@@ -16,34 +16,51 @@ public class EloRatingServiceTest {
 
     @Test
     void testEqualRatingWin() {
-        // Equal ratings: win should award +16 points, loss -16 points
+        // Win awards +25 points, loss -25 points
         EloRatingService.EloResult result = eloRatingService.calculateNewRatings(500, 500, 1.0);
-        assertEquals(516, result.getNewRatingA());
-        assertEquals(484, result.getNewRatingB());
-        assertEquals(16, result.getDeltaA());
-        assertEquals(-16, result.getDeltaB());
+        assertEquals(525, result.getNewRatingA());
+        assertEquals(475, result.getNewRatingB());
+        assertEquals(25, result.getDeltaA());
+        assertEquals(-25, result.getDeltaB());
     }
 
     @Test
     void testHigherBeatingLower() {
-        // Higher rated beating lower: smaller gain
+        // Regardless of rating gap: winner gets +25, loser gets -25
         EloRatingService.EloResult result = eloRatingService.calculateNewRatings(800, 400, 1.0);
-        assertTrue(result.getDeltaA() < 16, "High rated beating low rated player should yield small gain");
-        assertTrue(result.getDeltaA() >= 1, "Gain should be at least 1 point");
+        assertEquals(825, result.getNewRatingA());
+        assertEquals(375, result.getNewRatingB());
+        assertEquals(25, result.getDeltaA());
+        assertEquals(-25, result.getDeltaB());
     }
 
     @Test
     void testLowerBeatingHigher() {
-        // Lower rated player beating higher: large gain
+        // Lower rated player beating higher: still +25 and -25
         EloRatingService.EloResult result = eloRatingService.calculateNewRatings(400, 800, 1.0);
-        assertTrue(result.getDeltaA() > 16, "Underdog winning should yield large rating gain");
+        assertEquals(425, result.getNewRatingA());
+        assertEquals(775, result.getNewRatingB());
+        assertEquals(25, result.getDeltaA());
+        assertEquals(-25, result.getDeltaB());
+    }
+
+    @Test
+    void testDraw() {
+        // Draw: 0 points change
+        EloRatingService.EloResult result = eloRatingService.calculateNewRatings(500, 600, 0.5);
+        assertEquals(500, result.getNewRatingA());
+        assertEquals(600, result.getNewRatingB());
+        assertEquals(0, result.getDeltaA());
+        assertEquals(0, result.getDeltaB());
     }
 
     @Test
     void testFloorAtZero() {
         // Ensure rating does not drop below 0
-        EloRatingService.EloResult result = eloRatingService.calculateNewRatings(5, 5, 0.0);
+        EloRatingService.EloResult result = eloRatingService.calculateNewRatings(10, 500, 0.0);
         assertEquals(0, result.getNewRatingA());
-        assertTrue(result.getNewRatingA() >= 0);
+        assertEquals(-10, result.getDeltaA());
+        assertEquals(525, result.getNewRatingB());
+        assertEquals(25, result.getDeltaB());
     }
 }

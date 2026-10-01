@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { KeyRound, Lightbulb, CheckCircle2, XCircle, Sparkles, Delete, Swords, Users, Clock, Shield, Lock } from 'lucide-react';
+import { KeyRound, Lightbulb, CheckCircle2, XCircle, Delete, Lock } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useGame } from '../../context/GameContext';
 import { useTimer } from '../../hooks/useTimer';
@@ -435,8 +435,8 @@ export default function CodeBreaker() {
 
         if (currentMatch.player2Id === 999999 || currentMatch.isBotMatch) {
           const botScore = Math.max(0, score + (Math.random() > 0.4 ? (Math.random() > 0.5 ? 0 : -1) : 1));
-          const botDelta = score >= botScore ? -16 : 16;
-          const myDelta = score > botScore ? 24 : (score === botScore ? 0 : -18);
+          const botDelta = score > botScore ? -25 : (score === botScore ? 0 : 25);
+          const myDelta = score > botScore ? 25 : (score === botScore ? 0 : -25);
           const simResult = {
             ...currentMatch,
             player1Score: score,
@@ -473,7 +473,7 @@ export default function CodeBreaker() {
         gameTitle="Code Breaker"
         mode={playMode === 'FRIEND' ? 'FRIEND' : 'RANKED'}
         friendTarget={invitedFriend}
-        initialMatch={currentMatch}
+        initialMatch={playMode === 'FRIEND' ? currentMatch : null}
         onClose={() => {
           setShowMatchmaking(false);
           setInvitedFriend(null);
@@ -506,28 +506,42 @@ export default function CodeBreaker() {
   // === WAITING FOR OPPONENT TO FINISH ===
   if (waitingForOpponent) {
     return (
-      <div style={{ minHeight: '100vh', background: '#020617', paddingTop: '6.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
-        <div className="star-field" />
-        <div className="binary-texture" />
-        <div className="mesh-glow" style={{ top: '30%', left: '50%', transform: 'translate(-50%, -50%)', opacity: 0.15 }} />
-        
-        <div style={{ textAlign: 'center', padding: '3rem 2rem', background: 'rgba(8, 14, 33, 0.85)', backdropFilter: 'blur(16px)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '1.75rem', maxWidth: '420px', width: '90%', position: 'relative', zIndex: 10 }}>
-          <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: 'rgba(59, 130, 246, 0.12)', border: '1px solid rgba(59, 130, 246, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem', color: '#60a5fa' }}>
-            <Clock size={32} />
+      <div className="cosmic-void" style={{ minHeight: '100vh', paddingTop: '6.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.5rem', position: 'relative', overflow: 'hidden' }}>
+        <div className="paper-grain" />
+        <div className="halftone-violet halftone-fade-r" style={{ position: 'absolute', top: 0, right: 0, width: '38%', height: '100%', opacity: 0.2 }} />
+
+        <div className="zine-card" style={{ textAlign: 'center', padding: '3rem 2rem', maxWidth: '440px', width: '100%', position: 'relative', zIndex: 1, boxShadow: '10px 10px 0 var(--riso-violet)' }}>
+          <div style={{
+            width: '66px',
+            height: '66px',
+            background: 'var(--riso-violet)',
+            border: '3px solid var(--ink)',
+            boxShadow: '4px 4px 0 var(--ink)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '0 auto 1.5rem',
+            transform: 'rotate(4deg)',
+            color: '#fffdf6'
+          }}>
+            <Lock size={30} />
           </div>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.02em', marginBottom: '0.5rem' }}>
+
+          <h2 className="zine-display misreg" data-text="SET COMPLETED" style={{ fontSize: 'clamp(1.3rem, 4vw, 1.8rem)', marginBottom: '0.6rem' }}>
             SET COMPLETED
           </h2>
-          <p style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '0.85rem', marginBottom: '1.5rem', lineHeight: 1.5 }}>
+
+          <p style={{ color: 'var(--ink-muted)', fontSize: '0.85rem', marginBottom: '1.5rem', lineHeight: 1.5 }}>
             Synchronizing neural stream. Awaiting opponent submission...
           </p>
+
           <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem' }}>
             {[0, 1, 2].map(i => (
               <motion.div
                 key={i}
                 animate={{ scale: [0.6, 1.2, 0.6], opacity: [0.3, 1, 0.3] }}
                 transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.2 }}
-                style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#3b82f6' }}
+                style={{ width: '10px', height: '10px', background: 'var(--riso-violet)', border: '2px solid var(--ink)' }}
               />
             ))}
           </div>
@@ -539,29 +553,30 @@ export default function CodeBreaker() {
   // === COMPETITIVE MATCH RESULTS SCREEN ===
   if (competitiveResult) {
     return (
-      <div style={{ minHeight: '100vh', background: '#020617', paddingTop: '6.5rem', paddingBottom: '3rem', position: 'relative' }}>
-        <div className="star-field" />
-        <div className="binary-texture" />
-        <CompetitiveResults
-          matchResult={competitiveResult}
-          currentUserId={user?.id || currentMatch?.player1Id}
-          onRematch={() => {
-            if (playMode === 'FRIEND' && currentMatch) {
-              const oppId = currentMatch.player1Id === user?.id ? currentMatch.player2Id : currentMatch.player1Id;
-              const oppName = currentMatch.player1Id === user?.id ? currentMatch.player2Username : currentMatch.player1Username;
-              if (oppId && oppId !== 999999) {
-                setInvitedFriend({ id: oppId, username: oppName });
+      <div className="cosmic-void" style={{ minHeight: '100vh', paddingTop: '6.5rem', paddingBottom: '3rem', position: 'relative' }}>
+        <div className="paper-grain" />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <CompetitiveResults
+            matchResult={competitiveResult}
+            currentUserId={user?.id || currentMatch?.player1Id}
+            onRematch={() => {
+              if (playMode === 'FRIEND' && currentMatch) {
+                const oppId = currentMatch.player1Id === user?.id ? currentMatch.player2Id : currentMatch.player1Id;
+                const oppName = currentMatch.player1Id === user?.id ? currentMatch.player2Username : currentMatch.player1Username;
+                if (oppId && oppId !== 999999) {
+                  setInvitedFriend({ id: oppId, username: oppName });
+                }
               }
-            }
-            clearMatchStorage(currentMatch?.id);
-            setCompetitiveResult(null);
-            setShowMatchmaking(true);
-          }}
-          onDashboard={() => {
-            clearMatchStorage(currentMatch?.id);
-            navigate('/dashboard');
-          }}
-        />
+              clearMatchStorage(currentMatch?.id);
+              setCompetitiveResult(null);
+              setShowMatchmaking(true);
+            }}
+            onDashboard={() => {
+              clearMatchStorage(currentMatch?.id);
+              navigate('/dashboard');
+            }}
+          />
+        </div>
       </div>
     );
   }
@@ -593,12 +608,11 @@ export default function CodeBreaker() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#020617', paddingTop: '6.5rem', color: '#FFFFFF', position: 'relative', overflow: 'hidden' }}>
-      <div className="star-field" />
-      <div className="binary-texture" />
-      <div className="mesh-glow" style={{ top: '25%', left: '50%', transform: 'translate(-50%, -50%)', opacity: 0.15 }} />
+    <div className="cosmic-void" style={{ minHeight: '100vh', paddingTop: '6.5rem', position: 'relative', overflow: 'hidden' }}>
+      <div className="paper-grain" />
+      <div className="halftone-teal halftone-fade-l" style={{ position: 'absolute', top: 0, left: 0, width: '26%', height: '100%', opacity: 0.18 }} />
 
-      <div style={{ maxWidth: '820px', margin: '0 auto', padding: '1rem 1.5rem 4rem', position: 'relative', zIndex: 10 }}>
+      <div style={{ maxWidth: '820px', margin: '0 auto', padding: '1.25rem 1.5rem 4rem', position: 'relative', zIndex: 1 }}>
         <GameProgress
           current={index + 1}
           total={puzzles.length}
@@ -623,27 +637,37 @@ export default function CodeBreaker() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
+              className="zine-card"
               style={{
-                background: 'rgba(8, 14, 33, 0.85)',
-                backdropFilter: 'blur(20px)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-                borderRadius: '1.75rem',
                 padding: '2rem 2.25rem',
-                boxShadow: '0 20px 50px rgba(0, 0, 0, 0.6)',
+                boxShadow: '7px 7px 0 var(--ink)',
                 position: 'relative'
               }}
             >
+              <div className="tape" style={{ top: -14, left: '8%' }} />
+
               {/* Header Title */}
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.75rem', flexWrap: 'wrap', gap: '1rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-                  <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(59, 130, 246, 0.12)', border: '1px solid rgba(59, 130, 246, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <KeyRound size={22} color="#60a5fa" />
+                  <div style={{
+                    width: '46px',
+                    height: '46px',
+                    background: 'var(--riso-violet)',
+                    border: '2px solid var(--ink)',
+                    boxShadow: '3px 3px 0 var(--ink)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#fffdf6',
+                    transform: 'rotate(-3deg)'
+                  }}>
+                    <KeyRound size={22} />
                   </div>
                   <div>
-                    <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.02em', margin: 0 }}>
+                    <h2 className="zine-display" style={{ fontSize: 'clamp(1.1rem, 3.4vw, 1.5rem)', margin: 0 }}>
                       {puzzle.title || "DECRYPT CIPHER"}
                     </h2>
-                    <p style={{ fontSize: '0.75rem', color: 'rgba(255, 255, 255, 0.55)', margin: '0.2rem 0 0', fontFamily: 'var(--font-mono)' }}>
+                    <p className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--ink-muted)', margin: '0.2rem 0 0', letterSpacing: '0.08em' }}>
                       Crack the {digitCount}-digit secret sequence using the constraints
                     </p>
                   </div>
@@ -652,67 +676,22 @@ export default function CodeBreaker() {
                 <button
                   onClick={() => { setShowHint(true); setHintUsed(true); }}
                   disabled={showHint || showResult}
-                  style={{
-                    display: 'flex', alignItems: 'center', gap: '0.45rem',
-                    padding: '0.45rem 1rem', borderRadius: '999px',
-                    background: showHint ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.08)',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
-                    fontSize: '0.75rem', fontWeight: 700,
-                    color: showHint ? 'rgba(255, 255, 255, 0.3)' : '#ffffff',
-                    fontFamily: 'var(--font-mono)',
-                    cursor: showHint || showResult ? 'default' : 'pointer',
-                    transition: 'all 0.2s ease'
-                  }}
+                  className={`zine-btn-sm${showHint ? '' : ' zine-btn-sm--yellow'}`}
                 >
-                  <Lightbulb size={13} color={showHint ? '#64748B' : '#FBBF24'} /> {showHint ? 'HINT ACTIVE' : 'REQUEST HINT'}
+                  <Lightbulb size={14} color={showHint ? 'var(--ink-faint)' : 'var(--ink)'} /> {showHint ? 'HINT ACTIVE' : 'REQUEST HINT'}
                 </button>
               </div>
 
-              {/* Clues Table */}
+              {/* Clue Strips */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', marginBottom: '2rem' }}>
                 {puzzle.clues.map((clue, idx) => (
-                  <div
-                    key={idx}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '1.25rem',
-                      background: 'rgba(10, 18, 42, 0.65)',
-                      border: '1px solid rgba(255, 255, 255, 0.06)',
-                      borderRadius: '1rem',
-                      padding: '0.85rem 1.25rem',
-                      transition: 'border-color 0.2s ease'
-                    }}
-                  >
-                    {/* Clue Guess Code */}
+                  <div key={idx} className="zine-clue">
                     <div style={{ display: 'flex', gap: '0.35rem', flexShrink: 0 }}>
                       {clue.guess.split('').map((char, cIdx) => (
-                        <div
-                          key={cIdx}
-                          style={{
-                            width: '34px',
-                            height: '38px',
-                            borderRadius: '8px',
-                            background: '#060b1e',
-                            border: '1px solid rgba(59, 130, 246, 0.3)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            fontFamily: 'var(--font-mono)',
-                            fontWeight: 800,
-                            fontSize: '1.15rem',
-                            color: '#38bdf8'
-                          }}
-                        >
-                          {char}
-                        </div>
+                        <div key={cIdx} className="zine-clue-digit">{char}</div>
                       ))}
                     </div>
-
-                    {/* Clue Text */}
-                    <div style={{ fontSize: '0.85rem', color: 'rgba(255, 255, 255, 0.85)', fontWeight: 500, flex: 1, lineHeight: 1.4 }}>
-                      {clue.text}
-                    </div>
+                    <div className="zine-clue__text">{clue.text}</div>
                   </div>
                 ))}
               </div>
@@ -722,55 +701,29 @@ export default function CodeBreaker() {
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
-                  style={{
-                    background: 'rgba(59, 130, 246, 0.08)',
-                    border: '1px solid rgba(59, 130, 246, 0.25)',
-                    borderRadius: '1rem',
-                    padding: '0.9rem 1.25rem',
-                    marginBottom: '2rem',
-                    fontSize: '0.825rem',
-                    color: '#93c5fd',
-                    display: 'flex',
-                    gap: '0.65rem',
-                    alignItems: 'center'
-                  }}
+                  className="zine-hint"
+                  style={{ marginBottom: '2rem' }}
                 >
-                  <Lightbulb size={16} color="#60a5fa" style={{ flexShrink: 0 }} />
-                  <span><strong>DECRYPT HINT:</strong> {puzzle.hint}</span>
+                  <Lightbulb size={16} color="var(--ink)" style={{ flexShrink: 0 }} />
+                  <span style={{ fontSize: '0.825rem', color: 'var(--ink)', lineHeight: 1.5, fontWeight: 500 }}>
+                    <strong>DECRYPT HINT:</strong> {puzzle.hint}
+                  </span>
                 </motion.div>
               )}
 
               {/* Player Code Input Slots */}
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.85rem', marginBottom: '2rem' }}>
-                <div style={{ fontSize: '0.725rem', color: 'rgba(255, 255, 255, 0.45)', fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700 }}>
-                  [ ENTER SECRET CODE ]
-                </div>
-                <div style={{ display: 'flex', gap: '0.85rem' }}>
+                <span className="zine-kicker">[ ENTER SECRET CODE ]</span>
+                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'center' }}>
                   {digits.map((digit, dIdx) => {
                     const isSelected = activeDigit === dIdx;
                     return (
                       <button
                         key={dIdx}
                         onClick={() => !showResult && setActiveDigit(dIdx)}
-                        style={{
-                          width: '64px',
-                          height: '72px',
-                          borderRadius: '1rem',
-                          background: digit !== '' ? 'rgba(59, 130, 246, 0.15)' : 'rgba(10, 18, 42, 0.7)',
-                          border: isSelected ? '2px solid #3b82f6' : (digit !== '' ? '1px solid rgba(59, 130, 246, 0.45)' : '1px solid rgba(255, 255, 255, 0.1)'),
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          fontSize: '2rem',
-                          fontWeight: 900,
-                          color: '#ffffff',
-                          fontFamily: 'var(--font-mono)',
-                          cursor: showResult ? 'default' : 'pointer',
-                          boxShadow: isSelected ? '0 0 20px rgba(59, 130, 246, 0.4)' : 'none',
-                          transition: 'all 0.15s ease'
-                        }}
+                        className={`zine-digit${digit !== '' ? ' filled' : ''}${isSelected ? ' active' : ''}`}
                       >
-                        {digit || (isSelected ? <span style={{ opacity: 0.5, color: '#38bdf8' }}>_</span> : '')}
+                        {digit || (isSelected ? '_' : '')}
                       </button>
                     );
                   })}
@@ -779,84 +732,22 @@ export default function CodeBreaker() {
 
               {/* Interactive Keypad */}
               {!showResult && (
-                <div style={{ maxWidth: '340px', margin: '0 auto 1rem', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.65rem' }}>
+                <div style={{ maxWidth: '360px', margin: '0 auto 1rem', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.65rem' }}>
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => (
-                    <button
-                      key={n}
-                      onClick={() => handleDigitInput(n)}
-                      style={{
-                        height: '52px',
-                        fontSize: '1.25rem',
-                        fontWeight: 700,
-                        fontFamily: 'var(--font-mono)',
-                        borderRadius: '0.85rem',
-                        background: 'rgba(255, 255, 255, 0.05)',
-                        border: '1px solid rgba(255, 255, 255, 0.08)',
-                        color: '#ffffff',
-                        cursor: 'pointer',
-                        transition: 'all 0.15s ease'
-                      }}
-                      onMouseEnter={e => { e.currentTarget.style.background = 'rgba(59, 130, 246, 0.15)'; e.currentTarget.style.borderColor = 'rgba(59, 130, 246, 0.35)'; }}
-                      onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)'; e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)'; }}
-                    >
+                    <button key={n} onClick={() => handleDigitInput(n)} className="zine-key">
                       {n}
                     </button>
                   ))}
-                  <button
-                    onClick={handleBackspace}
-                    style={{
-                      height: '52px',
-                      borderRadius: '0.85rem',
-                      background: 'rgba(255, 255, 255, 0.05)',
-                      border: '1px solid rgba(255, 255, 255, 0.08)',
-                      color: 'rgba(255, 255, 255, 0.6)',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      transition: 'all 0.15s ease'
-                    }}
-                    onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'; e.currentTarget.style.color = '#ffffff'; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)'; e.currentTarget.style.color = 'rgba(255, 255, 255, 0.6)'; }}
-                  >
+                  <button onClick={handleBackspace} className="zine-key zine-key--action" style={{ color: 'var(--ink-muted)' }}>
                     <Delete size={18} />
                   </button>
-                  <button
-                    onClick={() => handleDigitInput(0)}
-                    style={{
-                      height: '52px',
-                      fontSize: '1.25rem',
-                      fontWeight: 700,
-                      fontFamily: 'var(--font-mono)',
-                      borderRadius: '0.85rem',
-                      background: 'rgba(255, 255, 255, 0.05)',
-                      border: '1px solid rgba(255, 255, 255, 0.08)',
-                      color: '#ffffff',
-                      cursor: 'pointer',
-                      transition: 'all 0.15s ease'
-                    }}
-                    onMouseEnter={e => { e.currentTarget.style.background = 'rgba(59, 130, 246, 0.15)'; e.currentTarget.style.borderColor = 'rgba(59, 130, 246, 0.35)'; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)'; e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)'; }}
-                  >
+                  <button onClick={() => handleDigitInput(0)} className="zine-key">
                     0
                   </button>
                   <button
                     onClick={() => handleSubmit(false)}
                     disabled={digits.some(d => d === '')}
-                    style={{
-                      height: '52px',
-                      borderRadius: '0.85rem',
-                      fontFamily: 'var(--font-display)',
-                      fontWeight: 700,
-                      fontSize: '0.85rem',
-                      background: digits.some(d => d === '') ? 'rgba(255, 255, 255, 0.08)' : 'linear-gradient(180deg, #3b82f6 0%, #2563eb 100%)',
-                      color: digits.some(d => d === '') ? 'rgba(255, 255, 255, 0.3)' : '#ffffff',
-                      border: 'none',
-                      opacity: digits.some(d => d === '') ? 0.4 : 1,
-                      cursor: digits.some(d => d === '') ? 'not-allowed' : 'pointer',
-                      boxShadow: digits.some(d => d === '') ? 'none' : '0 0 15px rgba(59, 130, 246, 0.4)',
-                      transition: 'all 0.15s ease'
-                    }}
+                    className="zine-key zine-key--action zine-key--unlock"
                   >
                     UNLOCK
                   </button>
@@ -869,41 +760,27 @@ export default function CodeBreaker() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   style={{
-                    background: result === 'correct' ? 'rgba(34, 197, 94, 0.1)' : 'rgba(244, 63, 94, 0.1)',
-                    border: `1px solid ${result === 'correct' ? 'rgba(34, 197, 94, 0.3)' : 'rgba(244, 63, 94, 0.3)'}`,
-                    borderRadius: '1.25rem',
+                    background: result === 'correct' ? 'var(--riso-teal)' : 'var(--riso-coral)',
+                    color: '#fffdf6',
+                    border: '2px solid var(--ink)',
+                    boxShadow: '6px 6px 0 var(--ink)',
                     padding: '1.5rem',
                     marginTop: '1.5rem',
                     textAlign: 'center'
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                    {result === 'correct' ? <CheckCircle2 size={24} color="#22c55e" /> : <XCircle size={24} color="#f43f5e" />}
-                    <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.2rem', fontWeight: 800, color: result === 'correct' ? '#22c55e' : '#f43f5e', margin: 0 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.6rem' }}>
+                    {result === 'correct' ? <CheckCircle2 size={24} /> : <XCircle size={24} />}
+                    <h3 className="zine-display" style={{ fontSize: 'clamp(1.05rem, 3.2vw, 1.35rem)', margin: 0, color: '#fffdf6' }}>
                       {result === 'correct' ? 'VAULT UNLOCKED' : 'ACCESS DENIED'}
                     </h3>
                   </div>
 
-                  <p style={{ color: 'rgba(255, 255, 255, 0.75)', fontSize: '0.875rem', marginBottom: '1.25rem', lineHeight: 1.5, fontWeight: 500 }}>
+                  <p style={{ color: '#fffdf6', fontSize: '0.875rem', marginBottom: '1.5rem', lineHeight: 1.5, fontWeight: 500 }}>
                     {puzzle.explanation}
                   </p>
 
-                  <button
-                    onClick={handleNext}
-                    style={{
-                      padding: '0.75rem 2.25rem',
-                      borderRadius: '999px',
-                      background: 'linear-gradient(180deg, #3b82f6 0%, #2563eb 100%)',
-                      color: '#ffffff',
-                      border: 'none',
-                      fontWeight: 700,
-                      fontFamily: 'var(--font-display)',
-                      fontSize: '0.85rem',
-                      cursor: 'pointer',
-                      letterSpacing: '0.02em',
-                      boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)'
-                    }}
-                  >
+                  <button onClick={handleNext} className="zine-btn" style={{ background: '#fffdf6', color: 'var(--ink)' }}>
                     {index + 1 < puzzles.length ? 'NEXT CIPHER →' : 'VIEW CLASSIFICATION'}
                   </button>
                 </motion.div>

@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Bot, Swords, Users, X } from 'lucide-react';
 
 export default function PlayModeModal({
@@ -15,13 +15,8 @@ export default function PlayModeModal({
       id: 'PRACTICE',
       title: 'Practice vs Computer',
       badge: 'Single Player',
-      badgeColor: '#34d399',
-      badgeBg: 'rgba(16, 185, 129, 0.12)',
-      badgeBorder: 'rgba(16, 185, 129, 0.3)',
+      ink: 'var(--riso-teal)',
       icon: Bot,
-      color: '#34d399',
-      bg: 'rgba(16, 185, 129, 0.1)',
-      border: 'rgba(16, 185, 129, 0.25)',
       description: 'Standard single player mode. Solve challenges, earn XP for account level and unlock achievements. Rating is not affected.',
       benefits: ['Earn Account XP & Level Up', 'No Rating Risk', 'Casual Pace']
     },
@@ -29,13 +24,8 @@ export default function PlayModeModal({
       id: 'RANKED',
       title: 'Ranked Matchmaking',
       badge: 'Competitive Elo',
-      badgeColor: '#60a5fa',
-      badgeBg: 'rgba(59, 130, 246, 0.15)',
-      badgeBorder: 'rgba(59, 130, 246, 0.35)',
+      ink: 'var(--riso-violet)',
       icon: Swords,
-      color: '#3b82f6',
-      bg: 'rgba(59, 130, 246, 0.12)',
-      border: 'rgba(59, 130, 246, 0.3)',
       description: 'Match with a player of similar rating. Both receive the identical challenge. The fastest and most accurate wins rating points.',
       benefits: ['Fair Skill Matchmaking', 'Climb Competitive Tiers', 'Elo Rating at Stake']
     },
@@ -43,175 +33,112 @@ export default function PlayModeModal({
       id: 'FRIEND',
       title: 'Play with a Friend',
       badge: 'Custom Lobby',
-      badgeColor: '#38bdf8',
-      badgeBg: 'rgba(56, 189, 248, 0.12)',
-      badgeBorder: 'rgba(56, 189, 248, 0.3)',
+      ink: 'var(--riso-coral)',
       icon: Users,
-      color: '#38bdf8',
-      bg: 'rgba(56, 189, 248, 0.1)',
-      border: 'rgba(56, 189, 248, 0.25)',
       description: 'Create a private match or invite a friend directly. Compete head-to-head on the same synchronized challenge.',
       benefits: ['Direct Head-to-Head', 'Live Synchronized Results', 'Friendly Rivalry']
     }
   ];
 
   return (
-    <AnimatePresence>
-      <div style={{
-        position: 'fixed',
-        inset: 0,
-        zIndex: 9999,
-        background: 'rgba(2, 6, 23, 0.85)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '1rem',
-      }}>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 15 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 15 }}
-          transition={{ duration: 0.2 }}
-          style={{
-            background: 'rgba(8, 14, 33, 0.95)',
-            borderRadius: '1.25rem',
-            width: '100%',
-            maxWidth: '620px',
-            border: '1px solid rgba(255, 255, 255, 0.12)',
-            boxShadow: '0 25px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(59, 130, 246, 0.1)',
-            overflow: 'hidden',
-            color: '#F8FAFC'
-          }}
-        >
-          {/* Header */}
-          <div style={{
-            padding: '1.5rem 1.75rem 1.15rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <span style={{ fontSize: '1.5rem' }}>{gameIcon}</span>
-              <div>
-                <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.2rem', fontWeight: 700, color: '#F8FAFC', margin: 0 }}>
-                  Select Mode — {gameTitle}
-                </h2>
-                <p style={{ fontSize: '0.8rem', color: '#94A3B8', margin: '0.2rem 0 0 0' }}>
-                  Choose your competitive environment
-                </p>
-              </div>
-            </div>
-            <button
-              onClick={onClose}
-              style={{
-                background: 'rgba(255, 255, 255, 0.06)',
-                border: '1px solid rgba(255, 255, 255, 0.12)',
-                borderRadius: '50%',
-                width: '32px',
-                height: '32px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-                color: '#94A3B8'
-              }}
-            >
-              <X size={16} />
-            </button>
-          </div>
+    <div className="overlay" style={{ zIndex: 9999 }}>
+      <div className="halftone-violet halftone-fade-b" style={{ position: 'absolute', inset: 0, opacity: 0.4 }} />
 
-          {/* Mode Cards */}
-          <div style={{ padding: '1.25rem 1.5rem 1.75rem', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-            {modes.map((m) => {
-              const Icon = m.icon;
-              return (
-                <div
-                  key={m.id}
-                  onClick={() => onSelectMode(m.id)}
-                  style={{
-                    border: '1px solid rgba(255, 255, 255, 0.08)',
-                    borderRadius: '1rem',
-                    padding: '1.15rem 1.25rem',
-                    cursor: 'pointer',
-                    background: 'rgba(255, 255, 255, 0.02)',
-                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
-                    transition: 'all 0.15s ease',
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: '1rem'
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.borderColor = 'rgba(59, 130, 246, 0.45)';
-                    e.currentTarget.style.background = 'rgba(59, 130, 246, 0.05)';
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
-                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.02)';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                  }}
-                >
-                  <div style={{
-                    width: '42px',
-                    height: '42px',
-                    borderRadius: '10px',
-                    background: m.bg,
-                    border: `1px solid ${m.border}`,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0
-                  }}>
-                    <Icon size={20} color={m.color} />
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
+        className="zine-modal"
+        style={{ width: '100%', maxWidth: '620px', overflow: 'hidden', position: 'relative' }}
+      >
+        <div className="halftone-coral halftone-fade-l" style={{ position: 'absolute', top: 0, right: 0, width: 100, height: 100, opacity: 0.4 }} />
+
+        {/* Header */}
+        <div style={{
+          padding: '1.25rem 1.5rem 1rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '1rem',
+          borderBottom: '3px solid var(--ink)',
+          background: 'var(--riso-yellow)',
+          position: 'relative'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0 }}>
+            <span style={{
+              fontSize: '1.5rem', width: '46px', height: '46px', flexShrink: 0,
+              background: 'var(--paper-card)', border: '2px solid var(--ink)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              boxShadow: '3px 3px 0 var(--ink)', transform: 'rotate(-3deg)'
+            }}>{gameIcon}</span>
+            <div style={{ minWidth: 0 }}>
+              <h2 className="zine-display" style={{ fontSize: '1.1rem', margin: 0 }}>Select Mode</h2>
+              <p className="font-mono" style={{ fontSize: '0.68rem', margin: '0.15rem 0 0', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--ink-soft)' }}>
+                {gameTitle}
+              </p>
+            </div>
+          </div>
+          <button onClick={onClose} aria-label="Close" className="zine-btn-sm">
+            <X size={14} />
+          </button>
+        </div>
+
+        {/* Mode Cards */}
+        <div style={{ padding: '1.25rem 1.5rem 1.5rem', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+          {modes.map((m) => {
+            const Icon = m.icon;
+            return (
+              <button
+                key={m.id}
+                onClick={() => onSelectMode(m.id)}
+                className="zine-card zine-card--flat"
+                style={{
+                  padding: '1.1rem 1.2rem',
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  background: 'var(--paper-card)',
+                  borderLeft: `10px solid ${m.ink}`,
+                  boxShadow: '3px 3px 0 var(--ink)',
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: '1rem',
+                  font: 'inherit'
+                }}
+              >
+                <div style={{
+                  width: '44px',
+                  height: '44px',
+                  background: m.ink,
+                  border: '2px solid var(--ink)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0
+                }}>
+                  <Icon size={20} color="#fffdf6" />
+                </div>
+
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem', marginBottom: '0.25rem', flexWrap: 'wrap' }}>
+                    <span className="zine-display" style={{ fontSize: '0.95rem' }}>{m.title}</span>
+                    <span className="zine-badge" style={{ background: m.ink, color: '#fffdf6' }}>{m.badge}</span>
                   </div>
 
-                  <div style={{ flex: 1 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.25rem' }}>
-                      <span style={{ fontFamily: 'var(--font-display)', fontSize: '0.95rem', fontWeight: 700, color: '#F8FAFC' }}>
-                        {m.title}
-                      </span>
-                      <span style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '0.625rem',
-                        fontWeight: 700,
-                        padding: '0.15rem 0.5rem',
-                        borderRadius: '999px',
-                        background: m.badgeBg,
-                        border: `1px solid ${m.badgeBorder}`,
-                        color: m.badgeColor
-                      }}>
-                        {m.badge}
-                      </span>
-                    </div>
+                  <p style={{ fontSize: '0.8rem', color: 'var(--ink-muted)', margin: '0 0 0.6rem', lineHeight: 1.45 }}>{m.description}</p>
 
-                    <p style={{ fontSize: '0.8rem', color: '#94A3B8', margin: '0 0 0.65rem 0', lineHeight: 1.45 }}>
-                      {m.description}
-                    </p>
-
-                    <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                      {m.benefits.map((b, i) => (
-                        <span key={i} style={{
-                          fontSize: '0.675rem',
-                          color: '#CBD5E1',
-                          background: 'rgba(255, 255, 255, 0.04)',
-                          padding: '0.1rem 0.45rem',
-                          borderRadius: '4px',
-                          border: '1px solid rgba(255, 255, 255, 0.06)'
-                        }}>
-                          • {b}
-                        </span>
-                      ))}
-                    </div>
+                  <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+                    {m.benefits.map((b, i) => (
+                      <span key={i} className="zine-badge" style={{ background: 'var(--paper-sunk)', fontSize: '0.6rem' }}>
+                        {b}
+                      </span>
+                    ))}
                   </div>
                 </div>
-              );
-            })}
-          </div>
-        </motion.div>
-      </div>
-    </AnimatePresence>
+              </button>
+            );
+          })}
+        </div>
+      </motion.div>
+    </div>
   );
 }

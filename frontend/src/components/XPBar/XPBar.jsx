@@ -5,19 +5,17 @@ export default function XPBar({ current, total, level, animated = true }) {
 
   return (
     <div style={{ width: '100%' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.45rem' }}>
-        <span style={{ fontSize: '0.75rem', color: '#60A5FA', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
-          TIER {level}
-        </span>
-        <span style={{ fontSize: '0.75rem', color: 'rgba(255, 255, 255, 0.55)', fontFamily: 'var(--font-mono)' }}>
-          <span style={{ color: '#ffffff', fontWeight: 800 }}>{current.toLocaleString()}</span>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.45rem', gap: '0.5rem' }}>
+        <span className="zine-badge" style={{ background: 'var(--riso-violet)', color: '#fffdf6' }}>TIER {level}</span>
+        <span className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--ink-muted)', letterSpacing: '0.04em' }}>
+          <strong style={{ color: 'var(--ink)', fontWeight: 800 }}>{current.toLocaleString()}</strong>
           {' / '}{total.toLocaleString()} XP
         </span>
       </div>
 
-      <div style={{ width: '100%', height: '6px', background: 'rgba(255, 255, 255, 0.08)', borderRadius: '999px', overflow: 'hidden' }}>
+      <div className="zine-meter" style={{ height: '16px' }}>
         <motion.div
-          style={{ height: '100%', background: 'linear-gradient(90deg, #2563eb, #3b82f6, #38bdf8)', borderRadius: '999px', boxShadow: '0 0 10px rgba(59, 130, 246, 0.5)' }}
+          style={{ height: '100%', background: 'repeating-linear-gradient(45deg, var(--riso-violet) 0 8px, var(--riso-violet-2) 8px 16px)' }}
           initial={animated ? { width: 0 } : { width: `${pct}%` }}
           animate={{ width: `${pct}%` }}
           transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
@@ -25,7 +23,7 @@ export default function XPBar({ current, total, level, animated = true }) {
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '0.35rem' }}>
-        <span style={{ fontSize: '0.7rem', color: 'rgba(255, 255, 255, 0.4)', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>{pct}% PROGRESSED</span>
+        <span className="font-mono" style={{ fontSize: '0.64rem', color: 'var(--ink-faint)', fontWeight: 700, letterSpacing: '0.12em' }}>{pct}% PROGRESSED</span>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Eye, EyeOff, CheckCircle, XCircle, Swords, Users, Clock, Shield } from 'lucide-react';
+import { Eye, EyeOff, CheckCircle, XCircle, Clock } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useGame } from '../../context/GameContext';
 import XPPopup from '../../components/XPPopup/XPPopup';
@@ -236,6 +236,23 @@ export default function MemoryChallenge() {
       }
     }
 
+    if (Array.isArray(parsedQuestions) && parsedQuestions.length > 0) {
+      setScenes(parsedQuestions);
+      setDifficulty((matchData.difficulty || 'MEDIUM').toUpperCase());
+      setSceneIndex(0);
+      setPhase('reveal');
+      setSelected(null);
+      setShowResult(false);
+      setScore(0);
+      setMistakes(0);
+      setTotalXP(0);
+      setShowComplete(false);
+      scoreRef.current = 0;
+      mistakesRef.current = 0;
+      startTimeRef.current = Date.now();
+      return;
+    }
+
     const matchSeed = matchData.id || matchData.createdAt || 'match-seed';
     const seededRandom = createSeededRandom(matchSeed);
 
@@ -344,8 +361,8 @@ export default function MemoryChallenge() {
 
         if (currentMatch.player2Id === 999999 || currentMatch.isBotMatch) {
           const botScore = Math.max(0, scoreRef.current + (Math.random() > 0.4 ? 0 : -1));
-          const botDelta = scoreRef.current >= botScore ? -16 : 16;
-          const myDelta = scoreRef.current > botScore ? 24 : (scoreRef.current === botScore ? 0 : -18);
+          const botDelta = scoreRef.current > botScore ? -25 : (scoreRef.current === botScore ? 0 : 25);
+          const myDelta = scoreRef.current > botScore ? 25 : (scoreRef.current === botScore ? 0 : -25);
           const simResult = {
             ...currentMatch,
             player1Score: scoreRef.current,
@@ -427,13 +444,49 @@ export default function MemoryChallenge() {
   // === WAITING FOR OPPONENT TO FINISH ===
   if (waitingForOpponent) {
     return (
-      <div style={{ minHeight: '100vh', background: '#020617', paddingTop: '6.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-        <div className="star-field" />
-        <div style={{ textAlign: 'center', padding: '2.5rem', background: 'rgba(8, 14, 33, 0.85)', borderRadius: '1.25rem', border: '1px solid rgba(255, 255, 255, 0.08)', backdropFilter: 'blur(20px)', boxShadow: '0 12px 35px rgba(0, 0, 0, 0.5)', zIndex: 1 }}>
-          <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⏳</div>
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#F8FAFC', marginBottom: '0.5rem', fontFamily: 'var(--font-display)' }}>Challenge Completed</h2>
-          <p style={{ color: '#94A3B8', fontSize: '0.95rem', marginBottom: '0.5rem' }}>Your score: <strong className="font-mono" style={{ color: '#38bdf8' }}>{scoreRef.current} / {scenes.length}</strong></p>
-          <p className="font-mono" style={{ color: '#38bdf8', fontSize: '0.8rem' }}>Waiting for opponent synchronization...</p>
+      <div className="cosmic-void" style={{ minHeight: '100vh', paddingTop: '6.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.5rem', position: 'relative' }}>
+        <div className="paper-grain" />
+        <div className="halftone-coral halftone-fade-l" style={{ position: 'absolute', top: 0, left: 0, width: '34%', height: '100%', opacity: 0.2 }} />
+
+        <div className="zine-card" style={{ textAlign: 'center', padding: '2.5rem 2rem', maxWidth: '460px', width: '100%', position: 'relative', zIndex: 1, boxShadow: '10px 10px 0 var(--riso-coral)' }}>
+          <div style={{
+            width: '66px',
+            height: '66px',
+            background: 'var(--riso-yellow)',
+            border: '3px solid var(--ink)',
+            boxShadow: '4px 4px 0 var(--ink)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '0 auto 1.5rem',
+            transform: 'rotate(4deg)',
+            color: 'var(--ink)'
+          }}>
+            <Clock size={30} />
+          </div>
+
+          <h2 className="zine-display misreg" data-text="CHALLENGE COMPLETE" style={{ fontSize: 'clamp(1.3rem, 4vw, 1.8rem)', marginBottom: '0.6rem' }}>
+            CHALLENGE COMPLETE
+          </h2>
+
+          <p style={{ fontSize: '0.875rem', color: 'var(--ink-muted)', fontFamily: 'var(--font-mono)', marginBottom: '1.5rem' }}>
+            Your score: <strong style={{ color: 'var(--riso-teal)' }}>{scoreRef.current} / {scenes.length}</strong>
+          </p>
+
+          <div style={{
+            background: 'var(--paper-sunk)',
+            border: '2px solid var(--ink)',
+            boxShadow: '3px 3px 0 var(--ink)',
+            padding: '0.9rem 1rem',
+            fontFamily: 'var(--font-mono)',
+            fontSize: '0.75rem',
+            fontWeight: 700,
+            letterSpacing: '0.14em',
+            textTransform: 'uppercase',
+            color: 'var(--riso-violet)'
+          }}>
+            Waiting for opponent synchronization...
+          </div>
         </div>
       </div>
     );
@@ -442,28 +495,30 @@ export default function MemoryChallenge() {
   // === COMPETITIVE MATCH RESULTS SCREEN ===
   if (competitiveResult) {
     return (
-      <div style={{ minHeight: '100vh', background: '#020617', paddingTop: '6.5rem', paddingBottom: '3rem', color: '#F8FAFC', position: 'relative' }}>
-        <div className="star-field" />
-        <CompetitiveResults
-          matchResult={competitiveResult}
-          currentUserId={user?.id || currentMatch?.player1Id}
-          onRematch={() => {
-            if (playMode === 'FRIEND' && currentMatch) {
-              const oppId = currentMatch.player1Id === user?.id ? currentMatch.player2Id : currentMatch.player1Id;
-              const oppName = currentMatch.player1Id === user?.id ? currentMatch.player2Username : currentMatch.player1Username;
-              if (oppId && oppId !== 999999) {
-                setInvitedFriend({ id: oppId, username: oppName });
+      <div className="cosmic-void" style={{ minHeight: '100vh', paddingTop: '6.5rem', paddingBottom: '3rem', position: 'relative' }}>
+        <div className="paper-grain" />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <CompetitiveResults
+            matchResult={competitiveResult}
+            currentUserId={user?.id || currentMatch?.player1Id}
+            onRematch={() => {
+              if (playMode === 'FRIEND' && currentMatch) {
+                const oppId = currentMatch.player1Id === user?.id ? currentMatch.player2Id : currentMatch.player1Id;
+                const oppName = currentMatch.player1Id === user?.id ? currentMatch.player2Username : currentMatch.player1Username;
+                if (oppId && oppId !== 999999) {
+                  setInvitedFriend({ id: oppId, username: oppName });
+                }
               }
-            }
-            clearMatchStorage(currentMatch?.id);
-            setCompetitiveResult(null);
-            setShowMatchmaking(true);
-          }}
-          onDashboard={() => {
-            clearMatchStorage(currentMatch?.id);
-            navigate('/dashboard');
-          }}
-        />
+              clearMatchStorage(currentMatch?.id);
+              setCompetitiveResult(null);
+              setShowMatchmaking(true);
+            }}
+            onDashboard={() => {
+              clearMatchStorage(currentMatch?.id);
+              navigate('/dashboard');
+            }}
+          />
+        </div>
       </div>
     );
   }
@@ -499,11 +554,12 @@ export default function MemoryChallenge() {
   const choicesList = scene.options || (scene.questions?.[0]?.choices) || [];
 
   return (
-    <div style={{ minHeight: '100vh', background: '#020617', paddingTop: '6.5rem', color: '#F8FAFC', position: 'relative' }}>
+    <div className="cosmic-void" style={{ minHeight: '100vh', paddingTop: '6.5rem', position: 'relative', overflow: 'hidden' }}>
       <XPPopup popups={xpPopups} />
-      <div className="star-field" />
+      <div className="paper-grain" />
+      <div className="halftone-yellow halftone-fade-r" style={{ position: 'absolute', top: 0, right: 0, width: '28%', height: '100%', opacity: 0.28 }} />
 
-      <div style={{ maxWidth: '780px', margin: '0 auto', padding: '1.5rem 1.5rem 4rem', position: 'relative', zIndex: 1 }}>
+      <div style={{ maxWidth: '780px', margin: '0 auto', padding: '1.25rem 1.5rem 4rem', position: 'relative', zIndex: 1 }}>
         
         {/* Progress Header */}
         <GameProgress
@@ -529,62 +585,48 @@ export default function MemoryChallenge() {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                <Eye size={20} color="#38bdf8" />
-                <span className="font-mono" style={{ fontSize: '1.15rem', fontWeight: 800, color: '#38bdf8' }}>
-                  {scene.title}
-                </span>
+                <Eye size={20} color="var(--riso-violet)" />
+                <span className="zine-display" style={{ fontSize: 'clamp(1.1rem, 3.5vw, 1.6rem)' }}>{scene.title}</span>
               </div>
-              <p style={{ color: '#94A3B8', fontSize: '0.9rem', fontWeight: 400 }}>{scene.description}</p>
+              <p className="zine-lede" style={{ fontSize: '0.9rem' }}>{scene.description}</p>
             </div>
 
             {/* Scene Matrix Display */}
-            <div style={{
-              background: 'rgba(8, 14, 33, 0.85)',
-              backdropFilter: 'blur(20px)',
-              border: '1px solid rgba(255, 255, 255, 0.08)',
-              borderRadius: '1.25rem',
-              padding: '2rem',
-              marginBottom: '1.5rem',
-              boxShadow: '0 12px 35px rgba(0,0,0,0.5)'
-            }}>
-              <div style={{ display: 'grid', gridTemplateColumns: `repeat(${scene.items.length > 6 ? 3 : 3}, 1fr)`, gap: '1rem' }}>
+            <div className="zine-card" style={{ padding: '2rem', marginBottom: '1.5rem', boxShadow: '7px 7px 0 var(--riso-violet)' }}>
+              <div className="tape" style={{ top: -14, left: '6%' }} />
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '0.85rem', position: 'relative' }}>
                 {scene.items.map((item, i) => (
                   <motion.div
                     key={i}
                     initial={{ opacity: 0, scale: 0.85 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: i * 0.04 }}
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      padding: '1.25rem 0.75rem',
-                      background: 'rgba(255, 255, 255, 0.02)',
-                      border: '1px solid rgba(255, 255, 255, 0.06)',
-                      borderRadius: '0.875rem',
-                      gap: '0.5rem',
-                      textAlign: 'center',
-                      boxShadow: '0 2px 6px rgba(0,0,0,0.2)'
-                    }}
+                    className="zine-scene-cell"
                   >
-                    <span style={{ fontSize: '2.5rem' }}>{item.emoji}</span>
-                    <span className="font-mono" style={{ fontSize: '0.8rem', color: '#F8FAFC', fontWeight: 700, lineHeight: 1.3 }}>{item.label}</span>
+                    <span className="zine-scene-cell__emoji">{item.emoji}</span>
+                    <span className="zine-scene-cell__label">{item.label}</span>
                   </motion.div>
                 ))}
               </div>
             </div>
 
-            {/* Countdown bar */}
+            {/* Countdown meter */}
             <div style={{ textAlign: 'center' }}>
-              <div style={{ height: '6px', background: 'rgba(255, 255, 255, 0.06)', borderRadius: '999px', overflow: 'hidden', maxWidth: '300px', margin: '0 auto' }}>
-                <motion.div
-                  style={{ height: '100%', borderRadius: '999px', background: timeLeft <= 2 ? '#f43f5e' : 'linear-gradient(90deg, #3b82f6, #38bdf8, #60a5fa)' }}
+              <div className="zine-meter" style={{ maxWidth: '320px', margin: '0 auto' }}>
+                <motion.span
                   initial={{ width: '100%' }}
-                  animate={{ width: `${(timeLeft / (scene.revealTime || 8)) * 100}%` }}
+                  animate={{
+                    width: `${Math.max(0, Math.min(100, (timeLeft / (scene.revealTime || 8)) * 100))}%`,
+                    background: timeLeft <= 2
+                      ? 'repeating-linear-gradient(45deg, var(--riso-coral) 0 7px, var(--riso-coral-2) 7px 14px)'
+                      : 'repeating-linear-gradient(45deg, var(--riso-teal) 0 7px, var(--riso-teal-2) 7px 14px)'
+                  }}
                   transition={{ duration: 1, ease: 'linear' }}
                 />
               </div>
-              <p className="font-mono" style={{ marginTop: '0.75rem', color: '#94A3B8', fontSize: '0.8rem', fontWeight: 600 }}>Scene obscured in {timeLeft}s...</p>
+              <p className="font-mono" style={{ marginTop: '0.75rem', color: timeLeft <= 2 ? 'var(--riso-coral)' : 'var(--ink-muted)', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+                Scene obscured in {timeLeft}s...
+              </p>
             </div>
           </motion.div>
         )}
@@ -592,69 +634,57 @@ export default function MemoryChallenge() {
         {/* RECALL PHASE */}
         {phase === 'recall' && (
           <AnimatePresence mode="wait">
-            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-              <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                  <EyeOff size={18} color="#38bdf8" />
-                  <span className="font-mono" style={{ fontSize: '1.1rem', fontWeight: 800, color: '#38bdf8' }}>
-                    // SCENE OBSCURED — RECALL FROM MEMORY
+            <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -15 }}>
+              <div className="zine-card" style={{ padding: '2rem', marginBottom: '1.25rem', boxShadow: '7px 7px 0 var(--ink)' }}>
+                <div className="tape" style={{ top: -14, left: '6%' }} />
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '1.25rem' }}>
+                  <EyeOff size={18} color="var(--riso-coral)" />
+                  <span className="zine-kicker" style={{ color: 'var(--riso-coral)' }}>
+                    SCENE OBSCURED — RECALL FROM MEMORY
                   </span>
                 </div>
-              </div>
 
-              <div style={{
-                background: 'rgba(8, 14, 33, 0.85)',
-                backdropFilter: 'blur(20px)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-                borderRadius: '1.25rem',
-                padding: '2rem',
-                marginBottom: '1.25rem',
-                boxShadow: '0 12px 35px rgba(0,0,0,0.5)'
-              }}>
-                <p className="font-mono" style={{ fontSize: '1.15rem', fontWeight: 700, color: '#F8FAFC', marginBottom: '1.75rem', textAlign: 'center', lineHeight: 1.6 }}>
+                <div className="zine-number-board" style={{ fontSize: 'clamp(0.95rem, 2.6vw, 1.25rem)', padding: '1.25rem', boxShadow: '4px 4px 0 var(--riso-coral)', marginBottom: '1.75rem' }}>
                   {scene.question}
-                </p>
+                </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem' }}>
-                  {choicesList.map(choice => {
-                    let borderColor = 'rgba(255, 255, 255, 0.08)';
-                    let bg = 'rgba(255, 255, 255, 0.02)';
-                    let color = '#F8FAFC';
-
-                    if (selected) {
-                      if (choice === scene.correctAnswer) {
-                        borderColor = 'rgba(56, 189, 248, 0.5)';
-                        bg = 'rgba(56, 189, 248, 0.12)';
-                        color = '#38bdf8';
-                      } else if (selected === choice) {
-                        borderColor = 'rgba(244, 63, 94, 0.5)';
-                        bg = 'rgba(244, 63, 94, 0.12)';
-                        color = '#f43f5e';
-                      }
-                    }
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.75rem' }}>
+                  {choicesList.map((choice, choiceIdx) => {
+                    const isCorrect = choice === scene.correctAnswer;
+                    const isPicked = selected === choice;
+                    const outcome = selected
+                      ? isCorrect ? ' correct' : (isPicked ? ' wrong' : '')
+                      : '';
 
                     return (
                       <motion.button
                         key={choice}
-                        whileHover={!selected ? { scale: 1.01, borderColor: 'rgba(59, 130, 246, 0.4)' } : {}}
+                        whileHover={!selected ? { x: -2, y: -2 } : {}}
                         onClick={() => handleAnswer(choice)}
                         disabled={!!selected}
-                        style={{
-                          padding: '1.1rem',
-                          borderRadius: '0.875rem',
-                          border: `1px solid ${borderColor}`,
-                          background: bg,
-                          color,
-                          cursor: selected ? 'default' : 'pointer',
-                          fontSize: '0.95rem',
-                          fontFamily: 'var(--font-mono)',
-                          fontWeight: 700,
-                          textAlign: 'center',
-                          boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
-                          transition: 'all 0.15s ease'
-                        }}
+                        className={`choice-btn${outcome}`}
+                        style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: '0.9rem', textAlign: 'center' }}
                       >
-                        {choice}
+                        <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem' }}>
+                          <span
+                            style={{
+                              width: '26px',
+                              height: '26px',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              background: outcome ? '#fffdf6' : 'var(--paper-sunk)',
+                              color: outcome ? (isCorrect ? 'var(--riso-teal)' : 'var(--riso-coral)') : 'var(--ink)',
+                              border: '2px solid var(--ink)',
+                              fontSize: '0.72rem',
+                              fontWeight: 800,
+                              flexShrink: 0
+                            }}
+                          >
+                            {String.fromCharCode(65 + choiceIdx)}
+                          </span>
+                          {choice}
+                        </span>
                       </motion.button>
                     );
                   })}
@@ -670,40 +700,23 @@ export default function MemoryChallenge() {
                       alignItems: 'center',
                       gap: '0.75rem',
                       padding: '1rem 1.25rem',
-                      borderRadius: '0.85rem',
-                      background: selected === scene.correctAnswer ? 'rgba(56, 189, 248, 0.12)' : 'rgba(244, 63, 94, 0.12)',
-                      border: `1px solid ${selected === scene.correctAnswer ? 'rgba(56, 189, 248, 0.25)' : 'rgba(244, 63, 94, 0.25)'}`,
-                      marginBottom: '1rem'
+                      background: selected === scene.correctAnswer ? 'var(--riso-teal)' : 'var(--riso-coral)',
+                      color: '#fffdf6',
+                      border: '2px solid var(--ink)',
+                      boxShadow: '4px 4px 0 var(--ink)',
+                      marginBottom: '1.25rem'
                     }}
                   >
-                    {selected === scene.correctAnswer ? <CheckCircle size={22} color="#38bdf8" /> : <XCircle size={22} color="#f43f5e" />}
-                    <div>
-                      <div className="font-mono" style={{ fontWeight: 800, color: selected === scene.correctAnswer ? '#38bdf8' : '#f43f5e', fontSize: '0.95rem' }}>
-                        {selected === scene.correctAnswer ? '🎉 Perfect Recall!' : `Incorrect — The correct item was: ${scene.correctAnswer}`}
-                      </div>
+                    {selected === scene.correctAnswer ? <CheckCircle size={22} /> : <XCircle size={22} />}
+                    <div className="font-mono" style={{ fontWeight: 800, fontSize: '0.9rem', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+                      {selected === scene.correctAnswer
+                        ? 'PERFECT RECALL'
+                        : `INCORRECT — EXPECTED: ${scene.correctAnswer}`}
                     </div>
                   </div>
 
-                  <button
-                    onClick={handleNext}
-                    style={{
-                      width: '100%',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      padding: '0.9rem',
-                      borderRadius: '9999px',
-                      background: 'linear-gradient(180deg, #3b82f6 0%, #2563eb 100%)',
-                      color: '#ffffff',
-                      fontWeight: 700,
-                      fontSize: '0.95rem',
-                      boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)',
-                      border: 'none',
-                      cursor: 'pointer',
-                      transition: 'all 0.2s ease'
-                    }}
-                  >
-                    {sceneIndex + 1 >= scenes.length ? 'Final Summary & Rewards 🏆' : 'Next Scene →'}
+                  <button onClick={handleNext} className="btn-primary" style={{ width: '100%' }}>
+                    {sceneIndex + 1 >= scenes.length ? 'FINAL CLASSIFICATION →' : 'NEXT SCENE →'}
                   </button>
                 </motion.div>
               )}

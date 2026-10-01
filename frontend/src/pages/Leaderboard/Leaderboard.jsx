@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Trophy, Flame, Zap, Crown, Swords, Shield } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { getRankFromRating } from '../../utils/rankUtils';
 import api from '../../utils/api';
@@ -13,9 +12,9 @@ const TABS = [
 ];
 
 const RANK_ACCENTS = [
-  { color: '#FBBF24', bg: 'rgba(251, 191, 36, 0.12)', border: 'rgba(251, 191, 36, 0.3)', emoji: '🥇' },
-  { color: '#93C5FD', bg: 'rgba(147, 197, 253, 0.12)', border: 'rgba(147, 197, 253, 0.3)', emoji: '🥈' },
-  { color: '#60A5FA', bg: 'rgba(96, 165, 250, 0.12)', border: 'rgba(96, 165, 250, 0.3)', emoji: '🥉' }
+  { ink: 'var(--riso-yellow)', emoji: '🥇' },
+  { ink: 'var(--riso-teal)',   emoji: '🥈' },
+  { ink: 'var(--riso-coral)',  emoji: '🥉' }
 ];
 
 export default function Leaderboard() {
@@ -41,59 +40,32 @@ export default function Leaderboard() {
   }, [activeTab]);
 
   return (
-    <div style={{ minHeight: '100vh', background: '#020617', paddingTop: '6.5rem', color: '#F8FAFC', position: 'relative' }}>
-      
-      {/* Background Starfield & Texture */}
-      <div className="star-field" />
-      <div className="binary-texture" />
+    <div className="cosmic-void" style={{ minHeight: '100vh', paddingTop: '6.5rem', position: 'relative' }}>
+      <div className="paper-grain" />
 
-      <div style={{ maxWidth: '880px', margin: '0 auto', padding: '1.5rem 1.5rem 5rem', position: 'relative', zIndex: 1 }}>
+      <div style={{ maxWidth: '900px', margin: '0 auto', padding: '1.5rem 1.5rem 5rem', position: 'relative', zIndex: 1 }}>
 
         {/* Header */}
-        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#38BDF8', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-            // GLOBAL CLASSIFICATION
-          </span>
-          <h1 className="font-display" style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', fontWeight: 700, color: '#FFFFFF', marginTop: '0.4rem', letterSpacing: '-0.02em' }}>
-            Leaderboard
+        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <span className="zine-kicker">Global Classification</span>
+          <h1 className="zine-display misreg" data-text="LEADERBOARD" style={{ fontSize: 'clamp(2rem, 6vw, 3.4rem)', marginTop: '0.5rem' }}>
+            LEADERBOARD
           </h1>
-          <p style={{ color: '#94A3B8', marginTop: '0.35rem', fontSize: '0.95rem' }}>
+          <p className="zine-lede" style={{ marginTop: '0.5rem' }}>
             Top ranked analytical minds across the AlgoArena network
           </p>
         </motion.div>
 
         {/* Tabs */}
-        <div style={{
-          display: 'flex',
-          gap: '0.35rem',
-          background: 'rgba(8, 14, 33, 0.85)',
-          padding: '0.35rem',
-          borderRadius: '999px',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
-          marginBottom: '2rem',
-          width: 'fit-content',
-          margin: '0 auto 2rem',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)'
-        }}>
+        <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', justifyContent: 'center', marginBottom: '1.75rem' }}>
           {TABS.map(t => {
             const active = activeTab === t.id;
             return (
               <button
                 key={t.id}
                 onClick={() => setActiveTab(t.id)}
-                style={{
-                  padding: '0.45rem 1.25rem',
-                  borderRadius: '999px',
-                  border: 'none',
-                  background: active ? 'linear-gradient(180deg, #3b82f6 0%, #2563eb 100%)' : 'transparent',
-                  color: active ? '#FFFFFF' : '#94A3B8',
-                  cursor: 'pointer',
-                  fontWeight: active ? 700 : 500,
-                  fontSize: '0.825rem',
-                  fontFamily: 'var(--font-display)',
-                  boxShadow: active ? '0 0 15px rgba(59, 130, 246, 0.4)' : 'none',
-                  transition: 'all 0.15s ease'
-                }}
+                className={`zine-btn-sm${active ? ' zine-btn-sm--violet' : ''}`}
+                style={{ padding: '0.5rem 1.1rem', fontSize: '0.72rem' }}
               >
                 {t.label}
               </button>
@@ -102,18 +74,13 @@ export default function Leaderboard() {
         </div>
 
         {/* Board container */}
-        <div style={{
-          background: 'rgba(8, 14, 33, 0.75)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
-          borderRadius: '1.25rem',
-          overflow: 'hidden',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5)'
-        }}>
+        <div className="zine-card" style={{ overflow: 'hidden', boxShadow: '8px 8px 0 var(--riso-violet)' }}>
           {loading ? (
-            <div style={{ padding: '3rem', textAlign: 'center', color: '#94A3B8', fontFamily: 'var(--font-mono)' }}>
-              Querying ranking index...
+            <div style={{ padding: '3rem', textAlign: 'center' }}>
+              <div className="zine-spinner" style={{ margin: '0 auto 1rem' }} />
+              <p className="font-mono" style={{ color: 'var(--ink-muted)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.18em' }}>
+                Querying ranking index...
+              </p>
             </div>
           ) : (
             <div>
@@ -130,23 +97,23 @@ export default function Leaderboard() {
                 return (
                   <div
                     key={idx}
+                    className="lb-row"
                     style={{
                       display: 'grid',
                       gridTemplateColumns: '3.5rem 1fr auto auto',
                       alignItems: 'center',
                       gap: '1rem',
-                      padding: '1rem 1.5rem',
-                      borderBottom: idx < board.length - 1 ? '1px solid rgba(255, 255, 255, 0.05)' : 'none',
-                      background: isCurrentUser ? 'rgba(59, 130, 246, 0.12)' : 'transparent',
-                      transition: 'background 0.15s ease'
+                      padding: '0.95rem 1.4rem',
+                      borderBottom: idx < board.length - 1 ? '2px dashed var(--ink-faint)' : 'none',
+                      background: isCurrentUser ? 'var(--riso-yellow)' : 'transparent'
                     }}
                   >
                     {/* Rank number / medal */}
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       {topAccent ? (
-                        <span style={{ fontSize: '1.25rem' }}>{topAccent.emoji}</span>
+                        <span style={{ fontSize: '1.3rem' }}>{topAccent.emoji}</span>
                       ) : (
-                        <span className="font-mono" style={{ fontSize: '0.9rem', fontWeight: 700, color: '#64748B' }}>
+                        <span className="font-mono" style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--ink-muted)' }}>
                           #{idx + 1}
                         </span>
                       )}
@@ -157,30 +124,32 @@ export default function Leaderboard() {
                       <div style={{
                         width: '34px',
                         height: '34px',
-                        borderRadius: '50%',
-                        background: isCurrentUser ? '#3B82F6' : 'rgba(59, 130, 246, 0.12)',
-                        color: isCurrentUser ? '#FFFFFF' : '#60A5FA',
-                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        background: isCurrentUser ? 'var(--riso-coral)' : 'var(--paper-sunk)',
+                        color: isCurrentUser ? '#fffdf6' : 'var(--ink)',
+                        border: '2px solid var(--ink)',
+                        boxShadow: '2px 2px 0 var(--ink)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         fontWeight: 800,
-                        fontSize: '0.85rem'
+                        fontSize: '0.85rem',
+                        fontFamily: 'var(--font-mono)',
+                        flexShrink: 0
                       }}>
                         {player.username?.[0]?.toUpperCase()}
                       </div>
                       <div style={{ minWidth: 0 }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-                          <span className="font-display" style={{ fontSize: '0.925rem', fontWeight: 700, color: isCurrentUser ? '#FFFFFF' : '#F8FAFC', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                          <span className="zine-display" style={{ fontSize: '0.88rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                             {player.username}
                           </span>
                           {isCurrentUser && (
-                            <span style={{ fontSize: '0.625rem', background: 'rgba(59, 130, 246, 0.25)', color: '#60A5FA', padding: '0.1rem 0.4rem', borderRadius: '4px', fontWeight: 700 }}>
+                            <span className="zine-badge" style={{ background: 'var(--riso-coral)', color: '#fffdf6', fontSize: '0.55rem' }}>
                               YOU
                             </span>
                           )}
                         </div>
-                        <div style={{ fontSize: '0.725rem', color: '#94A3B8' }}>
+                        <div className="font-mono" style={{ fontSize: '0.64rem', color: 'var(--ink-muted)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                           Level {player.level || 1} • {rankObj.name}
                         </div>
                       </div>
@@ -188,21 +157,14 @@ export default function Leaderboard() {
 
                     {/* Rank Badge */}
                     <div className="hidden sm:block">
-                      <span style={{
-                        fontSize: '0.725rem',
-                        padding: '0.2rem 0.6rem',
-                        borderRadius: '999px',
-                        background: 'rgba(59, 130, 246, 0.1)',
-                        border: '1px solid rgba(59, 130, 246, 0.25)',
-                        color: '#60A5FA'
-                      }}>
+                      <span className="zine-badge" style={{ background: 'var(--paper-sunk)' }}>
                         {rankObj.badge} {rankObj.name}
                       </span>
                     </div>
 
                     {/* Stat Value */}
                     <div style={{ textAlign: 'right' }}>
-                      <span className="font-mono" style={{ fontSize: '0.95rem', fontWeight: 800, color: topAccent ? topAccent.color : '#F8FAFC' }}>
+                      <span className="font-mono" style={{ fontSize: '0.9rem', fontWeight: 800, color: topAccent ? topAccent.ink : 'var(--ink)' }}>
                         {displayVal}
                       </span>
                     </div>

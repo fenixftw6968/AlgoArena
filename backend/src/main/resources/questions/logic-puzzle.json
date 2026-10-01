@@ -1,0 +1,3402 @@
+[
+  {
+    "id": "logic-1",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Arithmetic Progression",
+    "question": "Find the next number in the sequence: 4, 9, 14, 19, 24, ?",
+    "options": [
+      "29",
+      "28",
+      "30",
+      "31"
+    ],
+    "correctAnswer": "29",
+    "explanation": "The sequence adds +5 at each step: 24 + 5 = 29.",
+    "hint": "Look at the constant difference between terms."
+  },
+  {
+    "id": "logic-2",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Geometric Doubling",
+    "question": "Find the next number in the sequence: 3, 6, 12, 24, 48, ?",
+    "options": [
+      "96",
+      "92",
+      "84",
+      "108"
+    ],
+    "correctAnswer": "96",
+    "explanation": "Each number is multiplied by 2: 48 * 2 = 96.",
+    "hint": "Each term is twice the previous term."
+  },
+  {
+    "id": "logic-3",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Square Numbers",
+    "question": "What is the next number in the sequence: 1, 4, 9, 16, 25, ?",
+    "options": [
+      "36",
+      "49",
+      "30",
+      "32"
+    ],
+    "correctAnswer": "36",
+    "explanation": "These are consecutive squares: 1^2, 2^2, 3^2, 4^2, 5^2, so the next is 6^2 = 36.",
+    "hint": "Consecutive integer squares."
+  },
+  {
+    "id": "logic-4",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Number Sequences",
+    "title": "Fibonacci Sequence",
+    "question": "Find the next number: 2, 3, 5, 8, 13, 21, ?",
+    "options": [
+      "34",
+      "33",
+      "35",
+      "36"
+    ],
+    "correctAnswer": "34",
+    "explanation": "Each term is the sum of the preceding two: 13 + 21 = 34.",
+    "hint": "Add the two previous numbers."
+  },
+  {
+    "id": "logic-5",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Number Sequences",
+    "title": "Quadratic Differences",
+    "question": "Find the missing number in the sequence: 2, 6, 12, 20, 30, ?",
+    "options": [
+      "42",
+      "40",
+      "44",
+      "38"
+    ],
+    "correctAnswer": "42",
+    "explanation": "First differences are +4, +6, +8, +10. The next difference is +12: 30 + 12 = 42 (also n*(n+1): 6*7 = 42).",
+    "hint": "Differences increase by 2 each step."
+  },
+  {
+    "id": "logic-6",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Number Sequences",
+    "title": "Alternating Operations",
+    "question": "Find the next number in the sequence: 5, 10, 8, 16, 14, 28, ?",
+    "options": [
+      "26",
+      "30",
+      "32",
+      "24"
+    ],
+    "correctAnswer": "26",
+    "explanation": "Pattern alternates between (* 2) and (- 2): 28 - 2 = 26.",
+    "hint": "Multiply by 2, then subtract 2."
+  },
+  {
+    "id": "logic-7",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Number Sequences",
+    "title": "Cube and Add Constant",
+    "question": "What replaces the question mark in: 2, 9, 28, 65, 126, ?",
+    "options": [
+      "217",
+      "215",
+      "216",
+      "224"
+    ],
+    "correctAnswer": "217",
+    "explanation": "Pattern is n^3 + 1: 1^3+1=2, 2^3+1=9, 3^3+1=28, 4^3+1=65, 5^3+1=126, 6^3+1 = 216 + 1 = 217.",
+    "hint": "Cubes plus 1."
+  },
+  {
+    "id": "logic-8",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Number Sequences",
+    "title": "Two Interleaved Sequences",
+    "question": "Find the next number: 3, 15, 6, 30, 12, 60, ?",
+    "options": [
+      "24",
+      "120",
+      "18",
+      "72"
+    ],
+    "correctAnswer": "24",
+    "explanation": "Odd positions double: 3, 6, 12, 24. Even positions double: 15, 30, 60. Next is 24.",
+    "hint": "Interleaved sequences at odd and even indices."
+  },
+  {
+    "id": "logic-9",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Deductive Reasoning",
+    "title": "Syllogism Basics",
+    "question": "Premise 1: All birds have feathers. Premise 2: A robin is a bird. Conclusion: ?",
+    "options": [
+      "A robin has feathers",
+      "Feathers can fly",
+      "All feathered animals are robins",
+      "Robins are mammals"
+    ],
+    "correctAnswer": "A robin has feathers",
+    "explanation": "By categorical syllogism (Modus Ponens), since robin is a subset of birds, it possesses feathers.",
+    "hint": "Direct logical deduction from universal premise."
+  },
+  {
+    "id": "logic-10",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Deductive Reasoning",
+    "title": "Transitive Comparison",
+    "question": "If Alice is taller than Bob, and Bob is taller than Charlie, who is the shortest?",
+    "options": [
+      "Charlie",
+      "Bob",
+      "Alice",
+      "Cannot be determined"
+    ],
+    "correctAnswer": "Charlie",
+    "explanation": "By transitive inequality: Alice > Bob > Charlie, Charlie is strictly the shortest.",
+    "hint": "Chain the greater-than relationships."
+  },
+  {
+    "id": "logic-11",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Deductive Reasoning",
+    "title": "Contrapositive Equivalence",
+    "question": "Which statement is logically equivalent to \"If it rains, then the ground is wet\"?",
+    "options": [
+      "If the ground is not wet, then it did not rain",
+      "If the ground is wet, then it rained",
+      "If it does not rain, the ground is dry",
+      "It only rains when dry"
+    ],
+    "correctAnswer": "If the ground is not wet, then it did not rain",
+    "explanation": "A conditional statement (P -> Q) is logically equivalent to its contrapositive (~Q -> ~P).",
+    "hint": "Contrapositive: Negate and swap both parts."
+  },
+  {
+    "id": "logic-12",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Deductive Reasoning",
+    "title": "Knights and Knaves",
+    "question": "On an island, Knights always tell the truth and Knaves always lie. Person A says: \"Both of us are Knaves.\" What is Person A and B?",
+    "options": [
+      "A is a Knave, B is a Knight",
+      "Both are Knights",
+      "Both are Knaves",
+      "A is a Knight, B is a Knave"
+    ],
+    "correctAnswer": "A is a Knave, B is a Knight",
+    "explanation": "A Knight cannot say \"I am a Knave\", so A is a Knave. Since A lies, \"both are Knaves\" is false, meaning B is a Knight.",
+    "hint": "A Knight cannot call themselves a Knave."
+  },
+  {
+    "id": "logic-13",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Deductive Reasoning",
+    "title": "Four-Card Selection Task",
+    "question": "Rule: \"If a card has an even number on one face, its opposite face is Red.\" Cards showing: [8], [3], [Red], [Blue]. Which cards must be turned over to verify the rule?",
+    "options": [
+      "[8] and [Blue]",
+      "[8] and [Red]",
+      "[8] only",
+      "All four cards"
+    ],
+    "correctAnswer": "[8] and [Blue]",
+    "explanation": "Wason selection task: You must test P ([8], to see if Red) and ~Q ([Blue], to ensure it is not an even number). Turning [Red] tests nothing.",
+    "hint": "Test Modus Ponens (P) and Modus Tollens (~Q)."
+  },
+  {
+    "id": "logic-14",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Analogies",
+    "title": "Word Functional Analogy",
+    "question": "Clock is to Time as Thermometer is to: ?",
+    "options": [
+      "Temperature",
+      "Heat",
+      "Mercury",
+      "Weather"
+    ],
+    "correctAnswer": "Temperature",
+    "explanation": "A clock measures time; a thermometer measures temperature.",
+    "hint": "Tool to measured physical quantity."
+  },
+  {
+    "id": "logic-15",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Odd One Out",
+    "title": "Prime vs Composite",
+    "question": "Which number is the odd one out: 13, 17, 19, 21, 23?",
+    "options": [
+      "21",
+      "13",
+      "17",
+      "23"
+    ],
+    "correctAnswer": "21",
+    "explanation": "21 is composite (3 * 7), whereas 13, 17, 19, and 23 are all prime numbers.",
+    "hint": "Check for divisibility / primality."
+  },
+  {
+    "id": "logic-16",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Odd One Out",
+    "title": "Geometric Property",
+    "question": "Which geometric shape is the odd one out: Square, Rectangle, Rhombus, Triangle?",
+    "options": [
+      "Triangle",
+      "Square",
+      "Rectangle",
+      "Rhombus"
+    ],
+    "correctAnswer": "Triangle",
+    "explanation": "Square, Rectangle, and Rhombus are all 4-sided quadrilaterals; Triangle is a 3-sided polygon.",
+    "hint": "Count the number of vertices."
+  },
+  {
+    "id": "logic-17",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Analogies",
+    "title": "Alphabetical Shift Analogy",
+    "question": "ACE is to GIK as BDF is to: ?",
+    "options": [
+      "HJL",
+      "IKM",
+      "GIK",
+      "HJM"
+    ],
+    "correctAnswer": "HJL",
+    "explanation": "Each letter shifts by +6 positions: B(+6)H, D(+6)J, F(+6)L -> HJL.",
+    "hint": "Constant alphabetical position shift."
+  },
+  {
+    "id": "logic-18",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Odd One Out",
+    "title": "Digit Sum Property",
+    "question": "Which number does not belong: 284, 372, 462, 591, 714?",
+    "options": [
+      "591",
+      "284",
+      "372",
+      "462"
+    ],
+    "correctAnswer": "591",
+    "explanation": "In all other numbers, the middle digit equals the sum of the first and third digits: 2+4=6!=8? In 284 (2+4!=8), 3+2=5!=7? Let us check digit sums: 2+8+4=14, 3+7+2=12, 4+6+2=12, 7+1+4=12. 5+9+1=15. All others sum to even numbers.",
+    "hint": "Examine sum of digits."
+  },
+  {
+    "id": "logic-19",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Arrangements",
+    "title": "Linear Order",
+    "question": "Five friends P, Q, R, S, T sit in a row. R is in the exact middle. S is to the immediate right of R. Who is at index 4 (1-indexed)?",
+    "options": [
+      "S",
+      "R",
+      "P",
+      "T"
+    ],
+    "correctAnswer": "S",
+    "explanation": "With 5 positions [1, 2, 3, 4, 5], middle is 3 (R). Immediate right of position 3 is position 4, which is S.",
+    "hint": "Middle is position 3; right is position 4."
+  },
+  {
+    "id": "logic-20",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Arrangements",
+    "title": "Circular Table Facing Center",
+    "question": "Six people sit in a circle facing the center. A is directly opposite D. B is immediately left of A. Who is to the immediate right of D?",
+    "options": [
+      "B",
+      "C",
+      "E",
+      "F"
+    ],
+    "correctAnswer": "B",
+    "explanation": "Facing center, the person immediately left of A sits directly adjacent to D on Ds right side in a 6-seat circle.",
+    "hint": "Trace circular clock positions."
+  },
+  {
+    "id": "logic-21",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Arrangements",
+    "title": "Rank Position Clue",
+    "question": "In a class of 45 students, Kevin ranks 15th from the top. What is Kevins rank from the bottom?",
+    "options": [
+      "31st",
+      "30th",
+      "32nd",
+      "29th"
+    ],
+    "correctAnswer": "31st",
+    "explanation": "Rank from bottom = Total - Rank_from_top + 1 = 45 - 15 + 1 = 31st.",
+    "hint": "Total minus top rank plus 1."
+  },
+  {
+    "id": "logic-22",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Mathematical Reasoning",
+    "title": "Handshake Problem",
+    "question": "If 6 people attend a meeting and every person shakes hands with everyone else once, how many handshakes occur?",
+    "options": [
+      "15",
+      "30",
+      "12",
+      "36"
+    ],
+    "correctAnswer": "15",
+    "explanation": "Combinations formula: n*(n-1)/2 = 6*5/2 = 15 handshakes.",
+    "hint": "Formula is n * (n - 1) / 2."
+  },
+  {
+    "id": "logic-23",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Mathematical Reasoning",
+    "title": "Work Rate Problem",
+    "question": "If 3 workers build 3 tables in 3 days, how many days do 6 workers take to build 6 tables?",
+    "options": [
+      "3 days",
+      "6 days",
+      "1 day",
+      "12 days"
+    ],
+    "correctAnswer": "3 days",
+    "explanation": "1 worker builds 1 table in 3 days. Therefore, 6 workers build 6 tables in the same 3 days.",
+    "hint": "Work rate per person remains constant."
+  },
+  {
+    "id": "logic-24",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Mathematical Reasoning",
+    "title": "Clock Hands Angle",
+    "question": "At 3:15, what is the angle between the hour hand and the minute hand?",
+    "options": [
+      "7.5 degrees",
+      "0 degrees",
+      "15 degrees",
+      "5 degrees"
+    ],
+    "correctAnswer": "7.5 degrees",
+    "explanation": "At 15 minutes, the minute hand is at 90 deg. The hour hand is at 3 * 30 + 15 * 0.5 = 97.5 deg. Difference = 7.5 deg.",
+    "hint": "Hour hand moves 0.5 degrees per minute."
+  },
+  {
+    "id": "logic-25",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Probability",
+    "title": "Two Dice Sum of 7",
+    "question": "When rolling two standard 6-sided dice, what is the probability that the sum of the numbers is 7?",
+    "options": [
+      "1/6",
+      "1/12",
+      "7/36",
+      "5/36"
+    ],
+    "correctAnswer": "1/6",
+    "explanation": "There are 6 favorable outcomes: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) out of 36 total: 6/36 = 1/6.",
+    "hint": "Count pairs that add to 7 over 36."
+  },
+  {
+    "id": "logic-26",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Probability",
+    "title": "Monty Hall Problem",
+    "question": "In the classic Monty Hall 3-door problem, what is the probability of winning the car if you switch doors after the host reveals a goat?",
+    "options": [
+      "2/3",
+      "1/2",
+      "1/3",
+      "3/4"
+    ],
+    "correctAnswer": "2/3",
+    "explanation": "Your initial door had a 1/3 chance of winning and 2/3 chance of being a goat. Switching transfers the entire 2/3 probability to the remaining door.",
+    "hint": "Initial choice had 1/3 probability."
+  },
+  {
+    "id": "logic-27",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Step Arithmetic",
+    "question": "What is the missing term in the sequence: 10, 17, 24, 31, ?",
+    "options": [
+      "38",
+      "37",
+      "39",
+      "40"
+    ],
+    "correctAnswer": "38",
+    "explanation": "Constant difference of +7: 31 + 7 = 38.",
+    "hint": "Add 7 to the previous term."
+  },
+  {
+    "id": "logic-28",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Deductive Reasoning",
+    "title": "Directional Heading",
+    "question": "A person walks 10m North, turns right, walks 10m, and turns right again walking 10m. Which direction are they facing?",
+    "options": [
+      "South",
+      "East",
+      "North",
+      "West"
+    ],
+    "correctAnswer": "South",
+    "explanation": "Starting North -> right turn makes heading East -> right turn makes heading South.",
+    "hint": "Track 90 degree clockwise turns."
+  },
+  {
+    "id": "logic-29",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Analogies",
+    "title": "Tool Analogy",
+    "question": "Painter is to Brush as Sculptor is to: ?",
+    "options": [
+      "Chisel",
+      "Canvas",
+      "Pencil",
+      "Camera"
+    ],
+    "correctAnswer": "Chisel",
+    "explanation": "A painter uses a brush as their primary tool; a sculptor uses a chisel.",
+    "hint": "Primary instrument of creation."
+  },
+  {
+    "id": "logic-30",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Odd One Out",
+    "title": "Divisibility Rule",
+    "question": "Which of the following numbers is NOT divisible by 3: 123, 234, 345, 452?",
+    "options": [
+      "452",
+      "123",
+      "234",
+      "345"
+    ],
+    "correctAnswer": "452",
+    "explanation": "Sum of digits: 4+5+2 = 11, which is not divisible by 3. All other digit sums are multiples of 3.",
+    "hint": "Sum of digits must be divisible by 3."
+  },
+  {
+    "id": "logic-31",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Mathematical Reasoning",
+    "title": "Speed and Time",
+    "question": "If a car travels at 60 km/h for 2 hours and 30 minutes, what is the total distance covered?",
+    "options": [
+      "150 km",
+      "120 km",
+      "180 km",
+      "140 km"
+    ],
+    "correctAnswer": "150 km",
+    "explanation": "Distance = Speed * Time = 60 * 2.5 = 150 km.",
+    "hint": "Multiply speed by 2.5 hours."
+  },
+  {
+    "id": "logic-32",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Arrangements",
+    "title": "Opposite Pairing",
+    "question": "In a group of 8 people seated symmetrically around a round table, how many seats separate two directly opposite individuals along the perimeter in one direction?",
+    "options": [
+      "3 seats",
+      "4 seats",
+      "2 seats",
+      "1 seat"
+    ],
+    "correctAnswer": "3 seats",
+    "explanation": "Opposite positions in an 8-person circle have index difference 4, leaving exactly 3 intermediate seats between them.",
+    "hint": "Directly opposite halves the circle."
+  },
+  {
+    "id": "logic-33",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Deductive Reasoning",
+    "title": "Conditional Negation",
+    "question": "If the statement \"Some doctors are musicians\" is TRUE, what can definitely be concluded?",
+    "options": [
+      "At least one person is both a doctor and a musician",
+      "All musicians are doctors",
+      "No doctors are musicians",
+      "Doctors cannot be musicians"
+    ],
+    "correctAnswer": "At least one person is both a doctor and a musician",
+    "explanation": "In formal logic, \"some\" asserts the existence of at least one entity possessing both properties.",
+    "hint": "Some means at least one."
+  },
+  {
+    "id": "logic-34",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Probability",
+    "title": "Coin Toss Independence",
+    "question": "If a fair coin lands on Heads 5 times in a row, what is the probability that the 6th flip is Heads?",
+    "options": [
+      "1/2",
+      "1/64",
+      "1/32",
+      "3/4"
+    ],
+    "correctAnswer": "1/2",
+    "explanation": "Each coin toss is an independent event; past outcomes do not alter the 50% (1/2) probability of a fair flip.",
+    "hint": "Independent coin tosses."
+  },
+  {
+    "id": "logic-35",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Step Arithmetic",
+    "question": "What is the missing term in the sequence: 10, 17, 24, 31, ?",
+    "options": [
+      "38",
+      "37",
+      "39",
+      "40"
+    ],
+    "correctAnswer": "38",
+    "explanation": "Constant difference of +7: 31 + 7 = 38.",
+    "hint": "Add 7 to the previous term."
+  },
+  {
+    "id": "logic-36",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Deductive Reasoning",
+    "title": "Directional Heading",
+    "question": "A person walks 10m North, turns right, walks 10m, and turns right again walking 10m. Which direction are they facing?",
+    "options": [
+      "South",
+      "East",
+      "North",
+      "West"
+    ],
+    "correctAnswer": "South",
+    "explanation": "Starting North -> right turn makes heading East -> right turn makes heading South.",
+    "hint": "Track 90 degree clockwise turns."
+  },
+  {
+    "id": "logic-37",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Analogies",
+    "title": "Tool Analogy",
+    "question": "Painter is to Brush as Sculptor is to: ?",
+    "options": [
+      "Chisel",
+      "Canvas",
+      "Pencil",
+      "Camera"
+    ],
+    "correctAnswer": "Chisel",
+    "explanation": "A painter uses a brush as their primary tool; a sculptor uses a chisel.",
+    "hint": "Primary instrument of creation."
+  },
+  {
+    "id": "logic-38",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Odd One Out",
+    "title": "Divisibility Rule",
+    "question": "Which of the following numbers is NOT divisible by 3: 123, 234, 345, 452?",
+    "options": [
+      "452",
+      "123",
+      "234",
+      "345"
+    ],
+    "correctAnswer": "452",
+    "explanation": "Sum of digits: 4+5+2 = 11, which is not divisible by 3. All other digit sums are multiples of 3.",
+    "hint": "Sum of digits must be divisible by 3."
+  },
+  {
+    "id": "logic-39",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Mathematical Reasoning",
+    "title": "Speed and Time",
+    "question": "If a car travels at 60 km/h for 2 hours and 30 minutes, what is the total distance covered?",
+    "options": [
+      "150 km",
+      "120 km",
+      "180 km",
+      "140 km"
+    ],
+    "correctAnswer": "150 km",
+    "explanation": "Distance = Speed * Time = 60 * 2.5 = 150 km.",
+    "hint": "Multiply speed by 2.5 hours."
+  },
+  {
+    "id": "logic-40",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Arrangements",
+    "title": "Opposite Pairing",
+    "question": "In a group of 8 people seated symmetrically around a round table, how many seats separate two directly opposite individuals along the perimeter in one direction?",
+    "options": [
+      "3 seats",
+      "4 seats",
+      "2 seats",
+      "1 seat"
+    ],
+    "correctAnswer": "3 seats",
+    "explanation": "Opposite positions in an 8-person circle have index difference 4, leaving exactly 3 intermediate seats between them.",
+    "hint": "Directly opposite halves the circle."
+  },
+  {
+    "id": "logic-41",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Deductive Reasoning",
+    "title": "Conditional Negation",
+    "question": "If the statement \"Some doctors are musicians\" is TRUE, what can definitely be concluded?",
+    "options": [
+      "At least one person is both a doctor and a musician",
+      "All musicians are doctors",
+      "No doctors are musicians",
+      "Doctors cannot be musicians"
+    ],
+    "correctAnswer": "At least one person is both a doctor and a musician",
+    "explanation": "In formal logic, \"some\" asserts the existence of at least one entity possessing both properties.",
+    "hint": "Some means at least one."
+  },
+  {
+    "id": "logic-42",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Probability",
+    "title": "Coin Toss Independence",
+    "question": "If a fair coin lands on Heads 5 times in a row, what is the probability that the 6th flip is Heads?",
+    "options": [
+      "1/2",
+      "1/64",
+      "1/32",
+      "3/4"
+    ],
+    "correctAnswer": "1/2",
+    "explanation": "Each coin toss is an independent event; past outcomes do not alter the 50% (1/2) probability of a fair flip.",
+    "hint": "Independent coin tosses."
+  },
+  {
+    "id": "logic-43",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Step Arithmetic",
+    "question": "What is the missing term in the sequence: 10, 17, 24, 31, ?",
+    "options": [
+      "38",
+      "37",
+      "39",
+      "40"
+    ],
+    "correctAnswer": "38",
+    "explanation": "Constant difference of +7: 31 + 7 = 38.",
+    "hint": "Add 7 to the previous term."
+  },
+  {
+    "id": "logic-44",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Deductive Reasoning",
+    "title": "Directional Heading",
+    "question": "A person walks 10m North, turns right, walks 10m, and turns right again walking 10m. Which direction are they facing?",
+    "options": [
+      "South",
+      "East",
+      "North",
+      "West"
+    ],
+    "correctAnswer": "South",
+    "explanation": "Starting North -> right turn makes heading East -> right turn makes heading South.",
+    "hint": "Track 90 degree clockwise turns."
+  },
+  {
+    "id": "logic-45",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Analogies",
+    "title": "Tool Analogy",
+    "question": "Painter is to Brush as Sculptor is to: ?",
+    "options": [
+      "Chisel",
+      "Canvas",
+      "Pencil",
+      "Camera"
+    ],
+    "correctAnswer": "Chisel",
+    "explanation": "A painter uses a brush as their primary tool; a sculptor uses a chisel.",
+    "hint": "Primary instrument of creation."
+  },
+  {
+    "id": "logic-46",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Odd One Out",
+    "title": "Divisibility Rule",
+    "question": "Which of the following numbers is NOT divisible by 3: 123, 234, 345, 452?",
+    "options": [
+      "452",
+      "123",
+      "234",
+      "345"
+    ],
+    "correctAnswer": "452",
+    "explanation": "Sum of digits: 4+5+2 = 11, which is not divisible by 3. All other digit sums are multiples of 3.",
+    "hint": "Sum of digits must be divisible by 3."
+  },
+  {
+    "id": "logic-47",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Mathematical Reasoning",
+    "title": "Speed and Time",
+    "question": "If a car travels at 60 km/h for 2 hours and 30 minutes, what is the total distance covered?",
+    "options": [
+      "150 km",
+      "120 km",
+      "180 km",
+      "140 km"
+    ],
+    "correctAnswer": "150 km",
+    "explanation": "Distance = Speed * Time = 60 * 2.5 = 150 km.",
+    "hint": "Multiply speed by 2.5 hours."
+  },
+  {
+    "id": "logic-48",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Arrangements",
+    "title": "Opposite Pairing",
+    "question": "In a group of 8 people seated symmetrically around a round table, how many seats separate two directly opposite individuals along the perimeter in one direction?",
+    "options": [
+      "3 seats",
+      "4 seats",
+      "2 seats",
+      "1 seat"
+    ],
+    "correctAnswer": "3 seats",
+    "explanation": "Opposite positions in an 8-person circle have index difference 4, leaving exactly 3 intermediate seats between them.",
+    "hint": "Directly opposite halves the circle."
+  },
+  {
+    "id": "logic-49",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Deductive Reasoning",
+    "title": "Conditional Negation",
+    "question": "If the statement \"Some doctors are musicians\" is TRUE, what can definitely be concluded?",
+    "options": [
+      "At least one person is both a doctor and a musician",
+      "All musicians are doctors",
+      "No doctors are musicians",
+      "Doctors cannot be musicians"
+    ],
+    "correctAnswer": "At least one person is both a doctor and a musician",
+    "explanation": "In formal logic, \"some\" asserts the existence of at least one entity possessing both properties.",
+    "hint": "Some means at least one."
+  },
+  {
+    "id": "logic-50",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Probability",
+    "title": "Coin Toss Independence",
+    "question": "If a fair coin lands on Heads 5 times in a row, what is the probability that the 6th flip is Heads?",
+    "options": [
+      "1/2",
+      "1/64",
+      "1/32",
+      "3/4"
+    ],
+    "correctAnswer": "1/2",
+    "explanation": "Each coin toss is an independent event; past outcomes do not alter the 50% (1/2) probability of a fair flip.",
+    "hint": "Independent coin tosses."
+  },
+  {
+    "id": "logic-51",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Step Arithmetic",
+    "question": "What is the missing term in the sequence: 10, 17, 24, 31, ?",
+    "options": [
+      "38",
+      "37",
+      "39",
+      "40"
+    ],
+    "correctAnswer": "38",
+    "explanation": "Constant difference of +7: 31 + 7 = 38.",
+    "hint": "Add 7 to the previous term."
+  },
+  {
+    "id": "logic-52",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Deductive Reasoning",
+    "title": "Directional Heading",
+    "question": "A person walks 10m North, turns right, walks 10m, and turns right again walking 10m. Which direction are they facing?",
+    "options": [
+      "South",
+      "East",
+      "North",
+      "West"
+    ],
+    "correctAnswer": "South",
+    "explanation": "Starting North -> right turn makes heading East -> right turn makes heading South.",
+    "hint": "Track 90 degree clockwise turns."
+  },
+  {
+    "id": "logic-53",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Analogies",
+    "title": "Tool Analogy",
+    "question": "Painter is to Brush as Sculptor is to: ?",
+    "options": [
+      "Chisel",
+      "Canvas",
+      "Pencil",
+      "Camera"
+    ],
+    "correctAnswer": "Chisel",
+    "explanation": "A painter uses a brush as their primary tool; a sculptor uses a chisel.",
+    "hint": "Primary instrument of creation."
+  },
+  {
+    "id": "logic-54",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Odd One Out",
+    "title": "Divisibility Rule",
+    "question": "Which of the following numbers is NOT divisible by 3: 123, 234, 345, 452?",
+    "options": [
+      "452",
+      "123",
+      "234",
+      "345"
+    ],
+    "correctAnswer": "452",
+    "explanation": "Sum of digits: 4+5+2 = 11, which is not divisible by 3. All other digit sums are multiples of 3.",
+    "hint": "Sum of digits must be divisible by 3."
+  },
+  {
+    "id": "logic-55",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Mathematical Reasoning",
+    "title": "Speed and Time",
+    "question": "If a car travels at 60 km/h for 2 hours and 30 minutes, what is the total distance covered?",
+    "options": [
+      "150 km",
+      "120 km",
+      "180 km",
+      "140 km"
+    ],
+    "correctAnswer": "150 km",
+    "explanation": "Distance = Speed * Time = 60 * 2.5 = 150 km.",
+    "hint": "Multiply speed by 2.5 hours."
+  },
+  {
+    "id": "logic-56",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Arrangements",
+    "title": "Opposite Pairing",
+    "question": "In a group of 8 people seated symmetrically around a round table, how many seats separate two directly opposite individuals along the perimeter in one direction?",
+    "options": [
+      "3 seats",
+      "4 seats",
+      "2 seats",
+      "1 seat"
+    ],
+    "correctAnswer": "3 seats",
+    "explanation": "Opposite positions in an 8-person circle have index difference 4, leaving exactly 3 intermediate seats between them.",
+    "hint": "Directly opposite halves the circle."
+  },
+  {
+    "id": "logic-57",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Deductive Reasoning",
+    "title": "Conditional Negation",
+    "question": "If the statement \"Some doctors are musicians\" is TRUE, what can definitely be concluded?",
+    "options": [
+      "At least one person is both a doctor and a musician",
+      "All musicians are doctors",
+      "No doctors are musicians",
+      "Doctors cannot be musicians"
+    ],
+    "correctAnswer": "At least one person is both a doctor and a musician",
+    "explanation": "In formal logic, \"some\" asserts the existence of at least one entity possessing both properties.",
+    "hint": "Some means at least one."
+  },
+  {
+    "id": "logic-58",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Probability",
+    "title": "Coin Toss Independence",
+    "question": "If a fair coin lands on Heads 5 times in a row, what is the probability that the 6th flip is Heads?",
+    "options": [
+      "1/2",
+      "1/64",
+      "1/32",
+      "3/4"
+    ],
+    "correctAnswer": "1/2",
+    "explanation": "Each coin toss is an independent event; past outcomes do not alter the 50% (1/2) probability of a fair flip.",
+    "hint": "Independent coin tosses."
+  },
+  {
+    "id": "logic-59",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Step Arithmetic",
+    "question": "What is the missing term in the sequence: 10, 17, 24, 31, ?",
+    "options": [
+      "38",
+      "37",
+      "39",
+      "40"
+    ],
+    "correctAnswer": "38",
+    "explanation": "Constant difference of +7: 31 + 7 = 38.",
+    "hint": "Add 7 to the previous term."
+  },
+  {
+    "id": "logic-60",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Deductive Reasoning",
+    "title": "Directional Heading",
+    "question": "A person walks 10m North, turns right, walks 10m, and turns right again walking 10m. Which direction are they facing?",
+    "options": [
+      "South",
+      "East",
+      "North",
+      "West"
+    ],
+    "correctAnswer": "South",
+    "explanation": "Starting North -> right turn makes heading East -> right turn makes heading South.",
+    "hint": "Track 90 degree clockwise turns."
+  },
+  {
+    "id": "logic-61",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Analogies",
+    "title": "Tool Analogy",
+    "question": "Painter is to Brush as Sculptor is to: ?",
+    "options": [
+      "Chisel",
+      "Canvas",
+      "Pencil",
+      "Camera"
+    ],
+    "correctAnswer": "Chisel",
+    "explanation": "A painter uses a brush as their primary tool; a sculptor uses a chisel.",
+    "hint": "Primary instrument of creation."
+  },
+  {
+    "id": "logic-62",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Odd One Out",
+    "title": "Divisibility Rule",
+    "question": "Which of the following numbers is NOT divisible by 3: 123, 234, 345, 452?",
+    "options": [
+      "452",
+      "123",
+      "234",
+      "345"
+    ],
+    "correctAnswer": "452",
+    "explanation": "Sum of digits: 4+5+2 = 11, which is not divisible by 3. All other digit sums are multiples of 3.",
+    "hint": "Sum of digits must be divisible by 3."
+  },
+  {
+    "id": "logic-63",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Mathematical Reasoning",
+    "title": "Speed and Time",
+    "question": "If a car travels at 60 km/h for 2 hours and 30 minutes, what is the total distance covered?",
+    "options": [
+      "150 km",
+      "120 km",
+      "180 km",
+      "140 km"
+    ],
+    "correctAnswer": "150 km",
+    "explanation": "Distance = Speed * Time = 60 * 2.5 = 150 km.",
+    "hint": "Multiply speed by 2.5 hours."
+  },
+  {
+    "id": "logic-64",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Arrangements",
+    "title": "Opposite Pairing",
+    "question": "In a group of 8 people seated symmetrically around a round table, how many seats separate two directly opposite individuals along the perimeter in one direction?",
+    "options": [
+      "3 seats",
+      "4 seats",
+      "2 seats",
+      "1 seat"
+    ],
+    "correctAnswer": "3 seats",
+    "explanation": "Opposite positions in an 8-person circle have index difference 4, leaving exactly 3 intermediate seats between them.",
+    "hint": "Directly opposite halves the circle."
+  },
+  {
+    "id": "logic-65",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Deductive Reasoning",
+    "title": "Conditional Negation",
+    "question": "If the statement \"Some doctors are musicians\" is TRUE, what can definitely be concluded?",
+    "options": [
+      "At least one person is both a doctor and a musician",
+      "All musicians are doctors",
+      "No doctors are musicians",
+      "Doctors cannot be musicians"
+    ],
+    "correctAnswer": "At least one person is both a doctor and a musician",
+    "explanation": "In formal logic, \"some\" asserts the existence of at least one entity possessing both properties.",
+    "hint": "Some means at least one."
+  },
+  {
+    "id": "logic-66",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Probability",
+    "title": "Coin Toss Independence",
+    "question": "If a fair coin lands on Heads 5 times in a row, what is the probability that the 6th flip is Heads?",
+    "options": [
+      "1/2",
+      "1/64",
+      "1/32",
+      "3/4"
+    ],
+    "correctAnswer": "1/2",
+    "explanation": "Each coin toss is an independent event; past outcomes do not alter the 50% (1/2) probability of a fair flip.",
+    "hint": "Independent coin tosses."
+  },
+  {
+    "id": "logic-67",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Step Arithmetic",
+    "question": "What is the missing term in the sequence: 10, 17, 24, 31, ?",
+    "options": [
+      "38",
+      "37",
+      "39",
+      "40"
+    ],
+    "correctAnswer": "38",
+    "explanation": "Constant difference of +7: 31 + 7 = 38.",
+    "hint": "Add 7 to the previous term."
+  },
+  {
+    "id": "logic-68",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Deductive Reasoning",
+    "title": "Directional Heading",
+    "question": "A person walks 10m North, turns right, walks 10m, and turns right again walking 10m. Which direction are they facing?",
+    "options": [
+      "South",
+      "East",
+      "North",
+      "West"
+    ],
+    "correctAnswer": "South",
+    "explanation": "Starting North -> right turn makes heading East -> right turn makes heading South.",
+    "hint": "Track 90 degree clockwise turns."
+  },
+  {
+    "id": "logic-69",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Analogies",
+    "title": "Tool Analogy",
+    "question": "Painter is to Brush as Sculptor is to: ?",
+    "options": [
+      "Chisel",
+      "Canvas",
+      "Pencil",
+      "Camera"
+    ],
+    "correctAnswer": "Chisel",
+    "explanation": "A painter uses a brush as their primary tool; a sculptor uses a chisel.",
+    "hint": "Primary instrument of creation."
+  },
+  {
+    "id": "logic-70",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Odd One Out",
+    "title": "Divisibility Rule",
+    "question": "Which of the following numbers is NOT divisible by 3: 123, 234, 345, 452?",
+    "options": [
+      "452",
+      "123",
+      "234",
+      "345"
+    ],
+    "correctAnswer": "452",
+    "explanation": "Sum of digits: 4+5+2 = 11, which is not divisible by 3. All other digit sums are multiples of 3.",
+    "hint": "Sum of digits must be divisible by 3."
+  },
+  {
+    "id": "logic-71",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Mathematical Reasoning",
+    "title": "Speed and Time",
+    "question": "If a car travels at 60 km/h for 2 hours and 30 minutes, what is the total distance covered?",
+    "options": [
+      "150 km",
+      "120 km",
+      "180 km",
+      "140 km"
+    ],
+    "correctAnswer": "150 km",
+    "explanation": "Distance = Speed * Time = 60 * 2.5 = 150 km.",
+    "hint": "Multiply speed by 2.5 hours."
+  },
+  {
+    "id": "logic-72",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Arrangements",
+    "title": "Opposite Pairing",
+    "question": "In a group of 8 people seated symmetrically around a round table, how many seats separate two directly opposite individuals along the perimeter in one direction?",
+    "options": [
+      "3 seats",
+      "4 seats",
+      "2 seats",
+      "1 seat"
+    ],
+    "correctAnswer": "3 seats",
+    "explanation": "Opposite positions in an 8-person circle have index difference 4, leaving exactly 3 intermediate seats between them.",
+    "hint": "Directly opposite halves the circle."
+  },
+  {
+    "id": "logic-73",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Deductive Reasoning",
+    "title": "Conditional Negation",
+    "question": "If the statement \"Some doctors are musicians\" is TRUE, what can definitely be concluded?",
+    "options": [
+      "At least one person is both a doctor and a musician",
+      "All musicians are doctors",
+      "No doctors are musicians",
+      "Doctors cannot be musicians"
+    ],
+    "correctAnswer": "At least one person is both a doctor and a musician",
+    "explanation": "In formal logic, \"some\" asserts the existence of at least one entity possessing both properties.",
+    "hint": "Some means at least one."
+  },
+  {
+    "id": "logic-74",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Probability",
+    "title": "Coin Toss Independence",
+    "question": "If a fair coin lands on Heads 5 times in a row, what is the probability that the 6th flip is Heads?",
+    "options": [
+      "1/2",
+      "1/64",
+      "1/32",
+      "3/4"
+    ],
+    "correctAnswer": "1/2",
+    "explanation": "Each coin toss is an independent event; past outcomes do not alter the 50% (1/2) probability of a fair flip.",
+    "hint": "Independent coin tosses."
+  },
+  {
+    "id": "logic-75",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Step Arithmetic",
+    "question": "What is the missing term in the sequence: 10, 17, 24, 31, ?",
+    "options": [
+      "38",
+      "37",
+      "39",
+      "40"
+    ],
+    "correctAnswer": "38",
+    "explanation": "Constant difference of +7: 31 + 7 = 38.",
+    "hint": "Add 7 to the previous term."
+  },
+  {
+    "id": "logic-76",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Deductive Reasoning",
+    "title": "Directional Heading",
+    "question": "A person walks 10m North, turns right, walks 10m, and turns right again walking 10m. Which direction are they facing?",
+    "options": [
+      "South",
+      "East",
+      "North",
+      "West"
+    ],
+    "correctAnswer": "South",
+    "explanation": "Starting North -> right turn makes heading East -> right turn makes heading South.",
+    "hint": "Track 90 degree clockwise turns."
+  },
+  {
+    "id": "logic-77",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Analogies",
+    "title": "Tool Analogy",
+    "question": "Painter is to Brush as Sculptor is to: ?",
+    "options": [
+      "Chisel",
+      "Canvas",
+      "Pencil",
+      "Camera"
+    ],
+    "correctAnswer": "Chisel",
+    "explanation": "A painter uses a brush as their primary tool; a sculptor uses a chisel.",
+    "hint": "Primary instrument of creation."
+  },
+  {
+    "id": "logic-78",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Odd One Out",
+    "title": "Divisibility Rule",
+    "question": "Which of the following numbers is NOT divisible by 3: 123, 234, 345, 452?",
+    "options": [
+      "452",
+      "123",
+      "234",
+      "345"
+    ],
+    "correctAnswer": "452",
+    "explanation": "Sum of digits: 4+5+2 = 11, which is not divisible by 3. All other digit sums are multiples of 3.",
+    "hint": "Sum of digits must be divisible by 3."
+  },
+  {
+    "id": "logic-79",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Mathematical Reasoning",
+    "title": "Speed and Time",
+    "question": "If a car travels at 60 km/h for 2 hours and 30 minutes, what is the total distance covered?",
+    "options": [
+      "150 km",
+      "120 km",
+      "180 km",
+      "140 km"
+    ],
+    "correctAnswer": "150 km",
+    "explanation": "Distance = Speed * Time = 60 * 2.5 = 150 km.",
+    "hint": "Multiply speed by 2.5 hours."
+  },
+  {
+    "id": "logic-80",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Arrangements",
+    "title": "Opposite Pairing",
+    "question": "In a group of 8 people seated symmetrically around a round table, how many seats separate two directly opposite individuals along the perimeter in one direction?",
+    "options": [
+      "3 seats",
+      "4 seats",
+      "2 seats",
+      "1 seat"
+    ],
+    "correctAnswer": "3 seats",
+    "explanation": "Opposite positions in an 8-person circle have index difference 4, leaving exactly 3 intermediate seats between them.",
+    "hint": "Directly opposite halves the circle."
+  },
+  {
+    "id": "logic-81",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Deductive Reasoning",
+    "title": "Conditional Negation",
+    "question": "If the statement \"Some doctors are musicians\" is TRUE, what can definitely be concluded?",
+    "options": [
+      "At least one person is both a doctor and a musician",
+      "All musicians are doctors",
+      "No doctors are musicians",
+      "Doctors cannot be musicians"
+    ],
+    "correctAnswer": "At least one person is both a doctor and a musician",
+    "explanation": "In formal logic, \"some\" asserts the existence of at least one entity possessing both properties.",
+    "hint": "Some means at least one."
+  },
+  {
+    "id": "logic-82",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Probability",
+    "title": "Coin Toss Independence",
+    "question": "If a fair coin lands on Heads 5 times in a row, what is the probability that the 6th flip is Heads?",
+    "options": [
+      "1/2",
+      "1/64",
+      "1/32",
+      "3/4"
+    ],
+    "correctAnswer": "1/2",
+    "explanation": "Each coin toss is an independent event; past outcomes do not alter the 50% (1/2) probability of a fair flip.",
+    "hint": "Independent coin tosses."
+  },
+  {
+    "id": "logic-83",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Step Arithmetic",
+    "question": "What is the missing term in the sequence: 10, 17, 24, 31, ?",
+    "options": [
+      "38",
+      "37",
+      "39",
+      "40"
+    ],
+    "correctAnswer": "38",
+    "explanation": "Constant difference of +7: 31 + 7 = 38.",
+    "hint": "Add 7 to the previous term."
+  },
+  {
+    "id": "logic-84",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Deductive Reasoning",
+    "title": "Directional Heading",
+    "question": "A person walks 10m North, turns right, walks 10m, and turns right again walking 10m. Which direction are they facing?",
+    "options": [
+      "South",
+      "East",
+      "North",
+      "West"
+    ],
+    "correctAnswer": "South",
+    "explanation": "Starting North -> right turn makes heading East -> right turn makes heading South.",
+    "hint": "Track 90 degree clockwise turns."
+  },
+  {
+    "id": "logic-85",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Analogies",
+    "title": "Tool Analogy",
+    "question": "Painter is to Brush as Sculptor is to: ?",
+    "options": [
+      "Chisel",
+      "Canvas",
+      "Pencil",
+      "Camera"
+    ],
+    "correctAnswer": "Chisel",
+    "explanation": "A painter uses a brush as their primary tool; a sculptor uses a chisel.",
+    "hint": "Primary instrument of creation."
+  },
+  {
+    "id": "logic-86",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Odd One Out",
+    "title": "Divisibility Rule",
+    "question": "Which of the following numbers is NOT divisible by 3: 123, 234, 345, 452?",
+    "options": [
+      "452",
+      "123",
+      "234",
+      "345"
+    ],
+    "correctAnswer": "452",
+    "explanation": "Sum of digits: 4+5+2 = 11, which is not divisible by 3. All other digit sums are multiples of 3.",
+    "hint": "Sum of digits must be divisible by 3."
+  },
+  {
+    "id": "logic-87",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Mathematical Reasoning",
+    "title": "Speed and Time",
+    "question": "If a car travels at 60 km/h for 2 hours and 30 minutes, what is the total distance covered?",
+    "options": [
+      "150 km",
+      "120 km",
+      "180 km",
+      "140 km"
+    ],
+    "correctAnswer": "150 km",
+    "explanation": "Distance = Speed * Time = 60 * 2.5 = 150 km.",
+    "hint": "Multiply speed by 2.5 hours."
+  },
+  {
+    "id": "logic-88",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Arrangements",
+    "title": "Opposite Pairing",
+    "question": "In a group of 8 people seated symmetrically around a round table, how many seats separate two directly opposite individuals along the perimeter in one direction?",
+    "options": [
+      "3 seats",
+      "4 seats",
+      "2 seats",
+      "1 seat"
+    ],
+    "correctAnswer": "3 seats",
+    "explanation": "Opposite positions in an 8-person circle have index difference 4, leaving exactly 3 intermediate seats between them.",
+    "hint": "Directly opposite halves the circle."
+  },
+  {
+    "id": "logic-89",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Deductive Reasoning",
+    "title": "Conditional Negation",
+    "question": "If the statement \"Some doctors are musicians\" is TRUE, what can definitely be concluded?",
+    "options": [
+      "At least one person is both a doctor and a musician",
+      "All musicians are doctors",
+      "No doctors are musicians",
+      "Doctors cannot be musicians"
+    ],
+    "correctAnswer": "At least one person is both a doctor and a musician",
+    "explanation": "In formal logic, \"some\" asserts the existence of at least one entity possessing both properties.",
+    "hint": "Some means at least one."
+  },
+  {
+    "id": "logic-90",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Probability",
+    "title": "Coin Toss Independence",
+    "question": "If a fair coin lands on Heads 5 times in a row, what is the probability that the 6th flip is Heads?",
+    "options": [
+      "1/2",
+      "1/64",
+      "1/32",
+      "3/4"
+    ],
+    "correctAnswer": "1/2",
+    "explanation": "Each coin toss is an independent event; past outcomes do not alter the 50% (1/2) probability of a fair flip.",
+    "hint": "Independent coin tosses."
+  },
+  {
+    "id": "logic-91",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Step Arithmetic",
+    "question": "What is the missing term in the sequence: 10, 17, 24, 31, ?",
+    "options": [
+      "38",
+      "37",
+      "39",
+      "40"
+    ],
+    "correctAnswer": "38",
+    "explanation": "Constant difference of +7: 31 + 7 = 38.",
+    "hint": "Add 7 to the previous term."
+  },
+  {
+    "id": "logic-92",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Deductive Reasoning",
+    "title": "Directional Heading",
+    "question": "A person walks 10m North, turns right, walks 10m, and turns right again walking 10m. Which direction are they facing?",
+    "options": [
+      "South",
+      "East",
+      "North",
+      "West"
+    ],
+    "correctAnswer": "South",
+    "explanation": "Starting North -> right turn makes heading East -> right turn makes heading South.",
+    "hint": "Track 90 degree clockwise turns."
+  },
+  {
+    "id": "logic-93",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Analogies",
+    "title": "Tool Analogy",
+    "question": "Painter is to Brush as Sculptor is to: ?",
+    "options": [
+      "Chisel",
+      "Canvas",
+      "Pencil",
+      "Camera"
+    ],
+    "correctAnswer": "Chisel",
+    "explanation": "A painter uses a brush as their primary tool; a sculptor uses a chisel.",
+    "hint": "Primary instrument of creation."
+  },
+  {
+    "id": "logic-94",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Odd One Out",
+    "title": "Divisibility Rule",
+    "question": "Which of the following numbers is NOT divisible by 3: 123, 234, 345, 452?",
+    "options": [
+      "452",
+      "123",
+      "234",
+      "345"
+    ],
+    "correctAnswer": "452",
+    "explanation": "Sum of digits: 4+5+2 = 11, which is not divisible by 3. All other digit sums are multiples of 3.",
+    "hint": "Sum of digits must be divisible by 3."
+  },
+  {
+    "id": "logic-95",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Mathematical Reasoning",
+    "title": "Speed and Time",
+    "question": "If a car travels at 60 km/h for 2 hours and 30 minutes, what is the total distance covered?",
+    "options": [
+      "150 km",
+      "120 km",
+      "180 km",
+      "140 km"
+    ],
+    "correctAnswer": "150 km",
+    "explanation": "Distance = Speed * Time = 60 * 2.5 = 150 km.",
+    "hint": "Multiply speed by 2.5 hours."
+  },
+  {
+    "id": "logic-96",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Arrangements",
+    "title": "Opposite Pairing",
+    "question": "In a group of 8 people seated symmetrically around a round table, how many seats separate two directly opposite individuals along the perimeter in one direction?",
+    "options": [
+      "3 seats",
+      "4 seats",
+      "2 seats",
+      "1 seat"
+    ],
+    "correctAnswer": "3 seats",
+    "explanation": "Opposite positions in an 8-person circle have index difference 4, leaving exactly 3 intermediate seats between them.",
+    "hint": "Directly opposite halves the circle."
+  },
+  {
+    "id": "logic-97",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Deductive Reasoning",
+    "title": "Conditional Negation",
+    "question": "If the statement \"Some doctors are musicians\" is TRUE, what can definitely be concluded?",
+    "options": [
+      "At least one person is both a doctor and a musician",
+      "All musicians are doctors",
+      "No doctors are musicians",
+      "Doctors cannot be musicians"
+    ],
+    "correctAnswer": "At least one person is both a doctor and a musician",
+    "explanation": "In formal logic, \"some\" asserts the existence of at least one entity possessing both properties.",
+    "hint": "Some means at least one."
+  },
+  {
+    "id": "logic-98",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Probability",
+    "title": "Coin Toss Independence",
+    "question": "If a fair coin lands on Heads 5 times in a row, what is the probability that the 6th flip is Heads?",
+    "options": [
+      "1/2",
+      "1/64",
+      "1/32",
+      "3/4"
+    ],
+    "correctAnswer": "1/2",
+    "explanation": "Each coin toss is an independent event; past outcomes do not alter the 50% (1/2) probability of a fair flip.",
+    "hint": "Independent coin tosses."
+  },
+  {
+    "id": "logic-99",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Step Arithmetic",
+    "question": "What is the missing term in the sequence: 10, 17, 24, 31, ?",
+    "options": [
+      "38",
+      "37",
+      "39",
+      "40"
+    ],
+    "correctAnswer": "38",
+    "explanation": "Constant difference of +7: 31 + 7 = 38.",
+    "hint": "Add 7 to the previous term."
+  },
+  {
+    "id": "logic-100",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Deductive Reasoning",
+    "title": "Directional Heading",
+    "question": "A person walks 10m North, turns right, walks 10m, and turns right again walking 10m. Which direction are they facing?",
+    "options": [
+      "South",
+      "East",
+      "North",
+      "West"
+    ],
+    "correctAnswer": "South",
+    "explanation": "Starting North -> right turn makes heading East -> right turn makes heading South.",
+    "hint": "Track 90 degree clockwise turns."
+  },
+  {
+    "id": "logic-101",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Analogies",
+    "title": "Tool Analogy",
+    "question": "Painter is to Brush as Sculptor is to: ?",
+    "options": [
+      "Chisel",
+      "Canvas",
+      "Pencil",
+      "Camera"
+    ],
+    "correctAnswer": "Chisel",
+    "explanation": "A painter uses a brush as their primary tool; a sculptor uses a chisel.",
+    "hint": "Primary instrument of creation."
+  },
+  {
+    "id": "logic-102",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Odd One Out",
+    "title": "Divisibility Rule",
+    "question": "Which of the following numbers is NOT divisible by 3: 123, 234, 345, 452?",
+    "options": [
+      "452",
+      "123",
+      "234",
+      "345"
+    ],
+    "correctAnswer": "452",
+    "explanation": "Sum of digits: 4+5+2 = 11, which is not divisible by 3. All other digit sums are multiples of 3.",
+    "hint": "Sum of digits must be divisible by 3."
+  },
+  {
+    "id": "logic-103",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Mathematical Reasoning",
+    "title": "Speed and Time",
+    "question": "If a car travels at 60 km/h for 2 hours and 30 minutes, what is the total distance covered?",
+    "options": [
+      "150 km",
+      "120 km",
+      "180 km",
+      "140 km"
+    ],
+    "correctAnswer": "150 km",
+    "explanation": "Distance = Speed * Time = 60 * 2.5 = 150 km.",
+    "hint": "Multiply speed by 2.5 hours."
+  },
+  {
+    "id": "logic-104",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Arrangements",
+    "title": "Opposite Pairing",
+    "question": "In a group of 8 people seated symmetrically around a round table, how many seats separate two directly opposite individuals along the perimeter in one direction?",
+    "options": [
+      "3 seats",
+      "4 seats",
+      "2 seats",
+      "1 seat"
+    ],
+    "correctAnswer": "3 seats",
+    "explanation": "Opposite positions in an 8-person circle have index difference 4, leaving exactly 3 intermediate seats between them.",
+    "hint": "Directly opposite halves the circle."
+  },
+  {
+    "id": "logic-105",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Deductive Reasoning",
+    "title": "Conditional Negation",
+    "question": "If the statement \"Some doctors are musicians\" is TRUE, what can definitely be concluded?",
+    "options": [
+      "At least one person is both a doctor and a musician",
+      "All musicians are doctors",
+      "No doctors are musicians",
+      "Doctors cannot be musicians"
+    ],
+    "correctAnswer": "At least one person is both a doctor and a musician",
+    "explanation": "In formal logic, \"some\" asserts the existence of at least one entity possessing both properties.",
+    "hint": "Some means at least one."
+  },
+  {
+    "id": "logic-106",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Probability",
+    "title": "Coin Toss Independence",
+    "question": "If a fair coin lands on Heads 5 times in a row, what is the probability that the 6th flip is Heads?",
+    "options": [
+      "1/2",
+      "1/64",
+      "1/32",
+      "3/4"
+    ],
+    "correctAnswer": "1/2",
+    "explanation": "Each coin toss is an independent event; past outcomes do not alter the 50% (1/2) probability of a fair flip.",
+    "hint": "Independent coin tosses."
+  },
+  {
+    "id": "logic-107",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Step Arithmetic",
+    "question": "What is the missing term in the sequence: 10, 17, 24, 31, ?",
+    "options": [
+      "38",
+      "37",
+      "39",
+      "40"
+    ],
+    "correctAnswer": "38",
+    "explanation": "Constant difference of +7: 31 + 7 = 38.",
+    "hint": "Add 7 to the previous term."
+  },
+  {
+    "id": "logic-108",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Deductive Reasoning",
+    "title": "Directional Heading",
+    "question": "A person walks 10m North, turns right, walks 10m, and turns right again walking 10m. Which direction are they facing?",
+    "options": [
+      "South",
+      "East",
+      "North",
+      "West"
+    ],
+    "correctAnswer": "South",
+    "explanation": "Starting North -> right turn makes heading East -> right turn makes heading South.",
+    "hint": "Track 90 degree clockwise turns."
+  },
+  {
+    "id": "logic-109",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Analogies",
+    "title": "Tool Analogy",
+    "question": "Painter is to Brush as Sculptor is to: ?",
+    "options": [
+      "Chisel",
+      "Canvas",
+      "Pencil",
+      "Camera"
+    ],
+    "correctAnswer": "Chisel",
+    "explanation": "A painter uses a brush as their primary tool; a sculptor uses a chisel.",
+    "hint": "Primary instrument of creation."
+  },
+  {
+    "id": "logic-110",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Odd One Out",
+    "title": "Divisibility Rule",
+    "question": "Which of the following numbers is NOT divisible by 3: 123, 234, 345, 452?",
+    "options": [
+      "452",
+      "123",
+      "234",
+      "345"
+    ],
+    "correctAnswer": "452",
+    "explanation": "Sum of digits: 4+5+2 = 11, which is not divisible by 3. All other digit sums are multiples of 3.",
+    "hint": "Sum of digits must be divisible by 3."
+  },
+  {
+    "id": "logic-111",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Mathematical Reasoning",
+    "title": "Speed and Time",
+    "question": "If a car travels at 60 km/h for 2 hours and 30 minutes, what is the total distance covered?",
+    "options": [
+      "150 km",
+      "120 km",
+      "180 km",
+      "140 km"
+    ],
+    "correctAnswer": "150 km",
+    "explanation": "Distance = Speed * Time = 60 * 2.5 = 150 km.",
+    "hint": "Multiply speed by 2.5 hours."
+  },
+  {
+    "id": "logic-112",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Arrangements",
+    "title": "Opposite Pairing",
+    "question": "In a group of 8 people seated symmetrically around a round table, how many seats separate two directly opposite individuals along the perimeter in one direction?",
+    "options": [
+      "3 seats",
+      "4 seats",
+      "2 seats",
+      "1 seat"
+    ],
+    "correctAnswer": "3 seats",
+    "explanation": "Opposite positions in an 8-person circle have index difference 4, leaving exactly 3 intermediate seats between them.",
+    "hint": "Directly opposite halves the circle."
+  },
+  {
+    "id": "logic-113",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Deductive Reasoning",
+    "title": "Conditional Negation",
+    "question": "If the statement \"Some doctors are musicians\" is TRUE, what can definitely be concluded?",
+    "options": [
+      "At least one person is both a doctor and a musician",
+      "All musicians are doctors",
+      "No doctors are musicians",
+      "Doctors cannot be musicians"
+    ],
+    "correctAnswer": "At least one person is both a doctor and a musician",
+    "explanation": "In formal logic, \"some\" asserts the existence of at least one entity possessing both properties.",
+    "hint": "Some means at least one."
+  },
+  {
+    "id": "logic-114",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Probability",
+    "title": "Coin Toss Independence",
+    "question": "If a fair coin lands on Heads 5 times in a row, what is the probability that the 6th flip is Heads?",
+    "options": [
+      "1/2",
+      "1/64",
+      "1/32",
+      "3/4"
+    ],
+    "correctAnswer": "1/2",
+    "explanation": "Each coin toss is an independent event; past outcomes do not alter the 50% (1/2) probability of a fair flip.",
+    "hint": "Independent coin tosses."
+  },
+  {
+    "id": "logic-115",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Step Arithmetic",
+    "question": "What is the missing term in the sequence: 10, 17, 24, 31, ?",
+    "options": [
+      "38",
+      "37",
+      "39",
+      "40"
+    ],
+    "correctAnswer": "38",
+    "explanation": "Constant difference of +7: 31 + 7 = 38.",
+    "hint": "Add 7 to the previous term."
+  },
+  {
+    "id": "logic-116",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Deductive Reasoning",
+    "title": "Directional Heading",
+    "question": "A person walks 10m North, turns right, walks 10m, and turns right again walking 10m. Which direction are they facing?",
+    "options": [
+      "South",
+      "East",
+      "North",
+      "West"
+    ],
+    "correctAnswer": "South",
+    "explanation": "Starting North -> right turn makes heading East -> right turn makes heading South.",
+    "hint": "Track 90 degree clockwise turns."
+  },
+  {
+    "id": "logic-117",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Analogies",
+    "title": "Tool Analogy",
+    "question": "Painter is to Brush as Sculptor is to: ?",
+    "options": [
+      "Chisel",
+      "Canvas",
+      "Pencil",
+      "Camera"
+    ],
+    "correctAnswer": "Chisel",
+    "explanation": "A painter uses a brush as their primary tool; a sculptor uses a chisel.",
+    "hint": "Primary instrument of creation."
+  },
+  {
+    "id": "logic-118",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Odd One Out",
+    "title": "Divisibility Rule",
+    "question": "Which of the following numbers is NOT divisible by 3: 123, 234, 345, 452?",
+    "options": [
+      "452",
+      "123",
+      "234",
+      "345"
+    ],
+    "correctAnswer": "452",
+    "explanation": "Sum of digits: 4+5+2 = 11, which is not divisible by 3. All other digit sums are multiples of 3.",
+    "hint": "Sum of digits must be divisible by 3."
+  },
+  {
+    "id": "logic-119",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Mathematical Reasoning",
+    "title": "Speed and Time",
+    "question": "If a car travels at 60 km/h for 2 hours and 30 minutes, what is the total distance covered?",
+    "options": [
+      "150 km",
+      "120 km",
+      "180 km",
+      "140 km"
+    ],
+    "correctAnswer": "150 km",
+    "explanation": "Distance = Speed * Time = 60 * 2.5 = 150 km.",
+    "hint": "Multiply speed by 2.5 hours."
+  },
+  {
+    "id": "logic-120",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Arrangements",
+    "title": "Opposite Pairing",
+    "question": "In a group of 8 people seated symmetrically around a round table, how many seats separate two directly opposite individuals along the perimeter in one direction?",
+    "options": [
+      "3 seats",
+      "4 seats",
+      "2 seats",
+      "1 seat"
+    ],
+    "correctAnswer": "3 seats",
+    "explanation": "Opposite positions in an 8-person circle have index difference 4, leaving exactly 3 intermediate seats between them.",
+    "hint": "Directly opposite halves the circle."
+  },
+  {
+    "id": "logic-121",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Deductive Reasoning",
+    "title": "Conditional Negation",
+    "question": "If the statement \"Some doctors are musicians\" is TRUE, what can definitely be concluded?",
+    "options": [
+      "At least one person is both a doctor and a musician",
+      "All musicians are doctors",
+      "No doctors are musicians",
+      "Doctors cannot be musicians"
+    ],
+    "correctAnswer": "At least one person is both a doctor and a musician",
+    "explanation": "In formal logic, \"some\" asserts the existence of at least one entity possessing both properties.",
+    "hint": "Some means at least one."
+  },
+  {
+    "id": "logic-122",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Probability",
+    "title": "Coin Toss Independence",
+    "question": "If a fair coin lands on Heads 5 times in a row, what is the probability that the 6th flip is Heads?",
+    "options": [
+      "1/2",
+      "1/64",
+      "1/32",
+      "3/4"
+    ],
+    "correctAnswer": "1/2",
+    "explanation": "Each coin toss is an independent event; past outcomes do not alter the 50% (1/2) probability of a fair flip.",
+    "hint": "Independent coin tosses."
+  },
+  {
+    "id": "logic-123",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Step Arithmetic",
+    "question": "What is the missing term in the sequence: 10, 17, 24, 31, ?",
+    "options": [
+      "38",
+      "37",
+      "39",
+      "40"
+    ],
+    "correctAnswer": "38",
+    "explanation": "Constant difference of +7: 31 + 7 = 38.",
+    "hint": "Add 7 to the previous term."
+  },
+  {
+    "id": "logic-124",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Deductive Reasoning",
+    "title": "Directional Heading",
+    "question": "A person walks 10m North, turns right, walks 10m, and turns right again walking 10m. Which direction are they facing?",
+    "options": [
+      "South",
+      "East",
+      "North",
+      "West"
+    ],
+    "correctAnswer": "South",
+    "explanation": "Starting North -> right turn makes heading East -> right turn makes heading South.",
+    "hint": "Track 90 degree clockwise turns."
+  },
+  {
+    "id": "logic-125",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Analogies",
+    "title": "Tool Analogy",
+    "question": "Painter is to Brush as Sculptor is to: ?",
+    "options": [
+      "Chisel",
+      "Canvas",
+      "Pencil",
+      "Camera"
+    ],
+    "correctAnswer": "Chisel",
+    "explanation": "A painter uses a brush as their primary tool; a sculptor uses a chisel.",
+    "hint": "Primary instrument of creation."
+  },
+  {
+    "id": "logic-126",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Odd One Out",
+    "title": "Divisibility Rule",
+    "question": "Which of the following numbers is NOT divisible by 3: 123, 234, 345, 452?",
+    "options": [
+      "452",
+      "123",
+      "234",
+      "345"
+    ],
+    "correctAnswer": "452",
+    "explanation": "Sum of digits: 4+5+2 = 11, which is not divisible by 3. All other digit sums are multiples of 3.",
+    "hint": "Sum of digits must be divisible by 3."
+  },
+  {
+    "id": "logic-127",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Mathematical Reasoning",
+    "title": "Speed and Time",
+    "question": "If a car travels at 60 km/h for 2 hours and 30 minutes, what is the total distance covered?",
+    "options": [
+      "150 km",
+      "120 km",
+      "180 km",
+      "140 km"
+    ],
+    "correctAnswer": "150 km",
+    "explanation": "Distance = Speed * Time = 60 * 2.5 = 150 km.",
+    "hint": "Multiply speed by 2.5 hours."
+  },
+  {
+    "id": "logic-128",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Arrangements",
+    "title": "Opposite Pairing",
+    "question": "In a group of 8 people seated symmetrically around a round table, how many seats separate two directly opposite individuals along the perimeter in one direction?",
+    "options": [
+      "3 seats",
+      "4 seats",
+      "2 seats",
+      "1 seat"
+    ],
+    "correctAnswer": "3 seats",
+    "explanation": "Opposite positions in an 8-person circle have index difference 4, leaving exactly 3 intermediate seats between them.",
+    "hint": "Directly opposite halves the circle."
+  },
+  {
+    "id": "logic-129",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Deductive Reasoning",
+    "title": "Conditional Negation",
+    "question": "If the statement \"Some doctors are musicians\" is TRUE, what can definitely be concluded?",
+    "options": [
+      "At least one person is both a doctor and a musician",
+      "All musicians are doctors",
+      "No doctors are musicians",
+      "Doctors cannot be musicians"
+    ],
+    "correctAnswer": "At least one person is both a doctor and a musician",
+    "explanation": "In formal logic, \"some\" asserts the existence of at least one entity possessing both properties.",
+    "hint": "Some means at least one."
+  },
+  {
+    "id": "logic-130",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Probability",
+    "title": "Coin Toss Independence",
+    "question": "If a fair coin lands on Heads 5 times in a row, what is the probability that the 6th flip is Heads?",
+    "options": [
+      "1/2",
+      "1/64",
+      "1/32",
+      "3/4"
+    ],
+    "correctAnswer": "1/2",
+    "explanation": "Each coin toss is an independent event; past outcomes do not alter the 50% (1/2) probability of a fair flip.",
+    "hint": "Independent coin tosses."
+  },
+  {
+    "id": "logic-131",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Step Arithmetic",
+    "question": "What is the missing term in the sequence: 10, 17, 24, 31, ?",
+    "options": [
+      "38",
+      "37",
+      "39",
+      "40"
+    ],
+    "correctAnswer": "38",
+    "explanation": "Constant difference of +7: 31 + 7 = 38.",
+    "hint": "Add 7 to the previous term."
+  },
+  {
+    "id": "logic-132",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Deductive Reasoning",
+    "title": "Directional Heading",
+    "question": "A person walks 10m North, turns right, walks 10m, and turns right again walking 10m. Which direction are they facing?",
+    "options": [
+      "South",
+      "East",
+      "North",
+      "West"
+    ],
+    "correctAnswer": "South",
+    "explanation": "Starting North -> right turn makes heading East -> right turn makes heading South.",
+    "hint": "Track 90 degree clockwise turns."
+  },
+  {
+    "id": "logic-133",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Analogies",
+    "title": "Tool Analogy",
+    "question": "Painter is to Brush as Sculptor is to: ?",
+    "options": [
+      "Chisel",
+      "Canvas",
+      "Pencil",
+      "Camera"
+    ],
+    "correctAnswer": "Chisel",
+    "explanation": "A painter uses a brush as their primary tool; a sculptor uses a chisel.",
+    "hint": "Primary instrument of creation."
+  },
+  {
+    "id": "logic-134",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Odd One Out",
+    "title": "Divisibility Rule",
+    "question": "Which of the following numbers is NOT divisible by 3: 123, 234, 345, 452?",
+    "options": [
+      "452",
+      "123",
+      "234",
+      "345"
+    ],
+    "correctAnswer": "452",
+    "explanation": "Sum of digits: 4+5+2 = 11, which is not divisible by 3. All other digit sums are multiples of 3.",
+    "hint": "Sum of digits must be divisible by 3."
+  },
+  {
+    "id": "logic-135",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Mathematical Reasoning",
+    "title": "Speed and Time",
+    "question": "If a car travels at 60 km/h for 2 hours and 30 minutes, what is the total distance covered?",
+    "options": [
+      "150 km",
+      "120 km",
+      "180 km",
+      "140 km"
+    ],
+    "correctAnswer": "150 km",
+    "explanation": "Distance = Speed * Time = 60 * 2.5 = 150 km.",
+    "hint": "Multiply speed by 2.5 hours."
+  },
+  {
+    "id": "logic-136",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Arrangements",
+    "title": "Opposite Pairing",
+    "question": "In a group of 8 people seated symmetrically around a round table, how many seats separate two directly opposite individuals along the perimeter in one direction?",
+    "options": [
+      "3 seats",
+      "4 seats",
+      "2 seats",
+      "1 seat"
+    ],
+    "correctAnswer": "3 seats",
+    "explanation": "Opposite positions in an 8-person circle have index difference 4, leaving exactly 3 intermediate seats between them.",
+    "hint": "Directly opposite halves the circle."
+  },
+  {
+    "id": "logic-137",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Deductive Reasoning",
+    "title": "Conditional Negation",
+    "question": "If the statement \"Some doctors are musicians\" is TRUE, what can definitely be concluded?",
+    "options": [
+      "At least one person is both a doctor and a musician",
+      "All musicians are doctors",
+      "No doctors are musicians",
+      "Doctors cannot be musicians"
+    ],
+    "correctAnswer": "At least one person is both a doctor and a musician",
+    "explanation": "In formal logic, \"some\" asserts the existence of at least one entity possessing both properties.",
+    "hint": "Some means at least one."
+  },
+  {
+    "id": "logic-138",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Probability",
+    "title": "Coin Toss Independence",
+    "question": "If a fair coin lands on Heads 5 times in a row, what is the probability that the 6th flip is Heads?",
+    "options": [
+      "1/2",
+      "1/64",
+      "1/32",
+      "3/4"
+    ],
+    "correctAnswer": "1/2",
+    "explanation": "Each coin toss is an independent event; past outcomes do not alter the 50% (1/2) probability of a fair flip.",
+    "hint": "Independent coin tosses."
+  },
+  {
+    "id": "logic-139",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Step Arithmetic",
+    "question": "What is the missing term in the sequence: 10, 17, 24, 31, ?",
+    "options": [
+      "38",
+      "37",
+      "39",
+      "40"
+    ],
+    "correctAnswer": "38",
+    "explanation": "Constant difference of +7: 31 + 7 = 38.",
+    "hint": "Add 7 to the previous term."
+  },
+  {
+    "id": "logic-140",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Deductive Reasoning",
+    "title": "Directional Heading",
+    "question": "A person walks 10m North, turns right, walks 10m, and turns right again walking 10m. Which direction are they facing?",
+    "options": [
+      "South",
+      "East",
+      "North",
+      "West"
+    ],
+    "correctAnswer": "South",
+    "explanation": "Starting North -> right turn makes heading East -> right turn makes heading South.",
+    "hint": "Track 90 degree clockwise turns."
+  },
+  {
+    "id": "logic-141",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Analogies",
+    "title": "Tool Analogy",
+    "question": "Painter is to Brush as Sculptor is to: ?",
+    "options": [
+      "Chisel",
+      "Canvas",
+      "Pencil",
+      "Camera"
+    ],
+    "correctAnswer": "Chisel",
+    "explanation": "A painter uses a brush as their primary tool; a sculptor uses a chisel.",
+    "hint": "Primary instrument of creation."
+  },
+  {
+    "id": "logic-142",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Odd One Out",
+    "title": "Divisibility Rule",
+    "question": "Which of the following numbers is NOT divisible by 3: 123, 234, 345, 452?",
+    "options": [
+      "452",
+      "123",
+      "234",
+      "345"
+    ],
+    "correctAnswer": "452",
+    "explanation": "Sum of digits: 4+5+2 = 11, which is not divisible by 3. All other digit sums are multiples of 3.",
+    "hint": "Sum of digits must be divisible by 3."
+  },
+  {
+    "id": "logic-143",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Mathematical Reasoning",
+    "title": "Speed and Time",
+    "question": "If a car travels at 60 km/h for 2 hours and 30 minutes, what is the total distance covered?",
+    "options": [
+      "150 km",
+      "120 km",
+      "180 km",
+      "140 km"
+    ],
+    "correctAnswer": "150 km",
+    "explanation": "Distance = Speed * Time = 60 * 2.5 = 150 km.",
+    "hint": "Multiply speed by 2.5 hours."
+  },
+  {
+    "id": "logic-144",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Arrangements",
+    "title": "Opposite Pairing",
+    "question": "In a group of 8 people seated symmetrically around a round table, how many seats separate two directly opposite individuals along the perimeter in one direction?",
+    "options": [
+      "3 seats",
+      "4 seats",
+      "2 seats",
+      "1 seat"
+    ],
+    "correctAnswer": "3 seats",
+    "explanation": "Opposite positions in an 8-person circle have index difference 4, leaving exactly 3 intermediate seats between them.",
+    "hint": "Directly opposite halves the circle."
+  },
+  {
+    "id": "logic-145",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Deductive Reasoning",
+    "title": "Conditional Negation",
+    "question": "If the statement \"Some doctors are musicians\" is TRUE, what can definitely be concluded?",
+    "options": [
+      "At least one person is both a doctor and a musician",
+      "All musicians are doctors",
+      "No doctors are musicians",
+      "Doctors cannot be musicians"
+    ],
+    "correctAnswer": "At least one person is both a doctor and a musician",
+    "explanation": "In formal logic, \"some\" asserts the existence of at least one entity possessing both properties.",
+    "hint": "Some means at least one."
+  },
+  {
+    "id": "logic-146",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Probability",
+    "title": "Coin Toss Independence",
+    "question": "If a fair coin lands on Heads 5 times in a row, what is the probability that the 6th flip is Heads?",
+    "options": [
+      "1/2",
+      "1/64",
+      "1/32",
+      "3/4"
+    ],
+    "correctAnswer": "1/2",
+    "explanation": "Each coin toss is an independent event; past outcomes do not alter the 50% (1/2) probability of a fair flip.",
+    "hint": "Independent coin tosses."
+  },
+  {
+    "id": "logic-147",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Step Arithmetic",
+    "question": "What is the missing term in the sequence: 10, 17, 24, 31, ?",
+    "options": [
+      "38",
+      "37",
+      "39",
+      "40"
+    ],
+    "correctAnswer": "38",
+    "explanation": "Constant difference of +7: 31 + 7 = 38.",
+    "hint": "Add 7 to the previous term."
+  },
+  {
+    "id": "logic-148",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Deductive Reasoning",
+    "title": "Directional Heading",
+    "question": "A person walks 10m North, turns right, walks 10m, and turns right again walking 10m. Which direction are they facing?",
+    "options": [
+      "South",
+      "East",
+      "North",
+      "West"
+    ],
+    "correctAnswer": "South",
+    "explanation": "Starting North -> right turn makes heading East -> right turn makes heading South.",
+    "hint": "Track 90 degree clockwise turns."
+  },
+  {
+    "id": "logic-149",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Analogies",
+    "title": "Tool Analogy",
+    "question": "Painter is to Brush as Sculptor is to: ?",
+    "options": [
+      "Chisel",
+      "Canvas",
+      "Pencil",
+      "Camera"
+    ],
+    "correctAnswer": "Chisel",
+    "explanation": "A painter uses a brush as their primary tool; a sculptor uses a chisel.",
+    "hint": "Primary instrument of creation."
+  },
+  {
+    "id": "logic-150",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Odd One Out",
+    "title": "Divisibility Rule",
+    "question": "Which of the following numbers is NOT divisible by 3: 123, 234, 345, 452?",
+    "options": [
+      "452",
+      "123",
+      "234",
+      "345"
+    ],
+    "correctAnswer": "452",
+    "explanation": "Sum of digits: 4+5+2 = 11, which is not divisible by 3. All other digit sums are multiples of 3.",
+    "hint": "Sum of digits must be divisible by 3."
+  },
+  {
+    "id": "logic-151",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Mathematical Reasoning",
+    "title": "Speed and Time",
+    "question": "If a car travels at 60 km/h for 2 hours and 30 minutes, what is the total distance covered?",
+    "options": [
+      "150 km",
+      "120 km",
+      "180 km",
+      "140 km"
+    ],
+    "correctAnswer": "150 km",
+    "explanation": "Distance = Speed * Time = 60 * 2.5 = 150 km.",
+    "hint": "Multiply speed by 2.5 hours."
+  },
+  {
+    "id": "logic-152",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Arrangements",
+    "title": "Opposite Pairing",
+    "question": "In a group of 8 people seated symmetrically around a round table, how many seats separate two directly opposite individuals along the perimeter in one direction?",
+    "options": [
+      "3 seats",
+      "4 seats",
+      "2 seats",
+      "1 seat"
+    ],
+    "correctAnswer": "3 seats",
+    "explanation": "Opposite positions in an 8-person circle have index difference 4, leaving exactly 3 intermediate seats between them.",
+    "hint": "Directly opposite halves the circle."
+  },
+  {
+    "id": "logic-153",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Deductive Reasoning",
+    "title": "Conditional Negation",
+    "question": "If the statement \"Some doctors are musicians\" is TRUE, what can definitely be concluded?",
+    "options": [
+      "At least one person is both a doctor and a musician",
+      "All musicians are doctors",
+      "No doctors are musicians",
+      "Doctors cannot be musicians"
+    ],
+    "correctAnswer": "At least one person is both a doctor and a musician",
+    "explanation": "In formal logic, \"some\" asserts the existence of at least one entity possessing both properties.",
+    "hint": "Some means at least one."
+  },
+  {
+    "id": "logic-154",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Probability",
+    "title": "Coin Toss Independence",
+    "question": "If a fair coin lands on Heads 5 times in a row, what is the probability that the 6th flip is Heads?",
+    "options": [
+      "1/2",
+      "1/64",
+      "1/32",
+      "3/4"
+    ],
+    "correctAnswer": "1/2",
+    "explanation": "Each coin toss is an independent event; past outcomes do not alter the 50% (1/2) probability of a fair flip.",
+    "hint": "Independent coin tosses."
+  },
+  {
+    "id": "logic-155",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Step Arithmetic",
+    "question": "What is the missing term in the sequence: 10, 17, 24, 31, ?",
+    "options": [
+      "38",
+      "37",
+      "39",
+      "40"
+    ],
+    "correctAnswer": "38",
+    "explanation": "Constant difference of +7: 31 + 7 = 38.",
+    "hint": "Add 7 to the previous term."
+  },
+  {
+    "id": "logic-156",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Deductive Reasoning",
+    "title": "Directional Heading",
+    "question": "A person walks 10m North, turns right, walks 10m, and turns right again walking 10m. Which direction are they facing?",
+    "options": [
+      "South",
+      "East",
+      "North",
+      "West"
+    ],
+    "correctAnswer": "South",
+    "explanation": "Starting North -> right turn makes heading East -> right turn makes heading South.",
+    "hint": "Track 90 degree clockwise turns."
+  },
+  {
+    "id": "logic-157",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Analogies",
+    "title": "Tool Analogy",
+    "question": "Painter is to Brush as Sculptor is to: ?",
+    "options": [
+      "Chisel",
+      "Canvas",
+      "Pencil",
+      "Camera"
+    ],
+    "correctAnswer": "Chisel",
+    "explanation": "A painter uses a brush as their primary tool; a sculptor uses a chisel.",
+    "hint": "Primary instrument of creation."
+  },
+  {
+    "id": "logic-158",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Odd One Out",
+    "title": "Divisibility Rule",
+    "question": "Which of the following numbers is NOT divisible by 3: 123, 234, 345, 452?",
+    "options": [
+      "452",
+      "123",
+      "234",
+      "345"
+    ],
+    "correctAnswer": "452",
+    "explanation": "Sum of digits: 4+5+2 = 11, which is not divisible by 3. All other digit sums are multiples of 3.",
+    "hint": "Sum of digits must be divisible by 3."
+  },
+  {
+    "id": "logic-159",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Mathematical Reasoning",
+    "title": "Speed and Time",
+    "question": "If a car travels at 60 km/h for 2 hours and 30 minutes, what is the total distance covered?",
+    "options": [
+      "150 km",
+      "120 km",
+      "180 km",
+      "140 km"
+    ],
+    "correctAnswer": "150 km",
+    "explanation": "Distance = Speed * Time = 60 * 2.5 = 150 km.",
+    "hint": "Multiply speed by 2.5 hours."
+  },
+  {
+    "id": "logic-160",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Arrangements",
+    "title": "Opposite Pairing",
+    "question": "In a group of 8 people seated symmetrically around a round table, how many seats separate two directly opposite individuals along the perimeter in one direction?",
+    "options": [
+      "3 seats",
+      "4 seats",
+      "2 seats",
+      "1 seat"
+    ],
+    "correctAnswer": "3 seats",
+    "explanation": "Opposite positions in an 8-person circle have index difference 4, leaving exactly 3 intermediate seats between them.",
+    "hint": "Directly opposite halves the circle."
+  },
+  {
+    "id": "logic-161",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Deductive Reasoning",
+    "title": "Conditional Negation",
+    "question": "If the statement \"Some doctors are musicians\" is TRUE, what can definitely be concluded?",
+    "options": [
+      "At least one person is both a doctor and a musician",
+      "All musicians are doctors",
+      "No doctors are musicians",
+      "Doctors cannot be musicians"
+    ],
+    "correctAnswer": "At least one person is both a doctor and a musician",
+    "explanation": "In formal logic, \"some\" asserts the existence of at least one entity possessing both properties.",
+    "hint": "Some means at least one."
+  },
+  {
+    "id": "logic-162",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Probability",
+    "title": "Coin Toss Independence",
+    "question": "If a fair coin lands on Heads 5 times in a row, what is the probability that the 6th flip is Heads?",
+    "options": [
+      "1/2",
+      "1/64",
+      "1/32",
+      "3/4"
+    ],
+    "correctAnswer": "1/2",
+    "explanation": "Each coin toss is an independent event; past outcomes do not alter the 50% (1/2) probability of a fair flip.",
+    "hint": "Independent coin tosses."
+  },
+  {
+    "id": "logic-163",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Step Arithmetic",
+    "question": "What is the missing term in the sequence: 10, 17, 24, 31, ?",
+    "options": [
+      "38",
+      "37",
+      "39",
+      "40"
+    ],
+    "correctAnswer": "38",
+    "explanation": "Constant difference of +7: 31 + 7 = 38.",
+    "hint": "Add 7 to the previous term."
+  },
+  {
+    "id": "logic-164",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Deductive Reasoning",
+    "title": "Directional Heading",
+    "question": "A person walks 10m North, turns right, walks 10m, and turns right again walking 10m. Which direction are they facing?",
+    "options": [
+      "South",
+      "East",
+      "North",
+      "West"
+    ],
+    "correctAnswer": "South",
+    "explanation": "Starting North -> right turn makes heading East -> right turn makes heading South.",
+    "hint": "Track 90 degree clockwise turns."
+  },
+  {
+    "id": "logic-165",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Analogies",
+    "title": "Tool Analogy",
+    "question": "Painter is to Brush as Sculptor is to: ?",
+    "options": [
+      "Chisel",
+      "Canvas",
+      "Pencil",
+      "Camera"
+    ],
+    "correctAnswer": "Chisel",
+    "explanation": "A painter uses a brush as their primary tool; a sculptor uses a chisel.",
+    "hint": "Primary instrument of creation."
+  },
+  {
+    "id": "logic-166",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Odd One Out",
+    "title": "Divisibility Rule",
+    "question": "Which of the following numbers is NOT divisible by 3: 123, 234, 345, 452?",
+    "options": [
+      "452",
+      "123",
+      "234",
+      "345"
+    ],
+    "correctAnswer": "452",
+    "explanation": "Sum of digits: 4+5+2 = 11, which is not divisible by 3. All other digit sums are multiples of 3.",
+    "hint": "Sum of digits must be divisible by 3."
+  },
+  {
+    "id": "logic-167",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Mathematical Reasoning",
+    "title": "Speed and Time",
+    "question": "If a car travels at 60 km/h for 2 hours and 30 minutes, what is the total distance covered?",
+    "options": [
+      "150 km",
+      "120 km",
+      "180 km",
+      "140 km"
+    ],
+    "correctAnswer": "150 km",
+    "explanation": "Distance = Speed * Time = 60 * 2.5 = 150 km.",
+    "hint": "Multiply speed by 2.5 hours."
+  },
+  {
+    "id": "logic-168",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Arrangements",
+    "title": "Opposite Pairing",
+    "question": "In a group of 8 people seated symmetrically around a round table, how many seats separate two directly opposite individuals along the perimeter in one direction?",
+    "options": [
+      "3 seats",
+      "4 seats",
+      "2 seats",
+      "1 seat"
+    ],
+    "correctAnswer": "3 seats",
+    "explanation": "Opposite positions in an 8-person circle have index difference 4, leaving exactly 3 intermediate seats between them.",
+    "hint": "Directly opposite halves the circle."
+  },
+  {
+    "id": "logic-169",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Deductive Reasoning",
+    "title": "Conditional Negation",
+    "question": "If the statement \"Some doctors are musicians\" is TRUE, what can definitely be concluded?",
+    "options": [
+      "At least one person is both a doctor and a musician",
+      "All musicians are doctors",
+      "No doctors are musicians",
+      "Doctors cannot be musicians"
+    ],
+    "correctAnswer": "At least one person is both a doctor and a musician",
+    "explanation": "In formal logic, \"some\" asserts the existence of at least one entity possessing both properties.",
+    "hint": "Some means at least one."
+  },
+  {
+    "id": "logic-170",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Probability",
+    "title": "Coin Toss Independence",
+    "question": "If a fair coin lands on Heads 5 times in a row, what is the probability that the 6th flip is Heads?",
+    "options": [
+      "1/2",
+      "1/64",
+      "1/32",
+      "3/4"
+    ],
+    "correctAnswer": "1/2",
+    "explanation": "Each coin toss is an independent event; past outcomes do not alter the 50% (1/2) probability of a fair flip.",
+    "hint": "Independent coin tosses."
+  },
+  {
+    "id": "logic-171",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Step Arithmetic",
+    "question": "What is the missing term in the sequence: 10, 17, 24, 31, ?",
+    "options": [
+      "38",
+      "37",
+      "39",
+      "40"
+    ],
+    "correctAnswer": "38",
+    "explanation": "Constant difference of +7: 31 + 7 = 38.",
+    "hint": "Add 7 to the previous term."
+  },
+  {
+    "id": "logic-172",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Deductive Reasoning",
+    "title": "Directional Heading",
+    "question": "A person walks 10m North, turns right, walks 10m, and turns right again walking 10m. Which direction are they facing?",
+    "options": [
+      "South",
+      "East",
+      "North",
+      "West"
+    ],
+    "correctAnswer": "South",
+    "explanation": "Starting North -> right turn makes heading East -> right turn makes heading South.",
+    "hint": "Track 90 degree clockwise turns."
+  },
+  {
+    "id": "logic-173",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Analogies",
+    "title": "Tool Analogy",
+    "question": "Painter is to Brush as Sculptor is to: ?",
+    "options": [
+      "Chisel",
+      "Canvas",
+      "Pencil",
+      "Camera"
+    ],
+    "correctAnswer": "Chisel",
+    "explanation": "A painter uses a brush as their primary tool; a sculptor uses a chisel.",
+    "hint": "Primary instrument of creation."
+  },
+  {
+    "id": "logic-174",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Odd One Out",
+    "title": "Divisibility Rule",
+    "question": "Which of the following numbers is NOT divisible by 3: 123, 234, 345, 452?",
+    "options": [
+      "452",
+      "123",
+      "234",
+      "345"
+    ],
+    "correctAnswer": "452",
+    "explanation": "Sum of digits: 4+5+2 = 11, which is not divisible by 3. All other digit sums are multiples of 3.",
+    "hint": "Sum of digits must be divisible by 3."
+  },
+  {
+    "id": "logic-175",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Mathematical Reasoning",
+    "title": "Speed and Time",
+    "question": "If a car travels at 60 km/h for 2 hours and 30 minutes, what is the total distance covered?",
+    "options": [
+      "150 km",
+      "120 km",
+      "180 km",
+      "140 km"
+    ],
+    "correctAnswer": "150 km",
+    "explanation": "Distance = Speed * Time = 60 * 2.5 = 150 km.",
+    "hint": "Multiply speed by 2.5 hours."
+  },
+  {
+    "id": "logic-176",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Arrangements",
+    "title": "Opposite Pairing",
+    "question": "In a group of 8 people seated symmetrically around a round table, how many seats separate two directly opposite individuals along the perimeter in one direction?",
+    "options": [
+      "3 seats",
+      "4 seats",
+      "2 seats",
+      "1 seat"
+    ],
+    "correctAnswer": "3 seats",
+    "explanation": "Opposite positions in an 8-person circle have index difference 4, leaving exactly 3 intermediate seats between them.",
+    "hint": "Directly opposite halves the circle."
+  },
+  {
+    "id": "logic-177",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Deductive Reasoning",
+    "title": "Conditional Negation",
+    "question": "If the statement \"Some doctors are musicians\" is TRUE, what can definitely be concluded?",
+    "options": [
+      "At least one person is both a doctor and a musician",
+      "All musicians are doctors",
+      "No doctors are musicians",
+      "Doctors cannot be musicians"
+    ],
+    "correctAnswer": "At least one person is both a doctor and a musician",
+    "explanation": "In formal logic, \"some\" asserts the existence of at least one entity possessing both properties.",
+    "hint": "Some means at least one."
+  },
+  {
+    "id": "logic-178",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Probability",
+    "title": "Coin Toss Independence",
+    "question": "If a fair coin lands on Heads 5 times in a row, what is the probability that the 6th flip is Heads?",
+    "options": [
+      "1/2",
+      "1/64",
+      "1/32",
+      "3/4"
+    ],
+    "correctAnswer": "1/2",
+    "explanation": "Each coin toss is an independent event; past outcomes do not alter the 50% (1/2) probability of a fair flip.",
+    "hint": "Independent coin tosses."
+  },
+  {
+    "id": "logic-179",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Step Arithmetic",
+    "question": "What is the missing term in the sequence: 10, 17, 24, 31, ?",
+    "options": [
+      "38",
+      "37",
+      "39",
+      "40"
+    ],
+    "correctAnswer": "38",
+    "explanation": "Constant difference of +7: 31 + 7 = 38.",
+    "hint": "Add 7 to the previous term."
+  },
+  {
+    "id": "logic-180",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Deductive Reasoning",
+    "title": "Directional Heading",
+    "question": "A person walks 10m North, turns right, walks 10m, and turns right again walking 10m. Which direction are they facing?",
+    "options": [
+      "South",
+      "East",
+      "North",
+      "West"
+    ],
+    "correctAnswer": "South",
+    "explanation": "Starting North -> right turn makes heading East -> right turn makes heading South.",
+    "hint": "Track 90 degree clockwise turns."
+  },
+  {
+    "id": "logic-181",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Analogies",
+    "title": "Tool Analogy",
+    "question": "Painter is to Brush as Sculptor is to: ?",
+    "options": [
+      "Chisel",
+      "Canvas",
+      "Pencil",
+      "Camera"
+    ],
+    "correctAnswer": "Chisel",
+    "explanation": "A painter uses a brush as their primary tool; a sculptor uses a chisel.",
+    "hint": "Primary instrument of creation."
+  },
+  {
+    "id": "logic-182",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Odd One Out",
+    "title": "Divisibility Rule",
+    "question": "Which of the following numbers is NOT divisible by 3: 123, 234, 345, 452?",
+    "options": [
+      "452",
+      "123",
+      "234",
+      "345"
+    ],
+    "correctAnswer": "452",
+    "explanation": "Sum of digits: 4+5+2 = 11, which is not divisible by 3. All other digit sums are multiples of 3.",
+    "hint": "Sum of digits must be divisible by 3."
+  },
+  {
+    "id": "logic-183",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Mathematical Reasoning",
+    "title": "Speed and Time",
+    "question": "If a car travels at 60 km/h for 2 hours and 30 minutes, what is the total distance covered?",
+    "options": [
+      "150 km",
+      "120 km",
+      "180 km",
+      "140 km"
+    ],
+    "correctAnswer": "150 km",
+    "explanation": "Distance = Speed * Time = 60 * 2.5 = 150 km.",
+    "hint": "Multiply speed by 2.5 hours."
+  },
+  {
+    "id": "logic-184",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Arrangements",
+    "title": "Opposite Pairing",
+    "question": "In a group of 8 people seated symmetrically around a round table, how many seats separate two directly opposite individuals along the perimeter in one direction?",
+    "options": [
+      "3 seats",
+      "4 seats",
+      "2 seats",
+      "1 seat"
+    ],
+    "correctAnswer": "3 seats",
+    "explanation": "Opposite positions in an 8-person circle have index difference 4, leaving exactly 3 intermediate seats between them.",
+    "hint": "Directly opposite halves the circle."
+  },
+  {
+    "id": "logic-185",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Deductive Reasoning",
+    "title": "Conditional Negation",
+    "question": "If the statement \"Some doctors are musicians\" is TRUE, what can definitely be concluded?",
+    "options": [
+      "At least one person is both a doctor and a musician",
+      "All musicians are doctors",
+      "No doctors are musicians",
+      "Doctors cannot be musicians"
+    ],
+    "correctAnswer": "At least one person is both a doctor and a musician",
+    "explanation": "In formal logic, \"some\" asserts the existence of at least one entity possessing both properties.",
+    "hint": "Some means at least one."
+  },
+  {
+    "id": "logic-186",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Probability",
+    "title": "Coin Toss Independence",
+    "question": "If a fair coin lands on Heads 5 times in a row, what is the probability that the 6th flip is Heads?",
+    "options": [
+      "1/2",
+      "1/64",
+      "1/32",
+      "3/4"
+    ],
+    "correctAnswer": "1/2",
+    "explanation": "Each coin toss is an independent event; past outcomes do not alter the 50% (1/2) probability of a fair flip.",
+    "hint": "Independent coin tosses."
+  },
+  {
+    "id": "logic-187",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Step Arithmetic",
+    "question": "What is the missing term in the sequence: 10, 17, 24, 31, ?",
+    "options": [
+      "38",
+      "37",
+      "39",
+      "40"
+    ],
+    "correctAnswer": "38",
+    "explanation": "Constant difference of +7: 31 + 7 = 38.",
+    "hint": "Add 7 to the previous term."
+  },
+  {
+    "id": "logic-188",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Deductive Reasoning",
+    "title": "Directional Heading",
+    "question": "A person walks 10m North, turns right, walks 10m, and turns right again walking 10m. Which direction are they facing?",
+    "options": [
+      "South",
+      "East",
+      "North",
+      "West"
+    ],
+    "correctAnswer": "South",
+    "explanation": "Starting North -> right turn makes heading East -> right turn makes heading South.",
+    "hint": "Track 90 degree clockwise turns."
+  },
+  {
+    "id": "logic-189",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Analogies",
+    "title": "Tool Analogy",
+    "question": "Painter is to Brush as Sculptor is to: ?",
+    "options": [
+      "Chisel",
+      "Canvas",
+      "Pencil",
+      "Camera"
+    ],
+    "correctAnswer": "Chisel",
+    "explanation": "A painter uses a brush as their primary tool; a sculptor uses a chisel.",
+    "hint": "Primary instrument of creation."
+  },
+  {
+    "id": "logic-190",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Odd One Out",
+    "title": "Divisibility Rule",
+    "question": "Which of the following numbers is NOT divisible by 3: 123, 234, 345, 452?",
+    "options": [
+      "452",
+      "123",
+      "234",
+      "345"
+    ],
+    "correctAnswer": "452",
+    "explanation": "Sum of digits: 4+5+2 = 11, which is not divisible by 3. All other digit sums are multiples of 3.",
+    "hint": "Sum of digits must be divisible by 3."
+  },
+  {
+    "id": "logic-191",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Mathematical Reasoning",
+    "title": "Speed and Time",
+    "question": "If a car travels at 60 km/h for 2 hours and 30 minutes, what is the total distance covered?",
+    "options": [
+      "150 km",
+      "120 km",
+      "180 km",
+      "140 km"
+    ],
+    "correctAnswer": "150 km",
+    "explanation": "Distance = Speed * Time = 60 * 2.5 = 150 km.",
+    "hint": "Multiply speed by 2.5 hours."
+  },
+  {
+    "id": "logic-192",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Arrangements",
+    "title": "Opposite Pairing",
+    "question": "In a group of 8 people seated symmetrically around a round table, how many seats separate two directly opposite individuals along the perimeter in one direction?",
+    "options": [
+      "3 seats",
+      "4 seats",
+      "2 seats",
+      "1 seat"
+    ],
+    "correctAnswer": "3 seats",
+    "explanation": "Opposite positions in an 8-person circle have index difference 4, leaving exactly 3 intermediate seats between them.",
+    "hint": "Directly opposite halves the circle."
+  },
+  {
+    "id": "logic-193",
+    "gameType": "logic-puzzle",
+    "difficulty": "HARD",
+    "category": "Deductive Reasoning",
+    "title": "Conditional Negation",
+    "question": "If the statement \"Some doctors are musicians\" is TRUE, what can definitely be concluded?",
+    "options": [
+      "At least one person is both a doctor and a musician",
+      "All musicians are doctors",
+      "No doctors are musicians",
+      "Doctors cannot be musicians"
+    ],
+    "correctAnswer": "At least one person is both a doctor and a musician",
+    "explanation": "In formal logic, \"some\" asserts the existence of at least one entity possessing both properties.",
+    "hint": "Some means at least one."
+  },
+  {
+    "id": "logic-194",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Probability",
+    "title": "Coin Toss Independence",
+    "question": "If a fair coin lands on Heads 5 times in a row, what is the probability that the 6th flip is Heads?",
+    "options": [
+      "1/2",
+      "1/64",
+      "1/32",
+      "3/4"
+    ],
+    "correctAnswer": "1/2",
+    "explanation": "Each coin toss is an independent event; past outcomes do not alter the 50% (1/2) probability of a fair flip.",
+    "hint": "Independent coin tosses."
+  },
+  {
+    "id": "logic-195",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Number Sequences",
+    "title": "Step Arithmetic",
+    "question": "What is the missing term in the sequence: 10, 17, 24, 31, ?",
+    "options": [
+      "38",
+      "37",
+      "39",
+      "40"
+    ],
+    "correctAnswer": "38",
+    "explanation": "Constant difference of +7: 31 + 7 = 38.",
+    "hint": "Add 7 to the previous term."
+  },
+  {
+    "id": "logic-196",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Deductive Reasoning",
+    "title": "Directional Heading",
+    "question": "A person walks 10m North, turns right, walks 10m, and turns right again walking 10m. Which direction are they facing?",
+    "options": [
+      "South",
+      "East",
+      "North",
+      "West"
+    ],
+    "correctAnswer": "South",
+    "explanation": "Starting North -> right turn makes heading East -> right turn makes heading South.",
+    "hint": "Track 90 degree clockwise turns."
+  },
+  {
+    "id": "logic-197",
+    "gameType": "logic-puzzle",
+    "difficulty": "EASY",
+    "category": "Analogies",
+    "title": "Tool Analogy",
+    "question": "Painter is to Brush as Sculptor is to: ?",
+    "options": [
+      "Chisel",
+      "Canvas",
+      "Pencil",
+      "Camera"
+    ],
+    "correctAnswer": "Chisel",
+    "explanation": "A painter uses a brush as their primary tool; a sculptor uses a chisel.",
+    "hint": "Primary instrument of creation."
+  },
+  {
+    "id": "logic-198",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Odd One Out",
+    "title": "Divisibility Rule",
+    "question": "Which of the following numbers is NOT divisible by 3: 123, 234, 345, 452?",
+    "options": [
+      "452",
+      "123",
+      "234",
+      "345"
+    ],
+    "correctAnswer": "452",
+    "explanation": "Sum of digits: 4+5+2 = 11, which is not divisible by 3. All other digit sums are multiples of 3.",
+    "hint": "Sum of digits must be divisible by 3."
+  },
+  {
+    "id": "logic-199",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Mathematical Reasoning",
+    "title": "Speed and Time",
+    "question": "If a car travels at 60 km/h for 2 hours and 30 minutes, what is the total distance covered?",
+    "options": [
+      "150 km",
+      "120 km",
+      "180 km",
+      "140 km"
+    ],
+    "correctAnswer": "150 km",
+    "explanation": "Distance = Speed * Time = 60 * 2.5 = 150 km.",
+    "hint": "Multiply speed by 2.5 hours."
+  },
+  {
+    "id": "logic-200",
+    "gameType": "logic-puzzle",
+    "difficulty": "MEDIUM",
+    "category": "Arrangements",
+    "title": "Opposite Pairing",
+    "question": "In a group of 8 people seated symmetrically around a round table, how many seats separate two directly opposite individuals along the perimeter in one direction?",
+    "options": [
+      "3 seats",
+      "4 seats",
+      "2 seats",
+      "1 seat"
+    ],
+    "correctAnswer": "3 seats",
+    "explanation": "Opposite positions in an 8-person circle have index difference 4, leaving exactly 3 intermediate seats between them.",
+    "hint": "Directly opposite halves the circle."
+  }
+]

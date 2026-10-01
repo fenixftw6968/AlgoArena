@@ -19,28 +19,29 @@ export function isAuthenticated() {
 export async function selectQuestionsForGame(optionsOrSlug, optDifficulty, optBank, optCount, optShuffle) {
   let gameSlug, difficulty, questionBank, count, userShuffle;
 
+  const normGame = (gameSlug || 'generic').toLowerCase().trim();
+  const normDiff = (difficulty || 'all').toLowerCase().trim();
+  const defaultCount = (normGame === 'dsa-master-quiz' || normGame === 'number-detective') ? 5 : 10;
+
   if (typeof optionsOrSlug === 'object' && optionsOrSlug !== null) {
     ({
       gameSlug,
       difficulty = 'all',
       questionBank = [],
-      count = 10,
+      count = defaultCount,
       userShuffle = true
     } = optionsOrSlug);
   } else {
     gameSlug = optionsOrSlug;
     difficulty = optDifficulty || 'all';
     questionBank = optBank || [];
-    count = optCount || 10;
+    count = optCount || defaultCount;
     userShuffle = optShuffle !== undefined ? optShuffle : true;
   }
 
   if (!Array.isArray(questionBank) || questionBank.length === 0) {
     return [];
   }
-
-  const normGame = (gameSlug || 'generic').toLowerCase().trim();
-  const normDiff = (difficulty || 'all').toLowerCase().trim();
 
   // 1. Filter by difficulty if specified
   let eligible = questionBank;
@@ -57,6 +58,23 @@ export async function selectQuestionsForGame(optionsOrSlug, optDifficulty, optBa
     eligible = questionBank;
   }
 
+  // Helper to test if question is already in selected
+  const seenIds = new Set();
+  const seenTexts = new Set();
+  const isUniqueCandidate = (q) => {
+    if (!q) return false;
+    const qId = String(q.id);
+    const qText = (q.question || q.title || '').trim().toLowerCase();
+    if (seenIds.has(qId)) return false;
+    if (qText && seenTexts.has(qText)) return false;
+    return true;
+  };
+  const markAdded = (q) => {
+    seenIds.add(String(q.id));
+    const qText = (q.question || q.title || '').trim().toLowerCase();
+    if (qText) seenTexts.add(qText);
+  };
+
   // Create lookup map by string ID
   const poolMap = new Map();
   eligible.forEach(q => poolMap.set(String(q.id), q));
@@ -64,7 +82,8 @@ export async function selectQuestionsForGame(optionsOrSlug, optDifficulty, optBa
   // 2. If authenticated, request selection from the backend with strict timeout
   if (isAuthenticated()) {
     try {
-      const candidateIds = eligible.map(q => String(q.id));
+      // Deduplicate candidates before sending
+      const candidateIds = Array.from(new Set(eligible.map(q => String(q.id))));
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 1800);
 
@@ -83,15 +102,20 @@ export async function selectQuestionsForGame(optionsOrSlug, optDifficulty, optBa
         const selected = [];
         for (const id of res.data.selectedIds) {
           const q = poolMap.get(String(id));
-          if (q) selected.push(q);
+          if (q && isUniqueCandidate(q)) {
+            markAdded(q);
+            selected.push(q);
+          }
         }
 
-        // If server selected fewer than needed, fill remainder
+        // If server selected fewer than needed, fill remainder strictly with unique questions
         if (selected.length < count) {
-          const selectedSet = new Set(selected.map(q => String(q.id)));
-          const remainder = eligible.filter(q => !selectedSet.has(String(q.id)));
+          const remainder = eligible.filter(isUniqueCandidate);
           const extra = shuffleArray(remainder).slice(0, count - selected.length);
-          selected.push(...extra);
+          for (const eq of extra) {
+            markAdded(eq);
+            selected.push(eq);
+          }
         }
 
         if (selected.length > 0) {
@@ -104,9 +128,16 @@ export async function selectQuestionsForGame(optionsOrSlug, optDifficulty, optBa
     }
   }
 
-  // 3. Guest / Offline / Fast Fallback: Local shuffle selection
+  // 3. Guest / Offline / Fast Fallback: Local shuffle selection with strict uniqueness
   const shuffled = shuffleArray([...eligible]);
-  const fallbackSelection = shuffled.slice(0, Math.min(count, shuffled.length));
+  const fallbackSelection = [];
+  for (const q of shuffled) {
+    if (fallbackSelection.length >= count) break;
+    if (isUniqueCandidate(q)) {
+      markAdded(q);
+      fallbackSelection.push(q);
+    }
+  }
   const ordered = userShuffle ? shuffleArray([...fallbackSelection]) : fallbackSelection;
   return balanceAndRandomizeQuestionOptions(ordered);
 }

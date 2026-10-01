@@ -1,0 +1,6962 @@
+[
+  {
+    "id": "mc-easy-01",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Farmer's Market Stand",
+    "description": "Memorize the 6 fresh fruits and vegetables on the table.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🍎",
+        "label": "Red Apple"
+      },
+      {
+        "emoji": "🍌",
+        "label": "Yellow Banana"
+      },
+      {
+        "emoji": "🥕",
+        "label": "Orange Carrot"
+      },
+      {
+        "emoji": "🍇",
+        "label": "Purple Grapes"
+      },
+      {
+        "emoji": "🥦",
+        "label": "Green Broccoli"
+      },
+      {
+        "emoji": "🍓",
+        "label": "Red Strawberry"
+      }
+    ],
+    "question": "Which purple fruit was on the market table?",
+    "options": [
+      "Purple Grapes",
+      "Eggplant",
+      "Plum",
+      "Blueberries"
+    ],
+    "correctAnswer": "Purple Grapes",
+    "explanation": "The market table contained Purple Grapes (🍇) in the top/middle row.",
+    "hint": "Think about the bunch of purple fruit.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which purple fruit was displayed?",
+        "choices": [
+          "Purple Grapes",
+          "Eggplant",
+          "Plum",
+          "Blueberries"
+        ],
+        "answer": "Purple Grapes"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-02",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Stationery Desk",
+    "description": "Memorize the study tools placed on the desk.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "✂️",
+        "label": "Silver Scissors"
+      },
+      {
+        "emoji": "📏",
+        "label": "Yellow Ruler"
+      },
+      {
+        "emoji": "📐",
+        "label": "Triangle Protractor"
+      },
+      {
+        "emoji": "📎",
+        "label": "Paperclip"
+      },
+      {
+        "emoji": "✏️",
+        "label": "Pencil"
+      },
+      {
+        "emoji": "📌",
+        "label": "Red Pushpin"
+      }
+    ],
+    "question": "What color was the ruler on the desk?",
+    "options": [
+      "Yellow",
+      "Blue",
+      "Clear",
+      "Green"
+    ],
+    "correctAnswer": "Yellow",
+    "explanation": "The ruler (📏) was bright yellow.",
+    "hint": "Recall the classic wooden/plastic yellow measuring tool.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What color was the ruler on the desk?",
+        "choices": [
+          "Yellow",
+          "Blue",
+          "Clear",
+          "Green"
+        ],
+        "answer": "Yellow"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-03",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Pet Shop Window",
+    "description": "Observe the animals resting in the pet store.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🐶",
+        "label": "Golden Dog"
+      },
+      {
+        "emoji": "🐱",
+        "label": "Tabby Cat"
+      },
+      {
+        "emoji": "🐹",
+        "label": "Hamster"
+      },
+      {
+        "emoji": "🐰",
+        "label": "White Bunny"
+      },
+      {
+        "emoji": "🦜",
+        "label": "Parrot"
+      },
+      {
+        "emoji": "🐠",
+        "label": "Goldfish"
+      }
+    ],
+    "question": "Which bird was present in the pet shop?",
+    "options": [
+      "Parrot",
+      "Owl",
+      "Canary",
+      "Pigeon"
+    ],
+    "correctAnswer": "Parrot",
+    "explanation": "The parrot (🦜) was perched in the lower row.",
+    "hint": "Think of the colorful talking tropical bird.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which bird was present in the pet shop?",
+        "choices": [
+          "Parrot",
+          "Owl",
+          "Canary",
+          "Pigeon"
+        ],
+        "answer": "Parrot"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-04",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Toy Chest",
+    "description": "Memorize the toys packed inside the playroom chest.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🧸",
+        "label": "Teddy Bear"
+      },
+      {
+        "emoji": "🚗",
+        "label": "Red Toy Car"
+      },
+      {
+        "emoji": "🪁",
+        "label": "Kite"
+      },
+      {
+        "emoji": "🪀",
+        "label": "Yo-Yo"
+      },
+      {
+        "emoji": "🎲",
+        "label": "Pair of Dice"
+      },
+      {
+        "emoji": "🧩",
+        "label": "Puzzle Piece"
+      }
+    ],
+    "question": "What vehicle toy was inside the chest?",
+    "options": [
+      "Red Toy Car",
+      "Toy Train",
+      "Airplane",
+      "Sailboat"
+    ],
+    "correctAnswer": "Red Toy Car",
+    "explanation": "The red toy car (🚗) was in the top row.",
+    "hint": "Recall the small 4-wheeled red vehicle.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What vehicle toy was inside the chest?",
+        "choices": [
+          "Red Toy Car",
+          "Toy Train",
+          "Airplane",
+          "Sailboat"
+        ],
+        "answer": "Red Toy Car"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-05",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Bakery Showcase",
+    "description": "Take note of the baked treats on the display tray.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🥐",
+        "label": "Croissant"
+      },
+      {
+        "emoji": "🥖",
+        "label": "French Baguette"
+      },
+      {
+        "emoji": "🥨",
+        "label": "Salted Pretzel"
+      },
+      {
+        "emoji": "🥯",
+        "label": "Plain Bagel"
+      },
+      {
+        "emoji": "🧁",
+        "label": "Cupcake"
+      },
+      {
+        "emoji": "🍩",
+        "label": "Glazed Donut"
+      }
+    ],
+    "question": "Which sweet treat had pink frosting and sprinkles?",
+    "options": [
+      "Cupcake",
+      "Croissant",
+      "Baguette",
+      "Pretzel"
+    ],
+    "correctAnswer": "Cupcake",
+    "explanation": "The cupcake (🧁) was decorated with frosting.",
+    "hint": "Think about the small individual cake with icing.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which sweet treat had frosting?",
+        "choices": [
+          "Cupcake",
+          "Croissant",
+          "Baguette",
+          "Pretzel"
+        ],
+        "answer": "Cupcake"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-06",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Camping Gear",
+    "description": "Memorize the essential equipment packed for camping.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "⛺",
+        "label": "Green Tent"
+      },
+      {
+        "emoji": "🔦",
+        "label": "Flashlight"
+      },
+      {
+        "emoji": "🪵",
+        "label": "Firewood"
+      },
+      {
+        "emoji": "🥾",
+        "label": "Hiking Boots"
+      },
+      {
+        "emoji": "🧭",
+        "label": "Compass"
+      },
+      {
+        "emoji": "🎒",
+        "label": "Backpack"
+      }
+    ],
+    "question": "What tool was used for navigation?",
+    "options": [
+      "Compass",
+      "Map",
+      "GPS Phone",
+      "Lantern"
+    ],
+    "correctAnswer": "Compass",
+    "explanation": "The compass (🧭) was packed to show directional bearings.",
+    "hint": "The circular needle instrument.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What tool was used for navigation?",
+        "choices": [
+          "Compass",
+          "Map",
+          "GPS Phone",
+          "Lantern"
+        ],
+        "answer": "Compass"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-07",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Musical Instruments",
+    "description": "Memorize the instruments on the stage.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🎸",
+        "label": "Electric Guitar"
+      },
+      {
+        "emoji": "🎹",
+        "label": "Keyboard"
+      },
+      {
+        "emoji": "🥁",
+        "label": "Drum Kit"
+      },
+      {
+        "emoji": "🎺",
+        "label": "Brass Trumpet"
+      },
+      {
+        "emoji": "🎻",
+        "label": "Violin"
+      },
+      {
+        "emoji": "🎷",
+        "label": "Saxophone"
+      }
+    ],
+    "question": "Which percussion instrument was on the stage?",
+    "options": [
+      "Drum Kit",
+      "Trumpet",
+      "Guitar",
+      "Violin"
+    ],
+    "correctAnswer": "Drum Kit",
+    "explanation": "The drum kit (🥁) was the percussion piece in the middle.",
+    "hint": "The instrument struck with drumsticks.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which percussion instrument was on the stage?",
+        "choices": [
+          "Drum Kit",
+          "Trumpet",
+          "Guitar",
+          "Violin"
+        ],
+        "answer": "Drum Kit"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-08",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Sports Equipment",
+    "description": "Memorize the balls and gear in the gym locker.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "⚽",
+        "label": "Soccer Ball"
+      },
+      {
+        "emoji": "🏀",
+        "label": "Basketball"
+      },
+      {
+        "emoji": "🏈",
+        "label": "American Football"
+      },
+      {
+        "emoji": "🎾",
+        "label": "Tennis Ball"
+      },
+      {
+        "emoji": "🏐",
+        "label": "Volleyball"
+      },
+      {
+        "emoji": "🏓",
+        "label": "Ping Pong Paddle"
+      }
+    ],
+    "question": "Which orange ball was in the top row?",
+    "options": [
+      "Basketball",
+      "Soccer Ball",
+      "Tennis Ball",
+      "Volleyball"
+    ],
+    "correctAnswer": "Basketball",
+    "explanation": "The basketball (🏀) was the orange round ball.",
+    "hint": "Used on hardwood hoops courts.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which orange ball was in the top row?",
+        "choices": [
+          "Basketball",
+          "Soccer Ball",
+          "Tennis Ball",
+          "Volleyball"
+        ],
+        "answer": "Basketball"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-09",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Beach Day Kit",
+    "description": "Memorize the summer items ready for the coast.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🏖️",
+        "label": "Beach Umbrella"
+      },
+      {
+        "emoji": "🩴",
+        "label": "Flip Flops"
+      },
+      {
+        "emoji": "🕶️",
+        "label": "Sunglasses"
+      },
+      {
+        "emoji": "🐚",
+        "label": "Seashell"
+      },
+      {
+        "emoji": "🤿",
+        "label": "Diving Mask"
+      },
+      {
+        "emoji": "🧴",
+        "label": "Sunscreen Lotion"
+      }
+    ],
+    "question": "What protective eyewear was included in the kit?",
+    "options": [
+      "Sunglasses",
+      "Goggles",
+      "Binoculars",
+      "Monocle"
+    ],
+    "correctAnswer": "Sunglasses",
+    "explanation": "Dark sunglasses (🕶️) were packed for UV protection.",
+    "hint": "Worn over the eyes against bright sunlight.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What protective eyewear was included?",
+        "choices": [
+          "Sunglasses",
+          "Goggles",
+          "Binoculars",
+          "Monocle"
+        ],
+        "answer": "Sunglasses"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-10",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Toolbox Essentials",
+    "description": "Memorize the hardware tools in the repair kit.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🔨",
+        "label": "Claw Hammer"
+      },
+      {
+        "emoji": "🪛",
+        "label": "Screwdriver"
+      },
+      {
+        "emoji": "🔧",
+        "label": "Wrench"
+      },
+      {
+        "emoji": "🪚",
+        "label": "Hand Saw"
+      },
+      {
+        "emoji": "🔩",
+        "label": "Nut and Bolt"
+      },
+      {
+        "emoji": "🧲",
+        "label": "Horseshoe Magnet"
+      }
+    ],
+    "question": "Which tool had a claw and head for driving nails?",
+    "options": [
+      "Claw Hammer",
+      "Wrench",
+      "Screwdriver",
+      "Hand Saw"
+    ],
+    "correctAnswer": "Claw Hammer",
+    "explanation": "The claw hammer (🔨) was the first item on the top row.",
+    "hint": "Heavy metal head used with nails.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which tool drives nails?",
+        "choices": [
+          "Claw Hammer",
+          "Wrench",
+          "Screwdriver",
+          "Hand Saw"
+        ],
+        "answer": "Claw Hammer"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-11",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Art Studio Easel",
+    "description": "Memorize the creative painting tools scattered around the easel.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🎨",
+        "label": "Color Palette"
+      },
+      {
+        "emoji": "🖌️",
+        "label": "Oil Paintbrush"
+      },
+      {
+        "emoji": "🖍️",
+        "label": "Wax Crayon"
+      },
+      {
+        "emoji": "🏺",
+        "label": "Clay Vase"
+      },
+      {
+        "emoji": "📐",
+        "label": "T-Square Ruler"
+      },
+      {
+        "emoji": "🧽",
+        "label": "Cleaning Sponge"
+      }
+    ],
+    "question": "What pottery item was sitting next to the paint supplies?",
+    "options": [
+      "Clay Vase",
+      "Ceramic Bowl",
+      "Teacup",
+      "Flower Pot"
+    ],
+    "correctAnswer": "Clay Vase",
+    "explanation": "A Clay Vase (🏺) was placed beside the painting palette.",
+    "hint": "Think about handmade pottery.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What pottery item was sitting next to the paint supplies?",
+        "choices": [
+          "Clay Vase",
+          "Ceramic Bowl",
+          "Teacup",
+          "Flower Pot"
+        ],
+        "answer": "Clay Vase"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-12",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Aquarium Tank Display",
+    "description": "Observe the aquatic creatures swimming in the main tank.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🐠",
+        "label": "Tropical Fish"
+      },
+      {
+        "emoji": "🐡",
+        "label": "Blowfish"
+      },
+      {
+        "emoji": "🦈",
+        "label": "Reef Shark"
+      },
+      {
+        "emoji": "🐙",
+        "label": "Red Octopus"
+      },
+      {
+        "emoji": "🦀",
+        "label": "Crab"
+      },
+      {
+        "emoji": "🐚",
+        "label": "Conch Shell"
+      }
+    ],
+    "question": "Which eight-legged sea creature was visible in the tank?",
+    "options": [
+      "Red Octopus",
+      "Jellyfish",
+      "Squid",
+      "Lobster"
+    ],
+    "correctAnswer": "Red Octopus",
+    "explanation": "The Red Octopus (🐙) was clinging near the rocks.",
+    "hint": "Eight tentacles and ink.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which eight-legged sea creature was visible in the tank?",
+        "choices": [
+          "Red Octopus",
+          "Jellyfish",
+          "Squid",
+          "Lobster"
+        ],
+        "answer": "Red Octopus"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-13",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Coffee Shop Counter",
+    "description": "Memorize the breakfast items ordered at the cafe counter.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "☕",
+        "label": "Hot Espresso"
+      },
+      {
+        "emoji": "🧃",
+        "label": "Apple Juice Box"
+      },
+      {
+        "emoji": "🥞",
+        "label": "Stack of Pancakes"
+      },
+      {
+        "emoji": "🧇",
+        "label": "Belgian Waffle"
+      },
+      {
+        "emoji": "🥛",
+        "label": "Glass of Milk"
+      },
+      {
+        "emoji": "🍪",
+        "label": "Chocolate Cookie"
+      }
+    ],
+    "question": "Which warm breakfast pastry had a checked grid pattern?",
+    "options": [
+      "Belgian Waffle",
+      "Pancake",
+      "Toast",
+      "Muffin"
+    ],
+    "correctAnswer": "Belgian Waffle",
+    "explanation": "The Belgian Waffle (🧇) has a signature grid design.",
+    "hint": "Square pockets for maple syrup.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which warm breakfast pastry had a checked grid pattern?",
+        "choices": [
+          "Belgian Waffle",
+          "Pancake",
+          "Toast",
+          "Muffin"
+        ],
+        "answer": "Belgian Waffle"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-14",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Beach Day Blanket",
+    "description": "Take note of the items placed on the sunny beach towel.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🏖️",
+        "label": "Beach Umbrella"
+      },
+      {
+        "emoji": "🕶️",
+        "label": "Dark Sunglasses"
+      },
+      {
+        "emoji": "🧴",
+        "label": "Sunscreen Bottle"
+      },
+      {
+        "emoji": "🩴",
+        "label": "Blue Flip-Flops"
+      },
+      {
+        "emoji": "🏐",
+        "label": "Volleyball"
+      },
+      {
+        "emoji": "🍉",
+        "label": "Watermelon Slice"
+      }
+    ],
+    "question": "What footwear was resting beside the beach towel?",
+    "options": [
+      "Blue Flip-Flops",
+      "Sandals",
+      "Sneakers",
+      "Water Shoes"
+    ],
+    "correctAnswer": "Blue Flip-Flops",
+    "explanation": "Blue Flip-Flops (🩴) were resting on the edge of the towel.",
+    "hint": "Casual open-toe beach footwear.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What footwear was resting beside the beach towel?",
+        "choices": [
+          "Blue Flip-Flops",
+          "Sandals",
+          "Sneakers",
+          "Water Shoes"
+        ],
+        "answer": "Blue Flip-Flops"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-15",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Doctor's First Aid Kit",
+    "description": "Study the medical care items packed inside the first aid box.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🩹",
+        "label": "Adhesive Bandage"
+      },
+      {
+        "emoji": "🩺",
+        "label": "Stethoscope"
+      },
+      {
+        "emoji": "💊",
+        "label": "Medicine Capsule"
+      },
+      {
+        "emoji": "🌡️",
+        "label": "Mercury Thermometer"
+      },
+      {
+        "emoji": "🧴",
+        "label": "Antiseptic Wash"
+      },
+      {
+        "emoji": "🧤",
+        "label": "Surgical Gloves"
+      }
+    ],
+    "question": "Which instrument is used to listen to a patient's heartbeat?",
+    "options": [
+      "Stethoscope",
+      "Thermometer",
+      "Otoscope",
+      "Blood Pressure Cuff"
+    ],
+    "correctAnswer": "Stethoscope",
+    "explanation": "The Stethoscope (🩺) is used to listen to internal heart and lung sounds.",
+    "hint": "Draped around a physician's neck.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which instrument is used to listen to a patient's heartbeat?",
+        "choices": [
+          "Stethoscope",
+          "Thermometer",
+          "Otoscope",
+          "Blood Pressure Cuff"
+        ],
+        "answer": "Stethoscope"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-16",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Music Room Stage",
+    "description": "Observe the acoustic instruments resting on the stage.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🎸",
+        "label": "Acoustic Guitar"
+      },
+      {
+        "emoji": "🎻",
+        "label": "Violin"
+      },
+      {
+        "emoji": "🎹",
+        "label": "Piano Keyboard"
+      },
+      {
+        "emoji": "🥁",
+        "label": "Snare Drum"
+      },
+      {
+        "emoji": "🎺",
+        "label": "Brass Trumpet"
+      },
+      {
+        "emoji": "🪗",
+        "label": "Accordion"
+      }
+    ],
+    "question": "Which brass horn was shining under the stage lights?",
+    "options": [
+      "Brass Trumpet",
+      "Saxophone",
+      "Trombone",
+      "French Horn"
+    ],
+    "correctAnswer": "Brass Trumpet",
+    "explanation": "The Brass Trumpet (🎺) was polished and shining on the stand.",
+    "hint": "Golden horn with three valves.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which brass horn was shining under the stage lights?",
+        "choices": [
+          "Brass Trumpet",
+          "Saxophone",
+          "Trombone",
+          "French Horn"
+        ],
+        "answer": "Brass Trumpet"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-17",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Kitchen Pantry Shelf",
+    "description": "Memorize the cooking ingredients stacked on the second shelf.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🫒",
+        "label": "Green Olives"
+      },
+      {
+        "emoji": "🧀",
+        "label": "Cheddar Cheese"
+      },
+      {
+        "emoji": "🍞",
+        "label": "Wheat Bread"
+      },
+      {
+        "emoji": "🥫",
+        "label": "Tomato Can"
+      },
+      {
+        "emoji": "🍯",
+        "label": "Honey Pot"
+      },
+      {
+        "emoji": "🧂",
+        "label": "Salt Shaker"
+      }
+    ],
+    "question": "Which condiment pot contained golden sweet syrup?",
+    "options": [
+      "Honey Pot",
+      "Maple Jar",
+      "Mustard Bottle",
+      "Jam Pot"
+    ],
+    "correctAnswer": "Honey Pot",
+    "explanation": "The Honey Pot (🍯) contained sweet golden nectar.",
+    "hint": "Made by bees.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which condiment pot contained golden sweet syrup?",
+        "choices": [
+          "Honey Pot",
+          "Maple Jar",
+          "Mustard Bottle",
+          "Jam Pot"
+        ],
+        "answer": "Honey Pot"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-18",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Vegetable Garden Patch",
+    "description": "Observe the fresh produce growing in the garden bed.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🌽",
+        "label": "Sweet Corn"
+      },
+      {
+        "emoji": "🍅",
+        "label": "Ripe Tomato"
+      },
+      {
+        "emoji": "🍆",
+        "label": "Purple Eggplant"
+      },
+      {
+        "emoji": "🥔",
+        "label": "Brown Potato"
+      },
+      {
+        "emoji": "🌶️",
+        "label": "Hot Pepper"
+      },
+      {
+        "emoji": "🥬",
+        "label": "Leafy Lettuce"
+      }
+    ],
+    "question": "Which spicy red vegetable was hanging from the vine?",
+    "options": [
+      "Hot Pepper",
+      "Tomato",
+      "Eggplant",
+      "Red Cabbage"
+    ],
+    "correctAnswer": "Hot Pepper",
+    "explanation": "The spicy Hot Pepper (🌶️) grew vibrant red on the vine.",
+    "hint": "Known for its fiery kick.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which spicy red vegetable was hanging from the vine?",
+        "choices": [
+          "Hot Pepper",
+          "Tomato",
+          "Eggplant",
+          "Red Cabbage"
+        ],
+        "answer": "Hot Pepper"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-19",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Superhero Utility Belt",
+    "description": "Memorize the gadgets clipped to the hero's utility belt.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "⚡",
+        "label": "Shock Baton"
+      },
+      {
+        "emoji": "🔦",
+        "label": "Tactical Light"
+      },
+      {
+        "emoji": "🪢",
+        "label": "Grappling Rope"
+      },
+      {
+        "emoji": "📻",
+        "label": "Two-Way Radio"
+      },
+      {
+        "emoji": "🕶️",
+        "label": "Night Goggles"
+      },
+      {
+        "emoji": "🧲",
+        "label": "Magnetic Clamp"
+      }
+    ],
+    "question": "What communications gear was attached to the belt?",
+    "options": [
+      "Two-Way Radio",
+      "Satellite Phone",
+      "Beacon",
+      "Smartwatch"
+    ],
+    "correctAnswer": "Two-Way Radio",
+    "explanation": "The Two-Way Radio (📻) kept communication open with headquarters.",
+    "hint": "Handheld walkie-talkie style transceiver.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What communications gear was attached to the belt?",
+        "choices": [
+          "Two-Way Radio",
+          "Satellite Phone",
+          "Beacon",
+          "Smartwatch"
+        ],
+        "answer": "Two-Way Radio"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-20",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Picnic in the Park",
+    "description": "Memorize the lunch spread set out on the checkered blanket.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🥪",
+        "label": "Club Sandwich"
+      },
+      {
+        "emoji": "🍎",
+        "label": "Crisp Apple"
+      },
+      {
+        "emoji": "🍇",
+        "label": "Green Grapes"
+      },
+      {
+        "emoji": "🥤",
+        "label": "Soda Cup"
+      },
+      {
+        "emoji": "🥧",
+        "label": "Cherry Pie"
+      },
+      {
+        "emoji": "🧺",
+        "label": "Wicker Basket"
+      }
+    ],
+    "question": "What classic pastry dessert was sliced on the picnic blanket?",
+    "options": [
+      "Cherry Pie",
+      "Chocolate Cake",
+      "Brownie",
+      "Donut"
+    ],
+    "correctAnswer": "Cherry Pie",
+    "explanation": "A freshly baked Cherry Pie (🥧) was ready for dessert.",
+    "hint": "Flaky crust with fruit filling.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What classic pastry dessert was sliced on the picnic blanket?",
+        "choices": [
+          "Cherry Pie",
+          "Chocolate Cake",
+          "Brownie",
+          "Donut"
+        ],
+        "answer": "Cherry Pie"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-21",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Sports Locker Room",
+    "description": "Take note of the athletic gear stored in the metal locker.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "⚽",
+        "label": "Soccer Ball"
+      },
+      {
+        "emoji": "🏀",
+        "label": "Orange Basketball"
+      },
+      {
+        "emoji": "🏈",
+        "label": "Football"
+      },
+      {
+        "emoji": "⚾",
+        "label": "Baseball"
+      },
+      {
+        "emoji": "🎾",
+        "label": "Tennis Ball"
+      },
+      {
+        "emoji": "🏓",
+        "label": "Ping Pong Paddle"
+      }
+    ],
+    "question": "Which ball had black and white hexagonal patches?",
+    "options": [
+      "Soccer Ball",
+      "Basketball",
+      "Volleyball",
+      "Tennis Ball"
+    ],
+    "correctAnswer": "Soccer Ball",
+    "explanation": "The Soccer Ball (⚽) has iconic black and white hexagons.",
+    "hint": "Kicked into a goal.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which ball had black and white hexagonal patches?",
+        "choices": [
+          "Soccer Ball",
+          "Basketball",
+          "Volleyball",
+          "Tennis Ball"
+        ],
+        "answer": "Soccer Ball"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-22",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Movie Theater Concession",
+    "description": "Study the snacks on the movie concession counter.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🍿",
+        "label": "Buttered Popcorn"
+      },
+      {
+        "emoji": "🥤",
+        "label": "Fountain Drink"
+      },
+      {
+        "emoji": "🍫",
+        "label": "Chocolate Bar"
+      },
+      {
+        "emoji": "🍬",
+        "label": "Hard Candy"
+      },
+      {
+        "emoji": "🌭",
+        "label": "Hot Dog"
+      },
+      {
+        "emoji": "🎟️",
+        "label": "Gold Admission Ticket"
+      }
+    ],
+    "question": "What paper pass provided entrance to the movie screening?",
+    "options": [
+      "Gold Admission Ticket",
+      "VIP Card",
+      "Wristband",
+      "Receipt"
+    ],
+    "correctAnswer": "Gold Admission Ticket",
+    "explanation": "The Gold Admission Ticket (🎟️) admitted viewers into theater 4.",
+    "hint": "Punched stub for moviegoers.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What paper pass provided entrance to the movie screening?",
+        "choices": [
+          "Gold Admission Ticket",
+          "VIP Card",
+          "Wristband",
+          "Receipt"
+        ],
+        "answer": "Gold Admission Ticket"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-23",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Winter Wardrobe Shelf",
+    "description": "Memorize the cold-weather garments hanging in the closet.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🧥",
+        "label": "Down Jacket"
+      },
+      {
+        "emoji": "🧣",
+        "label": "Wool Scarf"
+      },
+      {
+        "emoji": "🧤",
+        "label": "Knit Mittens"
+      },
+      {
+        "emoji": "🧦",
+        "label": "Thermal Socks"
+      },
+      {
+        "emoji": "👢",
+        "label": "Snow Boots"
+      },
+      {
+        "emoji": "🎿",
+        "label": "Skis"
+      }
+    ],
+    "question": "Which item protected the neck from frosty winds?",
+    "options": [
+      "Wool Scarf",
+      "Turtleneck",
+      "Down Jacket",
+      "Ear Muffs"
+    ],
+    "correctAnswer": "Wool Scarf",
+    "explanation": "The Wool Scarf (🧣) was wrapped around the neck.",
+    "hint": "Long knit cloth wrapped around the collar.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which item protected the neck from frosty winds?",
+        "choices": [
+          "Wool Scarf",
+          "Turtleneck",
+          "Down Jacket",
+          "Ear Muffs"
+        ],
+        "answer": "Wool Scarf"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-24",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Flower Shop Display",
+    "description": "Observe the floral arrangements standing in the boutique.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🌹",
+        "label": "Red Rose"
+      },
+      {
+        "emoji": "🌻",
+        "label": "Bright Sunflower"
+      },
+      {
+        "emoji": "🌷",
+        "label": "Pink Tulip"
+      },
+      {
+        "emoji": "🌼",
+        "label": "Yellow Daisy"
+      },
+      {
+        "emoji": "💐",
+        "label": "Flower Bouquet"
+      },
+      {
+        "emoji": "🪴",
+        "label": "Potted Fern"
+      }
+    ],
+    "question": "Which flower featured tall yellow petals following the sun?",
+    "options": [
+      "Bright Sunflower",
+      "Daffodil",
+      "Marigold",
+      "Yellow Rose"
+    ],
+    "correctAnswer": "Bright Sunflower",
+    "explanation": "The Bright Sunflower (🌻) turned toward the morning window.",
+    "hint": "Large golden head with seeds in the center.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which flower featured tall yellow petals following the sun?",
+        "choices": [
+          "Bright Sunflower",
+          "Daffodil",
+          "Marigold",
+          "Yellow Rose"
+        ],
+        "answer": "Bright Sunflower"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-25",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Home Garage Workbench",
+    "description": "Memorize the maintenance hand tools resting on the bench.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🔨",
+        "label": "Claw Hammer"
+      },
+      {
+        "emoji": "🔧",
+        "label": "Adjustable Wrench"
+      },
+      {
+        "emoji": "🪛",
+        "label": "Flathead Screwdriver"
+      },
+      {
+        "emoji": "🪚",
+        "label": "Handsaw"
+      },
+      {
+        "emoji": "🔩",
+        "label": "Nut and Bolt"
+      },
+      {
+        "emoji": "🧰",
+        "label": "Red Toolbox"
+      }
+    ],
+    "question": "What tool was used to drive nails into timber?",
+    "options": [
+      "Claw Hammer",
+      "Mallet",
+      "Pliers",
+      "Wrench"
+    ],
+    "correctAnswer": "Claw Hammer",
+    "explanation": "The Claw Hammer (🔨) was used for driving and pulling nails.",
+    "hint": "Heavy metal head with a wooden handle.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What tool was used to drive nails into timber?",
+        "choices": [
+          "Claw Hammer",
+          "Mallet",
+          "Pliers",
+          "Wrench"
+        ],
+        "answer": "Claw Hammer"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-26",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Sunday Breakfast Spread",
+    "description": "Observe the morning food items on the dining room table.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🍳",
+        "label": "Fried Egg"
+      },
+      {
+        "emoji": "🥓",
+        "label": "Crispy Bacon"
+      },
+      {
+        "emoji": "🧈",
+        "label": "Stick of Butter"
+      },
+      {
+        "emoji": "🍞",
+        "label": "Toasted Bread"
+      },
+      {
+        "emoji": "☕",
+        "label": "Black Coffee"
+      },
+      {
+        "emoji": "🍊",
+        "label": "Orange Slice"
+      }
+    ],
+    "question": "What savory sizzling meat was served with the eggs?",
+    "options": [
+      "Crispy Bacon",
+      "Sausage Link",
+      "Ham Slice",
+      "Steak"
+    ],
+    "correctAnswer": "Crispy Bacon",
+    "explanation": "Crispy Bacon (🥓) strips were cooked golden brown.",
+    "hint": "Cured pork strips loved at breakfast.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What savory sizzling meat was served with the eggs?",
+        "choices": [
+          "Crispy Bacon",
+          "Sausage Link",
+          "Ham Slice",
+          "Steak"
+        ],
+        "answer": "Crispy Bacon"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-27",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Farmyard Barn Stalls",
+    "description": "Memorize the friendly animals resting in the wooden barn.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🐄",
+        "label": "Spotted Cow"
+      },
+      {
+        "emoji": "🐖",
+        "label": "Pink Piglet"
+      },
+      {
+        "emoji": "🐑",
+        "label": "Fluffy Sheep"
+      },
+      {
+        "emoji": "🐓",
+        "label": "Rooster"
+      },
+      {
+        "emoji": "🐴",
+        "label": "Brown Horse"
+      },
+      {
+        "emoji": "🦆",
+        "label": "Mallard Duck"
+      }
+    ],
+    "question": "Which bird with vibrant feathers crowns the morning wakeup call?",
+    "options": [
+      "Rooster",
+      "Duck",
+      "Turkey",
+      "Goose"
+    ],
+    "correctAnswer": "Rooster",
+    "explanation": "The Rooster (🐓) perched on the fence post at dawn.",
+    "hint": "Crowing bird with a red comb.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which bird with vibrant feathers crowns the morning wakeup call?",
+        "choices": [
+          "Rooster",
+          "Duck",
+          "Turkey",
+          "Goose"
+        ],
+        "answer": "Rooster"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-28",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Post Office Sorting Table",
+    "description": "Study the mailing supplies ready for international delivery.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "✉️",
+        "label": "Postal Envelope"
+      },
+      {
+        "emoji": "📦",
+        "label": "Cardboard Parcel"
+      },
+      {
+        "emoji": "🏷️",
+        "label": "Shipping Tag"
+      },
+      {
+        "emoji": "📮",
+        "label": "Red Mailbox"
+      },
+      {
+        "emoji": "📯",
+        "label": "Post Horn"
+      },
+      {
+        "emoji": "✒️",
+        "label": "Fountain Ink Pen"
+      }
+    ],
+    "question": "What container held the packaged goods for delivery?",
+    "options": [
+      "Cardboard Parcel",
+      "Wooden Crate",
+      "Padded Mailer",
+      "Luggage Trunk"
+    ],
+    "correctAnswer": "Cardboard Parcel",
+    "explanation": "The Cardboard Parcel (📦) was sealed with brown packing tape.",
+    "hint": "Taped cardboard carton.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What container held the packaged goods for delivery?",
+        "choices": [
+          "Cardboard Parcel",
+          "Wooden Crate",
+          "Padded Mailer",
+          "Luggage Trunk"
+        ],
+        "answer": "Cardboard Parcel"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-29",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Ice Cream Parlor Tub",
+    "description": "Memorize the cold sweet treats lined up behind the counter glass.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🍦",
+        "label": "Vanilla Soft Serve"
+      },
+      {
+        "emoji": "🍧",
+        "label": "Shaved Ice"
+      },
+      {
+        "emoji": "🍨",
+        "label": "Ice Cream Sundae"
+      },
+      {
+        "emoji": "🍒",
+        "label": "Topping Cherry"
+      },
+      {
+        "emoji": "🍫",
+        "label": "Fudge Syrup"
+      },
+      {
+        "emoji": "🥄",
+        "label": "Silver Spoon"
+      }
+    ],
+    "question": "Which bright red fruit crowned the top of the sundae?",
+    "options": [
+      "Topping Cherry",
+      "Strawberry",
+      "Raspberry",
+      "Pomegranate"
+    ],
+    "correctAnswer": "Topping Cherry",
+    "explanation": "A sweet maraschino Topping Cherry (🍒) topped the sundae.",
+    "hint": "Classic fruit on top of sundaes.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which bright red fruit crowned the top of the sundae?",
+        "choices": [
+          "Topping Cherry",
+          "Strawberry",
+          "Raspberry",
+          "Pomegranate"
+        ],
+        "answer": "Topping Cherry"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-30",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Sewing and Tailor Kit",
+    "description": "Take note of the dressmaking accessories on the cutting mat.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🧵",
+        "label": "Spool of Thread"
+      },
+      {
+        "emoji": "🪡",
+        "label": "Sewing Needle"
+      },
+      {
+        "emoji": "🧷",
+        "label": "Safety Pin"
+      },
+      {
+        "emoji": "🔘",
+        "label": "Coat Button"
+      },
+      {
+        "emoji": "✂️",
+        "label": "Fabric Shears"
+      },
+      {
+        "emoji": "📏",
+        "label": "Cloth Tape Measure"
+      }
+    ],
+    "question": "Which tool has a sharp eyelet for pulling thread?",
+    "options": [
+      "Sewing Needle",
+      "Safety Pin",
+      "Thimble",
+      "Stitch Ripper"
+    ],
+    "correctAnswer": "Sewing Needle",
+    "explanation": "The Sewing Needle (🪡) was threaded with silk.",
+    "hint": "Slender pointed steel tool.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which tool has a sharp eyelet for pulling thread?",
+        "choices": [
+          "Sewing Needle",
+          "Safety Pin",
+          "Thimble",
+          "Stitch Ripper"
+        ],
+        "answer": "Sewing Needle"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-31",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Magician's Secret Trunk",
+    "description": "Memorize the illusionist props packed inside the velvet trunk.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🎩",
+        "label": "Silk Top Hat"
+      },
+      {
+        "emoji": "🪄",
+        "label": "Magic Wand"
+      },
+      {
+        "emoji": "🐇",
+        "label": "White Rabbit"
+      },
+      {
+        "emoji": "🃏",
+        "label": "Playing Card Deck"
+      },
+      {
+        "emoji": "🕊️",
+        "label": "White Dove"
+      },
+      {
+        "emoji": "🪙",
+        "label": "Coin Illusion"
+      }
+    ],
+    "question": "Which animal famously leaps out of the magician's hat?",
+    "options": [
+      "White Rabbit",
+      "Hamster",
+      "Ferret",
+      "Pigeon"
+    ],
+    "correctAnswer": "White Rabbit",
+    "explanation": "The White Rabbit (🐇) was waiting behind the false bottom.",
+    "hint": "Long ears and fluffy tail.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which animal famously leaps out of the magician's hat?",
+        "choices": [
+          "White Rabbit",
+          "Hamster",
+          "Ferret",
+          "Pigeon"
+        ],
+        "answer": "White Rabbit"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-32",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Construction Foreman Rig",
+    "description": "Study the heavy duty safety gear on the site office table.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🪖",
+        "label": "Yellow Hardhat"
+      },
+      {
+        "emoji": "🚧",
+        "label": "Barrier Fence"
+      },
+      {
+        "emoji": "🚜",
+        "label": "Excavator Tractor"
+      },
+      {
+        "emoji": "🧱",
+        "label": "Red Brick"
+      },
+      {
+        "emoji": "🪜",
+        "label": "Step Ladder"
+      },
+      {
+        "emoji": "📐",
+        "label": "Architect Blueprint"
+      }
+    ],
+    "question": "What protective headwear must workers wear on site?",
+    "options": [
+      "Yellow Hardhat",
+      "Welding Mask",
+      "Beanie",
+      "Goggles"
+    ],
+    "correctAnswer": "Yellow Hardhat",
+    "explanation": "The Yellow Hardhat (🪖) protects against falling debris.",
+    "hint": "Tough yellow plastic helmet.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What protective headwear must workers wear on site?",
+        "choices": [
+          "Yellow Hardhat",
+          "Welding Mask",
+          "Beanie",
+          "Goggles"
+        ],
+        "answer": "Yellow Hardhat"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-33",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Public Library Reading Nook",
+    "description": "Observe the study materials on the quiet reading table.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "📚",
+        "label": "Stack of Books"
+      },
+      {
+        "emoji": "📖",
+        "label": "Open Novel"
+      },
+      {
+        "emoji": "🔖",
+        "label": "Silk Bookmark"
+      },
+      {
+        "emoji": "👓",
+        "label": "Reading Glasses"
+      },
+      {
+        "emoji": "💡",
+        "label": "Desk Lamp"
+      },
+      {
+        "emoji": "📝",
+        "label": "Notepad"
+      }
+    ],
+    "question": "Which eyewear helped the scholar inspect small text?",
+    "options": [
+      "Reading Glasses",
+      "Magnifier",
+      "Monocle",
+      "Sunglasses"
+    ],
+    "correctAnswer": "Reading Glasses",
+    "explanation": "The Reading Glasses (👓) sat folded on the open book.",
+    "hint": "Prescription lenses for reading.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which eyewear helped the scholar inspect small text?",
+        "choices": [
+          "Reading Glasses",
+          "Magnifier",
+          "Monocle",
+          "Sunglasses"
+        ],
+        "answer": "Reading Glasses"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-34",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Outdoor Forest Trail Marker",
+    "description": "Memorize the woodland wonders spotted near the hiking path.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🌲",
+        "label": "Pine Tree"
+      },
+      {
+        "emoji": "🍄",
+        "label": "Red Mushroom"
+      },
+      {
+        "emoji": "🐿️",
+        "label": "Chipmunk"
+      },
+      {
+        "emoji": "🌰",
+        "label": "Acorn"
+      },
+      {
+        "emoji": "🪨",
+        "label": "Granite Boulder"
+      },
+      {
+        "emoji": "🪵",
+        "label": "Fallen Log"
+      }
+    ],
+    "question": "What nut did the forest critter stash under the roots?",
+    "options": [
+      "Acorn",
+      "Walnut",
+      "Chestnut",
+      "Hazelnut"
+    ],
+    "correctAnswer": "Acorn",
+    "explanation": "The small brown Acorn (🌰) was buried in the soft moss.",
+    "hint": "Oak tree nut with a textured cap.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What nut did the forest critter stash under the roots?",
+        "choices": [
+          "Acorn",
+          "Walnut",
+          "Chestnut",
+          "Hazelnut"
+        ],
+        "answer": "Acorn"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-35",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Nursery Play Mat",
+    "description": "Take note of the toddler toys arranged on the soft mat.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🧸",
+        "label": "Brown Teddy"
+      },
+      {
+        "emoji": "🍼",
+        "label": "Baby Bottle"
+      },
+      {
+        "emoji": "🪇",
+        "label": "Maraca Rattle"
+      },
+      {
+        "emoji": "🚂",
+        "label": "Wooden Train"
+      },
+      {
+        "emoji": "🎈",
+        "label": "Red Balloon"
+      },
+      {
+        "emoji": "🪀",
+        "label": "Spinning Top"
+      }
+    ],
+    "question": "Which floating rubber toy was filled with helium?",
+    "options": [
+      "Red Balloon",
+      "Kite",
+      "Pinwheel",
+      "Glider"
+    ],
+    "correctAnswer": "Red Balloon",
+    "explanation": "The Red Balloon (🎈) hovered gently tied to the chair leg.",
+    "hint": "Tied with a ribbon and floats.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which floating rubber toy was filled with helium?",
+        "choices": [
+          "Red Balloon",
+          "Kite",
+          "Pinwheel",
+          "Glider"
+        ],
+        "answer": "Red Balloon"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-36",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Jewelry Repair Desk",
+    "description": "Study the precision accessories resting on the velvet pad.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "💍",
+        "label": "Gold Band Ring"
+      },
+      {
+        "emoji": "💎",
+        "label": "Facet Cut Diamond"
+      },
+      {
+        "emoji": "👑",
+        "label": "Miniature Tiara"
+      },
+      {
+        "emoji": "📿",
+        "label": "Pearl Necklace"
+      },
+      {
+        "emoji": "🔬",
+        "label": "Jeweler Loupe"
+      },
+      {
+        "emoji": "🧲",
+        "label": "Testing Magnet"
+      }
+    ],
+    "question": "Which circular adornment was crafted from polished gold?",
+    "options": [
+      "Gold Band Ring",
+      "Bangle",
+      "Brooch",
+      "Locket"
+    ],
+    "correctAnswer": "Gold Band Ring",
+    "explanation": "The Gold Band Ring (💍) was polished to a mirror finish.",
+    "hint": "Worn on the finger.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which circular adornment was crafted from polished gold?",
+        "choices": [
+          "Gold Band Ring",
+          "Bangle",
+          "Brooch",
+          "Locket"
+        ],
+        "answer": "Gold Band Ring"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-37",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Astronomy Stargazer Table",
+    "description": "Memorize the skywatching instruments on the balcony.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🔭",
+        "label": "Star Telescope"
+      },
+      {
+        "emoji": "🗺️",
+        "label": "Constellation Chart"
+      },
+      {
+        "emoji": "🧭",
+        "label": "Brass Compass"
+      },
+      {
+        "emoji": "🌙",
+        "label": "Crescent Moon Model"
+      },
+      {
+        "emoji": "🔦",
+        "label": "Red Beam Torch"
+      },
+      {
+        "emoji": "☕",
+        "label": "Warm Thermos"
+      }
+    ],
+    "question": "What optical tube was aimed directly toward the stars?",
+    "options": [
+      "Star Telescope",
+      "Periscope",
+      "Kaleidoscope",
+      "Binoculars"
+    ],
+    "correctAnswer": "Star Telescope",
+    "explanation": "The Star Telescope (🔭) magnified distant planetary rings.",
+    "hint": "Long barrel tube on a tripod.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What optical tube was aimed directly toward the stars?",
+        "choices": [
+          "Star Telescope",
+          "Periscope",
+          "Kaleidoscope",
+          "Binoculars"
+        ],
+        "answer": "Star Telescope"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-38",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Cozy Fireside Hearth",
+    "description": "Observe the homey items resting by the crackling fireplace.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🔥",
+        "label": "Fireplace Flame"
+      },
+      {
+        "emoji": "🪵",
+        "label": "Oak Log"
+      },
+      {
+        "emoji": "🫖",
+        "label": "Iron Teapot"
+      },
+      {
+        "emoji": "🛋️",
+        "label": "Armchair"
+      },
+      {
+        "emoji": "🐱",
+        "label": "Sleeping Cat"
+      },
+      {
+        "emoji": "📖",
+        "label": "Leather Journal"
+      }
+    ],
+    "question": "Which kettle was simmering hot water above the embers?",
+    "options": [
+      "Iron Teapot",
+      "Copper Kettle",
+      "Clay Urn",
+      "Glass Pitcher"
+    ],
+    "correctAnswer": "Iron Teapot",
+    "explanation": "The heavy Iron Teapot (🫖) whistled quietly near the grate.",
+    "hint": "Cast-iron vessel for brewing tea.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which kettle was simmering hot water above the embers?",
+        "choices": [
+          "Iron Teapot",
+          "Copper Kettle",
+          "Clay Urn",
+          "Glass Pitcher"
+        ],
+        "answer": "Iron Teapot"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-39",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Greenhouse Seedling Tray",
+    "description": "Memorize the plant starter supplies in the nursery shed.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🌱",
+        "label": "Sprouting Seedling"
+      },
+      {
+        "emoji": "🪴",
+        "label": "Clay Planter"
+      },
+      {
+        "emoji": "🚿",
+        "label": "Watering Can"
+      },
+      {
+        "emoji": "🧤",
+        "label": "Gardening Gloves"
+      },
+      {
+        "emoji": "🌿",
+        "label": "Herb Sprig"
+      },
+      {
+        "emoji": "🏷️",
+        "label": "Botanical Plant Tag"
+      }
+    ],
+    "question": "What young green growth had just emerged from the soil?",
+    "options": [
+      "Sprouting Seedling",
+      "Vine",
+      "Fern",
+      "Cactus"
+    ],
+    "correctAnswer": "Sprouting Seedling",
+    "explanation": "The Sprouting Seedling (🌱) opened its first pair of baby leaves.",
+    "hint": "Tender shoot with two small green leaves.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What young green growth had just emerged from the soil?",
+        "choices": [
+          "Sprouting Seedling",
+          "Vine",
+          "Fern",
+          "Cactus"
+        ],
+        "answer": "Sprouting Seedling"
+      }
+    ]
+  },
+  {
+    "id": "mc-easy-40",
+    "gameType": "memory-challenge",
+    "difficulty": "easy",
+    "title": "Pottery Workshop Wheel",
+    "description": "Observe the clay shaping implements near the pottery wheel.",
+    "revealTime": 8,
+    "items": [
+      {
+        "emoji": "🏺",
+        "label": "Tall Ceramic Urn"
+      },
+      {
+        "emoji": "🥣",
+        "label": "Shallow Bowl"
+      },
+      {
+        "emoji": "🧽",
+        "label": "Damp Sponge"
+      },
+      {
+        "emoji": "🔪",
+        "label": "Trimming Blade"
+      },
+      {
+        "emoji": "🪣",
+        "label": "Water Bucket"
+      },
+      {
+        "emoji": "🧵",
+        "label": "Cutting Wire"
+      }
+    ],
+    "question": "Which curved vessel was ready for glazing?",
+    "options": [
+      "Tall Ceramic Urn",
+      "Teapot",
+      "Goblet",
+      "Flower Pot"
+    ],
+    "correctAnswer": "Tall Ceramic Urn",
+    "explanation": "The Tall Ceramic Urn (🏺) stood dry on the top drying rack.",
+    "hint": "Ancient-style amphora shape.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which curved vessel was ready for glazing?",
+        "choices": [
+          "Tall Ceramic Urn",
+          "Teapot",
+          "Goblet",
+          "Flower Pot"
+        ],
+        "answer": "Tall Ceramic Urn"
+      }
+    ]
+  },
+  {
+    "id": "mc-med-01",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Detective's Clue Board",
+    "description": "Study the 6 pieces of physical evidence carefully in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🔑",
+        "label": "Brass Key"
+      },
+      {
+        "emoji": "📜",
+        "label": "Burned Letter"
+      },
+      {
+        "emoji": "🧤",
+        "label": "Leather Glove"
+      },
+      {
+        "emoji": "🕰️",
+        "label": "Pocket Watch (Stopped at 3:15)"
+      },
+      {
+        "emoji": "💍",
+        "label": "Emerald Ring"
+      },
+      {
+        "emoji": "🖋️",
+        "label": "Silver Fountain Pen"
+      }
+    ],
+    "question": "Which precious gemstone was set in the ring?",
+    "options": [
+      "Emerald",
+      "Ruby",
+      "Diamond",
+      "Sapphire"
+    ],
+    "correctAnswer": "Emerald",
+    "explanation": "The ring was specified as an Emerald Ring (💍) with a green gem.",
+    "hint": "Recall the green gemstone on the bottom row.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which gemstone was in the ring?",
+        "choices": [
+          "Emerald",
+          "Ruby",
+          "Diamond",
+          "Sapphire"
+        ],
+        "answer": "Emerald"
+      }
+    ]
+  },
+  {
+    "id": "mc-med-02",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Astronaut Flight Console",
+    "description": "Memorize the spacecraft navigation indicators in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🚀",
+        "label": "Rocket Booster 1"
+      },
+      {
+        "emoji": "🛰️",
+        "label": "Orbital Satellite"
+      },
+      {
+        "emoji": "🛸",
+        "label": "Deep Space Probe"
+      },
+      {
+        "emoji": "🌍",
+        "label": "Earth Home Beacon"
+      },
+      {
+        "emoji": "🌙",
+        "label": "Lunar Lander"
+      },
+      {
+        "emoji": "☄️",
+        "label": "Approaching Comet"
+      }
+    ],
+    "question": "Which celestial danger was approaching the console radar?",
+    "options": [
+      "Approaching Comet",
+      "Black Hole",
+      "Solar Flare",
+      "Asteroid Belt"
+    ],
+    "correctAnswer": "Approaching Comet",
+    "explanation": "The approaching comet (☄️) was detected on the bottom right telemetry.",
+    "hint": "Icy tail blazing through space.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which celestial danger was approaching?",
+        "choices": [
+          "Approaching Comet",
+          "Black Hole",
+          "Solar Flare",
+          "Asteroid Belt"
+        ],
+        "answer": "Approaching Comet"
+      }
+    ]
+  },
+  {
+    "id": "mc-med-03",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Medieval Castle Vault",
+    "description": "Study the royal heirlooms locked in the vault.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "👑",
+        "label": "Golden Crown"
+      },
+      {
+        "emoji": "🗡️",
+        "label": "Jeweled Dagger"
+      },
+      {
+        "emoji": "🛡️",
+        "label": "Lion Shield"
+      },
+      {
+        "emoji": "🏆",
+        "label": "Silver Chalice"
+      },
+      {
+        "emoji": "💎",
+        "label": "Blue Sapphire"
+      },
+      {
+        "emoji": "🕯️",
+        "label": "Iron Candelabra"
+      }
+    ],
+    "question": "Which animal emblem was carved onto the shield?",
+    "options": [
+      "Lion",
+      "Dragon",
+      "Eagle",
+      "Wolf"
+    ],
+    "correctAnswer": "Lion",
+    "explanation": "The shield had a Lion insignia (Lion Shield).",
+    "hint": "King of the jungle crest.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which animal was on the shield?",
+        "choices": [
+          "Lion",
+          "Dragon",
+          "Eagle",
+          "Wolf"
+        ],
+        "answer": "Lion"
+      }
+    ]
+  },
+  {
+    "id": "mc-med-04",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Alchemist's Laboratory",
+    "description": "Memorize the potions and ingredients on the laboratory shelf.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🧪",
+        "label": "Glowing Green Elixir"
+      },
+      {
+        "emoji": "🍄",
+        "label": "Spotted Red Toadstool"
+      },
+      {
+        "emoji": "🫙",
+        "label": "Jar of Dragon Scale Dust"
+      },
+      {
+        "emoji": "🔥",
+        "label": "Eternal Blue Flame"
+      },
+      {
+        "emoji": "🔮",
+        "label": "Crystal Orb"
+      },
+      {
+        "emoji": "📜",
+        "label": "Ancient Alchemy Scroll"
+      }
+    ],
+    "question": "What color was the glowing elixir in the test tube?",
+    "options": [
+      "Green",
+      "Purple",
+      "Red",
+      "Blue"
+    ],
+    "correctAnswer": "Green",
+    "explanation": "The test tube contained a Glowing Green Elixir (🧪).",
+    "hint": "Recall the toxic bright emerald hue.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What color was the glowing elixir?",
+        "choices": [
+          "Green",
+          "Purple",
+          "Red",
+          "Blue"
+        ],
+        "answer": "Green"
+      }
+    ]
+  },
+  {
+    "id": "mc-med-05",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Art Gallery Wing",
+    "description": "Study the master artworks in the modern wing.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🖼️",
+        "label": "Impressionist Sunrise"
+      },
+      {
+        "emoji": "🗿",
+        "label": "Marble Bust"
+      },
+      {
+        "emoji": "🏺",
+        "label": "Greek Amphora Vase"
+      },
+      {
+        "emoji": "🎭",
+        "label": "Venetian Masquerade Masks"
+      },
+      {
+        "emoji": "🎨",
+        "label": "Oil Painter Palette"
+      },
+      {
+        "emoji": "🪞",
+        "label": "Gilded Baroque Mirror"
+      }
+    ],
+    "question": "What ancient pottery vessel was displayed?",
+    "options": [
+      "Greek Amphora Vase",
+      "Clay Teapot",
+      "Porcelain Plate",
+      "Bronze Urn"
+    ],
+    "correctAnswer": "Greek Amphora Vase",
+    "explanation": "The Greek Amphora Vase (🏺) was in the top right.",
+    "hint": "Two-handled terracotta classical container.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What ancient vessel was displayed?",
+        "choices": [
+          "Greek Amphora Vase",
+          "Clay Teapot",
+          "Porcelain Plate",
+          "Bronze Urn"
+        ],
+        "answer": "Greek Amphora Vase"
+      }
+    ]
+  },
+  {
+    "id": "mc-med-06",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Wildlife Safari Log",
+    "description": "Observe the endangered species tracked on the savannah.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🦁",
+        "label": "African Lion"
+      },
+      {
+        "emoji": "🐘",
+        "label": "Savannah Elephant"
+      },
+      {
+        "emoji": "🦒",
+        "label": "Tall Giraffe"
+      },
+      {
+        "emoji": "🦓",
+        "label": "Striped Zebra"
+      },
+      {
+        "emoji": "🦏",
+        "label": "Black Rhino"
+      },
+      {
+        "emoji": "🐆",
+        "label": "Spotted Leopard"
+      }
+    ],
+    "question": "Which big cat had spots rather than a mane?",
+    "options": [
+      "Spotted Leopard",
+      "African Lion",
+      "Cheetah",
+      "Tiger"
+    ],
+    "correctAnswer": "Spotted Leopard",
+    "explanation": "The spotted leopard (🐆) was in the bottom right corner.",
+    "hint": "Look for the rosette-patterned predator.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which predator had spots?",
+        "choices": [
+          "Spotted Leopard",
+          "African Lion",
+          "Cheetah",
+          "Tiger"
+        ],
+        "answer": "Spotted Leopard"
+      }
+    ]
+  },
+  {
+    "id": "mc-med-07",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Submarine Sonar Station",
+    "description": "Memorize the deep ocean signals detected at 200 fathoms.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🐋",
+        "label": "Blue Whale"
+      },
+      {
+        "emoji": "🦈",
+        "label": "Great White Shark"
+      },
+      {
+        "emoji": "🐙",
+        "label": "Giant Octopus"
+      },
+      {
+        "emoji": "🪸",
+        "label": "Coral Reef Beacon"
+      },
+      {
+        "emoji": "⚓",
+        "label": "Sunken Galleon Anchor"
+      },
+      {
+        "emoji": "🤿",
+        "label": "Deep Sea Diver"
+      }
+    ],
+    "question": "Which eight-armed creature appeared on the sonar?",
+    "options": [
+      "Giant Octopus",
+      "Blue Whale",
+      "Great White Shark",
+      "Jellyfish"
+    ],
+    "correctAnswer": "Giant Octopus",
+    "explanation": "The giant octopus (🐙) was spotted on the right.",
+    "hint": "Cephalopod with suction tentacles.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which 8-armed creature was detected?",
+        "choices": [
+          "Giant Octopus",
+          "Blue Whale",
+          "Great White Shark",
+          "Jellyfish"
+        ],
+        "answer": "Giant Octopus"
+      }
+    ]
+  },
+  {
+    "id": "mc-med-08",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Botanical Greenhouse",
+    "description": "Memorize the exotic flowers blooming in the glasshouse.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🌹",
+        "label": "Crimson Rose"
+      },
+      {
+        "emoji": "🌻",
+        "label": "Giant Sunflower"
+      },
+      {
+        "emoji": "🌺",
+        "label": "Tropical Hibiscus"
+      },
+      {
+        "emoji": "🪻",
+        "label": "Purple Hyacinth"
+      },
+      {
+        "emoji": "🪷",
+        "label": "White Lotus"
+      },
+      {
+        "emoji": "🌵",
+        "label": "Desert Saguaro Cactus"
+      }
+    ],
+    "question": "Which flower floated on the water pond?",
+    "options": [
+      "White Lotus",
+      "Crimson Rose",
+      "Giant Sunflower",
+      "Tropical Hibiscus"
+    ],
+    "correctAnswer": "White Lotus",
+    "explanation": "The White Lotus (🪷) bloomed in the aquatic center.",
+    "hint": "Sacred floating water flower.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which aquatic flower was present?",
+        "choices": [
+          "White Lotus",
+          "Crimson Rose",
+          "Giant Sunflower",
+          "Tropical Hibiscus"
+        ],
+        "answer": "White Lotus"
+      }
+    ]
+  },
+  {
+    "id": "mc-med-09",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Railway Terminal Board",
+    "description": "Memorize the transport options leaving the central terminal.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🚄",
+        "label": "Bullet Train (Track 1)"
+      },
+      {
+        "emoji": "🚇",
+        "label": "Metro Subway (Track 2)"
+      },
+      {
+        "emoji": "🚋",
+        "label": "City Tram (Track 3)"
+      },
+      {
+        "emoji": "🚌",
+        "label": "Express Bus (Bay 4)"
+      },
+      {
+        "emoji": "🚖",
+        "label": "Yellow Taxi (Stand 5)"
+      },
+      {
+        "emoji": "🚲",
+        "label": "Bicycle Share (Dock 6)"
+      }
+    ],
+    "question": "Which high-speed rail vehicle departed from Track 1?",
+    "options": [
+      "Bullet Train",
+      "City Tram",
+      "Metro Subway",
+      "Express Bus"
+    ],
+    "correctAnswer": "Bullet Train",
+    "explanation": "The high-speed bullet train (🚄) was assigned to Track 1.",
+    "hint": "Aerodynamic streamlined Japanese-style locomotive.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which train was at Track 1?",
+        "choices": [
+          "Bullet Train",
+          "City Tram",
+          "Metro Subway",
+          "Express Bus"
+        ],
+        "answer": "Bullet Train"
+      }
+    ]
+  },
+  {
+    "id": "mc-med-10",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Chef's Spice Rack",
+    "description": "Memorize the rare culinary spices on the chef's counter.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🫚",
+        "label": "Fresh Ginger Root"
+      },
+      {
+        "emoji": "🧄",
+        "label": "Garlic Clove"
+      },
+      {
+        "emoji": "🌶️",
+        "label": "Hot Red Chili"
+      },
+      {
+        "emoji": "🧅",
+        "label": "Sweet Onion"
+      },
+      {
+        "emoji": "🧂",
+        "label": "Himalayan Pink Salt"
+      },
+      {
+        "emoji": "🫒",
+        "label": "Cold Pressed Olive"
+      }
+    ],
+    "question": "What specialty mineral salt was on the spice rack?",
+    "options": [
+      "Himalayan Pink Salt",
+      "Sea Salt Flakes",
+      "Black Lava Salt",
+      "Iodized Salt"
+    ],
+    "correctAnswer": "Himalayan Pink Salt",
+    "explanation": "The shaker contained Himalayan Pink Salt (🧂).",
+    "hint": "Mountain-mined pink crystalline seasoning.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which specialty salt was on the rack?",
+        "choices": [
+          "Himalayan Pink Salt",
+          "Sea Salt Flakes",
+          "Black Lava Salt",
+          "Iodized Salt"
+        ],
+        "answer": "Himalayan Pink Salt"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-11",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Cyberpunk Deck Terminal",
+    "description": "Memorize the neon-lit hardware modules connected to the cyberdeck in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "💾",
+        "label": "Optical Data Chip"
+      },
+      {
+        "emoji": "🔌",
+        "label": "Fiber Interface Cable"
+      },
+      {
+        "emoji": "📟",
+        "label": "Encrypted Pager"
+      },
+      {
+        "emoji": "🔋",
+        "label": "Plasma Battery Pack"
+      },
+      {
+        "emoji": "🎧",
+        "label": "Audio Comm Headset"
+      },
+      {
+        "emoji": "🕶️",
+        "label": "HUD Cyber Visor"
+      }
+    ],
+    "question": "Which optical medium held the stolen network blueprints?",
+    "options": [
+      "Optical Data Chip",
+      "Thumb Drive",
+      "Magnetic Tape",
+      "Hologram Disc"
+    ],
+    "correctAnswer": "Optical Data Chip",
+    "explanation": "The Optical Data Chip (💾) glowed blue on the expansion rail.",
+    "hint": "Retro floppy-style data storage symbol.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which optical medium held the stolen network blueprints?",
+        "choices": [
+          "Optical Data Chip",
+          "Thumb Drive",
+          "Magnetic Tape",
+          "Hologram Disc"
+        ],
+        "answer": "Optical Data Chip"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-12",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Secret Agent Briefcase",
+    "description": "Study the classified operative tools concealed inside the briefcase in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "📷",
+        "label": "Micro Spy Camera"
+      },
+      {
+        "emoji": "🎙️",
+        "label": "Concealed Bug Transmitter"
+      },
+      {
+        "emoji": "🗺️",
+        "label": "Satellite Target Grid"
+      },
+      {
+        "emoji": "🗝️",
+        "label": "Skeleton Lockpick"
+      },
+      {
+        "emoji": "💉",
+        "label": "Antidote Syringe"
+      },
+      {
+        "emoji": "🛂",
+        "label": "Forged Diplomatic Passport"
+      }
+    ],
+    "question": "What audio surveillance tool was hidden beneath the lining?",
+    "options": [
+      "Concealed Bug Transmitter",
+      "Wiretap",
+      "Parabolic Mic",
+      "Sonar Beacon"
+    ],
+    "correctAnswer": "Concealed Bug Transmitter",
+    "explanation": "The Concealed Bug Transmitter (🎙️) relayed room chatter to the van.",
+    "hint": "Miniature microphone emblem.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What audio surveillance tool was hidden beneath the lining?",
+        "choices": [
+          "Concealed Bug Transmitter",
+          "Wiretap",
+          "Parabolic Mic",
+          "Sonar Beacon"
+        ],
+        "answer": "Concealed Bug Transmitter"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-13",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Pirate Flagship Locker",
+    "description": "Inspect the captain's loot and navigation gear in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🪙",
+        "label": "Gold Doubloon"
+      },
+      {
+        "emoji": "💎",
+        "label": "Blood Red Ruby"
+      },
+      {
+        "emoji": "🧭",
+        "label": "Pirate Pocket Compass"
+      },
+      {
+        "emoji": "📜",
+        "label": "Treasure Island Map"
+      },
+      {
+        "emoji": "🗡️",
+        "label": "Boarding Cutlass"
+      },
+      {
+        "emoji": "🦜",
+        "label": "Stuffed Green Macaw"
+      }
+    ],
+    "question": "Which brilliant red gemstone flashed inside the strongbox?",
+    "options": [
+      "Blood Red Ruby",
+      "Garnet",
+      "Carnelian",
+      "Topaz"
+    ],
+    "correctAnswer": "Blood Red Ruby",
+    "explanation": "A flawless Blood Red Ruby (💎) rested in the silk lining.",
+    "hint": "Vibrant crimson precious stone.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which brilliant red gemstone flashed inside the strongbox?",
+        "choices": [
+          "Blood Red Ruby",
+          "Garnet",
+          "Carnelian",
+          "Topaz"
+        ],
+        "answer": "Blood Red Ruby"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-14",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Ancient Pharaoh Tomb Antechamber",
+    "description": "Memorize the sacred relics preserved inside the stone tomb in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "⚱️",
+        "label": "Canopic Funerary Jar"
+      },
+      {
+        "emoji": "🪲",
+        "label": "Lapis Scarab Amulet"
+      },
+      {
+        "emoji": "👑",
+        "label": "Golden Nemes Headdress"
+      },
+      {
+        "emoji": "🪞",
+        "label": "Polished Bronze Mirror"
+      },
+      {
+        "emoji": "🪶",
+        "label": "Ma'at Justice Feather"
+      },
+      {
+        "emoji": "🏺",
+        "label": "Scented Myrrh Amphora"
+      }
+    ],
+    "question": "Which jeweled insect amulet symbolized immortality and protection?",
+    "options": [
+      "Lapis Scarab Amulet",
+      "Golden Locust",
+      "Scorpion Charm",
+      "Winged Beetle"
+    ],
+    "correctAnswer": "Lapis Scarab Amulet",
+    "explanation": "The Lapis Scarab Amulet (🪲) protected the heart seal.",
+    "hint": "Sacred Egyptian dung beetle.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which jeweled insect amulet symbolized immortality and protection?",
+        "choices": [
+          "Lapis Scarab Amulet",
+          "Golden Locust",
+          "Scorpion Charm",
+          "Winged Beetle"
+        ],
+        "answer": "Lapis Scarab Amulet"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-15",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Submarine Sonar Station",
+    "description": "Observe the deep sea navigation instruments in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🧭",
+        "label": "Gyro Compass"
+      },
+      {
+        "emoji": "📡",
+        "label": "Active Sonar Transceiver"
+      },
+      {
+        "emoji": "🎛️",
+        "label": "Hydrophone Dial"
+      },
+      {
+        "emoji": "🧲",
+        "label": "Degaussing Coil"
+      },
+      {
+        "emoji": "🔦",
+        "label": "Halogen Spotlight"
+      },
+      {
+        "emoji": "🤿",
+        "label": "Emergency Scuba Mask"
+      }
+    ],
+    "question": "Which acoustic transceiver pinged underwater hull reflections?",
+    "options": [
+      "Active Sonar Transceiver",
+      "Radar Dome",
+      "Lidar Scanner",
+      "Radio Antenna"
+    ],
+    "correctAnswer": "Active Sonar Transceiver",
+    "explanation": "The Active Sonar Transceiver (📡) broadcast 10 kHz pings.",
+    "hint": "Satellite dish / sonar sensor icon.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which acoustic transceiver pinged underwater hull reflections?",
+        "choices": [
+          "Active Sonar Transceiver",
+          "Radar Dome",
+          "Lidar Scanner",
+          "Radio Antenna"
+        ],
+        "answer": "Active Sonar Transceiver"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-16",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Knight Castle Armory",
+    "description": "Study the forged combat armor and weapons in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "⚔️",
+        "label": "Crossed Longswords"
+      },
+      {
+        "emoji": "🛡️",
+        "label": "Falcon Heraldic Shield"
+      },
+      {
+        "emoji": "🪖",
+        "label": "Steel Visored Helm"
+      },
+      {
+        "emoji": "🏹",
+        "label": "Yew Longbow"
+      },
+      {
+        "emoji": "🪓",
+        "label": "Heavy Battleaxe"
+      },
+      {
+        "emoji": "🎺",
+        "label": "Herald Battle Horn"
+      }
+    ],
+    "question": "Which avian predator was emblazoned upon the knight's shield?",
+    "options": [
+      "Falcon",
+      "Eagle",
+      "Raven",
+      "Hawk"
+    ],
+    "correctAnswer": "Falcon",
+    "explanation": "The Falcon Heraldic Shield (🛡️) bore the silver falcon of the northern marches.",
+    "hint": "Fast diving bird of prey.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which avian predator was emblazoned upon the knight's shield?",
+        "choices": [
+          "Falcon",
+          "Eagle",
+          "Raven",
+          "Hawk"
+        ],
+        "answer": "Falcon"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-17",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Mountaintop Astronomical Observatory",
+    "description": "Memorize the telemetry gear inside the revolving dome in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🔭",
+        "label": "Infrared Reflector Tube"
+      },
+      {
+        "emoji": "💻",
+        "label": "Spectrograph Console"
+      },
+      {
+        "emoji": "🌐",
+        "label": "Celestial Armillary Sphere"
+      },
+      {
+        "emoji": "📷",
+        "label": "CCD Star Camera"
+      },
+      {
+        "emoji": "⏱️",
+        "label": "Atomic Master Chronometer"
+      },
+      {
+        "emoji": "📊",
+        "label": "Radial Velocity Chart"
+      }
+    ],
+    "question": "What brass spherical model illustrated the cosmic coordinates?",
+    "options": [
+      "Celestial Armillary Sphere",
+      "Planetarium Globe",
+      "Orrery",
+      "Astrolabe"
+    ],
+    "correctAnswer": "Celestial Armillary Sphere",
+    "explanation": "The Celestial Armillary Sphere (🌐) modeled equatorial coordinates.",
+    "hint": "Rings forming a skeletal celestial sphere.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What brass spherical model illustrated the cosmic coordinates?",
+        "choices": [
+          "Celestial Armillary Sphere",
+          "Planetarium Globe",
+          "Orrery",
+          "Astrolabe"
+        ],
+        "answer": "Celestial Armillary Sphere"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-18",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Alchemist Potion Laboratory",
+    "description": "Study the glass vessels brewing mystical tinctures in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🧪",
+        "label": "Luminescent Elixir"
+      },
+      {
+        "emoji": "⚗️",
+        "label": "Copper Alembic"
+      },
+      {
+        "emoji": "🍄",
+        "label": "Bioluminescent Spore"
+      },
+      {
+        "emoji": "🫙",
+        "label": "Dragon Scale Specimen"
+      },
+      {
+        "emoji": "🕯️",
+        "label": "Everburning Candle"
+      },
+      {
+        "emoji": "📜",
+        "label": "Transmutation Manuscript"
+      }
+    ],
+    "question": "Which glowing glass phial held the shimmering liquid formula?",
+    "options": [
+      "Luminescent Elixir",
+      "Health Tonic",
+      "Acid Vial",
+      "Essence of Fire"
+    ],
+    "correctAnswer": "Luminescent Elixir",
+    "explanation": "The Luminescent Elixir (🧪) glowed with an eerie green radiance.",
+    "hint": "Glass test tube holding glowing liquid.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which glowing glass phial held the shimmering liquid formula?",
+        "choices": [
+          "Luminescent Elixir",
+          "Health Tonic",
+          "Acid Vial",
+          "Essence of Fire"
+        ],
+        "answer": "Luminescent Elixir"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-19",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Metropolitan Crime Scene Investigation",
+    "description": "Memorize the marked forensic evidence markers in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🔍",
+        "label": "Fingerprint Lens"
+      },
+      {
+        "emoji": "🏷️",
+        "label": "Ballistic Evidence Tag"
+      },
+      {
+        "emoji": "🧤",
+        "label": "Latex Barrier Gloves"
+      },
+      {
+        "emoji": "👞",
+        "label": "Muddy Shoe Impression"
+      },
+      {
+        "emoji": "📱",
+        "label": "Recovered Burner Phone"
+      },
+      {
+        "emoji": "🔦",
+        "label": "UV Bloodlight"
+      }
+    ],
+    "question": "Which communications device was recovered as critical evidence?",
+    "options": [
+      "Recovered Burner Phone",
+      "Walkie Talkie",
+      "Smart Watch",
+      "Pager"
+    ],
+    "correctAnswer": "Recovered Burner Phone",
+    "explanation": "The Recovered Burner Phone (📱) contained encrypted call logs.",
+    "hint": "Small cellular phone.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which communications device was recovered as critical evidence?",
+        "choices": [
+          "Recovered Burner Phone",
+          "Walkie Talkie",
+          "Smart Watch",
+          "Pager"
+        ],
+        "answer": "Recovered Burner Phone"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-20",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Hospital Crash Cart Mobile Rig",
+    "description": "Observe the emergency resuscitation medical modules in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "⚡",
+        "label": "Defibrillator Electrodes"
+      },
+      {
+        "emoji": "🫁",
+        "label": "Ventilator Bellows"
+      },
+      {
+        "emoji": "💉",
+        "label": "Epinephrine Syringe"
+      },
+      {
+        "emoji": "🩺",
+        "label": "Electronic Stethoscope"
+      },
+      {
+        "emoji": "🩹",
+        "label": "Compression Trauma Pad"
+      },
+      {
+        "emoji": "📋",
+        "label": "Vitals Chart Clipboard"
+      }
+    ],
+    "question": "Which electrical shock pads were charged for cardiac arrest?",
+    "options": [
+      "Defibrillator Electrodes",
+      "Pacemaker Leads",
+      "ECG Sensors",
+      "Tens Unit"
+    ],
+    "correctAnswer": "Defibrillator Electrodes",
+    "explanation": "The Defibrillator Electrodes (⚡) were pre-charged to 200 Joules.",
+    "hint": "Paddles delivering electric shock.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which electrical shock pads were charged for cardiac arrest?",
+        "choices": [
+          "Defibrillator Electrodes",
+          "Pacemaker Leads",
+          "ECG Sensors",
+          "Tens Unit"
+        ],
+        "answer": "Defibrillator Electrodes"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-21",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Air Traffic Control Flight Tower",
+    "description": "Memorize the airspace routing displays in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🖥️",
+        "label": "Primary Radar Screen"
+      },
+      {
+        "emoji": "✈️",
+        "label": "Supersonic Jet Blip"
+      },
+      {
+        "emoji": "🎙️",
+        "label": "Radio Dispatch Boom"
+      },
+      {
+        "emoji": "🗺️",
+        "label": "Runway Vector Chart"
+      },
+      {
+        "emoji": "🚨",
+        "label": "Weather Windshear Alert"
+      },
+      {
+        "emoji": "⏱️",
+        "label": "UTC Flight Chronograph"
+      }
+    ],
+    "question": "Which aircraft blip was tracked moving along vector 090?",
+    "options": [
+      "Supersonic Jet Blip",
+      "Cargo Airliner",
+      "Helicopter",
+      "Private Jet"
+    ],
+    "correctAnswer": "Supersonic Jet Blip",
+    "explanation": "The Supersonic Jet Blip (✈️) approached cruising at Mach 1.4.",
+    "hint": "Twin-engine passenger aircraft emblem.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which aircraft blip was tracked moving along vector 090?",
+        "choices": [
+          "Supersonic Jet Blip",
+          "Cargo Airliner",
+          "Helicopter",
+          "Private Jet"
+        ],
+        "answer": "Supersonic Jet Blip"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-22",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Autonomous Robotics Assembly Lab",
+    "description": "Study the automated machinery components in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🦾",
+        "label": "Titanium Robotic Arm"
+      },
+      {
+        "emoji": "🤖",
+        "label": "Bipedal Sentry Droid"
+      },
+      {
+        "emoji": "⚙️",
+        "label": "Harmonic Gearbox"
+      },
+      {
+        "emoji": "🔋",
+        "label": "Lithium Power Core"
+      },
+      {
+        "emoji": "💻",
+        "label": "Firmware Flasher"
+      },
+      {
+        "emoji": "🦿",
+        "label": "Articulated Bionic Leg"
+      }
+    ],
+    "question": "What robotic manipulator reached out with motorized precision?",
+    "options": [
+      "Titanium Robotic Arm",
+      "Hydraulic Gripper",
+      "Magnetic Hoist",
+      "Laser Welder"
+    ],
+    "correctAnswer": "Titanium Robotic Arm",
+    "explanation": "The Titanium Robotic Arm (🦾) was calibrated to 0.01mm tolerance.",
+    "hint": "Mechanical arm prosthesis / industrial arm.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What robotic manipulator reached out with motorized precision?",
+        "choices": [
+          "Titanium Robotic Arm",
+          "Hydraulic Gripper",
+          "Magnetic Hoist",
+          "Laser Welder"
+        ],
+        "answer": "Titanium Robotic Arm"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-23",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Grand Prix Formula Pit Lane",
+    "description": "Take note of the rapid tire-change tools in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🏎️",
+        "label": "Championship Racecar"
+      },
+      {
+        "emoji": "🛞",
+        "label": "Soft Compound Slick Tire"
+      },
+      {
+        "emoji": "🔧",
+        "label": "Pneumatic Wheel Gun"
+      },
+      {
+        "emoji": "⛽",
+        "label": "High-Flow Fuel Rig"
+      },
+      {
+        "emoji": "🏁",
+        "label": "Checkered Signal Flag"
+      },
+      {
+        "emoji": "🧯",
+        "label": "CO2 Fire Suppressor"
+      }
+    ],
+    "question": "Which pneumatic tool was used to secure the central wheel nut?",
+    "options": [
+      "Pneumatic Wheel Gun",
+      "Torque Wrench",
+      "Impact Drill",
+      "Jack Stand"
+    ],
+    "correctAnswer": "Pneumatic Wheel Gun",
+    "explanation": "The high-rpm Pneumatic Wheel Gun (🔧) loosened the lug in 0.8 seconds.",
+    "hint": "Air wrench icon.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which pneumatic tool was used to secure the central wheel nut?",
+        "choices": [
+          "Pneumatic Wheel Gun",
+          "Torque Wrench",
+          "Impact Drill",
+          "Jack Stand"
+        ],
+        "answer": "Pneumatic Wheel Gun"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-24",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Volcanology Monitoring Outpost",
+    "description": "Observe the seismic indicators near the active crater in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🌋",
+        "label": "Smoking Caldera"
+      },
+      {
+        "emoji": "📈",
+        "label": "Seismograph Drum Chart"
+      },
+      {
+        "emoji": "🌡️",
+        "label": "Infrared Pyrometer"
+      },
+      {
+        "emoji": "🪨",
+        "label": "Pumice Basalt Sample"
+      },
+      {
+        "emoji": "🥽",
+        "label": "Sulfur Gas Goggles"
+      },
+      {
+        "emoji": "🚁",
+        "label": "Evacuation Copter"
+      }
+    ],
+    "question": "What scientific chart tracked the magnitude of tremors under the crust?",
+    "options": [
+      "Seismograph Drum Chart",
+      "Tiltmeter Graph",
+      "Gas Spectrometer",
+      "Thermal Map"
+    ],
+    "correctAnswer": "Seismograph Drum Chart",
+    "explanation": "The Seismograph Drum Chart (📈) registered harmonic volcanic tremor.",
+    "hint": "Graph tracking seismic vibrations.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What scientific chart tracked the magnitude of tremors under the crust?",
+        "choices": [
+          "Seismograph Drum Chart",
+          "Tiltmeter Graph",
+          "Gas Spectrometer",
+          "Thermal Map"
+        ],
+        "answer": "Seismograph Drum Chart"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-25",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Deep Sea Trench Exploration Rig",
+    "description": "Memorize the abyssal sub components in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🫧",
+        "label": "Oxygen Scrubber Bubbles"
+      },
+      {
+        "emoji": "🔦",
+        "label": "Deep-Sea Xenon Beam"
+      },
+      {
+        "emoji": "🦑",
+        "label": "Colossal Squid"
+      },
+      {
+        "emoji": "🪨",
+        "label": "Manganese Nodule"
+      },
+      {
+        "emoji": "📹",
+        "label": "Pressure Hull 4K Camera"
+      },
+      {
+        "emoji": "🧲",
+        "label": "Sediment Sampler Claw"
+      }
+    ],
+    "question": "Which deep-sea cephalopod lurked just past the floodlights?",
+    "options": [
+      "Colossal Squid",
+      "Vampire Octopus",
+      "Anglerfish",
+      "Viperfish"
+    ],
+    "correctAnswer": "Colossal Squid",
+    "explanation": "The Colossal Squid (🦑) glided silently at 3,000 meters depth.",
+    "hint": "Ten-armed tentacled predator.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which deep-sea cephalopod lurked just past the floodlights?",
+        "choices": [
+          "Colossal Squid",
+          "Vampire Octopus",
+          "Anglerfish",
+          "Viperfish"
+        ],
+        "answer": "Colossal Squid"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-26",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Antarctic Expedition Snowcat",
+    "description": "Memorize the polar survival provisions in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "❄️",
+        "label": "Glacial Ice Core"
+      },
+      {
+        "emoji": "🧊",
+        "label": "Permafrost Drill"
+      },
+      {
+        "emoji": "🛷",
+        "label": "Kevlar Cargo Sled"
+      },
+      {
+        "emoji": "📻",
+        "label": "High-Frequency Radio"
+      },
+      {
+        "emoji": "🧤",
+        "label": "Fur Lined Mitts"
+      },
+      {
+        "emoji": "🪓",
+        "label": "Steel Ice Axe"
+      }
+    ],
+    "question": "What geological specimen was retrieved from 800 meters beneath the ice sheet?",
+    "options": [
+      "Glacial Ice Core",
+      "Fossil Stone",
+      "Frozen Amber",
+      "Meteorite Shard"
+    ],
+    "correctAnswer": "Glacial Ice Core",
+    "explanation": "The Glacial Ice Core (❄️) preserved atmospheric gas bubbles from 100,000 years ago.",
+    "hint": "Cylindrical sample of ancient ice.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What geological specimen was retrieved from 800 meters beneath the ice sheet?",
+        "choices": [
+          "Glacial Ice Core",
+          "Fossil Stone",
+          "Frozen Amber",
+          "Meteorite Shard"
+        ],
+        "answer": "Glacial Ice Core"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-27",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Old World Clockmaker Bench",
+    "description": "Study the horological precision gears in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🕰️",
+        "label": "Pendulum Wall Clock"
+      },
+      {
+        "emoji": "⚙️",
+        "label": "Jeweled Escapement Wheel"
+      },
+      {
+        "emoji": "🪛",
+        "label": "Watchmaker Screwdriver"
+      },
+      {
+        "emoji": "🔍",
+        "label": "Eyepiece Loupe"
+      },
+      {
+        "emoji": "⏳",
+        "label": "Brass Hourglass"
+      },
+      {
+        "emoji": "🛎️",
+        "label": "Hourly Chime Bell"
+      }
+    ],
+    "question": "Which critical toothed mechanism regulated the ticking movement?",
+    "options": [
+      "Jeweled Escapement Wheel",
+      "Balance Spring",
+      "Mainspring Barrel",
+      "Crown Gear"
+    ],
+    "correctAnswer": "Jeweled Escapement Wheel",
+    "explanation": "The Jeweled Escapement Wheel (⚙️) regulated energy release to the balance.",
+    "hint": "Interlocking brass gear icon.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which critical toothed mechanism regulated the ticking movement?",
+        "choices": [
+          "Jeweled Escapement Wheel",
+          "Balance Spring",
+          "Mainspring Barrel",
+          "Crown Gear"
+        ],
+        "answer": "Jeweled Escapement Wheel"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-28",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Cryptographic Cipher Center",
+    "description": "Inspect the mechanical code rotors in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🔐",
+        "label": "Rotary Rotor Lock"
+      },
+      {
+        "emoji": "⌨️",
+        "label": "Teletype Keyboard"
+      },
+      {
+        "emoji": "📜",
+        "label": "One-Time Pad Key"
+      },
+      {
+        "emoji": "💡",
+        "label": "Lampboard Alphabet"
+      },
+      {
+        "emoji": "🔌",
+        "label": "Plugboard Stecker Cable"
+      },
+      {
+        "emoji": "📻",
+        "label": "Intercept Receiver"
+      }
+    ],
+    "question": "Which component displayed illuminated letters when keys were struck?",
+    "options": [
+      "Lampboard Alphabet",
+      "Cathode Tube",
+      "Nixie Display",
+      "Ticker Tape"
+    ],
+    "correctAnswer": "Lampboard Alphabet",
+    "explanation": "The Lampboard Alphabet (💡) illuminated the substituted cipher letters.",
+    "hint": "Lightbulb indicator bank.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which component displayed illuminated letters when keys were struck?",
+        "choices": [
+          "Lampboard Alphabet",
+          "Cathode Tube",
+          "Nixie Display",
+          "Ticker Tape"
+        ],
+        "answer": "Lampboard Alphabet"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-29",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Desert Archaeological Dig",
+    "description": "Memorize the uncovered antiquities in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🏺",
+        "label": "Clay Wine Amphora"
+      },
+      {
+        "emoji": "🪙",
+        "label": "Bronze Roman Coin"
+      },
+      {
+        "emoji": "🗡️",
+        "label": "Corroded Bronze Dagger"
+      },
+      {
+        "emoji": "🦴",
+        "label": "Fossilized Femur"
+      },
+      {
+        "emoji": "🖌️",
+        "label": "Excavation Soft Brush"
+      },
+      {
+        "emoji": "📐",
+        "label": "Grid Reference Frame"
+      }
+    ],
+    "question": "Which skeletal relic was carefully dusted free of sandstone?",
+    "options": [
+      "Fossilized Femur",
+      "Skull Fragment",
+      "Saber Tooth",
+      "Rib Cage"
+    ],
+    "correctAnswer": "Fossilized Femur",
+    "explanation": "A Fossilized Femur (🦴) from the prehistoric era was logged in quadrant 3.",
+    "hint": "Bone specimen icon.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which skeletal relic was carefully dusted free of sandstone?",
+        "choices": [
+          "Fossilized Femur",
+          "Skull Fragment",
+          "Saber Tooth",
+          "Rib Cage"
+        ],
+        "answer": "Fossilized Femur"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-30",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "High Security Diamond Safe",
+    "description": "Study the laser grid and showcase contents in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "💎",
+        "label": "The Star of India Diamond"
+      },
+      {
+        "emoji": "🚨",
+        "label": "Infrared Motion Sensor"
+      },
+      {
+        "emoji": "🔒",
+        "label": "Titanium Vault Dial"
+      },
+      {
+        "emoji": "📹",
+        "label": "360 Dome Camera"
+      },
+      {
+        "emoji": "🧯",
+        "label": "Halon Fire Nozzle"
+      },
+      {
+        "emoji": "💳",
+        "label": "Biometric Swipe Card"
+      }
+    ],
+    "question": "What legendary gemstone was displayed on the central velvet pedestal?",
+    "options": [
+      "The Star of India Diamond",
+      "Hope Sapphire",
+      "Orlov Diamond",
+      "Koh-i-Noor"
+    ],
+    "correctAnswer": "The Star of India Diamond",
+    "explanation": "The Star of India Diamond (💎) was locked behind bullet-resistant quartz.",
+    "hint": "Massive sparkling cut jewel.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What legendary gemstone was displayed on the central velvet pedestal?",
+        "choices": [
+          "The Star of India Diamond",
+          "Hope Sapphire",
+          "Orlov Diamond",
+          "Koh-i-Noor"
+        ],
+        "answer": "The Star of India Diamond"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-31",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Tactical Drone Ground Control",
+    "description": "Memorize the telemetry links and drone status in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🛰️",
+        "label": "Uplink Transponder"
+      },
+      {
+        "emoji": "🕹️",
+        "label": "Dual Gimbal Joystick"
+      },
+      {
+        "emoji": "🛩️",
+        "label": "Recon Drone Drone 1"
+      },
+      {
+        "emoji": "🗺️",
+        "label": "Topographic Grid Map"
+      },
+      {
+        "emoji": "🔋",
+        "label": "Swappable Battery Cell"
+      },
+      {
+        "emoji": "📡",
+        "label": "Phased Array Antenna"
+      }
+    ],
+    "question": "What handheld controller guided the recon drone's flight path?",
+    "options": [
+      "Dual Gimbal Joystick",
+      "Trackball",
+      "Gamepad",
+      "Throttle Lever"
+    ],
+    "correctAnswer": "Dual Gimbal Joystick",
+    "explanation": "The Dual Gimbal Joystick (🕹️) controlled pitch and yaw.",
+    "hint": "Arcade-style control stick.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What handheld controller guided the recon drone's flight path?",
+        "choices": [
+          "Dual Gimbal Joystick",
+          "Trackball",
+          "Gamepad",
+          "Throttle Lever"
+        ],
+        "answer": "Dual Gimbal Joystick"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-32",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Space Habitat Hydroponic Bay",
+    "description": "Observe the zero-gravity orbital crops in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🥬",
+        "label": "Hydroponic Romaine"
+      },
+      {
+        "emoji": "🍅",
+        "label": "Bioengineered Tomato"
+      },
+      {
+        "emoji": "💧",
+        "label": "Nutrient Mister"
+      },
+      {
+        "emoji": "💡",
+        "label": "UV Grow Lamp"
+      },
+      {
+        "emoji": "🌡️",
+        "label": "Atmosphere Regulator"
+      },
+      {
+        "emoji": "🧪",
+        "label": "Ph Mineral Balance Vial"
+      }
+    ],
+    "question": "Which red bioengineered fruit was thriving in the nutrient mist?",
+    "options": [
+      "Bioengineered Tomato",
+      "Strawberries",
+      "Bell Pepper",
+      "Apple"
+    ],
+    "correctAnswer": "Bioengineered Tomato",
+    "explanation": "The Bioengineered Tomato (🍅) produced clusters in microgravity.",
+    "hint": "Classic round red salad staple.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which red bioengineered fruit was thriving in the nutrient mist?",
+        "choices": [
+          "Bioengineered Tomato",
+          "Strawberries",
+          "Bell Pepper",
+          "Apple"
+        ],
+        "answer": "Bioengineered Tomato"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-33",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Supercomputer Quantum Chill Bay",
+    "description": "Memorize the cryogenic quantum components in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "❄️",
+        "label": "Dilution Chandelier"
+      },
+      {
+        "emoji": "🧮",
+        "label": "512 Qubit Processor"
+      },
+      {
+        "emoji": "🔌",
+        "label": "Gold Coaxial Weave"
+      },
+      {
+        "emoji": "🌡️",
+        "label": "Millikelvin Thermometer"
+      },
+      {
+        "emoji": "💻",
+        "label": "Error Correction Cluster"
+      },
+      {
+        "emoji": "🛡️",
+        "label": "Mu-Metal Shielding"
+      }
+    ],
+    "question": "What processor chip executed the Shor factorization algorithms?",
+    "options": [
+      "512 Qubit Processor",
+      "Optic Core",
+      "Tensor Unit",
+      "Silicon Wafer"
+    ],
+    "correctAnswer": "512 Qubit Processor",
+    "explanation": "The 512 Qubit Processor (🧮) calculated entangled states at 15 mK.",
+    "hint": "Abacus symbol for quantum computing.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What processor chip executed the Shor factorization algorithms?",
+        "choices": [
+          "512 Qubit Processor",
+          "Optic Core",
+          "Tensor Unit",
+          "Silicon Wafer"
+        ],
+        "answer": "512 Qubit Processor"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-34",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Bullet Train Driver Cabin",
+    "description": "Take note of the high-speed transit controls in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🚄",
+        "label": "Shinkansen Train"
+      },
+      {
+        "emoji": "🕹️",
+        "label": "Master Throttle Handle"
+      },
+      {
+        "emoji": "📟",
+        "label": "ATC Speed Limiter"
+      },
+      {
+        "emoji": "📡",
+        "label": "Trackway Balise Sensor"
+      },
+      {
+        "emoji": "🚨",
+        "label": "Emergency Magnetic Brake"
+      },
+      {
+        "emoji": "📻",
+        "label": "Conductor Comm Link"
+      }
+    ],
+    "question": "What high-speed bullet train was barreling forward at 320 km/h?",
+    "options": [
+      "Shinkansen Train",
+      "Maglev Capsule",
+      "Express Metro",
+      "Steam Engine"
+    ],
+    "correctAnswer": "Shinkansen Train",
+    "explanation": "The sleek aerodynamic Shinkansen Train (🚄) traversed the coastal viaduct.",
+    "hint": "Modern pointed nose train icon.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What high-speed bullet train was barreling forward at 320 km/h?",
+        "choices": [
+          "Shinkansen Train",
+          "Maglev Capsule",
+          "Express Metro",
+          "Steam Engine"
+        ],
+        "answer": "Shinkansen Train"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-35",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "African Savanna Safari Outpost",
+    "description": "Observe the wildlife viewing equipment on the tower deck in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🦁",
+        "label": "Resting Lion Pride"
+      },
+      {
+        "emoji": "🐘",
+        "label": "Bull Elephant"
+      },
+      {
+        "emoji": "🦒",
+        "label": "Tall Giraffe"
+      },
+      {
+        "emoji": "🦓",
+        "label": "Zebra Herd"
+      },
+      {
+        "emoji": "🔭",
+        "label": "Spotting Scope"
+      },
+      {
+        "emoji": "📸",
+        "label": "Telephoto Camera"
+      }
+    ],
+    "question": "Which apex feline predator was surveyed through the binoculars?",
+    "options": [
+      "Resting Lion Pride",
+      "Cheetah",
+      "Leopard",
+      "Hyena"
+    ],
+    "correctAnswer": "Resting Lion Pride",
+    "explanation": "The Resting Lion Pride (🦁) basked under the shade of the acacia tree.",
+    "hint": "King of the jungle with a golden mane.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which apex feline predator was surveyed through the binoculars?",
+        "choices": [
+          "Resting Lion Pride",
+          "Cheetah",
+          "Leopard",
+          "Hyena"
+        ],
+        "answer": "Resting Lion Pride"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-36",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Himalayan Alpine Basecamp",
+    "description": "Memorize the high-altitude climbing equipment in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🏔️",
+        "label": "Everest Summit Peak"
+      },
+      {
+        "emoji": "⛺",
+        "label": "Dome Expedition Tent"
+      },
+      {
+        "emoji": "🫁",
+        "label": "Oxygen Cylinder Pack"
+      },
+      {
+        "emoji": "🥾",
+        "label": "Steel Crampon Boots"
+      },
+      {
+        "emoji": "🧗",
+        "label": "Climbing Carabiner"
+      },
+      {
+        "emoji": "🔥",
+        "label": "Pressurized Kerosene Stove"
+      }
+    ],
+    "question": "What gas canister enabled breathing in the death zone above 8,000 meters?",
+    "options": [
+      "Oxygen Cylinder Pack",
+      "Nitrogen Tank",
+      "Compressed Air",
+      "Helium Cannister"
+    ],
+    "correctAnswer": "Oxygen Cylinder Pack",
+    "explanation": "The Oxygen Cylinder Pack (🫁) delivered supplementary O2 on the ridge.",
+    "hint": "Lungs / respiratory equipment symbol.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What gas canister enabled breathing in the death zone above 8,000 meters?",
+        "choices": [
+          "Oxygen Cylinder Pack",
+          "Nitrogen Tank",
+          "Compressed Air",
+          "Helium Cannister"
+        ],
+        "answer": "Oxygen Cylinder Pack"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-37",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Supercarrier Flight Operations Deck",
+    "description": "Observe the jet launch catapults in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "⚓",
+        "label": "Carrier Anchor Winch"
+      },
+      {
+        "emoji": "🛩️",
+        "label": "Stealth Fighter Jet"
+      },
+      {
+        "emoji": "🪖",
+        "label": "Shooter Yellow Vest"
+      },
+      {
+        "emoji": "🪢",
+        "label": "Arresting Cable"
+      },
+      {
+        "emoji": "🚨",
+        "label": "Wave-Off Beacon"
+      },
+      {
+        "emoji": "⛽",
+        "label": "Jet-A Refueling Hose"
+      }
+    ],
+    "question": "What heavy steel cable snagged the tailhook to halt landing aircraft?",
+    "options": [
+      "Arresting Cable",
+      "Towing Hawser",
+      "Safety Net",
+      "Mooring Rope"
+    ],
+    "correctAnswer": "Arresting Cable",
+    "explanation": "The heavy Arresting Cable (🪢) absorbed 50 tons of aircraft kinetic energy.",
+    "hint": "High-tensile wire rope knot.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What heavy steel cable snagged the tailhook to halt landing aircraft?",
+        "choices": [
+          "Arresting Cable",
+          "Towing Hawser",
+          "Safety Net",
+          "Mooring Rope"
+        ],
+        "answer": "Arresting Cable"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-38",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Glowworm Subterranean Grotto",
+    "description": "Study the subterranean wonders inside the cave in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "🪨",
+        "label": "Calcite Stalactite"
+      },
+      {
+        "emoji": "💡",
+        "label": "Arachnocampa Bioluminescence"
+      },
+      {
+        "emoji": "🚣",
+        "label": "Underground River Canoe"
+      },
+      {
+        "emoji": "🦇",
+        "label": "Fruit Bat Cluster"
+      },
+      {
+        "emoji": "💧",
+        "label": "Mineral Water Pool"
+      },
+      {
+        "emoji": "🔦",
+        "label": "Caving Headlamp"
+      }
+    ],
+    "question": "Which nocturnal flying mammal hung suspended from the cave ceiling?",
+    "options": [
+      "Fruit Bat Cluster",
+      "Swallow",
+      "Owl",
+      "Flying Squirrel"
+    ],
+    "correctAnswer": "Fruit Bat Cluster",
+    "explanation": "A Fruit Bat Cluster (🦇) roosted above the subterranean river.",
+    "hint": "Winged nocturnal mammal.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which nocturnal flying mammal hung suspended from the cave ceiling?",
+        "choices": [
+          "Fruit Bat Cluster",
+          "Swallow",
+          "Owl",
+          "Flying Squirrel"
+        ],
+        "answer": "Fruit Bat Cluster"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-39",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Royal Imperial Regalia Treasury",
+    "description": "Memorize the monarch's coronation artifacts in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "👑",
+        "label": "Imperial State Crown"
+      },
+      {
+        "emoji": "🪄",
+        "label": "Sovereign Scepter with Cross"
+      },
+      {
+        "emoji": "🌐",
+        "label": "Golden Globus Cruciger"
+      },
+      {
+        "emoji": "🗡️",
+        "label": "Jeweled Sword of Offering"
+      },
+      {
+        "emoji": "💍",
+        "label": "Coronation Ring"
+      },
+      {
+        "emoji": "📜",
+        "label": "Ancient Parchment Oath"
+      }
+    ],
+    "question": "Which gold rod topped with a cross symbolized imperial authority?",
+    "options": [
+      "Sovereign Scepter with Cross",
+      "Mace",
+      "Staff",
+      "Crosier"
+    ],
+    "correctAnswer": "Sovereign Scepter with Cross",
+    "explanation": "The Sovereign Scepter with Cross (🪄) was borne in the right hand.",
+    "hint": "Wand / rod of royalty.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which gold rod topped with a cross symbolized imperial authority?",
+        "choices": [
+          "Sovereign Scepter with Cross",
+          "Mace",
+          "Staff",
+          "Crosier"
+        ],
+        "answer": "Sovereign Scepter with Cross"
+      }
+    ]
+  },
+  {
+    "id": "mc-medi-40",
+    "gameType": "memory-challenge",
+    "difficulty": "medium",
+    "title": "Level 4 Biohazard Cleanroom",
+    "description": "Study the viral containment barriers in 6 seconds.",
+    "revealTime": 6,
+    "items": [
+      {
+        "emoji": "☣️",
+        "label": "Biohazard Warning Trefoil"
+      },
+      {
+        "emoji": "🥽",
+        "label": "Pressurized Positive Suit"
+      },
+      {
+        "emoji": "🧫",
+        "label": "Petri Culture Dish"
+      },
+      {
+        "emoji": "🔬",
+        "label": "Confocal Electron Scope"
+      },
+      {
+        "emoji": "🚪",
+        "label": "Airtight Airlock Seal"
+      },
+      {
+        "emoji": "🚿",
+        "label": "Chemical Decon Shower"
+      }
+    ],
+    "question": "Which culture vessel contained growing microorganism colonies?",
+    "options": [
+      "Petri Culture Dish",
+      "Test Tube",
+      "Flask",
+      "Beaker"
+    ],
+    "correctAnswer": "Petri Culture Dish",
+    "explanation": "The Petri Culture Dish (🧫) nurtured isolated bacterial strains.",
+    "hint": "Circular glass culture plate.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which culture vessel contained growing microorganism colonies?",
+        "choices": [
+          "Petri Culture Dish",
+          "Test Tube",
+          "Flask",
+          "Beaker"
+        ],
+        "answer": "Petri Culture Dish"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-01",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Museum Crime Scene",
+    "description": "Scan the 9 objects in the heist room in under 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🖼️",
+        "label": "Mona Lisa Frame (Cut)"
+      },
+      {
+        "emoji": "🔦",
+        "label": "Dropped Tactical Flashlight"
+      },
+      {
+        "emoji": "🪜",
+        "label": "Rope Ladder"
+      },
+      {
+        "emoji": "🧤",
+        "label": "Right Black Glove"
+      },
+      {
+        "emoji": "💎",
+        "label": "Blue Diamond Shard"
+      },
+      {
+        "emoji": "🩸",
+        "label": "Blood Drop on Glass"
+      },
+      {
+        "emoji": "👞",
+        "label": "Muddy Shoe Print #42"
+      },
+      {
+        "emoji": "🪪",
+        "label": "Forged Staff Security Badge"
+      },
+      {
+        "emoji": "🗝️",
+        "label": "Bent Skeleton Key"
+      }
+    ],
+    "question": "Which hand did the dropped glove belong to?",
+    "options": [
+      "Right Hand",
+      "Left Hand",
+      "Pair of Gloves",
+      "Fingerless Mitt"
+    ],
+    "correctAnswer": "Right Hand",
+    "explanation": "The evidence log explicitly noted a 'Right Black Glove' (🧤).",
+    "hint": "Recall the specific handedness of the glove.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which glove was dropped?",
+        "choices": [
+          "Right Hand",
+          "Left Hand",
+          "Pair of Gloves",
+          "Fingerless Mitt"
+        ],
+        "answer": "Right Hand"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-02",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Quantum Reactor Matrix",
+    "description": "Memorize the 9 subsystem modules before blackout in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "⚡",
+        "label": "Plasma Conduit Alpha (800 MW)"
+      },
+      {
+        "emoji": "🔋",
+        "label": "Lithium Ion Core"
+      },
+      {
+        "emoji": "⚙️",
+        "label": "Magnetic Turbine 3"
+      },
+      {
+        "emoji": "🧲",
+        "label": "Cryo Containment Field"
+      },
+      {
+        "emoji": "☢️",
+        "label": "Uranium Rod Cluster 7"
+      },
+      {
+        "emoji": "🖥️",
+        "label": "Main AI Terminal"
+      },
+      {
+        "emoji": "📟",
+        "label": "Emergency Coolant Valve"
+      },
+      {
+        "emoji": "🚨",
+        "label": "Overheat Warning Siren"
+      },
+      {
+        "emoji": "🎛️",
+        "label": "Flux Frequency Modulator"
+      }
+    ],
+    "question": "What number was assigned to the Uranium Rod Cluster?",
+    "options": [
+      "Cluster 7",
+      "Cluster 3",
+      "Cluster 5",
+      "Cluster 9"
+    ],
+    "correctAnswer": "Cluster 7",
+    "explanation": "The radioactive core was labeled 'Uranium Rod Cluster 7' (☢️).",
+    "hint": "Think of the lucky prime number attached to the uranium rods.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What cluster number was the Uranium Rod?",
+        "choices": [
+          "Cluster 7",
+          "Cluster 3",
+          "Cluster 5",
+          "Cluster 9"
+        ],
+        "answer": "Cluster 7"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-03",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Forensic Toxicology Tray",
+    "description": "Scan the 9 chemical vials and biological samples in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🧪",
+        "label": "Arsenic Trioxide (Vial A)"
+      },
+      {
+        "emoji": "💉",
+        "label": "Insulin Syringe 50mg"
+      },
+      {
+        "emoji": "🧬",
+        "label": "DNA Strands Sequence B"
+      },
+      {
+        "emoji": "🧫",
+        "label": "Anthrax Culture Dish"
+      },
+      {
+        "emoji": "💊",
+        "label": "Cyanide Capsule Red"
+      },
+      {
+        "emoji": "🔬",
+        "label": "Microscope Slide 104"
+      },
+      {
+        "emoji": "🩸",
+        "label": "AB-Negative Blood Vial"
+      },
+      {
+        "emoji": "🧴",
+        "label": "Chloroform Solvent"
+      },
+      {
+        "emoji": "📦",
+        "label": "Sealed Hazmat Container"
+      }
+    ],
+    "question": "What rare blood type was labeled on the blood vial?",
+    "options": [
+      "AB-Negative",
+      "O-Positive",
+      "A-Positive",
+      "B-Negative"
+    ],
+    "correctAnswer": "AB-Negative",
+    "explanation": "The blood vial was typed as AB-Negative (🩸), the rarest blood type.",
+    "hint": "Universal recipient plasma type with negative Rh factor.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What blood type was on the vial?",
+        "choices": [
+          "AB-Negative",
+          "O-Positive",
+          "A-Positive",
+          "B-Negative"
+        ],
+        "answer": "AB-Negative"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-04",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Secret Society Council",
+    "description": "Memorize the 9 relics on the ritual table in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🕯️",
+        "label": "Black Wax Candle"
+      },
+      {
+        "emoji": "📜",
+        "label": "Parchment of the 13th Oath"
+      },
+      {
+        "emoji": "🗡️",
+        "label": "Obsidian Dagger"
+      },
+      {
+        "emoji": "💀",
+        "label": "Carved Crystal Skull"
+      },
+      {
+        "emoji": "⚖️",
+        "label": "Brass Scale of Ma'at"
+      },
+      {
+        "emoji": "🗝️",
+        "label": "Seven-Notch Key"
+      },
+      {
+        "emoji": "🪙",
+        "label": "Roman Denarius Coin"
+      },
+      {
+        "emoji": "🪶",
+        "label": "Falcon Quill Pen"
+      },
+      {
+        "emoji": "⏳",
+        "label": "Black Sand Hourglass"
+      }
+    ],
+    "question": "What material was the ritual dagger crafted from?",
+    "options": [
+      "Obsidian",
+      "Damascus Steel",
+      "Silver",
+      "Meteorite Iron"
+    ],
+    "correctAnswer": "Obsidian",
+    "explanation": "The dagger was listed as an Obsidian Dagger (🗡️).",
+    "hint": "Volcanic black glass blade.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What material was the dagger?",
+        "choices": [
+          "Obsidian",
+          "Damascus Steel",
+          "Silver",
+          "Meteorite Iron"
+        ],
+        "answer": "Obsidian"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-05",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Cyber Security SOC Dashboard",
+    "description": "Scan the 9 threat vectors alerted on the SOC grid in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "👾",
+        "label": "Trojan.Agent.Win64"
+      },
+      {
+        "emoji": "🖧",
+        "label": "SYN Flood Port 443"
+      },
+      {
+        "emoji": "🔒",
+        "label": "Ransomware CryptLock"
+      },
+      {
+        "emoji": "🐛",
+        "label": "Zero-Day Memory Leak"
+      },
+      {
+        "emoji": "🕵️",
+        "label": "Man-in-the-Middle Proxy"
+      },
+      {
+        "emoji": "💣",
+        "label": "SQL Injection on Auth"
+      },
+      {
+        "emoji": "🛡️",
+        "label": "Firewall Node 8"
+      },
+      {
+        "emoji": "📡",
+        "label": "Exfiltration Beacon at 4 AM"
+      },
+      {
+        "emoji": "🔑",
+        "label": "SSH Key Brute Force"
+      }
+    ],
+    "question": "Which port was targeted by the SYN Flood attack?",
+    "options": [
+      "Port 443 (HTTPS)",
+      "Port 80 (HTTP)",
+      "Port 22 (SSH)",
+      "Port 8080 (Proxy)"
+    ],
+    "correctAnswer": "Port 443 (HTTPS)",
+    "explanation": "The network alert specified SYN Flood targeting Port 443 (🖧).",
+    "hint": "Standard encrypted web port.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which port was targeted by the SYN Flood?",
+        "choices": [
+          "Port 443 (HTTPS)",
+          "Port 80 (HTTP)",
+          "Port 22 (SSH)",
+          "Port 8080 (Proxy)"
+        ],
+        "answer": "Port 443 (HTTPS)"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-06",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Diplomatic Treaty Room",
+    "description": "Memorize the 9 official tokens and credentials on the summit table in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🖋️",
+        "label": "Gold Fountain Pen"
+      },
+      {
+        "emoji": "📜",
+        "label": "Signed Geneva Accord"
+      },
+      {
+        "emoji": "🏛️",
+        "label": "Seal of the High Court"
+      },
+      {
+        "emoji": "💼",
+        "label": "Leather Diplomatic Pouch"
+      },
+      {
+        "emoji": "🎖️",
+        "label": "Medal of Grand Cross"
+      },
+      {
+        "emoji": "🌐",
+        "label": "UN Charter Volume 4"
+      },
+      {
+        "emoji": "🚩",
+        "label": "Tri-Color Silk Flag"
+      },
+      {
+        "emoji": "🕰️",
+        "label": "Swiss Chronometer 12:00"
+      },
+      {
+        "emoji": "🔏",
+        "label": "Wax Seal Stamp 'Veritas'"
+      }
+    ],
+    "question": "What Latin word was inscribed on the wax seal stamp?",
+    "options": [
+      "Veritas",
+      "Justitia",
+      "Pax",
+      "Libertas"
+    ],
+    "correctAnswer": "Veritas",
+    "explanation": "The wax stamp was engraved with the Latin word 'Veritas' (Truth).",
+    "hint": "Latin word for Truth.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What word was on the wax stamp?",
+        "choices": [
+          "Veritas",
+          "Justitia",
+          "Pax",
+          "Libertas"
+        ],
+        "answer": "Veritas"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-07",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Archaeologist Dig Site",
+    "description": "Scan the 9 uncovered artifacts from the Pharaoh's tomb in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "⚱️",
+        "label": "Canopic Jar of Hapi"
+      },
+      {
+        "emoji": "🪲",
+        "label": "Lapis Scarab Amulet"
+      },
+      {
+        "emoji": "👑",
+        "label": "Golden Nemes Headdress"
+      },
+      {
+        "emoji": "📜",
+        "label": "Book of the Dead Papyrus"
+      },
+      {
+        "emoji": "🏺",
+        "label": "Alabaster Perfume Flask"
+      },
+      {
+        "emoji": "🗡️",
+        "label": "Meteoritic Iron Khopesh"
+      },
+      {
+        "emoji": "🪞",
+        "label": "Polished Bronze Mirror"
+      },
+      {
+        "emoji": "💍",
+        "label": "Cartouche Ring of Tutankhamun"
+      },
+      {
+        "emoji": "🪙",
+        "label": "Gold Stater Coin"
+      }
+    ],
+    "question": "What stone was the sacred scarab amulet carved from?",
+    "options": [
+      "Lapis Lazuli",
+      "Turquoise",
+      "Carnelian",
+      "Jade"
+    ],
+    "correctAnswer": "Lapis Lazuli",
+    "explanation": "The amulet was noted as 'Lapis Scarab Amulet' (🪲).",
+    "hint": "Deep celestial blue gemstone prized in ancient Egypt.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What stone was the scarab amulet?",
+        "choices": [
+          "Lapis Lazuli",
+          "Turquoise",
+          "Carnelian",
+          "Jade"
+        ],
+        "answer": "Lapis Lazuli"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-08",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Air Traffic Control Radar",
+    "description": "Memorize the 9 flight vectors in the airspace sector in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "✈️",
+        "label": "Flight BA-204 (Altitude 32,000 ft)"
+      },
+      {
+        "emoji": "🛩️",
+        "label": "Cessna Skyhawk (Heading 180)"
+      },
+      {
+        "emoji": "🚁",
+        "label": "MedEvac Chopper (Pad 3)"
+      },
+      {
+        "emoji": "🛫",
+        "label": "Cargo Jet (Heavy 747)"
+      },
+      {
+        "emoji": "🛬",
+        "label": "Airbus A350 (On Final ILS)"
+      },
+      {
+        "emoji": "📡",
+        "label": "Doppler Weather Station"
+      },
+      {
+        "emoji": "🛰️",
+        "label": "GPS Constellation 12"
+      },
+      {
+        "emoji": "🗼",
+        "label": "Tower Beacon 118.7 MHz"
+      },
+      {
+        "emoji": "🌪️",
+        "label": "Wind Shear Alert North"
+      }
+    ],
+    "question": "What was the radio frequency of the Control Tower Beacon?",
+    "options": [
+      "118.7 MHz",
+      "121.5 MHz",
+      "135.2 MHz",
+      "108.0 MHz"
+    ],
+    "correctAnswer": "118.7 MHz",
+    "explanation": "The Tower Beacon was operating on frequency 118.7 MHz (🗼).",
+    "hint": "Look at the MHz frequency listed on the tower.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What was the tower radio frequency?",
+        "choices": [
+          "118.7 MHz",
+          "121.5 MHz",
+          "135.2 MHz",
+          "108.0 MHz"
+        ],
+        "answer": "118.7 MHz"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-09",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Deep Sea Trench Expedition",
+    "description": "Scan the 9 abyssal specimens collected at 10,000 meters in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🦐",
+        "label": "Hydrothermal Vent Shrimp"
+      },
+      {
+        "emoji": "🐟",
+        "label": "Bioluminescent Anglerfish"
+      },
+      {
+        "emoji": "🦑",
+        "label": "Colossal Squid Tentacle"
+      },
+      {
+        "emoji": "🦀",
+        "label": "Yeti Crab (White Bristles)"
+      },
+      {
+        "emoji": "🪸",
+        "label": "Black Coral Branch"
+      },
+      {
+        "emoji": "🫧",
+        "label": "Methane Hydrate Bubble"
+      },
+      {
+        "emoji": "🪨",
+        "label": "Manganese Nodule Grade A"
+      },
+      {
+        "emoji": "🌋",
+        "label": "Black Smoker Chimney Vent"
+      },
+      {
+        "emoji": "🦠",
+        "label": "Chemoautotrophic Bacteria"
+      }
+    ],
+    "question": "What distinct physical feature did the Yeti Crab have?",
+    "options": [
+      "White Bristles",
+      "Blue Claws",
+      "Giant Eyes",
+      "Spotted Shell"
+    ],
+    "correctAnswer": "White Bristles",
+    "explanation": "The Yeti Crab (🦀) was catalogued with 'White Bristles'.",
+    "hint": "Hair-like filaments on its arms.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What feature did the Yeti Crab have?",
+        "choices": [
+          "White Bristles",
+          "Blue Claws",
+          "Giant Eyes",
+          "Spotted Shell"
+        ],
+        "answer": "White Bristles"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-10",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Formula 1 Pitstop Telemetry",
+    "description": "Memorize the 9 sensor parameters of the race car in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🏎️",
+        "label": "Car #44 (Chassis F1-W15)"
+      },
+      {
+        "emoji": "🛞",
+        "label": "Soft Red Compound Tyres (100°C)"
+      },
+      {
+        "emoji": "⛽",
+        "label": "Fuel Load 42.5 kg"
+      },
+      {
+        "emoji": "⏱️",
+        "label": "Pit Stop Target 2.1s"
+      },
+      {
+        "emoji": "🌡️",
+        "label": "Brake Temp 850°C"
+      },
+      {
+        "emoji": "🏁",
+        "label": "P1 Lead (+4.8s)"
+      },
+      {
+        "emoji": "🛠️",
+        "label": "Front Wing Flap +1.5 Deg"
+      },
+      {
+        "emoji": "📻",
+        "label": "Radio Channel 9 'Box Box'"
+      },
+      {
+        "emoji": "📊",
+        "label": "ERS Battery 92%"
+      }
+    ],
+    "question": "What tyre compound was fitted during the pitstop?",
+    "options": [
+      "Soft Red Compound",
+      "Hard White Compound",
+      "Medium Yellow Compound",
+      "Wet Green Compound"
+    ],
+    "correctAnswer": "Soft Red Compound",
+    "explanation": "The vehicle was fitted with Soft Red Compound Tyres (🛞) at 100°C.",
+    "hint": "The red-striped tyre compound.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What tyre compound was fitted?",
+        "choices": [
+          "Soft Red Compound",
+          "Hard White Compound",
+          "Medium Yellow Compound",
+          "Wet Green Compound"
+        ],
+        "answer": "Soft Red Compound"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-11",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Orbital Defense Battle Platform",
+    "description": "Scan the orbital railgun fire control telemetry in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🛰️",
+        "label": "Orbital Targeting Array"
+      },
+      {
+        "emoji": "⚡",
+        "label": "Electromagnetic Railgun"
+      },
+      {
+        "emoji": "🔋",
+        "label": "Capacitor Bank 9"
+      },
+      {
+        "emoji": "🚀",
+        "label": "Tungsten Kinetic Slug"
+      },
+      {
+        "emoji": "🛡️",
+        "label": "Point-Defense Laser"
+      },
+      {
+        "emoji": "📡",
+        "label": "Hyperwave Comms Array"
+      }
+    ],
+    "question": "What dense metal projectile was loaded into the electromagnetic railgun?",
+    "options": [
+      "Tungsten Kinetic Slug",
+      "Depleted Uranium Dart",
+      "Titanium Shell",
+      "Lead Slug"
+    ],
+    "correctAnswer": "Tungsten Kinetic Slug",
+    "explanation": "The Tungsten Kinetic Slug (🚀) accelerated at 30 km/s.",
+    "hint": "Heavy refractory metal bullet.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What dense metal projectile was loaded into the electromagnetic railgun?",
+        "choices": [
+          "Tungsten Kinetic Slug",
+          "Depleted Uranium Dart",
+          "Titanium Shell",
+          "Lead Slug"
+        ],
+        "answer": "Tungsten Kinetic Slug"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-12",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Tokamak Magnetic Fusion Core",
+    "description": "Analyze the 100-million degree plasma containment telemetry in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "⚛️",
+        "label": "Deuterium-Tritium Fuel"
+      },
+      {
+        "emoji": "🧲",
+        "label": "Toroidal Field Magnet"
+      },
+      {
+        "emoji": "🔥",
+        "label": "Confined Plasma Arc"
+      },
+      {
+        "emoji": "🛡️",
+        "label": "Beryllium Divertor Tile"
+      },
+      {
+        "emoji": "💻",
+        "label": "MHD Stabilization Loop"
+      },
+      {
+        "emoji": "❄️",
+        "label": "Liquid Helium Cryostat"
+      }
+    ],
+    "question": "Which light element isotopes fueled the core nuclear reaction?",
+    "options": [
+      "Deuterium-Tritium Fuel",
+      "Helium-3",
+      "Boron-11",
+      "Lithium Hydride"
+    ],
+    "correctAnswer": "Deuterium-Tritium Fuel",
+    "explanation": "Deuterium and Tritium (⚛️) fused to release 14.1 MeV neutrons.",
+    "hint": "Heavy isotopes of hydrogen.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which light element isotopes fueled the core nuclear reaction?",
+        "choices": [
+          "Deuterium-Tritium Fuel",
+          "Helium-3",
+          "Boron-11",
+          "Lithium Hydride"
+        ],
+        "answer": "Deuterium-Tritium Fuel"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-13",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Molecular Nanotech Synthesizer",
+    "description": "Study the atomic-scale carbon lattice assembly in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🔬",
+        "label": "Scanning Probe Tip"
+      },
+      {
+        "emoji": "💎",
+        "label": "Diamondoid Nanoribbon"
+      },
+      {
+        "emoji": "🧬",
+        "label": "DNA Origami Scaffold"
+      },
+      {
+        "emoji": "⚙️",
+        "label": "Molecular Molecular Gear"
+      },
+      {
+        "emoji": "🧪",
+        "label": "Fullerene C60 Solution"
+      },
+      {
+        "emoji": "💻",
+        "label": "Atomic Position Controller"
+      }
+    ],
+    "question": "Which spherical carbon cage molecule was suspended in solution?",
+    "options": [
+      "Fullerene C60 Solution",
+      "Graphene Sheet",
+      "Carbon Nanotube",
+      "Amorphous Carbon"
+    ],
+    "correctAnswer": "Fullerene C60 Solution",
+    "explanation": "The Fullerene C60 Buckyball (🧪) solution was injected into the vapor chamber.",
+    "hint": "Soccer-ball shaped carbon cluster.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which spherical carbon cage molecule was suspended in solution?",
+        "choices": [
+          "Fullerene C60 Solution",
+          "Graphene Sheet",
+          "Carbon Nanotube",
+          "Amorphous Carbon"
+        ],
+        "answer": "Fullerene C60 Solution"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-14",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Stealth Interceptor 6th-Gen Cockpit",
+    "description": "Memorize the multi-spectrum radar displays in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🛩️",
+        "label": "Ghostwing Interceptor"
+      },
+      {
+        "emoji": "🕶️",
+        "label": "Retinal Projection Helmet"
+      },
+      {
+        "emoji": "🎮",
+        "label": "Side-Stick Fly-By-Light"
+      },
+      {
+        "emoji": "📡",
+        "label": "Active AESA Radar"
+      },
+      {
+        "emoji": "🚨",
+        "label": "Laser Warning Receiver"
+      },
+      {
+        "emoji": "🚀",
+        "label": "Internal Bay Ramjet"
+      }
+    ],
+    "question": "What advanced helmet beamed flight data straight into the pilot's eyes?",
+    "options": [
+      "Retinal Projection Helmet",
+      "HUD Glass",
+      "Night Vision Visor",
+      "Binocular Monocle"
+    ],
+    "correctAnswer": "Retinal Projection Helmet",
+    "explanation": "The Retinal Projection Helmet (🕶️) projected 360-degree sensor fusion imagery.",
+    "hint": "Cybernetic optics visor.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What advanced helmet beamed flight data straight into the pilot's eyes?",
+        "choices": [
+          "Retinal Projection Helmet",
+          "HUD Glass",
+          "Night Vision Visor",
+          "Binocular Monocle"
+        ],
+        "answer": "Retinal Projection Helmet"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-15",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Hadron Supercollider Detector Hub",
+    "description": "Inspect the particle collision telemetry in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🌀",
+        "label": "Proton Collision Vertex"
+      },
+      {
+        "emoji": "🧲",
+        "label": "Superconducting Solenoid"
+      },
+      {
+        "emoji": "📊",
+        "label": "Muon Chamber Spectrometer"
+      },
+      {
+        "emoji": "💡",
+        "label": "Liquid Argon Calorimeter"
+      },
+      {
+        "emoji": "💻",
+        "label": "Petabyte Buffer Farm"
+      },
+      {
+        "emoji": "⚛️",
+        "label": "Higgs Boson Signature"
+      }
+    ],
+    "question": "Which subatomic signature decaying into two photons was flagged?",
+    "options": [
+      "Higgs Boson Signature",
+      "Top Quark",
+      "Tau Lepton",
+      "Z Boson"
+    ],
+    "correctAnswer": "Higgs Boson Signature",
+    "explanation": "The Higgs Boson Signature (⚛️) was reconstructed at 125.1 GeV.",
+    "hint": "The famous 'God Particle'.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which subatomic signature decaying into two photons was flagged?",
+        "choices": [
+          "Higgs Boson Signature",
+          "Top Quark",
+          "Tau Lepton",
+          "Z Boson"
+        ],
+        "answer": "Higgs Boson Signature"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-16",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Earth Crust Ultra-Deep Drill Site",
+    "description": "Study the mantle penetration sensors in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🪨",
+        "label": "Mantle Peridotite Core"
+      },
+      {
+        "emoji": "🔩",
+        "label": "Diamond Impregnated Bit"
+      },
+      {
+        "emoji": "🌡️",
+        "label": "Deep Borehole Thermocouple"
+      },
+      {
+        "emoji": "🛢️",
+        "label": "Synthetic Drilling Mud"
+      },
+      {
+        "emoji": "📈",
+        "label": "Lithological Sonic Log"
+      },
+      {
+        "emoji": "⚙️",
+        "label": "Hydraulic Top Drive"
+      }
+    ],
+    "question": "What ultra-hard industrial abrasive tipped the deep drilling tool?",
+    "options": [
+      "Diamond Impregnated Bit",
+      "Tungsten Carbide",
+      "Titanium Nitride",
+      "Silicon Carbide"
+    ],
+    "correctAnswer": "Diamond Impregnated Bit",
+    "explanation": "The Diamond Impregnated Bit (🔩) penetrated dense basalt at 12 km depth.",
+    "hint": "Hardest known natural mineral.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What ultra-hard industrial abrasive tipped the deep drilling tool?",
+        "choices": [
+          "Diamond Impregnated Bit",
+          "Tungsten Carbide",
+          "Titanium Nitride",
+          "Silicon Carbide"
+        ],
+        "answer": "Diamond Impregnated Bit"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-17",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Global Cyber Command SOC Center",
+    "description": "Scan the nation-state cyber warfare monitors in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🛡️",
+        "label": "Air-Gapped Firewall"
+      },
+      {
+        "emoji": "💻",
+        "label": "Zero-Day Exploit Payload"
+      },
+      {
+        "emoji": "🚨",
+        "label": "DDoS Mitigation Shunt"
+      },
+      {
+        "emoji": "🗺️",
+        "label": "Global Threat Heatmap"
+      },
+      {
+        "emoji": "🔐",
+        "label": "Quantum Key Distribution"
+      },
+      {
+        "emoji": "💾",
+        "label": "Hardened Backup Vault"
+      }
+    ],
+    "question": "What cryptography protocol leveraged photon states to guarantee privacy?",
+    "options": [
+      "Quantum Key Distribution",
+      "RSA 4096",
+      "AES 256",
+      "Elliptic Curve"
+    ],
+    "correctAnswer": "Quantum Key Distribution",
+    "explanation": "Quantum Key Distribution (🔐) encrypted critical satellite relays.",
+    "hint": "Unbreakable quantum physics encryption.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What cryptography protocol leveraged photon states to guarantee privacy?",
+        "choices": [
+          "Quantum Key Distribution",
+          "RSA 4096",
+          "AES 256",
+          "Elliptic Curve"
+        ],
+        "answer": "Quantum Key Distribution"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-18",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Ancient Mayan High Pyramid Chamber",
+    "description": "Analyze the jade offerings and codex glyphs in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "👑",
+        "label": "Jade Mosaic Death Mask"
+      },
+      {
+        "emoji": "📜",
+        "label": "Dresden Venus Codex"
+      },
+      {
+        "emoji": "🗡️",
+        "label": "Obsidian Sacrificial Blade"
+      },
+      {
+        "emoji": "🏺",
+        "label": "Incense Copal Urn"
+      },
+      {
+        "emoji": "🐆",
+        "label": "Polished Jaguar Effigy"
+      },
+      {
+        "emoji": "🪙",
+        "label": "Quetzal Feather Plaque"
+      }
+    ],
+    "question": "What volcanic glass mineral was knapped to razor sharpness?",
+    "options": [
+      "Obsidian Sacrificial Blade",
+      "Flint",
+      "Chert",
+      "Basalt"
+    ],
+    "correctAnswer": "Obsidian Sacrificial Blade",
+    "explanation": "The Obsidian Sacrificial Blade (🗡️) had an edge thinner than steel.",
+    "hint": "Glossy black volcanic glass.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What volcanic glass mineral was knapped to razor sharpness?",
+        "choices": [
+          "Obsidian Sacrificial Blade",
+          "Flint",
+          "Chert",
+          "Basalt"
+        ],
+        "answer": "Obsidian Sacrificial Blade"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-19",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Crispr Gene Editing Bio-Sequencer",
+    "description": "Examine the synthetic nucleotide chains in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🧬",
+        "label": "Dual-Strand Synthetic DNA"
+      },
+      {
+        "emoji": "✂️",
+        "label": "Cas9 Endonuclease Enzyme"
+      },
+      {
+        "emoji": "🧫",
+        "label": "Target Gene Plasmid"
+      },
+      {
+        "emoji": "🔬",
+        "label": "Fluorescence Scanner"
+      },
+      {
+        "emoji": "🧪",
+        "label": "Buffer Reagent Ph 7.4"
+      },
+      {
+        "emoji": "💻",
+        "label": "Bioinformatics Pipeline"
+      }
+    ],
+    "question": "Which molecular scissors enzyme clipped the targeted nucleotide sequence?",
+    "options": [
+      "Cas9 Endonuclease Enzyme",
+      "RNA Polymerase",
+      "DNA Ligase",
+      "Amylase"
+    ],
+    "correctAnswer": "Cas9 Endonuclease Enzyme",
+    "explanation": "The Cas9 Endonuclease Enzyme (✂️) made a precise double-stranded break.",
+    "hint": "Key enzyme of the CRISPR-Cas9 system.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which molecular scissors enzyme clipped the targeted nucleotide sequence?",
+        "choices": [
+          "Cas9 Endonuclease Enzyme",
+          "RNA Polymerase",
+          "DNA Ligase",
+          "Amylase"
+        ],
+        "answer": "Cas9 Endonuclease Enzyme"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-20",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Deep Space Voyager Probe Bus",
+    "description": "Scan the interstellar probe instruments in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "📡",
+        "label": "3.7m High-Gain Dish"
+      },
+      {
+        "emoji": "📀",
+        "label": "Gold Plated Phonograph Record"
+      },
+      {
+        "emoji": "🔋",
+        "label": "Plutonium RTG Generator"
+      },
+      {
+        "emoji": "🧲",
+        "label": "Magnetometer Boom"
+      },
+      {
+        "emoji": "📸",
+        "label": "Narrow Angle Cosmic Camera"
+      },
+      {
+        "emoji": "🌌",
+        "label": "Heliopause Boundary Sensor"
+      }
+    ],
+    "question": "What golden cultural record was bolted to the spacecraft's side?",
+    "options": [
+      "Gold Plated Phonograph Record",
+      "Golden Plaque",
+      "Memory Capsule",
+      "Holo Disc"
+    ],
+    "correctAnswer": "Gold Plated Phonograph Record",
+    "explanation": "The Gold Plated Phonograph Record (📀) carried greetings from Earth into deep space.",
+    "hint": "Golden phonograph disc with instructions.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What golden cultural record was bolted to the spacecraft's side?",
+        "choices": [
+          "Gold Plated Phonograph Record",
+          "Golden Plaque",
+          "Memory Capsule",
+          "Holo Disc"
+        ],
+        "answer": "Gold Plated Phonograph Record"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-21",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Neutrino IceCube Detector Station",
+    "description": "Study the optical sensor telemetry in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🧊",
+        "label": "2.5km Antarctic Borehole"
+      },
+      {
+        "emoji": "💡",
+        "label": "Digital Optical Module"
+      },
+      {
+        "emoji": "⚡",
+        "label": "Cherenkov Blue Radiation Flash"
+      },
+      {
+        "emoji": "📡",
+        "label": "South Pole Fiber Relay"
+      },
+      {
+        "emoji": "📊",
+        "label": "Muon Track Reconstruction"
+      },
+      {
+        "emoji": "⚛️",
+        "label": "Astrophysical Tau Neutrino"
+      }
+    ],
+    "question": "What characteristic blue light flashed when particles exceeded the speed of light in ice?",
+    "options": [
+      "Cherenkov Blue Radiation Flash",
+      "Bioluminescence",
+      "Aurora Light",
+      "Scintillation Pulse"
+    ],
+    "correctAnswer": "Cherenkov Blue Radiation Flash",
+    "explanation": "Cherenkov Blue Radiation Flash (⚡) revealed high-energy particle tracks.",
+    "hint": "Eerie blue glow in nuclear reactors and particle detectors.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What characteristic blue light flashed when particles exceeded the speed of light in ice?",
+        "choices": [
+          "Cherenkov Blue Radiation Flash",
+          "Bioluminescence",
+          "Aurora Light",
+          "Scintillation Pulse"
+        ],
+        "answer": "Cherenkov Blue Radiation Flash"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-22",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Event Horizon Ergosphere Probe",
+    "description": "Memorize the extreme relativistic parameters in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🕳️",
+        "label": "Kerr Rotating Black Hole"
+      },
+      {
+        "emoji": "🌌",
+        "label": "Accretion Disk Doppler Shift"
+      },
+      {
+        "emoji": "⏱️",
+        "label": "Gravitational Time Dilation Gauge"
+      },
+      {
+        "emoji": "🛡️",
+        "label": "Tachyon Dissipation Shield"
+      },
+      {
+        "emoji": "🚀",
+        "label": "Penrose Energy Tap"
+      },
+      {
+        "emoji": "📡",
+        "label": "Graviton Transceiver"
+      }
+    ],
+    "question": "What gravitational vortex curved spacetime into an inescapable singularity?",
+    "options": [
+      "Kerr Rotating Black Hole",
+      "Neutron Star",
+      "White Dwarf",
+      "Quasar Jet"
+    ],
+    "correctAnswer": "Kerr Rotating Black Hole",
+    "explanation": "The Kerr Rotating Black Hole (🕳️) dragged inertial frames within its ergosphere.",
+    "hint": "Dark void with immense gravitational pull.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What gravitational vortex curved spacetime into an inescapable singularity?",
+        "choices": [
+          "Kerr Rotating Black Hole",
+          "Neutron Star",
+          "White Dwarf",
+          "Quasar Jet"
+        ],
+        "answer": "Kerr Rotating Black Hole"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-23",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Martian Subsurface Ice Drill",
+    "description": "Observe the planetary surface exploration modules in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🤖",
+        "label": "Six-Wheeled Rover Chassis"
+      },
+      {
+        "emoji": "🔩",
+        "label": "Pneumatic Permafrost Core Drill"
+      },
+      {
+        "emoji": "🧪",
+        "label": "Raman Mineral Spectrometer"
+      },
+      {
+        "emoji": "☀️",
+        "label": "High-Efficiency Solar Wings"
+      },
+      {
+        "emoji": "📡",
+        "label": "X-Band Direct-to-Earth Antenna"
+      },
+      {
+        "emoji": "🪨",
+        "label": "Hematite Blueberry Sphere"
+      }
+    ],
+    "question": "Which miniature spherical mineral concretions were discovered in the sediment?",
+    "options": [
+      "Hematite Blueberry Sphere",
+      "Basalt Pebble",
+      "Silica Bead",
+      "Quartz Crystal"
+    ],
+    "correctAnswer": "Hematite Blueberry Sphere",
+    "explanation": "The Hematite Blueberry Sphere (🪨) indicated ancient liquid groundwater.",
+    "hint": "Famous spherical Martian mineral beads.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which miniature spherical mineral concretions were discovered in the sediment?",
+        "choices": [
+          "Hematite Blueberry Sphere",
+          "Basalt Pebble",
+          "Silica Bead",
+          "Quartz Crystal"
+        ],
+        "answer": "Hematite Blueberry Sphere"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-24",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Sub-Zero Cryostasis Pod",
+    "description": "Memorize the astronaut life support indicators in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🧊",
+        "label": "Vitrification Cryo Chamber"
+      },
+      {
+        "emoji": "🫀",
+        "label": "Induced Hypothermia Monitor"
+      },
+      {
+        "emoji": "💉",
+        "label": "Anti-Freeze Cryoprotectant"
+      },
+      {
+        "emoji": "💻",
+        "label": "Biostasis Neural Monitor"
+      },
+      {
+        "emoji": "⚡",
+        "label": "Capacitive Rewarming Coil"
+      },
+      {
+        "emoji": "🛡️",
+        "label": "Lead Radiation Baffling"
+      }
+    ],
+    "question": "What bio-chemical solution prevented ice crystals from shredding cellular membranes?",
+    "options": [
+      "Anti-Freeze Cryoprotectant",
+      "Saline Solution",
+      "Glycerin Gel",
+      "Plasma Expander"
+    ],
+    "correctAnswer": "Anti-Freeze Cryoprotectant",
+    "explanation": "The Anti-Freeze Cryoprotectant (💉) enabled glass-like vitrification without crystal damage.",
+    "hint": "Medical fluid preventing ice damage.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What bio-chemical solution prevented ice crystals from shredding cellular membranes?",
+        "choices": [
+          "Anti-Freeze Cryoprotectant",
+          "Saline Solution",
+          "Glycerin Gel",
+          "Plasma Expander"
+        ],
+        "answer": "Anti-Freeze Cryoprotectant"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-25",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Vatican Secret Underground Archive",
+    "description": "Study the centuries-old codices in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "📜",
+        "label": "Papal Bull of Excommunication"
+      },
+      {
+        "emoji": "🗝️",
+        "label": "St. Peter Bronze Key"
+      },
+      {
+        "emoji": "🕯️",
+        "label": "Beeswax Seal Stamp"
+      },
+      {
+        "emoji": "📖",
+        "label": "Galileo Trial Transcript"
+      },
+      {
+        "emoji": "👑",
+        "label": "Crusader Patriarch Cross"
+      },
+      {
+        "emoji": "🪞",
+        "label": "Illuminated Magnifying Lens"
+      }
+    ],
+    "question": "Which historical heresy proceeding manuscript was cataloged in the drawer?",
+    "options": [
+      "Galileo Trial Transcript",
+      "Da Vinci Diary",
+      "Templar Charter",
+      "Magna Carta"
+    ],
+    "correctAnswer": "Galileo Trial Transcript",
+    "explanation": "The handwritten Galileo Trial Transcript (📖) was filed under Section 4.",
+    "hint": "Trial of the famed Italian astronomer.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which historical heresy proceeding manuscript was cataloged in the drawer?",
+        "choices": [
+          "Galileo Trial Transcript",
+          "Da Vinci Diary",
+          "Templar Charter",
+          "Magna Carta"
+        ],
+        "answer": "Galileo Trial Transcript"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-26",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Wall Street High-Frequency Node",
+    "description": "Memorize the microsecond trade telemetry in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "💻",
+        "label": "FPGA Direct-Execution Board"
+      },
+      {
+        "emoji": "🔌",
+        "label": "Dark Fiber Laser Transceiver"
+      },
+      {
+        "emoji": "⏱️",
+        "label": "Rubidium Atomic Timestamp"
+      },
+      {
+        "emoji": "📊",
+        "label": "Level 3 Order Book Stream"
+      },
+      {
+        "emoji": "📈",
+        "label": "Arbitrage Spread Calculator"
+      },
+      {
+        "emoji": "🚨",
+        "label": "Circuit Breaker Killswitch"
+      }
+    ],
+    "question": "What atomic timing standard synchronized transaction timestamps to 10 nanoseconds?",
+    "options": [
+      "Rubidium Atomic Timestamp",
+      "Quartz Clock",
+      "GPS Signal",
+      "NTP Server"
+    ],
+    "correctAnswer": "Rubidium Atomic Timestamp",
+    "explanation": "The Rubidium Atomic Timestamp (⏱️) provided legal regulatory compliance.",
+    "hint": "Element 37 atomic clock.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What atomic timing standard synchronized transaction timestamps to 10 nanoseconds?",
+        "choices": [
+          "Rubidium Atomic Timestamp",
+          "Quartz Clock",
+          "GPS Signal",
+          "NTP Server"
+        ],
+        "answer": "Rubidium Atomic Timestamp"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-27",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Mars Atmospheric Terraform Complex",
+    "description": "Scan the climate modification reactor status in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🏭",
+        "label": "Fluorocarbon Gas Generator"
+      },
+      {
+        "emoji": "🧊",
+        "label": "Dry Ice Polar Cap Sublimator"
+      },
+      {
+        "emoji": "🪞",
+        "label": "Orbital Mirror Solar Reflector"
+      },
+      {
+        "emoji": "🌱",
+        "label": "Genetically Modified Lichen"
+      },
+      {
+        "emoji": "🌡️",
+        "label": "Planetary Barometer"
+      },
+      {
+        "emoji": "💨",
+        "label": "Atmospheric Density Gauge"
+      }
+    ],
+    "question": "What reflective mega-structure redirected extra sunlight toward the Martian south pole?",
+    "options": [
+      "Orbital Mirror Solar Reflector",
+      "Solar Sail",
+      "Dyson Ring",
+      "Laser Emitter"
+    ],
+    "correctAnswer": "Orbital Mirror Solar Reflector",
+    "explanation": "The 100km Orbital Mirror Solar Reflector (🪞) vaporized frozen CO2.",
+    "hint": "Gigantic mirror orbiting in space.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What reflective mega-structure redirected extra sunlight toward the Martian south pole?",
+        "choices": [
+          "Orbital Mirror Solar Reflector",
+          "Solar Sail",
+          "Dyson Ring",
+          "Laser Emitter"
+        ],
+        "answer": "Orbital Mirror Solar Reflector"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-28",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Challenger Deep Ultra-Submarine Cockpit",
+    "description": "Examine the 11,000-meter depth gauges in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🌊",
+        "label": "1,100 Atmosphere Pressure Dial"
+      },
+      {
+        "emoji": "🔮",
+        "label": "Acrylic Spherical Viewport"
+      },
+      {
+        "emoji": "🧲",
+        "label": "Syntactic Foam Buoyancy Pod"
+      },
+      {
+        "emoji": "🎙️",
+        "label": "Underwater Acoustic Comm"
+      },
+      {
+        "emoji": "💡",
+        "label": "High-Flux LED Lightbar"
+      },
+      {
+        "emoji": "🧭",
+        "label": "Inertial Dead-Reckoning Nav"
+      }
+    ],
+    "question": "What transparent spherical capsule gave the pilot panoramic sightlines?",
+    "options": [
+      "Acrylic Spherical Viewport",
+      "Sapphire Lens",
+      "Quartz Window",
+      "Titanium Slit"
+    ],
+    "correctAnswer": "Acrylic Spherical Viewport",
+    "explanation": "The 7-inch thick Acrylic Spherical Viewport (🔮) resisted crushing ocean pressure.",
+    "hint": "Curved crystal-clear polymer bubble.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What transparent spherical capsule gave the pilot panoramic sightlines?",
+        "choices": [
+          "Acrylic Spherical Viewport",
+          "Sapphire Lens",
+          "Quartz Window",
+          "Titanium Slit"
+        ],
+        "answer": "Acrylic Spherical Viewport"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-29",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Lunar South Pole Base Artemis",
+    "description": "Memorize the permanently shadowed crater telemetry in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🌕",
+        "label": "Shackleton Crater Rim"
+      },
+      {
+        "emoji": "🧊",
+        "label": "Water Ice Regolith Extractor"
+      },
+      {
+        "emoji": "⚡",
+        "label": "Kilopower Fission Reactor"
+      },
+      {
+        "emoji": "🚜",
+        "label": "Autonomous Lunar Bulldozer"
+      },
+      {
+        "emoji": "🏠",
+        "label": "Inflatable Habitation Module"
+      },
+      {
+        "emoji": "📡",
+        "label": "Lagrange Relay Dish"
+      }
+    ],
+    "question": "What small fission power plant supplied continuous 10 kW electrical power?",
+    "options": [
+      "Kilopower Fission Reactor",
+      "Radioisotope Pack",
+      "Fuel Cell",
+      "Solar Tower"
+    ],
+    "correctAnswer": "Kilopower Fission Reactor",
+    "explanation": "The Kilopower Fission Reactor (⚡) operated through the 14-day lunar night.",
+    "hint": "Nuclear fission energy system.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What small fission power plant supplied continuous 10 kW electrical power?",
+        "choices": [
+          "Kilopower Fission Reactor",
+          "Radioisotope Pack",
+          "Fuel Cell",
+          "Solar Tower"
+        ],
+        "answer": "Kilopower Fission Reactor"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-30",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Laser Sails Interstellar Fleet Bay",
+    "description": "Observe the relativistic lightsail bay in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "⛵",
+        "label": "Graphene Micro-Sail"
+      },
+      {
+        "emoji": "💡",
+        "label": "100-Gigawatt Beamer Phased Array"
+      },
+      {
+        "emoji": "🛰️",
+        "label": "StarChip Gram Probe"
+      },
+      {
+        "emoji": "📸",
+        "label": "Multispectral Flyby Sensor"
+      },
+      {
+        "emoji": "📡",
+        "label": "Optical Laser Downlink"
+      },
+      {
+        "emoji": "🪐",
+        "label": "Proxima Centauri b Target"
+      }
+    ],
+    "question": "Which microscopic 1-gram wafer carried the camera and power circuits?",
+    "options": [
+      "StarChip Gram Probe",
+      "Nano CubeSat",
+      "Silicon Pill",
+      "Photonic Chip"
+    ],
+    "correctAnswer": "StarChip Gram Probe",
+    "explanation": "The StarChip Gram Probe (🛰️) accelerated to 20% the speed of light.",
+    "hint": "Gram-scale micro-spacecraft.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which microscopic 1-gram wafer carried the camera and power circuits?",
+        "choices": [
+          "StarChip Gram Probe",
+          "Nano CubeSat",
+          "Silicon Pill",
+          "Photonic Chip"
+        ],
+        "answer": "StarChip Gram Probe"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-31",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Supercomputer Neural Network Foundry",
+    "description": "Scan the trillion-parameter AI weights architecture in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🧠",
+        "label": "Transformer Neural Graph"
+      },
+      {
+        "emoji": "💻",
+        "label": "Wafer-Scale AI Engine"
+      },
+      {
+        "emoji": "🌊",
+        "label": "Immersion Liquid Coolant"
+      },
+      {
+        "emoji": "📊",
+        "label": "Loss Convergence Plot"
+      },
+      {
+        "emoji": "🔌",
+        "label": "400Gbps InfiniBand Switch"
+      },
+      {
+        "emoji": "💾",
+        "label": "Checkpoint Shard Array"
+      }
+    ],
+    "question": "What chart confirmed mathematical convergence during the training run?",
+    "options": [
+      "Loss Convergence Plot",
+      "ROC Curve",
+      "Scatter Matrix",
+      "Heatmap"
+    ],
+    "correctAnswer": "Loss Convergence Plot",
+    "explanation": "The Loss Convergence Plot (📊) trended downwards with zero gradient explosion.",
+    "hint": "Statistical training loss diagram.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What chart confirmed mathematical convergence during the training run?",
+        "choices": [
+          "Loss Convergence Plot",
+          "ROC Curve",
+          "Scatter Matrix",
+          "Heatmap"
+        ],
+        "answer": "Loss Convergence Plot"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-32",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Pulsar Spacecraft Navigational Beacon",
+    "description": "Study the millisecond cosmic timing pulses in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "⭐",
+        "label": "Millisecond Radio Pulsar"
+      },
+      {
+        "emoji": "⏱️",
+        "label": "X-Ray Timing Telescope"
+      },
+      {
+        "emoji": "🧭",
+        "label": "Triangulated Spatial Fix"
+      },
+      {
+        "emoji": "💻",
+        "label": "Relativistic Ephemeris Code"
+      },
+      {
+        "emoji": "📡",
+        "label": "Wideband Horn Receiver"
+      },
+      {
+        "emoji": "🛰️",
+        "label": "Autonomous Deep Nav Unit"
+      }
+    ],
+    "question": "Which spinning neutron star acted as an infallible galactic GPS lighthouse?",
+    "options": [
+      "Millisecond Radio Pulsar",
+      "Magnetar",
+      "Quasar",
+      "White Dwarf"
+    ],
+    "correctAnswer": "Millisecond Radio Pulsar",
+    "explanation": "The Millisecond Radio Pulsar (⭐) rotated with clock-like precision every 1.5 ms.",
+    "hint": "Ultra-fast spinning collapsed star.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which spinning neutron star acted as an infallible galactic GPS lighthouse?",
+        "choices": [
+          "Millisecond Radio Pulsar",
+          "Magnetar",
+          "Quasar",
+          "White Dwarf"
+        ],
+        "answer": "Millisecond Radio Pulsar"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-33",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "LIGO Laser Interferometer Arm",
+    "description": "Memorize the gravitational wave detection optics in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "💡",
+        "label": "Stabilized Infrared Laser"
+      },
+      {
+        "emoji": "🪞",
+        "label": "40kg Fused Silica Test Mirror"
+      },
+      {
+        "emoji": "📏",
+        "label": "4-Kilometer Vacuum Beam Tube"
+      },
+      {
+        "emoji": "🌊",
+        "label": "Spacetime Strain Ripple"
+      },
+      {
+        "emoji": "🧲",
+        "label": "Quadruple Pendulum Isolator"
+      },
+      {
+        "emoji": "💻",
+        "label": "Matched Filter Waveform"
+      }
+    ],
+    "question": "What ultra-pure glass mirror hung suspended to bounce the laser arms?",
+    "options": [
+      "40kg Fused Silica Test Mirror",
+      "Beryllium Reflector",
+      "Gold Mirror",
+      "Quartz Prism"
+    ],
+    "correctAnswer": "40kg Fused Silica Test Mirror",
+    "explanation": "The 40kg Fused Silica Test Mirror (🪞) moved less than 1/10,000th the width of a proton.",
+    "hint": "Heavy suspended optic mirror.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What ultra-pure glass mirror hung suspended to bounce the laser arms?",
+        "choices": [
+          "40kg Fused Silica Test Mirror",
+          "Beryllium Reflector",
+          "Gold Mirror",
+          "Quartz Prism"
+        ],
+        "answer": "40kg Fused Silica Test Mirror"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-34",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Cryogenic Dark Matter Trap Core",
+    "description": "Analyze the WIMP recoil detector telemetry in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🧪",
+        "label": "Liquid Xenon Target Chamber"
+      },
+      {
+        "emoji": "⚡",
+        "label": "Dual-Phase Ionization Grid"
+      },
+      {
+        "emoji": "💡",
+        "label": "Photomultiplier Tube Ring"
+      },
+      {
+        "emoji": "🛡️",
+        "label": "Water Cherenkov Shield"
+      },
+      {
+        "emoji": "📈",
+        "label": "S1/S2 Scintillation Ratio"
+      },
+      {
+        "emoji": "⚛️",
+        "label": "Candidate WIMP Event"
+      }
+    ],
+    "question": "What noble liquid element provided the dense atomic target for invisible matter?",
+    "options": [
+      "Liquid Xenon Target Chamber",
+      "Liquid Argon",
+      "Liquid Helium",
+      "Liquid Neon"
+    ],
+    "correctAnswer": "Liquid Xenon Target Chamber",
+    "explanation": "Ultra-pure Liquid Xenon (🧪) filled the central 5-ton cryostat.",
+    "hint": "Heavy noble gas element.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What noble liquid element provided the dense atomic target for invisible matter?",
+        "choices": [
+          "Liquid Xenon Target Chamber",
+          "Liquid Argon",
+          "Liquid Helium",
+          "Liquid Neon"
+        ],
+        "answer": "Liquid Xenon Target Chamber"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-35",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Hyperloop Low-Pressure Transit Tube",
+    "description": "Scan the 1,000 km/h maglev pod systems in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🚆",
+        "label": "Aerodynamic Passenger Pod"
+      },
+      {
+        "emoji": "🌀",
+        "label": "Axial Compressor Fan"
+      },
+      {
+        "emoji": "🧲",
+        "label": "Linear Induction Motor"
+      },
+      {
+        "emoji": "💨",
+        "label": "0.001 Atm Evacuated Tube"
+      },
+      {
+        "emoji": "🔋",
+        "label": "Regenerative Skid Brake"
+      },
+      {
+        "emoji": "📡",
+        "label": "Continuous Trackway Wi-Fi"
+      }
+    ],
+    "question": "What front compressor mechanism diverted residual air beneath the chassis?",
+    "options": [
+      "Axial Compressor Fan",
+      "Turbocharger",
+      "Ram Air Scoop",
+      "Exhaust Turbine"
+    ],
+    "correctAnswer": "Axial Compressor Fan",
+    "explanation": "The Axial Compressor Fan (🌀) relieved Kantrowitz aerodynamic limit pressure.",
+    "hint": "High-speed multi-blade fan.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What front compressor mechanism diverted residual air beneath the chassis?",
+        "choices": [
+          "Axial Compressor Fan",
+          "Turbocharger",
+          "Ram Air Scoop",
+          "Exhaust Turbine"
+        ],
+        "answer": "Axial Compressor Fan"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-36",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Sub-Orbital Drop Capsule Bay",
+    "description": "Memorize the planetary atmospheric reentry gear in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🚀",
+        "label": "Ablative Heatshield Cone"
+      },
+      {
+        "emoji": "🪂",
+        "label": "Supersonic Drogue Parachute"
+      },
+      {
+        "emoji": "⚡",
+        "label": "Retro-Rocket Thruster"
+      },
+      {
+        "emoji": "🛋️",
+        "label": "Molded Shock Absorb Couch"
+      },
+      {
+        "emoji": "📻",
+        "label": "Plasma Blackout Comm Transceiver"
+      },
+      {
+        "emoji": "🧯",
+        "label": "Impact Crush Structure"
+      }
+    ],
+    "question": "What thermal barrier burned away to protect occupants from 2,000°C reentry heat?",
+    "options": [
+      "Ablative Heatshield Cone",
+      "Ceramic Tile",
+      "Titanium Skin",
+      "Gold Foil"
+    ],
+    "correctAnswer": "Ablative Heatshield Cone",
+    "explanation": "The Ablative Heatshield Cone (🚀) peeled away in a glowing plasma sheath.",
+    "hint": "Sacrificial thermal shield.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What thermal barrier burned away to protect occupants from 2,000°C reentry heat?",
+        "choices": [
+          "Ablative Heatshield Cone",
+          "Ceramic Tile",
+          "Titanium Skin",
+          "Gold Foil"
+        ],
+        "answer": "Ablative Heatshield Cone"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-37",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Quantum Entanglement Router Gateway",
+    "description": "Observe the quantum teleportation repeater nodes in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "⚛️",
+        "label": "Spontaneous Parametric Down-Converter"
+      },
+      {
+        "emoji": "💡",
+        "label": "Entangled Photon Pair"
+      },
+      {
+        "emoji": "🪞",
+        "label": "Polarizing Beam Splitter"
+      },
+      {
+        "emoji": "💻",
+        "label": "Bell-State Measurement Unit"
+      },
+      {
+        "emoji": "🔌",
+        "label": "Single-Photon Avalanche Diode"
+      },
+      {
+        "emoji": "🛡️",
+        "label": "E91 Quantum Key Validator"
+      }
+    ],
+    "question": "What crystal setup generated pairs of entangled photons?",
+    "options": [
+      "Spontaneous Parametric Down-Converter",
+      "Ruby Laser",
+      "Prism",
+      "LED Array"
+    ],
+    "correctAnswer": "Spontaneous Parametric Down-Converter",
+    "explanation": "The Down-Converter crystal (⚛️) split pump photons into entangled daughter pairs.",
+    "hint": "Non-linear optical crystal converter.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What crystal setup generated pairs of entangled photons?",
+        "choices": [
+          "Spontaneous Parametric Down-Converter",
+          "Ruby Laser",
+          "Prism",
+          "LED Array"
+        ],
+        "answer": "Spontaneous Parametric Down-Converter"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-38",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "James Webb Deep Field Instrument Bay",
+    "description": "Study the infrared telescope sensors in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🪞",
+        "label": "18 Gold Beryllium Hexagons"
+      },
+      {
+        "emoji": "🛡️",
+        "label": "5-Layer Kapton Sunshield"
+      },
+      {
+        "emoji": "📸",
+        "label": "NIRCam Infrared Detector"
+      },
+      {
+        "emoji": "❄️",
+        "label": "MIRI Cryocooler Loop"
+      },
+      {
+        "emoji": "📡",
+        "label": "Ka-Band High-Gain Feed"
+      },
+      {
+        "emoji": "🌌",
+        "label": "First Light Galaxy Cluster"
+      }
+    ],
+    "question": "What lightweight metal coated in gold comprised the 18 segmented primary mirrors?",
+    "options": [
+      "18 Gold Beryllium Hexagons",
+      "Aluminum Alloy",
+      "Titanium Core",
+      "Fused Quartz"
+    ],
+    "correctAnswer": "18 Gold Beryllium Hexagons",
+    "explanation": "The 18 Gold Beryllium Hexagons (🪞) unfold into a 6.5-meter mirror aperture.",
+    "hint": "Hexagonal gold mirrors on JWST.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What lightweight metal coated in gold comprised the 18 segmented primary mirrors?",
+        "choices": [
+          "18 Gold Beryllium Hexagons",
+          "Aluminum Alloy",
+          "Titanium Core",
+          "Fused Quartz"
+        ],
+        "answer": "18 Gold Beryllium Hexagons"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-39",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Exoplanet Biosignature Gas Spectrometer",
+    "description": "Analyze the atmospheric transmission absorption spectrum in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "🪐",
+        "label": "Habitable Zone Super-Earth"
+      },
+      {
+        "emoji": "💡",
+        "label": "Starlight Transmission Filter"
+      },
+      {
+        "emoji": "📈",
+        "label": "Water Vapor Absorption Notch"
+      },
+      {
+        "emoji": "🧪",
+        "label": "Methane-Oxygen Disequilibrium"
+      },
+      {
+        "emoji": "📊",
+        "label": "Carbon Dioxide Dip"
+      },
+      {
+        "emoji": "💻",
+        "label": "Photochemical Equilibrium Model"
+      }
+    ],
+    "question": "Which atmospheric gas coexistence pointed toward possible alien biological activity?",
+    "options": [
+      "Methane-Oxygen Disequilibrium",
+      "Carbon Monoxide",
+      "Argon Only",
+      "Helium Vapor"
+    ],
+    "correctAnswer": "Methane-Oxygen Disequilibrium",
+    "explanation": "The coexistence of Methane and Oxygen (🧪) strongly indicated a living biosphere.",
+    "hint": "Chemically unstable gas pairing created by life.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Which atmospheric gas coexistence pointed toward possible alien biological activity?",
+        "choices": [
+          "Methane-Oxygen Disequilibrium",
+          "Carbon Monoxide",
+          "Argon Only",
+          "Helium Vapor"
+        ],
+        "answer": "Methane-Oxygen Disequilibrium"
+      }
+    ]
+  },
+  {
+    "id": "mc-hard-40",
+    "gameType": "memory-challenge",
+    "difficulty": "hard",
+    "title": "Dark Energy Survey Panoramic Camera",
+    "description": "Memorize the 570-megapixel focal plane array in 5 seconds.",
+    "revealTime": 5,
+    "items": [
+      {
+        "emoji": "📷",
+        "label": "DECam 570-Megapixel CCD Mosaic"
+      },
+      {
+        "emoji": "🔭",
+        "label": "Blanco 4-Meter Telescope"
+      },
+      {
+        "emoji": "🌌",
+        "label": "Gravitational Lensing Arc"
+      },
+      {
+        "emoji": "📊",
+        "label": "Baryon Acoustic Oscillation Peak"
+      },
+      {
+        "emoji": "💻",
+        "label": "Redshift Clustering Grid"
+      },
+      {
+        "emoji": "🛡️",
+        "label": "Cryogenic Dewar Vessel"
+      }
+    ],
+    "question": "What curved optical distortion revealed invisible dark matter halos?",
+    "options": [
+      "Gravitational Lensing Arc",
+      "Aberration Ring",
+      "Diffraction Spike",
+      "Ghost Reflection"
+    ],
+    "correctAnswer": "Gravitational Lensing Arc",
+    "explanation": "The Gravitational Lensing Arc (🌌) bent distant galaxy light around foreground clusters.",
+    "hint": "Curved light distorted by gravity.",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "What curved optical distortion revealed invisible dark matter halos?",
+        "choices": [
+          "Gravitational Lensing Arc",
+          "Aberration Ring",
+          "Diffraction Spike",
+          "Ghost Reflection"
+        ],
+        "answer": "Gravitational Lensing Arc"
+      }
+    ]
+  }
+]

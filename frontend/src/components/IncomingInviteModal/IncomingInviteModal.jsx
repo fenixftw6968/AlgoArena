@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Swords, Check, X, Bell } from 'lucide-react';
+import { Check, X } from 'lucide-react';
 import { GAME_REGISTRY } from '../../data/gameRegistry';
 
 export default function IncomingInviteModal({
@@ -19,7 +19,7 @@ export default function IncomingInviteModal({
     <AnimatePresence>
       <div style={{
         position: 'fixed',
-        top: '80px',
+        top: '88px',
         right: '24px',
         zIndex: 99999,
         maxWidth: '400px',
@@ -29,64 +29,41 @@ export default function IncomingInviteModal({
           initial={{ opacity: 0, y: -20, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -20, scale: 0.95 }}
+          className="zine-card"
           style={{
-            background: 'rgba(8, 14, 33, 0.95)',
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
-            borderRadius: '1.5rem',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
-            boxShadow: '0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(59, 130, 246, 0.2)',
-            padding: '1.35rem 1.5rem',
+            padding: '1.25rem 1.35rem',
             position: 'relative',
             overflow: 'hidden',
-            color: '#FFFFFF'
+            background: 'var(--paper-card)',
+            boxShadow: '7px 7px 0 var(--riso-violet)',
+            transform: 'rotate(0.7deg)'
           }}
         >
-          {/* Top accent stream */}
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            height: '3px',
-            background: 'linear-gradient(90deg, #3b82f6, #38bdf8)'
-          }} />
+          <div className="hazard-tape" style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 8, borderBottom: '2px solid var(--ink)' }} />
 
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.9rem', marginTop: '0.35rem' }}>
             <div style={{
-              width: '46px',
-              height: '46px',
-              borderRadius: '12px',
-              background: 'rgba(59, 130, 246, 0.12)',
-              border: '1px solid rgba(59, 130, 246, 0.3)',
+              width: '48px',
+              height: '48px',
+              background: 'var(--riso-violet)',
+              border: '2px solid var(--ink)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               fontSize: '1.4rem',
-              flexShrink: 0
+              flexShrink: 0,
+              boxShadow: '3px 3px 0 var(--ink)'
             }}>
               {gameInfo.icon}
             </div>
 
             <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.2rem' }}>
-                <span style={{
-                  fontSize: '0.65rem',
-                  fontWeight: 800,
-                  color: '#38bdf8',
-                  fontFamily: 'var(--font-mono)',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.08em'
-                }}>
-                  INCOMING 1V1 CHALLENGE
-                </span>
-              </div>
+              <span className="font-mono" style={{ fontSize: '0.6rem', fontWeight: 800, color: 'var(--riso-coral)', letterSpacing: '0.14em', textTransform: 'uppercase', display: 'block', marginBottom: '0.25rem' }}>
+                Incoming 1v1 Challenge
+              </span>
 
-              <h4 style={{
-                fontSize: '0.95rem',
-                fontWeight: 800,
-                color: '#FFFFFF',
-                fontFamily: 'var(--font-display)',
+              <h4 className="zine-display" style={{
+                fontSize: '1rem',
                 marginBottom: '0.25rem',
                 whiteSpace: 'nowrap',
                 overflow: 'hidden',
@@ -95,60 +72,16 @@ export default function IncomingInviteModal({
                 @{invite.player1Username}
               </h4>
 
-              <p style={{
-                fontSize: '0.8rem',
-                color: 'rgba(255, 255, 255, 0.6)',
-                lineHeight: 1.4,
-                marginBottom: '1rem'
-              }}>
-                Dispatched challenge for <strong style={{ color: '#ffffff' }}>{gameInfo.title}</strong>
+              <p style={{ fontSize: '0.8rem', color: 'var(--ink-muted)', lineHeight: 1.4, marginBottom: '0.9rem' }}>
+                Dispatched challenge for <strong style={{ color: 'var(--ink)' }}>{gameInfo.title}</strong>
               </p>
 
-              {/* Action buttons */}
               <div style={{ display: 'flex', gap: '0.5rem' }}>
-                <button
-                  onClick={() => onAccept(invite)}
-                  style={{
-                    flex: 1,
-                    padding: '0.55rem 0.85rem',
-                    borderRadius: '999px',
-                    background: 'linear-gradient(180deg, #3b82f6 0%, #2563eb 100%)',
-                    color: '#ffffff',
-                    border: 'none',
-                    fontWeight: 700,
-                    fontFamily: 'var(--font-display)',
-                    fontSize: '0.75rem',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '0.3rem',
-                    boxShadow: '0 0 15px rgba(59, 130, 246, 0.4)'
-                  }}
-                >
-                  <Check size={13} /> ACCEPT
+                <button onClick={() => onAccept(invite)} className="zine-btn-sm zine-btn-sm--violet" style={{ flex: 1, padding: '0.5rem 0.75rem' }}>
+                  <Check size={12} /> ACCEPT
                 </button>
-
-                <button
-                  onClick={() => onDecline(invite)}
-                  style={{
-                    flex: 1,
-                    padding: '0.55rem 0.85rem',
-                    borderRadius: '999px',
-                    background: 'rgba(255, 255, 255, 0.06)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    color: 'rgba(255, 255, 255, 0.6)',
-                    fontWeight: 700,
-                    fontFamily: 'var(--font-display)',
-                    fontSize: '0.75rem',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '0.3rem'
-                  }}
-                >
-                  <X size={13} /> DECLINE
+                <button onClick={() => onDecline(invite)} className="zine-btn-sm" style={{ flex: 1, padding: '0.5rem 0.75rem' }}>
+                  <X size={12} /> DECLINE
                 </button>
               </div>
             </div>

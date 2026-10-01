@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { AlertTriangle, LogOut } from 'lucide-react';
 
 export default function ExitModal({
@@ -12,116 +12,60 @@ export default function ExitModal({
   if (!isOpen) return null;
 
   return (
-    <AnimatePresence>
-      <div style={{
-        position: 'fixed',
-        inset: 0,
-        zIndex: 99999,
-        background: 'rgba(2, 6, 23, 0.85)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '1rem',
-      }}>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.92, y: 15 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.92, y: 15 }}
-          transition={{ duration: 0.2 }}
-          style={{
-            background: 'rgba(8, 14, 33, 0.95)',
-            borderRadius: '1.75rem',
-            width: '100%',
-            maxWidth: '440px',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
-            boxShadow: '0 30px 70px rgba(0, 0, 0, 0.8), 0 0 30px rgba(59, 130, 246, 0.15)',
-            padding: '2.25rem 2rem',
-            textAlign: 'center',
-            position: 'relative',
-            color: '#FFFFFF'
-          }}
-        >
-          <div style={{
-            width: '60px',
-            height: '60px',
-            borderRadius: '50%',
-            background: 'rgba(244, 63, 94, 0.12)',
-            border: '1px solid rgba(244, 63, 94, 0.3)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            margin: '0 auto 1.25rem',
-            color: '#f43f5e',
-          }}>
-            <AlertTriangle size={28} />
-          </div>
+    <div className="overlay" style={{ zIndex: 99999 }}>
+      <div className="halftone-coral halftone-fade-b" style={{ position: 'absolute', inset: 0, opacity: 0.4 }} />
 
-          <h2 style={{
-            fontSize: '1.25rem',
-            fontWeight: 800,
-            color: '#FFFFFF',
-            fontFamily: 'var(--font-display)',
-            letterSpacing: '-0.02em',
-            marginBottom: '0.5rem',
-          }}>
-            {title}
-          </h2>
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
+        className="zine-modal"
+        style={{
+          width: '100%',
+          maxWidth: '460px',
+          padding: '2.25rem 2rem',
+          textAlign: 'center',
+          position: 'relative',
+          overflow: 'hidden'
+        }}
+      >
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 12, background: 'var(--riso-coral)' }} />
 
-          <p style={{
-            color: 'rgba(255, 255, 255, 0.6)',
-            fontSize: '0.85rem',
-            lineHeight: 1.5,
-            marginBottom: '1.75rem',
-          }}>
-            {message}
-          </p>
+        <div style={{
+          width: '72px',
+          height: '72px',
+          background: 'var(--riso-coral)',
+          border: '3px solid var(--ink)',
+          boxShadow: '5px 5px 0 var(--ink)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          margin: '1.5rem auto 1.25rem',
+          color: '#fffdf6',
+          transform: 'rotate(-4deg)'
+        }}>
+          <AlertTriangle size={30} />
+        </div>
 
-          <div style={{ display: 'flex', gap: '0.75rem' }}>
-            <button
-              onClick={onCancel}
-              style={{
-                flex: 1,
-                padding: '0.75rem 1rem',
-                borderRadius: '999px',
-                background: 'linear-gradient(180deg, #3b82f6 0%, #2563eb 100%)',
-                color: '#ffffff',
-                border: 'none',
-                fontWeight: 700,
-                fontFamily: 'var(--font-display)',
-                fontSize: '0.8rem',
-                cursor: 'pointer',
-                boxShadow: '0 0 15px rgba(59, 130, 246, 0.4)'
-              }}
-            >
-              RESUME MATCH
-            </button>
+        <h2 className="zine-display misreg" data-text={title} style={{ fontSize: 'clamp(1.3rem, 5vw, 1.75rem)', marginBottom: '0.6rem' }}>
+          {title}
+        </h2>
 
-            <button
-              onClick={onConfirm}
-              style={{
-                flex: 1,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '0.4rem',
-                padding: '0.75rem 1rem',
-                borderRadius: '999px',
-                background: 'rgba(244, 63, 94, 0.1)',
-                border: '1px solid rgba(244, 63, 94, 0.3)',
-                color: '#f43f5e',
-                fontWeight: 700,
-                fontFamily: 'var(--font-display)',
-                fontSize: '0.8rem',
-                cursor: 'pointer'
-              }}
-            >
-              <LogOut size={14} /> FORFEIT
-            </button>
-          </div>
-        </motion.div>
-      </div>
-    </AnimatePresence>
+        <p className="zine-lede" style={{ fontSize: '0.85rem', marginBottom: '1.75rem' }}>{message}</p>
+
+        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+          <button onClick={onCancel} className="btn-primary" style={{ flex: 1, minWidth: '140px' }}>
+            RESUME MATCH
+          </button>
+          <button
+            onClick={onConfirm}
+            className="btn-rose"
+            style={{ flex: 1, minWidth: '140px' }}
+          >
+            <LogOut size={14} /> FORFEIT
+          </button>
+        </div>
+      </motion.div>
+    </div>
   );
 }

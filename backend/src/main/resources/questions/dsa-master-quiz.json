@@ -1,11 +1,4 @@
-/**
- * MindForge - dsaMasterQuestions
- * Exactly 150 Curated DSA Master Quiz Problems
- * (50 Novice / EASY, 50 Intermediate / MEDIUM, 50 Expert / HARD)
- * 100% Unique Questions, Balanced Options, Verified Explanations
- */
-
-export const dsaMasterQuestions = [
+[
   {
     "id": "dsa-1",
     "gameType": "dsa-master-quiz",
@@ -2556,6 +2549,4 @@ export const dsaMasterQuestions = [
     "explanation": "Pass 1 orders vertices by finishing time on G. Pass 2 visits vertices in reverse finishing order on transposed graph G^T, identifying each SCC.",
     "hint": "Pass on original graph followed by pass on reversed graph."
   }
-];
-
-export default dsaMasterQuestions;
+]

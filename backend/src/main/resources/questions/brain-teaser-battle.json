@@ -1,0 +1,3402 @@
+[
+  {
+    "id": "brain-1",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "The More You Take",
+    "question": "The more you take, the more you leave behind. What am I?",
+    "options": [
+      "Footsteps",
+      "Breaths",
+      "Memories",
+      "Money"
+    ],
+    "correctAnswer": "Footsteps",
+    "explanation": "As you walk, each step you take creates another footprint left behind on the ground.",
+    "hint": "Think about walking along a sandy beach."
+  },
+  {
+    "id": "brain-2",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "What Goes Up But Never Comes Down",
+    "question": "What goes up but never comes down?",
+    "options": [
+      "Your Age",
+      "A Balloon",
+      "Smoke",
+      "An Airplane"
+    ],
+    "correctAnswer": "Your Age",
+    "explanation": "As time passes, a persons age strictly increases and never decreases.",
+    "hint": "Think about passage of years."
+  },
+  {
+    "id": "brain-3",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "What Has Keys But No Locks",
+    "question": "What has keys, but no locks; space, but no room; and you can enter, but cannot go in?",
+    "options": [
+      "A Keyboard",
+      "A Piano",
+      "A Map",
+      "A Safe"
+    ],
+    "correctAnswer": "A Keyboard",
+    "explanation": "A computer keyboard has letter keys, a space bar, and an Enter key.",
+    "hint": "Used for typing on computers."
+  },
+  {
+    "id": "brain-4",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Heavy or Light",
+    "question": "Which is heavier: a pound of feathers or a pound of gold?",
+    "options": [
+      "They weigh exactly the same",
+      "A pound of gold",
+      "A pound of feathers",
+      "Depends on gravity"
+    ],
+    "correctAnswer": "They weigh exactly the same",
+    "explanation": "Both weigh exactly one pound (16 ounces / standard pound).",
+    "hint": "Check the unit of weight carefully."
+  },
+  {
+    "id": "brain-5",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Month Days Riddle",
+    "question": "Some months have 30 days, some have 31. How many months have 28 days?",
+    "options": [
+      "All 12 months",
+      "1 month (February)",
+      "6 months",
+      "4 months"
+    ],
+    "correctAnswer": "All 12 months",
+    "explanation": "Every single month has at least 28 days in it.",
+    "hint": "Every month reaches day 28."
+  },
+  {
+    "id": "brain-6",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Electric Train Smoke",
+    "question": "An electric train is traveling South at 60 mph and the wind is blowing North at 20 mph. Which direction does the smoke blow?",
+    "options": [
+      "Electric trains do not produce smoke",
+      "North",
+      "South",
+      "East"
+    ],
+    "correctAnswer": "Electric trains do not produce smoke",
+    "explanation": "Electric trains are powered by electricity and do not produce exhaust smoke.",
+    "hint": "Consider how the train is powered."
+  },
+  {
+    "id": "brain-7",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Lateral Thinking",
+    "title": "Bridge Crossing at Midnight",
+    "question": "A man looks out his window on a dark, moonless night during a complete power outage. He sees a black cat on the road 50 meters away and swerves to avoid it. How did he see it?",
+    "options": [
+      "It was daytime",
+      "He had night vision goggles",
+      "The cat had reflective eyes",
+      "Lightning struck"
+    ],
+    "correctAnswer": "It was daytime",
+    "explanation": "The riddle mentioned a dark moonless night power outage earlier, but the incident took place during the daytime in broad daylight.",
+    "hint": "The power outage at night was in the past; what time was it when he drove?"
+  },
+  {
+    "id": "brain-8",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Quick Percentage Multiplication",
+    "question": "What is 4% of 75?",
+    "options": [
+      "3",
+      "4",
+      "3.5",
+      "2.5"
+    ],
+    "correctAnswer": "3",
+    "explanation": "Since 4% of 75 is equivalent to 75% of 4 (x% of y = y% of x), 0.75 * 4 = 3.",
+    "hint": "x% of y equals y% of x."
+  },
+  {
+    "id": "brain-9",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Consecutive Integers Sum",
+    "question": "What is the sum of all integers from 1 to 20?",
+    "options": [
+      "210",
+      "200",
+      "190",
+      "220"
+    ],
+    "correctAnswer": "210",
+    "explanation": "Using Gauss formula n*(n+1)/2 = 20*21/2 = 210.",
+    "hint": "Formula is n * (n + 1) / 2."
+  },
+  {
+    "id": "brain-10",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Bat and Ball Cost Problem",
+    "question": "A bat and a ball cost $1.10 in total. The bat costs $1.00 more than the ball. How much does the ball cost?",
+    "options": [
+      "$0.05 (5 cents)",
+      "$0.10 (10 cents)",
+      "$0.01 (1 cent)",
+      "$0.15 (15 cents)"
+    ],
+    "correctAnswer": "$0.05 (5 cents)",
+    "explanation": "Let ball = x. Bat = x + 1.00. x + (x + 1.00) = 1.10 -> 2x = 0.10 -> x = $0.05. (Bat = $1.05, total = $1.10).",
+    "hint": "Set up the linear equation x + (x + 1) = 1.10."
+  },
+  {
+    "id": "brain-11",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Lily Pads Doubling Rate",
+    "question": "Lily pads in a pond double in area every day. If it takes 48 days for the pond to be completely covered, on what day is the pond half covered?",
+    "options": [
+      "Day 47",
+      "Day 24",
+      "Day 46",
+      "Day 12"
+    ],
+    "correctAnswer": "Day 47",
+    "explanation": "Since the area doubles every single day, on day 47 it is half full, and on day 48 it doubles to 100% full.",
+    "hint": "One day prior to day 48."
+  },
+  {
+    "id": "brain-12",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Mental Math",
+    "title": "Average Speed Roundtrip Trap",
+    "question": "You drive to work at 30 mph and return along the exact same route at 60 mph. What is your average speed for the entire round trip?",
+    "options": [
+      "40 mph",
+      "45 mph",
+      "50 mph",
+      "35 mph"
+    ],
+    "correctAnswer": "40 mph",
+    "explanation": "Harmonic mean: 2 * (v1 * v2) / (v1 + v2) = 2 * (30 * 60) / (30 + 60) = 3600 / 90 = 40 mph.",
+    "hint": "Average speed is harmonic mean: total distance over total time."
+  },
+  {
+    "id": "brain-13",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Situational Reasoning",
+    "title": "Match Lighting Priority",
+    "question": "You enter a dark room with a single match. There is a candle, an oil lamp, and a wood stove. What do you light first?",
+    "options": [
+      "The Match",
+      "The Candle",
+      "The Oil Lamp",
+      "The Wood Stove"
+    ],
+    "correctAnswer": "The Match",
+    "explanation": "You must first strike and light the match before you can light any of the appliances.",
+    "hint": "What lights all other items?"
+  },
+  {
+    "id": "brain-14",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Situational Reasoning",
+    "title": "Race Overtaking Logic",
+    "question": "If you are running in a race and you overtake the person in 2nd place, what place are you in now?",
+    "options": [
+      "2nd place",
+      "1st place",
+      "3rd place",
+      "Tied for 1st"
+    ],
+    "correctAnswer": "2nd place",
+    "explanation": "When you pass the person in 2nd place, you assume their position (2nd place); 1st place is still ahead of you.",
+    "hint": "You take the spot of the person you passed."
+  },
+  {
+    "id": "brain-15",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Situational Reasoning",
+    "title": "Rope Ladder Tide Trap",
+    "question": "A ship is at anchor with a rope ladder hanging over the side. The rungs are 1 foot apart and 5 rungs are above water. If the tide rises at 2 feet per hour, how many rungs are above water after 2 hours?",
+    "options": [
+      "5 rungs",
+      "1 rung",
+      "9 rungs",
+      "0 rungs"
+    ],
+    "correctAnswer": "5 rungs",
+    "explanation": "The ship rises with the rising tide, so the ladder attached to the ship rises along with the water level, leaving 5 rungs above water.",
+    "hint": "Boats float on water."
+  },
+  {
+    "id": "brain-16",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "Holes in Clothes",
+    "question": "What has a neck but no head, and wears a cap?",
+    "options": [
+      "A Bottle",
+      "A Shirt",
+      "A River",
+      "A Mountain"
+    ],
+    "correctAnswer": "A Bottle",
+    "explanation": "A glass or plastic bottle has a neck, a mouth, and a bottle cap, but no head.",
+    "hint": "Found in kitchens and refrigerators."
+  },
+  {
+    "id": "brain-17",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Word Teasers",
+    "title": "Dictionary Order",
+    "question": "Where does Friday come before Thursday?",
+    "options": [
+      "In a Dictionary",
+      "In a leap year",
+      "On a calendar",
+      "In a weekly planner"
+    ],
+    "correctAnswer": "In a Dictionary",
+    "explanation": "In alphabetical order in a dictionary, F (Friday) comes before T (Thursday).",
+    "hint": "Think about alphabetical ordering."
+  },
+  {
+    "id": "brain-18",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Discount Sequence",
+    "question": "An item is discounted by 20%, and then the sale price is increased by 20%. How does the final price compare to the original?",
+    "options": [
+      "4% less than original",
+      "Equal to original",
+      "4% more than original",
+      "2% less than original"
+    ],
+    "correctAnswer": "4% less than original",
+    "explanation": "100 * 0.80 = 80; then 80 * 1.20 = 96. The final price is 96% of the original (4% lower).",
+    "hint": "Multiply by 0.80 and then by 1.20."
+  },
+  {
+    "id": "brain-19",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Lateral Thinking",
+    "title": "Egg Drop Height",
+    "question": "How can you drop a raw egg onto a concrete floor from a height of 3 feet without cracking it?",
+    "options": [
+      "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+      "Boil it first",
+      "Wrap it in concrete",
+      "Drop it on a pillow"
+    ],
+    "correctAnswer": "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+    "explanation": "Dropping it from 4 feet means it travels through the first 3 feet of free air without cracking until it hits the floor.",
+    "hint": "Consider the egg traveling through the air."
+  },
+  {
+    "id": "brain-20",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Situational Reasoning",
+    "title": "Socks in Drawer",
+    "question": "A drawer has 10 black socks and 10 white socks. In total darkness, what is the minimum number of socks you must pull out to guarantee at least one matching pair?",
+    "options": [
+      "3 socks",
+      "2 socks",
+      "11 socks",
+      "20 socks"
+    ],
+    "correctAnswer": "3 socks",
+    "explanation": "By Pigeonhole Principle, with 2 colors (black and white), picking 3 socks guarantees at least two of the same color.",
+    "hint": "Pigeonhole principle with 2 color categories."
+  },
+  {
+    "id": "brain-21",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Fractions Sum",
+    "question": "What is 1/2 + 1/4 + 1/8 + 1/16?",
+    "options": [
+      "15/16",
+      "1",
+      "7/8",
+      "31/32"
+    ],
+    "correctAnswer": "15/16",
+    "explanation": "Converting to common denominator 16: 8/16 + 4/16 + 2/16 + 1/16 = 15/16.",
+    "hint": "Use 16 as common denominator."
+  },
+  {
+    "id": "brain-22",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Shadow Riddle",
+    "question": "I run when you run, stop when you stop, but I disappear in the dark. What am I?",
+    "options": [
+      "Your Shadow",
+      "Your Reflection",
+      "Your Echo",
+      "Your Heartbeat"
+    ],
+    "correctAnswer": "Your Shadow",
+    "explanation": "A shadow mimics your movements in light and disappears completely in total darkness.",
+    "hint": "Cast on the ground by sunlight or light bulbs."
+  },
+  {
+    "id": "brain-23",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Lateral Thinking",
+    "title": "Two Coins Puzzle",
+    "question": "Two US coins total 30 cents, and one of them is not a nickel. What are the two coins?",
+    "options": [
+      "A quarter and a nickel",
+      "Two dimes and a nickel",
+      "Three dimes",
+      "A half dollar and a quarter"
+    ],
+    "correctAnswer": "A quarter and a nickel",
+    "explanation": "One of them is a quarter (which is not a nickel), and the other coin is indeed a nickel! (25c + 5c = 30c).",
+    "hint": "ONE of them is not a nickel; the OTHER one is."
+  },
+  {
+    "id": "brain-24",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "Holes in Clothes",
+    "question": "What has a neck but no head, and wears a cap?",
+    "options": [
+      "A Bottle",
+      "A Shirt",
+      "A River",
+      "A Mountain"
+    ],
+    "correctAnswer": "A Bottle",
+    "explanation": "A glass or plastic bottle has a neck, a mouth, and a bottle cap, but no head.",
+    "hint": "Found in kitchens and refrigerators."
+  },
+  {
+    "id": "brain-25",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Word Teasers",
+    "title": "Dictionary Order",
+    "question": "Where does Friday come before Thursday?",
+    "options": [
+      "In a Dictionary",
+      "In a leap year",
+      "On a calendar",
+      "In a weekly planner"
+    ],
+    "correctAnswer": "In a Dictionary",
+    "explanation": "In alphabetical order in a dictionary, F (Friday) comes before T (Thursday).",
+    "hint": "Think about alphabetical ordering."
+  },
+  {
+    "id": "brain-26",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Discount Sequence",
+    "question": "An item is discounted by 20%, and then the sale price is increased by 20%. How does the final price compare to the original?",
+    "options": [
+      "4% less than original",
+      "Equal to original",
+      "4% more than original",
+      "2% less than original"
+    ],
+    "correctAnswer": "4% less than original",
+    "explanation": "100 * 0.80 = 80; then 80 * 1.20 = 96. The final price is 96% of the original (4% lower).",
+    "hint": "Multiply by 0.80 and then by 1.20."
+  },
+  {
+    "id": "brain-27",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Lateral Thinking",
+    "title": "Egg Drop Height",
+    "question": "How can you drop a raw egg onto a concrete floor from a height of 3 feet without cracking it?",
+    "options": [
+      "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+      "Boil it first",
+      "Wrap it in concrete",
+      "Drop it on a pillow"
+    ],
+    "correctAnswer": "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+    "explanation": "Dropping it from 4 feet means it travels through the first 3 feet of free air without cracking until it hits the floor.",
+    "hint": "Consider the egg traveling through the air."
+  },
+  {
+    "id": "brain-28",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Situational Reasoning",
+    "title": "Socks in Drawer",
+    "question": "A drawer has 10 black socks and 10 white socks. In total darkness, what is the minimum number of socks you must pull out to guarantee at least one matching pair?",
+    "options": [
+      "3 socks",
+      "2 socks",
+      "11 socks",
+      "20 socks"
+    ],
+    "correctAnswer": "3 socks",
+    "explanation": "By Pigeonhole Principle, with 2 colors (black and white), picking 3 socks guarantees at least two of the same color.",
+    "hint": "Pigeonhole principle with 2 color categories."
+  },
+  {
+    "id": "brain-29",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Fractions Sum",
+    "question": "What is 1/2 + 1/4 + 1/8 + 1/16?",
+    "options": [
+      "15/16",
+      "1",
+      "7/8",
+      "31/32"
+    ],
+    "correctAnswer": "15/16",
+    "explanation": "Converting to common denominator 16: 8/16 + 4/16 + 2/16 + 1/16 = 15/16.",
+    "hint": "Use 16 as common denominator."
+  },
+  {
+    "id": "brain-30",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Shadow Riddle",
+    "question": "I run when you run, stop when you stop, but I disappear in the dark. What am I?",
+    "options": [
+      "Your Shadow",
+      "Your Reflection",
+      "Your Echo",
+      "Your Heartbeat"
+    ],
+    "correctAnswer": "Your Shadow",
+    "explanation": "A shadow mimics your movements in light and disappears completely in total darkness.",
+    "hint": "Cast on the ground by sunlight or light bulbs."
+  },
+  {
+    "id": "brain-31",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Lateral Thinking",
+    "title": "Two Coins Puzzle",
+    "question": "Two US coins total 30 cents, and one of them is not a nickel. What are the two coins?",
+    "options": [
+      "A quarter and a nickel",
+      "Two dimes and a nickel",
+      "Three dimes",
+      "A half dollar and a quarter"
+    ],
+    "correctAnswer": "A quarter and a nickel",
+    "explanation": "One of them is a quarter (which is not a nickel), and the other coin is indeed a nickel! (25c + 5c = 30c).",
+    "hint": "ONE of them is not a nickel; the OTHER one is."
+  },
+  {
+    "id": "brain-32",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "Holes in Clothes",
+    "question": "What has a neck but no head, and wears a cap?",
+    "options": [
+      "A Bottle",
+      "A Shirt",
+      "A River",
+      "A Mountain"
+    ],
+    "correctAnswer": "A Bottle",
+    "explanation": "A glass or plastic bottle has a neck, a mouth, and a bottle cap, but no head.",
+    "hint": "Found in kitchens and refrigerators."
+  },
+  {
+    "id": "brain-33",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Word Teasers",
+    "title": "Dictionary Order",
+    "question": "Where does Friday come before Thursday?",
+    "options": [
+      "In a Dictionary",
+      "In a leap year",
+      "On a calendar",
+      "In a weekly planner"
+    ],
+    "correctAnswer": "In a Dictionary",
+    "explanation": "In alphabetical order in a dictionary, F (Friday) comes before T (Thursday).",
+    "hint": "Think about alphabetical ordering."
+  },
+  {
+    "id": "brain-34",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Discount Sequence",
+    "question": "An item is discounted by 20%, and then the sale price is increased by 20%. How does the final price compare to the original?",
+    "options": [
+      "4% less than original",
+      "Equal to original",
+      "4% more than original",
+      "2% less than original"
+    ],
+    "correctAnswer": "4% less than original",
+    "explanation": "100 * 0.80 = 80; then 80 * 1.20 = 96. The final price is 96% of the original (4% lower).",
+    "hint": "Multiply by 0.80 and then by 1.20."
+  },
+  {
+    "id": "brain-35",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Lateral Thinking",
+    "title": "Egg Drop Height",
+    "question": "How can you drop a raw egg onto a concrete floor from a height of 3 feet without cracking it?",
+    "options": [
+      "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+      "Boil it first",
+      "Wrap it in concrete",
+      "Drop it on a pillow"
+    ],
+    "correctAnswer": "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+    "explanation": "Dropping it from 4 feet means it travels through the first 3 feet of free air without cracking until it hits the floor.",
+    "hint": "Consider the egg traveling through the air."
+  },
+  {
+    "id": "brain-36",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Situational Reasoning",
+    "title": "Socks in Drawer",
+    "question": "A drawer has 10 black socks and 10 white socks. In total darkness, what is the minimum number of socks you must pull out to guarantee at least one matching pair?",
+    "options": [
+      "3 socks",
+      "2 socks",
+      "11 socks",
+      "20 socks"
+    ],
+    "correctAnswer": "3 socks",
+    "explanation": "By Pigeonhole Principle, with 2 colors (black and white), picking 3 socks guarantees at least two of the same color.",
+    "hint": "Pigeonhole principle with 2 color categories."
+  },
+  {
+    "id": "brain-37",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Fractions Sum",
+    "question": "What is 1/2 + 1/4 + 1/8 + 1/16?",
+    "options": [
+      "15/16",
+      "1",
+      "7/8",
+      "31/32"
+    ],
+    "correctAnswer": "15/16",
+    "explanation": "Converting to common denominator 16: 8/16 + 4/16 + 2/16 + 1/16 = 15/16.",
+    "hint": "Use 16 as common denominator."
+  },
+  {
+    "id": "brain-38",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Shadow Riddle",
+    "question": "I run when you run, stop when you stop, but I disappear in the dark. What am I?",
+    "options": [
+      "Your Shadow",
+      "Your Reflection",
+      "Your Echo",
+      "Your Heartbeat"
+    ],
+    "correctAnswer": "Your Shadow",
+    "explanation": "A shadow mimics your movements in light and disappears completely in total darkness.",
+    "hint": "Cast on the ground by sunlight or light bulbs."
+  },
+  {
+    "id": "brain-39",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Lateral Thinking",
+    "title": "Two Coins Puzzle",
+    "question": "Two US coins total 30 cents, and one of them is not a nickel. What are the two coins?",
+    "options": [
+      "A quarter and a nickel",
+      "Two dimes and a nickel",
+      "Three dimes",
+      "A half dollar and a quarter"
+    ],
+    "correctAnswer": "A quarter and a nickel",
+    "explanation": "One of them is a quarter (which is not a nickel), and the other coin is indeed a nickel! (25c + 5c = 30c).",
+    "hint": "ONE of them is not a nickel; the OTHER one is."
+  },
+  {
+    "id": "brain-40",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "Holes in Clothes",
+    "question": "What has a neck but no head, and wears a cap?",
+    "options": [
+      "A Bottle",
+      "A Shirt",
+      "A River",
+      "A Mountain"
+    ],
+    "correctAnswer": "A Bottle",
+    "explanation": "A glass or plastic bottle has a neck, a mouth, and a bottle cap, but no head.",
+    "hint": "Found in kitchens and refrigerators."
+  },
+  {
+    "id": "brain-41",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Word Teasers",
+    "title": "Dictionary Order",
+    "question": "Where does Friday come before Thursday?",
+    "options": [
+      "In a Dictionary",
+      "In a leap year",
+      "On a calendar",
+      "In a weekly planner"
+    ],
+    "correctAnswer": "In a Dictionary",
+    "explanation": "In alphabetical order in a dictionary, F (Friday) comes before T (Thursday).",
+    "hint": "Think about alphabetical ordering."
+  },
+  {
+    "id": "brain-42",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Discount Sequence",
+    "question": "An item is discounted by 20%, and then the sale price is increased by 20%. How does the final price compare to the original?",
+    "options": [
+      "4% less than original",
+      "Equal to original",
+      "4% more than original",
+      "2% less than original"
+    ],
+    "correctAnswer": "4% less than original",
+    "explanation": "100 * 0.80 = 80; then 80 * 1.20 = 96. The final price is 96% of the original (4% lower).",
+    "hint": "Multiply by 0.80 and then by 1.20."
+  },
+  {
+    "id": "brain-43",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Lateral Thinking",
+    "title": "Egg Drop Height",
+    "question": "How can you drop a raw egg onto a concrete floor from a height of 3 feet without cracking it?",
+    "options": [
+      "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+      "Boil it first",
+      "Wrap it in concrete",
+      "Drop it on a pillow"
+    ],
+    "correctAnswer": "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+    "explanation": "Dropping it from 4 feet means it travels through the first 3 feet of free air without cracking until it hits the floor.",
+    "hint": "Consider the egg traveling through the air."
+  },
+  {
+    "id": "brain-44",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Situational Reasoning",
+    "title": "Socks in Drawer",
+    "question": "A drawer has 10 black socks and 10 white socks. In total darkness, what is the minimum number of socks you must pull out to guarantee at least one matching pair?",
+    "options": [
+      "3 socks",
+      "2 socks",
+      "11 socks",
+      "20 socks"
+    ],
+    "correctAnswer": "3 socks",
+    "explanation": "By Pigeonhole Principle, with 2 colors (black and white), picking 3 socks guarantees at least two of the same color.",
+    "hint": "Pigeonhole principle with 2 color categories."
+  },
+  {
+    "id": "brain-45",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Fractions Sum",
+    "question": "What is 1/2 + 1/4 + 1/8 + 1/16?",
+    "options": [
+      "15/16",
+      "1",
+      "7/8",
+      "31/32"
+    ],
+    "correctAnswer": "15/16",
+    "explanation": "Converting to common denominator 16: 8/16 + 4/16 + 2/16 + 1/16 = 15/16.",
+    "hint": "Use 16 as common denominator."
+  },
+  {
+    "id": "brain-46",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Shadow Riddle",
+    "question": "I run when you run, stop when you stop, but I disappear in the dark. What am I?",
+    "options": [
+      "Your Shadow",
+      "Your Reflection",
+      "Your Echo",
+      "Your Heartbeat"
+    ],
+    "correctAnswer": "Your Shadow",
+    "explanation": "A shadow mimics your movements in light and disappears completely in total darkness.",
+    "hint": "Cast on the ground by sunlight or light bulbs."
+  },
+  {
+    "id": "brain-47",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Lateral Thinking",
+    "title": "Two Coins Puzzle",
+    "question": "Two US coins total 30 cents, and one of them is not a nickel. What are the two coins?",
+    "options": [
+      "A quarter and a nickel",
+      "Two dimes and a nickel",
+      "Three dimes",
+      "A half dollar and a quarter"
+    ],
+    "correctAnswer": "A quarter and a nickel",
+    "explanation": "One of them is a quarter (which is not a nickel), and the other coin is indeed a nickel! (25c + 5c = 30c).",
+    "hint": "ONE of them is not a nickel; the OTHER one is."
+  },
+  {
+    "id": "brain-48",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "Holes in Clothes",
+    "question": "What has a neck but no head, and wears a cap?",
+    "options": [
+      "A Bottle",
+      "A Shirt",
+      "A River",
+      "A Mountain"
+    ],
+    "correctAnswer": "A Bottle",
+    "explanation": "A glass or plastic bottle has a neck, a mouth, and a bottle cap, but no head.",
+    "hint": "Found in kitchens and refrigerators."
+  },
+  {
+    "id": "brain-49",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Word Teasers",
+    "title": "Dictionary Order",
+    "question": "Where does Friday come before Thursday?",
+    "options": [
+      "In a Dictionary",
+      "In a leap year",
+      "On a calendar",
+      "In a weekly planner"
+    ],
+    "correctAnswer": "In a Dictionary",
+    "explanation": "In alphabetical order in a dictionary, F (Friday) comes before T (Thursday).",
+    "hint": "Think about alphabetical ordering."
+  },
+  {
+    "id": "brain-50",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Discount Sequence",
+    "question": "An item is discounted by 20%, and then the sale price is increased by 20%. How does the final price compare to the original?",
+    "options": [
+      "4% less than original",
+      "Equal to original",
+      "4% more than original",
+      "2% less than original"
+    ],
+    "correctAnswer": "4% less than original",
+    "explanation": "100 * 0.80 = 80; then 80 * 1.20 = 96. The final price is 96% of the original (4% lower).",
+    "hint": "Multiply by 0.80 and then by 1.20."
+  },
+  {
+    "id": "brain-51",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Lateral Thinking",
+    "title": "Egg Drop Height",
+    "question": "How can you drop a raw egg onto a concrete floor from a height of 3 feet without cracking it?",
+    "options": [
+      "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+      "Boil it first",
+      "Wrap it in concrete",
+      "Drop it on a pillow"
+    ],
+    "correctAnswer": "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+    "explanation": "Dropping it from 4 feet means it travels through the first 3 feet of free air without cracking until it hits the floor.",
+    "hint": "Consider the egg traveling through the air."
+  },
+  {
+    "id": "brain-52",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Situational Reasoning",
+    "title": "Socks in Drawer",
+    "question": "A drawer has 10 black socks and 10 white socks. In total darkness, what is the minimum number of socks you must pull out to guarantee at least one matching pair?",
+    "options": [
+      "3 socks",
+      "2 socks",
+      "11 socks",
+      "20 socks"
+    ],
+    "correctAnswer": "3 socks",
+    "explanation": "By Pigeonhole Principle, with 2 colors (black and white), picking 3 socks guarantees at least two of the same color.",
+    "hint": "Pigeonhole principle with 2 color categories."
+  },
+  {
+    "id": "brain-53",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Fractions Sum",
+    "question": "What is 1/2 + 1/4 + 1/8 + 1/16?",
+    "options": [
+      "15/16",
+      "1",
+      "7/8",
+      "31/32"
+    ],
+    "correctAnswer": "15/16",
+    "explanation": "Converting to common denominator 16: 8/16 + 4/16 + 2/16 + 1/16 = 15/16.",
+    "hint": "Use 16 as common denominator."
+  },
+  {
+    "id": "brain-54",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Shadow Riddle",
+    "question": "I run when you run, stop when you stop, but I disappear in the dark. What am I?",
+    "options": [
+      "Your Shadow",
+      "Your Reflection",
+      "Your Echo",
+      "Your Heartbeat"
+    ],
+    "correctAnswer": "Your Shadow",
+    "explanation": "A shadow mimics your movements in light and disappears completely in total darkness.",
+    "hint": "Cast on the ground by sunlight or light bulbs."
+  },
+  {
+    "id": "brain-55",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Lateral Thinking",
+    "title": "Two Coins Puzzle",
+    "question": "Two US coins total 30 cents, and one of them is not a nickel. What are the two coins?",
+    "options": [
+      "A quarter and a nickel",
+      "Two dimes and a nickel",
+      "Three dimes",
+      "A half dollar and a quarter"
+    ],
+    "correctAnswer": "A quarter and a nickel",
+    "explanation": "One of them is a quarter (which is not a nickel), and the other coin is indeed a nickel! (25c + 5c = 30c).",
+    "hint": "ONE of them is not a nickel; the OTHER one is."
+  },
+  {
+    "id": "brain-56",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "Holes in Clothes",
+    "question": "What has a neck but no head, and wears a cap?",
+    "options": [
+      "A Bottle",
+      "A Shirt",
+      "A River",
+      "A Mountain"
+    ],
+    "correctAnswer": "A Bottle",
+    "explanation": "A glass or plastic bottle has a neck, a mouth, and a bottle cap, but no head.",
+    "hint": "Found in kitchens and refrigerators."
+  },
+  {
+    "id": "brain-57",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Word Teasers",
+    "title": "Dictionary Order",
+    "question": "Where does Friday come before Thursday?",
+    "options": [
+      "In a Dictionary",
+      "In a leap year",
+      "On a calendar",
+      "In a weekly planner"
+    ],
+    "correctAnswer": "In a Dictionary",
+    "explanation": "In alphabetical order in a dictionary, F (Friday) comes before T (Thursday).",
+    "hint": "Think about alphabetical ordering."
+  },
+  {
+    "id": "brain-58",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Discount Sequence",
+    "question": "An item is discounted by 20%, and then the sale price is increased by 20%. How does the final price compare to the original?",
+    "options": [
+      "4% less than original",
+      "Equal to original",
+      "4% more than original",
+      "2% less than original"
+    ],
+    "correctAnswer": "4% less than original",
+    "explanation": "100 * 0.80 = 80; then 80 * 1.20 = 96. The final price is 96% of the original (4% lower).",
+    "hint": "Multiply by 0.80 and then by 1.20."
+  },
+  {
+    "id": "brain-59",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Lateral Thinking",
+    "title": "Egg Drop Height",
+    "question": "How can you drop a raw egg onto a concrete floor from a height of 3 feet without cracking it?",
+    "options": [
+      "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+      "Boil it first",
+      "Wrap it in concrete",
+      "Drop it on a pillow"
+    ],
+    "correctAnswer": "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+    "explanation": "Dropping it from 4 feet means it travels through the first 3 feet of free air without cracking until it hits the floor.",
+    "hint": "Consider the egg traveling through the air."
+  },
+  {
+    "id": "brain-60",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Situational Reasoning",
+    "title": "Socks in Drawer",
+    "question": "A drawer has 10 black socks and 10 white socks. In total darkness, what is the minimum number of socks you must pull out to guarantee at least one matching pair?",
+    "options": [
+      "3 socks",
+      "2 socks",
+      "11 socks",
+      "20 socks"
+    ],
+    "correctAnswer": "3 socks",
+    "explanation": "By Pigeonhole Principle, with 2 colors (black and white), picking 3 socks guarantees at least two of the same color.",
+    "hint": "Pigeonhole principle with 2 color categories."
+  },
+  {
+    "id": "brain-61",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Fractions Sum",
+    "question": "What is 1/2 + 1/4 + 1/8 + 1/16?",
+    "options": [
+      "15/16",
+      "1",
+      "7/8",
+      "31/32"
+    ],
+    "correctAnswer": "15/16",
+    "explanation": "Converting to common denominator 16: 8/16 + 4/16 + 2/16 + 1/16 = 15/16.",
+    "hint": "Use 16 as common denominator."
+  },
+  {
+    "id": "brain-62",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Shadow Riddle",
+    "question": "I run when you run, stop when you stop, but I disappear in the dark. What am I?",
+    "options": [
+      "Your Shadow",
+      "Your Reflection",
+      "Your Echo",
+      "Your Heartbeat"
+    ],
+    "correctAnswer": "Your Shadow",
+    "explanation": "A shadow mimics your movements in light and disappears completely in total darkness.",
+    "hint": "Cast on the ground by sunlight or light bulbs."
+  },
+  {
+    "id": "brain-63",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Lateral Thinking",
+    "title": "Two Coins Puzzle",
+    "question": "Two US coins total 30 cents, and one of them is not a nickel. What are the two coins?",
+    "options": [
+      "A quarter and a nickel",
+      "Two dimes and a nickel",
+      "Three dimes",
+      "A half dollar and a quarter"
+    ],
+    "correctAnswer": "A quarter and a nickel",
+    "explanation": "One of them is a quarter (which is not a nickel), and the other coin is indeed a nickel! (25c + 5c = 30c).",
+    "hint": "ONE of them is not a nickel; the OTHER one is."
+  },
+  {
+    "id": "brain-64",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "Holes in Clothes",
+    "question": "What has a neck but no head, and wears a cap?",
+    "options": [
+      "A Bottle",
+      "A Shirt",
+      "A River",
+      "A Mountain"
+    ],
+    "correctAnswer": "A Bottle",
+    "explanation": "A glass or plastic bottle has a neck, a mouth, and a bottle cap, but no head.",
+    "hint": "Found in kitchens and refrigerators."
+  },
+  {
+    "id": "brain-65",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Word Teasers",
+    "title": "Dictionary Order",
+    "question": "Where does Friday come before Thursday?",
+    "options": [
+      "In a Dictionary",
+      "In a leap year",
+      "On a calendar",
+      "In a weekly planner"
+    ],
+    "correctAnswer": "In a Dictionary",
+    "explanation": "In alphabetical order in a dictionary, F (Friday) comes before T (Thursday).",
+    "hint": "Think about alphabetical ordering."
+  },
+  {
+    "id": "brain-66",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Discount Sequence",
+    "question": "An item is discounted by 20%, and then the sale price is increased by 20%. How does the final price compare to the original?",
+    "options": [
+      "4% less than original",
+      "Equal to original",
+      "4% more than original",
+      "2% less than original"
+    ],
+    "correctAnswer": "4% less than original",
+    "explanation": "100 * 0.80 = 80; then 80 * 1.20 = 96. The final price is 96% of the original (4% lower).",
+    "hint": "Multiply by 0.80 and then by 1.20."
+  },
+  {
+    "id": "brain-67",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Lateral Thinking",
+    "title": "Egg Drop Height",
+    "question": "How can you drop a raw egg onto a concrete floor from a height of 3 feet without cracking it?",
+    "options": [
+      "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+      "Boil it first",
+      "Wrap it in concrete",
+      "Drop it on a pillow"
+    ],
+    "correctAnswer": "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+    "explanation": "Dropping it from 4 feet means it travels through the first 3 feet of free air without cracking until it hits the floor.",
+    "hint": "Consider the egg traveling through the air."
+  },
+  {
+    "id": "brain-68",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Situational Reasoning",
+    "title": "Socks in Drawer",
+    "question": "A drawer has 10 black socks and 10 white socks. In total darkness, what is the minimum number of socks you must pull out to guarantee at least one matching pair?",
+    "options": [
+      "3 socks",
+      "2 socks",
+      "11 socks",
+      "20 socks"
+    ],
+    "correctAnswer": "3 socks",
+    "explanation": "By Pigeonhole Principle, with 2 colors (black and white), picking 3 socks guarantees at least two of the same color.",
+    "hint": "Pigeonhole principle with 2 color categories."
+  },
+  {
+    "id": "brain-69",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Fractions Sum",
+    "question": "What is 1/2 + 1/4 + 1/8 + 1/16?",
+    "options": [
+      "15/16",
+      "1",
+      "7/8",
+      "31/32"
+    ],
+    "correctAnswer": "15/16",
+    "explanation": "Converting to common denominator 16: 8/16 + 4/16 + 2/16 + 1/16 = 15/16.",
+    "hint": "Use 16 as common denominator."
+  },
+  {
+    "id": "brain-70",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Shadow Riddle",
+    "question": "I run when you run, stop when you stop, but I disappear in the dark. What am I?",
+    "options": [
+      "Your Shadow",
+      "Your Reflection",
+      "Your Echo",
+      "Your Heartbeat"
+    ],
+    "correctAnswer": "Your Shadow",
+    "explanation": "A shadow mimics your movements in light and disappears completely in total darkness.",
+    "hint": "Cast on the ground by sunlight or light bulbs."
+  },
+  {
+    "id": "brain-71",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Lateral Thinking",
+    "title": "Two Coins Puzzle",
+    "question": "Two US coins total 30 cents, and one of them is not a nickel. What are the two coins?",
+    "options": [
+      "A quarter and a nickel",
+      "Two dimes and a nickel",
+      "Three dimes",
+      "A half dollar and a quarter"
+    ],
+    "correctAnswer": "A quarter and a nickel",
+    "explanation": "One of them is a quarter (which is not a nickel), and the other coin is indeed a nickel! (25c + 5c = 30c).",
+    "hint": "ONE of them is not a nickel; the OTHER one is."
+  },
+  {
+    "id": "brain-72",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "Holes in Clothes",
+    "question": "What has a neck but no head, and wears a cap?",
+    "options": [
+      "A Bottle",
+      "A Shirt",
+      "A River",
+      "A Mountain"
+    ],
+    "correctAnswer": "A Bottle",
+    "explanation": "A glass or plastic bottle has a neck, a mouth, and a bottle cap, but no head.",
+    "hint": "Found in kitchens and refrigerators."
+  },
+  {
+    "id": "brain-73",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Word Teasers",
+    "title": "Dictionary Order",
+    "question": "Where does Friday come before Thursday?",
+    "options": [
+      "In a Dictionary",
+      "In a leap year",
+      "On a calendar",
+      "In a weekly planner"
+    ],
+    "correctAnswer": "In a Dictionary",
+    "explanation": "In alphabetical order in a dictionary, F (Friday) comes before T (Thursday).",
+    "hint": "Think about alphabetical ordering."
+  },
+  {
+    "id": "brain-74",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Discount Sequence",
+    "question": "An item is discounted by 20%, and then the sale price is increased by 20%. How does the final price compare to the original?",
+    "options": [
+      "4% less than original",
+      "Equal to original",
+      "4% more than original",
+      "2% less than original"
+    ],
+    "correctAnswer": "4% less than original",
+    "explanation": "100 * 0.80 = 80; then 80 * 1.20 = 96. The final price is 96% of the original (4% lower).",
+    "hint": "Multiply by 0.80 and then by 1.20."
+  },
+  {
+    "id": "brain-75",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Lateral Thinking",
+    "title": "Egg Drop Height",
+    "question": "How can you drop a raw egg onto a concrete floor from a height of 3 feet without cracking it?",
+    "options": [
+      "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+      "Boil it first",
+      "Wrap it in concrete",
+      "Drop it on a pillow"
+    ],
+    "correctAnswer": "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+    "explanation": "Dropping it from 4 feet means it travels through the first 3 feet of free air without cracking until it hits the floor.",
+    "hint": "Consider the egg traveling through the air."
+  },
+  {
+    "id": "brain-76",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Situational Reasoning",
+    "title": "Socks in Drawer",
+    "question": "A drawer has 10 black socks and 10 white socks. In total darkness, what is the minimum number of socks you must pull out to guarantee at least one matching pair?",
+    "options": [
+      "3 socks",
+      "2 socks",
+      "11 socks",
+      "20 socks"
+    ],
+    "correctAnswer": "3 socks",
+    "explanation": "By Pigeonhole Principle, with 2 colors (black and white), picking 3 socks guarantees at least two of the same color.",
+    "hint": "Pigeonhole principle with 2 color categories."
+  },
+  {
+    "id": "brain-77",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Fractions Sum",
+    "question": "What is 1/2 + 1/4 + 1/8 + 1/16?",
+    "options": [
+      "15/16",
+      "1",
+      "7/8",
+      "31/32"
+    ],
+    "correctAnswer": "15/16",
+    "explanation": "Converting to common denominator 16: 8/16 + 4/16 + 2/16 + 1/16 = 15/16.",
+    "hint": "Use 16 as common denominator."
+  },
+  {
+    "id": "brain-78",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Shadow Riddle",
+    "question": "I run when you run, stop when you stop, but I disappear in the dark. What am I?",
+    "options": [
+      "Your Shadow",
+      "Your Reflection",
+      "Your Echo",
+      "Your Heartbeat"
+    ],
+    "correctAnswer": "Your Shadow",
+    "explanation": "A shadow mimics your movements in light and disappears completely in total darkness.",
+    "hint": "Cast on the ground by sunlight or light bulbs."
+  },
+  {
+    "id": "brain-79",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Lateral Thinking",
+    "title": "Two Coins Puzzle",
+    "question": "Two US coins total 30 cents, and one of them is not a nickel. What are the two coins?",
+    "options": [
+      "A quarter and a nickel",
+      "Two dimes and a nickel",
+      "Three dimes",
+      "A half dollar and a quarter"
+    ],
+    "correctAnswer": "A quarter and a nickel",
+    "explanation": "One of them is a quarter (which is not a nickel), and the other coin is indeed a nickel! (25c + 5c = 30c).",
+    "hint": "ONE of them is not a nickel; the OTHER one is."
+  },
+  {
+    "id": "brain-80",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "Holes in Clothes",
+    "question": "What has a neck but no head, and wears a cap?",
+    "options": [
+      "A Bottle",
+      "A Shirt",
+      "A River",
+      "A Mountain"
+    ],
+    "correctAnswer": "A Bottle",
+    "explanation": "A glass or plastic bottle has a neck, a mouth, and a bottle cap, but no head.",
+    "hint": "Found in kitchens and refrigerators."
+  },
+  {
+    "id": "brain-81",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Word Teasers",
+    "title": "Dictionary Order",
+    "question": "Where does Friday come before Thursday?",
+    "options": [
+      "In a Dictionary",
+      "In a leap year",
+      "On a calendar",
+      "In a weekly planner"
+    ],
+    "correctAnswer": "In a Dictionary",
+    "explanation": "In alphabetical order in a dictionary, F (Friday) comes before T (Thursday).",
+    "hint": "Think about alphabetical ordering."
+  },
+  {
+    "id": "brain-82",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Discount Sequence",
+    "question": "An item is discounted by 20%, and then the sale price is increased by 20%. How does the final price compare to the original?",
+    "options": [
+      "4% less than original",
+      "Equal to original",
+      "4% more than original",
+      "2% less than original"
+    ],
+    "correctAnswer": "4% less than original",
+    "explanation": "100 * 0.80 = 80; then 80 * 1.20 = 96. The final price is 96% of the original (4% lower).",
+    "hint": "Multiply by 0.80 and then by 1.20."
+  },
+  {
+    "id": "brain-83",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Lateral Thinking",
+    "title": "Egg Drop Height",
+    "question": "How can you drop a raw egg onto a concrete floor from a height of 3 feet without cracking it?",
+    "options": [
+      "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+      "Boil it first",
+      "Wrap it in concrete",
+      "Drop it on a pillow"
+    ],
+    "correctAnswer": "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+    "explanation": "Dropping it from 4 feet means it travels through the first 3 feet of free air without cracking until it hits the floor.",
+    "hint": "Consider the egg traveling through the air."
+  },
+  {
+    "id": "brain-84",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Situational Reasoning",
+    "title": "Socks in Drawer",
+    "question": "A drawer has 10 black socks and 10 white socks. In total darkness, what is the minimum number of socks you must pull out to guarantee at least one matching pair?",
+    "options": [
+      "3 socks",
+      "2 socks",
+      "11 socks",
+      "20 socks"
+    ],
+    "correctAnswer": "3 socks",
+    "explanation": "By Pigeonhole Principle, with 2 colors (black and white), picking 3 socks guarantees at least two of the same color.",
+    "hint": "Pigeonhole principle with 2 color categories."
+  },
+  {
+    "id": "brain-85",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Fractions Sum",
+    "question": "What is 1/2 + 1/4 + 1/8 + 1/16?",
+    "options": [
+      "15/16",
+      "1",
+      "7/8",
+      "31/32"
+    ],
+    "correctAnswer": "15/16",
+    "explanation": "Converting to common denominator 16: 8/16 + 4/16 + 2/16 + 1/16 = 15/16.",
+    "hint": "Use 16 as common denominator."
+  },
+  {
+    "id": "brain-86",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Shadow Riddle",
+    "question": "I run when you run, stop when you stop, but I disappear in the dark. What am I?",
+    "options": [
+      "Your Shadow",
+      "Your Reflection",
+      "Your Echo",
+      "Your Heartbeat"
+    ],
+    "correctAnswer": "Your Shadow",
+    "explanation": "A shadow mimics your movements in light and disappears completely in total darkness.",
+    "hint": "Cast on the ground by sunlight or light bulbs."
+  },
+  {
+    "id": "brain-87",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Lateral Thinking",
+    "title": "Two Coins Puzzle",
+    "question": "Two US coins total 30 cents, and one of them is not a nickel. What are the two coins?",
+    "options": [
+      "A quarter and a nickel",
+      "Two dimes and a nickel",
+      "Three dimes",
+      "A half dollar and a quarter"
+    ],
+    "correctAnswer": "A quarter and a nickel",
+    "explanation": "One of them is a quarter (which is not a nickel), and the other coin is indeed a nickel! (25c + 5c = 30c).",
+    "hint": "ONE of them is not a nickel; the OTHER one is."
+  },
+  {
+    "id": "brain-88",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "Holes in Clothes",
+    "question": "What has a neck but no head, and wears a cap?",
+    "options": [
+      "A Bottle",
+      "A Shirt",
+      "A River",
+      "A Mountain"
+    ],
+    "correctAnswer": "A Bottle",
+    "explanation": "A glass or plastic bottle has a neck, a mouth, and a bottle cap, but no head.",
+    "hint": "Found in kitchens and refrigerators."
+  },
+  {
+    "id": "brain-89",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Word Teasers",
+    "title": "Dictionary Order",
+    "question": "Where does Friday come before Thursday?",
+    "options": [
+      "In a Dictionary",
+      "In a leap year",
+      "On a calendar",
+      "In a weekly planner"
+    ],
+    "correctAnswer": "In a Dictionary",
+    "explanation": "In alphabetical order in a dictionary, F (Friday) comes before T (Thursday).",
+    "hint": "Think about alphabetical ordering."
+  },
+  {
+    "id": "brain-90",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Discount Sequence",
+    "question": "An item is discounted by 20%, and then the sale price is increased by 20%. How does the final price compare to the original?",
+    "options": [
+      "4% less than original",
+      "Equal to original",
+      "4% more than original",
+      "2% less than original"
+    ],
+    "correctAnswer": "4% less than original",
+    "explanation": "100 * 0.80 = 80; then 80 * 1.20 = 96. The final price is 96% of the original (4% lower).",
+    "hint": "Multiply by 0.80 and then by 1.20."
+  },
+  {
+    "id": "brain-91",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Lateral Thinking",
+    "title": "Egg Drop Height",
+    "question": "How can you drop a raw egg onto a concrete floor from a height of 3 feet without cracking it?",
+    "options": [
+      "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+      "Boil it first",
+      "Wrap it in concrete",
+      "Drop it on a pillow"
+    ],
+    "correctAnswer": "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+    "explanation": "Dropping it from 4 feet means it travels through the first 3 feet of free air without cracking until it hits the floor.",
+    "hint": "Consider the egg traveling through the air."
+  },
+  {
+    "id": "brain-92",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Situational Reasoning",
+    "title": "Socks in Drawer",
+    "question": "A drawer has 10 black socks and 10 white socks. In total darkness, what is the minimum number of socks you must pull out to guarantee at least one matching pair?",
+    "options": [
+      "3 socks",
+      "2 socks",
+      "11 socks",
+      "20 socks"
+    ],
+    "correctAnswer": "3 socks",
+    "explanation": "By Pigeonhole Principle, with 2 colors (black and white), picking 3 socks guarantees at least two of the same color.",
+    "hint": "Pigeonhole principle with 2 color categories."
+  },
+  {
+    "id": "brain-93",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Fractions Sum",
+    "question": "What is 1/2 + 1/4 + 1/8 + 1/16?",
+    "options": [
+      "15/16",
+      "1",
+      "7/8",
+      "31/32"
+    ],
+    "correctAnswer": "15/16",
+    "explanation": "Converting to common denominator 16: 8/16 + 4/16 + 2/16 + 1/16 = 15/16.",
+    "hint": "Use 16 as common denominator."
+  },
+  {
+    "id": "brain-94",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Shadow Riddle",
+    "question": "I run when you run, stop when you stop, but I disappear in the dark. What am I?",
+    "options": [
+      "Your Shadow",
+      "Your Reflection",
+      "Your Echo",
+      "Your Heartbeat"
+    ],
+    "correctAnswer": "Your Shadow",
+    "explanation": "A shadow mimics your movements in light and disappears completely in total darkness.",
+    "hint": "Cast on the ground by sunlight or light bulbs."
+  },
+  {
+    "id": "brain-95",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Lateral Thinking",
+    "title": "Two Coins Puzzle",
+    "question": "Two US coins total 30 cents, and one of them is not a nickel. What are the two coins?",
+    "options": [
+      "A quarter and a nickel",
+      "Two dimes and a nickel",
+      "Three dimes",
+      "A half dollar and a quarter"
+    ],
+    "correctAnswer": "A quarter and a nickel",
+    "explanation": "One of them is a quarter (which is not a nickel), and the other coin is indeed a nickel! (25c + 5c = 30c).",
+    "hint": "ONE of them is not a nickel; the OTHER one is."
+  },
+  {
+    "id": "brain-96",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "Holes in Clothes",
+    "question": "What has a neck but no head, and wears a cap?",
+    "options": [
+      "A Bottle",
+      "A Shirt",
+      "A River",
+      "A Mountain"
+    ],
+    "correctAnswer": "A Bottle",
+    "explanation": "A glass or plastic bottle has a neck, a mouth, and a bottle cap, but no head.",
+    "hint": "Found in kitchens and refrigerators."
+  },
+  {
+    "id": "brain-97",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Word Teasers",
+    "title": "Dictionary Order",
+    "question": "Where does Friday come before Thursday?",
+    "options": [
+      "In a Dictionary",
+      "In a leap year",
+      "On a calendar",
+      "In a weekly planner"
+    ],
+    "correctAnswer": "In a Dictionary",
+    "explanation": "In alphabetical order in a dictionary, F (Friday) comes before T (Thursday).",
+    "hint": "Think about alphabetical ordering."
+  },
+  {
+    "id": "brain-98",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Discount Sequence",
+    "question": "An item is discounted by 20%, and then the sale price is increased by 20%. How does the final price compare to the original?",
+    "options": [
+      "4% less than original",
+      "Equal to original",
+      "4% more than original",
+      "2% less than original"
+    ],
+    "correctAnswer": "4% less than original",
+    "explanation": "100 * 0.80 = 80; then 80 * 1.20 = 96. The final price is 96% of the original (4% lower).",
+    "hint": "Multiply by 0.80 and then by 1.20."
+  },
+  {
+    "id": "brain-99",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Lateral Thinking",
+    "title": "Egg Drop Height",
+    "question": "How can you drop a raw egg onto a concrete floor from a height of 3 feet without cracking it?",
+    "options": [
+      "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+      "Boil it first",
+      "Wrap it in concrete",
+      "Drop it on a pillow"
+    ],
+    "correctAnswer": "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+    "explanation": "Dropping it from 4 feet means it travels through the first 3 feet of free air without cracking until it hits the floor.",
+    "hint": "Consider the egg traveling through the air."
+  },
+  {
+    "id": "brain-100",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Situational Reasoning",
+    "title": "Socks in Drawer",
+    "question": "A drawer has 10 black socks and 10 white socks. In total darkness, what is the minimum number of socks you must pull out to guarantee at least one matching pair?",
+    "options": [
+      "3 socks",
+      "2 socks",
+      "11 socks",
+      "20 socks"
+    ],
+    "correctAnswer": "3 socks",
+    "explanation": "By Pigeonhole Principle, with 2 colors (black and white), picking 3 socks guarantees at least two of the same color.",
+    "hint": "Pigeonhole principle with 2 color categories."
+  },
+  {
+    "id": "brain-101",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Fractions Sum",
+    "question": "What is 1/2 + 1/4 + 1/8 + 1/16?",
+    "options": [
+      "15/16",
+      "1",
+      "7/8",
+      "31/32"
+    ],
+    "correctAnswer": "15/16",
+    "explanation": "Converting to common denominator 16: 8/16 + 4/16 + 2/16 + 1/16 = 15/16.",
+    "hint": "Use 16 as common denominator."
+  },
+  {
+    "id": "brain-102",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Shadow Riddle",
+    "question": "I run when you run, stop when you stop, but I disappear in the dark. What am I?",
+    "options": [
+      "Your Shadow",
+      "Your Reflection",
+      "Your Echo",
+      "Your Heartbeat"
+    ],
+    "correctAnswer": "Your Shadow",
+    "explanation": "A shadow mimics your movements in light and disappears completely in total darkness.",
+    "hint": "Cast on the ground by sunlight or light bulbs."
+  },
+  {
+    "id": "brain-103",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Lateral Thinking",
+    "title": "Two Coins Puzzle",
+    "question": "Two US coins total 30 cents, and one of them is not a nickel. What are the two coins?",
+    "options": [
+      "A quarter and a nickel",
+      "Two dimes and a nickel",
+      "Three dimes",
+      "A half dollar and a quarter"
+    ],
+    "correctAnswer": "A quarter and a nickel",
+    "explanation": "One of them is a quarter (which is not a nickel), and the other coin is indeed a nickel! (25c + 5c = 30c).",
+    "hint": "ONE of them is not a nickel; the OTHER one is."
+  },
+  {
+    "id": "brain-104",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "Holes in Clothes",
+    "question": "What has a neck but no head, and wears a cap?",
+    "options": [
+      "A Bottle",
+      "A Shirt",
+      "A River",
+      "A Mountain"
+    ],
+    "correctAnswer": "A Bottle",
+    "explanation": "A glass or plastic bottle has a neck, a mouth, and a bottle cap, but no head.",
+    "hint": "Found in kitchens and refrigerators."
+  },
+  {
+    "id": "brain-105",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Word Teasers",
+    "title": "Dictionary Order",
+    "question": "Where does Friday come before Thursday?",
+    "options": [
+      "In a Dictionary",
+      "In a leap year",
+      "On a calendar",
+      "In a weekly planner"
+    ],
+    "correctAnswer": "In a Dictionary",
+    "explanation": "In alphabetical order in a dictionary, F (Friday) comes before T (Thursday).",
+    "hint": "Think about alphabetical ordering."
+  },
+  {
+    "id": "brain-106",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Discount Sequence",
+    "question": "An item is discounted by 20%, and then the sale price is increased by 20%. How does the final price compare to the original?",
+    "options": [
+      "4% less than original",
+      "Equal to original",
+      "4% more than original",
+      "2% less than original"
+    ],
+    "correctAnswer": "4% less than original",
+    "explanation": "100 * 0.80 = 80; then 80 * 1.20 = 96. The final price is 96% of the original (4% lower).",
+    "hint": "Multiply by 0.80 and then by 1.20."
+  },
+  {
+    "id": "brain-107",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Lateral Thinking",
+    "title": "Egg Drop Height",
+    "question": "How can you drop a raw egg onto a concrete floor from a height of 3 feet without cracking it?",
+    "options": [
+      "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+      "Boil it first",
+      "Wrap it in concrete",
+      "Drop it on a pillow"
+    ],
+    "correctAnswer": "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+    "explanation": "Dropping it from 4 feet means it travels through the first 3 feet of free air without cracking until it hits the floor.",
+    "hint": "Consider the egg traveling through the air."
+  },
+  {
+    "id": "brain-108",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Situational Reasoning",
+    "title": "Socks in Drawer",
+    "question": "A drawer has 10 black socks and 10 white socks. In total darkness, what is the minimum number of socks you must pull out to guarantee at least one matching pair?",
+    "options": [
+      "3 socks",
+      "2 socks",
+      "11 socks",
+      "20 socks"
+    ],
+    "correctAnswer": "3 socks",
+    "explanation": "By Pigeonhole Principle, with 2 colors (black and white), picking 3 socks guarantees at least two of the same color.",
+    "hint": "Pigeonhole principle with 2 color categories."
+  },
+  {
+    "id": "brain-109",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Fractions Sum",
+    "question": "What is 1/2 + 1/4 + 1/8 + 1/16?",
+    "options": [
+      "15/16",
+      "1",
+      "7/8",
+      "31/32"
+    ],
+    "correctAnswer": "15/16",
+    "explanation": "Converting to common denominator 16: 8/16 + 4/16 + 2/16 + 1/16 = 15/16.",
+    "hint": "Use 16 as common denominator."
+  },
+  {
+    "id": "brain-110",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Shadow Riddle",
+    "question": "I run when you run, stop when you stop, but I disappear in the dark. What am I?",
+    "options": [
+      "Your Shadow",
+      "Your Reflection",
+      "Your Echo",
+      "Your Heartbeat"
+    ],
+    "correctAnswer": "Your Shadow",
+    "explanation": "A shadow mimics your movements in light and disappears completely in total darkness.",
+    "hint": "Cast on the ground by sunlight or light bulbs."
+  },
+  {
+    "id": "brain-111",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Lateral Thinking",
+    "title": "Two Coins Puzzle",
+    "question": "Two US coins total 30 cents, and one of them is not a nickel. What are the two coins?",
+    "options": [
+      "A quarter and a nickel",
+      "Two dimes and a nickel",
+      "Three dimes",
+      "A half dollar and a quarter"
+    ],
+    "correctAnswer": "A quarter and a nickel",
+    "explanation": "One of them is a quarter (which is not a nickel), and the other coin is indeed a nickel! (25c + 5c = 30c).",
+    "hint": "ONE of them is not a nickel; the OTHER one is."
+  },
+  {
+    "id": "brain-112",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "Holes in Clothes",
+    "question": "What has a neck but no head, and wears a cap?",
+    "options": [
+      "A Bottle",
+      "A Shirt",
+      "A River",
+      "A Mountain"
+    ],
+    "correctAnswer": "A Bottle",
+    "explanation": "A glass or plastic bottle has a neck, a mouth, and a bottle cap, but no head.",
+    "hint": "Found in kitchens and refrigerators."
+  },
+  {
+    "id": "brain-113",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Word Teasers",
+    "title": "Dictionary Order",
+    "question": "Where does Friday come before Thursday?",
+    "options": [
+      "In a Dictionary",
+      "In a leap year",
+      "On a calendar",
+      "In a weekly planner"
+    ],
+    "correctAnswer": "In a Dictionary",
+    "explanation": "In alphabetical order in a dictionary, F (Friday) comes before T (Thursday).",
+    "hint": "Think about alphabetical ordering."
+  },
+  {
+    "id": "brain-114",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Discount Sequence",
+    "question": "An item is discounted by 20%, and then the sale price is increased by 20%. How does the final price compare to the original?",
+    "options": [
+      "4% less than original",
+      "Equal to original",
+      "4% more than original",
+      "2% less than original"
+    ],
+    "correctAnswer": "4% less than original",
+    "explanation": "100 * 0.80 = 80; then 80 * 1.20 = 96. The final price is 96% of the original (4% lower).",
+    "hint": "Multiply by 0.80 and then by 1.20."
+  },
+  {
+    "id": "brain-115",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Lateral Thinking",
+    "title": "Egg Drop Height",
+    "question": "How can you drop a raw egg onto a concrete floor from a height of 3 feet without cracking it?",
+    "options": [
+      "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+      "Boil it first",
+      "Wrap it in concrete",
+      "Drop it on a pillow"
+    ],
+    "correctAnswer": "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+    "explanation": "Dropping it from 4 feet means it travels through the first 3 feet of free air without cracking until it hits the floor.",
+    "hint": "Consider the egg traveling through the air."
+  },
+  {
+    "id": "brain-116",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Situational Reasoning",
+    "title": "Socks in Drawer",
+    "question": "A drawer has 10 black socks and 10 white socks. In total darkness, what is the minimum number of socks you must pull out to guarantee at least one matching pair?",
+    "options": [
+      "3 socks",
+      "2 socks",
+      "11 socks",
+      "20 socks"
+    ],
+    "correctAnswer": "3 socks",
+    "explanation": "By Pigeonhole Principle, with 2 colors (black and white), picking 3 socks guarantees at least two of the same color.",
+    "hint": "Pigeonhole principle with 2 color categories."
+  },
+  {
+    "id": "brain-117",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Fractions Sum",
+    "question": "What is 1/2 + 1/4 + 1/8 + 1/16?",
+    "options": [
+      "15/16",
+      "1",
+      "7/8",
+      "31/32"
+    ],
+    "correctAnswer": "15/16",
+    "explanation": "Converting to common denominator 16: 8/16 + 4/16 + 2/16 + 1/16 = 15/16.",
+    "hint": "Use 16 as common denominator."
+  },
+  {
+    "id": "brain-118",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Shadow Riddle",
+    "question": "I run when you run, stop when you stop, but I disappear in the dark. What am I?",
+    "options": [
+      "Your Shadow",
+      "Your Reflection",
+      "Your Echo",
+      "Your Heartbeat"
+    ],
+    "correctAnswer": "Your Shadow",
+    "explanation": "A shadow mimics your movements in light and disappears completely in total darkness.",
+    "hint": "Cast on the ground by sunlight or light bulbs."
+  },
+  {
+    "id": "brain-119",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Lateral Thinking",
+    "title": "Two Coins Puzzle",
+    "question": "Two US coins total 30 cents, and one of them is not a nickel. What are the two coins?",
+    "options": [
+      "A quarter and a nickel",
+      "Two dimes and a nickel",
+      "Three dimes",
+      "A half dollar and a quarter"
+    ],
+    "correctAnswer": "A quarter and a nickel",
+    "explanation": "One of them is a quarter (which is not a nickel), and the other coin is indeed a nickel! (25c + 5c = 30c).",
+    "hint": "ONE of them is not a nickel; the OTHER one is."
+  },
+  {
+    "id": "brain-120",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "Holes in Clothes",
+    "question": "What has a neck but no head, and wears a cap?",
+    "options": [
+      "A Bottle",
+      "A Shirt",
+      "A River",
+      "A Mountain"
+    ],
+    "correctAnswer": "A Bottle",
+    "explanation": "A glass or plastic bottle has a neck, a mouth, and a bottle cap, but no head.",
+    "hint": "Found in kitchens and refrigerators."
+  },
+  {
+    "id": "brain-121",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Word Teasers",
+    "title": "Dictionary Order",
+    "question": "Where does Friday come before Thursday?",
+    "options": [
+      "In a Dictionary",
+      "In a leap year",
+      "On a calendar",
+      "In a weekly planner"
+    ],
+    "correctAnswer": "In a Dictionary",
+    "explanation": "In alphabetical order in a dictionary, F (Friday) comes before T (Thursday).",
+    "hint": "Think about alphabetical ordering."
+  },
+  {
+    "id": "brain-122",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Discount Sequence",
+    "question": "An item is discounted by 20%, and then the sale price is increased by 20%. How does the final price compare to the original?",
+    "options": [
+      "4% less than original",
+      "Equal to original",
+      "4% more than original",
+      "2% less than original"
+    ],
+    "correctAnswer": "4% less than original",
+    "explanation": "100 * 0.80 = 80; then 80 * 1.20 = 96. The final price is 96% of the original (4% lower).",
+    "hint": "Multiply by 0.80 and then by 1.20."
+  },
+  {
+    "id": "brain-123",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Lateral Thinking",
+    "title": "Egg Drop Height",
+    "question": "How can you drop a raw egg onto a concrete floor from a height of 3 feet without cracking it?",
+    "options": [
+      "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+      "Boil it first",
+      "Wrap it in concrete",
+      "Drop it on a pillow"
+    ],
+    "correctAnswer": "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+    "explanation": "Dropping it from 4 feet means it travels through the first 3 feet of free air without cracking until it hits the floor.",
+    "hint": "Consider the egg traveling through the air."
+  },
+  {
+    "id": "brain-124",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Situational Reasoning",
+    "title": "Socks in Drawer",
+    "question": "A drawer has 10 black socks and 10 white socks. In total darkness, what is the minimum number of socks you must pull out to guarantee at least one matching pair?",
+    "options": [
+      "3 socks",
+      "2 socks",
+      "11 socks",
+      "20 socks"
+    ],
+    "correctAnswer": "3 socks",
+    "explanation": "By Pigeonhole Principle, with 2 colors (black and white), picking 3 socks guarantees at least two of the same color.",
+    "hint": "Pigeonhole principle with 2 color categories."
+  },
+  {
+    "id": "brain-125",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Fractions Sum",
+    "question": "What is 1/2 + 1/4 + 1/8 + 1/16?",
+    "options": [
+      "15/16",
+      "1",
+      "7/8",
+      "31/32"
+    ],
+    "correctAnswer": "15/16",
+    "explanation": "Converting to common denominator 16: 8/16 + 4/16 + 2/16 + 1/16 = 15/16.",
+    "hint": "Use 16 as common denominator."
+  },
+  {
+    "id": "brain-126",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Shadow Riddle",
+    "question": "I run when you run, stop when you stop, but I disappear in the dark. What am I?",
+    "options": [
+      "Your Shadow",
+      "Your Reflection",
+      "Your Echo",
+      "Your Heartbeat"
+    ],
+    "correctAnswer": "Your Shadow",
+    "explanation": "A shadow mimics your movements in light and disappears completely in total darkness.",
+    "hint": "Cast on the ground by sunlight or light bulbs."
+  },
+  {
+    "id": "brain-127",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Lateral Thinking",
+    "title": "Two Coins Puzzle",
+    "question": "Two US coins total 30 cents, and one of them is not a nickel. What are the two coins?",
+    "options": [
+      "A quarter and a nickel",
+      "Two dimes and a nickel",
+      "Three dimes",
+      "A half dollar and a quarter"
+    ],
+    "correctAnswer": "A quarter and a nickel",
+    "explanation": "One of them is a quarter (which is not a nickel), and the other coin is indeed a nickel! (25c + 5c = 30c).",
+    "hint": "ONE of them is not a nickel; the OTHER one is."
+  },
+  {
+    "id": "brain-128",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "Holes in Clothes",
+    "question": "What has a neck but no head, and wears a cap?",
+    "options": [
+      "A Bottle",
+      "A Shirt",
+      "A River",
+      "A Mountain"
+    ],
+    "correctAnswer": "A Bottle",
+    "explanation": "A glass or plastic bottle has a neck, a mouth, and a bottle cap, but no head.",
+    "hint": "Found in kitchens and refrigerators."
+  },
+  {
+    "id": "brain-129",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Word Teasers",
+    "title": "Dictionary Order",
+    "question": "Where does Friday come before Thursday?",
+    "options": [
+      "In a Dictionary",
+      "In a leap year",
+      "On a calendar",
+      "In a weekly planner"
+    ],
+    "correctAnswer": "In a Dictionary",
+    "explanation": "In alphabetical order in a dictionary, F (Friday) comes before T (Thursday).",
+    "hint": "Think about alphabetical ordering."
+  },
+  {
+    "id": "brain-130",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Discount Sequence",
+    "question": "An item is discounted by 20%, and then the sale price is increased by 20%. How does the final price compare to the original?",
+    "options": [
+      "4% less than original",
+      "Equal to original",
+      "4% more than original",
+      "2% less than original"
+    ],
+    "correctAnswer": "4% less than original",
+    "explanation": "100 * 0.80 = 80; then 80 * 1.20 = 96. The final price is 96% of the original (4% lower).",
+    "hint": "Multiply by 0.80 and then by 1.20."
+  },
+  {
+    "id": "brain-131",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Lateral Thinking",
+    "title": "Egg Drop Height",
+    "question": "How can you drop a raw egg onto a concrete floor from a height of 3 feet without cracking it?",
+    "options": [
+      "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+      "Boil it first",
+      "Wrap it in concrete",
+      "Drop it on a pillow"
+    ],
+    "correctAnswer": "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+    "explanation": "Dropping it from 4 feet means it travels through the first 3 feet of free air without cracking until it hits the floor.",
+    "hint": "Consider the egg traveling through the air."
+  },
+  {
+    "id": "brain-132",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Situational Reasoning",
+    "title": "Socks in Drawer",
+    "question": "A drawer has 10 black socks and 10 white socks. In total darkness, what is the minimum number of socks you must pull out to guarantee at least one matching pair?",
+    "options": [
+      "3 socks",
+      "2 socks",
+      "11 socks",
+      "20 socks"
+    ],
+    "correctAnswer": "3 socks",
+    "explanation": "By Pigeonhole Principle, with 2 colors (black and white), picking 3 socks guarantees at least two of the same color.",
+    "hint": "Pigeonhole principle with 2 color categories."
+  },
+  {
+    "id": "brain-133",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Fractions Sum",
+    "question": "What is 1/2 + 1/4 + 1/8 + 1/16?",
+    "options": [
+      "15/16",
+      "1",
+      "7/8",
+      "31/32"
+    ],
+    "correctAnswer": "15/16",
+    "explanation": "Converting to common denominator 16: 8/16 + 4/16 + 2/16 + 1/16 = 15/16.",
+    "hint": "Use 16 as common denominator."
+  },
+  {
+    "id": "brain-134",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Shadow Riddle",
+    "question": "I run when you run, stop when you stop, but I disappear in the dark. What am I?",
+    "options": [
+      "Your Shadow",
+      "Your Reflection",
+      "Your Echo",
+      "Your Heartbeat"
+    ],
+    "correctAnswer": "Your Shadow",
+    "explanation": "A shadow mimics your movements in light and disappears completely in total darkness.",
+    "hint": "Cast on the ground by sunlight or light bulbs."
+  },
+  {
+    "id": "brain-135",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Lateral Thinking",
+    "title": "Two Coins Puzzle",
+    "question": "Two US coins total 30 cents, and one of them is not a nickel. What are the two coins?",
+    "options": [
+      "A quarter and a nickel",
+      "Two dimes and a nickel",
+      "Three dimes",
+      "A half dollar and a quarter"
+    ],
+    "correctAnswer": "A quarter and a nickel",
+    "explanation": "One of them is a quarter (which is not a nickel), and the other coin is indeed a nickel! (25c + 5c = 30c).",
+    "hint": "ONE of them is not a nickel; the OTHER one is."
+  },
+  {
+    "id": "brain-136",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "Holes in Clothes",
+    "question": "What has a neck but no head, and wears a cap?",
+    "options": [
+      "A Bottle",
+      "A Shirt",
+      "A River",
+      "A Mountain"
+    ],
+    "correctAnswer": "A Bottle",
+    "explanation": "A glass or plastic bottle has a neck, a mouth, and a bottle cap, but no head.",
+    "hint": "Found in kitchens and refrigerators."
+  },
+  {
+    "id": "brain-137",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Word Teasers",
+    "title": "Dictionary Order",
+    "question": "Where does Friday come before Thursday?",
+    "options": [
+      "In a Dictionary",
+      "In a leap year",
+      "On a calendar",
+      "In a weekly planner"
+    ],
+    "correctAnswer": "In a Dictionary",
+    "explanation": "In alphabetical order in a dictionary, F (Friday) comes before T (Thursday).",
+    "hint": "Think about alphabetical ordering."
+  },
+  {
+    "id": "brain-138",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Discount Sequence",
+    "question": "An item is discounted by 20%, and then the sale price is increased by 20%. How does the final price compare to the original?",
+    "options": [
+      "4% less than original",
+      "Equal to original",
+      "4% more than original",
+      "2% less than original"
+    ],
+    "correctAnswer": "4% less than original",
+    "explanation": "100 * 0.80 = 80; then 80 * 1.20 = 96. The final price is 96% of the original (4% lower).",
+    "hint": "Multiply by 0.80 and then by 1.20."
+  },
+  {
+    "id": "brain-139",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Lateral Thinking",
+    "title": "Egg Drop Height",
+    "question": "How can you drop a raw egg onto a concrete floor from a height of 3 feet without cracking it?",
+    "options": [
+      "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+      "Boil it first",
+      "Wrap it in concrete",
+      "Drop it on a pillow"
+    ],
+    "correctAnswer": "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+    "explanation": "Dropping it from 4 feet means it travels through the first 3 feet of free air without cracking until it hits the floor.",
+    "hint": "Consider the egg traveling through the air."
+  },
+  {
+    "id": "brain-140",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Situational Reasoning",
+    "title": "Socks in Drawer",
+    "question": "A drawer has 10 black socks and 10 white socks. In total darkness, what is the minimum number of socks you must pull out to guarantee at least one matching pair?",
+    "options": [
+      "3 socks",
+      "2 socks",
+      "11 socks",
+      "20 socks"
+    ],
+    "correctAnswer": "3 socks",
+    "explanation": "By Pigeonhole Principle, with 2 colors (black and white), picking 3 socks guarantees at least two of the same color.",
+    "hint": "Pigeonhole principle with 2 color categories."
+  },
+  {
+    "id": "brain-141",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Fractions Sum",
+    "question": "What is 1/2 + 1/4 + 1/8 + 1/16?",
+    "options": [
+      "15/16",
+      "1",
+      "7/8",
+      "31/32"
+    ],
+    "correctAnswer": "15/16",
+    "explanation": "Converting to common denominator 16: 8/16 + 4/16 + 2/16 + 1/16 = 15/16.",
+    "hint": "Use 16 as common denominator."
+  },
+  {
+    "id": "brain-142",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Shadow Riddle",
+    "question": "I run when you run, stop when you stop, but I disappear in the dark. What am I?",
+    "options": [
+      "Your Shadow",
+      "Your Reflection",
+      "Your Echo",
+      "Your Heartbeat"
+    ],
+    "correctAnswer": "Your Shadow",
+    "explanation": "A shadow mimics your movements in light and disappears completely in total darkness.",
+    "hint": "Cast on the ground by sunlight or light bulbs."
+  },
+  {
+    "id": "brain-143",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Lateral Thinking",
+    "title": "Two Coins Puzzle",
+    "question": "Two US coins total 30 cents, and one of them is not a nickel. What are the two coins?",
+    "options": [
+      "A quarter and a nickel",
+      "Two dimes and a nickel",
+      "Three dimes",
+      "A half dollar and a quarter"
+    ],
+    "correctAnswer": "A quarter and a nickel",
+    "explanation": "One of them is a quarter (which is not a nickel), and the other coin is indeed a nickel! (25c + 5c = 30c).",
+    "hint": "ONE of them is not a nickel; the OTHER one is."
+  },
+  {
+    "id": "brain-144",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "Holes in Clothes",
+    "question": "What has a neck but no head, and wears a cap?",
+    "options": [
+      "A Bottle",
+      "A Shirt",
+      "A River",
+      "A Mountain"
+    ],
+    "correctAnswer": "A Bottle",
+    "explanation": "A glass or plastic bottle has a neck, a mouth, and a bottle cap, but no head.",
+    "hint": "Found in kitchens and refrigerators."
+  },
+  {
+    "id": "brain-145",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Word Teasers",
+    "title": "Dictionary Order",
+    "question": "Where does Friday come before Thursday?",
+    "options": [
+      "In a Dictionary",
+      "In a leap year",
+      "On a calendar",
+      "In a weekly planner"
+    ],
+    "correctAnswer": "In a Dictionary",
+    "explanation": "In alphabetical order in a dictionary, F (Friday) comes before T (Thursday).",
+    "hint": "Think about alphabetical ordering."
+  },
+  {
+    "id": "brain-146",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Discount Sequence",
+    "question": "An item is discounted by 20%, and then the sale price is increased by 20%. How does the final price compare to the original?",
+    "options": [
+      "4% less than original",
+      "Equal to original",
+      "4% more than original",
+      "2% less than original"
+    ],
+    "correctAnswer": "4% less than original",
+    "explanation": "100 * 0.80 = 80; then 80 * 1.20 = 96. The final price is 96% of the original (4% lower).",
+    "hint": "Multiply by 0.80 and then by 1.20."
+  },
+  {
+    "id": "brain-147",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Lateral Thinking",
+    "title": "Egg Drop Height",
+    "question": "How can you drop a raw egg onto a concrete floor from a height of 3 feet without cracking it?",
+    "options": [
+      "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+      "Boil it first",
+      "Wrap it in concrete",
+      "Drop it on a pillow"
+    ],
+    "correctAnswer": "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+    "explanation": "Dropping it from 4 feet means it travels through the first 3 feet of free air without cracking until it hits the floor.",
+    "hint": "Consider the egg traveling through the air."
+  },
+  {
+    "id": "brain-148",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Situational Reasoning",
+    "title": "Socks in Drawer",
+    "question": "A drawer has 10 black socks and 10 white socks. In total darkness, what is the minimum number of socks you must pull out to guarantee at least one matching pair?",
+    "options": [
+      "3 socks",
+      "2 socks",
+      "11 socks",
+      "20 socks"
+    ],
+    "correctAnswer": "3 socks",
+    "explanation": "By Pigeonhole Principle, with 2 colors (black and white), picking 3 socks guarantees at least two of the same color.",
+    "hint": "Pigeonhole principle with 2 color categories."
+  },
+  {
+    "id": "brain-149",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Fractions Sum",
+    "question": "What is 1/2 + 1/4 + 1/8 + 1/16?",
+    "options": [
+      "15/16",
+      "1",
+      "7/8",
+      "31/32"
+    ],
+    "correctAnswer": "15/16",
+    "explanation": "Converting to common denominator 16: 8/16 + 4/16 + 2/16 + 1/16 = 15/16.",
+    "hint": "Use 16 as common denominator."
+  },
+  {
+    "id": "brain-150",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Shadow Riddle",
+    "question": "I run when you run, stop when you stop, but I disappear in the dark. What am I?",
+    "options": [
+      "Your Shadow",
+      "Your Reflection",
+      "Your Echo",
+      "Your Heartbeat"
+    ],
+    "correctAnswer": "Your Shadow",
+    "explanation": "A shadow mimics your movements in light and disappears completely in total darkness.",
+    "hint": "Cast on the ground by sunlight or light bulbs."
+  },
+  {
+    "id": "brain-151",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Lateral Thinking",
+    "title": "Two Coins Puzzle",
+    "question": "Two US coins total 30 cents, and one of them is not a nickel. What are the two coins?",
+    "options": [
+      "A quarter and a nickel",
+      "Two dimes and a nickel",
+      "Three dimes",
+      "A half dollar and a quarter"
+    ],
+    "correctAnswer": "A quarter and a nickel",
+    "explanation": "One of them is a quarter (which is not a nickel), and the other coin is indeed a nickel! (25c + 5c = 30c).",
+    "hint": "ONE of them is not a nickel; the OTHER one is."
+  },
+  {
+    "id": "brain-152",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "Holes in Clothes",
+    "question": "What has a neck but no head, and wears a cap?",
+    "options": [
+      "A Bottle",
+      "A Shirt",
+      "A River",
+      "A Mountain"
+    ],
+    "correctAnswer": "A Bottle",
+    "explanation": "A glass or plastic bottle has a neck, a mouth, and a bottle cap, but no head.",
+    "hint": "Found in kitchens and refrigerators."
+  },
+  {
+    "id": "brain-153",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Word Teasers",
+    "title": "Dictionary Order",
+    "question": "Where does Friday come before Thursday?",
+    "options": [
+      "In a Dictionary",
+      "In a leap year",
+      "On a calendar",
+      "In a weekly planner"
+    ],
+    "correctAnswer": "In a Dictionary",
+    "explanation": "In alphabetical order in a dictionary, F (Friday) comes before T (Thursday).",
+    "hint": "Think about alphabetical ordering."
+  },
+  {
+    "id": "brain-154",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Discount Sequence",
+    "question": "An item is discounted by 20%, and then the sale price is increased by 20%. How does the final price compare to the original?",
+    "options": [
+      "4% less than original",
+      "Equal to original",
+      "4% more than original",
+      "2% less than original"
+    ],
+    "correctAnswer": "4% less than original",
+    "explanation": "100 * 0.80 = 80; then 80 * 1.20 = 96. The final price is 96% of the original (4% lower).",
+    "hint": "Multiply by 0.80 and then by 1.20."
+  },
+  {
+    "id": "brain-155",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Lateral Thinking",
+    "title": "Egg Drop Height",
+    "question": "How can you drop a raw egg onto a concrete floor from a height of 3 feet without cracking it?",
+    "options": [
+      "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+      "Boil it first",
+      "Wrap it in concrete",
+      "Drop it on a pillow"
+    ],
+    "correctAnswer": "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+    "explanation": "Dropping it from 4 feet means it travels through the first 3 feet of free air without cracking until it hits the floor.",
+    "hint": "Consider the egg traveling through the air."
+  },
+  {
+    "id": "brain-156",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Situational Reasoning",
+    "title": "Socks in Drawer",
+    "question": "A drawer has 10 black socks and 10 white socks. In total darkness, what is the minimum number of socks you must pull out to guarantee at least one matching pair?",
+    "options": [
+      "3 socks",
+      "2 socks",
+      "11 socks",
+      "20 socks"
+    ],
+    "correctAnswer": "3 socks",
+    "explanation": "By Pigeonhole Principle, with 2 colors (black and white), picking 3 socks guarantees at least two of the same color.",
+    "hint": "Pigeonhole principle with 2 color categories."
+  },
+  {
+    "id": "brain-157",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Fractions Sum",
+    "question": "What is 1/2 + 1/4 + 1/8 + 1/16?",
+    "options": [
+      "15/16",
+      "1",
+      "7/8",
+      "31/32"
+    ],
+    "correctAnswer": "15/16",
+    "explanation": "Converting to common denominator 16: 8/16 + 4/16 + 2/16 + 1/16 = 15/16.",
+    "hint": "Use 16 as common denominator."
+  },
+  {
+    "id": "brain-158",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Shadow Riddle",
+    "question": "I run when you run, stop when you stop, but I disappear in the dark. What am I?",
+    "options": [
+      "Your Shadow",
+      "Your Reflection",
+      "Your Echo",
+      "Your Heartbeat"
+    ],
+    "correctAnswer": "Your Shadow",
+    "explanation": "A shadow mimics your movements in light and disappears completely in total darkness.",
+    "hint": "Cast on the ground by sunlight or light bulbs."
+  },
+  {
+    "id": "brain-159",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Lateral Thinking",
+    "title": "Two Coins Puzzle",
+    "question": "Two US coins total 30 cents, and one of them is not a nickel. What are the two coins?",
+    "options": [
+      "A quarter and a nickel",
+      "Two dimes and a nickel",
+      "Three dimes",
+      "A half dollar and a quarter"
+    ],
+    "correctAnswer": "A quarter and a nickel",
+    "explanation": "One of them is a quarter (which is not a nickel), and the other coin is indeed a nickel! (25c + 5c = 30c).",
+    "hint": "ONE of them is not a nickel; the OTHER one is."
+  },
+  {
+    "id": "brain-160",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "Holes in Clothes",
+    "question": "What has a neck but no head, and wears a cap?",
+    "options": [
+      "A Bottle",
+      "A Shirt",
+      "A River",
+      "A Mountain"
+    ],
+    "correctAnswer": "A Bottle",
+    "explanation": "A glass or plastic bottle has a neck, a mouth, and a bottle cap, but no head.",
+    "hint": "Found in kitchens and refrigerators."
+  },
+  {
+    "id": "brain-161",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Word Teasers",
+    "title": "Dictionary Order",
+    "question": "Where does Friday come before Thursday?",
+    "options": [
+      "In a Dictionary",
+      "In a leap year",
+      "On a calendar",
+      "In a weekly planner"
+    ],
+    "correctAnswer": "In a Dictionary",
+    "explanation": "In alphabetical order in a dictionary, F (Friday) comes before T (Thursday).",
+    "hint": "Think about alphabetical ordering."
+  },
+  {
+    "id": "brain-162",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Discount Sequence",
+    "question": "An item is discounted by 20%, and then the sale price is increased by 20%. How does the final price compare to the original?",
+    "options": [
+      "4% less than original",
+      "Equal to original",
+      "4% more than original",
+      "2% less than original"
+    ],
+    "correctAnswer": "4% less than original",
+    "explanation": "100 * 0.80 = 80; then 80 * 1.20 = 96. The final price is 96% of the original (4% lower).",
+    "hint": "Multiply by 0.80 and then by 1.20."
+  },
+  {
+    "id": "brain-163",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Lateral Thinking",
+    "title": "Egg Drop Height",
+    "question": "How can you drop a raw egg onto a concrete floor from a height of 3 feet without cracking it?",
+    "options": [
+      "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+      "Boil it first",
+      "Wrap it in concrete",
+      "Drop it on a pillow"
+    ],
+    "correctAnswer": "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+    "explanation": "Dropping it from 4 feet means it travels through the first 3 feet of free air without cracking until it hits the floor.",
+    "hint": "Consider the egg traveling through the air."
+  },
+  {
+    "id": "brain-164",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Situational Reasoning",
+    "title": "Socks in Drawer",
+    "question": "A drawer has 10 black socks and 10 white socks. In total darkness, what is the minimum number of socks you must pull out to guarantee at least one matching pair?",
+    "options": [
+      "3 socks",
+      "2 socks",
+      "11 socks",
+      "20 socks"
+    ],
+    "correctAnswer": "3 socks",
+    "explanation": "By Pigeonhole Principle, with 2 colors (black and white), picking 3 socks guarantees at least two of the same color.",
+    "hint": "Pigeonhole principle with 2 color categories."
+  },
+  {
+    "id": "brain-165",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Fractions Sum",
+    "question": "What is 1/2 + 1/4 + 1/8 + 1/16?",
+    "options": [
+      "15/16",
+      "1",
+      "7/8",
+      "31/32"
+    ],
+    "correctAnswer": "15/16",
+    "explanation": "Converting to common denominator 16: 8/16 + 4/16 + 2/16 + 1/16 = 15/16.",
+    "hint": "Use 16 as common denominator."
+  },
+  {
+    "id": "brain-166",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Shadow Riddle",
+    "question": "I run when you run, stop when you stop, but I disappear in the dark. What am I?",
+    "options": [
+      "Your Shadow",
+      "Your Reflection",
+      "Your Echo",
+      "Your Heartbeat"
+    ],
+    "correctAnswer": "Your Shadow",
+    "explanation": "A shadow mimics your movements in light and disappears completely in total darkness.",
+    "hint": "Cast on the ground by sunlight or light bulbs."
+  },
+  {
+    "id": "brain-167",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Lateral Thinking",
+    "title": "Two Coins Puzzle",
+    "question": "Two US coins total 30 cents, and one of them is not a nickel. What are the two coins?",
+    "options": [
+      "A quarter and a nickel",
+      "Two dimes and a nickel",
+      "Three dimes",
+      "A half dollar and a quarter"
+    ],
+    "correctAnswer": "A quarter and a nickel",
+    "explanation": "One of them is a quarter (which is not a nickel), and the other coin is indeed a nickel! (25c + 5c = 30c).",
+    "hint": "ONE of them is not a nickel; the OTHER one is."
+  },
+  {
+    "id": "brain-168",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "Holes in Clothes",
+    "question": "What has a neck but no head, and wears a cap?",
+    "options": [
+      "A Bottle",
+      "A Shirt",
+      "A River",
+      "A Mountain"
+    ],
+    "correctAnswer": "A Bottle",
+    "explanation": "A glass or plastic bottle has a neck, a mouth, and a bottle cap, but no head.",
+    "hint": "Found in kitchens and refrigerators."
+  },
+  {
+    "id": "brain-169",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Word Teasers",
+    "title": "Dictionary Order",
+    "question": "Where does Friday come before Thursday?",
+    "options": [
+      "In a Dictionary",
+      "In a leap year",
+      "On a calendar",
+      "In a weekly planner"
+    ],
+    "correctAnswer": "In a Dictionary",
+    "explanation": "In alphabetical order in a dictionary, F (Friday) comes before T (Thursday).",
+    "hint": "Think about alphabetical ordering."
+  },
+  {
+    "id": "brain-170",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Discount Sequence",
+    "question": "An item is discounted by 20%, and then the sale price is increased by 20%. How does the final price compare to the original?",
+    "options": [
+      "4% less than original",
+      "Equal to original",
+      "4% more than original",
+      "2% less than original"
+    ],
+    "correctAnswer": "4% less than original",
+    "explanation": "100 * 0.80 = 80; then 80 * 1.20 = 96. The final price is 96% of the original (4% lower).",
+    "hint": "Multiply by 0.80 and then by 1.20."
+  },
+  {
+    "id": "brain-171",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Lateral Thinking",
+    "title": "Egg Drop Height",
+    "question": "How can you drop a raw egg onto a concrete floor from a height of 3 feet without cracking it?",
+    "options": [
+      "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+      "Boil it first",
+      "Wrap it in concrete",
+      "Drop it on a pillow"
+    ],
+    "correctAnswer": "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+    "explanation": "Dropping it from 4 feet means it travels through the first 3 feet of free air without cracking until it hits the floor.",
+    "hint": "Consider the egg traveling through the air."
+  },
+  {
+    "id": "brain-172",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Situational Reasoning",
+    "title": "Socks in Drawer",
+    "question": "A drawer has 10 black socks and 10 white socks. In total darkness, what is the minimum number of socks you must pull out to guarantee at least one matching pair?",
+    "options": [
+      "3 socks",
+      "2 socks",
+      "11 socks",
+      "20 socks"
+    ],
+    "correctAnswer": "3 socks",
+    "explanation": "By Pigeonhole Principle, with 2 colors (black and white), picking 3 socks guarantees at least two of the same color.",
+    "hint": "Pigeonhole principle with 2 color categories."
+  },
+  {
+    "id": "brain-173",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Fractions Sum",
+    "question": "What is 1/2 + 1/4 + 1/8 + 1/16?",
+    "options": [
+      "15/16",
+      "1",
+      "7/8",
+      "31/32"
+    ],
+    "correctAnswer": "15/16",
+    "explanation": "Converting to common denominator 16: 8/16 + 4/16 + 2/16 + 1/16 = 15/16.",
+    "hint": "Use 16 as common denominator."
+  },
+  {
+    "id": "brain-174",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Shadow Riddle",
+    "question": "I run when you run, stop when you stop, but I disappear in the dark. What am I?",
+    "options": [
+      "Your Shadow",
+      "Your Reflection",
+      "Your Echo",
+      "Your Heartbeat"
+    ],
+    "correctAnswer": "Your Shadow",
+    "explanation": "A shadow mimics your movements in light and disappears completely in total darkness.",
+    "hint": "Cast on the ground by sunlight or light bulbs."
+  },
+  {
+    "id": "brain-175",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Lateral Thinking",
+    "title": "Two Coins Puzzle",
+    "question": "Two US coins total 30 cents, and one of them is not a nickel. What are the two coins?",
+    "options": [
+      "A quarter and a nickel",
+      "Two dimes and a nickel",
+      "Three dimes",
+      "A half dollar and a quarter"
+    ],
+    "correctAnswer": "A quarter and a nickel",
+    "explanation": "One of them is a quarter (which is not a nickel), and the other coin is indeed a nickel! (25c + 5c = 30c).",
+    "hint": "ONE of them is not a nickel; the OTHER one is."
+  },
+  {
+    "id": "brain-176",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "Holes in Clothes",
+    "question": "What has a neck but no head, and wears a cap?",
+    "options": [
+      "A Bottle",
+      "A Shirt",
+      "A River",
+      "A Mountain"
+    ],
+    "correctAnswer": "A Bottle",
+    "explanation": "A glass or plastic bottle has a neck, a mouth, and a bottle cap, but no head.",
+    "hint": "Found in kitchens and refrigerators."
+  },
+  {
+    "id": "brain-177",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Word Teasers",
+    "title": "Dictionary Order",
+    "question": "Where does Friday come before Thursday?",
+    "options": [
+      "In a Dictionary",
+      "In a leap year",
+      "On a calendar",
+      "In a weekly planner"
+    ],
+    "correctAnswer": "In a Dictionary",
+    "explanation": "In alphabetical order in a dictionary, F (Friday) comes before T (Thursday).",
+    "hint": "Think about alphabetical ordering."
+  },
+  {
+    "id": "brain-178",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Discount Sequence",
+    "question": "An item is discounted by 20%, and then the sale price is increased by 20%. How does the final price compare to the original?",
+    "options": [
+      "4% less than original",
+      "Equal to original",
+      "4% more than original",
+      "2% less than original"
+    ],
+    "correctAnswer": "4% less than original",
+    "explanation": "100 * 0.80 = 80; then 80 * 1.20 = 96. The final price is 96% of the original (4% lower).",
+    "hint": "Multiply by 0.80 and then by 1.20."
+  },
+  {
+    "id": "brain-179",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Lateral Thinking",
+    "title": "Egg Drop Height",
+    "question": "How can you drop a raw egg onto a concrete floor from a height of 3 feet without cracking it?",
+    "options": [
+      "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+      "Boil it first",
+      "Wrap it in concrete",
+      "Drop it on a pillow"
+    ],
+    "correctAnswer": "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+    "explanation": "Dropping it from 4 feet means it travels through the first 3 feet of free air without cracking until it hits the floor.",
+    "hint": "Consider the egg traveling through the air."
+  },
+  {
+    "id": "brain-180",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Situational Reasoning",
+    "title": "Socks in Drawer",
+    "question": "A drawer has 10 black socks and 10 white socks. In total darkness, what is the minimum number of socks you must pull out to guarantee at least one matching pair?",
+    "options": [
+      "3 socks",
+      "2 socks",
+      "11 socks",
+      "20 socks"
+    ],
+    "correctAnswer": "3 socks",
+    "explanation": "By Pigeonhole Principle, with 2 colors (black and white), picking 3 socks guarantees at least two of the same color.",
+    "hint": "Pigeonhole principle with 2 color categories."
+  },
+  {
+    "id": "brain-181",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Fractions Sum",
+    "question": "What is 1/2 + 1/4 + 1/8 + 1/16?",
+    "options": [
+      "15/16",
+      "1",
+      "7/8",
+      "31/32"
+    ],
+    "correctAnswer": "15/16",
+    "explanation": "Converting to common denominator 16: 8/16 + 4/16 + 2/16 + 1/16 = 15/16.",
+    "hint": "Use 16 as common denominator."
+  },
+  {
+    "id": "brain-182",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Shadow Riddle",
+    "question": "I run when you run, stop when you stop, but I disappear in the dark. What am I?",
+    "options": [
+      "Your Shadow",
+      "Your Reflection",
+      "Your Echo",
+      "Your Heartbeat"
+    ],
+    "correctAnswer": "Your Shadow",
+    "explanation": "A shadow mimics your movements in light and disappears completely in total darkness.",
+    "hint": "Cast on the ground by sunlight or light bulbs."
+  },
+  {
+    "id": "brain-183",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Lateral Thinking",
+    "title": "Two Coins Puzzle",
+    "question": "Two US coins total 30 cents, and one of them is not a nickel. What are the two coins?",
+    "options": [
+      "A quarter and a nickel",
+      "Two dimes and a nickel",
+      "Three dimes",
+      "A half dollar and a quarter"
+    ],
+    "correctAnswer": "A quarter and a nickel",
+    "explanation": "One of them is a quarter (which is not a nickel), and the other coin is indeed a nickel! (25c + 5c = 30c).",
+    "hint": "ONE of them is not a nickel; the OTHER one is."
+  },
+  {
+    "id": "brain-184",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "Holes in Clothes",
+    "question": "What has a neck but no head, and wears a cap?",
+    "options": [
+      "A Bottle",
+      "A Shirt",
+      "A River",
+      "A Mountain"
+    ],
+    "correctAnswer": "A Bottle",
+    "explanation": "A glass or plastic bottle has a neck, a mouth, and a bottle cap, but no head.",
+    "hint": "Found in kitchens and refrigerators."
+  },
+  {
+    "id": "brain-185",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Word Teasers",
+    "title": "Dictionary Order",
+    "question": "Where does Friday come before Thursday?",
+    "options": [
+      "In a Dictionary",
+      "In a leap year",
+      "On a calendar",
+      "In a weekly planner"
+    ],
+    "correctAnswer": "In a Dictionary",
+    "explanation": "In alphabetical order in a dictionary, F (Friday) comes before T (Thursday).",
+    "hint": "Think about alphabetical ordering."
+  },
+  {
+    "id": "brain-186",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Discount Sequence",
+    "question": "An item is discounted by 20%, and then the sale price is increased by 20%. How does the final price compare to the original?",
+    "options": [
+      "4% less than original",
+      "Equal to original",
+      "4% more than original",
+      "2% less than original"
+    ],
+    "correctAnswer": "4% less than original",
+    "explanation": "100 * 0.80 = 80; then 80 * 1.20 = 96. The final price is 96% of the original (4% lower).",
+    "hint": "Multiply by 0.80 and then by 1.20."
+  },
+  {
+    "id": "brain-187",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Lateral Thinking",
+    "title": "Egg Drop Height",
+    "question": "How can you drop a raw egg onto a concrete floor from a height of 3 feet without cracking it?",
+    "options": [
+      "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+      "Boil it first",
+      "Wrap it in concrete",
+      "Drop it on a pillow"
+    ],
+    "correctAnswer": "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+    "explanation": "Dropping it from 4 feet means it travels through the first 3 feet of free air without cracking until it hits the floor.",
+    "hint": "Consider the egg traveling through the air."
+  },
+  {
+    "id": "brain-188",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Situational Reasoning",
+    "title": "Socks in Drawer",
+    "question": "A drawer has 10 black socks and 10 white socks. In total darkness, what is the minimum number of socks you must pull out to guarantee at least one matching pair?",
+    "options": [
+      "3 socks",
+      "2 socks",
+      "11 socks",
+      "20 socks"
+    ],
+    "correctAnswer": "3 socks",
+    "explanation": "By Pigeonhole Principle, with 2 colors (black and white), picking 3 socks guarantees at least two of the same color.",
+    "hint": "Pigeonhole principle with 2 color categories."
+  },
+  {
+    "id": "brain-189",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Fractions Sum",
+    "question": "What is 1/2 + 1/4 + 1/8 + 1/16?",
+    "options": [
+      "15/16",
+      "1",
+      "7/8",
+      "31/32"
+    ],
+    "correctAnswer": "15/16",
+    "explanation": "Converting to common denominator 16: 8/16 + 4/16 + 2/16 + 1/16 = 15/16.",
+    "hint": "Use 16 as common denominator."
+  },
+  {
+    "id": "brain-190",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Shadow Riddle",
+    "question": "I run when you run, stop when you stop, but I disappear in the dark. What am I?",
+    "options": [
+      "Your Shadow",
+      "Your Reflection",
+      "Your Echo",
+      "Your Heartbeat"
+    ],
+    "correctAnswer": "Your Shadow",
+    "explanation": "A shadow mimics your movements in light and disappears completely in total darkness.",
+    "hint": "Cast on the ground by sunlight or light bulbs."
+  },
+  {
+    "id": "brain-191",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Lateral Thinking",
+    "title": "Two Coins Puzzle",
+    "question": "Two US coins total 30 cents, and one of them is not a nickel. What are the two coins?",
+    "options": [
+      "A quarter and a nickel",
+      "Two dimes and a nickel",
+      "Three dimes",
+      "A half dollar and a quarter"
+    ],
+    "correctAnswer": "A quarter and a nickel",
+    "explanation": "One of them is a quarter (which is not a nickel), and the other coin is indeed a nickel! (25c + 5c = 30c).",
+    "hint": "ONE of them is not a nickel; the OTHER one is."
+  },
+  {
+    "id": "brain-192",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "Holes in Clothes",
+    "question": "What has a neck but no head, and wears a cap?",
+    "options": [
+      "A Bottle",
+      "A Shirt",
+      "A River",
+      "A Mountain"
+    ],
+    "correctAnswer": "A Bottle",
+    "explanation": "A glass or plastic bottle has a neck, a mouth, and a bottle cap, but no head.",
+    "hint": "Found in kitchens and refrigerators."
+  },
+  {
+    "id": "brain-193",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Word Teasers",
+    "title": "Dictionary Order",
+    "question": "Where does Friday come before Thursday?",
+    "options": [
+      "In a Dictionary",
+      "In a leap year",
+      "On a calendar",
+      "In a weekly planner"
+    ],
+    "correctAnswer": "In a Dictionary",
+    "explanation": "In alphabetical order in a dictionary, F (Friday) comes before T (Thursday).",
+    "hint": "Think about alphabetical ordering."
+  },
+  {
+    "id": "brain-194",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Mental Math",
+    "title": "Discount Sequence",
+    "question": "An item is discounted by 20%, and then the sale price is increased by 20%. How does the final price compare to the original?",
+    "options": [
+      "4% less than original",
+      "Equal to original",
+      "4% more than original",
+      "2% less than original"
+    ],
+    "correctAnswer": "4% less than original",
+    "explanation": "100 * 0.80 = 80; then 80 * 1.20 = 96. The final price is 96% of the original (4% lower).",
+    "hint": "Multiply by 0.80 and then by 1.20."
+  },
+  {
+    "id": "brain-195",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Lateral Thinking",
+    "title": "Egg Drop Height",
+    "question": "How can you drop a raw egg onto a concrete floor from a height of 3 feet without cracking it?",
+    "options": [
+      "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+      "Boil it first",
+      "Wrap it in concrete",
+      "Drop it on a pillow"
+    ],
+    "correctAnswer": "Drop it from 4 feet; it will not crack in the first 3 feet of air",
+    "explanation": "Dropping it from 4 feet means it travels through the first 3 feet of free air without cracking until it hits the floor.",
+    "hint": "Consider the egg traveling through the air."
+  },
+  {
+    "id": "brain-196",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Situational Reasoning",
+    "title": "Socks in Drawer",
+    "question": "A drawer has 10 black socks and 10 white socks. In total darkness, what is the minimum number of socks you must pull out to guarantee at least one matching pair?",
+    "options": [
+      "3 socks",
+      "2 socks",
+      "11 socks",
+      "20 socks"
+    ],
+    "correctAnswer": "3 socks",
+    "explanation": "By Pigeonhole Principle, with 2 colors (black and white), picking 3 socks guarantees at least two of the same color.",
+    "hint": "Pigeonhole principle with 2 color categories."
+  },
+  {
+    "id": "brain-197",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Mental Math",
+    "title": "Fractions Sum",
+    "question": "What is 1/2 + 1/4 + 1/8 + 1/16?",
+    "options": [
+      "15/16",
+      "1",
+      "7/8",
+      "31/32"
+    ],
+    "correctAnswer": "15/16",
+    "explanation": "Converting to common denominator 16: 8/16 + 4/16 + 2/16 + 1/16 = 15/16.",
+    "hint": "Use 16 as common denominator."
+  },
+  {
+    "id": "brain-198",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "MEDIUM",
+    "category": "Riddles",
+    "title": "Shadow Riddle",
+    "question": "I run when you run, stop when you stop, but I disappear in the dark. What am I?",
+    "options": [
+      "Your Shadow",
+      "Your Reflection",
+      "Your Echo",
+      "Your Heartbeat"
+    ],
+    "correctAnswer": "Your Shadow",
+    "explanation": "A shadow mimics your movements in light and disappears completely in total darkness.",
+    "hint": "Cast on the ground by sunlight or light bulbs."
+  },
+  {
+    "id": "brain-199",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "HARD",
+    "category": "Lateral Thinking",
+    "title": "Two Coins Puzzle",
+    "question": "Two US coins total 30 cents, and one of them is not a nickel. What are the two coins?",
+    "options": [
+      "A quarter and a nickel",
+      "Two dimes and a nickel",
+      "Three dimes",
+      "A half dollar and a quarter"
+    ],
+    "correctAnswer": "A quarter and a nickel",
+    "explanation": "One of them is a quarter (which is not a nickel), and the other coin is indeed a nickel! (25c + 5c = 30c).",
+    "hint": "ONE of them is not a nickel; the OTHER one is."
+  },
+  {
+    "id": "brain-200",
+    "gameType": "brain-teaser-battle",
+    "difficulty": "EASY",
+    "category": "Riddles",
+    "title": "Holes in Clothes",
+    "question": "What has a neck but no head, and wears a cap?",
+    "options": [
+      "A Bottle",
+      "A Shirt",
+      "A River",
+      "A Mountain"
+    ],
+    "correctAnswer": "A Bottle",
+    "explanation": "A glass or plastic bottle has a neck, a mouth, and a bottle cap, but no head.",
+    "hint": "Found in kitchens and refrigerators."
+  }
+]

@@ -38,8 +38,10 @@ public class QuestionHistoryService {
                 ? request.getDifficulty().trim().toUpperCase()
                 : "ALL";
 
-        List<String> candidates = request.getCandidateIds() != null ? request.getCandidateIds() : List.of();
-        int requestedCount = (request.getCount() != null && request.getCount() > 0) ? request.getCount() : 10;
+        List<String> rawCandidates = request.getCandidateIds() != null ? request.getCandidateIds() : List.of();
+        List<String> candidates = new ArrayList<>(new LinkedHashSet<>(rawCandidates));
+        int defaultCount = ("dsa-master-quiz".equalsIgnoreCase(gameSlug) || "number-detective".equalsIgnoreCase(gameSlug)) ? 5 : 10;
+        int requestedCount = (request.getCount() != null && request.getCount() > 0) ? request.getCount() : defaultCount;
 
         if (candidates.isEmpty()) {
             return QuestionHistoryDto.SelectionResponse.builder()

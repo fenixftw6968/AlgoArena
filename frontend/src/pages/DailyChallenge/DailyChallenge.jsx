@@ -1,10 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Flame, Star, Coins, Lightbulb, CheckCircle, XCircle, Clock, ArrowRight } from 'lucide-react';
+import { ArrowLeft, Star, Coins, Lightbulb, CheckCircle, XCircle, Clock } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useGame } from '../../context/GameContext';
-import XPPopup from '../../components/XPPopup/XPPopup';
 import { getDailyCountdown, subscribeToMidnightIST } from '../../services/dailyQuestionService';
 import api from '../../utils/api';
 
@@ -18,7 +17,7 @@ const GAME_TYPE_LABELS = {
 };
 
 export default function DailyChallenge() {
-  const { user, refreshUser } = useAuth();
+  const { refreshUser } = useAuth();
   const { xpPopups, showXPPopup } = useGame();
   const navigate = useNavigate();
 
@@ -131,20 +130,32 @@ export default function DailyChallenge() {
 
   if (loading) {
     return (
-      <div style={{ minHeight: '100vh', background: '#020617', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94A3B8', fontFamily: 'var(--font-mono)' }}>
-        Loading synchronized challenge...
+      <div className="cosmic-void" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="paper-grain" />
+        <div style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
+          <div className="zine-spinner" style={{ margin: '0 auto 1rem' }} />
+          <p className="font-mono" style={{ color: 'var(--ink-muted)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.18em' }}>
+            Synchronizing daily seed...
+          </p>
+        </div>
       </div>
     );
   }
 
   if (!challenge) {
     return (
-      <div style={{ minHeight: '100vh', background: '#020617', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#F8FAFC', padding: '2rem' }}>
-        <h2 className="font-display" style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>No Active Daily Challenge</h2>
-        <p style={{ color: '#94A3B8', marginBottom: '1.5rem' }}>Check back later for the next daily synchronization.</p>
-        <button onClick={() => navigate('/dashboard')} className="pill-btn-blue">
-          Return to Dashboard
-        </button>
+      <div className="cosmic-void" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2rem' }}>
+        <div className="paper-grain" />
+        <div className="zine-card" style={{ textAlign: 'center', padding: '2.5rem 2rem', boxShadow: '8px 8px 0 var(--riso-coral)', position: 'relative', zIndex: 1, maxWidth: '440px' }}>
+          <div style={{ fontSize: '3rem', marginBottom: '0.75rem' }}>🗞️</div>
+          <h2 className="zine-display misreg" data-text="NO ACTIVE MISSION" style={{ fontSize: '1.5rem', marginBottom: '0.6rem' }}>
+            NO ACTIVE MISSION
+          </h2>
+          <p className="zine-lede" style={{ marginBottom: '1.5rem' }}>Check back later for the next daily synchronization.</p>
+          <button onClick={() => navigate('/dashboard')} className="zine-btn zine-btn--violet">
+            Return to Dashboard
+          </button>
+        </div>
       </div>
     );
   }
@@ -161,95 +172,58 @@ export default function DailyChallenge() {
   const hasOptions = Array.isArray(puzzleData.options) && puzzleData.options.length > 0;
 
   return (
-    <div style={{ minHeight: '100vh', background: '#020617', paddingTop: '6rem', color: '#F8FAFC', position: 'relative' }}>
-      {/* Background Starfield & Texture */}
-      <div className="star-field" />
-      <div className="binary-texture" />
+    <div className="cosmic-void" style={{ minHeight: '100vh', paddingTop: '6rem', position: 'relative' }}>
+      <div className="paper-grain" />
 
       {/* Top back navigation */}
       <div style={{ maxWidth: '800px', margin: '0 auto', padding: '1rem 1.5rem 0', position: 'relative', zIndex: 10 }}>
-        <button
-          onClick={() => navigate('/dashboard')}
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            background: 'rgba(255, 255, 255, 0.05)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            borderRadius: '999px',
-            padding: '0.4rem 1rem',
-            color: '#CBD5E1',
-            fontSize: '0.8rem',
-            fontWeight: 600,
-            cursor: 'pointer',
-            fontFamily: 'var(--font-display)',
-            transition: 'all 0.15s ease'
-          }}
-          onMouseEnter={e => { e.currentTarget.style.color = '#FFFFFF'; e.currentTarget.style.background = 'rgba(59, 130, 246, 0.12)'; }}
-          onMouseLeave={e => { e.currentTarget.style.color = '#CBD5E1'; e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)'; }}
-        >
-          <ArrowLeft size={14} /> Back to Dashboard
+        <button onClick={() => navigate('/dashboard')} className="zine-btn zine-btn--ghost zine-btn--sm">
+          <ArrowLeft size={13} /> Back to Dashboard
         </button>
       </div>
 
-      <div style={{ maxWidth: '800px', margin: '0 auto', padding: '1.5rem 1.5rem 5rem', position: 'relative', zIndex: 1 }}>
-        
+      <div style={{ maxWidth: '800px', margin: '0 auto', padding: '1.25rem 1.5rem 5rem', position: 'relative', zIndex: 1 }}>
+
         {/* Main Challenge Card */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          style={{
-            background: 'rgba(8, 14, 33, 0.85)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
-            borderRadius: '1.75rem',
-            padding: '2.25rem',
-            boxShadow: '0 25px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(59, 130, 246, 0.12)',
-            position: 'relative',
-            overflow: 'hidden'
-          }}
+          className="zine-card"
+          style={{ padding: '2rem', boxShadow: '10px 10px 0 var(--riso-violet)' }}
         >
           {/* Header */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
-            <span style={{ fontSize: '1.2rem' }}>{typeConfig.icon}</span>
-            <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#38BDF8', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-              // DAILY SEED • {typeConfig.label}
-            </span>
-            <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '0.35rem', background: 'rgba(59, 130, 246, 0.12)', padding: '0.3rem 0.75rem', borderRadius: '999px', border: '1px solid rgba(59, 130, 246, 0.3)' }}>
-              <Clock size={12} color="#60A5FA" />
-              <span className="font-mono" style={{ fontSize: '0.7rem', color: '#60A5FA', fontWeight: 700 }}>RESETS {timeLeft}</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
+            <span style={{ fontSize: '1.3rem' }}>{typeConfig.icon}</span>
+            <span className="zine-kicker">Daily Seed • {typeConfig.label}</span>
+            <div className="zine-badge" style={{ marginLeft: 'auto', background: 'var(--riso-violet)', gap: '0.35rem' }}>
+              <Clock size={11} /> RESETS {timeLeft}
             </div>
           </div>
 
-          <h1 className="font-display" style={{ fontSize: '1.65rem', fontWeight: 700, color: '#FFFFFF', marginBottom: '0.4rem', letterSpacing: '-0.02em' }}>
+          <h1 className="zine-display misreg" data-text={challenge.title} style={{ fontSize: 'clamp(1.4rem, 4vw, 2rem)', marginBottom: '0.5rem' }}>
             {challenge.title}
           </h1>
-          <p style={{ color: 'rgba(255, 255, 255, 0.65)', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>
+          <p className="zine-lede" style={{ marginBottom: '1.25rem' }}>
             {challenge.description}
           </p>
 
           {/* Rewards Panel */}
-          <div style={{ display: 'flex', gap: '1rem', background: 'rgba(13, 23, 56, 0.65)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '0.75rem 1rem', borderRadius: '1rem', marginBottom: '1.75rem', alignItems: 'center' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <Star size={15} color="#FBBF24" fill="#FBBF24" />
-              <span className="font-mono" style={{ fontSize: '0.8rem', color: '#FBBF24', fontWeight: 800 }}>+{challenge.xpReward} XP</span>
+          <div className="zine-panel" style={{ display: 'flex', gap: '1.1rem', padding: '0.7rem 0.9rem', marginBottom: '1.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+              <Star size={14} color="var(--riso-yellow)" fill="var(--riso-yellow)" />
+              <span className="font-mono" style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--ink)' }}>+{challenge.xpReward} XP</span>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <Coins size={15} color="#FBBF24" />
-              <span className="font-mono" style={{ fontSize: '0.8rem', color: '#FBBF24', fontWeight: 800 }}>+{challenge.coinReward} COINS</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+              <Coins size={14} />
+              <span className="font-mono" style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--ink)' }}>+{challenge.coinReward} COINS</span>
             </div>
-            <div style={{ marginLeft: 'auto', background: 'rgba(59, 130, 246, 0.15)', padding: '0.2rem 0.65rem', borderRadius: '999px', border: '1px solid rgba(59, 130, 246, 0.35)' }}>
-              <span className="font-mono" style={{ fontSize: '0.675rem', color: '#60A5FA', fontWeight: 800 }}>{challenge.difficulty}</span>
-            </div>
+            <span className="zine-badge" style={{ marginLeft: 'auto', background: 'var(--riso-coral)' }}>{challenge.difficulty}</span>
           </div>
 
           {/* Puzzle Challenge Area */}
-          <div style={{ background: 'rgba(13, 23, 56, 0.65)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '1rem', padding: '1.5rem', marginBottom: '1.75rem', textAlign: 'center' }}>
-            <div style={{ fontSize: '0.65rem', color: '#60A5FA', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.6rem', fontWeight: 700 }}>
-              // PROBLEM STATEMENT
-            </div>
-            <div className="font-display" style={{ fontSize: '1.15rem', fontWeight: 600, color: '#FFFFFF', lineHeight: 1.6, wordBreak: 'break-word' }}>
+          <div className="zine-panel" style={{ padding: '1.5rem 1.25rem', marginBottom: '1.5rem', textAlign: 'center' }}>
+            <div className="zine-kicker" style={{ marginBottom: '0.6rem' }}>Problem Statement</div>
+            <div className="zine-display" style={{ fontSize: '1.1rem', lineHeight: 1.55, wordBreak: 'break-word' }}>
               {puzzleData.question}
             </div>
           </div>
@@ -258,7 +232,7 @@ export default function DailyChallenge() {
           {!submitted ? (
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {hasOptions ? (
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem' }}>
+                <div className="zine-options">
                   {puzzleData.options.map((opt) => {
                     const isSelected = answer === opt;
                     return (
@@ -266,20 +240,7 @@ export default function DailyChallenge() {
                         type="button"
                         key={opt}
                         onClick={() => setAnswer(opt)}
-                        style={{
-                          padding: '1rem',
-                          borderRadius: '1rem',
-                          background: isSelected ? 'rgba(59, 130, 246, 0.2)' : 'rgba(13, 23, 56, 0.65)',
-                          border: `1px solid ${isSelected ? '#3B82F6' : 'rgba(255, 255, 255, 0.08)'}`,
-                          color: isSelected ? '#FFFFFF' : 'rgba(255, 255, 255, 0.85)',
-                          fontWeight: 600,
-                          fontSize: '0.9rem',
-                          fontFamily: 'var(--font-display)',
-                          cursor: 'pointer',
-                          textAlign: 'center',
-                          boxShadow: isSelected ? '0 0 15px rgba(59, 130, 246, 0.25)' : 'none',
-                          transition: 'all 0.15s ease'
-                        }}
+                        className={`zine-option${isSelected ? ' zine-option--selected' : ''}`}
                       >
                         {opt}
                       </button>
@@ -294,16 +255,8 @@ export default function DailyChallenge() {
                     value={answer}
                     onChange={(e) => setAnswer(e.target.value)}
                     required
-                    className="input-dark"
-                    style={{
-                      width: '100%',
-                      padding: '0.85rem',
-                      borderRadius: '1rem',
-                      textAlign: 'center',
-                      fontSize: '1rem',
-                      fontWeight: 700,
-                      outline: 'none'
-                    }}
+                    className="zine-input zine-input--mono"
+                    style={{ textAlign: 'center', fontSize: '1rem', fontWeight: 800 }}
                   />
                 </div>
               )}
@@ -315,99 +268,75 @@ export default function DailyChallenge() {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
-                    style={{
-                      background: 'rgba(59, 130, 246, 0.12)',
-                      border: '1px solid rgba(59, 130, 246, 0.3)',
-                      borderRadius: '1rem',
-                      padding: '0.85rem 1.15rem',
-                      display: 'flex', gap: '0.5rem', alignItems: 'flex-start'
-                    }}
+                    className="zine-hint"
                   >
-                    <Lightbulb size={15} color="#60A5FA" style={{ flexShrink: 0, marginTop: '0.15rem' }} />
-                    <span style={{ fontSize: '0.825rem', color: '#93C5FD', lineHeight: 1.4, fontWeight: 500 }}>{puzzleData.hint}</span>
+                    <Lightbulb size={15} style={{ flexShrink: 0, marginTop: '0.15rem' }} />
+                    <span style={{ fontSize: '0.85rem', lineHeight: 1.45, color: 'var(--ink)' }}>{puzzleData.hint}</span>
                   </motion.div>
                 )}
               </AnimatePresence>
 
-              <div style={{ display: 'flex', gap: '0.75rem' }}>
+              <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
                 {!showHint && puzzleData.hint && (
                   <button
                     type="button"
                     onClick={() => { setShowHint(true); setHintUsed(true); }}
-                    className="pill-btn-ghost"
-                    style={{
-                      flex: 1,
-                      padding: '0.8rem',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '0.35rem',
-                      fontSize: '0.8rem',
-                      fontWeight: 600
-                    }}
+                    className="zine-btn zine-btn--yellow"
+                    style={{ flex: 1, minWidth: '140px' }}
                   >
-                    <Lightbulb size={13} color="#FBBF24" /> HINT
+                    <Lightbulb size={13} /> HINT
                   </button>
                 )}
                 <button
                   type="submit"
                   disabled={!answer.trim()}
-                  className="pill-btn-blue"
-                  style={{
-                    flex: 2,
-                    padding: '0.8rem',
-                    fontSize: '0.875rem',
-                    fontWeight: 700,
-                    opacity: answer.trim() ? 1 : 0.5,
-                    cursor: answer.trim() ? 'pointer' : 'not-allowed'
-                  }}
+                  className="zine-btn zine-btn--violet"
+                  style={{ flex: 2, minWidth: '180px', opacity: answer.trim() ? 1 : 0.5, cursor: answer.trim() ? 'pointer' : 'not-allowed' }}
                 >
-                  SUBMIT SOLUTION →
+                  SUBMIT SOLUTION
                 </button>
               </div>
             </form>
           ) : (
             /* Results View */
             <div style={{ textAlign: 'center' }}>
-              <div style={{
-                padding: '1.35rem',
-                borderRadius: '1.25rem',
-                background: result?.correct ? 'rgba(16, 185, 129, 0.15)' : 'rgba(239, 68, 68, 0.15)',
-                border: `1px solid ${result?.correct ? 'rgba(16, 185, 129, 0.35)' : 'rgba(239, 68, 68, 0.35)'}`,
-                marginBottom: '1.5rem'
-              }}>
+              <div
+                className="zine-panel"
+                style={{
+                  padding: '1.35rem',
+                  marginBottom: '1.25rem',
+                  background: result?.correct ? 'var(--riso-teal)' : 'var(--riso-coral)',
+                  border: '2px solid var(--ink)',
+                  boxShadow: result?.correct ? '6px 6px 0 var(--ink)' : '6px 6px 0 var(--ink)'
+                }}
+              >
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.4rem' }}>
-                  {result?.correct ? <CheckCircle size={22} color="#34d399" /> : <XCircle size={22} color="#f87171" />}
-                  <span className="font-display" style={{ fontSize: '1.15rem', fontWeight: 800, color: result?.correct ? '#34d399' : '#f87171' }}>
-                    {result?.correct ? 'CORRECT SOLUTION VERIFIED' : 'INCORRECT ATTEMPT'}
+                  {result?.correct ? <CheckCircle size={22} color="var(--ink)" /> : <XCircle size={22} color="#fffdf6" />}
+                  <span className="zine-display" style={{ fontSize: '1.05rem' }}>
+                    {result?.correct ? 'SOLUTION VERIFIED' : 'INCORRECT ATTEMPT'}
                   </span>
                 </div>
 
                 {result?.correct && (
                   <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '0.5rem' }}>
-                    <span className="font-mono" style={{ fontSize: '0.85rem', fontWeight: 800, color: '#34d399' }}>+{result.xpEarned} XP</span>
-                    <span className="font-mono" style={{ fontSize: '0.85rem', fontWeight: 800, color: '#34d399' }}>+{result.coinEarned} COINS</span>
+                    <span className="font-mono" style={{ fontSize: '0.9rem', fontWeight: 800, textShadow: '1px 1px 0 rgba(255,253,246,0.6)' }}>+{result.xpEarned} XP</span>
+                    <span className="font-mono" style={{ fontSize: '0.9rem', fontWeight: 800, textShadow: '1px 1px 0 rgba(255,253,246,0.6)' }}>+{result.coinEarned} COINS</span>
                   </div>
                 )}
               </div>
 
               {/* Explanation */}
               {result?.explanation && (
-                <div style={{ textAlign: 'left', background: 'rgba(13, 23, 56, 0.65)', padding: '1.25rem', borderRadius: '1rem', border: '1px solid rgba(255, 255, 255, 0.08)', marginBottom: '1.5rem' }}>
-                  <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#38BDF8', textTransform: 'uppercase', marginBottom: '0.35rem' }}>// DECRYPTED ANALYSIS</div>
-                  <div style={{ fontSize: '0.875rem', color: 'rgba(255, 255, 255, 0.8)', lineHeight: 1.6 }}>{result.explanation}</div>
+                <div className="zine-panel" style={{ textAlign: 'left', padding: '1.15rem', marginBottom: '1.25rem' }}>
+                  <div className="zine-kicker" style={{ marginBottom: '0.4rem' }}>Decrypted Analysis</div>
+                  <div style={{ fontSize: '0.9rem', color: 'var(--ink)', lineHeight: 1.6 }}>{result.explanation}</div>
                 </div>
               )}
 
               <button
                 onClick={() => navigate('/dashboard')}
-                className="pill-btn-blue"
-                style={{
-                  width: '100%',
-                  padding: '0.85rem',
-                  fontSize: '0.85rem',
-                  fontWeight: 700
-                }}
+                className="zine-btn zine-btn--violet"
+                style={{ width: '100%' }}
               >
                 RETURN TO DASHBOARD
               </button>

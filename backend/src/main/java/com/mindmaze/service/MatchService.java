@@ -1,5 +1,6 @@
 package com.mindmaze.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mindmaze.dto.MatchDto;
 import com.mindmaze.dto.MatchSubmitRequest;
@@ -11,11 +12,14 @@ import com.mindmaze.exception.ResourceNotFoundException;
 import com.mindmaze.repository.MatchRepository;
 import com.mindmaze.repository.UserRepository;
 import com.mindmaze.util.RankUtil;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -32,111 +36,117 @@ public class MatchService {
     private final GameService gameService;
     private final ObjectMapper objectMapper;
     private final SimpMessagingTemplate messagingTemplate;
+    private final TransactionTemplate transactionTemplate;
 
-    // Fast in-memory matchmaking queue by gameSlug: queue of User IDs
-    private final Map<String, List<Long>> matchmakingQueues = new ConcurrentHashMap<>();
+    private final Object matchmakingLock = new Object();
 
-    @Transactional
+    @PostConstruct
+    void configureMatchmakingTransaction() {
+        // Matchmaking writes must commit *while matchmakingLock is still held*.
+        // REQUIRES_NEW guarantees the transaction is committed by the time execute()
+        // returns, i.e. before the monitor is released, so the next player's
+        // SELECT can already see this player's row.
+        transactionTemplate.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
+        transactionTemplate.setIsolationLevel(TransactionDefinition.ISOLATION_READ_COMMITTED);
+    }
+
+    /**
+     * Queues a player for ranked matchmaking (claim an open slot, otherwise create one).
+     *
+     * <p>The whole flow runs inside {@code matchmakingLock} and inside its own transaction that
+     * commits before the lock is released. {@code flush()} alone is not enough: without a commit
+     * the row stays invisible to other READ_COMMITTED transactions, so two players tapping
+     * "Ranked" at the same moment would each create their own WAITING row and never be matched.
+     */
     public MatchDto queueForMatch(Long userId, String gameSlug, String difficulty) {
+        synchronized (matchmakingLock) {
+            return transactionTemplate.execute(status -> doQueueForMatch(userId, gameSlug, difficulty));
+        }
+    }
+
+    private MatchDto doQueueForMatch(Long userId, String gameSlug, String difficulty) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
-        List<Long> queue = matchmakingQueues.computeIfAbsent(gameSlug, k -> Collections.synchronizedList(new ArrayList<>()));
+        LocalDateTime cutoff = LocalDateTime.now().minusSeconds(90);
 
-        // Remove user if already present in queue
-        queue.remove(userId);
+        // Step 1: Idempotent check - if user already has an active match for this game, return it
+        List<Match> myActive = matchRepository.findActiveMatchesByUserAndGame(user, gameSlug, cutoff);
+        for (Match m : myActive) {
+            if (m.getMode() == Match.MatchMode.RANKED) {
+                log.info("[Matchmaking] User {} already has active match {} (status={}), returning it",
+                        userId, m.getId(), m.getStatus());
+                return convertToDto(m);
+            }
+        }
 
-        // Try to find a matched player in queue
-        Long matchedUserId = null;
-        synchronized (queue) {
-            if (!queue.isEmpty()) {
-                // Find opponent with closest rating
-                int myRating = user.getCompetitiveRating() != null ? user.getCompetitiveRating() : 500;
-                Long bestOpponent = null;
-                int minDiff = Integer.MAX_VALUE;
-
-                for (Long oppId : queue) {
-                    if (!oppId.equals(userId)) {
-                        Optional<User> oppOpt = userRepository.findById(oppId);
-                        if (oppOpt.isPresent()) {
-                            int oppRating = oppOpt.get().getCompetitiveRating() != null ? oppOpt.get().getCompetitiveRating() : 500;
-                            int diff = Math.abs(myRating - oppRating);
-                            if (diff < minDiff) {
-                                minDiff = diff;
-                                bestOpponent = oppId;
-                            }
-                        }
-                    }
-                }
-
-                if (bestOpponent != null) {
-                    queue.remove(bestOpponent);
-                    matchedUserId = bestOpponent;
+        // Step 2: Cancel user's own old stale WAITING ranked matches
+        List<Match> existingWaiting = matchRepository.findWaitingMatchesByUser(user);
+        for (Match m : existingWaiting) {
+            if (m.getMode() == Match.MatchMode.RANKED) {
+                if (gameSlug.equalsIgnoreCase(m.getGameSlug()) && m.getCreatedAt() != null && m.getCreatedAt().isAfter(cutoff)) {
+                    // Fresh match for same game - return idempotently (player re-queued)
+                    log.info("[Matchmaking] User {} already waiting on match {}, returning it", userId, m.getId());
+                    return convertToDto(m);
+                } else {
+                    // Old/stale match - cancel it
+                    m.setStatus(Match.MatchStatus.CANCELLED);
+                    m.setCancelledReason("SUPERSEDED");
+                    matchRepository.save(m);
+                    log.info("[Matchmaking] Cancelled stale match {} for user {}", m.getId(), userId);
                 }
             }
         }
 
-        if (matchedUserId != null) {
-            User opponent = userRepository.findById(matchedUserId).orElseThrow();
-            // Generate server-side challenge data (puzzles)
-            String challengeData = generateChallengeData(gameSlug, difficulty);
+        // Step 3: Atomically try to claim a waiting opponent using FOR UPDATE SKIP LOCKED
+        // This prevents two concurrent Player-2s from claiming the same slot.
+        // (Re-entrant: matchmakingLock is already held by queueForMatch.)
+        synchronized (matchmakingLock) {
+            Optional<Match> lockedMatch = matchRepository.findAndLockWaitingRankedMatch(gameSlug, userId, cutoff);
+            if (lockedMatch.isPresent()) {
+                Match openMatch = lockedMatch.get();
+                
+                // Double-check it's still WAITING (could have been claimed by another thread between query and lock)
+                if (openMatch.getStatus() != Match.MatchStatus.WAITING) {
+                    log.warn("[Matchmaking] Match {} was no longer WAITING after lock, creating new slot", openMatch.getId());
+                } else {
+                    openMatch.setPlayer2(user);
+                    openMatch.setPlayer1RatingBefore(openMatch.getPlayer1().getCompetitiveRating() != null ?
+                            openMatch.getPlayer1().getCompetitiveRating() : 500);
+                    openMatch.setPlayer2RatingBefore(user.getCompetitiveRating() != null ?
+                            user.getCompetitiveRating() : 500);
+                    openMatch.setStatus(Match.MatchStatus.READY);
+                    openMatch.setPlayer1Ready(true);
+                    openMatch.setPlayer2Ready(true);
+                    openMatch.setIsBotMatch(false);
+                    openMatch.setStartedAt(LocalDateTime.now().plusSeconds(4));
 
-            Match match = Match.builder()
-                    .gameSlug(gameSlug)
-                    .difficulty(difficulty)
-                    .mode(Match.MatchMode.RANKED)
-                    .status(Match.MatchStatus.READY)
-                    .player1(opponent)
-                    .player2(user)
-                    .player1Ready(true)
-                    .player2Ready(true)
-                    .player1Score(0)
-                    .player2Score(0)
-                    .player1RatingBefore(opponent.getCompetitiveRating() != null ? opponent.getCompetitiveRating() : 500)
-                    .player2RatingBefore(user.getCompetitiveRating() != null ? user.getCompetitiveRating() : 500)
-                    .challengeData(challengeData)
-                    .isBotMatch(false)
-                    .startedAt(LocalDateTime.now().plusSeconds(5))
-                    .build();
+                    // Always regenerate challenge data when pairing so both players get fresh, same questions
+                    String challengeData = generateChallengeData(gameSlug, openMatch.getDifficulty());
+                    openMatch.setChallengeData(challengeData);
 
-            match = matchRepository.save(match);
-            MatchDto dto = convertToDto(match);
-            broadcastMatchEvent(match.getId(), "MATCH_READY", dto);
-            return dto;
-        } else {
-            // Also check if there's any open ranked match in database waiting for another player
-            List<Match> openMatches = matchRepository.findOpenRankedMatches(gameSlug, user);
-            if (!openMatches.isEmpty()) {
-                // Pick open match with closest rating
-                int myRating = user.getCompetitiveRating() != null ? user.getCompetitiveRating() : 500;
-                Match bestMatch = openMatches.get(0);
-                int minDiff = Math.abs(myRating - (bestMatch.getPlayer1RatingBefore() != null ? bestMatch.getPlayer1RatingBefore() : 500));
-                for (Match m : openMatches) {
-                    int diff = Math.abs(myRating - (m.getPlayer1RatingBefore() != null ? m.getPlayer1RatingBefore() : 500));
-                    if (diff < minDiff) {
-                        minDiff = diff;
-                        bestMatch = m;
-                    }
+                    openMatch = matchRepository.save(openMatch);
+
+                    MatchDto dto = convertToDto(openMatch);
+
+                    // Notify both players instantly via WebSocket
+                    broadcastMatchEvent(openMatch.getId(), "MATCH_READY", dto);
+                    sendUserEvent(openMatch.getPlayer1().getId(), "MATCH_READY", dto);
+                    sendUserEvent(user.getId(), "MATCH_READY", dto);
+
+                    log.info("[Matchmaking] ✅ Matched user {} with user {} on match {}",
+                            userId, openMatch.getPlayer1().getId(), openMatch.getId());
+                    return dto;
                 }
-
-                bestMatch.setPlayer2(user);
-                bestMatch.setPlayer2RatingBefore(user.getCompetitiveRating() != null ? user.getCompetitiveRating() : 500);
-                bestMatch.setStatus(Match.MatchStatus.READY);
-                bestMatch.setPlayer1Ready(true);
-                bestMatch.setPlayer2Ready(true);
-                bestMatch.setIsBotMatch(false);
-                bestMatch.setStartedAt(LocalDateTime.now().plusSeconds(5));
-                bestMatch = matchRepository.save(bestMatch);
-                MatchDto dto = convertToDto(bestMatch);
-                broadcastMatchEvent(bestMatch.getId(), "MATCH_READY", dto);
-                return dto;
             }
 
-            // Otherwise create open match or add to queue
-            String challengeData = generateChallengeData(gameSlug, difficulty);
+            // Step 4: No opponent found - create a new waiting slot for this player
+            String chosenDiff = (difficulty != null && !difficulty.isBlank()) ? difficulty : "MEDIUM";
+            String challengeData = generateChallengeData(gameSlug, chosenDiff);
+
             Match match = Match.builder()
                     .gameSlug(gameSlug)
-                    .difficulty(difficulty)
+                    .difficulty(chosenDiff)
                     .mode(Match.MatchMode.RANKED)
                     .status(Match.MatchStatus.WAITING)
                     .player1(user)
@@ -147,65 +157,69 @@ public class MatchService {
                     .build();
 
             match = matchRepository.save(match);
-            queue.add(userId);
+            log.info("[Matchmaking] User {} queued for ranked match {}, waiting for opponent", userId, match.getId());
             return convertToDto(match);
         }
     }
 
-    @Transactional
     public void cancelQueue(Long userId, String gameSlug) {
-        List<Long> queue = matchmakingQueues.get(gameSlug);
-        if (queue != null) {
-            queue.remove(userId);
-        }
-        User user = userRepository.findById(userId).orElse(null);
-        if (user != null) {
-            List<Match> waiting = matchRepository.findWaitingMatchesByUser(user);
-            for (Match m : waiting) {
-                if (m.getMode() == Match.MatchMode.RANKED && m.getGameSlug().equals(gameSlug)) {
-                    m.setStatus(Match.MatchStatus.CANCELLED);
-                    m.setCancelledReason("CANCELLED_BY_PLAYER");
-                    matchRepository.save(m);
+        synchronized (matchmakingLock) {
+            // Commit inside the lock so a concurrent queue request can never claim a slot
+            // that is being cancelled at the same moment.
+            transactionTemplate.executeWithoutResult(status -> {
+                User user = userRepository.findById(userId).orElse(null);
+                if (user != null) {
+                    List<Match> waiting = matchRepository.findWaitingMatchesByUser(user);
+                    for (Match m : waiting) {
+                        if (m.getMode() == Match.MatchMode.RANKED && (gameSlug == null || m.getGameSlug().equals(gameSlug))) {
+                            m.setStatus(Match.MatchStatus.CANCELLED);
+                            m.setCancelledReason("CANCELLED_BY_PLAYER");
+                            matchRepository.save(m);
+                            broadcastMatchEvent(m.getId(), "MATCH_CANCELLED", convertToDto(m));
+                        }
+                    }
                 }
-            }
+            });
         }
     }
 
-    @Transactional
     public MatchDto connectBotMatch(String matchId, Long userId) {
-        Match match = matchRepository.findByIdWithLock(matchId)
-                .orElseThrow(() -> new ResourceNotFoundException("Match not found"));
+        synchronized (matchmakingLock) {
+            return transactionTemplate.execute(status -> {
+                Match match = matchRepository.findByIdWithLock(matchId)
+                        .orElseThrow(() -> new ResourceNotFoundException("Match not found"));
 
-        if (!match.getPlayer1().getId().equals(userId)) {
-            throw new BadRequestException("User is not the host of this match");
+                if (!match.getPlayer1().getId().equals(userId)) {
+                    throw new BadRequestException("User is not the host of this match");
+                }
+
+                // If a real player already matched while request was inflight, return the real match
+                if (match.getStatus() == Match.MatchStatus.READY && match.getPlayer2() != null && !Boolean.TRUE.equals(match.getIsBotMatch())) {
+                    return convertToDto(match);
+                }
+
+                if (match.getStatus() != Match.MatchStatus.WAITING && match.getStatus() != Match.MatchStatus.READY) {
+                    throw new BadRequestException("Match is not in a connectable state");
+                }
+
+                int userRating = match.getPlayer1RatingBefore() != null ? match.getPlayer1RatingBefore() : 500;
+                // Bot rating dynamically close to user's rating (± 20 points)
+                int botRating = Math.max(100, userRating + (new Random().nextInt(41) - 20));
+
+                match.setIsBotMatch(true);
+                match.setMode(Match.MatchMode.RANKED);
+                match.setStatus(Match.MatchStatus.READY);
+                match.setPlayer1Ready(true);
+                match.setPlayer2Ready(true);
+                match.setPlayer2RatingBefore(botRating);
+                match.setStartedAt(LocalDateTime.now().plusSeconds(4));
+
+                match = matchRepository.save(match);
+                MatchDto dto = convertToDto(match);
+                broadcastMatchEvent(match.getId(), "MATCH_READY", dto);
+                return dto;
+            });
         }
-
-        if (match.getStatus() != Match.MatchStatus.WAITING && match.getStatus() != Match.MatchStatus.READY) {
-            throw new BadRequestException("Match is not in a connectable state");
-        }
-
-        // Remove user from in-memory queue
-        List<Long> queue = matchmakingQueues.get(match.getGameSlug());
-        if (queue != null) {
-            queue.remove(userId);
-        }
-
-        int userRating = match.getPlayer1RatingBefore() != null ? match.getPlayer1RatingBefore() : 500;
-        // Bot rating dynamically close to user's rating (± 20 points)
-        int botRating = Math.max(100, userRating + (new Random().nextInt(41) - 20));
-
-        match.setIsBotMatch(true);
-        match.setMode(Match.MatchMode.RANKED);
-        match.setStatus(Match.MatchStatus.READY);
-        match.setPlayer1Ready(true);
-        match.setPlayer2Ready(true);
-        match.setPlayer2RatingBefore(botRating);
-        match.setStartedAt(LocalDateTime.now().plusSeconds(4));
-
-        match = matchRepository.save(match);
-        MatchDto dto = convertToDto(match);
-        broadcastMatchEvent(match.getId(), "MATCH_READY", dto);
-        return dto;
     }
 
     @Transactional
@@ -573,21 +587,69 @@ public class MatchService {
     }
 
     private String generateChallengeData(String gameSlug, String difficulty) {
+        if (gameSlug == null || gameSlug.isBlank()) return "[]";
+        String normalizedSlug = gameSlug.toLowerCase().trim();
+        String resourcePath = "questions/" + normalizedSlug + ".json";
+
+        try (var is = getClass().getClassLoader().getResourceAsStream(resourcePath)) {
+            if (is != null) {
+                List<Map<String, Object>> allQuestions = objectMapper.readValue(is, new TypeReference<List<Map<String, Object>>>() {});
+                if (allQuestions != null && !allQuestions.isEmpty()) {
+                    String normDiff = (difficulty != null && !difficulty.isBlank()) ? difficulty.trim().toUpperCase() : "MEDIUM";
+                    List<Map<String, Object>> filtered = allQuestions.stream()
+                            .filter(q -> {
+                                Object diffObj = q.get("difficulty");
+                                if (diffObj == null) return true;
+                                return normDiff.equalsIgnoreCase(diffObj.toString().trim());
+                            })
+                            .toList();
+
+                    List<Map<String, Object>> pool = (!filtered.isEmpty()) ? new ArrayList<>(filtered) : new ArrayList<>(allQuestions);
+                    Collections.shuffle(pool);
+
+                    int count = 5;
+                    if ("memory-challenge".equalsIgnoreCase(normalizedSlug) || "code-breaker".equalsIgnoreCase(normalizedSlug)) {
+                        count = 4;
+                    }
+                    List<Map<String, Object>> chosen = pool.stream().limit(count).map(q -> {
+                        Map<String, Object> copy = new HashMap<>(q);
+                        Object optsObj = copy.get("options");
+                        if (optsObj instanceof List<?> list && !list.isEmpty()) {
+                            List<Object> shuffledOpts = new ArrayList<>(list);
+                            Collections.shuffle(shuffledOpts);
+                            copy.put("options", shuffledOpts);
+                        }
+                        return copy;
+                    }).toList();
+                    return objectMapper.writeValueAsString(chosen);
+                }
+            }
+        } catch (Exception e) {
+            log.warn("Could not load challenge questions from resource {}: {}", resourcePath, e.getMessage());
+        }
+
         if ("number-detective".equalsIgnoreCase(gameSlug)) {
             List<Map<String, Object>> puzzles = new ArrayList<>();
             List<Map<String, Object>> bank = new ArrayList<>();
-            bank.add(Map.of("id", "nd-1", "question", "2, 4, 8, 16, ?", "correctAnswer", "32", "options", List.of("24", "30", "32", "36"), "hint", "Notice how each number doubles.", "explanation", "Each number is multiplied by 2."));
-            bank.add(Map.of("id", "nd-2", "question", "5, 10, 15, 20, ?", "correctAnswer", "25", "options", List.of("22", "25", "30", "35"), "hint", "Add 5 to the previous number.", "explanation", "Arithmetic sequence with a common difference of +5."));
-            bank.add(Map.of("id", "nd-3", "question", "100, 90, 80, 70, ?", "correctAnswer", "60", "options", List.of("50", "55", "60", "65"), "hint", "Decrease by 10.", "explanation", "Subtract 10 from each number consecutively."));
-            bank.add(Map.of("id", "nd-4", "question", "3, 6, 9, 12, ?", "correctAnswer", "15", "options", List.of("14", "15", "16", "18"), "hint", "Multiples of 3.", "explanation", "Multiples of 3 increasing by 3 each step."));
-            bank.add(Map.of("id", "nd-5", "question", "1, 4, 9, 16, ?", "correctAnswer", "25", "options", List.of("20", "24", "25", "36"), "hint", "Perfect squares.", "explanation", "Perfect squares: 1^2, 2^2, 3^2, 4^2, 5^2."));
-            bank.add(Map.of("id", "nd-6", "question", "1, 2, 4, 7, 11, ?", "correctAnswer", "16", "options", List.of("13", "14", "15", "16"), "hint", "Differences increase by 1.", "explanation", "+1, +2, +3, +4, +5..."));
-            bank.add(Map.of("id", "nd-7", "question", "2, 3, 5, 8, 13, ?", "correctAnswer", "21", "options", List.of("18", "20", "21", "25"), "hint", "Sum of preceding two.", "explanation", "Fibonacci sequence."));
-            bank.add(Map.of("id", "nd-8", "question", "1, 8, 27, 64, ?", "correctAnswer", "125", "options", List.of("100", "121", "125", "150"), "hint", "Perfect cubes.", "explanation", "Perfect cubes: 1^3, 2^3, 3^3, 4^3, 5^3."));
+            bank.add(new HashMap<>(Map.of("id", "nd-1", "question", "2, 4, 8, 16, ?", "correctAnswer", "32", "options", new ArrayList<>(List.of("24", "30", "32", "36")), "hint", "Notice how each number doubles.", "explanation", "Each number is multiplied by 2.")));
+            bank.add(new HashMap<>(Map.of("id", "nd-2", "question", "5, 10, 15, 20, ?", "correctAnswer", "25", "options", new ArrayList<>(List.of("22", "25", "30", "35")), "hint", "Add 5 to the previous number.", "explanation", "Arithmetic sequence with a common difference of +5.")));
+            bank.add(new HashMap<>(Map.of("id", "nd-3", "question", "100, 90, 80, 70, ?", "correctAnswer", "60", "options", new ArrayList<>(List.of("50", "55", "60", "65")), "hint", "Decrease by 10.", "explanation", "Subtract 10 from each number consecutively.")));
+            bank.add(new HashMap<>(Map.of("id", "nd-4", "question", "3, 6, 9, 12, ?", "correctAnswer", "15", "options", new ArrayList<>(List.of("14", "15", "16", "18")), "hint", "Multiples of 3.", "explanation", "Multiples of 3 increasing by 3 each step.")));
+            bank.add(new HashMap<>(Map.of("id", "nd-5", "question", "1, 4, 9, 16, ?", "correctAnswer", "25", "options", new ArrayList<>(List.of("20", "24", "25", "36")), "hint", "Perfect squares.", "explanation", "Perfect squares: 1^2, 2^2, 3^2, 4^2, 5^2.")));
+            bank.add(new HashMap<>(Map.of("id", "nd-6", "question", "1, 2, 4, 7, 11, ?", "correctAnswer", "16", "options", new ArrayList<>(List.of("13", "14", "15", "16")), "hint", "Differences increase by 1.", "explanation", "+1, +2, +3, +4, +5...")));
+            bank.add(new HashMap<>(Map.of("id", "nd-7", "question", "2, 3, 5, 8, 13, ?", "correctAnswer", "21", "options", new ArrayList<>(List.of("18", "20", "21", "25")), "hint", "Sum of preceding two.", "explanation", "Fibonacci sequence.")));
+            bank.add(new HashMap<>(Map.of("id", "nd-8", "question", "1, 8, 27, 64, ?", "correctAnswer", "125", "options", new ArrayList<>(List.of("100", "121", "125", "150")), "hint", "Perfect cubes.", "explanation", "Perfect cubes: 1^3, 2^3, 3^3, 4^3, 5^3.")));
             
             Collections.shuffle(bank);
             for (int i = 0; i < Math.min(4, bank.size()); i++) {
-                puzzles.add(bank.get(i));
+                Map<String, Object> p = new HashMap<>(bank.get(i));
+                Object optsObj = p.get("options");
+                if (optsObj instanceof List<?> l) {
+                    List<Object> shuff = new ArrayList<>(l);
+                    Collections.shuffle(shuff);
+                    p.put("options", shuff);
+                }
+                puzzles.add(p);
             }
             try {
                 return objectMapper.writeValueAsString(puzzles);
@@ -678,7 +740,14 @@ public class MatchService {
             
             Collections.shuffle(bank);
             for (int i = 0; i < Math.min(4, bank.size()); i++) {
-                puzzles.add(bank.get(i));
+                Map<String, Object> p = new HashMap<>(bank.get(i));
+                Object optsObj = p.get("options");
+                if (optsObj instanceof List<?> l) {
+                    List<Object> shuff = new ArrayList<>(l);
+                    Collections.shuffle(shuff);
+                    p.put("options", shuff);
+                }
+                puzzles.add(p);
             }
             try {
                 return objectMapper.writeValueAsString(puzzles);
@@ -777,7 +846,8 @@ public class MatchService {
             }
             if (puzzles != null && !puzzles.isEmpty()) {
                 Collections.shuffle(puzzles);
-                List<PuzzleDto> chosen = puzzles.stream().limit(10).toList();
+                int limit = ("dsa-master-quiz".equalsIgnoreCase(gameSlug) || "number-detective".equalsIgnoreCase(gameSlug)) ? 5 : 10;
+                List<PuzzleDto> chosen = puzzles.stream().limit(limit).toList();
                 return objectMapper.writeValueAsString(chosen);
             }
         } catch (Exception e) {

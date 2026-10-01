@@ -28,63 +28,38 @@ export default function DailyCountdown({
 
   if (compact) {
     return (
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.4rem',
-          background: 'rgba(59, 130, 246, 0.12)',
-          border: '1px solid rgba(59, 130, 246, 0.3)',
-          padding: '0.35rem 0.85rem',
-          borderRadius: '999px',
-          fontSize: '0.75rem',
-          fontFamily: 'var(--font-mono)',
-          fontWeight: 700,
-          color: '#60a5fa'
-        }}
-      >
-        <Flame size={13} color="#38bdf8" fill="#38bdf8" />
-        <span>RESET {countdown.formatted}</span>
-      </div>
+      <span className="zine-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', background: 'var(--riso-coral)', color: '#fffdf6', padding: '0.35rem 0.75rem' }}>
+        <Flame size={12} /> RESET {countdown.formatted}
+      </span>
     );
   }
 
   return (
-    <div
-      style={{
+    <div className="zine-card" style={{ display: 'flex', alignItems: 'center', gap: '0.9rem', padding: '1rem 1.25rem', boxShadow: '4px 4px 0 var(--riso-coral)' }}>
+      <div style={{
+        width: '44px',
+        height: '44px',
+        background: 'var(--riso-coral)',
+        border: '2px solid var(--ink)',
         display: 'flex',
         alignItems: 'center',
-        gap: '0.85rem',
-        background: 'rgba(8, 14, 33, 0.85)',
-        border: '1px solid rgba(255, 255, 255, 0.08)',
-        borderRadius: '1.25rem',
-        padding: '1rem 1.35rem',
-        boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
-      }}
-    >
-      <div
-        style={{
-          width: '38px',
-          height: '38px',
-          borderRadius: '10px',
-          background: 'rgba(59, 130, 246, 0.12)',
-          border: '1px solid rgba(59, 130, 246, 0.3)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}
-      >
-        <Clock size={18} color="#60a5fa" />
+        justifyContent: 'center',
+        color: '#fffdf6',
+        flexShrink: 0,
+        boxShadow: '3px 3px 0 var(--ink)',
+        transform: 'rotate(-3deg)'
+      }}>
+        <Clock size={19} />
       </div>
 
       <div>
         {showLabel && (
-          <div style={{ fontSize: '0.65rem', color: 'rgba(255, 255, 255, 0.45)', fontFamily: 'var(--font-mono)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            DAILY ARENA REFRESH (12:00 AM IST)
+          <div className="font-mono" style={{ fontSize: '0.6rem', color: 'var(--ink-muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em' }}>
+            Daily Arena Refresh (12:00 AM IST)
           </div>
         )}
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: 800, color: '#ffffff', letterSpacing: '0.05em' }}>
-          ⏳ {countdown.formatted}
+        <div className="font-mono" style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--ink)', letterSpacing: '0.04em' }}>
+          {countdown.formatted}
         </div>
       </div>
     </div>

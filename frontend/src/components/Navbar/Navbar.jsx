@@ -1,6 +1,6 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Brain, Zap, Trophy, Flame, Coins, LogOut, Menu, X, ChevronDown, Users, Swords, User } from 'lucide-react';
+import { Brain, Flame, Coins, LogOut, ChevronDown, Users, User } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { getRankFromRating } from '../../utils/rankUtils';
@@ -113,303 +113,183 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Floating Frosted Pill Nav Header */}
+      {/* ============ PRINT-SHOP MASTHEAD ============ */}
       <header style={{
         position: 'fixed',
-        top: '1rem',
+        top: 0,
         left: 0,
         right: 0,
         zIndex: 100,
-        display: 'flex',
-        justifyContent: 'center',
-        padding: '0 1rem',
         pointerEvents: 'none'
       }}>
         <div style={{
           width: '100%',
-          maxWidth: '1200px',
-          background: 'rgba(13, 13, 20, 0.78)',
-          backdropFilter: 'blur(28px)',
-          WebkitBackdropFilter: 'blur(28px)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
-          borderRadius: '9999px',
-          height: '58px',
-          padding: '0 1.25rem',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          boxShadow: '0 8px 32px -4px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.12)',
+          maxWidth: '1240px',
+          margin: '0.85rem auto 0',
+          padding: '0 0.75rem',
           pointerEvents: 'auto'
         }}>
-          
-          {/* Left: Brand Logo + Desktop Nav */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-            <Link to={isAuthenticated ? '/dashboard' : '/'} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
-              <div style={{
-                width: '32px',
-                height: '32px',
-                borderRadius: '8px',
-                background: 'rgba(59, 130, 246, 0.12)',
-                border: '1px solid rgba(59, 130, 246, 0.3)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0 0 15px rgba(59, 130, 246, 0.35)'
-              }}>
-                <Brain size={18} color="#60A5FA" />
-              </div>
-              <span className="font-display" style={{ fontSize: '1.05rem', fontWeight: 700, color: '#F8FAFC', letterSpacing: '-0.02em' }}>
-                Algo<span style={{ color: '#60A5FA' }}>Arena</span>
-              </span>
-            </Link>
+          <div style={{
+            background: 'var(--paper-card)',
+            border: '3px solid var(--ink)',
+            boxShadow: '6px 6px 0 var(--ink)',
+            height: '56px',
+            padding: '0 0.85rem',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '0.75rem',
+            position: 'relative'
+          }}>
+            <div className="halftone-violet halftone-fade-l" style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 60, opacity: 0.35 }} />
 
-            {/* Desktop Nav Links */}
-            {isAuthenticated && (
-              <div className="hidden md:flex" style={{ display: 'flex', gap: '0.25rem', alignItems: 'center' }}>
-                {navLinks.map(link => {
-                  const active = isActive(link.to);
-                  return (
-                    <Link
-                      key={link.to}
-                      to={link.to}
-                      style={{
-                        padding: '0.35rem 0.85rem',
-                        borderRadius: '9999px',
-                        textDecoration: 'none',
-                        fontSize: '0.825rem',
-                        fontFamily: 'var(--font-body)',
-                        fontWeight: active ? 600 : 500,
-                        color: active ? '#FFFFFF' : '#94A3B8',
-                        background: active ? 'rgba(59, 130, 246, 0.18)' : 'transparent',
-                        border: active ? '1px solid rgba(59, 130, 246, 0.35)' : '1px solid transparent',
-                        transition: 'all 0.15s ease',
-                      }}
-                      onMouseEnter={e => { if (!active) { e.target.style.color = '#F8FAFC'; e.target.style.background = 'rgba(255, 255, 255, 0.05)'; }}}
-                      onMouseLeave={e => { if (!active) { e.target.style.color = '#94A3B8'; e.target.style.background = 'transparent'; }}}
-                    >
-                      {link.label}
-                    </Link>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-
-          {/* Right: User Stats & Actions */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-            {isAuthenticated && user ? (
-              <>
-                {/* Stats pills */}
-                <div style={{ display: 'flex', gap: '0.35rem', alignItems: 'center' }}>
-                  {/* Competitive Rank Pill */}
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.35rem',
-                    padding: '0.25rem 0.65rem',
-                    borderRadius: '999px',
-                    background: 'rgba(59, 130, 246, 0.12)',
-                    border: '1px solid rgba(59, 130, 246, 0.3)'
-                  }}>
-                    <span style={{ fontSize: '0.8rem' }}>{currentRank.badge}</span>
-                    <span className="font-mono" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#60A5FA' }}>
-                      {user.competitiveRating || 500}
-                    </span>
-                  </div>
-
-                  {/* Coins Pill */}
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.3rem',
-                    padding: '0.25rem 0.65rem',
-                    borderRadius: '999px',
-                    background: 'rgba(245, 158, 11, 0.08)',
-                    border: '1px solid rgba(245, 158, 11, 0.25)'
-                  }}>
-                    <Coins size={12} style={{ color: '#FBBF24' }} />
-                    <span className="font-mono" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#FBBF24' }}>
-                      {user.coins}
-                    </span>
-                  </div>
-                  
-                  {/* Streak Pill */}
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.3rem',
-                    padding: '0.25rem 0.65rem',
-                    borderRadius: '999px',
-                    background: 'rgba(59, 130, 246, 0.08)',
-                    border: '1px solid rgba(59, 130, 246, 0.2)'
-                  }}>
-                    <Flame size={12} style={{ color: '#38BDF8' }} />
-                    <span className="font-mono" style={{ fontSize: '0.75rem', fontWeight: 700, color: '#F8FAFC' }}>
-                      {user.currentStreak}
-                    </span>
-                  </div>
+            {/* Left: Brand + Desktop Nav */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', position: 'relative' }}>
+              <Link to={isAuthenticated ? '/dashboard' : '/'} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <div style={{
+                  width: '34px',
+                  height: '34px',
+                  background: 'var(--riso-violet)',
+                  border: '2px solid var(--ink)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transform: 'rotate(-3deg)',
+                  flexShrink: 0
+                }}>
+                  <Brain size={17} color="#fffdf6" />
                 </div>
+                <span className="zine-display" style={{ fontSize: '0.95rem' }}>
+                  Algo<span style={{ color: 'var(--riso-coral)' }}>Arena</span>
+                </span>
+              </Link>
 
-                {/* Friends & Chat Trigger Button */}
-                <button
-                  onClick={() => setSocialOpen(true)}
-                  title="Friends & Social"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '32px',
-                    height: '32px',
-                    borderRadius: '50%',
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
-                    cursor: 'pointer',
-                    color: '#F8FAFC',
-                    transition: 'all 0.15s ease'
-                  }}
-                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255, 255, 255, 0.12)'; e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)'; e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.12)'; }}
-                >
-                  <Users size={14} />
-                </button>
-
-                {/* User menu dropdown */}
-                <div style={{ position: 'relative' }}>
-                  <button
-                    onClick={() => setUserMenuOpen(!userMenuOpen)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.4rem',
-                      background: 'rgba(255, 255, 255, 0.06)',
-                      border: '1px solid rgba(255, 255, 255, 0.12)',
-                      borderRadius: '999px',
-                      padding: '0.2rem 0.6rem 0.2rem 0.25rem',
-                      cursor: 'pointer',
-                      color: '#F8FAFC',
-                      transition: 'all 0.15s ease',
-                    }}
-                    onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)'; }}
-                    onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.12)'; }}
-                  >
-                    <div style={{
-                      width: '24px',
-                      height: '24px',
-                      borderRadius: '50%',
-                      background: '#FFFFFF',
-                      color: '#050507',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '0.725rem',
-                      fontWeight: 800
-                    }}>
-                      {user.username?.[0]?.toUpperCase()}
-                    </div>
-                    <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>{user.username}</span>
-                    <ChevronDown size={12} style={{ color: '#94A3B8', transform: userMenuOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
-                  </button>
-
-                  <AnimatePresence>
-                    {userMenuOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -8, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: -8, scale: 0.95 }}
-                        transition={{ duration: 0.12 }}
+              {isAuthenticated && (
+                <div className="hidden md:flex" style={{ display: 'flex', gap: '0.15rem', alignItems: 'center' }}>
+                  {navLinks.map(link => {
+                    const active = isActive(link.to);
+                    return (
+                      <Link
+                        key={link.to}
+                        to={link.to}
+                        className="zine-btn-sm"
                         style={{
-                          position: 'absolute',
-                          top: 'calc(100% + 10px)',
-                          right: 0,
-                          background: 'rgba(13, 13, 20, 0.95)',
-                          backdropFilter: 'blur(20px)',
-                          border: '1px solid rgba(255, 255, 255, 0.12)',
-                          borderRadius: '0.75rem',
-                          padding: '0.4rem',
-                          minWidth: '160px',
-                          boxShadow: '0 12px 30px rgba(0, 0, 0, 0.6)',
-                          zIndex: 200,
+                          background: active ? 'var(--ink)' : 'transparent',
+                          color: active ? 'var(--paper)' : 'var(--ink)',
+                          boxShadow: active ? '3px 3px 0 var(--riso-coral)' : 'none',
+                          transform: active ? 'translate(-1px, -1px)' : 'none',
                         }}
                       >
-                        <Link
-                          to="/profile"
-                          onClick={() => setUserMenuOpen(false)}
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.5rem',
-                            padding: '0.5rem 0.75rem',
-                            borderRadius: '0.5rem',
-                            color: '#CBD5E1',
-                            textDecoration: 'none',
-                            fontSize: '0.825rem',
-                            fontWeight: 500,
-                            transition: 'all 0.15s'
-                          }}
-                          onMouseEnter={e => { e.target.style.background = 'rgba(255, 255, 255, 0.08)'; e.target.style.color = '#FFFFFF'; }}
-                          onMouseLeave={e => { e.target.style.background = 'transparent'; e.target.style.color = '#CBD5E1'; }}
-                        >
-                          <User size={13} /> Profile
-                        </Link>
-                        <button
-                          onClick={() => { setUserMenuOpen(false); handleLogout(); }}
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.5rem',
-                            width: '100%',
-                            padding: '0.5rem 0.75rem',
-                            borderRadius: '0.5rem',
-                            color: '#f87171',
-                            background: 'transparent',
-                            border: 'none',
-                            cursor: 'pointer',
-                            fontSize: '0.825rem',
-                            fontWeight: 500,
-                            transition: 'all 0.15s'
-                          }}
-                          onMouseEnter={e => { e.currentTarget.style.background = 'rgba(239, 68, 68, 0.12)'; }}
-                          onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
-                        >
-                          <LogOut size={13} /> Log Out
-                        </button>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                        {link.label}
+                      </Link>
+                    );
+                  })}
                 </div>
-              </>
-            ) : (
-              <div style={{ display: 'flex', gap: '0.65rem', alignItems: 'center' }}>
-                <Link
-                  to="/login"
-                  style={{
-                    padding: '0.4rem 1.05rem',
-                    borderRadius: '9999px',
-                    fontSize: '0.825rem',
-                    fontWeight: 600,
-                    textDecoration: 'none',
-                    color: '#F8FAFC',
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
-                    transition: 'all 0.15s ease'
-                  }}
-                  onMouseEnter={e => { e.target.style.background = 'rgba(59, 130, 246, 0.12)'; e.target.style.borderColor = 'rgba(59, 130, 246, 0.35)'; }}
-                  onMouseLeave={e => { e.target.style.background = 'rgba(255, 255, 255, 0.05)'; e.target.style.borderColor = 'rgba(255, 255, 255, 0.12)'; }}
-                >
-                  Log In
-                </Link>
-                <Link
-                  to="/signup"
-                  className="pill-btn-blue"
-                  style={{
-                    padding: '0.4rem 1.25rem',
-                    fontSize: '0.825rem'
-                  }}
-                >
-                  Explore AlgoArena
-                </Link>
-              </div>
-            )}
+              )}
+            </div>
+
+            {/* Right: User Stats & Actions */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', position: 'relative' }}>
+              {isAuthenticated && user ? (
+                <>
+                  <div style={{ display: 'flex', gap: '0.3rem', alignItems: 'center' }}>
+                    <div className="zine-badge" style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', background: 'var(--riso-violet)', color: '#fffdf6' }}>
+                      <span style={{ fontSize: '0.8rem' }}>{currentRank.badge}</span>
+                      <span>{user.competitiveRating || 500}</span>
+                    </div>
+                    <div className="zine-badge" style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', background: 'var(--riso-yellow)' }}>
+                      <Coins size={11} />
+                      <span>{user.coins}</span>
+                    </div>
+                    <div className="zine-badge" style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', background: 'var(--riso-teal)', color: '#fffdf6' }}>
+                      <Flame size={11} />
+                      <span>{user.currentStreak}</span>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => setSocialOpen(true)}
+                    title="Friends & Social"
+                    className="zine-btn-sm"
+                  >
+                    <Users size={13} />
+                  </button>
+
+                  {/* User menu dropdown */}
+                  <div style={{ position: 'relative' }}>
+                    <button
+                      onClick={() => setUserMenuOpen(!userMenuOpen)}
+                      className="zine-btn-sm"
+                      style={{ paddingLeft: '0.3rem', background: 'var(--paper-card)' }}
+                    >
+                      <div style={{
+                        width: '22px',
+                        height: '22px',
+                        background: 'var(--riso-coral)',
+                        color: '#fffdf6',
+                        border: '2px solid var(--ink)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '0.65rem',
+                        fontWeight: 800
+                      }}>
+                        {user.username?.[0]?.toUpperCase()}
+                      </div>
+                      <span>{user.username}</span>
+                      <ChevronDown size={12} style={{ transform: userMenuOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+                    </button>
+
+                    <AnimatePresence>
+                      {userMenuOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -8 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -8 }}
+                          transition={{ duration: 0.12 }}
+                          style={{
+                            position: 'absolute',
+                            top: 'calc(100% + 10px)',
+                            right: 0,
+                            background: 'var(--paper-card)',
+                            border: '3px solid var(--ink)',
+                            boxShadow: '5px 5px 0 var(--ink)',
+                            padding: '0.35rem',
+                            minWidth: '170px',
+                            zIndex: 200,
+                          }}
+                        >
+                          <Link
+                            to="/profile"
+                            onClick={() => setUserMenuOpen(false)}
+                            className="zine-btn-sm"
+                            style={{ width: '100%', justifyContent: 'flex-start', boxShadow: 'none', border: 'none', background: 'transparent', padding: '0.5rem 0.6rem', textTransform: 'none', letterSpacing: 0, fontSize: '0.75rem' }}
+                          >
+                            <User size={13} /> Profile
+                          </Link>
+                          <button
+                            onClick={() => { setUserMenuOpen(false); handleLogout(); }}
+                            className="zine-btn-sm"
+                            style={{ width: '100%', justifyContent: 'flex-start', boxShadow: 'none', border: 'none', background: 'transparent', padding: '0.5rem 0.6rem', color: 'var(--riso-coral)', textTransform: 'none', letterSpacing: 0, fontSize: '0.75rem' }}
+                          >
+                            <LogOut size={13} /> Log Out
+                          </button>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </>
+              ) : (
+                <div style={{ display: 'flex', gap: '0.45rem', alignItems: 'center' }}>
+                  <Link to="/login" className="zine-btn-sm" style={{ padding: '0.45rem 0.9rem' }}>
+                    Log In
+                  </Link>
+                  <Link to="/signup" className="zine-btn-sm zine-btn-sm--coral" style={{ padding: '0.45rem 0.9rem' }}>
+                    Join
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </header>

@@ -34,7 +34,7 @@ export function getRandomQuestionSet({
   gameType,
   difficulty = 'all',
   questionBank = [],
-  count = 10,
+  count = null,
   userShuffle = true
 } = {}) {
   if (!Array.isArray(questionBank) || questionBank.length === 0) {
@@ -43,15 +43,18 @@ export function getRandomQuestionSet({
 
   const normGame = (gameType || 'generic').toLowerCase().trim();
   const normDiff = (difficulty || 'all').toLowerCase().trim();
+  const effectiveCount = (count !== null && count > 0)
+    ? count
+    : (normGame === 'dsa-master-quiz' || normGame === 'number-detective' ? 5 : 10);
   const key = `${STORAGE_KEY_PREFIX}-${normGame}-${normDiff}`;
   
   let eligible = questionBank;
   if (normDiff !== 'all') {
-    eligible = questionBank.filter(
+    const matching = questionBank.filter(
       q => q.difficulty && q.difficulty.toLowerCase() === normDiff
     );
-    if (eligible.length === 0) {
-      eligible = questionBank;
+    if (matching.length > 0) {
+      eligible = matching;
     }
   }
 
@@ -63,27 +66,50 @@ export function getRandomQuestionSet({
   const shuffledFresh = shuffleArray(bucketFresh);
   const shuffledPlayed = shuffleArray(bucketPlayed);
 
-  let chosen = [];
+  const chosen = [];
+  const seenIds = new Set();
+  const seenTexts = new Set();
 
-  if (shuffledFresh.length >= count) {
-    chosen = shuffledFresh.slice(0, count);
-  } else {
-    chosen = [...shuffledFresh];
-    const needed = count - chosen.length;
-    chosen.push(...shuffledPlayed.slice(0, needed));
+  function tryAdd(q) {
+    if (!q) return false;
+    const qId = String(q.id);
+    const qText = (q.question || q.title || '').trim().toLowerCase();
+    if (!seenIds.has(qId) && (!qText || !seenTexts.has(qText))) {
+      seenIds.add(qId);
+      if (qText) seenTexts.add(qText);
+      chosen.push(q);
+      return true;
+    }
+    return false;
   }
 
-  const uniqueChosen = Array.from(new Set(chosen)).slice(0, count);
+  for (const q of shuffledFresh) {
+    if (chosen.length >= effectiveCount) break;
+    tryAdd(q);
+  }
+
+  if (chosen.length < effectiveCount) {
+    for (const q of shuffledPlayed) {
+      if (chosen.length >= effectiveCount) break;
+      tryAdd(q);
+    }
+  }
+
+  if (chosen.length < effectiveCount) {
+    for (const q of shuffleArray([...eligible])) {
+      if (chosen.length >= effectiveCount) break;
+      tryAdd(q);
+    }
+  }
 
   // Update recently played
-  const newRecentIds = [...readStorage(key), ...uniqueChosen.map(q => String(q.id))];
-  // Keep only the most recent RECENT_MEMORY_SIZE ids
+  const newRecentIds = [...readStorage(key), ...chosen.map(q => String(q.id))];
   if (newRecentIds.length > RECENT_MEMORY_SIZE) {
     newRecentIds.splice(0, newRecentIds.length - RECENT_MEMORY_SIZE);
   }
   writeStorage(key, newRecentIds);
 
-  const orderedQuestions = userShuffle ? shuffleArray([...uniqueChosen]) : [...uniqueChosen];
+  const orderedQuestions = userShuffle ? shuffleArray([...chosen]) : [...chosen];
   return balanceAndRandomizeQuestionOptions(orderedQuestions);
 }
 

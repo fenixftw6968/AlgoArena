@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EloRatingService {
 
-    public static final int K_FACTOR = 32;
+    public static final int RATING_STEP = 25;
 
     public static class EloResult {
         private final int newRatingA;
@@ -27,30 +27,38 @@ public class EloRatingService {
     }
 
     /**
-     * Calculates updated Elo ratings.
+     * Calculates updated ratings:
+     * - Win increases rating by 25 (+25)
+     * - Loss decreases rating by 25 (-25), clamped at minimum 0
+     * - Draw has 0 change
+     *
      * @param ratingA Current rating of player A
      * @param ratingB Current rating of player B
      * @param actualScoreA 1.0 if A wins, 0.0 if B wins (A loses), 0.5 for draw
      * @return EloResult with updated ratings and deltas
      */
     public EloResult calculateNewRatings(int ratingA, int ratingB, double actualScoreA) {
-        // Expected score for player A
-        double expectedA = 1.0 / (1.0 + Math.pow(10.0, (double) (ratingB - ratingA) / 400.0));
-        // Expected score for player B
-        double expectedB = 1.0 - expectedA;
-        double actualScoreB = 1.0 - actualScoreA;
+        int deltaA;
+        int deltaB;
 
-        int deltaA = (int) Math.round(K_FACTOR * (actualScoreA - expectedA));
-        int deltaB = (int) Math.round(K_FACTOR * (actualScoreB - expectedB));
-
-        // In case of win, assure at least +1 gain (or at least reasonable min gain) unless already capped
-        if (actualScoreA == 1.0 && deltaA <= 0) deltaA = 1;
-        if (actualScoreB == 1.0 && deltaB <= 0) deltaB = 1;
+        if (actualScoreA == 1.0) {
+            // Player A wins, Player B loses
+            deltaA = RATING_STEP;
+            deltaB = -RATING_STEP;
+        } else if (actualScoreA == 0.0) {
+            // Player A loses, Player B wins
+            deltaA = -RATING_STEP;
+            deltaB = RATING_STEP;
+        } else {
+            // Draw
+            deltaA = 0;
+            deltaB = 0;
+        }
 
         int newRatingA = Math.max(0, ratingA + deltaA);
         int newRatingB = Math.max(0, ratingB + deltaB);
 
-        // Recompute actual delta if clamped at 0
+        // Clamp delta if floored at 0
         deltaA = newRatingA - ratingA;
         deltaB = newRatingB - ratingB;
 

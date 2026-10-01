@@ -68,22 +68,27 @@ export function clearRecentQuestionIds(gameType) {
 export function selectQuestions(questionBank, {
   gameType,
   difficulty = 'all',
-  count = 10,
+  count = null,
   recordHistory = true,
 } = {}) {
   if (!Array.isArray(questionBank) || questionBank.length === 0) {
     return [];
   }
 
+  const normGame = (gameType || 'generic').toLowerCase().trim();
+  const effectiveCount = (count !== null && count > 0)
+    ? count
+    : (normGame === 'dsa-master-quiz' || normGame === 'number-detective' ? 5 : 10);
+
   // 1. Filter by difficulty if specified and not 'all'
   let eligible = questionBank;
   if (difficulty && difficulty.toLowerCase() !== 'all') {
-    eligible = questionBank.filter(
+    const matching = questionBank.filter(
       q => q.difficulty && q.difficulty.toLowerCase() === difficulty.toLowerCase()
     );
     // If no questions match the specific difficulty, fall back to entire pool
-    if (eligible.length === 0) {
-      eligible = questionBank;
+    if (matching.length > 0) {
+      eligible = matching;
     }
   }
 
@@ -98,30 +103,57 @@ export function selectQuestions(questionBank, {
   const shuffledUnplayed = shuffleArray(unplayed);
   const shuffledPlayed = shuffleArray(played);
 
-  // 5. Combine: Pick from unplayed first, and if we still need more, pick from played
-  let selected = [];
-  if (shuffledUnplayed.length >= count) {
-    selected = shuffledUnplayed.slice(0, count);
-  } else {
-    // If not enough unplayed, take all unplayed + fill remainder from played
-    selected = [...shuffledUnplayed, ...shuffledPlayed.slice(0, count - shuffledUnplayed.length)];
-    
-    // If we had to reuse played questions and total eligible was exhausted, reset history to avoid locking
+  // 5. Combine: Pick from unplayed first, and if we still need more, pick from played, guaranteeing strictly unique questions
+  const selected = [];
+  const seenIds = new Set();
+  const seenTexts = new Set();
+
+  function tryAdd(q) {
+    if (!q) return false;
+    const qId = String(q.id);
+    const qText = (q.question || q.title || '').trim().toLowerCase();
+    if (!seenIds.has(qId) && (!qText || !seenTexts.has(qText))) {
+      seenIds.add(qId);
+      if (qText) seenTexts.add(qText);
+      selected.push(q);
+      return true;
+    }
+    return false;
+  }
+
+  for (const q of shuffledUnplayed) {
+    if (selected.length >= effectiveCount) break;
+    tryAdd(q);
+  }
+
+  if (selected.length < effectiveCount) {
+    for (const q of shuffledPlayed) {
+      if (selected.length >= effectiveCount) break;
+      tryAdd(q);
+    }
     if (unplayed.length === 0) {
       clearRecentQuestionIds(gameType);
     }
   }
 
+  // If still need more from eligible pool (e.g. initial set), try adding remaining unique
+  if (selected.length < effectiveCount) {
+    for (const q of shuffleArray([...eligible])) {
+      if (selected.length >= effectiveCount) break;
+      tryAdd(q);
+    }
+  }
+
   // Ensure overall array is shuffled so unplayed/played aren't clustered
-  selected = shuffleArray(selected);
+  const finalOrdered = shuffleArray(selected);
 
   // 6. Record played IDs in history
-  if (recordHistory && selected.length > 0) {
-    const selectedIds = selected.map(q => q.id);
+  if (recordHistory && finalOrdered.length > 0) {
+    const selectedIds = finalOrdered.map(q => q.id);
     saveRecentQuestionIds(gameType, selectedIds);
   }
 
-  return balanceAndRandomizeQuestionOptions(selected);
+  return balanceAndRandomizeQuestionOptions(finalOrdered);
 }
 
 /**

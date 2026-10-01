@@ -6,12 +6,11 @@ export default function ProtectedRoute({ children }) {
 
   if (loading) {
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#020617', position: 'relative', overflow: 'hidden' }}>
-        <div className="star-field" />
-        <div style={{ textAlign: 'center', position: 'relative', zIndex: 10 }}>
-          <div style={{ width: '44px', height: '44px', borderRadius: '50%', border: '2px solid rgba(255, 255, 255, 0.1)', borderTopColor: '#3b82f6', animation: 'spin 0.8s linear infinite', margin: '0 auto 1.25rem', boxShadow: '0 0 20px rgba(59, 130, 246, 0.3)' }} />
-          <p style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.85rem', fontFamily: 'var(--font-mono)', fontWeight: 700, letterSpacing: '0.08em' }}>SYNCHRONIZING ALGOARENA...</p>
-          <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+      <div className="cosmic-void" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+        <div className="paper-grain" />
+        <div style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
+          <div className="zine-spinner" style={{ margin: '0 auto 1.25rem' }} />
+          <p className="font-mono" style={{ color: 'var(--ink-muted)', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase' }}>Synchronizing AlgoArena...</p>
         </div>
       </div>
     );

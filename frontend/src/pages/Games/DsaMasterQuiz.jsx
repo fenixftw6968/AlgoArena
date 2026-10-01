@@ -10,6 +10,7 @@ export default function DsaMasterQuiz() {
       category="Programming / DSA"
       questionBank={dsaMasterQuestions}
       codeLanguage="cpp"
+      questionCount={5}
     />
   );
 }

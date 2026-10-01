@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Lightbulb, CheckCircle, XCircle, Clock, Swords, Code2, BookOpen, Target, Sparkles, Loader2 } from 'lucide-react';
+import { Lightbulb, CheckCircle, XCircle, Loader2 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useGame } from '../../context/GameContext';
 import { useTimer } from '../../hooks/useTimer';
@@ -32,8 +32,10 @@ export default function MCQGameEngine({
   category = 'Logic',
   questionBank = [],
   customDifficulties = null,
-  codeLanguage = 'cpp'
+  codeLanguage = 'cpp',
+  questionCount = null
 }) {
+  const targetCount = questionCount || (gameSlug === 'dsa-master-quiz' || gameSlug === 'number-detective' ? 5 : 10);
   const { user, refreshUser } = useAuth();
   const { xpPopups, showXPPopup } = useGame();
   const navigate = useNavigate();
@@ -88,6 +90,7 @@ export default function MCQGameEngine({
       setWaitingForOpponent(false);
       setCompetitiveResult(event.data);
       clearMatchStorage(currentMatch?.id);
+      refreshUser();
     }
   });
 
@@ -102,17 +105,18 @@ export default function MCQGameEngine({
           setWaitingForOpponent(false);
           setCompetitiveResult(res.data);
           clearMatchStorage(currentMatch.id);
+          refreshUser();
         }
       } catch (err) {
         console.warn("Polling match status fallback failed:", err);
       }
-    }, 2000);
+    }, 1200);
 
     return () => {
       isCancelled = true;
       clearInterval(interval);
     };
-  }, [waitingForOpponent, currentMatch, clearMatchStorage]);
+  }, [waitingForOpponent, currentMatch?.id, clearMatchStorage, refreshUser]);
 
   // Handle timeout on a question
   const handleTimeout = () => {
@@ -141,7 +145,7 @@ export default function MCQGameEngine({
         gameSlug,
         difficulty: selectedDiff,
         questionBank,
-        count: 10,
+        count: targetCount,
         userShuffle: true
       });
 
@@ -149,7 +153,8 @@ export default function MCQGameEngine({
 
       if (activeList.length === 0 && Array.isArray(questionBank) && questionBank.length > 0) {
         const matching = questionBank.filter(q => q.difficulty && q.difficulty.toLowerCase() === selectedDiff.toLowerCase());
-        activeList = matching.length > 0 ? matching.slice(0, 10) : questionBank.slice(0, 10);
+        const pool = matching.length > 0 ? matching : questionBank;
+        activeList = shuffleArray([...pool]).slice(0, targetCount);
       }
 
       setPuzzles(activeList);
@@ -172,7 +177,8 @@ export default function MCQGameEngine({
     } catch (err) {
       console.warn("Failed to load questions, using fallback set:", err);
       const fallback = questionBank.filter(q => q.difficulty && q.difficulty.toLowerCase() === selectedDiff.toLowerCase());
-      const activeList = fallback.length > 0 ? fallback.slice(0, 10) : questionBank.slice(0, 10);
+      const pool = fallback.length > 0 ? fallback : questionBank;
+      const activeList = shuffleArray([...pool]).slice(0, targetCount);
       setPuzzles(activeList);
       setDifficulty(selectedDiff);
       reset(TIMER_SECONDS[selectedDiff?.toUpperCase()] || 60);
@@ -281,6 +287,26 @@ export default function MCQGameEngine({
       }
     }
 
+    if (Array.isArray(parsedQuestions) && parsedQuestions.length > 0) {
+      // Authoritative questions directly from server: guarantees both players get the EXACT SAME questions
+      setPuzzles(parsedQuestions);
+      setDifficulty(matchData.difficulty || 'MEDIUM');
+      setIndex(0);
+      setScore(0);
+      setMistakes(0);
+      setTotalXP(0);
+      setShowResult(false);
+      setSelectedOption('');
+      setShowHint(false);
+      setHintUsed(false);
+      scoreRef.current = 0;
+      mistakesRef.current = 0;
+      startTimeRef.current = Date.now();
+      reset(TIMER_SECONDS[(matchData.difficulty || 'MEDIUM').toUpperCase()] || 60);
+      start();
+      return;
+    }
+
     const matchSeed = matchData.id || matchData.createdAt || 'match-seed';
     const seededRandom = createSeededRandom(matchSeed);
 
@@ -289,7 +315,7 @@ export default function MCQGameEngine({
       const filtered = questionBank.filter(q => (q.difficulty || 'MEDIUM').toUpperCase() === matchDiff);
       const pool = filtered.length > 0 ? filtered : questionBank;
       const shuffledPool = shuffleArray(pool, seededRandom);
-      parsedQuestions = shuffledPool.slice(0, 10);
+      parsedQuestions = shuffledPool.slice(0, targetCount);
     }
 
     // Balance and randomize option positions deterministically with match seed so correct answer isn't always A
@@ -317,7 +343,7 @@ export default function MCQGameEngine({
     if (!text) return null;
     const parts = text.split('```');
     if (parts.length === 1) {
-      return <div style={{ fontSize: '1.05rem', fontWeight: 700, color: '#FFFFFF', lineHeight: 1.6, fontFamily: 'var(--font-mono)' }}>{text}</div>;
+      return <div style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--ink)', lineHeight: 1.6, fontFamily: 'var(--font-mono)' }}>{text}</div>;
     }
 
     return (
@@ -329,24 +355,25 @@ export default function MCQGameEngine({
               <div
                 key={idx}
                 style={{
-                  background: 'rgba(2, 6, 23, 0.95)',
-                  border: '1px solid rgba(59, 130, 246, 0.25)',
-                  borderRadius: '0.85rem',
+                  background: 'var(--paper-deep)',
+                  border: '2px solid var(--ink)',
+                  boxShadow: '4px 4px 0 var(--riso-violet)',
                   padding: '1.1rem 1.25rem',
                   fontFamily: 'var(--font-mono)',
                   fontSize: '0.875rem',
-                  color: '#38bdf8',
+                  color: 'var(--ink)',
                   lineHeight: 1.5,
                   overflowX: 'auto',
-                  boxShadow: 'inset 0 2px 6px rgba(0,0,0,0.6)'
+                  position: 'relative'
                 }}
               >
+                <span className="zine-badge" style={{ position: 'absolute', top: '-11px', left: '12px', background: 'var(--riso-violet)', color: '#fffdf6' }}>CODE</span>
                 <pre style={{ margin: 0, fontFamily: 'inherit' }}>{lines.trim()}</pre>
               </div>
             );
           }
           return part.trim() ? (
-            <div key={idx} style={{ fontSize: '1.05rem', fontWeight: 700, color: '#FFFFFF', lineHeight: 1.6, fontFamily: 'var(--font-mono)' }}>
+            <div key={idx} style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--ink)', lineHeight: 1.6, fontFamily: 'var(--font-mono)' }}>
               {part.trim()}
             </div>
           ) : null;
@@ -413,7 +440,7 @@ export default function MCQGameEngine({
         friendTarget={invitedFriend}
         difficulty={difficulty || 'MEDIUM'}
         onMatchReady={handleMatchReady}
-        initialMatch={currentMatch}
+        initialMatch={playMode === 'FRIEND' ? currentMatch : null}
       />
     );
   }
@@ -421,18 +448,19 @@ export default function MCQGameEngine({
   // 3. Competitive 1v1 Final Results Screen
   if (competitiveResult) {
     return (
-      <div style={{ minHeight: '100vh', background: '#020617', paddingTop: '6.5rem', padding: '2rem 1.5rem', color: '#FFFFFF', position: 'relative' }}>
-        <div className="star-field" />
-        <div className="binary-texture" />
-        <CompetitiveResults
-          matchResult={competitiveResult}
-          currentUserId={user?.id}
-          onRematch={() => {
-            setCompetitiveResult(null);
-            setShowModeModal(true);
-          }}
-          onDashboard={() => navigate('/dashboard')}
-        />
+      <div className="cosmic-void" style={{ minHeight: '100vh', paddingTop: '6.5rem', padding: '2rem 1.5rem 4rem', position: 'relative' }}>
+        <div className="paper-grain" />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <CompetitiveResults
+            matchResult={competitiveResult}
+            currentUserId={user?.id}
+            onRematch={() => {
+              setCompetitiveResult(null);
+              setShowModeModal(true);
+            }}
+            onDashboard={() => navigate('/dashboard')}
+          />
+        </div>
       </div>
     );
   }
@@ -440,60 +468,41 @@ export default function MCQGameEngine({
   // 4. Waiting for Opponent in Competitive 1v1
   if (waitingForOpponent) {
     return (
-      <div style={{
+      <div className="cosmic-void" style={{
         minHeight: '100vh',
-        background: '#020617',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         padding: '2rem 1.5rem',
-        color: '#FFFFFF',
         position: 'relative',
         overflow: 'hidden'
       }}>
-        <div className="star-field" />
-        <div className="binary-texture" />
-        <div className="mesh-glow" style={{ top: '50%', opacity: 0.5 }} />
+        <div className="paper-grain" />
+        <div className="halftone-violet halftone-fade-r" style={{ position: 'absolute', top: 0, right: 0, width: '38%', height: '100%', opacity: 0.2 }} />
 
-        <div style={{
-          position: 'relative',
-          zIndex: 10,
-          background: 'rgba(8, 14, 33, 0.9)',
-          border: '1px solid rgba(59, 130, 246, 0.3)',
-          borderRadius: '1.5rem',
-          padding: '2.5rem 2rem',
-          maxWidth: '460px',
-          width: '100%',
-          textAlign: 'center',
-          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7)'
-        }}>
+        <div className="zine-card" style={{ position: 'relative', zIndex: 1, padding: '2.5rem 2rem', maxWidth: '460px', width: '100%', textAlign: 'center', boxShadow: '10px 10px 0 var(--riso-violet)' }}>
           <div style={{
-            width: '64px',
-            height: '64px',
-            borderRadius: '50%',
-            background: 'rgba(59, 130, 246, 0.1)',
-            border: '2px solid rgba(59, 130, 246, 0.4)',
+            width: '66px',
+            height: '66px',
+            background: 'var(--riso-yellow)',
+            border: '3px solid var(--ink)',
+            boxShadow: '4px 4px 0 var(--ink)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            margin: '0 auto 1.5rem'
+            margin: '0 auto 1.5rem',
+            transform: 'rotate(4deg)'
           }}>
-            <Loader2 size={32} className="animate-spin" color="#60a5fa" />
+            <Loader2 size={30} className="zine-bounce" color="var(--ink)" />
           </div>
 
-          <h2 style={{
-            fontSize: '1.4rem',
-            fontWeight: 800,
-            fontFamily: 'var(--font-display)',
-            marginBottom: '0.5rem',
-            letterSpacing: '-0.02em'
-          }}>
+          <h2 className="zine-display misreg" data-text="CALCULATING RESULTS" style={{ fontSize: 'clamp(1.3rem, 4vw, 1.8rem)', marginBottom: '0.6rem' }}>
             CALCULATING RESULTS
           </h2>
 
           <p style={{
             fontSize: '0.875rem',
-            color: 'rgba(255, 255, 255, 0.6)',
+            color: 'var(--ink-muted)',
             fontFamily: 'var(--font-mono)',
             marginBottom: '1.5rem'
           }}>
@@ -501,24 +510,48 @@ export default function MCQGameEngine({
           </p>
 
           <div style={{
-            background: 'rgba(255, 255, 255, 0.04)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
-            borderRadius: '0.75rem',
-            padding: '0.85rem 1rem',
+            background: 'var(--paper-sunk)',
+            border: '2px solid var(--ink)',
+            boxShadow: '3px 3px 0 var(--ink)',
+            padding: '0.9rem 1rem',
             display: 'flex',
             justifyContent: 'space-around',
+            gap: '0.75rem',
+            flexWrap: 'wrap',
             fontSize: '0.825rem',
-            fontFamily: 'var(--font-mono)'
+            fontFamily: 'var(--font-mono)',
+            marginBottom: '1.25rem'
           }}>
             <div>
-              <span style={{ color: 'rgba(255, 255, 255, 0.5)' }}>Your Score: </span>
-              <span style={{ color: '#22c55e', fontWeight: 700 }}>{score}</span>
+              <span style={{ color: 'var(--ink-muted)' }}>Your Score: </span>
+              <span style={{ color: 'var(--riso-teal)', fontWeight: 800 }}>{score}</span>
             </div>
             <div>
-              <span style={{ color: 'rgba(255, 255, 255, 0.5)' }}>Mistakes: </span>
-              <span style={{ color: '#ef4444', fontWeight: 700 }}>{mistakes}</span>
+              <span style={{ color: 'var(--ink-muted)' }}>Mistakes: </span>
+              <span style={{ color: 'var(--riso-coral)', fontWeight: 800 }}>{mistakes}</span>
             </div>
           </div>
+
+          <button
+            onClick={async () => {
+              if (!currentMatch?.id) return;
+              try {
+                const res = await api.get(`/api/matches/${currentMatch.id}`);
+                if (res.status === 200 && res.data?.status === 'FINISHED') {
+                  setWaitingForOpponent(false);
+                  setCompetitiveResult(res.data);
+                  clearMatchStorage(currentMatch.id);
+                  refreshUser();
+                }
+              } catch (e) {
+                console.warn("Manual match status check:", e);
+              }
+            }}
+            className="btn-secondary"
+            style={{ width: '100%', fontSize: '0.825rem', padding: '0.6rem 1rem' }}
+          >
+            Check Status
+          </button>
         </div>
       </div>
     );
@@ -554,11 +587,10 @@ export default function MCQGameEngine({
 
   // 6. Active MCQ Question Gameplay Screen
   return (
-    <div style={{ minHeight: '100vh', background: '#020617', paddingTop: '6.5rem', color: '#FFFFFF', position: 'relative', overflow: 'hidden' }}>
+    <div className="cosmic-void" style={{ minHeight: '100vh', paddingTop: '6.5rem', position: 'relative', overflow: 'hidden' }}>
       <XPPopup popups={xpPopups} />
-      <div className="star-field" />
-      <div className="binary-texture" />
-      <div className="mesh-glow" style={{ top: '25%', left: '50%', transform: 'translate(-50%, -50%)', opacity: 0.15 }} />
+      <div className="paper-grain" />
+      <div className="halftone-coral halftone-fade-l" style={{ position: 'absolute', top: 0, left: 0, width: '26%', height: 100, opacity: 0.22 }} />
 
       <ExitModal
         isOpen={showExitModal}
@@ -566,7 +598,7 @@ export default function MCQGameEngine({
         onConfirm={() => navigate('/games')}
       />
 
-      <div style={{ maxWidth: '820px', margin: '0 auto', padding: '1rem 1.5rem 4rem', position: 'relative', zIndex: 10 }}>
+      <div style={{ maxWidth: '820px', margin: '0 auto', padding: '1rem 1.5rem 4rem', position: 'relative', zIndex: 1 }}>
         {/* Progress & Header Bar */}
         <GameProgress
           current={index + 1}
@@ -580,10 +612,10 @@ export default function MCQGameEngine({
         />
 
         {puzzles.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '4rem 2rem', background: 'rgba(8, 14, 33, 0.75)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '1.75rem' }}>
-            <Loader2 size={32} className="animate-spin" color="#3b82f6" style={{ margin: '0 auto 1rem' }} />
-            <p style={{ fontFamily: 'var(--font-mono)', color: 'rgba(255, 255, 255, 0.6)', fontSize: '0.85rem' }}>
-              SYNCHRONIZING PROBLEM SET...
+          <div className="zine-card" style={{ textAlign: 'center', padding: '4rem 2rem', boxShadow: '6px 6px 0 var(--riso-violet)' }}>
+            <div className="zine-spinner" style={{ margin: '0 auto 1rem' }} />
+            <p className="font-mono" style={{ color: 'var(--ink-muted)', fontSize: '0.8rem', letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+              Synchronizing problem set...
             </p>
           </div>
         ) : (
@@ -595,19 +627,21 @@ export default function MCQGameEngine({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -15 }}
                 transition={{ duration: 0.2 }}
+                className="zine-card"
                 style={{
-                  background: 'rgba(8, 14, 33, 0.75)',
-                  backdropFilter: 'blur(20px)',
-                  border: '1px solid rgba(255, 255, 255, 0.08)',
-                  borderRadius: '1.75rem',
                   padding: '2rem 2.25rem',
-                  boxShadow: '0 20px 50px rgba(0, 0, 0, 0.6)',
+                  boxShadow: '7px 7px 0 var(--ink)',
                   marginBottom: '1.5rem',
                   position: 'relative'
                 }}
               >
+                <div className="tape" style={{ top: -14, left: '8%' }} />
+                <span className="font-mono" style={{ position: 'absolute', top: 14, right: 18, fontSize: '0.6rem', fontWeight: 700, color: 'var(--ink-faint)', letterSpacing: '0.18em' }}>
+                  Q{String(index + 1).padStart(2, '0')}
+                </span>
+
                 {/* Formatted Question Body */}
-                <div style={{ marginBottom: '2rem' }}>
+                <div style={{ marginBottom: '2rem', paddingRight: '2.5rem' }}>
                   {renderFormattedQuestion(puzzle.question)}
                 </div>
 
@@ -621,33 +655,20 @@ export default function MCQGameEngine({
                       return (
                         <motion.button
                           key={optIdx}
-                          whileHover={{ y: -2 }}
+                          whileHover={{ x: -2, y: -2 }}
                           whileTap={{ scale: 0.99 }}
                           type="button"
                           onClick={() => setSelectedOption(opt)}
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '1rem',
-                            padding: '1.1rem 1.25rem',
-                            borderRadius: '1rem',
-                            background: isSelected ? 'rgba(59, 130, 246, 0.15)' : 'rgba(10, 18, 42, 0.65)',
-                            border: isSelected ? '1px solid #3b82f6' : '1px solid rgba(255, 255, 255, 0.08)',
-                            color: '#FFFFFF',
-                            cursor: 'pointer',
-                            textAlign: 'left',
-                            transition: 'all 0.15s ease',
-                            boxShadow: isSelected ? '0 0 20px rgba(59, 130, 246, 0.3)' : 'none'
-                          }}
+                          className={`choice-btn${isSelected ? ' selected' : ''}`}
+                          style={{ display: 'flex', alignItems: 'center', gap: '0.9rem' }}
                         >
                           <span
                             style={{
-                              width: '30px',
-                              height: '30px',
-                              borderRadius: '8px',
-                              background: isSelected ? '#3b82f6' : 'rgba(255, 255, 255, 0.06)',
-                              border: isSelected ? 'none' : '1px solid rgba(255, 255, 255, 0.12)',
-                              color: '#FFFFFF',
+                              width: '32px',
+                              height: '32px',
+                              background: isSelected ? '#fffdf6' : 'var(--paper-sunk)',
+                              border: '2px solid var(--ink)',
+                              color: isSelected ? 'var(--riso-violet)' : 'var(--ink)',
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'center',
@@ -659,7 +680,7 @@ export default function MCQGameEngine({
                           >
                             {optionLetter}
                           </span>
-                          <span style={{ fontSize: '0.9rem', fontWeight: isSelected ? 700 : 500, lineHeight: 1.4, color: isSelected ? '#ffffff' : 'rgba(255, 255, 255, 0.85)' }}>
+                          <span style={{ fontSize: '0.9rem', fontWeight: isSelected ? 700 : 600, lineHeight: 1.4 }}>
                             {opt}
                           </span>
                         </motion.button>
@@ -674,49 +695,32 @@ export default function MCQGameEngine({
                         display: 'flex',
                         alignItems: 'center',
                         gap: '0.75rem',
-                        padding: '1.1rem 1.35rem',
-                        borderRadius: '1rem',
-                        background: result === 'correct' ? 'rgba(34, 197, 94, 0.12)' : 'rgba(244, 63, 94, 0.12)',
-                        border: `1px solid ${result === 'correct' ? 'rgba(34, 197, 94, 0.35)' : 'rgba(244, 63, 94, 0.35)'}`,
+                        padding: '1rem 1.25rem',
+                        background: result === 'correct' ? 'var(--riso-teal)' : 'var(--riso-coral)',
+                        color: '#fffdf6',
+                        border: '2px solid var(--ink)',
+                        boxShadow: '4px 4px 0 var(--ink)',
                         marginBottom: '1.25rem'
                       }}
                     >
-                      {result === 'correct' ? <CheckCircle size={22} color="#22c55e" /> : <XCircle size={22} color="#f43f5e" />}
-                      <div>
-                        <div style={{ fontFamily: 'var(--font-mono)', fontWeight: 800, color: result === 'correct' ? '#22c55e' : '#f43f5e', fontSize: '0.95rem' }}>
-                          {result === 'correct' ? 'CORRECT EVALUATION' : `INCORRECT — EXPECTED: ${puzzle.correctAnswer}`}
-                        </div>
+                      {result === 'correct' ? <CheckCircle size={22} /> : <XCircle size={22} />}
+                      <div className="font-mono" style={{ fontWeight: 800, fontSize: '0.9rem', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+                        {result === 'correct' ? 'CORRECT EVALUATION' : `INCORRECT — EXPECTED: ${puzzle.correctAnswer}`}
                       </div>
                     </div>
 
                     {puzzle.explanation && (
-                      <div style={{ padding: '1.25rem', borderRadius: '1rem', background: 'rgba(10, 18, 42, 0.65)', border: '1px solid rgba(255, 255, 255, 0.08)', marginBottom: '1.5rem' }}>
-                        <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', fontWeight: 700, color: '#38bdf8', marginBottom: '0.4rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-                          // DECRYPTED ANALYSIS
+                      <div style={{ padding: '1.15rem', background: 'var(--paper-sunk)', border: '2px dashed var(--ink-faint)', marginBottom: '1.5rem' }}>
+                        <p className="font-mono" style={{ fontSize: '0.66rem', fontWeight: 800, color: 'var(--riso-violet)', marginBottom: '0.45rem', letterSpacing: '0.16em', textTransform: 'uppercase' }}>
+                          Decrypted Analysis
                         </p>
-                        <p style={{ fontSize: '0.85rem', color: 'rgba(255, 255, 255, 0.75)', lineHeight: 1.6, fontWeight: 400, margin: 0 }}>
+                        <p style={{ fontSize: '0.875rem', color: 'var(--ink-soft)', lineHeight: 1.6, fontWeight: 400, margin: 0 }}>
                           {puzzle.explanation}
                         </p>
                       </div>
                     )}
 
-                    <button
-                      onClick={handleNext}
-                      style={{
-                        width: '100%',
-                        padding: '0.85rem',
-                        borderRadius: '999px',
-                        background: 'linear-gradient(180deg, #3b82f6 0%, #2563eb 100%)',
-                        color: '#ffffff',
-                        border: 'none',
-                        fontFamily: 'var(--font-display)',
-                        fontWeight: 700,
-                        fontSize: '0.875rem',
-                        cursor: 'pointer',
-                        letterSpacing: '0.02em',
-                        boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)'
-                      }}
-                    >
+                    <button onClick={handleNext} className="btn-primary" style={{ width: '100%' }}>
                       {index + 1 >= puzzles.length ? 'VIEW FINAL CLASSIFICATION →' : 'NEXT CHALLENGE →'}
                     </button>
                   </motion.div>
@@ -733,44 +737,32 @@ export default function MCQGameEngine({
                           animate={{ opacity: 1, height: 'auto' }}
                           exit={{ opacity: 0, height: 0 }}
                           style={{
-                            background: 'rgba(59, 130, 246, 0.08)',
-                            border: '1px solid rgba(59, 130, 246, 0.25)',
-                            borderRadius: '1rem',
-                            padding: '0.9rem 1.25rem',
+                            background: 'var(--riso-yellow)',
+                            border: '2px solid var(--ink)',
+                            boxShadow: '3px 3px 0 var(--ink)',
+                            padding: '0.9rem 1.15rem',
                             display: 'flex',
                             gap: '0.65rem',
                             alignItems: 'flex-start'
                           }}
                         >
-                          <Lightbulb size={16} color="#60a5fa" style={{ flexShrink: 0, marginTop: '2px' }} />
-                          <span style={{ fontSize: '0.825rem', color: '#93c5fd', lineHeight: 1.5, fontWeight: 500 }}>
+                          <Lightbulb size={16} color="var(--ink)" style={{ flexShrink: 0, marginTop: '2px' }} />
+                          <span style={{ fontSize: '0.825rem', color: 'var(--ink)', lineHeight: 1.5, fontWeight: 500 }}>
                             {puzzle.hint}
                           </span>
                         </motion.div>
                       )}
                     </AnimatePresence>
 
-                    <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
                       {!showHint && puzzle.hint && (
                         <button
                           type="button"
                           onClick={() => { setShowHint(true); setHintUsed(true); }}
-                          style={{
-                            padding: '0.75rem 1.25rem',
-                            borderRadius: '999px',
-                            background: 'rgba(255, 255, 255, 0.06)',
-                            border: '1px solid rgba(255, 255, 255, 0.1)',
-                            color: 'rgba(255, 255, 255, 0.7)',
-                            fontFamily: 'var(--font-mono)',
-                            fontSize: '0.75rem',
-                            fontWeight: 700,
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.4rem'
-                          }}
+                          className="zine-btn-sm"
+                          style={{ padding: '0.7rem 1rem' }}
                         >
-                          <Lightbulb size={14} color="#FBBF24" /> HINT (-30% XP)
+                          <Lightbulb size={14} color="var(--riso-yellow)" /> HINT (-30% XP)
                         </button>
                       )}
 
@@ -778,20 +770,8 @@ export default function MCQGameEngine({
                         type="button"
                         disabled={!selectedOption || showResult || !!result}
                         onClick={handleSubmit}
-                        style={{
-                          flex: 1,
-                          padding: '0.85rem 1.25rem',
-                          borderRadius: '999px',
-                          background: selectedOption && !showResult && !result ? 'linear-gradient(180deg, #3b82f6 0%, #2563eb 100%)' : 'rgba(255, 255, 255, 0.08)',
-                          color: selectedOption && !showResult && !result ? '#ffffff' : 'rgba(255, 255, 255, 0.3)',
-                          border: 'none',
-                          fontFamily: 'var(--font-display)',
-                          fontWeight: 700,
-                          fontSize: '0.875rem',
-                          cursor: selectedOption && !showResult && !result ? 'pointer' : 'not-allowed',
-                          boxShadow: selectedOption && !showResult && !result ? '0 0 20px rgba(59, 130, 246, 0.4)' : 'none',
-                          transition: 'all 0.15s ease'
-                        }}
+                        className="btn-primary"
+                        style={{ flex: 1, minWidth: '180px' }}
                       >
                         CONFIRM CHOICE →
                       </button>

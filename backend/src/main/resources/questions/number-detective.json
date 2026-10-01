@@ -1,11 +1,4 @@
-/**
- * MindForge - numberDetectiveQuestions
- * Exactly 150 Curated Number Detective Puzzles
- * (50 Novice / easy, 50 Intermediate / medium, 50 Expert / hard)
- * Elevated difficulty, 100% Unique, Verified Math Explanations
- */
-
-export const numberDetectiveQuestions = [
+[
   {
     "id": "nd-easy-1",
     "gameType": "number-detective",
@@ -2256,6 +2249,4 @@ export const numberDetectiveQuestions = [
     "explanation": "Fibonacci sum plus 1: a_n = a_{n-1} + a_{n-2} + 1: 1+2+1=4, 2+4+1=7, 4+7+1=12, 7+12+1=20, 12+20+1=33. Next is 20 + 33 + 1 = 54.",
     "hint": "Sum the previous two terms plus 1."
   }
-];
-
-export default numberDetectiveQuestions;
+]

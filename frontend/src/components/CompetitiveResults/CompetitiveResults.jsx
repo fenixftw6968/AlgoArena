@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Trophy, TrendingUp, TrendingDown, RotateCcw, Home, Swords, CheckCircle2, XCircle, Clock } from 'lucide-react';
+import { TrendingUp, TrendingDown, RotateCcw, Home } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { getRankFromRating } from '../../utils/rankUtils';
 
@@ -27,201 +27,136 @@ export default function CompetitiveResults({
 
   const currentRank = getRankFromRating(myAfter);
 
+  const ink = isWinner ? 'var(--riso-teal)' : (isDraw ? 'var(--riso-violet)' : 'var(--riso-coral)');
+  const emoji = isWinner ? '🏆' : (isDraw ? '🤝' : '⚔️');
+  const heading = isWinner ? 'VICTORY' : (isDraw ? 'DRAW' : 'DEFEAT');
+  const sub = isWinner
+    ? 'Superior deduction speed and accuracy verified.'
+    : (isDraw ? 'Equal cognitive performance registered across both nodes.' : 'Review mistake analysis to recalibrate your competitive strategy.');
+
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.95, y: 15 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      style={{
-        maxWidth: '560px',
-        margin: '2rem auto',
-        background: 'rgba(8, 14, 33, 0.85)',
-        backdropFilter: 'blur(20px)',
-        border: '1px solid rgba(255, 255, 255, 0.08)',
-        borderRadius: '1.75rem',
-        padding: '2.5rem 2.25rem',
-        boxShadow: '0 30px 70px rgba(0, 0, 0, 0.7), 0 0 30px rgba(59, 130, 246, 0.1)',
-        textAlign: 'center',
-        color: '#FFFFFF',
-        position: 'relative',
-        zIndex: 10
-      }}
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="zine-card"
+      style={{ maxWidth: '580px', margin: '2rem auto', padding: '2.5rem 2.25rem', textAlign: 'center', position: 'relative', zIndex: 10, boxShadow: `10px 10px 0 ${ink}` }}
     >
-      {/* Header banner */}
-      <div style={{ marginBottom: '2rem' }}>
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 14, background: ink, borderBottom: '3px solid var(--ink)' }} />
+      <div className="halftone-ink halftone-fade-b" style={{ position: 'absolute', inset: 0, opacity: 0.12, pointerEvents: 'none' }} />
+
+      <div style={{ marginBottom: '1.75rem', position: 'relative' }}>
         <div style={{
-          width: '76px',
-          height: '76px',
-          borderRadius: '50%',
-          background: isWinner ? 'rgba(34, 197, 94, 0.15)' : (isDraw ? 'rgba(56, 189, 248, 0.15)' : 'rgba(244, 63, 94, 0.15)'),
-          border: `1px solid ${isWinner ? 'rgba(34, 197, 94, 0.4)' : (isDraw ? 'rgba(56, 189, 248, 0.4)' : 'rgba(244, 63, 94, 0.4)')}`,
+          width: '84px',
+          height: '84px',
+          background: ink,
+          border: '3px solid var(--ink)',
+          boxShadow: `5px 5px 0 var(--ink)`,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          margin: '0 auto 1.25rem',
-          fontSize: '2.2rem'
+          margin: '1.5rem auto 1.1rem',
+          fontSize: '2.4rem',
+          transform: 'rotate(-4deg)'
         }}>
-          {isWinner ? '🏆' : (isDraw ? '🤝' : '⚔️')}
+          {emoji}
         </div>
 
-        <h1 style={{
-          fontSize: '2rem',
-          fontWeight: 800,
-          color: isWinner ? '#22c55e' : (isDraw ? '#38bdf8' : '#f43f5e'),
-          fontFamily: 'var(--font-display)',
-          marginBottom: '0.4rem',
-          letterSpacing: '-0.02em'
-        }}>
-          {isWinner ? 'VICTORY' : (isDraw ? 'DRAW PROTOCOL' : 'DEFEAT')}
+        <h1 className="zine-display misreg" data-text={heading} style={{ fontSize: 'clamp(1.9rem, 6vw, 2.8rem)', marginBottom: '0.4rem' }}>
+          {heading}
         </h1>
-        <p style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '0.875rem' }}>
-          {isWinner
-            ? 'Superior deduction speed and accuracy verified.'
-            : (isDraw ? 'Equal cognitive performance registered across both nodes.' : 'Review mistake analysis to recalibrate your competitive strategy.')}
-        </p>
+        <p className="zine-lede" style={{ fontSize: '0.875rem' }}>{sub}</p>
       </div>
 
-      {/* Head to Head Score comparison */}
+      {/* Head to head */}
       <div style={{
         display: 'grid',
         gridTemplateColumns: '1fr auto 1fr',
         alignItems: 'center',
-        background: 'rgba(10, 18, 42, 0.65)',
-        border: '1px solid rgba(255, 255, 255, 0.08)',
-        borderRadius: '1.25rem',
-        padding: '1.25rem 1.5rem',
-        marginBottom: '1.5rem'
+        background: 'var(--paper-sunk)',
+        border: '2px solid var(--ink)',
+        padding: '1.15rem 1.25rem',
+        marginBottom: '1.25rem',
+        position: 'relative'
       }}>
         <div style={{ textAlign: 'left' }}>
-          <div style={{ fontSize: '0.65rem', fontWeight: 700, color: 'rgba(255, 255, 255, 0.4)', fontFamily: 'var(--font-mono)', textTransform: 'uppercase' }}>YOUR SCORE</div>
-          <div style={{ fontSize: '2rem', fontWeight: 900, color: '#22c55e', fontFamily: 'var(--font-mono)' }}>
-            {myScore ?? 0}
-          </div>
+          <div className="font-mono" style={{ fontSize: '0.6rem', fontWeight: 700, color: 'var(--ink-muted)', letterSpacing: '0.14em', textTransform: 'uppercase' }}>Your Score</div>
+          <div style={{ fontFamily: 'var(--font-display)', fontSize: '2.1rem', lineHeight: 1, color: 'var(--riso-teal)', textTransform: 'uppercase' }}>{myScore ?? 0}</div>
         </div>
 
-        <div style={{ fontSize: '0.9rem', fontWeight: 900, color: '#38bdf8', fontFamily: 'var(--font-mono)', padding: '0 0.5rem' }}>
-          VS
-        </div>
+        <div className="font-mono" style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--ink)', padding: '0 0.6rem' }}>VS</div>
 
         <div style={{ textAlign: 'right' }}>
-          <div style={{ fontSize: '0.65rem', fontWeight: 700, color: 'rgba(255, 255, 255, 0.4)', fontFamily: 'var(--font-mono)', textTransform: 'uppercase', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{oppName}</div>
-          <div style={{ fontSize: '2rem', fontWeight: 900, color: 'rgba(255, 255, 255, 0.8)', fontFamily: 'var(--font-mono)' }}>
-            {oppScore ?? 0}
-          </div>
+          <div className="font-mono" style={{ fontSize: '0.6rem', fontWeight: 700, color: 'var(--ink-muted)', letterSpacing: '0.14em', textTransform: 'uppercase', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{oppName}</div>
+          <div style={{ fontFamily: 'var(--font-display)', fontSize: '2.1rem', lineHeight: 1, color: 'var(--ink)', textTransform: 'uppercase' }}>{oppScore ?? 0}</div>
         </div>
       </div>
 
-      {/* Rating Delta Box */}
+      {/* Rating delta */}
       {matchResult.mode !== 'RANKED' && matchResult.isBotMatch ? (
-        <div style={{
-          background: 'rgba(10, 18, 42, 0.65)',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
-          borderRadius: '1rem',
-          padding: '0.85rem 1.25rem',
-          marginBottom: '2rem',
+        <div className="font-mono" style={{
+          background: 'var(--paper-sunk)',
+          border: '2px dashed var(--ink-faint)',
+          padding: '0.85rem 1.15rem',
+          marginBottom: '1.75rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           gap: '0.5rem',
-          color: 'rgba(255, 255, 255, 0.55)',
-          fontSize: '0.8rem',
-          fontFamily: 'var(--font-mono)'
+          color: 'var(--ink-muted)',
+          fontSize: '0.75rem',
+          textAlign: 'center'
         }}>
-          🤖 <span>Custom Bot Simulation — Ranked Elo rating unaffected.</span>
+          <span>🤖 Custom Bot Simulation — Ranked Elo rating unaffected.</span>
         </div>
       ) : (
         <div style={{
-          background: myDelta > 0 ? 'rgba(34, 197, 94, 0.08)' : (myDelta < 0 ? 'rgba(244, 63, 94, 0.08)' : 'rgba(10, 18, 42, 0.65)'),
-          border: `1px solid ${myDelta > 0 ? 'rgba(34, 197, 94, 0.25)' : (myDelta < 0 ? 'rgba(244, 63, 94, 0.25)' : 'rgba(255, 255, 255, 0.08)')}`,
-          borderRadius: '1.25rem',
-          padding: '1.1rem 1.35rem',
-          marginBottom: '2rem',
+          background: myDelta > 0 ? 'var(--riso-teal)' : (myDelta < 0 ? 'var(--riso-coral)' : 'var(--paper-sunk)'),
+          color: myDelta === 0 ? 'var(--ink)' : '#fffdf6',
+          border: '2px solid var(--ink)',
+          boxShadow: '4px 4px 0 var(--ink)',
+          padding: '1rem 1.25rem',
+          marginBottom: '1.75rem',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between'
+          justifyContent: 'space-between',
+          gap: '1rem',
+          flexWrap: 'wrap',
+          position: 'relative'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
             <div style={{
-              width: '42px',
-              height: '42px',
-              borderRadius: '10px',
-              background: currentRank.bg,
-              border: `1px solid ${currentRank.border}`,
+              width: '46px',
+              height: '46px',
+              background: 'var(--paper-card)',
+              border: '2px solid var(--ink)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '1.25rem'
+              fontSize: '1.3rem',
+              flexShrink: 0
             }}>
               {currentRank.badge}
             </div>
             <div style={{ textAlign: 'left' }}>
-              <div style={{ fontSize: '0.85rem', fontWeight: 800, color: '#ffffff', fontFamily: 'var(--font-mono)' }}>
-                {currentRank.name} TIER
-              </div>
-              <div style={{ fontSize: '0.75rem', color: 'rgba(255, 255, 255, 0.5)', fontFamily: 'var(--font-mono)' }}>
-                {myBefore} → <strong style={{ color: '#ffffff' }}>{myAfter}</strong> Elo
+              <div className="zine-display" style={{ fontSize: '0.85rem' }}>{currentRank.name} Tier</div>
+              <div className="font-mono" style={{ fontSize: '0.7rem', opacity: 0.85 }}>
+                {myBefore} &rarr; <strong>{myAfter}</strong> Elo
               </div>
             </div>
           </div>
 
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.35rem',
-            fontSize: '1.15rem',
-            fontWeight: 800,
-            fontFamily: 'var(--font-mono)',
-            color: myDelta > 0 ? '#22c55e' : (myDelta < 0 ? '#f43f5e' : 'rgba(255, 255, 255, 0.6)')
-          }}>
-            {myDelta > 0 ? <TrendingUp size={18} /> : (myDelta < 0 ? <TrendingDown size={18} /> : null)}
-            {myDelta > 0 ? `+${myDelta}` : myDelta} Elo
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+            {myDelta > 0 ? <TrendingUp size={20} /> : (myDelta < 0 ? <TrendingDown size={20} /> : null)}
+            <span className="zine-display" style={{ fontSize: '1.3rem' }}>{myDelta > 0 ? `+${myDelta}` : myDelta}</span>
           </div>
         </div>
       )}
 
-      {/* Action Buttons */}
-      <div style={{ display: 'flex', gap: '0.85rem', justifyContent: 'center' }}>
-        <button
-          onClick={onRematch}
-          style={{
-            flex: 1,
-            padding: '0.85rem 1.25rem',
-            borderRadius: '999px',
-            background: 'linear-gradient(180deg, #3b82f6 0%, #2563eb 100%)',
-            color: '#ffffff',
-            border: 'none',
-            fontWeight: 700,
-            fontFamily: 'var(--font-display)',
-            fontSize: '0.85rem',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '0.4rem',
-            boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)'
-          }}
-        >
-          <RotateCcw size={15} /> REMATCH / REQUEUE
+      <div style={{ display: 'flex', gap: '0.85rem', justifyContent: 'center', flexWrap: 'wrap', position: 'relative' }}>
+        <button onClick={onRematch} className="btn-primary" style={{ flex: 1, minWidth: '170px' }}>
+          <RotateCcw size={15} /> REMATCH
         </button>
-
-        <button
-          onClick={() => onDashboard ? onDashboard() : navigate('/dashboard')}
-          style={{
-            flex: 1,
-            padding: '0.85rem 1.25rem',
-            borderRadius: '999px',
-            background: 'rgba(255, 255, 255, 0.08)',
-            border: '1px solid rgba(255, 255, 255, 0.12)',
-            color: '#ffffff',
-            fontWeight: 700,
-            fontFamily: 'var(--font-display)',
-            fontSize: '0.85rem',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '0.4rem'
-          }}
-        >
+        <button onClick={() => onDashboard ? onDashboard() : navigate('/dashboard')} className="btn-secondary" style={{ flex: 1, minWidth: '170px' }}>
           <Home size={15} /> DASHBOARD
         </button>
       </div>

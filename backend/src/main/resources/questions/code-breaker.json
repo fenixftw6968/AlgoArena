@@ -1,0 +1,1937 @@
+[
+  {
+    "id": "cb-easy-1",
+    "difficulty": "EASY",
+    "category": "Logic",
+    "title": "Museum Vault",
+    "secret": "042",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "682",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "614",
+        "text": "One digit is correct but in the wrong position",
+        "correctPos": 0,
+        "wrongPos": 1
+      },
+      {
+        "guess": "206",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      },
+      {
+        "guess": "738",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "780",
+        "text": "One digit is correct but in the wrong position",
+        "correctPos": 0,
+        "wrongPos": 1
+      }
+    ],
+    "hint": "7, 3, and 8 are completely eliminated from the 4th clue. Look at 682 and 780 next.",
+    "explanation": "From '738' (none correct), 7, 3, 8 are eliminated. In '682' (one right position), 8 is out so either 6 is in pos 1 or 2 is in pos 3. In '614' (one wrong pos), if 6 were correct it contradicts 682's pos 1. Thus 6 is out, 2 is in pos 3. In '780', 0 is in pos 1. In '614', 4 is in pos 2. Secret code: 042.",
+    "correctAnswer": "042"
+  },
+  {
+    "id": "cb-easy-2",
+    "difficulty": "EASY",
+    "category": "Logic",
+    "title": "Subway Locker",
+    "secret": "679",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "147",
+        "text": "One digit is correct but in the wrong position",
+        "correctPos": 0,
+        "wrongPos": 1
+      },
+      {
+        "guess": "189",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "964",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      },
+      {
+        "guess": "523",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "286",
+        "text": "One digit is correct but in the wrong position",
+        "correctPos": 0,
+        "wrongPos": 1
+      }
+    ],
+    "hint": "5, 2, and 3 are eliminated. Use 286 to test 8 vs 6.",
+    "explanation": "5, 2, 3 eliminated. From 286, 2 is out, so either 8 or 6 is correct. In 189 (one correct pos), if 8 were in pos 2, 286 would have 8 in pos 2 (correct pos, not wrong pos), so 8 is out. Thus 6 is correct and 9 is in pos 3. In 964, 9 and 6 are correct, meaning 4 is out. In 147, 1 and 4 are out, so 7 is correct. Code: 679.",
+    "correctAnswer": "679"
+  },
+  {
+    "id": "cb-easy-3",
+    "difficulty": "EASY",
+    "category": "Logic",
+    "title": "Bank Strongbox",
+    "secret": "384",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "294",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "245",
+        "text": "One digit is correct but in the wrong position",
+        "correctPos": 0,
+        "wrongPos": 1
+      },
+      {
+        "guess": "489",
+        "text": "Two digits are correct: one well placed, one misplaced",
+        "correctPos": 1,
+        "wrongPos": 1
+      },
+      {
+        "guess": "176",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "583",
+        "text": "Two digits are correct: one well placed, one misplaced",
+        "correctPos": 1,
+        "wrongPos": 1
+      }
+    ],
+    "hint": "1, 7, and 6 are out. Compare 294 and 245.",
+    "explanation": "1, 7, 6 are eliminated. In 294 & 245, 2 cannot be correct because it is in pos 1 in both (one says right pos, one says wrong). Thus 4 is in pos 3. In 489, 4 and 8 are correct. In 583, 8 and 3 are correct. Secret code is 384.",
+    "correctAnswer": "384"
+  },
+  {
+    "id": "cb-easy-4",
+    "difficulty": "EASY",
+    "category": "Logic",
+    "title": "Art Gallery Safe",
+    "secret": "426",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "123",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "145",
+        "text": "One digit is correct but in the wrong position",
+        "correctPos": 0,
+        "wrongPos": 1
+      },
+      {
+        "guess": "620",
+        "text": "Two digits are correct: one well placed, one misplaced",
+        "correctPos": 1,
+        "wrongPos": 1
+      },
+      {
+        "guess": "789",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "064",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      }
+    ],
+    "hint": "7, 8, and 9 are eliminated. Notice '123' and '620' both place 2 in position 2.",
+    "explanation": "7, 8, 9 are eliminated. '123' has 1 right place and '620' has 1 right place (2 in pos 2). From '145', 4 is correct but misplaced (must be in pos 1). From '064', 6 is in pos 3. Code: 426.",
+    "correctAnswer": "426"
+  },
+  {
+    "id": "cb-easy-5",
+    "difficulty": "EASY",
+    "category": "Logic",
+    "title": "Jewelry Chest",
+    "secret": "158",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "254",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "315",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      },
+      {
+        "guess": "870",
+        "text": "One digit is correct but in the wrong position",
+        "correctPos": 0,
+        "wrongPos": 1
+      },
+      {
+        "guess": "962",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "180",
+        "text": "Two digits are correct: one well placed, one misplaced",
+        "correctPos": 1,
+        "wrongPos": 1
+      }
+    ],
+    "hint": "9, 6, and 2 are out. In '254', 5 is well placed in position 2.",
+    "explanation": "9, 6, 2 are eliminated. In '254', 5 is in position 2. In '315', 1 is correct but misplaced (pos 1). In '180', 8 is misplaced so it belongs in pos 3. Secret: 158.",
+    "correctAnswer": "158"
+  },
+  {
+    "id": "cb-easy-6",
+    "difficulty": "EASY",
+    "category": "Logic",
+    "title": "Hotel Safety Deposit",
+    "secret": "291",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "893",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "275",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "182",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      },
+      {
+        "guess": "460",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "914",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      }
+    ],
+    "hint": "4, 6, 0 eliminated. In '893', 9 is well placed in pos 2.",
+    "explanation": "4, 6, 0 are eliminated. '893' has 9 in pos 2. '275' has 2 in pos 1. '914' has 9 and 1 misplaced, placing 1 in pos 3. Secret: 291.",
+    "correctAnswer": "291"
+  },
+  {
+    "id": "cb-easy-7",
+    "difficulty": "EASY",
+    "category": "Logic",
+    "title": "Antique Padlock",
+    "secret": "730",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "538",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "791",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "246",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "370",
+        "text": "Three digits are correct: one well placed, two misplaced",
+        "correctPos": 1,
+        "wrongPos": 2
+      },
+      {
+        "guess": "804",
+        "text": "One digit is correct but in the wrong position",
+        "correctPos": 0,
+        "wrongPos": 1
+      }
+    ],
+    "hint": "2, 4, 6 are eliminated. '538' places 3 in pos 2.",
+    "explanation": "2, 4, 6 eliminated. '538' has 3 in pos 2. '791' has 7 in pos 1. '370' has 3, 7, 0 all correct but misplaced, so 0 is in pos 3. Secret: 730.",
+    "correctAnswer": "730"
+  },
+  {
+    "id": "cb-easy-8",
+    "difficulty": "EASY",
+    "category": "Logic",
+    "title": "Cyber Locker",
+    "secret": "582",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "184",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "507",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "283",
+        "text": "Two digits are correct: one well placed, one misplaced",
+        "correctPos": 1,
+        "wrongPos": 1
+      },
+      {
+        "guess": "960",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "825",
+        "text": "Three digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 3
+      }
+    ],
+    "hint": "9, 6, 0 are eliminated. 8 is in pos 2 in both 184 and 283.",
+    "explanation": "9, 6, 0 are out. '184' places 8 in pos 2. '507' places 5 in pos 1. '825' has all 3 digits correct but misplaced, putting 2 in pos 3. Secret: 582.",
+    "correctAnswer": "582"
+  },
+  {
+    "id": "cb-easy-9",
+    "difficulty": "EASY",
+    "category": "Logic",
+    "title": "Train Depot Lockbox",
+    "secret": "317",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "418",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "390",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "731",
+        "text": "Three digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 3
+      },
+      {
+        "guess": "256",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "170",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      }
+    ],
+    "hint": "2, 5, 6 are eliminated. '418' has 1 well placed in pos 2.",
+    "explanation": "2, 5, 6 are eliminated. In '418', 1 is in pos 2. In '390', 3 is in pos 1. In '731', 7 is correct and belongs in pos 3. Secret: 317.",
+    "correctAnswer": "317"
+  },
+  {
+    "id": "cb-easy-10",
+    "difficulty": "EASY",
+    "category": "Logic",
+    "title": "Cargo Container Safe",
+    "secret": "845",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "821",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "349",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "584",
+        "text": "Three digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 3
+      },
+      {
+        "guess": "760",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "453",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      }
+    ],
+    "hint": "7, 6, 0 are out. 8 is in pos 1 in '821', and 4 is in pos 2 in '349'.",
+    "explanation": "7, 6, 0 out. In '821', 8 is well placed in pos 1. In '349', 4 is in pos 2. '584' has all 3 digits, so 5 is in pos 3. Code: 845.",
+    "correctAnswer": "845"
+  },
+  {
+    "id": "cb-easy-11",
+    "difficulty": "EASY",
+    "category": "Logic",
+    "title": "Submarine Hatch",
+    "secret": "603",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "671",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "804",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "360",
+        "text": "Three digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 3
+      },
+      {
+        "guess": "952",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "037",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      }
+    ],
+    "hint": "9, 5, 2 are eliminated. '671' places 6 in pos 1, '804' places 0 in pos 2.",
+    "explanation": "9, 5, 2 eliminated. '671' has 6 in pos 1. '804' has 0 in pos 2. '360' has 3 in pos 3. Secret: 603.",
+    "correctAnswer": "603"
+  },
+  {
+    "id": "cb-easy-12",
+    "difficulty": "EASY",
+    "category": "Logic",
+    "title": "Observatory Keypad",
+    "secret": "928",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "914",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "325",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "892",
+        "text": "Three digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 3
+      },
+      {
+        "guess": "760",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "281",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      }
+    ],
+    "hint": "7, 6, 0 are eliminated. 9 is in pos 1 in '914', 2 is in pos 2 in '325'.",
+    "explanation": "7, 6, 0 out. '914' has 9 in pos 1. '325' has 2 in pos 2. '892' has 8 in pos 3. Secret: 928.",
+    "correctAnswer": "928"
+  },
+  {
+    "id": "cb-easy-13",
+    "difficulty": "EASY",
+    "category": "Logic",
+    "title": "Dungeon Iron Gate",
+    "secret": "149",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "150",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "248",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "914",
+        "text": "Three digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 3
+      },
+      {
+        "guess": "673",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "492",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      }
+    ],
+    "hint": "6, 7, 3 are out. '150' places 1 in pos 1, '248' places 4 in pos 2.",
+    "explanation": "6, 7, 3 eliminated. 1 is in pos 1, 4 is in pos 2. '914' gives 9 in pos 3. Code: 149.",
+    "correctAnswer": "149"
+  },
+  {
+    "id": "cb-easy-14",
+    "difficulty": "EASY",
+    "category": "Logic",
+    "title": "Vintage Trunk",
+    "secret": "571",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "520",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "673",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "157",
+        "text": "Three digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 3
+      },
+      {
+        "guess": "894",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "716",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      }
+    ],
+    "hint": "8, 9, 4 are eliminated. '520' has 5 in pos 1, '673' has 7 in pos 2.",
+    "explanation": "8, 9, 4 out. 5 is in pos 1, 7 is in pos 2. '157' gives 1 in pos 3. Secret: 571.",
+    "correctAnswer": "571"
+  },
+  {
+    "id": "cb-easy-15",
+    "difficulty": "EASY",
+    "category": "Logic",
+    "title": "Diplomatic Pouch",
+    "secret": "264",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "281",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "365",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "426",
+        "text": "Three digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 3
+      },
+      {
+        "guess": "970",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "643",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      }
+    ],
+    "hint": "9, 7, 0 are out. '281' places 2 in pos 1, '365' places 6 in pos 2.",
+    "explanation": "9, 7, 0 out. 2 is in pos 1, 6 is in pos 2. '426' places 4 in pos 3. Secret: 264.",
+    "correctAnswer": "264"
+  },
+  {
+    "id": "cb-med-1",
+    "difficulty": "MEDIUM",
+    "category": "Logic",
+    "title": "Server Room Decryptor",
+    "secret": "816",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "291",
+        "text": "One digit is correct but in the wrong position",
+        "correctPos": 0,
+        "wrongPos": 1
+      },
+      {
+        "guess": "245",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "463",
+        "text": "One digit is correct but in the wrong position",
+        "correctPos": 0,
+        "wrongPos": 1
+      },
+      {
+        "guess": "578",
+        "text": "One digit is correct but in the wrong position",
+        "correctPos": 0,
+        "wrongPos": 1
+      },
+      {
+        "guess": "810",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      }
+    ],
+    "hint": "2, 4, 5 are completely eliminated. In 810, two digits are in their exact positions.",
+    "explanation": "2, 4, 5 eliminated. From 578, 8 is correct. In 810, 8 and 1 are well placed in pos 1 and 2. In 463, 6 is in pos 3. Secret code: 816.",
+    "correctAnswer": "816"
+  },
+  {
+    "id": "cb-med-2",
+    "difficulty": "MEDIUM",
+    "category": "Logic",
+    "title": "Encrypted Capsule",
+    "secret": "941",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "394",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      },
+      {
+        "guess": "738",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "641",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      },
+      {
+        "guess": "159",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      },
+      {
+        "guess": "926",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      }
+    ],
+    "hint": "7, 3, 8 are eliminated. Notice that in 641, 4 and 1 are well placed.",
+    "explanation": "7, 3, 8 out. In 394, 9 and 4 are correct digits. In 926, 9 is in pos 1. In 641, 4 and 1 are in pos 2 and 3. Secret code: 941.",
+    "correctAnswer": "941"
+  },
+  {
+    "id": "cb-med-3",
+    "difficulty": "MEDIUM",
+    "category": "Logic",
+    "title": "Laser Grid Terminal",
+    "secret": "539",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "138",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "524",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "953",
+        "text": "Three digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 3
+      },
+      {
+        "guess": "760",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "391",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      }
+    ],
+    "hint": "7, 6, 0 are out. Compare 138 with 391.",
+    "explanation": "7, 6, 0 out. '138' has 3 in pos 2. '524' has 5 in pos 1. '953' has all three digits misplaced, placing 9 in pos 3. Code: 539.",
+    "correctAnswer": "539"
+  },
+  {
+    "id": "cb-med-4",
+    "difficulty": "MEDIUM",
+    "category": "Logic",
+    "title": "Bank Archive Safe",
+    "secret": "782",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "185",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "740",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "278",
+        "text": "Three digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 3
+      },
+      {
+        "guess": "963",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "824",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      }
+    ],
+    "hint": "9, 6, 3 eliminated. '185' places 8 in pos 2, '740' places 7 in pos 1.",
+    "explanation": "9, 6, 3 out. 7 is in pos 1, 8 is in pos 2. '278' gives 2 in pos 3. Code: 782.",
+    "correctAnswer": "782"
+  },
+  {
+    "id": "cb-med-5",
+    "difficulty": "MEDIUM",
+    "category": "Logic",
+    "title": "Research Lab Vault",
+    "secret": "415",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "492",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "318",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "541",
+        "text": "Three digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 3
+      },
+      {
+        "guess": "760",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "152",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      }
+    ],
+    "hint": "7, 6, 0 are out. '492' places 4 in pos 1, '318' places 1 in pos 2.",
+    "explanation": "7, 6, 0 out. 4 is in pos 1, 1 is in pos 2. '541' gives 5 in pos 3. Code: 415.",
+    "correctAnswer": "415"
+  },
+  {
+    "id": "cb-med-6",
+    "difficulty": "MEDIUM",
+    "category": "Logic",
+    "title": "Air Traffic Crypt",
+    "secret": "629",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "615",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "824",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "962",
+        "text": "Three digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 3
+      },
+      {
+        "guess": "730",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "291",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      }
+    ],
+    "hint": "7, 3, 0 eliminated. '615' places 6 in pos 1, '824' places 2 in pos 2.",
+    "explanation": "7, 3, 0 out. 6 is in pos 1, 2 is in pos 2. '962' gives 9 in pos 3. Code: 629.",
+    "correctAnswer": "629"
+  },
+  {
+    "id": "cb-med-7",
+    "difficulty": "MEDIUM",
+    "category": "Logic",
+    "title": "Satellite Command Deck",
+    "secret": "374",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "381",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "275",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "437",
+        "text": "Three digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 3
+      },
+      {
+        "guess": "960",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "748",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      }
+    ],
+    "hint": "9, 6, 0 out. '381' has 3 in pos 1, '275' has 7 in pos 2.",
+    "explanation": "9, 6, 0 out. 3 is in pos 1, 7 is in pos 2. '437' gives 4 in pos 3. Code: 374.",
+    "correctAnswer": "374"
+  },
+  {
+    "id": "cb-med-8",
+    "difficulty": "MEDIUM",
+    "category": "Logic",
+    "title": "Pharaoh Gold Cache",
+    "secret": "892",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "814",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "593",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "289",
+        "text": "Three digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 3
+      },
+      {
+        "guess": "760",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "925",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      }
+    ],
+    "hint": "7, 6, 0 out. 8 is in pos 1 in '814', 9 is in pos 2 in '593'.",
+    "explanation": "7, 6, 0 out. 8 is in pos 1, 9 is in pos 2. '289' gives 2 in pos 3. Code: 892.",
+    "correctAnswer": "892"
+  },
+  {
+    "id": "cb-med-9",
+    "difficulty": "MEDIUM",
+    "category": "Logic",
+    "title": "Nuclear Silo Lock",
+    "secret": "163",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "145",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "962",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "316",
+        "text": "Three digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 3
+      },
+      {
+        "guess": "870",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "638",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      }
+    ],
+    "hint": "8, 7, 0 are out. 1 is in pos 1, 6 is in pos 2.",
+    "explanation": "8, 7, 0 out. 1 is in pos 1, 6 is in pos 2. '316' gives 3 in pos 3. Code: 163.",
+    "correctAnswer": "163"
+  },
+  {
+    "id": "cb-med-10",
+    "difficulty": "MEDIUM",
+    "category": "Logic",
+    "title": "Quantum Tunnel Safe",
+    "secret": "548",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "519",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "247",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "854",
+        "text": "Three digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 3
+      },
+      {
+        "guess": "630",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "482",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      }
+    ],
+    "hint": "6, 3, 0 are out. '519' gives 5 in pos 1, '247' gives 4 in pos 2.",
+    "explanation": "6, 3, 0 out. 5 is in pos 1, 4 is in pos 2. '854' gives 8 in pos 3. Code: 548.",
+    "correctAnswer": "548"
+  },
+  {
+    "id": "cb-med-11",
+    "difficulty": "MEDIUM",
+    "category": "Logic",
+    "title": "Crypto Exchange Ledger",
+    "secret": "287",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "234",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "981",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "728",
+        "text": "Three digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 3
+      },
+      {
+        "guess": "650",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "873",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      }
+    ],
+    "hint": "6, 5, 0 out. '234' gives 2 in pos 1, '981' gives 8 in pos 2.",
+    "explanation": "6, 5, 0 out. 2 is in pos 1, 8 is in pos 2. '728' gives 7 in pos 3. Code: 287.",
+    "correctAnswer": "287"
+  },
+  {
+    "id": "cb-med-12",
+    "difficulty": "MEDIUM",
+    "category": "Logic",
+    "title": "Federal Reserve Gate",
+    "secret": "936",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "915",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "438",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "693",
+        "text": "Three digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 3
+      },
+      {
+        "guess": "720",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "364",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      }
+    ],
+    "hint": "7, 2, 0 out. '915' has 9 in pos 1, '438' has 3 in pos 2.",
+    "explanation": "7, 2, 0 out. 9 is in pos 1, 3 is in pos 2. '693' gives 6 in pos 3. Code: 936.",
+    "correctAnswer": "936"
+  },
+  {
+    "id": "cb-med-13",
+    "difficulty": "MEDIUM",
+    "category": "Logic",
+    "title": "High Speed Rail Vault",
+    "secret": "471",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "425",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "873",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "147",
+        "text": "Three digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 3
+      },
+      {
+        "guess": "960",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "712",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      }
+    ],
+    "hint": "9, 6, 0 out. 4 in pos 1, 7 in pos 2.",
+    "explanation": "9, 6, 0 out. 4 is in pos 1, 7 is in pos 2. '147' gives 1 in pos 3. Code: 471.",
+    "correctAnswer": "471"
+  },
+  {
+    "id": "cb-med-14",
+    "difficulty": "MEDIUM",
+    "category": "Logic",
+    "title": "Deep Sea Airlock",
+    "secret": "652",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "618",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "953",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "265",
+        "text": "Three digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 3
+      },
+      {
+        "guess": "740",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "529",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      }
+    ],
+    "hint": "7, 4, 0 out. 6 in pos 1, 5 in pos 2.",
+    "explanation": "7, 4, 0 out. 6 is in pos 1, 5 is in pos 2. '265' gives 2 in pos 3. Code: 652.",
+    "correctAnswer": "652"
+  },
+  {
+    "id": "cb-med-15",
+    "difficulty": "MEDIUM",
+    "category": "Logic",
+    "title": "Orbital Relay Station",
+    "secret": "395",
+    "digitCount": 3,
+    "clues": [
+      {
+        "guess": "317",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "894",
+        "text": "One digit is correct and in the correct position",
+        "correctPos": 1,
+        "wrongPos": 0
+      },
+      {
+        "guess": "539",
+        "text": "Three digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 3
+      },
+      {
+        "guess": "620",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "958",
+        "text": "Two digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 2
+      }
+    ],
+    "hint": "6, 2, 0 out. 3 in pos 1, 9 in pos 2.",
+    "explanation": "6, 2, 0 out. 3 is in pos 1, 9 is in pos 2. '539' gives 5 in pos 3. Code: 395.",
+    "correctAnswer": "395"
+  },
+  {
+    "id": "cb-hard-1",
+    "difficulty": "HARD",
+    "category": "Logic",
+    "title": "Master Cipher Key",
+    "secret": "3185",
+    "digitCount": 4,
+    "clues": [
+      {
+        "guess": "9247",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "3605",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      },
+      {
+        "guess": "8136",
+        "text": "Three digits are correct: one well placed, two misplaced",
+        "correctPos": 1,
+        "wrongPos": 2
+      },
+      {
+        "guess": "5184",
+        "text": "Three digits are correct: two well placed, one misplaced",
+        "correctPos": 2,
+        "wrongPos": 1
+      },
+      {
+        "guess": "3785",
+        "text": "Three digits are correct and in the correct positions",
+        "correctPos": 3,
+        "wrongPos": 0
+      }
+    ],
+    "hint": "9, 2, 4, 7 are eliminated. Look at 3785 vs 5184.",
+    "explanation": "9, 2, 4, 7 eliminated. In 3785, 7 is out, so 3, 8, 5 are all in correct positions (pos 1, 3, 4). In 5184, 4 is out, 8 is in pos 3, so 1 is in pos 2. Secret code: 3185.",
+    "correctAnswer": "3185"
+  },
+  {
+    "id": "cb-hard-2",
+    "difficulty": "HARD",
+    "category": "Logic",
+    "title": "Quantum Lock",
+    "secret": "7402",
+    "digitCount": 4,
+    "clues": [
+      {
+        "guess": "1589",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "7362",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      },
+      {
+        "guess": "4720",
+        "text": "Four digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 4
+      },
+      {
+        "guess": "0432",
+        "text": "Three digits are correct: two well placed, one misplaced",
+        "correctPos": 2,
+        "wrongPos": 1
+      },
+      {
+        "guess": "7490",
+        "text": "Three digits are correct: two well placed, one misplaced",
+        "correctPos": 2,
+        "wrongPos": 1
+      }
+    ],
+    "hint": "From 4720, the exact 4 digits in the code are {0, 2, 4, 7}.",
+    "explanation": "From 4720, all four digits are 4, 7, 2, 0. In 7362, 7 and 2 are in correct positions (pos 1 and 4). In 7490, 7 and 4 are in pos 1 and 2. Thus 0 must be in pos 3. Secret code: 7402.",
+    "correctAnswer": "7402"
+  },
+  {
+    "id": "cb-hard-3",
+    "difficulty": "HARD",
+    "category": "Logic",
+    "title": "Titanium Core Hatch",
+    "secret": "2846",
+    "digitCount": 4,
+    "clues": [
+      {
+        "guess": "1357",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "2906",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      },
+      {
+        "guess": "8264",
+        "text": "Four digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 4
+      },
+      {
+        "guess": "4826",
+        "text": "Four digits are correct: two well placed, two misplaced",
+        "correctPos": 2,
+        "wrongPos": 2
+      },
+      {
+        "guess": "2891",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      }
+    ],
+    "hint": "1, 3, 5, 7 are eliminated from the first clue. Check 2906 next.",
+    "explanation": "1, 3, 5, 7 are out. In '2906', 9 and 0 are out, leaving 2 in pos 1 and 6 in pos 4. '8264' has all 4 digits misplaced, and '2891' gives 8 in pos 2, leaving 4 in pos 3. Code: 2846.",
+    "correctAnswer": "2846"
+  },
+  {
+    "id": "cb-hard-4",
+    "difficulty": "HARD",
+    "category": "Logic",
+    "title": "Black Box Flight Recorder",
+    "secret": "5913",
+    "digitCount": 4,
+    "clues": [
+      {
+        "guess": "2468",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "5703",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      },
+      {
+        "guess": "9531",
+        "text": "Four digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 4
+      },
+      {
+        "guess": "1953",
+        "text": "Four digits are correct: two well placed, two misplaced",
+        "correctPos": 2,
+        "wrongPos": 2
+      },
+      {
+        "guess": "5972",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      }
+    ],
+    "hint": "2, 4, 6, 8 are eliminated from the first clue. In 5703, 5 and 3 are correct.",
+    "explanation": "2, 4, 6, 8 eliminated. In '5703', 7 and 0 are out, leaving 5 in pos 1 and 3 in pos 4. In '5972', 9 is in pos 2. In '9531', 1 is in pos 3. Secret: 5913.",
+    "correctAnswer": "5913"
+  },
+  {
+    "id": "cb-hard-5",
+    "difficulty": "HARD",
+    "category": "Logic",
+    "title": "Deep Space Transponder",
+    "secret": "6381",
+    "digitCount": 4,
+    "clues": [
+      {
+        "guess": "5249",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "6701",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      },
+      {
+        "guess": "3618",
+        "text": "Four digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 4
+      },
+      {
+        "guess": "8361",
+        "text": "Four digits are correct: two well placed, two misplaced",
+        "correctPos": 2,
+        "wrongPos": 2
+      },
+      {
+        "guess": "6397",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      }
+    ],
+    "hint": "5, 2, 4, 9 are eliminated from the first clue.",
+    "explanation": "5, 2, 4, 9 eliminated. In '6701', 6 is in pos 1 and 1 is in pos 4. In '6397', 3 is in pos 2. In '3618', 8 must be in pos 3. Code: 6381.",
+    "correctAnswer": "6381"
+  },
+  {
+    "id": "cb-hard-6",
+    "difficulty": "HARD",
+    "category": "Logic",
+    "title": "Subterranean Reactor Gate",
+    "secret": "1749",
+    "digitCount": 4,
+    "clues": [
+      {
+        "guess": "2358",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "1609",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      },
+      {
+        "guess": "7194",
+        "text": "Four digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 4
+      },
+      {
+        "guess": "4719",
+        "text": "Four digits are correct: two well placed, two misplaced",
+        "correctPos": 2,
+        "wrongPos": 2
+      },
+      {
+        "guess": "1762",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      }
+    ],
+    "hint": "2, 3, 5, 8 are eliminated. In '1609', 1 is in pos 1 and 9 is in pos 4.",
+    "explanation": "2, 3, 5, 8 eliminated. In '1609', 1 is in pos 1 and 9 is in pos 4. In '1762', 7 is in pos 2. '7194' gives 4 in pos 3. Code: 1749.",
+    "correctAnswer": "1749"
+  },
+  {
+    "id": "cb-hard-7",
+    "difficulty": "HARD",
+    "category": "Logic",
+    "title": "Diplomatic Bunker Vault",
+    "secret": "8254",
+    "digitCount": 4,
+    "clues": [
+      {
+        "guess": "1369",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "8704",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      },
+      {
+        "guess": "2845",
+        "text": "Four digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 4
+      },
+      {
+        "guess": "5284",
+        "text": "Four digits are correct: two well placed, two misplaced",
+        "correctPos": 2,
+        "wrongPos": 2
+      },
+      {
+        "guess": "8271",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      }
+    ],
+    "hint": "1, 3, 6, 9 are eliminated. Check '8704' for pos 1 and pos 4.",
+    "explanation": "1, 3, 6, 9 eliminated. In '8704', 8 is in pos 1 and 4 is in pos 4. In '8271', 2 is in pos 2. '2845' gives 5 in pos 3. Code: 8254.",
+    "correctAnswer": "8254"
+  },
+  {
+    "id": "cb-hard-8",
+    "difficulty": "HARD",
+    "category": "Logic",
+    "title": "Nanotech Synthesis Cell",
+    "secret": "4927",
+    "digitCount": 4,
+    "clues": [
+      {
+        "guess": "1358",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "4607",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      },
+      {
+        "guess": "9472",
+        "text": "Four digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 4
+      },
+      {
+        "guess": "2947",
+        "text": "Four digits are correct: two well placed, two misplaced",
+        "correctPos": 2,
+        "wrongPos": 2
+      },
+      {
+        "guess": "4961",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      }
+    ],
+    "hint": "1, 3, 5, 8 are eliminated. Check '4607'.",
+    "explanation": "1, 3, 5, 8 out. In '4607', 4 is in pos 1 and 7 is in pos 4. In '4961', 9 is in pos 2. '9472' places 2 in pos 3. Code: 4927.",
+    "correctAnswer": "4927"
+  },
+  {
+    "id": "cb-hard-9",
+    "difficulty": "HARD",
+    "category": "Logic",
+    "title": "Cosmic Ray Observatory",
+    "secret": "7163",
+    "digitCount": 4,
+    "clues": [
+      {
+        "guess": "2458",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "7903",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      },
+      {
+        "guess": "1736",
+        "text": "Four digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 4
+      },
+      {
+        "guess": "6173",
+        "text": "Four digits are correct: two well placed, two misplaced",
+        "correctPos": 2,
+        "wrongPos": 2
+      },
+      {
+        "guess": "7192",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      }
+    ],
+    "hint": "2, 4, 5, 8 are eliminated. '7903' gives 7 in pos 1 and 3 in pos 4.",
+    "explanation": "2, 4, 5, 8 out. In '7903', 7 is in pos 1 and 3 is in pos 4. In '7192', 1 is in pos 2. '1736' gives 6 in pos 3. Code: 7163.",
+    "correctAnswer": "7163"
+  },
+  {
+    "id": "cb-hard-10",
+    "difficulty": "HARD",
+    "category": "Logic",
+    "title": "Atmospheric Shield Generator",
+    "secret": "3851",
+    "digitCount": 4,
+    "clues": [
+      {
+        "guess": "2469",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "3701",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      },
+      {
+        "guess": "8315",
+        "text": "Four digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 4
+      },
+      {
+        "guess": "5831",
+        "text": "Four digits are correct: two well placed, two misplaced",
+        "correctPos": 2,
+        "wrongPos": 2
+      },
+      {
+        "guess": "3872",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      }
+    ],
+    "hint": "2, 4, 6, 9 are eliminated from the first clue.",
+    "explanation": "2, 4, 6, 9 out. In '3701', 3 is in pos 1 and 1 is in pos 4. In '3872', 8 is in pos 2. '8315' gives 5 in pos 3. Code: 3851.",
+    "correctAnswer": "3851"
+  },
+  {
+    "id": "cb-hard-11",
+    "difficulty": "HARD",
+    "category": "Logic",
+    "title": "Superconducting Core Safe",
+    "secret": "9472",
+    "digitCount": 4,
+    "clues": [
+      {
+        "guess": "1368",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "9502",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      },
+      {
+        "guess": "4927",
+        "text": "Four digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 4
+      },
+      {
+        "guess": "7492",
+        "text": "Four digits are correct: two well placed, two misplaced",
+        "correctPos": 2,
+        "wrongPos": 2
+      },
+      {
+        "guess": "9451",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      }
+    ],
+    "hint": "1, 3, 6, 8 are out. In '9502', 9 is in pos 1 and 2 is in pos 4.",
+    "explanation": "1, 3, 6, 8 out. In '9502', 9 is in pos 1 and 2 is in pos 4. In '9451', 4 is in pos 2. '4927' gives 7 in pos 3. Code: 9472.",
+    "correctAnswer": "9472"
+  },
+  {
+    "id": "cb-hard-12",
+    "difficulty": "HARD",
+    "category": "Logic",
+    "title": "Hyperspace Jump Portal",
+    "secret": "5296",
+    "digitCount": 4,
+    "clues": [
+      {
+        "guess": "1348",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "5706",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      },
+      {
+        "guess": "2569",
+        "text": "Four digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 4
+      },
+      {
+        "guess": "9256",
+        "text": "Four digits are correct: two well placed, two misplaced",
+        "correctPos": 2,
+        "wrongPos": 2
+      },
+      {
+        "guess": "5271",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      }
+    ],
+    "hint": "1, 3, 4, 8 are eliminated from the first clue.",
+    "explanation": "1, 3, 4, 8 out. In '5706', 5 is in pos 1 and 6 is in pos 4. In '5271', 2 is in pos 2. '2569' gives 9 in pos 3. Code: 5296.",
+    "correctAnswer": "5296"
+  },
+  {
+    "id": "cb-hard-13",
+    "difficulty": "HARD",
+    "category": "Logic",
+    "title": "AI Training Cluster Vault",
+    "secret": "2638",
+    "digitCount": 4,
+    "clues": [
+      {
+        "guess": "1459",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "2708",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      },
+      {
+        "guess": "6283",
+        "text": "Four digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 4
+      },
+      {
+        "guess": "3628",
+        "text": "Four digits are correct: two well placed, two misplaced",
+        "correctPos": 2,
+        "wrongPos": 2
+      },
+      {
+        "guess": "2671",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      }
+    ],
+    "hint": "1, 4, 5, 9 are eliminated. '2708' places 2 in pos 1 and 8 in pos 4.",
+    "explanation": "1, 4, 5, 9 out. In '2708', 2 is in pos 1 and 8 is in pos 4. In '2671', 6 is in pos 2. '6283' gives 3 in pos 3. Code: 2638.",
+    "correctAnswer": "2638"
+  },
+  {
+    "id": "cb-hard-14",
+    "difficulty": "HARD",
+    "category": "Logic",
+    "title": "Bio-Containment Unit 7",
+    "secret": "6184",
+    "digitCount": 4,
+    "clues": [
+      {
+        "guess": "2359",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "6704",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      },
+      {
+        "guess": "1648",
+        "text": "Four digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 4
+      },
+      {
+        "guess": "8164",
+        "text": "Four digits are correct: two well placed, two misplaced",
+        "correctPos": 2,
+        "wrongPos": 2
+      },
+      {
+        "guess": "6172",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      }
+    ],
+    "hint": "2, 3, 5, 9 are eliminated. '6704' gives 6 in pos 1 and 4 in pos 4.",
+    "explanation": "2, 3, 5, 9 out. In '6704', 6 is in pos 1 and 4 is in pos 4. In '6172', 1 is in pos 2. '1648' gives 8 in pos 3. Code: 6184.",
+    "correctAnswer": "6184"
+  },
+  {
+    "id": "cb-hard-15",
+    "difficulty": "HARD",
+    "category": "Logic",
+    "title": "Quantum Teleportation Array",
+    "secret": "8375",
+    "digitCount": 4,
+    "clues": [
+      {
+        "guess": "1249",
+        "text": "No digit is correct",
+        "correctPos": 0,
+        "wrongPos": 0
+      },
+      {
+        "guess": "8605",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      },
+      {
+        "guess": "3857",
+        "text": "Four digits are correct but in the wrong positions",
+        "correctPos": 0,
+        "wrongPos": 4
+      },
+      {
+        "guess": "7385",
+        "text": "Four digits are correct: two well placed, two misplaced",
+        "correctPos": 2,
+        "wrongPos": 2
+      },
+      {
+        "guess": "8361",
+        "text": "Two digits are correct and in the correct positions",
+        "correctPos": 2,
+        "wrongPos": 0
+      }
+    ],
+    "hint": "1, 2, 4, 9 are eliminated. '8605' gives 8 in pos 1 and 5 in pos 4.",
+    "explanation": "1, 2, 4, 9 out. In '8605', 8 is in pos 1 and 5 is in pos 4. In '8361', 3 is in pos 2. '3857' gives 7 in pos 3. Code: 8375.",
+    "correctAnswer": "8375"
+  }
+]

@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Lightbulb, CheckCircle, XCircle, Clock, Swords, Shield, Users } from 'lucide-react';
+import { Lightbulb, CheckCircle, XCircle, Clock } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useGame } from '../../context/GameContext';
 import { useTimer } from '../../hooks/useTimer';
@@ -25,6 +25,7 @@ import { useMatchSocket } from '../../hooks/useMatchSocket';
 
 const TIMER_SECONDS = { EASY: 120, MEDIUM: 90, HARD: 60 };
 const XP_PER_DIFFICULTY = { EASY: 10, MEDIUM: 25, HARD: 50 };
+const QUESTION_COUNT = 5;
 
 export default function NumberDetective() {
   const { user, refreshUser } = useAuth();
@@ -185,13 +186,14 @@ export default function NumberDetective() {
         gameSlug: 'number-detective',
         difficulty: diff,
         questionBank: numberDetectiveQuestions,
-        count: 10,
+        count: QUESTION_COUNT,
         userShuffle: true
       });
       let activeList = Array.isArray(selected) && selected.length > 0 ? selected : [];
       if (activeList.length === 0) {
         const fallback = numberDetectiveQuestions.filter(q => q.difficulty.toLowerCase() === diff.toLowerCase());
-        activeList = fallback.length > 0 ? fallback.slice(0, 10) : numberDetectiveQuestions.slice(0, 10);
+        const pool = fallback.length > 0 ? fallback : numberDetectiveQuestions;
+        activeList = shuffleArray([...pool]).slice(0, QUESTION_COUNT);
       }
       setPuzzles(activeList);
       setDifficulty(diff);
@@ -212,7 +214,8 @@ export default function NumberDetective() {
     } catch (e) {
       console.warn("Failed to load questions, using fallback set:", e);
       const fallback = numberDetectiveQuestions.filter(q => q.difficulty.toLowerCase() === diff.toLowerCase());
-      const activeList = fallback.length > 0 ? fallback.slice(0, 10) : numberDetectiveQuestions.slice(0, 10);
+      const pool = fallback.length > 0 ? fallback : numberDetectiveQuestions;
+      const activeList = shuffleArray([...pool]).slice(0, QUESTION_COUNT);
       setPuzzles(activeList);
       setDifficulty(diff);
       reset(TIMER_SECONDS[diff] || 90);
@@ -237,6 +240,26 @@ export default function NumberDetective() {
       }
     }
 
+    if (Array.isArray(parsedQuestions) && parsedQuestions.length > 0) {
+      setPuzzles(parsedQuestions);
+      setDifficulty((matchData.difficulty || 'MEDIUM').toUpperCase());
+      setIndex(0);
+      setAnswer('');
+      setHintUsed(false);
+      setResult(null);
+      setShowResult(false);
+      setScore(0);
+      setMistakes(0);
+      setTotalXP(0);
+      setShowComplete(false);
+      scoreRef.current = 0;
+      mistakesRef.current = 0;
+      startTimeRef.current = Date.now();
+      reset(TIMER_SECONDS[(matchData.difficulty || 'MEDIUM').toUpperCase()] || 90);
+      start();
+      return;
+    }
+
     const matchSeed = matchData.id || matchData.createdAt || 'match-seed';
     const seededRandom = createSeededRandom(matchSeed);
 
@@ -245,7 +268,7 @@ export default function NumberDetective() {
       const filtered = numberDetectiveQuestions.filter(q => q.difficulty.toLowerCase() === matchDiff);
       const pool = filtered.length > 0 ? filtered : numberDetectiveQuestions;
       const shuffledPool = shuffleArray(pool, seededRandom);
-      parsedQuestions = shuffledPool.slice(0, 10);
+      parsedQuestions = shuffledPool.slice(0, QUESTION_COUNT);
     }
 
     parsedQuestions = balanceAndRandomizeQuestionOptions(parsedQuestions, seededRandom);
@@ -367,8 +390,8 @@ export default function NumberDetective() {
 
         if (currentMatch.player2Id === 999999 || currentMatch.isBotMatch) {
           const botScore = Math.max(0, scoreRef.current + (Math.random() > 0.4 ? (Math.random() > 0.5 ? 0 : -1) : 1));
-          const botDelta = scoreRef.current >= botScore ? -16 : 16;
-          const myDelta = scoreRef.current > botScore ? 24 : (scoreRef.current === botScore ? 0 : -18);
+          const botDelta = scoreRef.current > botScore ? -25 : (scoreRef.current === botScore ? 0 : 25);
+          const myDelta = scoreRef.current > botScore ? 25 : (scoreRef.current === botScore ? 0 : -25);
           const simResult = {
             ...currentMatch,
             player1Score: scoreRef.current,
@@ -451,28 +474,30 @@ export default function NumberDetective() {
   // === COMPETITIVE MATCH RESULTS SCREEN ===
   if (competitiveResult) {
     return (
-      <div style={{ minHeight: '100vh', background: '#020617', paddingTop: '6.5rem', paddingBottom: '3rem', color: '#F8FAFC', position: 'relative' }}>
-        <div className="star-field" />
-        <CompetitiveResults
-          matchResult={competitiveResult}
-          currentUserId={user?.id || currentMatch?.player1Id}
-          onRematch={() => {
-            if (playMode === 'FRIEND' && currentMatch) {
-              const oppId = currentMatch.player1Id === user?.id ? currentMatch.player2Id : currentMatch.player1Id;
-              const oppName = currentMatch.player1Id === user?.id ? currentMatch.player2Username : currentMatch.player1Username;
-              if (oppId && oppId !== 999999) {
-                setInvitedFriend({ id: oppId, username: oppName });
+      <div className="cosmic-void" style={{ minHeight: '100vh', paddingTop: '6.5rem', paddingBottom: '3rem', position: 'relative' }}>
+        <div className="paper-grain" />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <CompetitiveResults
+            matchResult={competitiveResult}
+            currentUserId={user?.id || currentMatch?.player1Id}
+            onRematch={() => {
+              if (playMode === 'FRIEND' && currentMatch) {
+                const oppId = currentMatch.player1Id === user?.id ? currentMatch.player2Id : currentMatch.player1Id;
+                const oppName = currentMatch.player1Id === user?.id ? currentMatch.player2Username : currentMatch.player1Username;
+                if (oppId && oppId !== 999999) {
+                  setInvitedFriend({ id: oppId, username: oppName });
+                }
               }
-            }
-            clearMatchStorage(currentMatch?.id);
-            setCompetitiveResult(null);
-            setShowMatchmaking(true);
-          }}
-          onDashboard={() => {
-            clearMatchStorage(currentMatch?.id);
-            navigate('/dashboard');
-          }}
-        />
+              clearMatchStorage(currentMatch?.id);
+              setCompetitiveResult(null);
+              setShowMatchmaking(true);
+            }}
+            onDashboard={() => {
+              clearMatchStorage(currentMatch?.id);
+              navigate('/dashboard');
+            }}
+          />
+        </div>
       </div>
     );
   }
@@ -480,13 +505,49 @@ export default function NumberDetective() {
   // === WAITING FOR OPPONENT TO FINISH ===
   if (waitingForOpponent) {
     return (
-      <div style={{ minHeight: '100vh', background: '#020617', paddingTop: '6.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-        <div className="star-field" />
-        <div style={{ textAlign: 'center', padding: '2.5rem', background: 'rgba(8, 14, 33, 0.85)', borderRadius: '1.25rem', border: '1px solid rgba(255, 255, 255, 0.08)', backdropFilter: 'blur(20px)', boxShadow: '0 12px 35px rgba(0, 0, 0, 0.5)', zIndex: 1 }}>
-          <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⏳</div>
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#F8FAFC', marginBottom: '0.5rem', fontFamily: 'var(--font-display)' }}>Challenge Completed</h2>
-          <p style={{ color: '#94A3B8', fontSize: '0.95rem', marginBottom: '0.5rem' }}>Your score: <strong className="font-mono" style={{ color: '#38bdf8' }}>{scoreRef.current} / {puzzles.length}</strong></p>
-          <p className="font-mono" style={{ color: '#38bdf8', fontSize: '0.8rem' }}>Waiting for opponent synchronization...</p>
+      <div className="cosmic-void" style={{ minHeight: '100vh', paddingTop: '6.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.5rem', position: 'relative' }}>
+        <div className="paper-grain" />
+        <div className="halftone-teal halftone-fade-r" style={{ position: 'absolute', top: 0, right: 0, width: '34%', height: '100%', opacity: 0.2 }} />
+
+        <div className="zine-card" style={{ textAlign: 'center', padding: '2.5rem 2rem', maxWidth: '460px', width: '100%', position: 'relative', zIndex: 1, boxShadow: '10px 10px 0 var(--riso-teal)' }}>
+          <div style={{
+            width: '66px',
+            height: '66px',
+            background: 'var(--riso-teal)',
+            border: '3px solid var(--ink)',
+            boxShadow: '4px 4px 0 var(--ink)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '0 auto 1.5rem',
+            transform: 'rotate(4deg)',
+            color: '#fffdf6'
+          }}>
+            <Clock size={30} />
+          </div>
+
+          <h2 className="zine-display misreg" data-text="CHALLENGE COMPLETE" style={{ fontSize: 'clamp(1.3rem, 4vw, 1.8rem)', marginBottom: '0.6rem' }}>
+            CHALLENGE COMPLETE
+          </h2>
+
+          <p style={{ fontSize: '0.875rem', color: 'var(--ink-muted)', fontFamily: 'var(--font-mono)', marginBottom: '1.5rem' }}>
+            Your score: <strong style={{ color: 'var(--riso-teal)' }}>{scoreRef.current} / {puzzles.length}</strong>
+          </p>
+
+          <div style={{
+            background: 'var(--paper-sunk)',
+            border: '2px solid var(--ink)',
+            boxShadow: '3px 3px 0 var(--ink)',
+            padding: '0.9rem 1rem',
+            fontFamily: 'var(--font-mono)',
+            fontSize: '0.75rem',
+            fontWeight: 700,
+            letterSpacing: '0.14em',
+            textTransform: 'uppercase',
+            color: 'var(--riso-violet)'
+          }}>
+            Waiting for opponent synchronization...
+          </div>
         </div>
       </div>
     );
@@ -522,11 +583,12 @@ export default function NumberDetective() {
   if (!puzzle) return null;
 
   return (
-    <div style={{ minHeight: '100vh', background: '#020617', paddingTop: '6.5rem', color: '#F8FAFC', position: 'relative', overflow: 'hidden' }}>
+    <div className="cosmic-void" style={{ minHeight: '100vh', paddingTop: '6.5rem', position: 'relative', overflow: 'hidden' }}>
       <XPPopup popups={xpPopups} />
-      <div className="star-field" />
+      <div className="paper-grain" />
+      <div className="halftone-violet halftone-fade-l" style={{ position: 'absolute', top: 0, left: 0, width: '26%', height: '100%', opacity: 0.2 }} />
 
-      <div style={{ maxWidth: '740px', margin: '0 auto', padding: '1.5rem 1.5rem 4rem', position: 'relative', zIndex: 1 }}>
+      <div style={{ maxWidth: '780px', margin: '0 auto', padding: '1.25rem 1.5rem 4rem', position: 'relative', zIndex: 1 }}>
         
         {/* Reusable Header Progress Bar */}
         <GameProgress
@@ -551,39 +613,29 @@ export default function NumberDetective() {
         <AnimatePresence mode="wait">
           <motion.div
             key={index}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.25 }}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.2 }}
+            className="zine-card"
             style={{
-              background: 'rgba(8, 14, 33, 0.85)',
-              backdropFilter: 'blur(24px)',
-              border: '1px solid rgba(255, 255, 255, 0.08)',
-              borderRadius: '1.25rem',
-              padding: '2.25rem',
+              padding: '2rem 2.25rem',
+              boxShadow: '7px 7px 0 var(--ink)',
               marginBottom: '1.5rem',
-              boxShadow: '0 12px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(59, 130, 246, 0.08)'
+              position: 'relative'
             }}
           >
-            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-              <span className="font-mono" style={{ fontSize: '0.75rem', color: '#38bdf8', marginBottom: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, display: 'block' }}>
-                // SEQUENCE RECOGNITION
+            <div className="tape" style={{ top: -14, left: '8%' }} />
+            <span className="font-mono" style={{ position: 'absolute', top: 14, right: 18, fontSize: '0.6rem', fontWeight: 700, color: 'var(--ink-faint)', letterSpacing: '0.18em' }}>
+              Q{String(index + 1).padStart(2, '0')}
+            </span>
+
+            {/* Sequence Board */}
+            <div style={{ marginBottom: '2rem', paddingRight: '2.5rem' }}>
+              <span className="zine-kicker" style={{ display: 'block', marginBottom: '0.75rem' }}>
+                SEQUENCE RECOGNITION
               </span>
-              <div
-                className="font-mono"
-                style={{
-                  fontSize: 'clamp(1.5rem, 4vw, 2.3rem)',
-                  fontWeight: 800,
-                  color: '#FFFFFF',
-                  letterSpacing: '0.05em',
-                  padding: '1.5rem',
-                  background: 'rgba(10, 18, 42, 0.65)',
-                  borderRadius: '1rem',
-                  border: '1px solid rgba(59, 130, 246, 0.25)'
-                }}
-              >
-                {puzzle.question}
-              </div>
+              <div className="zine-number-board">{puzzle.question}</div>
             </div>
 
             {/* Hint */}
@@ -591,18 +643,11 @@ export default function NumberDetective() {
               <motion.div
                 initial={{ opacity: 0, y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
-                style={{
-                  display: 'flex',
-                  gap: '0.5rem',
-                  background: 'rgba(59, 130, 246, 0.08)',
-                  border: '1px solid rgba(59, 130, 246, 0.25)',
-                  borderRadius: '0.75rem',
-                  padding: '0.85rem 1rem',
-                  marginBottom: '1.25rem'
-                }}
+                className="zine-hint"
+                style={{ marginBottom: '1.25rem' }}
               >
-                <Lightbulb size={16} color="#60a5fa" style={{ flexShrink: 0, marginTop: '2px' }} />
-                <p style={{ fontSize: '0.85rem', color: '#93c5fd', lineHeight: 1.5, fontWeight: 500 }}>{puzzle.hint}</p>
+                <Lightbulb size={16} color="var(--ink)" style={{ flexShrink: 0, marginTop: '2px' }} />
+                <p style={{ fontSize: '0.85rem', color: 'var(--ink)', lineHeight: 1.5, fontWeight: 500, margin: 0 }}>{puzzle.hint}</p>
               </motion.div>
             )}
 
@@ -610,24 +655,12 @@ export default function NumberDetective() {
             {!showResult ? (
               <div>
                 {Array.isArray(puzzle.options) && puzzle.options.length > 0 ? (
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '0.75rem' }}>
                     {puzzle.options.map(opt => (
                       <button
                         key={opt}
-                        onClick={() => { setAnswer(opt); }}
-                        style={{
-                          padding: '1.1rem',
-                          borderRadius: '0.875rem',
-                          border: answer === opt ? '1px solid #3b82f6' : '1px solid rgba(255, 255, 255, 0.08)',
-                          background: answer === opt ? 'rgba(59, 130, 246, 0.15)' : 'rgba(10, 18, 42, 0.65)',
-                          color: answer === opt ? '#FFFFFF' : '#CBD5E1',
-                          fontSize: '1.25rem',
-                          fontFamily: 'var(--font-mono)',
-                          fontWeight: 800,
-                          cursor: 'pointer',
-                          boxShadow: answer === opt ? '0 0 20px rgba(59, 130, 246, 0.3)' : '0 2px 6px rgba(0, 0, 0, 0.2)',
-                          transition: 'all 0.15s ease'
-                        }}
+                        onClick={() => { setAnswer(String(opt)); }}
+                        className={`zine-tile${answer === String(opt) ? ' selected' : ''}`}
                       >
                         {opt}
                       </button>
@@ -641,8 +674,8 @@ export default function NumberDetective() {
                       onChange={e => setAnswer(e.target.value)}
                       onKeyDown={e => e.key === 'Enter' && answer && handleSubmit()}
                       placeholder="Enter solution number..."
-                      className="input-dark"
-                      style={{ flex: 1, textAlign: 'center', fontSize: '1.25rem', fontFamily: 'var(--font-mono)', fontWeight: 800, padding: '0.85rem' }}
+                      className="zine-input zine-input--mono"
+                      style={{ flex: 1, textAlign: 'center', fontSize: '1.25rem', padding: '0.85rem' }}
                       autoFocus
                     />
                   </div>
@@ -651,27 +684,14 @@ export default function NumberDetective() {
                 <button
                   onClick={() => answer && handleSubmit()}
                   disabled={!answer}
-                  style={{
-                    width: '100%',
-                    marginTop: '1.25rem',
-                    padding: '0.85rem',
-                    borderRadius: '999px',
-                    background: answer ? 'linear-gradient(180deg, #3b82f6 0%, #2563eb 100%)' : 'rgba(255, 255, 255, 0.08)',
-                    color: answer ? '#ffffff' : 'rgba(255, 255, 255, 0.3)',
-                    border: 'none',
-                    fontWeight: 700,
-                    fontFamily: 'var(--font-display)',
-                    fontSize: '0.95rem',
-                    cursor: answer ? 'pointer' : 'not-allowed',
-                    boxShadow: answer ? '0 0 20px rgba(59, 130, 246, 0.4)' : 'none',
-                    transition: 'all 0.15s ease'
-                  }}
+                  className="btn-primary"
+                  style={{ width: '100%', marginTop: '1.5rem' }}
                 >
-                  Submit Solution &rarr;
+                  SUBMIT SOLUTION →
                 </button>
               </div>
             ) : (
-              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}>
+              <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }}>
                 {/* Result banner */}
                 <div
                   style={{
@@ -679,45 +699,35 @@ export default function NumberDetective() {
                     alignItems: 'center',
                     gap: '0.75rem',
                     padding: '1rem 1.25rem',
-                    borderRadius: '0.85rem',
-                    background: result === 'correct' ? 'rgba(34, 197, 94, 0.12)' : 'rgba(244, 63, 94, 0.12)',
-                    border: `1px solid ${result === 'correct' ? 'rgba(34, 197, 94, 0.3)' : 'rgba(244, 63, 94, 0.3)'}`,
-                    marginBottom: '1rem'
+                    background: result === 'correct' ? 'var(--riso-teal)' : 'var(--riso-coral)',
+                    color: '#fffdf6',
+                    border: '2px solid var(--ink)',
+                    boxShadow: '4px 4px 0 var(--ink)',
+                    marginBottom: '1.25rem'
                   }}
                 >
-                  {result === 'correct' ? <CheckCircle size={22} color="#22c55e" /> : <XCircle size={22} color="#f43f5e" />}
-                  <div>
-                    <div className="font-mono" style={{ fontWeight: 800, color: result === 'correct' ? '#22c55e' : '#f43f5e', fontSize: '0.95rem' }}>
-                      {result === 'correct' ? '🎉 Correct Number Found!' : `Incorrect — The correct answer was ${puzzle.correctAnswer || puzzle.answer}`}
-                    </div>
+                  {result === 'correct' ? <CheckCircle size={22} /> : <XCircle size={22} />}
+                  <div className="font-mono" style={{ fontWeight: 800, fontSize: '0.9rem', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+                    {result === 'correct'
+                      ? 'CORRECT NUMBER FOUND'
+                      : `INCORRECT — EXPECTED: ${puzzle.correctAnswer || puzzle.answer}`}
                   </div>
                 </div>
 
                 {/* Explanation */}
                 {puzzle.explanation && (
-                  <div style={{ padding: '1.15rem', borderRadius: '0.85rem', background: 'rgba(10, 18, 42, 0.65)', border: '1px solid rgba(255, 255, 255, 0.08)', marginBottom: '1.25rem' }}>
-                    <p className="font-mono" style={{ fontSize: '0.725rem', fontWeight: 700, color: '#38BDF8', marginBottom: '0.35rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>// SEQUENCE RULE</p>
-                    <p style={{ fontSize: '0.875rem', color: '#CBD5E1', lineHeight: 1.6, fontWeight: 400 }}>{puzzle.explanation}</p>
+                  <div style={{ padding: '1.15rem', background: 'var(--paper-sunk)', border: '2px dashed var(--ink-faint)', marginBottom: '1.5rem' }}>
+                    <p className="font-mono" style={{ fontSize: '0.66rem', fontWeight: 800, color: 'var(--riso-violet)', marginBottom: '0.45rem', letterSpacing: '0.16em', textTransform: 'uppercase' }}>
+                      SEQUENCE RULE
+                    </p>
+                    <p style={{ fontSize: '0.875rem', color: 'var(--ink-soft)', lineHeight: 1.6, fontWeight: 400, margin: 0 }}>
+                      {puzzle.explanation}
+                    </p>
                   </div>
                 )}
 
-                <button
-                  onClick={handleNext}
-                  style={{
-                    width: '100%',
-                    padding: '0.85rem',
-                    borderRadius: '999px',
-                    background: 'linear-gradient(180deg, #3b82f6 0%, #2563eb 100%)',
-                    color: '#ffffff',
-                    border: 'none',
-                    fontWeight: 700,
-                    fontFamily: 'var(--font-display)',
-                    fontSize: '0.9rem',
-                    cursor: 'pointer',
-                    boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)'
-                  }}
-                >
-                  {index + 1 >= puzzles.length ? 'Final Summary & Rewards 🏆' : 'Next Puzzle &rarr;'}
+                <button onClick={handleNext} className="btn-primary" style={{ width: '100%' }}>
+                  {index + 1 >= puzzles.length ? 'FINAL CLASSIFICATION →' : 'NEXT PUZZLE →'}
                 </button>
               </motion.div>
             )}
@@ -730,17 +740,9 @@ export default function NumberDetective() {
             {!hintUsed && puzzle.hint && (
               <button
                 onClick={() => setHintUsed(true)}
-                className="pill-btn-ghost"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  padding: '0.45rem 1rem',
-                  fontSize: '0.8rem',
-                  fontWeight: 600
-                }}
+                className="zine-btn-sm zine-btn-sm--yellow"
               >
-                <Lightbulb size={14} /> Hint (-30% XP)
+                <Lightbulb size={14} color="var(--ink)" /> HINT (-30% XP)
               </button>
             )}
           </div>
