@@ -29,7 +29,7 @@ export const XP_PER_LEVEL = [
 
 export const RANKS = [
   { minLevel: 1,  maxLevel: 4,  name: "Beginner",   color: "#a1a1b5", icon: "🌱" },
-  { minLevel: 5,  maxLevel: 8,  name: "Thinker",    color: "#06b6d4", icon: "💭" },
+  { minLevel: 5,  maxLevel: 8,  name: "Scholar",    color: "#06b6d4", icon: "⚡" },
   { minLevel: 9,  maxLevel: 12, name: "Solver",     color: "#10b981", icon: "🧩" },
   { minLevel: 13, maxLevel: 16, name: "Detective",  color: "#8b5cf6", icon: "🕵️" },
   { minLevel: 17, maxLevel: 20, name: "Strategist", color: "#f59e0b", icon: "⚡" },

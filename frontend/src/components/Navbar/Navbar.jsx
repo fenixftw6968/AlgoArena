@@ -102,7 +102,7 @@ export default function Navbar() {
 
   const navLinks = [
     { to: '/dashboard',       label: 'Dashboard' },
-    { to: '/games',           label: 'Games' },
+    { to: '/games',           label: 'Arena' },
     { to: '/daily-challenge', label: 'Challenges' },
     { to: '/leaderboard',     label: 'Progress' },
     { to: '/profile',         label: 'Profile' },

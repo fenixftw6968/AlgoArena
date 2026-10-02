@@ -105,9 +105,9 @@ export default function Dashboard() {
   const passRef = useRef(null);
 
   const DEFAULT_RECOMMENDED_PLAYERS = [
-    { userId: 101, username: 'Alex_Algorithms', level: 6, competitiveRating: 540, competitiveRank: 'Thinker', isOnline: true },
+    { userId: 101, username: 'Alex_Algorithms', level: 6, competitiveRating: 540, competitiveRank: 'Knight', isOnline: true },
     { userId: 102, username: 'Priya_Logic', level: 7, competitiveRating: 620, competitiveRank: 'Guardian', isOnline: true },
-    { userId: 103, username: 'Vikram_Byte', level: 5, competitiveRating: 480, competitiveRank: 'Thinker', isOnline: false },
+    { userId: 103, username: 'Vikram_Byte', level: 5, competitiveRating: 480, competitiveRank: 'Knight', isOnline: false },
     { userId: 104, username: 'CodeNinja_99', level: 8, competitiveRating: 710, competitiveRank: 'Master', isOnline: true },
   ];
 
@@ -219,7 +219,7 @@ export default function Dashboard() {
           <div className="dash-marquee-track">
             {[0, 1].map((dup) => (
               <span key={dup}>
-                ISSUE NO.07 — TODAY&apos;S RUN <i>✦</i> STREAK {user.currentStreak || 0} DAYS <i>✦</i> {rating} ELO <i>✦</i> DAILY MISSION LIVE <i>✦</i> PLAY — EARN — REPEAT <i>✦</i>&nbsp;
+                ISSUE NO.07 — TODAY&apos;S RUN <i>✦</i> STREAK {user.currentStreak || 0} DAYS <i>✦</i> {rating} RATING <i>✦</i> DAILY MISSION LIVE <i>✦</i> PLAY — EARN — REPEAT <i>✦</i>&nbsp;
               </span>
             ))}
           </div>
@@ -271,7 +271,7 @@ export default function Dashboard() {
         <div className="dash-ledger">
           <LedgerCell Icon={Flame} value={`${user.currentStreak || 0}d`} label="Daily streak" ink="var(--riso-coral)" delay={0} />
           <LedgerCell Icon={Coins} value={user.coins || 0} label="Coins balance" ink="var(--riso-yellow)" delay={1} />
-          <LedgerCell Icon={Swords} value={rating} label="Rating elo" ink="var(--riso-violet)" delay={2} />
+          <LedgerCell Icon={Swords} value={rating} label="Rating" ink="var(--riso-violet)" delay={2} />
           <LedgerCell Icon={Gamepad2} value={user.gamesCompleted || 0} label="Games solved" ink="var(--riso-teal)" delay={3} />
         </div>
 
@@ -349,12 +349,12 @@ export default function Dashboard() {
                 </div>
               </div>
               <div style={{ minWidth: 0 }}>
-                <div className="zine-display" style={{ fontSize: '1rem', color: 'var(--paper)' }}>{rank.name}</div>
+                <div className="zine-display" style={{ fontSize: '1rem', color: 'var(--paper)', textTransform: 'uppercase' }}>LEVEL {userLevel}</div>
                 <div className="font-mono" style={{ fontSize: '0.68rem', opacity: 0.75, marginTop: '0.25rem' }}>
                   {userXP.toLocaleString()} XP → {(xpNext || 0).toLocaleString()}
                 </div>
                 <div className="font-mono" style={{ fontSize: '0.62rem', color: 'var(--riso-yellow)', fontWeight: 800, marginTop: '0.3rem' }}>
-                  {compRank.badge} {compRank.name} · {rating} ELO
+                  {compRank.badge} {compRank.name} · {rating}
                 </div>
               </div>
             </div>
@@ -462,17 +462,16 @@ export default function Dashboard() {
                     </div>
                     <div style={{ flex: 1, minWidth: 180 }}>
                       <div className="zine-display" style={{ fontSize: '1.05rem' }}>{compRank.name} <span className="zine-badge" style={{ background: 'var(--riso-violet)', color: '#fffdf6', marginLeft: '0.4rem' }}>1v1 ranked</span></div>
-                      <p style={{ fontSize: '0.78rem', color: 'var(--ink-muted)' }}>{compRank.desc}</p>
                     </div>
                     <div style={{ textAlign: 'right' }}>
                       <div className="zine-num" style={{ fontSize: '2rem' }}>{rating}</div>
-                      <div className="font-mono" style={{ fontSize: '0.58rem', letterSpacing: '0.16em', color: 'var(--ink-faint)', fontWeight: 700 }}>RATING ELO</div>
+                      <div className="font-mono" style={{ fontSize: '0.58rem', letterSpacing: '0.16em', color: 'var(--ink-faint)', fontWeight: 700 }}>RATING</div>
                     </div>
                   </div>
                   {nextRank && (
                     <div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem', fontSize: '0.75rem', color: 'var(--ink-muted)', flexWrap: 'wrap', gap: '0.4rem' }}>
-                        <span>Next tier: <b style={{ color: 'var(--ink)' }}>{nextRank.name}</b></span>
+                        <span>Next rank: <b style={{ color: 'var(--ink)' }}>{nextRank.name}</b></span>
                         <span className="font-mono" style={{ fontWeight: 800, color: 'var(--ink)' }}>{rating} / {nextRank.minRating} · {rankProgress}%</span>
                       </div>
                       <div className="zine-meter">

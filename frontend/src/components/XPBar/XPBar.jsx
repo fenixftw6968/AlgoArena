@@ -6,7 +6,7 @@ export default function XPBar({ current, total, level, animated = true }) {
   return (
     <div style={{ width: '100%' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.45rem', gap: '0.5rem' }}>
-        <span className="zine-badge" style={{ background: 'var(--riso-violet)', color: '#fffdf6' }}>TIER {level}</span>
+        <span className="zine-badge" style={{ background: 'var(--riso-violet)', color: '#fffdf6' }}>LEVEL {level}</span>
         <span className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--ink-muted)', letterSpacing: '0.04em' }}>
           <strong style={{ color: 'var(--ink)', fontWeight: 800 }}>{current.toLocaleString()}</strong>
           {' / '}{total.toLocaleString()} XP

@@ -7,27 +7,27 @@ const INKS = { EASY: 'var(--riso-teal)', MEDIUM: 'var(--riso-violet)', HARD: 'va
 const DEFAULT_DIFFICULTIES = [
   {
     id: 'EASY',
-    label: 'NOVICE',
+    label: 'EASY',
     icon: '🌱',
     xp: '+10 XP',
     time: 'Standard',
-    desc: 'Foundational drills for conditioning reflexes and core memory recall.'
+    desc: ''
   },
   {
     id: 'MEDIUM',
-    label: 'INTERMEDIATE',
+    label: 'MEDIUM',
     icon: '⚡',
     xp: '+25 XP',
     time: 'Moderate',
-    desc: 'Multi-layer analytical scenarios demanding quick pattern identification.'
+    desc: ''
   },
   {
     id: 'HARD',
-    label: 'EXPERT',
+    label: 'HARD',
     icon: '🔥',
     xp: '+50 XP',
     time: 'Fast Pace',
-    desc: 'Ultra high-pressure combinatorial complexity under strict time decay.'
+    desc: ''
   }
 ];
 
@@ -119,16 +119,24 @@ export default function DifficultySelector({
 
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.6rem', flexWrap: 'wrap' }}>
-                      <span className="zine-display" style={{ fontSize: '1.05rem' }}>{tier.label || tier.id}</span>
+                      <span className="zine-display" style={{ fontSize: '1.15rem' }}>{tier.label || tier.id}</span>
                       {isCurrentLoading && (
                         <span className="font-mono" style={{ fontSize: '0.64rem', color: 'var(--riso-coral)', fontWeight: 800, letterSpacing: '0.12em' }}>
                           INITIALIZING...
                         </span>
                       )}
                     </div>
-                    <div style={{ fontSize: '0.8rem', color: 'var(--ink-muted)', marginTop: '0.25rem', lineHeight: 1.4 }}>
-                      {isCurrentLoading ? 'Synthesizing a verified, non-repeating problem stream...' : tier.desc}
-                    </div>
+                    {isCurrentLoading ? (
+                      <div style={{ fontSize: '0.8rem', color: 'var(--ink-muted)', marginTop: '0.25rem', lineHeight: 1.4 }}>
+                        Synthesizing a verified, non-repeating problem stream...
+                      </div>
+                    ) : (
+                      tier.desc ? (
+                        <div style={{ fontSize: '0.8rem', color: 'var(--ink-muted)', marginTop: '0.25rem', lineHeight: 1.4 }}>
+                          {tier.desc}
+                        </div>
+                      ) : null
+                    )}
                   </div>
 
                   <div style={{ textAlign: 'right', flexShrink: 0 }}>

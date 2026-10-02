@@ -78,7 +78,7 @@ export function selectQuestions(questionBank, {
   const normGame = (gameType || 'generic').toLowerCase().trim();
   const effectiveCount = (count !== null && count > 0)
     ? count
-    : (normGame === 'dsa-master-quiz' || normGame === 'number-detective' ? 5 : 10);
+    : (normGame === 'dsa-master-quiz' || normGame === 'number-detective' || normGame === 'logic-puzzle' ? 5 : 10);
 
   // 1. Filter by difficulty if specified and not 'all'
   let eligible = questionBank;

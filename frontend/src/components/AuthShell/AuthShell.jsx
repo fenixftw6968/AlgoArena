@@ -51,7 +51,7 @@ export default function AuthShell({ kicker, title, lede, accent = 'var(--riso-vi
         </Link>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
           <span className="sticker" style={{ display: 'none' }}>Issue 01</span>
-          <Link to="/games" className="zine-btn-sm">Browse Games</Link>
+          <Link to="/games" className="zine-btn-sm">Browse Arenas</Link>
         </div>
       </header>
 

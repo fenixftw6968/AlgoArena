@@ -4,9 +4,9 @@ import { ArrowLeft, Star, Clock, Flame } from 'lucide-react';
 import { getDailyCountdown, subscribeToMidnightIST } from '../../services/dailyQuestionService';
 
 const DIFF_STYLES = {
-  EASY:   { ink: 'var(--riso-teal)',   label: 'NOVICE' },
-  MEDIUM: { ink: 'var(--riso-violet)', label: 'MID' },
-  HARD:   { ink: 'var(--riso-coral)',  label: 'EXPERT' }
+  EASY:   { ink: 'var(--riso-teal)',   label: 'EASY' },
+  MEDIUM: { ink: 'var(--riso-violet)', label: 'MEDIUM' },
+  HARD:   { ink: 'var(--riso-coral)',  label: 'HARD' }
 };
 
 export default function GameProgress({

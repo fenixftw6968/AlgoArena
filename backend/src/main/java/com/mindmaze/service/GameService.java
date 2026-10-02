@@ -41,9 +41,7 @@ public class GameService {
     private static final List<String> ACTIVE_SLUGS = List.of(
         "dsa-master-quiz",
         "logic-puzzle",
-        "brain-teaser-battle",
         "number-detective",
-        "memory-challenge",
         "code-breaker"
     );
 

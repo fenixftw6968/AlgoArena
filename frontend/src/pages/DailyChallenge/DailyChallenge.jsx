@@ -10,9 +10,7 @@ import api from '../../utils/api';
 const GAME_TYPE_LABELS = {
   'dsa-master-quiz':     { label: 'DSA & Algorithms', icon: '🧠' },
   'logic-puzzle':        { label: 'Logic & Reasoning', icon: '🧩' },
-  'brain-teaser-battle': { label: 'Brain Teaser Battle', icon: '⚡' },
   'number-detective':    { label: 'Number Sequence', icon: '🔢' },
-  'memory-challenge':    { label: 'Memory & Recall', icon: '👁️' },
   'code-breaker':        { label: 'Code Breaker', icon: '🔐' },
 };
 
@@ -63,6 +61,20 @@ export default function DailyChallenge() {
     }
   };
 
+  const handleResetAttempt = async () => {
+    try {
+      await api.post('/api/games/daily/reset');
+    } catch (e) {
+      console.warn("Could not reset attempt on server:", e);
+    }
+    setSubmitted(false);
+    setResult(null);
+    setAnswer('');
+    setShowHint(false);
+    setHintUsed(false);
+    isSubmittingRef.current = false;
+  };
+
   useEffect(() => {
     fetchChallenge();
   }, []);
@@ -101,15 +113,15 @@ export default function DailyChallenge() {
         parsedPuzzle = typeof challenge?.puzzle === 'string' ? JSON.parse(challenge.puzzle) : (challenge?.puzzle || {});
       } catch (err) {}
 
-      const isCorrect = res.data.correct;
-      const xpEarned = isCorrect ? (hintUsed ? Math.floor(challenge.xpReward / 2) : challenge.xpReward) : 0;
-      const coinEarned = isCorrect ? challenge.coinReward : 0;
+      const isCorrect = res.data.isCorrect !== undefined ? res.data.isCorrect : (res.data.correct !== undefined ? res.data.correct : false);
+      const xpEarned = isCorrect ? (hintUsed ? Math.floor(challenge.xpReward / 2) : (res.data.xpEarned || challenge.xpReward)) : 0;
+      const coinEarned = isCorrect ? (res.data.coinsEarned || challenge.coinReward) : 0;
 
       setResult({
         correct: isCorrect,
         xpEarned,
         coinEarned,
-        explanation: parsedPuzzle.explanation || ""
+        explanation: res.data.explanation || parsedPuzzle.explanation || ""
       });
 
       if (isCorrect) {
@@ -123,8 +135,10 @@ export default function DailyChallenge() {
         correct: false,
         xpEarned: 0,
         coinEarned: 0,
-        explanation: "Network verification error. Please retry."
+        explanation: e.response?.data?.message || "Verification failed. Please retry your selection."
       });
+    } finally {
+      isSubmittingRef.current = false;
     }
   };
 
@@ -232,17 +246,37 @@ export default function DailyChallenge() {
           {!submitted ? (
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {hasOptions ? (
-                <div className="zine-options">
-                  {puzzleData.options.map((opt) => {
+                <div className="zine-options" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '0.75rem' }}>
+                  {puzzleData.options.map((opt, optIdx) => {
                     const isSelected = answer === opt;
+                    const letter = String.fromCharCode(65 + optIdx);
                     return (
                       <button
                         type="button"
-                        key={opt}
+                        key={optIdx}
                         onClick={() => setAnswer(opt)}
                         className={`zine-option${isSelected ? ' zine-option--selected' : ''}`}
+                        style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textAlign: 'left', padding: '0.8rem 1rem' }}
                       >
-                        {opt}
+                        <span style={{
+                          width: '28px',
+                          height: '28px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          border: '2px solid var(--ink)',
+                          background: isSelected ? 'var(--riso-violet)' : 'var(--paper-sunk)',
+                          color: isSelected ? '#fffdf6' : 'var(--ink)',
+                          fontFamily: 'var(--font-mono)',
+                          fontWeight: 800,
+                          fontSize: '0.82rem',
+                          flexShrink: 0
+                        }}>
+                          {letter}
+                        </span>
+                        <span style={{ fontSize: '0.9rem', fontWeight: isSelected ? 700 : 600 }}>
+                          {opt}
+                        </span>
                       </button>
                     );
                   })}
@@ -333,13 +367,23 @@ export default function DailyChallenge() {
                 </div>
               )}
 
-              <button
-                onClick={() => navigate('/dashboard')}
-                className="zine-btn zine-btn--violet"
-                style={{ width: '100%' }}
-              >
-                RETURN TO DASHBOARD
-              </button>
+              <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.75rem', flexWrap: 'wrap' }}>
+                <button
+                  type="button"
+                  onClick={handleResetAttempt}
+                  className="zine-btn zine-btn--yellow"
+                  style={{ flex: 1, minWidth: '160px' }}
+                >
+                  {result?.correct ? 'SOLVE AGAIN ↺' : 'TRY ANOTHER OPTION ↺'}
+                </button>
+                <button
+                  onClick={() => navigate('/dashboard')}
+                  className="zine-btn zine-btn--violet"
+                  style={{ flex: 1, minWidth: '160px' }}
+                >
+                  RETURN TO DASHBOARD
+                </button>
+              </div>
             </div>
           )}
         </motion.div>

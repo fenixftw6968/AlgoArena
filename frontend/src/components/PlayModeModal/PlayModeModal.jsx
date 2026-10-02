@@ -16,27 +16,21 @@ export default function PlayModeModal({
       title: 'Practice vs Computer',
       badge: 'Single Player',
       ink: 'var(--riso-teal)',
-      icon: Bot,
-      description: 'Standard single player mode. Solve challenges, earn XP for account level and unlock achievements. Rating is not affected.',
-      benefits: ['Earn Account XP & Level Up', 'No Rating Risk', 'Casual Pace']
+      icon: Bot
     },
     {
       id: 'RANKED',
       title: 'Ranked Matchmaking',
       badge: 'Competitive Elo',
       ink: 'var(--riso-violet)',
-      icon: Swords,
-      description: 'Match with a player of similar rating. Both receive the identical challenge. The fastest and most accurate wins rating points.',
-      benefits: ['Fair Skill Matchmaking', 'Climb Competitive Tiers', 'Elo Rating at Stake']
+      icon: Swords
     },
     {
       id: 'FRIEND',
       title: 'Play with a Friend',
       badge: 'Custom Lobby',
       ink: 'var(--riso-coral)',
-      icon: Users,
-      description: 'Create a private match or invite a friend directly. Compete head-to-head on the same synchronized challenge.',
-      benefits: ['Direct Head-to-Head', 'Live Synchronized Results', 'Friendly Rivalry']
+      icon: Users
     }
   ];
 
@@ -93,21 +87,21 @@ export default function PlayModeModal({
                 onClick={() => onSelectMode(m.id)}
                 className="zine-card zine-card--flat"
                 style={{
-                  padding: '1.1rem 1.2rem',
+                  padding: '1.15rem 1.25rem',
                   cursor: 'pointer',
                   textAlign: 'left',
                   background: 'var(--paper-card)',
                   borderLeft: `10px solid ${m.ink}`,
                   boxShadow: '3px 3px 0 var(--ink)',
                   display: 'flex',
-                  alignItems: 'flex-start',
+                  alignItems: 'center',
                   gap: '1rem',
                   font: 'inherit'
                 }}
               >
                 <div style={{
-                  width: '44px',
-                  height: '44px',
+                  width: '46px',
+                  height: '46px',
                   background: m.ink,
                   border: '2px solid var(--ink)',
                   display: 'flex',
@@ -115,24 +109,12 @@ export default function PlayModeModal({
                   justifyContent: 'center',
                   flexShrink: 0
                 }}>
-                  <Icon size={20} color="#fffdf6" />
+                  <Icon size={22} color="#fffdf6" />
                 </div>
 
-                <div style={{ flex: 1 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem', marginBottom: '0.25rem', flexWrap: 'wrap' }}>
-                    <span className="zine-display" style={{ fontSize: '0.95rem' }}>{m.title}</span>
-                    <span className="zine-badge" style={{ background: m.ink, color: '#fffdf6' }}>{m.badge}</span>
-                  </div>
-
-                  <p style={{ fontSize: '0.8rem', color: 'var(--ink-muted)', margin: '0 0 0.6rem', lineHeight: 1.45 }}>{m.description}</p>
-
-                  <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
-                    {m.benefits.map((b, i) => (
-                      <span key={i} className="zine-badge" style={{ background: 'var(--paper-sunk)', fontSize: '0.6rem' }}>
-                        {b}
-                      </span>
-                    ))}
-                  </div>
+                <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem', flexWrap: 'wrap' }}>
+                  <span className="zine-display" style={{ fontSize: '1.05rem', letterSpacing: '0.02em' }}>{m.title}</span>
+                  <span className="zine-badge" style={{ background: m.ink, color: '#fffdf6' }}>{m.badge}</span>
                 </div>
               </button>
             );

@@ -35,7 +35,7 @@ export default function MCQGameEngine({
   codeLanguage = 'cpp',
   questionCount = null
 }) {
-  const targetCount = questionCount || (gameSlug === 'dsa-master-quiz' || gameSlug === 'number-detective' ? 5 : 10);
+  const targetCount = questionCount || (gameSlug === 'dsa-master-quiz' || gameSlug === 'number-detective' || gameSlug === 'logic-puzzle' ? 5 : 10);
   const { user, refreshUser } = useAuth();
   const { xpPopups, showXPPopup } = useGame();
   const navigate = useNavigate();
@@ -193,8 +193,27 @@ export default function MCQGameEngine({
     if (isSubmittingRef.current || showResult || result || !selectedOption || !puzzle) return;
     isSubmittingRef.current = true;
     pause();
+    const targetAns = (puzzle.correctAnswer || puzzle.answer || '').trim().toLowerCase();
+    const chosen = (selectedOption || '').trim().toLowerCase();
+    let isCorrect = chosen === targetAns;
 
-    const isCorrect = selectedOption.trim().toLowerCase() === puzzle.correctAnswer.trim().toLowerCase();
+    if (!isCorrect && Array.isArray(puzzle.options)) {
+      const correctIdx = puzzle.options.findIndex(
+        opt => String(opt).trim().toLowerCase() === targetAns
+      );
+      if (correctIdx !== -1) {
+        const letters = ['a', 'b', 'c', 'd'];
+        if (chosen === letters[correctIdx]) {
+          isCorrect = true;
+        }
+      }
+      const letterIdx = ['a', 'b', 'c', 'd'].indexOf(targetAns);
+      if (letterIdx >= 0 && letterIdx < puzzle.options.length) {
+        if (chosen === String(puzzle.options[letterIdx]).trim().toLowerCase()) {
+          isCorrect = true;
+        }
+      }
+    }
     const currentDiff = (puzzle.difficulty || difficulty || 'MEDIUM').toUpperCase();
     const baseXP = XP_PER_DIFFICULTY[currentDiff] || 30;
     const earnedXP = isCorrect ? (hintUsed ? Math.round(baseXP * 0.7) : baseXP) : 0;

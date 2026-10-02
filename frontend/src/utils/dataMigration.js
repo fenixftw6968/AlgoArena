@@ -6,9 +6,11 @@
  */
 
 const DATA_VERSION_KEY = 'algoarena-data-version';
-const CURRENT_DATA_VERSION = 3;
+const CURRENT_DATA_VERSION = 4;
 
 const OBSOLETE_GAME_SLUGS = [
+  'brain-teaser-battle',
+  'memory-challenge',
   'reaction-rush',
   'grid-puzzle',
   'speed-match',

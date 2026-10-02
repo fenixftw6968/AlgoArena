@@ -54,13 +54,12 @@ export default function RankCard({ rating = 500, matchesPlayed = 0, matchesWon =
               <span className="zine-display" style={{ fontSize: '1.05rem' }}>{currentRank.name}</span>
               <span className="zine-badge" style={{ background: 'var(--riso-violet)', color: '#fffdf6', fontSize: '0.58rem' }}>1v1 Ranked</span>
             </div>
-            <p style={{ fontSize: '0.75rem', color: 'var(--ink-muted)', marginTop: '0.2rem' }}>{currentRank.desc}</p>
           </div>
         </div>
 
         <div style={{ textAlign: 'right' }}>
           <div className="zine-num" style={{ fontSize: '2.1rem' }}>{rating}</div>
-          <div className="font-mono" style={{ fontSize: '0.6rem', color: 'var(--ink-faint)', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase' }}>Rating Elo</div>
+          <div className="font-mono" style={{ fontSize: '0.6rem', color: 'var(--ink-faint)', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase' }}>Rating</div>
         </div>
       </div>
 
@@ -68,7 +67,7 @@ export default function RankCard({ rating = 500, matchesPlayed = 0, matchesWon =
         <div style={{ marginBottom: '1.25rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.4rem', gap: '0.5rem', flexWrap: 'wrap' }}>
             <span style={{ fontSize: '0.75rem', color: 'var(--ink-muted)' }}>
-              Next Tier: <span className="zine-display" style={{ fontSize: '0.78rem' }}>{nextRank.name}</span>
+              Next Rank: <span className="zine-display" style={{ fontSize: '0.78rem' }}>{nextRank.name}</span>
             </span>
             <span className="font-mono" style={{ fontSize: '0.7rem', color: 'var(--ink)', fontWeight: 700 }}>
               {rating} / {nextRank.minRating} &middot; {progress}%

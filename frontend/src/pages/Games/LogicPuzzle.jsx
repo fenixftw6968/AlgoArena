@@ -9,6 +9,7 @@ export default function LogicPuzzle() {
       gameIcon="🧩"
       category="Reasoning"
       questionBank={logicPuzzleQuestions}
+      questionCount={5}
     />
   );
 }

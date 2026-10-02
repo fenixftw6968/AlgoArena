@@ -76,32 +76,13 @@ export default function Profile() {
             }}>
               {user.username?.[0]?.toUpperCase()}
             </div>
-            <div className="zine-badge" style={{
-              position: 'absolute',
-              bottom: '-6px',
-              right: '-6px',
-              background: 'var(--riso-yellow)',
-              color: 'var(--ink)',
-              border: '2px solid var(--ink)',
-              width: '30px',
-              height: '30px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '0.9rem',
-              padding: 0
-            }}>
-              {rank.icon}
-            </div>
           </div>
 
           <div style={{ flex: 1, minWidth: '260px' }}>
-            <span className="zine-kicker">Thinker Profile</span>
-            <h1 className="zine-display misreg" data-text={user.username} style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', marginTop: '0.35rem' }}>
+            <h1 className="zine-display misreg" data-text={user.username} style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', margin: '0 0 0.35rem 0' }}>
               {user.username}
             </h1>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
-              <span className="zine-badge" style={{ background: 'var(--riso-violet)' }}>{rank.name}</span>
               <span className="font-mono" style={{ fontSize: '0.7rem', color: 'var(--ink-muted)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>
                 Joined {new Date(user.createdAt || Date.now()).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
               </span>
