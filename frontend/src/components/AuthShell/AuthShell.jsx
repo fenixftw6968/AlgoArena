@@ -78,7 +78,7 @@ export default function AuthShell({ kicker, title, lede, accent = 'var(--riso-vi
 
           <div style={{ padding: '2rem 1.75rem 1.75rem' }}>
             <div style={{ marginBottom: '1.5rem' }}>
-              <span className="zine-kicker">{kicker}</span>
+              {kicker && <span className="zine-kicker">{kicker}</span>}
               <h1 className="zine-display misreg" data-text={title} style={{ fontSize: 'clamp(1.9rem, 6vw, 2.6rem)', margin: '0.5rem 0 0.4rem' }}>
                 {title}
               </h1>

@@ -42,7 +42,6 @@ export default function Signup() {
 
   return (
     <AuthShell
-      kicker="New Subscription"
       title="Join Us"
       lede="Claim your copy of the daily puzzle gauntlet. Free forever, no fine print."
       accent="var(--riso-coral)"
@@ -82,7 +81,7 @@ export default function Signup() {
               id="su-email"
               type="email"
               required
-              placeholder="solver@algoarena.ai"
+              placeholder="Enter your email"
               value={form.email}
               onChange={update('email')}
               className="zine-field"

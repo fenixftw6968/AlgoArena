@@ -1,9 +1,9 @@
-import { shuffleArray } from './shuffleQuestions.js';
+﻿import { shuffleArray } from './shuffleQuestions.js';
 import { balanceAndRandomizeQuestionOptions } from './optionRandomizer.js';
 import { getDailyQuestionSet, getDailyCountdown } from '../services/dailyQuestionService.js';
 import { selectQuestionsForGame } from '../services/questionHistoryService.js';
 
-const STORAGE_PREFIX = 'mindmaze_recent_questions_';
+const STORAGE_PREFIX = 'algoarena_recent_questions_';
 
 /**
  * Retrieves the list of recently played question IDs from localStorage.

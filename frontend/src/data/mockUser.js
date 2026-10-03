@@ -1,8 +1,8 @@
-// Mock user data for Phase 1 (pre-backend)
+﻿// Mock user data for Phase 1 (pre-backend)
 export const mockUser = {
   id: 1,
   username: "ShadowThinker",
-  email: "shadow@mindmaze.io",
+  email: "shadow@algoarena.io",
   xp: 720,
   level: 7,
   rank: "Detective",

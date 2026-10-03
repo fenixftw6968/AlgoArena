@@ -1,4 +1,4 @@
-import { shuffleArray } from '../utils/shuffleQuestions.js';
+﻿import { shuffleArray } from '../utils/shuffleQuestions.js';
 import { balanceAndRandomizeQuestionOptions } from '../utils/optionRandomizer.js';
 import {
   getISTDate,
@@ -7,7 +7,7 @@ import {
   getPastISTDates
 } from '../utils/timezoneUtils.js';
 
-const STORAGE_KEY_PREFIX = 'mindmaze-daily';
+const STORAGE_KEY_PREFIX = 'algoarena-daily';
 
 // In-memory fallback for environments where window.localStorage is unavailable (e.g. tests/SSR)
 let memoryStorage = {};
@@ -50,8 +50,8 @@ function writeStorage(key, value) {
 /**
  * Computes a standardized date-based daily key for a game, difficulty tier, and IST date.
  * 
- * Format: mindmaze-daily-<gameType>-<difficulty>-<YYYY-MM-DD>
- * Example: mindmaze-daily-number-detective-easy-2026-08-22
+ * Format: algoarena-daily-<gameType>-<difficulty>-<YYYY-MM-DD>
+ * Example: algoarena-daily-number-detective-easy-2026-08-22
  * 
  * @param {string} gameType 
  * @param {string} difficulty 

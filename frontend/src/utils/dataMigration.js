@@ -1,4 +1,4 @@
-/**
+﻿/**
  * AlgoArena Data Migration & Backward Compatibility Utility
  * 
  * Safely cleans obsolete cache and legacy storage keys from removed games
@@ -45,7 +45,7 @@ export function runDataMigration() {
       const key = localStorage.key(i);
       if (!key) continue;
 
-      const isObsoleteDaily = OBSOLETE_GAME_SLUGS.some(slug => key.startsWith(`mindmaze-daily-${slug}`) || key.startsWith(`mindforge-daily-${slug}`) || key.startsWith(`algoarena-daily-${slug}`));
+      const isObsoleteDaily = OBSOLETE_GAME_SLUGS.some(slug => key.startsWith(`algoarena-daily-${slug}`) || key.startsWith(`mindforge-daily-${slug}`) || key.startsWith(`algoarena-daily-${slug}`));
       const isObsoleteGameSpecific = OBSOLETE_GAME_SLUGS.some(slug => key.includes(slug));
 
       if (isObsoleteDaily || (isObsoleteGameSpecific && !key.startsWith('mm_user') && !key.startsWith('mm_token'))) {

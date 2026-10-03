@@ -1,10 +1,10 @@
-import { shuffleArray } from '../utils/shuffleQuestions.js';
+﻿import { shuffleArray } from '../utils/shuffleQuestions.js';
 import { balanceAndRandomizeQuestionOptions } from '../utils/optionRandomizer.js';
 import { selectQuestionsForGame, fetchUserQuestionHistory, recordUserQuestions, resetUserQuestionHistory } from './questionHistoryService.js';
 
 export { selectQuestionsForGame, fetchUserQuestionHistory, recordUserQuestions, resetUserQuestionHistory };
 
-const STORAGE_KEY_PREFIX = 'mindmaze-recent-played';
+const STORAGE_KEY_PREFIX = 'algoarena-recent-played';
 const RECENT_MEMORY_SIZE = 50; // Remember last 50 questions per game/difficulty
 
 function readStorage(key) {

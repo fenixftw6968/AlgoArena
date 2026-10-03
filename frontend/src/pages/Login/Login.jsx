@@ -25,7 +25,6 @@ export default function Login() {
 
   return (
     <AuthShell
-      kicker="Issue 01 &mdash; Return Reader"
       title="Log In"
       lede="Sign in to resume your run of the daily puzzle gauntlet."
       accent="var(--riso-violet)"
@@ -48,7 +47,7 @@ export default function Login() {
               id="login-email"
               type="email"
               required
-              placeholder="solver@algoarena.ai"
+              placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="zine-field"
@@ -101,7 +100,7 @@ export default function Login() {
         <span style={{ color: 'var(--ink-muted)', fontSize: '0.85rem' }}>
           No account yet?{' '}
           <Link to="/signup" style={{ color: 'var(--riso-coral)', fontWeight: 700, textDecoration: 'underline', textDecorationThickness: '2px' }}>
-            Get a copy
+            Register
           </Link>
         </span>
       </div>
