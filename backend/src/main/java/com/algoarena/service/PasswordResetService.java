@@ -84,7 +84,7 @@ public class PasswordResetService {
         String rawToken = request.getToken().trim();
         String tokenHash = hashToken(rawToken);
 
-        PasswordResetToken resetToken = resetTokenRepository.findByTokenHash(tokenHash)
+        PasswordResetToken resetToken = resetTokenRepository.findByTokenHashForUpdate(tokenHash)
                 .orElseThrow(() -> new BadRequestException("Invalid or expired password reset link."));
 
         if (resetToken.isUsed()) {

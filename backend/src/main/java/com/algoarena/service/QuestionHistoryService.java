@@ -1,5 +1,6 @@
 package com.algoarena.service;
 
+import com.algoarena.util.SupportedGames;
 import com.algoarena.dto.QuestionHistoryDto;
 import com.algoarena.entity.User;
 import com.algoarena.entity.UserQuestionHistory;
@@ -26,6 +27,7 @@ public class QuestionHistoryService {
 
     @Transactional
     public QuestionHistoryDto.SelectionResponse selectAndReserveQuestions(Long userId, QuestionHistoryDto.SelectionRequest request) {
+        SupportedGames.require(request.getGameSlug());
         if (request.getGameSlug() == null || request.getGameSlug().trim().isEmpty()) {
             throw new BadRequestException("gameSlug is required");
         }
@@ -113,6 +115,7 @@ public class QuestionHistoryService {
 
     @Transactional(readOnly = true)
     public QuestionHistoryDto.HistoryResponse getQuestionHistory(Long userId, String gameSlug, String difficulty) {
+        SupportedGames.require(gameSlug);
         if (gameSlug == null || gameSlug.trim().isEmpty()) {
             throw new BadRequestException("gameSlug is required");
         }
@@ -138,6 +141,7 @@ public class QuestionHistoryService {
 
     @Transactional
     public void recordUsedQuestions(Long userId, QuestionHistoryDto.RecordRequest request) {
+        SupportedGames.require(request.getGameSlug());
         if (request.getGameSlug() == null || request.getGameSlug().trim().isEmpty()) {
             throw new BadRequestException("gameSlug is required");
         }
@@ -173,6 +177,7 @@ public class QuestionHistoryService {
 
     @Transactional
     public void resetHistory(Long userId, String gameSlug, String difficulty) {
+        SupportedGames.require(gameSlug);
         if (gameSlug == null || gameSlug.trim().isEmpty()) {
             throw new BadRequestException("gameSlug is required");
         }

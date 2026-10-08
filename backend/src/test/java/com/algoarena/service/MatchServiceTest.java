@@ -5,6 +5,7 @@ import com.algoarena.dto.MatchDto;
 import com.algoarena.dto.MatchSubmitRequest;
 import com.algoarena.entity.Match;
 import com.algoarena.entity.User;
+import com.algoarena.repository.FriendshipRepository;
 import com.algoarena.repository.MatchRepository;
 import com.algoarena.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,6 +35,9 @@ public class MatchServiceTest {
 
     @Mock
     private UserRepository userRepository;
+
+    @Mock
+    private FriendshipRepository friendshipRepository;
 
     @Spy
     private EloRatingService eloRatingService = new EloRatingService();

@@ -32,13 +32,4 @@ public class DailyChallengeController {
         }
         return ResponseEntity.ok(dailyChallengeService.submitAnswer(user.getId(), request.getUserAnswer()));
     }
-
-    @PostMapping("/reset")
-    public ResponseEntity<java.util.Map<String, Object>> resetDailyChallenge(@AuthenticationPrincipal User user) {
-        if (user == null) {
-            return ResponseEntity.status(401).build();
-        }
-        dailyChallengeService.resetTodayAttempt(user.getId());
-        return ResponseEntity.ok(dailyChallengeService.getTodayChallenge(user.getId()));
-    }
 }

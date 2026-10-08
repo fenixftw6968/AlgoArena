@@ -27,6 +27,18 @@ public class UserService {
     private final JwtUtil jwtUtil;
     private final AchievementService achievementService;
 
+    private volatile String dummyPasswordHash;
+
+    /** A valid BCrypt hash of a random value, used to equalise login timing for unknown accounts. */
+    private String dummyPasswordHash() {
+        String hash = dummyPasswordHash;
+        if (hash == null) {
+            hash = passwordEncoder.encode(java.util.UUID.randomUUID().toString());
+            dummyPasswordHash = hash;
+        }
+        return hash;
+    }
+
     private static final int[] XP_PER_LEVEL = {
         0, 100, 250, 450, 700, 1000, 1350, 1750, 2200, 2700,
         3250, 3850, 4500, 5200, 5950, 6750, 7600, 8500, 9450, 10450,
@@ -35,11 +47,14 @@ public class UserService {
 
     @Transactional
     public AuthResponse register(SignupRequest request) {
-        if (userRepository.existsByEmail(request.getEmail())) {
-            throw new BadRequestException("Email is already registered");
-        }
+        // Usernames are public (leaderboard), so a specific message is fine. The e-mail check uses a
+        // generic message that does not confirm that an address is registered.
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new BadRequestException("Username is already taken");
+        }
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new BadRequestException("We could not create an account with these details. "
+                    + "If you already have an account, please log in or reset your password.");
         }
 
         User user = User.builder()
@@ -53,7 +68,6 @@ public class UserService {
                 .currentStreak(0)
                 .longestStreak(0)
                 .gamesCompleted(0)
-                .mysteriesSolved(0)
                 .role("ROLE_USER")
                 .build();
 
@@ -65,10 +79,12 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public AuthResponse login(LoginRequest request) {
-        User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new BadRequestException("Invalid email or password"));
-
-        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+        User user = userRepository.findByEmail(request.getEmail()).orElse(null);
+        // Always run one BCrypt verification, even for unknown e-mails, so response time does not reveal
+        // whether an account exists. Both failures produce the identical message.
+        boolean passwordOk = passwordEncoder.matches(request.getPassword(),
+                user != null ? user.getPassword() : dummyPasswordHash());
+        if (user == null || !passwordOk) {
             throw new BadRequestException("Invalid email or password");
         }
 
@@ -84,7 +100,7 @@ public class UserService {
     }
 
     @Transactional
-    public void updateProgression(User user, int xpGained, int coinsGained, boolean isMystery, boolean isChallenge) {
+    public void updateProgression(User user, int xpGained, int coinsGained) {
         user.setXp(user.getXp() + xpGained);
         user.setCoins(user.getCoins() + coinsGained);
 
@@ -99,9 +115,6 @@ public class UserService {
         // Update Streak
         updateStreak(user);
 
-        if (isMystery) {
-            user.setMysteriesSolved(user.getMysteriesSolved() + 1);
-        }
         user.setGamesCompleted(user.getGamesCompleted() + 1);
 
         User saved = userRepository.save(user);
@@ -187,7 +200,6 @@ public class UserService {
                 .currentStreak(user.getCurrentStreak())
                 .longestStreak(user.getLongestStreak())
                 .gamesCompleted(user.getGamesCompleted())
-                .mysteriesSolved(user.getMysteriesSolved())
                 .competitiveRating(rating)
                 .competitiveRank(compRank)
                 .matchesPlayed(user.getMatchesPlayed() != null ? user.getMatchesPlayed() : 0)

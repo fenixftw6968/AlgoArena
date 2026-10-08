@@ -179,21 +179,6 @@ export function balanceAndRandomizeQuestionOptions(questions, randomFnOrSeed = M
         cloned.options = generateQuestionOptions(correct, incorrect, targetPos % q.options.length, rng);
       }
 
-      // 4. Nested sub-questions (e.g. Memory Challenge `questions: [{ id, question, choices, answer }]`)
-      if (Array.isArray(q.questions) && q.questions.length > 0) {
-        cloned.questions = q.questions.map(sq => {
-          if (Array.isArray(sq.choices) && sq.choices.length > 0) {
-            const sqCorrect = sq.answer || sq.correctAnswer || cloned.correctAnswer;
-            const sqIncorrect = sq.choices.filter(c => String(c).trim().toLowerCase() !== String(sqCorrect).trim().toLowerCase());
-            return {
-              ...sq,
-              choices: generateQuestionOptions(sqCorrect, sqIncorrect, targetPos % sq.choices.length, rng)
-            };
-          }
-          return sq;
-        });
-      }
-
       balancedQuestionsByIndex[item.originalIndex] = cloned;
     });
   }

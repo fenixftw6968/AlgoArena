@@ -20,6 +20,10 @@ public class BrevoEmailService implements EmailService {
     @Value("${brevo.api-key:}")
     private String brevoApiKey;
 
+    /** Local development only. The reset link contains the reset token, so it must never reach shared logs. */
+    @Value("${app.dev-log-reset-links:false}")
+    private boolean devLogResetLinks;
+
     @Value("${brevo.sender.email:no-reply@algoarena.com}")
     private String senderEmail;
 
@@ -32,10 +36,19 @@ public class BrevoEmailService implements EmailService {
         this.restTemplate = new RestTemplate();
     }
 
+    /**
+     * Runs asynchronously so the request time of /forgot-password does not depend on whether an e-mail
+     * was actually sent (which would reveal whether the account exists).
+     */
+    @org.springframework.scheduling.annotation.Async
     @Override
     public void sendPasswordResetEmail(String recipientEmail, String recipientName, String resetUrl) {
         if (brevoApiKey == null || brevoApiKey.isBlank()) {
-            log.warn("[BrevoEmailService] BREVO_API_KEY is not configured. Reset link for {}: {}", recipientEmail, resetUrl);
+            if (devLogResetLinks) {
+                log.warn("[BrevoEmailService] DEV MODE - BREVO_API_KEY not configured. Reset link for {}: {}", recipientEmail, resetUrl);
+            } else {
+                log.warn("[BrevoEmailService] BREVO_API_KEY is not configured; password reset email was NOT sent.");
+            }
             return;
         }
 

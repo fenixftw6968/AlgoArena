@@ -1,13 +1,11 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Lock, ChevronRight, Hash, Eye, KeyRound, Code2, Puzzle, Sparkles, HelpCircle } from 'lucide-react';
+import { Lock, ChevronRight, Hash, KeyRound, Code2, Puzzle, HelpCircle } from 'lucide-react';
 
 const CATEGORY_TAGS = {
   'Programming / DSA': 'PROGRAMMING',
   'Reasoning': 'REASONING',
-  'Brain Training': 'BRAIN TRAINING',
   'Logic': 'LOGIC',
-  'Memory': 'MEMORY',
 };
 
 const DIFFICULTY_INKS = {
@@ -19,9 +17,7 @@ const DIFFICULTY_INKS = {
 const SLUG_ICONS = {
   'dsa-master-quiz': Code2,
   'logic-puzzle': Puzzle,
-  'brain-teaser-battle': Sparkles,
   'number-detective': Hash,
-  'memory-challenge': Eye,
   'code-breaker': KeyRound,
 };
 

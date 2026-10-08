@@ -933,29 +933,6 @@ body {
 .zine-tile.selected { background: var(--riso-violet); color: #fffdf6; box-shadow: var(--shadow-sm); }
 .zine-tile:disabled { cursor: default; }
 
-/* Memory scene tile (Memory Challenge reveal grid) */
-.zine-scene-cell {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.55rem;
-  padding: 1.25rem 0.75rem;
-  background: var(--paper-card);
-  border: 2px solid var(--ink);
-  border-radius: 0;
-  box-shadow: var(--shadow-xs);
-  text-align: center;
-}
-.zine-scene-cell__emoji { font-size: 2.4rem; line-height: 1; }
-.zine-scene-cell__label {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 700;
-  line-height: 1.3;
-  color: var(--ink);
-}
-
 /* Clue strip (Code Breaker mastermind rows) */
 .zine-clue {
   display: flex;

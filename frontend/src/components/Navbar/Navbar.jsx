@@ -1,4 +1,5 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { COMPETITION_ENABLED } from '../../utils/competitionConfig';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Brain, Flame, Coins, LogOut, ChevronDown, Users, User } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
@@ -104,6 +105,7 @@ export default function Navbar() {
     { to: '/dashboard',       label: 'Dashboard' },
     { to: '/games',           label: 'Arena' },
     { to: '/daily-challenge', label: 'Challenges' },
+    ...(COMPETITION_ENABLED ? [{ to: '/competitions', label: 'Showdown' }] : []),
     { to: '/leaderboard',     label: 'Progress' },
     { to: '/profile',         label: 'Profile' },
   ];

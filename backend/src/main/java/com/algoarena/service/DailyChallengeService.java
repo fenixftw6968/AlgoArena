@@ -2,6 +2,7 @@ package com.algoarena.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.algoarena.entity.DailyChallenge;
 import com.algoarena.entity.User;
@@ -16,8 +17,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +37,9 @@ public class DailyChallengeService {
     private final ObjectMapper objectMapper;
 
     private static final ZoneId IST_ZONE = ZoneId.of("Asia/Kolkata");
+
+    /** Puzzle fields that must never reach a client before the attempt is graded. */
+    private static final List<String> HIDDEN_PUZZLE_FIELDS = List.of("answer", "correctAnswer", "explanation", "solution");
 
     @Data
     @Builder
@@ -133,11 +135,6 @@ public class DailyChallengeService {
         }
     }
 
-    @EventListener(ApplicationReadyEvent.class)
-    public void onApplicationReady() {
-        resetAllAttemptsForToday();
-    }
-
     /**
      * Determines today's canonical challenge based on Asia/Kolkata date.
      * Always selects a deterministic DSA Master Quiz question.
@@ -208,10 +205,12 @@ public class DailyChallengeService {
         Boolean isCorrect = null;
         Integer xpEarned = null;
         Integer coinsEarned = null;
+        boolean attempted = false;
 
         if (userId != null) {
             Optional<UserDailyChallenge> attempt = userDailyChallengeRepository.findByUserIdAndDailyChallengeId(userId, challenge.getId());
             if (attempt.isPresent()) {
+                attempted = true;
                 if (Boolean.TRUE.equals(attempt.get().getIsCorrect())) {
                     completed = true;
                     isCorrect = true;
@@ -233,12 +232,18 @@ public class DailyChallengeService {
         response.put("difficulty", challenge.getDifficulty());
         response.put("xpReward", challenge.getXpReward());
         response.put("coinReward", challenge.getCoinReward());
-        response.put("puzzle", challenge.getPuzzle());
+        response.put("puzzle", sanitizePuzzleForClient(challenge.getPuzzle()));
+        response.put("attempted", attempted);
         response.put("completed", completed);
         response.put("completedToday", completed);
         response.put("isCorrect", isCorrect);
         response.put("xpEarned", xpEarned);
         response.put("coinsEarned", coinsEarned);
+        if (attempted) {
+            // Graded already, so the answer and explanation may now be shown.
+            response.put("correctAnswer", extractReveal(challenge, "correctAnswer", "answer"));
+            response.put("explanation", extractReveal(challenge, "explanation", null));
+        }
         response.put("expiresAt", today.plusDays(1).atStartOfDay(IST_ZONE).toInstant().toString());
 
         return response;
@@ -249,11 +254,15 @@ public class DailyChallengeService {
         LocalDate today = LocalDate.now(IST_ZONE);
         DailyChallenge challenge = ensureChallengeForDate(today);
 
-        User user = userRepository.findById(userId)
+        // Row lock on the user serialises concurrent submissions from the same account, so the
+        // "already attempted?" check below cannot race with a parallel request.
+        User user = userRepository.findByIdForUpdate(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         Optional<UserDailyChallenge> existingAttempt = userDailyChallengeRepository.findByUserIdAndDailyChallengeId(userId, challenge.getId());
-        boolean wasAlreadySolved = existingAttempt.isPresent() && Boolean.TRUE.equals(existingAttempt.get().getIsCorrect());
+        if (existingAttempt.isPresent()) {
+            return buildAlreadyAttemptedResult(challenge, existingAttempt.get(), user);
+        }
 
         boolean isCorrect = false;
         String explanation = "Review the problem details.";
@@ -331,27 +340,25 @@ public class DailyChallengeService {
         if (isCorrect) {
             xpAwarded = challenge.getXpReward();
             coinsAwarded = challenge.getCoinReward();
-            if (!wasAlreadySolved) {
-                userService.updateProgression(user, xpAwarded, coinsAwarded, true, true);
-            }
+            userService.updateProgression(user, xpAwarded, coinsAwarded);
         } else {
             user.setLastPlayedDate(today);
             userRepository.save(user);
         }
 
-        UserDailyChallenge userDaily = existingAttempt.orElseGet(() -> UserDailyChallenge.builder()
+        // One graded attempt per user per day: this row locks the challenge for the rest of the day.
+        userDailyChallengeRepository.save(UserDailyChallenge.builder()
                 .user(user)
                 .dailyChallenge(challenge)
+                .isCorrect(isCorrect)
+                .xpEarned(xpAwarded)
+                .coinsEarned(coinsAwarded)
                 .build());
-
-        userDaily.setIsCorrect(isCorrect);
-        userDaily.setXpEarned(xpAwarded);
-        userDaily.setCoinsEarned(coinsAwarded);
-        userDailyChallengeRepository.save(userDaily);
 
         Map<String, Object> result = new HashMap<>();
         result.put("isCorrect", isCorrect);
         result.put("correct", isCorrect);
+        result.put("alreadyAttempted", false);
         result.put("correctAnswer", correctAnswer);
         result.put("explanation", explanation);
         result.put("xpEarned", xpAwarded);
@@ -361,27 +368,49 @@ public class DailyChallengeService {
         return result;
     }
 
-    @Transactional
-    public void resetTodayAttempt(Long userId) {
-        LocalDate today = LocalDate.now(IST_ZONE);
-        DailyChallenge challenge = ensureChallengeForDate(today);
-        if (userId != null) {
-            userDailyChallengeRepository.deleteByUserIdAndDailyChallengeId(userId, challenge.getId());
-            log.info("Reset daily challenge attempt for user {} on date {}", userId, today);
-        }
+    /**
+     * Result for a repeat submission: no grading, no rewards, no state change.
+     * The answer and explanation may be revealed because the attempt has already been graded.
+     */
+    private Map<String, Object> buildAlreadyAttemptedResult(DailyChallenge challenge, UserDailyChallenge attempt, User user) {
+        boolean correct = Boolean.TRUE.equals(attempt.getIsCorrect());
+        Map<String, Object> result = new HashMap<>();
+        result.put("isCorrect", correct);
+        result.put("correct", correct);
+        result.put("alreadyAttempted", true);
+        result.put("correctAnswer", extractReveal(challenge, "correctAnswer", "answer"));
+        result.put("explanation", extractReveal(challenge, "explanation", null));
+        result.put("xpEarned", attempt.getXpEarned());
+        result.put("coinsEarned", attempt.getCoinsEarned());
+        result.put("user", userService.convertToDto(user));
+        return result;
     }
 
-    @Transactional
-    public void resetAllAttemptsForToday() {
+    private String extractReveal(DailyChallenge challenge, String primaryKey, String fallbackKey) {
         try {
-            LocalDate today = LocalDate.now(IST_ZONE);
-            Optional<DailyChallenge> dc = dailyChallengeRepository.findByChallengeDate(today);
-            dc.ifPresent(challenge -> {
-                userDailyChallengeRepository.deleteByDailyChallengeId(challenge.getId());
-                log.info("Cleared user attempts for today's challenge id={}", challenge.getId());
-            });
+            JsonNode root = objectMapper.readTree(challenge.getPuzzle());
+            if (root.hasNonNull(primaryKey)) return root.get(primaryKey).asText().trim();
+            if (fallbackKey != null && root.hasNonNull(fallbackKey)) return root.get(fallbackKey).asText().trim();
         } catch (Exception e) {
-            log.warn("Could not reset today attempts: {}", e.getMessage());
+            log.error("Failed to read puzzle json for daily challenge {}", challenge.getId(), e);
         }
+        return "";
+    }
+
+    /**
+     * Returns the puzzle JSON that is safe to send before the attempt is graded:
+     * answer-bearing fields are removed. Fails closed (empty object) if the JSON cannot be parsed.
+     */
+    String sanitizePuzzleForClient(String puzzleJson) {
+        try {
+            JsonNode node = objectMapper.readTree(puzzleJson);
+            if (node instanceof ObjectNode obj) {
+                obj.remove(HIDDEN_PUZZLE_FIELDS);
+                return objectMapper.writeValueAsString(obj);
+            }
+        } catch (Exception e) {
+            log.error("Failed to sanitize daily challenge puzzle json", e);
+        }
+        return "{}";
     }
 }

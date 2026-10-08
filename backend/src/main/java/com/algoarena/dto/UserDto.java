@@ -20,7 +20,6 @@ public class UserDto {
     private Integer currentStreak;
     private Integer longestStreak;
     private Integer gamesCompleted;
-    private Integer mysteriesSolved;
     private Integer competitiveRating;
     private String competitiveRank;
     private Integer matchesPlayed;

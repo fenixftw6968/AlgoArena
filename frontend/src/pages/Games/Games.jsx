@@ -5,7 +5,7 @@ import GameCard from '../../components/GameCard/GameCard';
 import { getAllGamesList } from '../../data/gameRegistry';
 import api from '../../utils/api';
 
-const CATEGORIES = ['All', 'Programming / DSA', 'Reasoning', 'Brain Training'];
+const CATEGORIES = ['All', 'Programming / DSA', 'Reasoning'];
 const DIFFICULTIES = ['All', 'EASY', 'MEDIUM', 'HARD'];
 
 export default function Games() {

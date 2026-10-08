@@ -39,7 +39,7 @@ public class Match {
     private String id;
 
     @Column(nullable = false, length = 50)
-    private String gameSlug; // e.g. "number-detective", "memory-challenge"
+    private String gameSlug; // one of SupportedGames.SLUGS, e.g. "number-detective"
 
     @Column(length = 20)
     private String difficulty; // e.g. "EASY", "MEDIUM", "HARD"

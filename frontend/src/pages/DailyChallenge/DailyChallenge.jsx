@@ -34,17 +34,15 @@ export default function DailyChallenge() {
       setLoading(true);
       const res = await api.get('/api/games/daily');
       setChallenge(res.data);
-      if (res.data.completedToday) {
+      if (res.data.attempted) {
+        // One graded attempt per day: the server only sends the answer/explanation once graded.
         setSubmitted(true);
-        let expl = "";
-        try {
-          expl = JSON.parse(res.data.puzzle).explanation;
-        } catch (e) {}
         setResult({
-          correct: res.data.isCorrect,
+          correct: res.data.isCorrect === true,
           xpEarned: res.data.xpEarned || 0,
           coinEarned: res.data.coinsEarned || 0,
-          explanation: expl
+          explanation: res.data.explanation || "",
+          correctAnswer: res.data.correctAnswer || ""
         });
       } else {
         setSubmitted(false);
@@ -59,20 +57,6 @@ export default function DailyChallenge() {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleResetAttempt = async () => {
-    try {
-      await api.post('/api/games/daily/reset');
-    } catch (e) {
-      console.warn("Could not reset attempt on server:", e);
-    }
-    setSubmitted(false);
-    setResult(null);
-    setAnswer('');
-    setShowHint(false);
-    setHintUsed(false);
-    isSubmittingRef.current = false;
   };
 
   useEffect(() => {
@@ -108,23 +92,20 @@ export default function DailyChallenge() {
         hintUsed: hintUsed
       });
 
-      let parsedPuzzle = {};
-      try {
-        parsedPuzzle = typeof challenge?.puzzle === 'string' ? JSON.parse(challenge.puzzle) : (challenge?.puzzle || {});
-      } catch (err) {}
-
       const isCorrect = res.data.isCorrect !== undefined ? res.data.isCorrect : (res.data.correct !== undefined ? res.data.correct : false);
-      const xpEarned = isCorrect ? (hintUsed ? Math.floor(challenge.xpReward / 2) : (res.data.xpEarned || challenge.xpReward)) : 0;
-      const coinEarned = isCorrect ? (res.data.coinsEarned || challenge.coinReward) : 0;
+      // Rewards are decided by the server only; a repeat submission earns nothing new.
+      const xpEarned = res.data.alreadyAttempted ? 0 : (res.data.xpEarned || 0);
+      const coinEarned = res.data.alreadyAttempted ? 0 : (res.data.coinsEarned || 0);
 
       setResult({
         correct: isCorrect,
         xpEarned,
         coinEarned,
-        explanation: res.data.explanation || parsedPuzzle.explanation || ""
+        explanation: res.data.explanation || "",
+        correctAnswer: res.data.correctAnswer || ""
       });
 
-      if (isCorrect) {
+      if (isCorrect && !res.data.alreadyAttempted) {
         showXPPopup(xpEarned, 'Daily Mission Complete!');
       }
 
@@ -367,15 +348,18 @@ export default function DailyChallenge() {
                 </div>
               )}
 
+              {!result?.correct && result?.correctAnswer && (
+                <div className="zine-panel" style={{ textAlign: 'left', padding: '1.15rem', marginBottom: '1.25rem' }}>
+                  <div className="zine-kicker" style={{ marginBottom: '0.4rem' }}>Correct Answer</div>
+                  <div style={{ fontSize: '0.9rem', color: 'var(--ink)', lineHeight: 1.6 }}>{result.correctAnswer}</div>
+                </div>
+              )}
+
+              <div className="font-mono" style={{ fontSize: '0.8rem', marginBottom: '0.75rem', opacity: 0.8 }}>
+                One attempt per day. Next challenge in {timeLeft}.
+              </div>
+
               <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.75rem', flexWrap: 'wrap' }}>
-                <button
-                  type="button"
-                  onClick={handleResetAttempt}
-                  className="zine-btn zine-btn--yellow"
-                  style={{ flex: 1, minWidth: '160px' }}
-                >
-                  {result?.correct ? 'SOLVE AGAIN ↺' : 'TRY ANOTHER OPTION ↺'}
-                </button>
                 <button
                   onClick={() => navigate('/dashboard')}
                   className="zine-btn zine-btn--violet"

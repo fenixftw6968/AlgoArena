@@ -16,19 +16,17 @@ import Games from './pages/Games/Games';
 import Profile from './pages/Profile/Profile';
 import Leaderboard from './pages/Leaderboard/Leaderboard';
 import DailyChallenge from './pages/DailyChallenge/DailyChallenge';
+import CompetitionHome from './pages/Competition/CompetitionHome';
+import CompetitionRoom from './pages/Competition/CompetitionRoom';
+import { COMPETITION_ENABLED } from './utils/competitionConfig';
 
 // Game pages
 import DsaMasterQuiz from './pages/Games/DsaMasterQuiz';
 import LogicPuzzle from './pages/Games/LogicPuzzle';
-import BrainTeaserBattle from './pages/Games/BrainTeaserBattle';
 import NumberDetective from './pages/Games/NumberDetective';
-import MemoryChallenge from './pages/Games/MemoryChallenge';
 import CodeBreaker from './pages/Games/CodeBreaker';
 
-import { runDataMigration } from './utils/dataMigration';
 
-// Run backward compatibility migration
-runDataMigration();
 
 export default function App() {
   return (
@@ -51,12 +49,18 @@ export default function App() {
             <Route path="/leaderboard"     element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
             <Route path="/daily-challenge" element={<ProtectedRoute><DailyChallenge /></ProtectedRoute>} />
 
+            {/* DSA competition (opt-in via VITE_COMPETITION_ENABLED) */}
+            {COMPETITION_ENABLED && (
+              <>
+                <Route path="/competitions"     element={<ProtectedRoute><CompetitionHome /></ProtectedRoute>} />
+                <Route path="/competitions/:id" element={<ProtectedRoute><CompetitionRoom /></ProtectedRoute>} />
+              </>
+            )}
+
             {/* Game routes */}
             <Route path="/games/dsa-master-quiz"    element={<ProtectedRoute><DsaMasterQuiz /></ProtectedRoute>} />
             <Route path="/games/logic-puzzle"       element={<ProtectedRoute><LogicPuzzle /></ProtectedRoute>} />
-            <Route path="/games/brain-teaser-battle" element={<ProtectedRoute><BrainTeaserBattle /></ProtectedRoute>} />
             <Route path="/games/number-detective"   element={<ProtectedRoute><NumberDetective /></ProtectedRoute>} />
-            <Route path="/games/memory-challenge"   element={<ProtectedRoute><MemoryChallenge /></ProtectedRoute>} />
             <Route path="/games/code-breaker"       element={<ProtectedRoute><CodeBreaker /></ProtectedRoute>} />
 
             {/* Fallback */}

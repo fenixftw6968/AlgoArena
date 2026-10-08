@@ -48,4 +48,13 @@ public class MatchDto {
 
     private Long startedAtMillis;
     private Long serverTimeMillis;
+
+    /** Number of questions in this match's challenge (the questions themselves carry no answers). */
+    private Integer totalQuestions;
+    /**
+     * Progress of the requesting user only (null in broadcasts and for non-participants):
+     * lets a reconnecting client resume at the right question using server truth.
+     */
+    private Integer viewerAnsweredCount;
+    private Integer viewerCorrectCount;
 }

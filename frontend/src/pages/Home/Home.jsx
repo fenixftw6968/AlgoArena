@@ -34,19 +34,17 @@ const INKS = ['var(--riso-violet)', 'var(--riso-coral)', 'var(--riso-teal)', 'va
 const DISCIPLINES = [
   { glyph: '01', icon: '🧠', title: 'DSA & Algorithms',  desc: 'Master data structures, algorithm complexities, graph traversals, and code output analysis.', difficulty: 5 },
   { glyph: '02', icon: '🧩', title: 'Logical Reasoning', desc: 'Solve multi-step deduction grids, syllogisms, analogies, and boolean condition puzzles.', difficulty: 4 },
-  { glyph: '03', icon: '⚡', title: 'Brain Teaser Battle', desc: 'Challenge lateral thinking with mental math, tricky riddles, and rapid algorithmic traps.', difficulty: 4 },
-  { glyph: '04', icon: '🔢', title: 'Number Detective',    desc: 'Crack patterns in non-linear mathematical formulas, Fibonacci variants, and exponential matrices.', difficulty: 3 },
-  { glyph: '05', icon: '👁️', title: 'Memory Challenge',    desc: 'Sharpen short-term visual recall, spatial orientation, and complex pattern matching under time.', difficulty: 2 },
-  { glyph: '06', icon: '🔐', title: 'Code Breaker',        desc: 'Deduce secret combinations through systematic elimination, positional logic, and entropy clues.', difficulty: 4 },
+  { glyph: '03', icon: '🔢', title: 'Number Detective',    desc: 'Crack patterns in non-linear mathematical formulas, Fibonacci variants, and exponential matrices.', difficulty: 3 },
+  { glyph: '04', icon: '🔐', title: 'Code Breaker',        desc: 'Deduce secret combinations through systematic elimination, positional logic, and entropy clues.', difficulty: 4 },
 ];
 
 const KEY_FEATURES = [
   { mark: <StarburstMark />, tag: 'Ultra Responsive', title: 'Sub-Second Grading',   desc: 'Instant code and logic validation with millisecond precision, powered by reactive client-server architecture.', ink: 'var(--riso-violet)' },
-  { mark: <LayersMark />,    tag: 'Skill Tiers',      title: 'Adaptive Progression', desc: 'Six calibrated discipline arenas that test logic, time complexity, and recall against your tier.', ink: 'var(--riso-coral)' },
+  { mark: <LayersMark />,    tag: 'Skill Tiers',      title: 'Adaptive Progression', desc: 'Four calibrated game arenas that test algorithms, logic, number patterns, and deduction against your tier.', ink: 'var(--riso-coral)' },
   { mark: <CubeMark />,      tag: 'Competitive',       title: 'Real-Time 1v1 Elo',    desc: 'Live head-to-head battles with automated matchmaking, bot fallbacks, and Elo rating updates.', ink: 'var(--riso-teal)' },
 ];
 
-const TICKER = ['DAILY MIDNIGHT RESET', 'SIX COGNITIVE ARENAS', 'LIVE ELO MATCHMAKING', 'INSTANT GRADING', 'DAILY STREAKS', 'GLOBAL LEADERBOARD'];
+const TICKER = ['DAILY MIDNIGHT RESET', 'FOUR GAME ARENAS', 'LIVE ELO MATCHMAKING', 'INSTANT GRADING', 'DAILY STREAKS', 'GLOBAL LEADERBOARD'];
 
 export default function Home() {
   return (
@@ -133,7 +131,7 @@ export default function Home() {
             {[
               { icon: <Swords size={18} />, title: 'Live 1v1 Duels',      desc: 'Battle friends or matchmaking opponents in synchronized cognitive sprints.', ink: 'var(--riso-coral)' },
               { icon: <Trophy size={18} />, title: 'Competitive Elo',     desc: 'Climb from Novice to Master tier with a mathematically balanced rating system.', ink: 'var(--riso-violet)' },
-              { icon: <Brain size={18} />,  title: '6 Cognitive Suites',  desc: 'Algorithms, logic puzzles, number theory, memory recall, and code ciphers.', ink: 'var(--riso-teal)' },
+              { icon: <Brain size={18} />,  title: '4 Game Arenas',       desc: 'Algorithms, logic puzzles, number patterns, and code ciphers.', ink: 'var(--riso-teal)' },
             ].map((s, i, arr) => (
               <div
                 key={s.title}

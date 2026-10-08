@@ -21,6 +21,7 @@ import { numberDetectiveQuestions } from '../../data/numberDetectiveQuestions';
 import { balanceAndRandomizeQuestionOptions, createSeededRandom } from '../../utils/optionRandomizer';
 import { shuffleArray } from '../../utils/shuffleQuestions';
 import api from '../../utils/api';
+import { submitMatchAnswer, describeAnswerError } from '../../services/matchAnswerService';
 import { useMatchSocket } from '../../hooks/useMatchSocket';
 
 const TIMER_SECONDS = { EASY: 120, MEDIUM: 90, HARD: 60 };
@@ -63,6 +64,9 @@ export default function NumberDetective() {
   const mistakesRef = useRef(0);
   const durationRef = useRef(0);
   const isSubmittingRef = useRef(false);
+  const [serverFeedback, setServerFeedback] = useState(null); // server grading of the current question (match mode)
+  const [gradingError, setGradingError] = useState('');
+  const pendingAnswerRef = useRef(null);
 
   const clearMatchStorage = useCallback((matchId) => {
     localStorage.removeItem('activeMatchId_number-detective');
@@ -148,6 +152,17 @@ export default function NumberDetective() {
                 setMistakes(parseInt(savedMistakes, 10));
                 mistakesRef.current = parseInt(savedMistakes, 10);
               }
+
+              // Server truth wins over local storage: resume exactly where the server recorded the player.
+              if (Number.isInteger(match.viewerAnsweredCount)) {
+                const answeredOnServer = match.viewerAnsweredCount;
+                const correctOnServer = match.viewerCorrectCount || 0;
+                setIndex(answeredOnServer);
+                setScore(correctOnServer);
+                scoreRef.current = correctOnServer;
+                setMistakes(answeredOnServer - correctOnServer);
+                mistakesRef.current = answeredOnServer - correctOnServer;
+              }
             }
           }
         } else {
@@ -167,11 +182,17 @@ export default function NumberDetective() {
     isSubmittingRef.current = true;
     setResult('wrong');
     setShowResult(true);
+    if (currentMatch && currentMatch.id) {
+      // A timeout is recorded on the server as a wrong answer, in order.
+      pendingAnswerRef.current = submitMatchAnswer(currentMatch.id, index, null)
+        .then((fb) => setServerFeedback(fb))
+        .catch(() => {});
+    }
     setMistakes(m => {
       mistakesRef.current = m + 1;
       return m + 1;
     });
-  }, [showResult, result]);
+  }, [showResult, result, currentMatch, index]);
 
   const { timeLeft, formatted: formattedTime, urgency, reset, start, pause } = useTimer(
     TIMER_SECONDS[difficulty] || 90,
@@ -307,8 +328,24 @@ export default function NumberDetective() {
 
     pause();
 
-    const expectedAnswer = String(puzzle.answer !== undefined ? puzzle.answer : (puzzle.correctAnswer !== undefined ? puzzle.correctAnswer : '')).trim().toLowerCase();
-    const isCorrect = answer.trim().toLowerCase() === expectedAnswer;
+    let isCorrect = false;
+    if (currentMatch && currentMatch.id) {
+      // Match mode: the SERVER grades the answer (the client never holds the right answer).
+      try {
+        const feedback = await submitMatchAnswer(currentMatch.id, index, answer.trim());
+        setServerFeedback(feedback);
+        setGradingError('');
+        isCorrect = feedback.correct === true;
+      } catch (e) {
+        setGradingError(describeAnswerError(e));
+        isSubmittingRef.current = false;
+        start();
+        return;
+      }
+    } else {
+      const expectedAnswer = String(puzzle.answer !== undefined ? puzzle.answer : (puzzle.correctAnswer !== undefined ? puzzle.correctAnswer : '')).trim().toLowerCase();
+      isCorrect = answer.trim().toLowerCase() === expectedAnswer;
+    }
 
     setResult(isCorrect ? 'correct' : 'wrong');
     setShowResult(true);
@@ -349,10 +386,15 @@ export default function NumberDetective() {
         return m + (!isCorrect ? 1 : 0);
       });
     }
-  }, [puzzle, answer, hintUsed, result, difficulty, playMode, showXPPopup, pause]);
+  }, [puzzle, answer, hintUsed, result, difficulty, playMode, showXPPopup, pause, start, currentMatch, index]);
 
   const handleNext = async () => {
     isSubmittingRef.current = false;
+    if (pendingAnswerRef.current) {
+      try { await pendingAnswerRef.current; } finally { pendingAnswerRef.current = null; }
+    }
+    setServerFeedback(null);
+    setGradingError('');
     setAnswer('');
     setHintUsed(false);
     setResult(null);
@@ -710,18 +752,18 @@ export default function NumberDetective() {
                   <div className="font-mono" style={{ fontWeight: 800, fontSize: '0.9rem', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
                     {result === 'correct'
                       ? 'CORRECT NUMBER FOUND'
-                      : `INCORRECT — EXPECTED: ${puzzle.correctAnswer || puzzle.answer}`}
+                      : `INCORRECT — EXPECTED: ${serverFeedback?.correctAnswer ?? (puzzle.correctAnswer || puzzle.answer)}`}
                   </div>
                 </div>
 
                 {/* Explanation */}
-                {puzzle.explanation && (
+                {(serverFeedback?.explanation ?? puzzle.explanation) && (
                   <div style={{ padding: '1.15rem', background: 'var(--paper-sunk)', border: '2px dashed var(--ink-faint)', marginBottom: '1.5rem' }}>
                     <p className="font-mono" style={{ fontSize: '0.66rem', fontWeight: 800, color: 'var(--riso-violet)', marginBottom: '0.45rem', letterSpacing: '0.16em', textTransform: 'uppercase' }}>
                       SEQUENCE RULE
                     </p>
                     <p style={{ fontSize: '0.875rem', color: 'var(--ink-soft)', lineHeight: 1.6, fontWeight: 400, margin: 0 }}>
-                      {puzzle.explanation}
+                      {serverFeedback?.explanation ?? puzzle.explanation}
                     </p>
                   </div>
                 )}
@@ -748,6 +790,11 @@ export default function NumberDetective() {
           </div>
         )}
       </div>
+      {gradingError && (
+        <div role="alert" style={{ position: 'fixed', bottom: '1rem', left: '50%', transform: 'translateX(-50%)', zIndex: 1000, background: 'var(--riso-coral)', color: '#fffdf6', border: '2px solid var(--ink)', boxShadow: '4px 4px 0 var(--ink)', padding: '0.6rem 1rem', fontWeight: 700 }}>
+          {gradingError}
+        </div>
+      )}
     </div>
   );
 }

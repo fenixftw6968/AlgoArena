@@ -1,9 +1,13 @@
 package com.algoarena.controller;
 
+import com.algoarena.dto.MatchAnswerRequest;
+import com.algoarena.dto.MatchAnswerResponse;
 import com.algoarena.dto.MatchDto;
+import com.algoarena.dto.MatchInviteRequest;
 import com.algoarena.dto.MatchSubmitRequest;
 import com.algoarena.entity.User;
 import com.algoarena.service.MatchService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -39,13 +43,11 @@ public class MatchController {
 
     @PostMapping("/invite")
     public ResponseEntity<MatchDto> inviteFriend(
-            @RequestBody Map<String, Object> body,
+            @Valid @RequestBody MatchInviteRequest body,
             @AuthenticationPrincipal User user) {
         if (user == null) return ResponseEntity.status(401).build();
-        Long friendId = Long.valueOf(body.get("friendId").toString());
-        String gameSlug = (String) body.get("gameSlug");
-        String difficulty = (String) body.get("difficulty");
-        return ResponseEntity.ok(matchService.createFriendMatch(user.getId(), friendId, gameSlug, difficulty));
+        return ResponseEntity.ok(matchService.createFriendMatch(
+                user.getId(), body.getFriendId(), body.getGameSlug(), body.getDifficulty()));
     }
 
     @GetMapping("/invitations/pending")
@@ -100,16 +102,25 @@ public class MatchController {
             @PathVariable String matchId,
             @AuthenticationPrincipal User user) {
         if (user == null) return ResponseEntity.status(401).build();
-        return ResponseEntity.ok(matchService.getMatchStatus(matchId));
+        return ResponseEntity.ok(matchService.getMatchStatus(matchId, user.getId()));
     }
 
     @PostMapping("/{matchId}/submit")
     public ResponseEntity<MatchDto> submitMatch(
             @PathVariable String matchId,
-            @RequestBody MatchSubmitRequest request,
+            @RequestBody(required = false) MatchSubmitRequest request,
             @AuthenticationPrincipal User user) {
         if (user == null) return ResponseEntity.status(401).build();
         return ResponseEntity.ok(matchService.submitMatchResult(matchId, user.getId(), request));
+    }
+
+    @PostMapping("/{matchId}/answers")
+    public ResponseEntity<MatchAnswerResponse> submitAnswer(
+            @PathVariable String matchId,
+            @Valid @RequestBody MatchAnswerRequest request,
+            @AuthenticationPrincipal User user) {
+        if (user == null) return ResponseEntity.status(401).build();
+        return ResponseEntity.ok(matchService.submitMatchAnswer(matchId, user.getId(), request));
     }
 
     @GetMapping("/active")

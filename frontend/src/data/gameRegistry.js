@@ -6,7 +6,6 @@
 export const GAME_TYPES = {
   MCQ: 'mcq',
   QUESTION: 'question',
-  MEMORY: 'memory',
   LOGIC: 'logic',
 };
 

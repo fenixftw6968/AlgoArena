@@ -19,6 +19,7 @@ import { getRandomQuestionSet } from '../../services/randomQuestionService';
 import { selectQuestionsForGame } from '../../services/questionHistoryService';
 import { codeBreakerQuestions } from '../../data/codeBreakerQuestions';
 import api from '../../utils/api';
+import { submitMatchAnswer, describeAnswerError } from '../../services/matchAnswerService';
 import { useMatchSocket } from '../../hooks/useMatchSocket';
 
 const TIMER_SECONDS = { EASY: 150, MEDIUM: 120, HARD: 90 };
@@ -60,6 +61,8 @@ export default function CodeBreaker() {
   const scoreRef = useRef(0);
   const mistakesRef = useRef(0);
   const isSubmittingRef = useRef(false);
+  const [serverFeedback, setServerFeedback] = useState(null); // server grading of the current question (match mode)
+  const [gradingError, setGradingError] = useState('');
 
   const clearMatchStorage = useCallback((matchId) => {
     localStorage.removeItem('activeMatchId_code-breaker');
@@ -154,6 +157,17 @@ export default function CodeBreaker() {
               if (savedMistakes !== null) {
                 setMistakes(parseInt(savedMistakes, 10));
                 mistakesRef.current = parseInt(savedMistakes, 10);
+              }
+
+              // Server truth wins over local storage: resume exactly where the server recorded the player.
+              if (Number.isInteger(match.viewerAnsweredCount)) {
+                const answeredOnServer = match.viewerAnsweredCount;
+                const correctOnServer = match.viewerCorrectCount || 0;
+                setIndex(answeredOnServer);
+                setScore(correctOnServer);
+                scoreRef.current = correctOnServer;
+                setMistakes(answeredOnServer - correctOnServer);
+                mistakesRef.current = answeredOnServer - correctOnServer;
               }
             }
           }
@@ -355,8 +369,24 @@ export default function CodeBreaker() {
     pause();
 
     const userGuess = digits.join('');
-    const correctSecret = String(puzzle.secret || puzzle.correctAnswer).trim();
-    const isCorrect = !timedOut && userGuess === correctSecret;
+    let isCorrect = false;
+    if (currentMatch && currentMatch.id) {
+      // Match mode: the SERVER grades the guess; the secret code never reaches this client.
+      try {
+        const feedback = await submitMatchAnswer(currentMatch.id, index, timedOut ? null : userGuess);
+        setServerFeedback(feedback);
+        setGradingError('');
+        isCorrect = feedback.correct === true;
+      } catch (e) {
+        setGradingError(describeAnswerError(e));
+        isSubmittingRef.current = false;
+        start();
+        return;
+      }
+    } else {
+      const correctSecret = String(puzzle.secret || puzzle.correctAnswer).trim();
+      isCorrect = !timedOut && userGuess === correctSecret;
+    }
 
     setResult(isCorrect ? 'correct' : 'wrong');
     setShowResult(true);
@@ -393,10 +423,12 @@ export default function CodeBreaker() {
         setScore(s => s + 1);
       }
     }
-  }, [puzzle, result, digits, hintUsed, currentDiff, timerLimit, timeLeft, pause, showXPPopup, refreshUser, playMode]);
+  }, [puzzle, result, digits, hintUsed, currentDiff, timerLimit, timeLeft, pause, start, showXPPopup, refreshUser, playMode, currentMatch, index]);
 
   const handleNext = async () => {
     isSubmittingRef.current = false;
+    setServerFeedback(null);
+    setGradingError('');
     const nextCount = puzzles[index + 1]?.digitCount || 3;
     setDigits(new Array(nextCount).fill(''));
     setActiveDigit(0);
@@ -777,7 +809,7 @@ export default function CodeBreaker() {
                   </div>
 
                   <p style={{ color: '#fffdf6', fontSize: '0.875rem', marginBottom: '1.5rem', lineHeight: 1.5, fontWeight: 500 }}>
-                    {puzzle.explanation}
+                    {serverFeedback?.explanation ?? puzzle.explanation}
                   </p>
 
                   <button onClick={handleNext} className="zine-btn" style={{ background: '#fffdf6', color: 'var(--ink)' }}>
@@ -789,6 +821,11 @@ export default function CodeBreaker() {
           )}
         </AnimatePresence>
       </div>
+      {gradingError && (
+        <div role="alert" style={{ position: 'fixed', bottom: '1rem', left: '50%', transform: 'translateX(-50%)', zIndex: 1000, background: 'var(--riso-coral)', color: '#fffdf6', border: '2px solid var(--ink)', boxShadow: '4px 4px 0 var(--ink)', padding: '0.6rem 1rem', fontWeight: 700 }}>
+          {gradingError}
+        </div>
+      )}
     </div>
   );
 }

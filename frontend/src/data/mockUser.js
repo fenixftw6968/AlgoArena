@@ -10,14 +10,13 @@ export const mockUser = {
   currentStreak: 5,
   longestStreak: 12,
   gamesCompleted: 48,
-  mysteriesSolved: 3,
   createdAt: "2024-01-15T10:00:00Z",
   recentActivity: [
     { id: 1, action: "Solved Number Detective", xpGained: 25, timestamp: new Date().toISOString(), icon: "🔢" },
-    { id: 2, action: "Completed Pattern Detective", xpGained: 50, timestamp: new Date(Date.now() - 86400000).toISOString(), icon: "🧩" },
-    { id: 3, action: "Mystery Case: Missing Diamond", xpGained: 150, timestamp: new Date(Date.now() - 172800000).toISOString(), icon: "🔍" },
+    { id: 2, action: "Solved Logic Puzzle", xpGained: 50, timestamp: new Date(Date.now() - 86400000).toISOString(), icon: "🧩" },
+    { id: 3, action: "Cracked a Code Breaker vault", xpGained: 60, timestamp: new Date(Date.now() - 172800000).toISOString(), icon: "🔐" },
     { id: 4, action: "Daily Challenge Completed", xpGained: 100, timestamp: new Date(Date.now() - 259200000).toISOString(), icon: "🔥" },
-    { id: 5, action: "Who is Lying? - Hard Mode", xpGained: 50, timestamp: new Date(Date.now() - 345600000).toISOString(), icon: "🎭" },
+    { id: 5, action: "DSA Master Quiz - Hard Mode", xpGained: 60, timestamp: new Date(Date.now() - 345600000).toISOString(), icon: "🧠" },
   ]
 };
 

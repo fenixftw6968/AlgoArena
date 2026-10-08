@@ -69,6 +69,8 @@ public class User {
     @Builder.Default
     private Integer gamesCompleted = 0;
 
+    // LEGACY: column retained only for database compatibility (it is NOT NULL in existing databases).
+    // No game feature reads or writes it any more.
     @Column(nullable = false, columnDefinition = "integer default 0")
     @Builder.Default
     private Integer mysteriesSolved = 0;

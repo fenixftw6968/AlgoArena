@@ -16,6 +16,11 @@ public interface PasswordResetTokenRepository extends JpaRepository<PasswordRese
 
     Optional<PasswordResetToken> findByTokenHash(String tokenHash);
 
+    /** Row-locked read used when redeeming a token, so two concurrent requests cannot both use it. */
+    @org.springframework.data.jpa.repository.Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE)
+    @Query("SELECT t FROM PasswordResetToken t WHERE t.tokenHash = :tokenHash")
+    Optional<PasswordResetToken> findByTokenHashForUpdate(@Param("tokenHash") String tokenHash);
+
     @Modifying
     @Query("UPDATE PasswordResetToken p SET p.used = true WHERE p.user = :user AND p.used = false")
     void invalidateAllActiveTokensForUser(@Param("user") User user);

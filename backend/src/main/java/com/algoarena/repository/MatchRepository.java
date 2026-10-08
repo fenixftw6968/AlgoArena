@@ -35,6 +35,10 @@ public interface MatchRepository extends JpaRepository<Match, String> {
     @Query("SELECT m FROM Match m WHERE m.status = 'WAITING' AND (m.player1 = :user OR m.player2 = :user)")
     List<Match> findWaitingMatchesByUser(@Param("user") User user);
 
+    /** True if the user is player 1 or player 2 of the match (no entity/proxy loading). */
+    @Query("SELECT COUNT(m) > 0 FROM Match m WHERE m.id = :matchId AND (m.player1.id = :userId OR m.player2.id = :userId)")
+    boolean isParticipant(@Param("matchId") String matchId, @Param("userId") Long userId);
+
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("SELECT m FROM Match m WHERE m.id = :id")
     Optional<Match> findByIdWithLock(@Param("id") String id);

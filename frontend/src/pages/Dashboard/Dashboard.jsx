@@ -15,7 +15,6 @@ import {
   Code2,
   Puzzle,
   Hash,
-  Eye,
   ArrowRight,
   ArrowUpRight,
   Trophy,
@@ -34,9 +33,7 @@ import './Dashboard.css';
 const SLUG_ICONS = {
   'dsa-master-quiz': Code2,
   'logic-puzzle': Puzzle,
-  'brain-teaser-battle': Sparkles,
   'number-detective': Hash,
-  'memory-challenge': Eye,
   'code-breaker': KeyRound,
 };
 
@@ -191,8 +188,8 @@ export default function Dashboard() {
   const skills = [
     { label: 'Programming & DSA', acc: 85, ink: 'var(--riso-violet)' },
     { label: 'Reasoning & Sequences', acc: 78, ink: 'var(--riso-coral)' },
-    { label: 'Brain Training & Aptitude', acc: 72, ink: 'var(--riso-yellow)' },
-    { label: 'Visual Memory & Recall', acc: 80, ink: 'var(--riso-teal)' },
+    { label: 'Number Patterns', acc: 72, ink: 'var(--riso-yellow)' },
+    { label: 'Deduction & Ciphers', acc: 80, ink: 'var(--riso-teal)' },
   ];
 
   const ringR = 34;

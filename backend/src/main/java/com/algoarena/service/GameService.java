@@ -16,6 +16,8 @@ import com.algoarena.repository.GameAttemptRepository;
 import com.algoarena.repository.GameRepository;
 import com.algoarena.repository.PuzzleRepository;
 import com.algoarena.repository.UserRepository;
+import com.algoarena.util.AnswerRedactor;
+import com.algoarena.util.SupportedGames;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -38,23 +40,17 @@ public class GameService {
     private final UserService userService;
     private final ObjectMapper objectMapper;
 
-    private static final List<String> ACTIVE_SLUGS = List.of(
-        "dsa-master-quiz",
-        "logic-puzzle",
-        "number-detective",
-        "code-breaker"
-    );
-
     @Transactional(readOnly = true)
     public List<GameDto> getAllGames() {
         return gameRepository.findAll().stream()
-                .filter(g -> ACTIVE_SLUGS.contains(g.getSlug()))
+                .filter(g -> SupportedGames.isSupported(g.getSlug()))
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
     public GameDto getGameBySlug(String slug) {
+        requireSupported(slug);
         Game game = gameRepository.findBySlug(slug)
                 .orElseThrow(() -> new ResourceNotFoundException("Game not found with slug: " + slug));
         return convertToDto(game);
@@ -62,6 +58,7 @@ public class GameService {
 
     @Transactional(readOnly = true)
     public List<PuzzleDto> getPuzzlesByGame(String slug, String difficulty) {
+        requireSupported(slug);
         List<Puzzle> puzzles;
         if (difficulty != null && !difficulty.trim().isEmpty()) {
             puzzles = puzzleRepository.findRandomByGameSlugAndDifficulty(slug, difficulty.toUpperCase());
@@ -75,6 +72,7 @@ public class GameService {
 
     @Transactional
     public AttemptResponse submitAttempt(Long userId, String slug, AttemptRequest request) {
+        requireSupported(slug);
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
         Game game = gameRepository.findBySlug(slug)
@@ -134,7 +132,7 @@ public class GameService {
             if (!request.getHintUsed()) {
                 user.setNoHintGames(user.getNoHintGames() + 1);
             }
-            userService.updateProgression(user, xpEarned, coinsEarned, false, false);
+            userService.updateProgression(user, xpEarned, coinsEarned);
         }
 
         return AttemptResponse.builder()
@@ -177,23 +175,62 @@ public class GameService {
                 .build();
     }
 
+    /** Retired / unknown games behave as if they do not exist (404), even if a stale row is still in the database. */
+    private static void requireSupported(String slug) {
+        if (!SupportedGames.isSupported(slug)) {
+            throw new ResourceNotFoundException("Game not found with slug: " + slug);
+        }
+    }
+
     private List<String> getTagsForSlug(String slug) {
         switch (slug) {
             case "dsa-master-quiz":
                 return List.of("dsa", "c++", "algorithms", "trees", "dp", "complexity");
             case "logic-puzzle":
                 return List.of("logic", "sequences", "deduction", "analogies", "reasoning");
-            case "brain-teaser-battle":
-                return List.of("riddles", "math", "aptitude", "lateral-thinking", "quick");
             case "number-detective":
                 return List.of("numbers", "sequences", "logic", "math");
-            case "memory-challenge":
-                return List.of("memory", "observation", "attention", "visual");
             case "code-breaker":
                 return List.of("logic", "deduction", "code", "mastermind");
             default:
-                return List.of("brain-training");
+                return List.of();
         }
+    }
+
+    /**
+     * INTERNAL: full (answer-bearing) question maps built from DB puzzles for a match. The result
+     * is stored server-side only (see {@link MatchChallenge}); clients only ever see the
+     * sanitised view. Puzzles whose content or answer cannot be parsed are skipped, because they
+     * could not be graded.
+     */
+    @Transactional(readOnly = true)
+    public List<Map<String, Object>> getPuzzlesForMatch(String slug, String difficulty) {
+        List<Puzzle> puzzles = (difficulty != null && !difficulty.trim().isEmpty())
+                ? puzzleRepository.findRandomByGameSlugAndDifficulty(slug, difficulty.toUpperCase())
+                : puzzleRepository.findRandomByGameSlug(slug);
+
+        List<Map<String, Object>> questions = new ArrayList<>();
+        for (Puzzle puzzle : puzzles) {
+            try {
+                Map<String, Object> question = new java.util.LinkedHashMap<>(objectMapper.readValue(
+                        puzzle.getContent(), new com.fasterxml.jackson.core.type.TypeReference<Map<String, Object>>() { }));
+                JsonNode answer = objectMapper.readTree(puzzle.getCorrectAnswer());
+                String correct = answer.hasNonNull("answer") ? answer.get("answer").asText() : "";
+                if (correct.isBlank()) {
+                    continue;
+                }
+                question.put("id", puzzle.getId());
+                question.put("title", puzzle.getTitle());
+                question.put("difficulty", puzzle.getDifficulty());
+                question.put("correctAnswer", correct);
+                question.put("explanation", puzzle.getExplanation());
+                questions.add(question);
+            } catch (Exception e) {
+                log.warn("Skipping puzzle {} for match: unparseable content/answer ({})",
+                        puzzle.getId(), e.getClass().getSimpleName());
+            }
+        }
+        return questions;
     }
 
     private PuzzleDto convertToPuzzleDto(Puzzle puzzle) {
@@ -201,9 +238,7 @@ public class GameService {
                 .id(puzzle.getId())
                 .title(puzzle.getTitle())
                 .difficulty(puzzle.getDifficulty())
-                .content(puzzle.getContent())
-                .correctAnswer(puzzle.getCorrectAnswer())
-                .explanation(puzzle.getExplanation())
+                .content(AnswerRedactor.redactJson(puzzle.getContent()))
                 .xpReward(puzzle.getXpReward())
                 .orderIndex(puzzle.getOrderIndex())
                 .build();

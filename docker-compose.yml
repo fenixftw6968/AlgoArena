@@ -1,19 +1,28 @@
-version: '3.8'
+# Local development stack.
+#
+# SECURITY: this file contains NO credentials and never defaults to a hosted/production database.
+# Put your own values in a root-level .env file (git-ignored; copy .env.example) - docker compose
+# reads it automatically. Required variables fail fast with a clear message if missing.
+#
+#   docker compose up --build                       # backend + frontend, using the database in DB_URL
+#   docker compose --profile local-db up --build    # also start the optional local PostgreSQL container
+#                                                   # (then point DB_URL at jdbc:postgresql://db:5432/mindmaze)
 
 services:
   db:
     image: postgres:16-alpine
+    profiles: ["local-db"]
     container_name: mindmaze-db
     environment:
       POSTGRES_DB: mindmaze
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: ${LOCAL_DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${LOCAL_DB_PASSWORD:?Set LOCAL_DB_PASSWORD in .env to use the local-db profile}
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres -d mindmaze" ]
+      test: [ "CMD-SHELL", "pg_isready -U ${LOCAL_DB_USER:-postgres} -d mindmaze" ]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -28,15 +37,14 @@ services:
         aliases:
           - mindmapmatiks.railway.internal
     environment:
-      - DB_URL=jdbc:postgresql://ep-tiny-cell-ayjc5n7d-pooler.c-5.us-east-2.aws.neon.tech/neondb?sslmode=require
-      - DB_USERNAME=neondb_owner
-      - DB_PASSWORD=npg_Dc0ej4mHaPEs
-      - JWT_SECRET=mindmaze-super-secret-key-change-in-production-at-least-64-chars-long-2024
-      - CORS_ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5173
-    # Optional: If you want to use the local 'db' container, change DB_URL to 'jdbc:postgresql://db:5432/mindmaze'
-    depends_on:
-      db:
-        condition: service_healthy
+      - DB_URL=${DB_URL:?Set DB_URL in .env - use YOUR OWN database, never production}
+      - DB_USERNAME=${DB_USERNAME:?Set DB_USERNAME in .env}
+      - DB_PASSWORD=${DB_PASSWORD:?Set DB_PASSWORD in .env}
+      - JWT_SECRET=${JWT_SECRET:?Set JWT_SECRET in .env (openssl rand -base64 48)}
+      - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS:-http://localhost:3000,http://localhost:5173}
+      - FRONTEND_URL=${FRONTEND_URL:-http://localhost:3000}
+      - BREVO_API_KEY=${BREVO_API_KEY:-}
+      - DEV_LOG_RESET_LINKS=${DEV_LOG_RESET_LINKS:-true}
 
   frontend:
     build: ./frontend

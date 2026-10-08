@@ -20,6 +20,7 @@ import { selectQuestionsForGame } from '../../services/questionHistoryService';
 import { balanceAndRandomizeQuestionOptions, createSeededRandom } from '../../utils/optionRandomizer';
 import { shuffleArray } from '../../utils/shuffleQuestions';
 import api from '../../utils/api';
+import { submitMatchAnswer, describeAnswerError } from '../../services/matchAnswerService';
 import { useMatchSocket } from '../../hooks/useMatchSocket';
 
 const TIMER_SECONDS = { EASY: 90, MEDIUM: 60, HARD: 45 };
@@ -70,6 +71,9 @@ export default function MCQGameEngine({
   const [latestUser, setLatestUser] = useState(null);
 
   const isSubmittingRef = useRef(false);
+  const [serverFeedback, setServerFeedback] = useState(null); // server grading of the current question (match mode)
+  const [gradingError, setGradingError] = useState('');
+  const pendingAnswerRef = useRef(null);
   const startTimeRef = useRef(Date.now());
   const scoreRef = useRef(0);
   const mistakesRef = useRef(0);
@@ -127,6 +131,12 @@ export default function MCQGameEngine({
     setMistakes(mistakesRef.current);
     setResult('wrong');
     setShowResult(true);
+    if (currentMatch && currentMatch.id) {
+      // A timeout is recorded on the server as a wrong answer, in order.
+      pendingAnswerRef.current = submitMatchAnswer(currentMatch.id, index, null)
+        .then((fb) => setServerFeedback(fb))
+        .catch(() => {});
+    }
   };
 
   // Setup question timer
@@ -193,24 +203,41 @@ export default function MCQGameEngine({
     if (isSubmittingRef.current || showResult || result || !selectedOption || !puzzle) return;
     isSubmittingRef.current = true;
     pause();
-    const targetAns = (puzzle.correctAnswer || puzzle.answer || '').trim().toLowerCase();
-    const chosen = (selectedOption || '').trim().toLowerCase();
-    let isCorrect = chosen === targetAns;
-
-    if (!isCorrect && Array.isArray(puzzle.options)) {
-      const correctIdx = puzzle.options.findIndex(
-        opt => String(opt).trim().toLowerCase() === targetAns
-      );
-      if (correctIdx !== -1) {
-        const letters = ['a', 'b', 'c', 'd'];
-        if (chosen === letters[correctIdx]) {
-          isCorrect = true;
-        }
+    const inMatch = !!(currentMatch && currentMatch.id);
+    let isCorrect = false;
+    if (inMatch) {
+      // Match mode: the SERVER grades the answer (the client never holds the right answer).
+      try {
+        const feedback = await submitMatchAnswer(currentMatch.id, index, selectedOption);
+        setServerFeedback(feedback);
+        setGradingError('');
+        isCorrect = feedback.correct === true;
+      } catch (e) {
+        setGradingError(describeAnswerError(e));
+        isSubmittingRef.current = false;
+        start();
+        return;
       }
-      const letterIdx = ['a', 'b', 'c', 'd'].indexOf(targetAns);
-      if (letterIdx >= 0 && letterIdx < puzzle.options.length) {
-        if (chosen === String(puzzle.options[letterIdx]).trim().toLowerCase()) {
-          isCorrect = true;
+    } else {
+      const targetAns = (puzzle.correctAnswer || puzzle.answer || '').trim().toLowerCase();
+      const chosen = (selectedOption || '').trim().toLowerCase();
+      let isCorrect = chosen === targetAns;
+
+      if (!isCorrect && Array.isArray(puzzle.options)) {
+        const correctIdx = puzzle.options.findIndex(
+          opt => String(opt).trim().toLowerCase() === targetAns
+        );
+        if (correctIdx !== -1) {
+          const letters = ['a', 'b', 'c', 'd'];
+          if (chosen === letters[correctIdx]) {
+            isCorrect = true;
+          }
+        }
+        const letterIdx = ['a', 'b', 'c', 'd'].indexOf(targetAns);
+        if (letterIdx >= 0 && letterIdx < puzzle.options.length) {
+          if (chosen === String(puzzle.options[letterIdx]).trim().toLowerCase()) {
+            isCorrect = true;
+          }
         }
       }
     }
@@ -253,6 +280,11 @@ export default function MCQGameEngine({
   // Progress to next question or show completion screen
   const handleNext = async () => {
     isSubmittingRef.current = false;
+    if (pendingAnswerRef.current) {
+      try { await pendingAnswerRef.current; } finally { pendingAnswerRef.current = null; }
+    }
+    setServerFeedback(null);
+    setGradingError('');
     if (index + 1 >= puzzles.length) {
       pause();
       durationRef.current = Math.round((Date.now() - startTimeRef.current) / 1000);
@@ -292,6 +324,8 @@ export default function MCQGameEngine({
   // Handle competitive match start from MatchmakingLobby
   const handleMatchReady = (matchData) => {
     isSubmittingRef.current = false;
+    setServerFeedback(null);
+    setGradingError('');
     setCurrentMatch(matchData);
     setShowMatchmaking(false);
     setShowModeModal(false);
@@ -724,17 +758,17 @@ export default function MCQGameEngine({
                     >
                       {result === 'correct' ? <CheckCircle size={22} /> : <XCircle size={22} />}
                       <div className="font-mono" style={{ fontWeight: 800, fontSize: '0.9rem', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-                        {result === 'correct' ? 'CORRECT EVALUATION' : `INCORRECT — EXPECTED: ${puzzle.correctAnswer}`}
+                        {result === 'correct' ? 'CORRECT EVALUATION' : `INCORRECT — EXPECTED: ${serverFeedback?.correctAnswer ?? puzzle.correctAnswer}`}
                       </div>
                     </div>
 
-                    {puzzle.explanation && (
+                    {(serverFeedback?.explanation ?? puzzle.explanation) && (
                       <div style={{ padding: '1.15rem', background: 'var(--paper-sunk)', border: '2px dashed var(--ink-faint)', marginBottom: '1.5rem' }}>
                         <p className="font-mono" style={{ fontSize: '0.66rem', fontWeight: 800, color: 'var(--riso-violet)', marginBottom: '0.45rem', letterSpacing: '0.16em', textTransform: 'uppercase' }}>
                           Decrypted Analysis
                         </p>
                         <p style={{ fontSize: '0.875rem', color: 'var(--ink-soft)', lineHeight: 1.6, fontWeight: 400, margin: 0 }}>
-                          {puzzle.explanation}
+                          {serverFeedback?.explanation ?? puzzle.explanation}
                         </p>
                       </div>
                     )}
@@ -802,6 +836,11 @@ export default function MCQGameEngine({
           </AnimatePresence>
         )}
       </div>
+      {gradingError && (
+        <div role="alert" style={{ position: 'fixed', bottom: '1rem', left: '50%', transform: 'translateX(-50%)', zIndex: 1000, background: 'var(--riso-coral)', color: '#fffdf6', border: '2px solid var(--ink)', boxShadow: '4px 4px 0 var(--ink)', padding: '0.6rem 1rem', fontWeight: 700 }}>
+          {gradingError}
+        </div>
+      )}
     </div>
   );
 }

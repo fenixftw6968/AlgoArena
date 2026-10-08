@@ -2,16 +2,23 @@ package com.algoarena.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.algoarena.dto.MatchAnswerRequest;
+import com.algoarena.dto.MatchAnswerResponse;
 import com.algoarena.dto.MatchDto;
 import com.algoarena.dto.MatchSubmitRequest;
-import com.algoarena.dto.PuzzleDto;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.algoarena.entity.Match;
 import com.algoarena.entity.User;
+import com.algoarena.entity.Friendship;
 import com.algoarena.exception.BadRequestException;
+import com.algoarena.exception.ConflictException;
+import com.algoarena.exception.ForbiddenException;
 import com.algoarena.exception.ResourceNotFoundException;
+import com.algoarena.repository.FriendshipRepository;
 import com.algoarena.repository.MatchRepository;
 import com.algoarena.repository.UserRepository;
 import com.algoarena.util.RankUtil;
+import com.algoarena.util.SupportedGames;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +39,7 @@ public class MatchService {
 
     private final MatchRepository matchRepository;
     private final UserRepository userRepository;
+    private final FriendshipRepository friendshipRepository;
     private final EloRatingService eloRatingService;
     private final GameService gameService;
     private final ObjectMapper objectMapper;
@@ -39,6 +47,56 @@ public class MatchService {
     private final TransactionTemplate transactionTemplate;
 
     private final Object matchmakingLock = new Object();
+
+    private static final Set<String> SUPPORTED_DIFFICULTIES = Set.of("EASY", "MEDIUM", "HARD");
+
+    /** Friend invitations are listed for 60 s; accept honours that window plus a small grace. */
+    private static final long INVITATION_TTL_SECONDS = 70;
+
+    // ------------------------------------------------------------------
+    // Authorization / validation helpers
+    // ------------------------------------------------------------------
+
+    private static boolean isPlayer1(Match match, Long userId) {
+        return match.getPlayer1() != null && match.getPlayer1().getId().equals(userId);
+    }
+
+    private static boolean isPlayer2(Match match, Long userId) {
+        return match.getPlayer2() != null && match.getPlayer2().getId().equals(userId);
+    }
+
+    private static void requireParticipant(Match match, Long userId) {
+        if (!isPlayer1(match, userId) && !isPlayer2(match, userId)) {
+            throw new ForbiddenException("You are not a participant in this match");
+        }
+    }
+
+    private static boolean isTerminal(Match match) {
+        return match.getStatus() == Match.MatchStatus.FINISHED || match.getStatus() == Match.MatchStatus.CANCELLED;
+    }
+
+    /** True once the post-pairing countdown has elapsed, i.e. the match is actually being played. */
+    private static boolean hasStarted(Match match) {
+        return (match.getStatus() == Match.MatchStatus.READY || match.getStatus() == Match.MatchStatus.IN_PROGRESS)
+                && match.getStartedAt() != null
+                && !match.getStartedAt().isAfter(LocalDateTime.now());
+    }
+
+    private static String requireSupportedGameSlug(String gameSlug) {
+        return SupportedGames.require(gameSlug);
+    }
+
+    /** Blank difficulty stays null (callers apply their own default); anything else must be valid. */
+    private static String normaliseDifficulty(String difficulty) {
+        if (difficulty == null || difficulty.isBlank()) {
+            return null;
+        }
+        String normalised = difficulty.trim().toUpperCase(Locale.ROOT);
+        if (!SUPPORTED_DIFFICULTIES.contains(normalised)) {
+            throw new BadRequestException("Unsupported difficulty");
+        }
+        return normalised;
+    }
 
     @PostConstruct
     void configureMatchmakingTransaction() {
@@ -59,8 +117,10 @@ public class MatchService {
      * "Ranked" at the same moment would each create their own WAITING row and never be matched.
      */
     public MatchDto queueForMatch(Long userId, String gameSlug, String difficulty) {
+        final String slug = requireSupportedGameSlug(gameSlug);
+        final String diff = normaliseDifficulty(difficulty);
         synchronized (matchmakingLock) {
-            return transactionTemplate.execute(status -> doQueueForMatch(userId, gameSlug, difficulty));
+            return transactionTemplate.execute(status -> doQueueForMatch(userId, slug, diff));
         }
     }
 
@@ -189,8 +249,18 @@ public class MatchService {
                 Match match = matchRepository.findByIdWithLock(matchId)
                         .orElseThrow(() -> new ResourceNotFoundException("Match not found"));
 
-                if (!match.getPlayer1().getId().equals(userId)) {
-                    throw new BadRequestException("User is not the host of this match");
+                if (!isPlayer1(match, userId)) {
+                    throw new ForbiddenException("Only the host of this match can add a bot opponent");
+                }
+
+                // Bots are only for ranked queue matches; a friend invitation must not be hijacked.
+                if (match.getMode() != Match.MatchMode.RANKED) {
+                    throw new ConflictException("A bot opponent is only available for ranked queue matches");
+                }
+
+                // Already a bot match: idempotent, never re-arm the start time.
+                if (Boolean.TRUE.equals(match.getIsBotMatch())) {
+                    return convertToDto(match);
                 }
 
                 // If a real player already matched while request was inflight, return the real match
@@ -224,16 +294,36 @@ public class MatchService {
 
     @Transactional
     public MatchDto createFriendMatch(Long hostUserId, Long friendUserId, String gameSlug, String difficulty) {
+        if (friendUserId == null) {
+            throw new BadRequestException("friendId is required");
+        }
+        if (hostUserId.equals(friendUserId)) {
+            throw new BadRequestException("You cannot invite yourself");
+        }
+        gameSlug = requireSupportedGameSlug(gameSlug);
+        String normalisedDifficulty = normaliseDifficulty(difficulty);
+        difficulty = normalisedDifficulty != null ? normalisedDifficulty : "MEDIUM";
+
         User host = userRepository.findById(hostUserId)
                 .orElseThrow(() -> new ResourceNotFoundException("Host user not found"));
         User friend = userRepository.findById(friendUserId)
                 .orElseThrow(() -> new ResourceNotFoundException("Friend user not found"));
 
+        boolean areFriends = friendshipRepository.findBetweenUsers(host, friend)
+                .map(f -> f.getStatus() == Friendship.Status.ACCEPTED)
+                .orElse(false);
+        if (!areFriends) {
+            throw new ForbiddenException("You can only invite players who are your friends");
+        }
+
         String challengeData = generateChallengeData(gameSlug, difficulty);
 
-        // Cancel all previous waiting friend invitations for this friend
+        // Replace this host's own previous pending invitations to this friend (never other hosts' invitations)
         List<Match> waiting = matchRepository.findPendingInvitationsForUser(friend);
         for (Match w : waiting) {
+            if (!isPlayer1(w, hostUserId)) {
+                continue;
+            }
             w.setStatus(Match.MatchStatus.CANCELLED);
             w.setCancelledReason("REPLACED_BY_NEW_INVITATION");
             matchRepository.save(w);
@@ -275,8 +365,8 @@ public class MatchService {
         Match match = matchRepository.findByIdWithLock(matchId)
                 .orElseThrow(() -> new ResourceNotFoundException("Match not found"));
 
-        if (!match.getPlayer2().getId().equals(friendUserId)) {
-            throw new BadRequestException("You are not the invited player for this match");
+        if (match.getMode() != Match.MatchMode.FRIEND || !isPlayer2(match, friendUserId)) {
+            throw new ForbiddenException("You are not the invited player for this match");
         }
 
         if (match.getStatus() == Match.MatchStatus.READY || match.getStatus() == Match.MatchStatus.IN_PROGRESS) {
@@ -287,7 +377,12 @@ public class MatchService {
         }
 
         if (match.getStatus() != Match.MatchStatus.WAITING) {
-            throw new BadRequestException("This match invitation is no longer active");
+            throw new ConflictException("This match invitation is no longer active");
+        }
+
+        if (match.getCreatedAt() != null
+                && match.getCreatedAt().isBefore(LocalDateTime.now().minusSeconds(INVITATION_TTL_SECONDS))) {
+            throw new ConflictException("This match invitation has expired");
         }
 
         match.setPlayer2Ready(true);
@@ -313,11 +408,18 @@ public class MatchService {
 
     @Transactional
     public MatchDto declineFriendMatch(String matchId, Long friendUserId) {
-        Match match = matchRepository.findById(matchId)
+        Match match = matchRepository.findByIdWithLock(matchId)
                 .orElseThrow(() -> new ResourceNotFoundException("Match not found"));
 
-        if (!match.getPlayer2().getId().equals(friendUserId)) {
-            throw new BadRequestException("You are not the invited player for this match");
+        if (match.getMode() != Match.MatchMode.FRIEND || !isPlayer2(match, friendUserId)) {
+            throw new ForbiddenException("You are not the invited player for this match");
+        }
+
+        if (match.getStatus() == Match.MatchStatus.CANCELLED) {
+            return convertToDto(match); // already cancelled/declined: safe retry
+        }
+        if (match.getStatus() != Match.MatchStatus.WAITING) {
+            throw new ConflictException("This invitation can no longer be declined");
         }
 
         match.setStatus(Match.MatchStatus.CANCELLED);
@@ -331,14 +433,20 @@ public class MatchService {
 
     @Transactional
     public MatchDto cancelMatch(String matchId, Long userId) {
-        Match match = matchRepository.findById(matchId)
+        Match match = matchRepository.findByIdWithLock(matchId)
                 .orElseThrow(() -> new ResourceNotFoundException("Match not found"));
 
-        boolean isP1 = match.getPlayer1().getId().equals(userId);
-        boolean isP2 = match.getPlayer2() != null && match.getPlayer2().getId().equals(userId);
+        requireParticipant(match, userId);
+        boolean isP1 = isPlayer1(match, userId);
 
-        if (!isP1 && !isP2) {
-            throw new BadRequestException("You are not a participant in this match");
+        if (isTerminal(match)) {
+            return convertToDto(match); // finished/cancelled matches are immutable; safe retry
+        }
+
+        // Cancelling a match that is already being played would let a losing player dodge the
+        // result, so it is handled exactly like abandoning (forfeit).
+        if (hasStarted(match)) {
+            return forfeitMatch(match, isP1, userId);
         }
 
         match.setStatus(Match.MatchStatus.CANCELLED);
@@ -360,16 +468,19 @@ public class MatchService {
 
     @Transactional
     public MatchDto abandonMatch(String matchId, Long userId) {
-        Match match = matchRepository.findById(matchId)
+        Match match = matchRepository.findByIdWithLock(matchId)
                 .orElseThrow(() -> new ResourceNotFoundException("Match not found"));
 
-        boolean isP1 = match.getPlayer1().getId().equals(userId);
-        boolean isP2 = match.getPlayer2() != null && match.getPlayer2().getId().equals(userId);
+        requireParticipant(match, userId);
 
-        if (!isP1 && !isP2) {
-            throw new BadRequestException("You are not a participant in this match");
+        if (isTerminal(match)) {
+            return convertToDto(match); // finished/cancelled matches are immutable; safe retry
         }
+        return forfeitMatch(match, isPlayer1(match, userId), userId);
+    }
 
+    /** Shared by abandon and cancel-after-start: forfeits a running match, plainly cancels a not-yet-started one. */
+    private MatchDto forfeitMatch(Match match, boolean isP1, Long userId) {
         if (match.getStatus() == Match.MatchStatus.READY || match.getStatus() == Match.MatchStatus.IN_PROGRESS) {
             // Forfeit match: the abandoning player loses
             if (isP1) {
@@ -401,10 +512,11 @@ public class MatchService {
     }
 
     @Transactional(readOnly = true)
-    public MatchDto getMatchStatus(String matchId) {
+    public MatchDto getMatchStatus(String matchId, Long userId) {
         Match match = matchRepository.findById(matchId)
                 .orElseThrow(() -> new ResourceNotFoundException("Match not found"));
-        return convertToDto(match);
+        requireParticipant(match, userId);
+        return convertToDto(match, userId);
     }
 
     @Transactional
@@ -412,29 +524,129 @@ public class MatchService {
         Match match = matchRepository.findByIdWithLock(matchId)
                 .orElseThrow(() -> new ResourceNotFoundException("Match not found"));
 
-        boolean isPlayer1 = match.getPlayer1().getId().equals(userId);
-        boolean isPlayer2 = match.getPlayer2() != null && match.getPlayer2().getId().equals(userId);
+        requireParticipant(match, userId);
+        boolean isPlayer1 = isPlayer1(match, userId);
+        boolean isPlayer2 = isPlayer2(match, userId);
 
-        if (!isPlayer1 && !isPlayer2) {
-            throw new BadRequestException("User is not part of this match");
+        // A finished match is immutable: a late/duplicate submit is a harmless no-op.
+        if (match.getStatus() == Match.MatchStatus.FINISHED) {
+            return convertToDto(match);
+        }
+        // Results are only accepted while the match is actually running (never WAITING/CANCELLED).
+        if (match.getStatus() != Match.MatchStatus.READY && match.getStatus() != Match.MatchStatus.IN_PROGRESS) {
+            throw new ConflictException("This match is not in progress");
+        }
+        // One official submission per player: a repeat never overwrites the first result.
+        if ((isPlayer1 && Boolean.TRUE.equals(match.getPlayer1Finished()))
+                || (isPlayer2 && Boolean.TRUE.equals(match.getPlayer2Finished()))) {
+            return convertToDto(match);
         }
 
-        if (isPlayer1) {
-            match.setPlayer1Score(request.getScore() != null ? request.getScore() : 0);
-            match.setPlayer1TimeSeconds(request.getTimeTakenSeconds() != null ? request.getTimeTakenSeconds() : 0);
-            match.setPlayer1Mistakes(request.getMistakes() != null ? request.getMistakes() : 0);
+        // The client-supplied score/time/mistakes (request) are IGNORED: everything is derived from the
+        // answers the server graded and recorded. Unanswered questions count as wrong.
+        MatchChallenge challenge = MatchChallenge.parse(match.getChallengeData());
+        completePlayer(match, isPlayer1, challenge);
+        return persistAndBroadcast(match);
+    }
+
+    /**
+     * Grades and records ONE answer. The server decides correctness from its own copy of the
+     * question; the response reveals the right answer/explanation for this question only after the
+     * answer has been recorded. Questions must be answered in order, exactly once.
+     */
+    @Transactional
+    public MatchAnswerResponse submitMatchAnswer(String matchId, Long userId, MatchAnswerRequest request) {
+        Match match = matchRepository.findByIdWithLock(matchId)
+                .orElseThrow(() -> new ResourceNotFoundException("Match not found"));
+
+        requireParticipant(match, userId);
+        boolean isP1 = isPlayer1(match, userId);
+        String slot = isP1 ? MatchChallenge.P1 : MatchChallenge.P2;
+
+        MatchChallenge challenge = MatchChallenge.parse(match.getChallengeData());
+        int total = challenge.questionCount();
+        int index = request.getQuestionIndex();
+        if (index < 0 || index >= total) {
+            throw new BadRequestException("Unknown question");
+        }
+
+        // Replay of an already-recorded answer: the first answer stands, nothing changes.
+        JsonNode recorded = challenge.recordedAnswer(slot, index);
+        if (recorded != null) {
+            return buildAnswerResponse(match, challenge, slot, index, recorded.path("c").asBoolean(false), true, userId);
+        }
+
+        if (match.getStatus() != Match.MatchStatus.READY && match.getStatus() != Match.MatchStatus.IN_PROGRESS) {
+            throw new ConflictException("This match is not in progress");
+        }
+        if ((isP1 && Boolean.TRUE.equals(match.getPlayer1Finished()))
+                || (!isP1 && Boolean.TRUE.equals(match.getPlayer2Finished()))) {
+            throw new ConflictException("You have already finished this match");
+        }
+        if (match.getStartedAt() != null && LocalDateTime.now().isBefore(match.getStartedAt().minusSeconds(2))) {
+            throw new ConflictException("The match has not started yet");
+        }
+        int answered = challenge.answeredCount(slot);
+        if (index != answered) {
+            throw new ConflictException("Questions must be answered in order; next question is " + answered);
+        }
+
+        String given = request.getAnswer();
+        boolean correct = MatchChallenge.isCorrect(challenge.question(index), given);
+        challenge.record(slot, index, given, correct, System.currentTimeMillis());
+        match.setChallengeData(challenge.toJson());
+
+        boolean finishedNow = answered + 1 >= total;
+        if (finishedNow) {
+            completePlayer(match, isP1, challenge);
+            match = matchRepository.save(match);
+            persistAndBroadcast(match);
+        } else {
+            match = matchRepository.save(match);
+        }
+        return buildAnswerResponse(match, challenge, slot, index, correct, false, userId);
+    }
+
+    private MatchAnswerResponse buildAnswerResponse(Match match, MatchChallenge challenge, String slot, int index,
+                                                    boolean correct, boolean alreadyAnswered, Long userId) {
+        JsonNode question = challenge.question(index);
+        int answeredCount = challenge.answeredCount(slot);
+        return MatchAnswerResponse.builder()
+                .correct(correct)
+                .correctAnswer(MatchChallenge.correctAnswerOf(question))
+                .explanation(MatchChallenge.explanationOf(question))
+                .questionIndex(index)
+                .answeredCount(answeredCount)
+                .totalQuestions(challenge.questionCount())
+                .alreadyAnswered(alreadyAnswered)
+                .finished(answeredCount >= challenge.questionCount())
+                .match(convertToDto(match, userId))
+                .build();
+    }
+
+    /** Marks a player finished using ONLY server-recorded results (score = correct answers). */
+    private void completePlayer(Match match, boolean isP1, MatchChallenge challenge) {
+        String slot = isP1 ? MatchChallenge.P1 : MatchChallenge.P2;
+        int total = challenge.questionCount();
+        int score = challenge.correctCount(slot);
+        int mistakes = Math.max(0, total - score);
+        int seconds = match.getStartedAt() == null ? 0
+                : (int) Math.max(0, java.time.Duration.between(match.getStartedAt(), LocalDateTime.now()).getSeconds());
+
+        if (isP1) {
+            match.setPlayer1Score(score);
+            match.setPlayer1TimeSeconds(seconds);
+            match.setPlayer1Mistakes(mistakes);
             match.setPlayer1Finished(true);
 
-            // If this is a bot match, simulate bot opponent's performance right now
+            // Bot match: the bot's result is simulated from the player's SERVER-derived result
             if (Boolean.TRUE.equals(match.getIsBotMatch())) {
-                int userScore = request.getScore() != null ? request.getScore() : 0;
-                int userTime = request.getTimeTakenSeconds() != null ? request.getTimeTakenSeconds() : 60;
                 Random rnd = new Random();
                 // 45% equal score, 35% bot gets 1 less, 20% bot gets 1 more
                 double r = rnd.nextDouble();
                 int scoreOffset = r < 0.45 ? 0 : (r < 0.80 ? -1 : 1);
-                int botScore = Math.max(0, Math.min(10, userScore + scoreOffset));
-                int botTime = Math.max(15, userTime + (rnd.nextInt(15) - 7));
+                int botScore = Math.max(0, Math.min(10, score + scoreOffset));
+                int botTime = Math.max(15, seconds + (rnd.nextInt(15) - 7));
                 int botMistakes = Math.max(0, 10 - botScore);
 
                 match.setPlayer2Score(botScore);
@@ -443,12 +655,15 @@ public class MatchService {
                 match.setPlayer2Finished(true);
             }
         } else {
-            match.setPlayer2Score(request.getScore() != null ? request.getScore() : 0);
-            match.setPlayer2TimeSeconds(request.getTimeTakenSeconds() != null ? request.getTimeTakenSeconds() : 0);
-            match.setPlayer2Mistakes(request.getMistakes() != null ? request.getMistakes() : 0);
+            match.setPlayer2Score(score);
+            match.setPlayer2TimeSeconds(seconds);
+            match.setPlayer2Mistakes(mistakes);
             match.setPlayer2Finished(true);
         }
+    }
 
+    /** Finalises the match when both sides are done, persists, and notifies participants. */
+    private MatchDto persistAndBroadcast(Match match) {
         // If both finished (or if solo queue completed vs AI / async bot fallback if player2 was auto-simulated)
         if (Boolean.TRUE.equals(match.getPlayer1Finished()) && Boolean.TRUE.equals(match.getPlayer2Finished())) {
             finalizeMatch(match);
@@ -461,7 +676,7 @@ public class MatchService {
         match = matchRepository.save(match);
         MatchDto dto = convertToDto(match);
         broadcastMatchEvent(match.getId(), "MATCH_UPDATE", dto);
-        
+
         if (match.getStatus() == Match.MatchStatus.FINISHED) {
             broadcastMatchEvent(match.getId(), "MATCH_FINISHED", dto);
             broadcastMatchEvent(match.getId(), "MATCH_COMPLETED", dto);
@@ -472,7 +687,7 @@ public class MatchService {
                 sendUserEvent(match.getPlayer2().getId(), "MATCH_COMPLETED", dto);
             }
         }
-        return dto;
+        return convertToDto(match, null);
     }
 
     private void finalizeMatch(Match match) {
@@ -586,7 +801,15 @@ public class MatchService {
                 .toList();
     }
 
+    /**
+     * Builds the stored (server-only) challenge: the full questions including correct answers, in the
+     * {@link MatchChallenge} wrapper. Clients only ever receive {@link MatchChallenge#toClientJson}.
+     */
     private String generateChallengeData(String gameSlug, String difficulty) {
+        return MatchChallenge.fromQuestionsJson(generateQuestionsJson(gameSlug, difficulty));
+    }
+
+    private String generateQuestionsJson(String gameSlug, String difficulty) {
         if (gameSlug == null || gameSlug.isBlank()) return "[]";
         String normalizedSlug = gameSlug.toLowerCase().trim();
         String resourcePath = "questions/" + normalizedSlug + ".json";
@@ -608,7 +831,7 @@ public class MatchService {
                     Collections.shuffle(pool);
 
                     int count = 5;
-                    if ("memory-challenge".equalsIgnoreCase(normalizedSlug) || "code-breaker".equalsIgnoreCase(normalizedSlug)) {
+                    if ("code-breaker".equalsIgnoreCase(normalizedSlug)) {
                         count = 4;
                     }
                     List<Map<String, Object>> chosen = pool.stream().limit(count).map(q -> {
@@ -639,104 +862,6 @@ public class MatchService {
             bank.add(new HashMap<>(Map.of("id", "nd-6", "question", "1, 2, 4, 7, 11, ?", "correctAnswer", "16", "options", new ArrayList<>(List.of("13", "14", "15", "16")), "hint", "Differences increase by 1.", "explanation", "+1, +2, +3, +4, +5...")));
             bank.add(new HashMap<>(Map.of("id", "nd-7", "question", "2, 3, 5, 8, 13, ?", "correctAnswer", "21", "options", new ArrayList<>(List.of("18", "20", "21", "25")), "hint", "Sum of preceding two.", "explanation", "Fibonacci sequence.")));
             bank.add(new HashMap<>(Map.of("id", "nd-8", "question", "1, 8, 27, 64, ?", "correctAnswer", "125", "options", new ArrayList<>(List.of("100", "121", "125", "150")), "hint", "Perfect cubes.", "explanation", "Perfect cubes: 1^3, 2^3, 3^3, 4^3, 5^3.")));
-            
-            Collections.shuffle(bank);
-            for (int i = 0; i < Math.min(4, bank.size()); i++) {
-                Map<String, Object> p = new HashMap<>(bank.get(i));
-                Object optsObj = p.get("options");
-                if (optsObj instanceof List<?> l) {
-                    List<Object> shuff = new ArrayList<>(l);
-                    Collections.shuffle(shuff);
-                    p.put("options", shuff);
-                }
-                puzzles.add(p);
-            }
-            try {
-                return objectMapper.writeValueAsString(puzzles);
-            } catch (Exception e) {
-                return "[]";
-            }
-        }
-
-        if ("memory-challenge".equalsIgnoreCase(gameSlug)) {
-            List<Map<String, Object>> puzzles = new ArrayList<>();
-            List<Map<String, Object>> bank = new ArrayList<>();
-            
-            bank.add(Map.of(
-                "id", "mc-1",
-                "title", "Farmer's Market Stand",
-                "revealTime", 8,
-                "description", "Memorize the 6 fresh fruits and vegetables.",
-                "items", List.of(
-                    Map.of("emoji", "🍎", "label", "Red Apple"),
-                    Map.of("emoji", "🍌", "label", "Yellow Banana"),
-                    Map.of("emoji", "🥕", "label", "Orange Carrot"),
-                    Map.of("emoji", "🍇", "label", "Purple Grapes"),
-                    Map.of("emoji", "🥦", "label", "Green Broccoli"),
-                    Map.of("emoji", "🍓", "label", "Red Strawberry")
-                ),
-                "question", "Which purple fruit was on the market table?",
-                "options", List.of("Purple Grapes", "Eggplant", "Plum", "Blueberries"),
-                "correctAnswer", "Purple Grapes",
-                "explanation", "The market table contained Purple Grapes."
-            ));
-            
-            bank.add(Map.of(
-                "id", "mc-2",
-                "title", "Stationery Desk",
-                "revealTime", 8,
-                "description", "Memorize the study tools placed on the desk.",
-                "items", List.of(
-                    Map.of("emoji", "✂️", "label", "Silver Scissors"),
-                    Map.of("emoji", "📏", "label", "Yellow Ruler"),
-                    Map.of("emoji", "📐", "label", "Triangle Protractor"),
-                    Map.of("emoji", "📎", "label", "Paperclip"),
-                    Map.of("emoji", "✏️", "label", "Pencil"),
-                    Map.of("emoji", "📌", "label", "Red Pushpin")
-                ),
-                "question", "What color was the ruler on the desk?",
-                "options", List.of("Yellow", "Blue", "Clear", "Green"),
-                "correctAnswer", "Yellow",
-                "explanation", "The ruler was bright yellow."
-            ));
-
-            bank.add(Map.of(
-                "id", "mc-3",
-                "title", "Pet Shop Window",
-                "revealTime", 8,
-                "description", "Observe the animals resting in the pet store.",
-                "items", List.of(
-                    Map.of("emoji", "🐶", "label", "Golden Dog"),
-                    Map.of("emoji", "🐱", "label", "Tabby Cat"),
-                    Map.of("emoji", "🐹", "label", "Hamster"),
-                    Map.of("emoji", "🐰", "label", "White Rabbit"),
-                    Map.of("emoji", "🦜", "label", "Green Parrot"),
-                    Map.of("emoji", "🐠", "label", "Goldfish")
-                ),
-                "question", "Which bird was in the pet shop window?",
-                "options", List.of("Green Parrot", "Canary", "Pigeon", "Owl"),
-                "correctAnswer", "Green Parrot",
-                "explanation", "The window featured a Green Parrot."
-            ));
-
-            bank.add(Map.of(
-                "id", "mc-4",
-                "title", "Art Studio Shelf",
-                "revealTime", 8,
-                "description", "Memorize the art supplies on the shelf.",
-                "items", List.of(
-                    Map.of("emoji", "🎨", "label", "Paint Palette"),
-                    Map.of("emoji", "🖌️", "label", "Paintbrush"),
-                    Map.of("emoji", "📐", "label", "Ruler"),
-                    Map.of("emoji", "✏️", "label", "Sketch Pencil"),
-                    Map.of("emoji", "📓", "label", "Notebook"),
-                    Map.of("emoji", "🏺", "label", "Clay Vase")
-                ),
-                "question", "What container was placed on the shelf?",
-                "options", List.of("Clay Vase", "Glass Jar", "Metal Bucket", "Plastic Cup"),
-                "correctAnswer", "Clay Vase",
-                "explanation", "A Clay Vase was sitting on the shelf."
-            ));
             
             Collections.shuffle(bank);
             for (int i = 0; i < Math.min(4, bank.size()); i++) {
@@ -840,14 +965,16 @@ public class MatchService {
         }
 
         try {
-            List<PuzzleDto> puzzles = gameService.getPuzzlesByGame(gameSlug, difficulty != null ? difficulty : "MEDIUM");
+            // Full (answer-bearing) DB puzzles; stored server-side only and sanitised for clients.
+            List<Map<String, Object>> puzzles = gameService.getPuzzlesForMatch(gameSlug, difficulty != null ? difficulty : "MEDIUM");
             if (puzzles == null || puzzles.isEmpty()) {
-                puzzles = gameService.getPuzzlesByGame(gameSlug, null);
+                puzzles = gameService.getPuzzlesForMatch(gameSlug, null);
             }
             if (puzzles != null && !puzzles.isEmpty()) {
+                puzzles = new ArrayList<>(puzzles);
                 Collections.shuffle(puzzles);
                 int limit = ("dsa-master-quiz".equalsIgnoreCase(gameSlug) || "number-detective".equalsIgnoreCase(gameSlug)) ? 5 : 10;
-                List<PuzzleDto> chosen = puzzles.stream().limit(limit).toList();
+                List<Map<String, Object>> chosen = puzzles.stream().limit(limit).toList();
                 return objectMapper.writeValueAsString(chosen);
             }
         } catch (Exception e) {
@@ -857,6 +984,17 @@ public class MatchService {
     }
 
     public MatchDto convertToDto(Match match) {
+        return convertToDto(match, null);
+    }
+
+    /**
+     * Client-safe DTO. {@code challengeData} is always the sanitised view (no answers/explanations);
+     * {@code viewerId} (if a participant) adds that player's own progress.
+     */
+    public MatchDto convertToDto(Match match, Long viewerId) {
+        MatchChallenge challenge = MatchChallenge.parse(match.getChallengeData());
+        String viewerSlot = viewerId == null ? null
+                : (isPlayer1(match, viewerId) ? MatchChallenge.P1 : (isPlayer2(match, viewerId) ? MatchChallenge.P2 : null));
         User p1 = match.getPlayer1();
         User p2 = match.getPlayer2();
 
@@ -911,7 +1049,10 @@ public class MatchService {
                 .player2Finished(p2FinishedSafe)
                 .winnerId(match.getWinnerId())
                 .winnerUsername(winnerName)
-                .challengeData(match.getChallengeData())
+                .challengeData(MatchChallenge.toClientJson(match.getChallengeData()))
+                .totalQuestions(challenge.questionCount())
+                .viewerAnsweredCount(viewerSlot == null ? null : challenge.answeredCount(viewerSlot))
+                .viewerCorrectCount(viewerSlot == null ? null : challenge.correctCount(viewerSlot))
                 .isBotMatch(match.getIsBotMatch())
                 .cancelledReason(match.getCancelledReason())
                 .createdAt(match.getCreatedAt())
@@ -931,6 +1072,6 @@ public class MatchService {
         if (activeMatches.isEmpty()) {
             return null;
         }
-        return convertToDto(activeMatches.get(0));
+        return convertToDto(activeMatches.get(0), userId);
     }
 }

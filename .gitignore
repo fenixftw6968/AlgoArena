@@ -20,9 +20,13 @@ lerna-debug.log*
 .settings/
 .factorypath
 
-# Environment variables
+# Environment variables (real values only ever live in untracked files)
 .env
+.env.*
+!.env.example
 .env*.local
+*.pem
+*.key
 
 # Editor/OS directories and files
 .vscode/*

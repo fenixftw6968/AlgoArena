@@ -24,9 +24,16 @@ public class AchievementService {
     private final UserAchievementRepository userAchievementRepository;
     private final UserRepository userRepository;
 
+    /** Requirement types that can still be earned. Anything else in the table is legacy and inert. */
+    private static final java.util.Set<String> SUPPORTED_REQUIREMENTS =
+            java.util.Set.of("games_completed", "no_hint_games", "streak", "level", "coins");
+
     @Transactional(readOnly = true)
     public List<Achievement> getAllAchievements() {
-        return achievementRepository.findAll();
+        // Rows created for retired features may still exist in the database; never show them.
+        return achievementRepository.findAll().stream()
+                .filter(a -> SUPPORTED_REQUIREMENTS.contains(a.getRequirementType()))
+                .toList();
     }
 
     @Transactional(readOnly = true)
@@ -64,8 +71,6 @@ public class AchievementService {
         switch (type) {
             case "games_completed":
                 return user.getGamesCompleted() >= value;
-            case "mysteries_solved":
-                return user.getMysteriesSolved() >= value;
             case "no_hint_games":
                 return user.getNoHintGames() >= value;
             case "streak":
@@ -75,7 +80,7 @@ public class AchievementService {
             case "coins":
                 return user.getCoins() >= value;
             default:
-                log.warn("Unknown achievement requirement type: {}", type);
+                log.debug("Ignoring achievement with unsupported requirement type: {}", type);
                 return false;
         }
     }

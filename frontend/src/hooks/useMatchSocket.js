@@ -21,6 +21,12 @@ export function useMatchSocket(matchId, onEvent) {
       client = new Client({
         webSocketFactory: () => new SockJS(wsUrl),
         reconnectDelay: 5000,
+        // The server authenticates every STOMP session: send the current JWT on each (re)connect.
+        beforeConnect: (stompClient) => {
+          let token = null;
+          try { token = localStorage.getItem('mm_token'); } catch (e) { /* storage unavailable */ }
+          stompClient.connectHeaders = token ? { Authorization: `Bearer ${token}` } : {};
+        },
         heartbeatIncoming: 4000,
         heartbeatOutgoing: 4000,
         debug: () => {}, // Disable noisy debug logs
@@ -44,6 +50,9 @@ export function useMatchSocket(matchId, onEvent) {
           }
         },
         onStompError: (frame) => {
+          // A server-side refusal (bad/expired token, forbidden topic) will not fix itself: stop retrying.
+          // The match/invitation pages keep working through their REST polling fallback.
+          if (clientRef.current) { clientRef.current.reconnectDelay = 0; }
           console.warn('STOMP broker notice: ' + (frame?.headers?.message || ''));
         },
         onWebSocketClose: () => {
