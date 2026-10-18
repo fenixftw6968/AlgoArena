@@ -4,8 +4,12 @@ import { Lock, Eye, EyeOff, AlertCircle, CheckCircle2, KeyRound } from 'lucide-r
 import api from '../../utils/api';
 import AuthShell, { AuthError } from '../../components/AuthShell/AuthShell';
 
-const STRENGTH_INKS = ['var(--riso-coral)', 'var(--riso-yellow)', 'var(--riso-teal)', 'var(--riso-violet)'];
-const STRENGTH_LABELS = ['Weak', 'Fair', 'Good', 'Strong'];
+const STRENGTH_TOKENS = [
+  { color: 'var(--err)', label: 'Weak' },
+  { color: 'var(--warn)', label: 'Fair' },
+  { color: 'var(--ok)', label: 'Good' },
+  { color: 'var(--ok)', label: 'Strong' },
+];
 
 export default function ResetPassword() {
   const [searchParams]          = useSearchParams();
@@ -71,29 +75,17 @@ export default function ResetPassword() {
 
   return (
     <AuthShell
-      kicker="Security Override"
-      title={success ? 'Password Updated' : 'New Password'}
-      lede={success ? undefined : 'Enter and confirm your new credentials to restore access.'}
-      accent="var(--riso-violet)"
+      title={success ? 'Password updated' : 'New password'}
+      lede={success ? undefined : 'Choose a new password for your account.'}
     >
       {success ? (
-        <div style={{ textAlign: 'center' }}>
-          <div style={{
-            width: '64px', height: '64px',
-            background: 'var(--riso-teal)',
-            border: '3px solid var(--ink)',
-            boxShadow: '4px 4px 0 var(--ink)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            margin: '0 auto 1.25rem',
-            transform: 'rotate(4deg)'
-          }}>
-            <CheckCircle2 size={30} color="#fffdf6" />
-          </div>
-          <p className="zine-lede" style={{ fontSize: '0.9rem', marginBottom: '1.75rem' }}>
-            Your credentials have been refreshed. You can now log into your account.
+        <div>
+          <div className="auth-success-icon"><CheckCircle2 size={22} /></div>
+          <p className="muted" style={{ fontSize: '0.875rem', lineHeight: 1.65, marginBottom: 24 }}>
+            Your password has been updated. You can now log in with your new credentials.
           </p>
-          <Link to="/login" className="btn-primary" style={{ width: '100%' }}>
-            Proceed to Login
+          <Link to="/login" className="btn btn--primary" style={{ width: '100%' }}>
+            Go to login
           </Link>
         </div>
       ) : (
@@ -101,90 +93,89 @@ export default function ResetPassword() {
           <AuthError>
             {error && (
               <>
-                <AlertCircle size={16} />
-                <span className="font-mono" style={{ fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{error}</span>
+                <AlertCircle size={15} />
+                <span>{error}</span>
               </>
             )}
           </AuthError>
 
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.05rem' }}>
+          <form onSubmit={handleSubmit} className="auth-form">
             <div>
-              <label className="zine-label" htmlFor="rp-token">Reset Security Token</label>
+              <label className="zine-label" htmlFor="rp-token">Reset token</label>
               <div style={{ position: 'relative' }}>
-                <KeyRound size={16} color="var(--ink-muted)" style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)' }} />
+                <KeyRound size={15} className="field-icon" />
                 <input
                   id="rp-token"
                   type="text"
                   required
-                  placeholder="Paste your reset token..."
+                  placeholder="Paste the token from your email"
                   value={token}
                   onChange={(e) => setToken(e.target.value)}
-                  className="zine-field"
-                  style={{ paddingLeft: '2.4rem' }}
+                  className="zine-field field-with-icon"
                 />
               </div>
             </div>
 
             <div>
-              <label className="zine-label" htmlFor="rp-pass">New Password</label>
+              <label className="zine-label" htmlFor="rp-pass">New password</label>
               <div style={{ position: 'relative' }}>
-                <Lock size={16} color="var(--ink-muted)" style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)' }} />
+                <Lock size={15} className="field-icon" />
                 <input
                   id="rp-pass"
                   type={showPass ? 'text' : 'password'}
                   required
-                  placeholder="••••••••••••"
+                  autoComplete="new-password"
+                  placeholder="At least 6 characters"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="zine-field"
-                  style={{ paddingLeft: '2.4rem', paddingRight: '2.4rem' }}
+                  className="zine-field field-with-icon field-with-icon-r"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPass(!showPass)}
                   aria-label={showPass ? 'Hide password' : 'Show password'}
-                  style={{ position: 'absolute', right: '0.7rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'var(--ink-muted)', cursor: 'pointer', display: 'flex', padding: 0 }}
+                  className="field-action"
                 >
-                  {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
+                  {showPass ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
               </div>
 
               {password && (
-                <div style={{ marginTop: '0.5rem' }}>
-                  <div style={{ display: 'flex', gap: '3px', marginBottom: '0.3rem' }}>
+                <div style={{ marginTop: 10 }}>
+                  <div style={{ display: 'flex', gap: 4 }}>
                     {[1, 2, 3, 4].map(idx => (
-                      <div
+                      <span
                         key={idx}
                         style={{
-                          height: '8px',
+                          height: 4,
                           flex: 1,
-                          border: '2px solid var(--ink)',
-                          background: idx <= strength ? STRENGTH_INKS[strength - 1] : 'var(--paper-sunk)',
-                          transition: 'background 0.15s linear'
+                          borderRadius: 999,
+                          background: idx <= strength ? STRENGTH_TOKENS[strength - 1].color : 'var(--surface-3)',
+                          transition: 'background 0.2s ease',
                         }}
                       />
                     ))}
                   </div>
-                  <span className="font-mono" style={{ fontSize: '0.64rem', color: 'var(--ink-muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em' }}>
-                    Ink pressure: {STRENGTH_LABELS[strength - 1] || 'Too short'}
-                  </span>
+                  <div style={{ marginTop: 7, fontSize: '0.75rem', color: 'var(--ink-muted)' }}>
+                    Password strength: <strong style={{ fontWeight: 500, color: 'var(--ink-soft)' }}>{STRENGTH_TOKENS[strength - 1]?.label || 'Too short'}</strong>
+                  </div>
                 </div>
               )}
             </div>
 
             <div>
-              <label className="zine-label" htmlFor="rp-conf">Confirm New Password</label>
+              <label className="zine-label" htmlFor="rp-conf">Confirm new password</label>
               <div style={{ position: 'relative' }}>
-                <Lock size={16} color="var(--ink-muted)" style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)' }} />
+                <Lock size={15} className="field-icon" />
                 <input
                   id="rp-conf"
                   type={showPass ? 'text' : 'password'}
                   required
-                  placeholder="••••••••••••"
+                  autoComplete="new-password"
+                  placeholder="Repeat your password"
                   value={confirmPassword}
                   onChange={(e) => setConfirm(e.target.value)}
-                  className="zine-field"
-                  style={{ paddingLeft: '2.4rem' }}
+                  className="zine-field field-with-icon"
                 />
               </div>
             </div>
@@ -192,10 +183,10 @@ export default function ResetPassword() {
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary"
-              style={{ width: '100%', marginTop: '0.35rem', padding: '0.85rem', opacity: loading ? 0.6 : 1 }}
+              className="btn btn--primary"
+              style={{ width: '100%', marginTop: 6 }}
             >
-              {loading ? 'Overriding...' : 'Save New Password'}
+              {loading ? 'Saving…' : 'Save new password'}
             </button>
           </form>
         </>

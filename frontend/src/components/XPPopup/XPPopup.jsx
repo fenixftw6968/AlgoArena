@@ -2,38 +2,44 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 export default function XPPopup({ popups }) {
   return (
-    <div style={{ position: 'fixed', bottom: '5rem', right: '2rem', zIndex: 999, pointerEvents: 'none', display: 'flex', flexDirection: 'column-reverse', gap: '0.5rem' }}>
+    <div style={{ position: 'fixed', bottom: '24px', right: '24px', zIndex: 999, pointerEvents: 'none', display: 'flex', flexDirection: 'column-reverse', gap: '8px' }}>
       <AnimatePresence>
         {popups.map(p => (
           <motion.div
             key={p.id}
-            initial={{ opacity: 0, y: 0, scale: 0.6 }}
-            animate={{ opacity: 1, y: -50, scale: 1 }}
-            exit={{ opacity: 0, y: -90, scale: 0.8 }}
-            transition={{ duration: 1.4, ease: 'easeOut' }}
-            style={{
-              background: 'var(--riso-yellow)',
-              border: '3px solid var(--ink)',
-              color: 'var(--ink)',
-              fontWeight: 800,
-              fontSize: '0.85rem',
-              padding: '0.55rem 1.1rem',
-              boxShadow: '5px 5px 0 var(--riso-coral)',
-              fontFamily: 'var(--font-display)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.02em',
-              whiteSpace: 'nowrap',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.4rem',
-              transform: 'rotate(-1.5deg)'
-            }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            className="xp-popup"
           >
-            <span>+{p.amount} XP</span>
-            <span style={{ fontSize: '0.95rem' }}>&#9889;</span>
+            <span className="xp-popup-amount mono">+{p.amount} XP</span>
+            {p.label && <span className="xp-popup-label">{p.label}</span>}
           </motion.div>
         ))}
       </AnimatePresence>
+
+      <style>{`
+        .xp-popup {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 12px 16px;
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 10px;
+          white-space: nowrap;
+        }
+        .xp-popup-amount {
+          font-size: 0.85rem;
+          font-weight: 600;
+          color: var(--ink);
+        }
+        .xp-popup-label {
+          font-size: 0.78rem;
+          color: var(--ink-muted);
+        }
+      `}</style>
     </div>
   );
 }

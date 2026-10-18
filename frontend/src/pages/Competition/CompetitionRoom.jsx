@@ -60,7 +60,7 @@ export default function CompetitionRoom() {
       body = <div className="zine-panel comp-card"><p className="comp-muted">This competition is already in progress. Results will be public when it ends.</p></div>;
     } else if (state.me?.finished) {
       body = (
-        <div className="zine-card comp-card" style={{ boxShadow: '8px 8px 0 var(--riso-violet)' }}>
+        <div className="zine-card comp-card">
           <div className="zine-kicker">You are done</div>
           <h1 className="zine-display" style={{ fontSize: 'clamp(1.4rem, 4vw, 2rem)', margin: '0.3rem 0 0.5rem' }}>
             Waiting for the others
@@ -88,8 +88,7 @@ export default function CompetitionRoom() {
   }
 
   return (
-    <div className="cosmic-void comp-page">
-      <div className="paper-grain" />
+    <div className="comp-page">
       <div className="comp-wrap">{body}</div>
     </div>
   );

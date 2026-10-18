@@ -23,65 +23,64 @@ export default function Login() {
     else setError(result.error || 'Login failed');
   };
 
+  const fieldStyle = { position: 'relative' };
+
   return (
     <AuthShell
-      title="Log In"
-      lede="Sign in to resume your run of the daily puzzle gauntlet."
-      accent="var(--riso-violet)"
+      title="Log in"
+      lede="Welcome back. Pick up where you left off."
     >
       <AuthError>
         {error && (
           <>
-            <AlertCircle size={16} />
-            <span style={{ fontSize: '0.8rem', fontWeight: 700, fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>{error}</span>
+            <AlertCircle size={15} />
+            <span>{error}</span>
           </>
         )}
       </AuthError>
 
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.15rem' }}>
+      <form onSubmit={handleSubmit} className="auth-form">
         <div>
-          <label className="zine-label" htmlFor="login-email">Email Address</label>
-          <div style={{ position: 'relative' }}>
-            <Mail size={16} color="var(--ink-muted)" style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)' }} />
+          <label className="zine-label" htmlFor="login-email">Email</label>
+          <div style={fieldStyle}>
+            <Mail size={15} className="field-icon" />
             <input
               id="login-email"
               type="email"
               required
-              placeholder="Enter your email"
+              autoComplete="email"
+              placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="zine-field"
-              style={{ paddingLeft: '2.4rem' }}
+              className="zine-field field-with-icon"
             />
           </div>
         </div>
 
         <div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.35rem', gap: '0.5rem' }}>
+          <div className="row row--between" style={{ marginBottom: 6 }}>
             <label className="zine-label" htmlFor="login-pass" style={{ marginBottom: 0 }}>Password</label>
-            <Link to="/forgot-password" className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--riso-violet)', textDecoration: 'none', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-              Forgot?
-            </Link>
+            <Link to="/forgot-password" className="auth-link-sm">Forgot password?</Link>
           </div>
-          <div style={{ position: 'relative' }}>
-            <Lock size={16} color="var(--ink-muted)" style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)' }} />
+          <div style={fieldStyle}>
+            <Lock size={15} className="field-icon" />
             <input
               id="login-pass"
               type={showPass ? 'text' : 'password'}
               required
-              placeholder="••••••••••••"
+              autoComplete="current-password"
+              placeholder="Your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="zine-field"
-              style={{ paddingLeft: '2.4rem', paddingRight: '2.4rem' }}
+              className="zine-field field-with-icon field-with-icon-r"
             />
             <button
               type="button"
               onClick={() => setShowPass(!showPass)}
               aria-label={showPass ? 'Hide password' : 'Show password'}
-              style={{ position: 'absolute', right: '0.7rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'var(--ink-muted)', cursor: 'pointer', display: 'flex', padding: 0 }}
+              className="field-action"
             >
-              {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
+              {showPass ? <EyeOff size={15} /> : <Eye size={15} />}
             </button>
           </div>
         </div>
@@ -89,21 +88,16 @@ export default function Login() {
         <button
           type="submit"
           disabled={loading}
-          className="btn-primary"
-          style={{ width: '100%', marginTop: '0.35rem', padding: '0.85rem', opacity: loading ? 0.6 : 1 }}
+          className="btn btn--primary"
+          style={{ width: '100%', marginTop: 6 }}
         >
-          {loading ? 'Verifying...' : 'Log In'}
+          {loading ? 'Signing in…' : 'Log in'}
         </button>
       </form>
 
-      <div style={{ marginTop: '1.5rem', paddingTop: '1rem', borderTop: '2px dashed var(--ink-faint)', textAlign: 'center' }}>
-        <span style={{ color: 'var(--ink-muted)', fontSize: '0.85rem' }}>
-          No account yet?{' '}
-          <Link to="/signup" style={{ color: 'var(--riso-coral)', fontWeight: 700, textDecoration: 'underline', textDecorationThickness: '2px' }}>
-            Register
-          </Link>
-        </span>
-      </div>
+      <p className="auth-switch">
+        No account yet? <Link to="/signup">Create one</Link>
+      </p>
     </AuthShell>
   );
 }

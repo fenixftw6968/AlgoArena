@@ -1,7 +1,7 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { COMPETITION_ENABLED } from '../../utils/competitionConfig';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Brain, Flame, Coins, LogOut, ChevronDown, Users, User } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Brain, Coins, Flame, LogOut, Menu, Swords, User, Users, X } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { getRankFromRating } from '../../utils/rankUtils';
@@ -63,6 +63,12 @@ export default function Navbar() {
     };
   }, [isAuthenticated, processingInviteId]);
 
+  // Close menus on navigation
+  useEffect(() => {
+    setUserMenuOpen(false);
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
   const handleAcceptInvite = async (invite) => {
     if (!invite?.id) return;
     acceptedInviteIdsRef.current.add(invite.id);
@@ -104,9 +110,9 @@ export default function Navbar() {
   const navLinks = [
     { to: '/dashboard',       label: 'Dashboard' },
     { to: '/games',           label: 'Arena' },
-    { to: '/daily-challenge', label: 'Challenges' },
+    { to: '/daily-challenge', label: 'Daily' },
     ...(COMPETITION_ENABLED ? [{ to: '/competitions', label: 'Showdown' }] : []),
-    { to: '/leaderboard',     label: 'Progress' },
+    { to: '/leaderboard',     label: 'Leaderboard' },
     { to: '/profile',         label: 'Profile' },
   ];
 
@@ -115,195 +121,160 @@ export default function Navbar() {
 
   return (
     <>
-      {/* ============ PRINT-SHOP MASTHEAD ============ */}
-      <header style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 100,
-        pointerEvents: 'none'
-      }}>
-        <div style={{
-          width: '100%',
-          maxWidth: '1240px',
-          margin: '0.85rem auto 0',
-          padding: '0 0.75rem',
-          pointerEvents: 'auto'
-        }}>
-          <div style={{
-            background: 'var(--paper-card)',
-            border: '3px solid var(--ink)',
-            boxShadow: '6px 6px 0 var(--ink)',
-            height: '56px',
-            padding: '0 0.85rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '0.75rem',
-            position: 'relative'
-          }}>
-            <div className="halftone-violet halftone-fade-l" style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 60, opacity: 0.35 }} />
+      <header className="nav-root">
+        <div className="nav-inner">
+          {/* Brand */}
+          <Link to={isAuthenticated ? '/dashboard' : '/'} className="nav-brand">
+            <span className="nav-brand-mark"><Brain size={15} /></span>
+            <span className="nav-brand-name">AlgoArena</span>
+          </Link>
 
-            {/* Left: Brand + Desktop Nav */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', position: 'relative' }}>
-              <Link to={isAuthenticated ? '/dashboard' : '/'} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <div style={{
-                  width: '34px',
-                  height: '34px',
-                  background: 'var(--riso-violet)',
-                  border: '2px solid var(--ink)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transform: 'rotate(-3deg)',
-                  flexShrink: 0
-                }}>
-                  <Brain size={17} color="#fffdf6" />
+          {/* Desktop nav */}
+          {isAuthenticated && (
+            <nav className="nav-links" aria-label="Primary">
+              {navLinks.map(link => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={`nav-link${isActive(link.to) ? ' nav-link--active' : ''}`}
+                  aria-current={isActive(link.to) ? 'page' : undefined}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+          )}
+
+          {/* Right side */}
+          <div className="nav-actions">
+            {isAuthenticated && user ? (
+              <>
+                <div className="nav-stats" aria-label="Player stats">
+                  <span className="nav-stat" title="Rating">
+                    <Swords size={13} />
+                    <span className="mono">{user.competitiveRating || 500}</span>
+                  </span>
+                  <span className="nav-stat" title="Coins">
+                    <Coins size={13} />
+                    <span className="mono">{user.coins ?? 0}</span>
+                  </span>
+                  <span className="nav-stat" title="Streak">
+                    <Flame size={13} />
+                    <span className="mono">{user.currentStreak ?? 0}</span>
+                  </span>
                 </div>
-                <span className="zine-display" style={{ fontSize: '0.95rem' }}>
-                  Algo<span style={{ color: 'var(--riso-coral)' }}>Arena</span>
-                </span>
-              </Link>
 
-              {isAuthenticated && (
-                <div className="hidden md:flex" style={{ display: 'flex', gap: '0.15rem', alignItems: 'center' }}>
-                  {navLinks.map(link => {
-                    const active = isActive(link.to);
-                    return (
-                      <Link
-                        key={link.to}
-                        to={link.to}
-                        className="zine-btn-sm"
-                        style={{
-                          background: active ? 'var(--ink)' : 'transparent',
-                          color: active ? 'var(--paper)' : 'var(--ink)',
-                          boxShadow: active ? '3px 3px 0 var(--riso-coral)' : 'none',
-                          transform: active ? 'translate(-1px, -1px)' : 'none',
-                        }}
-                      >
-                        {link.label}
-                      </Link>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
+                <button
+                  onClick={() => setSocialOpen(true)}
+                  title="Friends & social"
+                  aria-label="Friends and social"
+                  className="nav-icon-btn"
+                >
+                  <Users size={15} />
+                </button>
 
-            {/* Right: User Stats & Actions */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', position: 'relative' }}>
-              {isAuthenticated && user ? (
-                <>
-                  <div style={{ display: 'flex', gap: '0.3rem', alignItems: 'center' }}>
-                    <div className="zine-badge" style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', background: 'var(--riso-violet)', color: '#fffdf6' }}>
-                      <span style={{ fontSize: '0.8rem' }}>{currentRank.badge}</span>
-                      <span>{user.competitiveRating || 500}</span>
-                    </div>
-                    <div className="zine-badge" style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', background: 'var(--riso-yellow)' }}>
-                      <Coins size={11} />
-                      <span>{user.coins}</span>
-                    </div>
-                    <div className="zine-badge" style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', background: 'var(--riso-teal)', color: '#fffdf6' }}>
-                      <Flame size={11} />
-                      <span>{user.currentStreak}</span>
-                    </div>
-                  </div>
-
+                <div className="nav-menu-wrap">
                   <button
-                    onClick={() => setSocialOpen(true)}
-                    title="Friends & Social"
-                    className="zine-btn-sm"
+                    onClick={() => setUserMenuOpen(v => !v)}
+                    className="nav-user-btn"
+                    aria-haspopup="menu"
+                    aria-expanded={userMenuOpen}
                   >
-                    <Users size={13} />
+                    <span className="nav-user-avatar">{user.username?.[0]?.toUpperCase()}</span>
+                    <span className="nav-user-name truncate">{user.username}</span>
                   </button>
 
-                  {/* User menu dropdown */}
-                  <div style={{ position: 'relative' }}>
-                    <button
-                      onClick={() => setUserMenuOpen(!userMenuOpen)}
-                      className="zine-btn-sm"
-                      style={{ paddingLeft: '0.3rem', background: 'var(--paper-card)' }}
-                    >
-                      <div style={{
-                        width: '22px',
-                        height: '22px',
-                        background: 'var(--riso-coral)',
-                        color: '#fffdf6',
-                        border: '2px solid var(--ink)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: '0.65rem',
-                        fontWeight: 800
-                      }}>
-                        {user.username?.[0]?.toUpperCase()}
-                      </div>
-                      <span>{user.username}</span>
-                      <ChevronDown size={12} style={{ transform: userMenuOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
-                    </button>
-
-                    <AnimatePresence>
-                      {userMenuOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, y: -8 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -8 }}
-                          transition={{ duration: 0.12 }}
-                          style={{
-                            position: 'absolute',
-                            top: 'calc(100% + 10px)',
-                            right: 0,
-                            background: 'var(--paper-card)',
-                            border: '3px solid var(--ink)',
-                            boxShadow: '5px 5px 0 var(--ink)',
-                            padding: '0.35rem',
-                            minWidth: '170px',
-                            zIndex: 200,
-                          }}
+                  <AnimatePresence>
+                    {userMenuOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -4 }}
+                        transition={{ duration: 0.12 }}
+                        className="nav-dropdown"
+                        role="menu"
+                      >
+                        <div className="nav-dropdown-head">
+                          <div className="nav-dropdown-name truncate">{user.username}</div>
+                          <div className="nav-dropdown-meta mono">
+                            {currentRank.name} · {user.competitiveRating || 500} · Lv {user.level || 1}
+                          </div>
+                        </div>
+                        <div className="nav-dropdown-sep" />
+                        <Link to="/profile" className="nav-dropdown-item" role="menuitem">
+                          <User size={14} /> Profile
+                        </Link>
+                        <Link to="/leaderboard" className="nav-dropdown-item" role="menuitem">
+                          <Swords size={14} /> Leaderboard
+                        </Link>
+                        <div className="nav-dropdown-sep" />
+                        <button
+                          onClick={handleLogout}
+                          className="nav-dropdown-item nav-dropdown-item--danger"
+                          role="menuitem"
                         >
-                          <Link
-                            to="/profile"
-                            onClick={() => setUserMenuOpen(false)}
-                            className="zine-btn-sm"
-                            style={{ width: '100%', justifyContent: 'flex-start', boxShadow: 'none', border: 'none', background: 'transparent', padding: '0.5rem 0.6rem', textTransform: 'none', letterSpacing: 0, fontSize: '0.75rem' }}
-                          >
-                            <User size={13} /> Profile
-                          </Link>
-                          <button
-                            onClick={() => { setUserMenuOpen(false); handleLogout(); }}
-                            className="zine-btn-sm"
-                            style={{ width: '100%', justifyContent: 'flex-start', boxShadow: 'none', border: 'none', background: 'transparent', padding: '0.5rem 0.6rem', color: 'var(--riso-coral)', textTransform: 'none', letterSpacing: 0, fontSize: '0.75rem' }}
-                          >
-                            <LogOut size={13} /> Log Out
-                          </button>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                </>
-              ) : (
-                <div style={{ display: 'flex', gap: '0.45rem', alignItems: 'center' }}>
-                  <Link to="/login" className="zine-btn-sm" style={{ padding: '0.45rem 0.9rem' }}>
-                    Log In
-                  </Link>
-                  <Link to="/signup" className="zine-btn-sm zine-btn-sm--coral" style={{ padding: '0.45rem 0.9rem' }}>
-                    Join
-                  </Link>
+                          <LogOut size={14} /> Log out
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-              )}
-            </div>
+
+                <button
+                  className="nav-icon-btn nav-icon-btn--mobile"
+                  onClick={() => setMobileMenuOpen(v => !v)}
+                  aria-label="Toggle navigation menu"
+                  aria-expanded={mobileMenuOpen}
+                >
+                  {mobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
+                </button>
+              </>
+            ) : (
+              <div className="nav-auth">
+                <Link to="/login" className="nav-link">Log in</Link>
+                <Link to="/signup" className="btn btn--primary btn--sm">Create account</Link>
+              </div>
+            )}
           </div>
         </div>
+
+        {/* Mobile menu */}
+        <AnimatePresence>
+          {isAuthenticated && mobileMenuOpen && (
+            <motion.nav
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.12 }}
+              className="nav-mobile"
+              aria-label="Mobile navigation"
+            >
+              {navLinks.map(link => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={`nav-mobile-link${isActive(link.to) ? ' nav-mobile-link--active' : ''}`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <div className="nav-mobile-sep" />
+              <button onClick={handleLogout} className="nav-mobile-link nav-mobile-link--danger">
+                <LogOut size={14} /> Log out
+              </button>
+            </motion.nav>
+          )}
+        </AnimatePresence>
       </header>
 
-      {/* Incoming Friend Match Invitation Popup */}
+      {/* Incoming friend match invitation popup */}
       <IncomingInviteModal
         invite={pendingInvite}
         onAccept={handleAcceptInvite}
         onDecline={handleDeclineInvite}
       />
 
-      {/* Friends & Social Drawer */}
+      {/* Friends & social drawer */}
       <SocialDrawer
         isOpen={socialOpen}
         onClose={() => setSocialOpen(false)}
@@ -312,6 +283,213 @@ export default function Navbar() {
           navigate('/games');
         }}
       />
+
+      <style>{`
+        .nav-root {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 100;
+          background: rgba(250, 250, 250, 0.92);
+          border-bottom: 1px solid var(--border);
+        }
+        .nav-inner {
+          max-width: 1200px;
+          margin: 0 auto;
+          height: 64px;
+          padding: 0 24px;
+          display: flex;
+          align-items: center;
+          gap: 24px;
+        }
+        .nav-brand {
+          display: inline-flex;
+          align-items: center;
+          gap: 9px;
+          text-decoration: none;
+          color: var(--ink);
+          flex-shrink: 0;
+        }
+        .nav-brand-mark {
+          width: 28px;
+          height: 28px;
+          border-radius: 8px;
+          background: var(--ink);
+          color: #fff;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .nav-brand-name {
+          font-size: 0.94rem;
+          font-weight: 600;
+          letter-spacing: -0.02em;
+        }
+        .nav-links {
+          display: flex;
+          align-items: center;
+          gap: 2px;
+          flex: 1;
+          min-width: 0;
+          overflow: hidden;
+        }
+        .nav-link {
+          display: inline-flex;
+          align-items: center;
+          padding: 7px 12px;
+          border-radius: 7px;
+          font-size: 0.85rem;
+          font-weight: 450;
+          color: var(--ink-muted);
+          text-decoration: none;
+          white-space: nowrap;
+          transition: color 0.15s ease, background 0.15s ease;
+        }
+        .nav-link:hover { color: var(--ink); background: var(--surface-2); }
+        .nav-link--active { color: var(--ink); font-weight: 550; }
+        .nav-actions {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-left: auto;
+          flex-shrink: 0;
+        }
+        .nav-stats {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          padding-right: 12px;
+          border-right: 1px solid var(--border);
+        }
+        .nav-stat {
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          font-size: 0.8rem;
+          color: var(--ink-muted);
+        }
+        .nav-stat .mono { color: var(--ink-soft); font-size: 0.78rem; }
+        .nav-icon-btn {
+          width: 34px;
+          height: 34px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid var(--border);
+          border-radius: 8px;
+          background: var(--surface);
+          color: var(--ink-soft);
+          cursor: pointer;
+          transition: border-color 0.15s ease, color 0.15s ease;
+        }
+        .nav-icon-btn:hover { border-color: var(--border-strong); color: var(--ink); }
+        .nav-icon-btn--mobile { display: none; }
+        .nav-menu-wrap { position: relative; }
+        .nav-user-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          height: 34px;
+          padding: 0 10px 0 4px;
+          border: 1px solid var(--border);
+          border-radius: 8px;
+          background: var(--surface);
+          color: var(--ink);
+          font-size: 0.83rem;
+          font-weight: 500;
+          cursor: pointer;
+          max-width: 190px;
+          transition: border-color 0.15s ease;
+        }
+        .nav-user-btn:hover { border-color: var(--border-strong); }
+        .nav-user-avatar {
+          width: 26px;
+          height: 26px;
+          border-radius: 6px;
+          background: var(--surface-2);
+          border: 1px solid var(--border);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 0.72rem;
+          font-weight: 600;
+          font-family: var(--font-mono);
+          flex-shrink: 0;
+        }
+        .nav-user-name { max-width: 110px; }
+        .nav-dropdown {
+          position: absolute;
+          top: calc(100% + 8px);
+          right: 0;
+          width: 220px;
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 12px;
+          padding: 6px;
+          z-index: 200;
+        }
+        .nav-dropdown-head { padding: 10px 10px 8px; }
+        .nav-dropdown-name { font-size: 0.85rem; font-weight: 600; color: var(--ink); }
+        .nav-dropdown-meta { font-size: 0.7rem; color: var(--ink-muted); margin-top: 2px; }
+        .nav-dropdown-sep { height: 1px; background: var(--border); margin: 5px 4px; }
+        .nav-dropdown-item {
+          display: flex;
+          align-items: center;
+          gap: 9px;
+          width: 100%;
+          padding: 8px 10px;
+          border: none;
+          border-radius: 7px;
+          background: transparent;
+          color: var(--ink-soft);
+          font-size: 0.84rem;
+          font-weight: 450;
+          text-decoration: none;
+          cursor: pointer;
+          transition: background 0.12s ease, color 0.12s ease;
+        }
+        .nav-dropdown-item:hover { background: var(--surface-2); color: var(--ink); }
+        .nav-dropdown-item--danger { color: var(--err); }
+        .nav-dropdown-item--danger:hover { background: var(--err-soft); color: var(--err); }
+        .nav-auth { display: flex; align-items: center; gap: 12px; }
+        .nav-mobile {
+          display: none;
+          border-top: 1px solid var(--border);
+          background: var(--surface);
+          padding: 10px 16px 14px;
+        }
+        .nav-mobile-link {
+          display: flex;
+          align-items: center;
+          gap: 9px;
+          width: 100%;
+          padding: 11px 12px;
+          border: none;
+          border-radius: 8px;
+          background: transparent;
+          color: var(--ink-soft);
+          font-size: 0.88rem;
+          text-decoration: none;
+          cursor: pointer;
+        }
+        .nav-mobile-link:hover { background: var(--surface-2); color: var(--ink); }
+        .nav-mobile-link--active { color: var(--ink); font-weight: 550; }
+        .nav-mobile-link--danger { color: var(--err); }
+        .nav-mobile-sep { height: 1px; background: var(--border); margin: 6px 0; }
+
+        @media (max-width: 1024px) {
+          .nav-links { display: none; }
+          .nav-icon-btn--mobile { display: inline-flex; }
+          .nav-mobile { display: block; }
+        }
+        @media (max-width: 560px) {
+          .nav-inner { padding: 0 16px; gap: 12px; }
+          .nav-stats { display: none; }
+          .nav-user-name { display: none; }
+          .nav-user-btn { padding: 0 4px; }
+        }
+      `}</style>
     </>
   );
 }

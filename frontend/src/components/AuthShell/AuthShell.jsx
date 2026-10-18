@@ -1,101 +1,171 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { Brain } from 'lucide-react';
 
-export default function AuthShell({ kicker, title, lede, accent = 'var(--riso-violet)', children, footer }) {
+/**
+ * Minimal auth chrome: quiet top bar, centered card, hairline footer.
+ * All four auth pages (login, signup, forgot, reset) render inside this shell.
+ */
+export default function AuthShell({ kicker, title, lede, children, footer }) {
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'var(--paper)',
-      position: 'relative',
-      overflowX: 'hidden',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      color: 'var(--ink)'
-    }}>
-      <div className="paper-grain" />
-      <div className="halftone-violet halftone-fade-b" style={{ position: 'absolute', inset: 0, opacity: 0.28 }} />
-      <div className="halftone-coral" style={{ position: 'absolute', top: -60, right: -60, width: 340, height: 340, opacity: 0.3 }} />
-      <div className="tape" style={{ top: 108, left: '8%', transform: 'rotate(-6deg)' }} />
-      <div className="tape" style={{ bottom: 64, right: '6%', transform: 'rotate(5deg)', background: 'rgba(255, 75, 51, 0.6)' }} />
-      <div className="reg-mark" style={{ top: 16, left: 16 }} />
-      <div className="reg-mark" style={{ bottom: 16, right: 16 }} />
-
-      <header style={{
-        padding: '1.75rem 2rem',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        maxWidth: '1200px',
-        margin: '0 auto',
-        width: '100%',
-        boxSizing: 'border-box',
-        zIndex: 10,
-        position: 'relative'
-      }}>
-        <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <div style={{
-            width: '34px', height: '34px',
-            background: 'var(--riso-violet)',
-            border: '2px solid var(--ink)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            transform: 'rotate(-3deg)',
-            boxShadow: '3px 3px 0 var(--ink)'
-          }}>
-            <Brain size={17} color="#fffdf6" />
-          </div>
-          <span className="zine-display" style={{ fontSize: '1rem' }}>
-            Algo<span style={{ color: 'var(--riso-coral)' }}>Arena</span>
-          </span>
+    <div className="auth-root">
+      <header className="auth-top">
+        <Link to="/" className="auth-brand">
+          <span className="auth-brand-mark"><Brain size={15} /></span>
+          <span className="auth-brand-name">AlgoArena</span>
         </Link>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-          <span className="sticker" style={{ display: 'none' }}>Issue 01</span>
-          <Link to="/games" className="zine-btn-sm">Browse Arenas</Link>
-        </div>
+        <Link to="/games" className="btn btn--ghost btn--sm">Browse arenas</Link>
       </header>
 
-      <main style={{
-        maxWidth: '470px',
-        margin: '0 auto',
-        padding: '2rem 1.5rem 4rem',
-        width: '100%',
-        boxSizing: 'border-box',
-        position: 'relative',
-        zIndex: 5,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
-      }}>
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.25 }}
-          className="zine-card"
-          style={{ width: '100%', boxSizing: 'border-box', boxShadow: `10px 10px 0 ${accent}` }}
-        >
-          <div style={{ height: 12, background: accent, borderBottom: '3px solid var(--ink)' }} />
-
-          <div style={{ padding: '2rem 1.75rem 1.75rem' }}>
-            <div style={{ marginBottom: '1.5rem' }}>
-              {kicker && <span className="zine-kicker">{kicker}</span>}
-              <h1 className="zine-display misreg" data-text={title} style={{ fontSize: 'clamp(1.9rem, 6vw, 2.6rem)', margin: '0.5rem 0 0.4rem' }}>
-                {title}
-              </h1>
-              {lede && <p className="zine-lede" style={{ fontSize: '0.9rem' }}>{lede}</p>}
-            </div>
-
-            {children}
+      <main className="auth-main">
+        <div className="auth-card">
+          <div className="auth-card-head">
+            {kicker && <span className="zine-kicker">{kicker}</span>}
+            <h1 className="auth-title">{title}</h1>
+            {lede && <p className="auth-lede">{lede}</p>}
           </div>
-        </motion.div>
+          {children}
+        </div>
       </main>
 
-      <footer style={{ borderTop: '3px solid var(--ink)', padding: '1rem 2rem', textAlign: 'center', zIndex: 10, position: 'relative', background: 'var(--paper-deep)' }}>
-        <p className="font-mono" style={{ fontSize: '0.68rem', textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--ink-muted)' }}>
-          &copy; {new Date().getFullYear()} AlgoArena &mdash; Printed &amp; bound in the open
-        </p>
+      <footer className="auth-foot">
+        <span>© {new Date().getFullYear()} AlgoArena</span>
+        <span>Competitive algorithms, puzzles & duels.</span>
         {footer}
       </footer>
+
+      <style>{`
+        .auth-root {
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+          background: var(--bg);
+        }
+        .auth-top {
+          height: 64px;
+          padding: 0 24px;
+          max-width: 1080px;
+          width: 100%;
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .auth-brand {
+          display: inline-flex;
+          align-items: center;
+          gap: 9px;
+          text-decoration: none;
+          color: var(--ink);
+        }
+        .auth-brand-mark {
+          width: 28px;
+          height: 28px;
+          border-radius: 8px;
+          background: var(--ink);
+          color: #fff;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .auth-brand-name { font-size: 0.94rem; font-weight: 600; letter-spacing: -0.02em; }
+        .auth-main {
+          flex: 1;
+          display: flex;
+          align-items: flex-start;
+          justify-content: center;
+          padding: 48px 24px 72px;
+        }
+        .auth-card {
+          width: 100%;
+          max-width: 420px;
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 16px;
+          padding: 36px 32px 32px;
+        }
+        .auth-card-head { margin-bottom: 28px; }
+        .auth-title {
+          font-size: 1.5rem;
+          font-weight: 600;
+          letter-spacing: -0.025em;
+          margin-top: 8px;
+        }
+        .auth-lede {
+          margin-top: 8px;
+          color: var(--ink-muted);
+          font-size: 0.875rem;
+          line-height: 1.6;
+        }
+        .auth-foot {
+          padding: 20px 24px 28px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 16px;
+          flex-wrap: wrap;
+          color: var(--ink-faint);
+          font-size: 0.75rem;
+        }
+        @media (max-width: 480px) {
+          .auth-card { padding: 28px 20px 24px; }
+          .auth-main { padding: 24px 16px 56px; }
+        }
+
+        /* Shared form patterns for all auth pages */
+        .auth-form { display: flex; flex-direction: column; gap: 18px; }
+        .field-icon {
+          position: absolute;
+          left: 12px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: var(--ink-faint);
+          pointer-events: none;
+        }
+        .field-with-icon { padding-left: 36px; }
+        .field-with-icon-r { padding-right: 38px; }
+        .field-action {
+          position: absolute;
+          right: 8px;
+          top: 50%;
+          transform: translateY(-50%);
+          background: none;
+          border: none;
+          color: var(--ink-faint);
+          cursor: pointer;
+          display: flex;
+          padding: 6px;
+          border-radius: 6px;
+        }
+        .field-action:hover { color: var(--ink-soft); }
+        .auth-link-sm {
+          font-size: 0.78rem;
+          color: var(--ink-muted);
+          text-decoration: none;
+        }
+        .auth-link-sm:hover { color: var(--ink); text-decoration: underline; }
+        .auth-switch {
+          margin-top: 24px;
+          padding-top: 20px;
+          border-top: 1px solid var(--border);
+          text-align: center;
+          color: var(--ink-muted);
+          font-size: 0.85rem;
+        }
+        .auth-switch a { color: var(--ink); font-weight: 500; text-decoration: none; }
+        .auth-switch a:hover { text-decoration: underline; }
+        .auth-success-icon {
+          width: 44px;
+          height: 44px;
+          border-radius: 12px;
+          background: var(--ok-soft);
+          border: 1px solid #bbf7d0;
+          color: var(--ok);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 18px;
+        }
+      `}</style>
     </div>
   );
 }
@@ -103,16 +173,7 @@ export default function AuthShell({ kicker, title, lede, accent = 'var(--riso-vi
 export function AuthError({ children }) {
   if (!children) return null;
   return (
-    <div className="zine-card zine-card--coral" style={{
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.6rem',
-      padding: '0.7rem 0.9rem',
-      marginBottom: '1.25rem',
-      boxShadow: '4px 4px 0 var(--riso-coral)',
-      background: 'var(--riso-coral)',
-      color: '#fffdf6'
-    }}>
+    <div className="notice" role="alert" style={{ marginBottom: 20 }}>
       {children}
     </div>
   );

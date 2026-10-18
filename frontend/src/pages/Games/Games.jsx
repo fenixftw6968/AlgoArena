@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import { Search } from 'lucide-react';
 import GameCard from '../../components/GameCard/GameCard';
 import { getAllGamesList } from '../../data/gameRegistry';
@@ -30,8 +29,8 @@ export default function Games() {
 
   const filtered = games.filter(g => {
     const matchCat  = category   === 'All' || g.category   === category;
-    const matchDiff = difficulty === 'All' 
-      || g.difficulty === difficulty 
+    const matchDiff = difficulty === 'All'
+      || g.difficulty === difficulty
       || (g.xpReward && g.xpReward[difficulty.toLowerCase()] !== undefined)
       || (Array.isArray(g.difficulties) && g.difficulties.includes(difficulty));
     const matchSrc  = !search || g.title.toLowerCase().includes(search.toLowerCase()) || g.description.toLowerCase().includes(search.toLowerCase());
@@ -39,95 +38,109 @@ export default function Games() {
   });
 
   return (
-    <div className="cosmic-void" style={{ minHeight: '100vh', paddingTop: '6rem', position: 'relative' }}>
-      <div className="paper-grain" />
-
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem 1.5rem 5rem', position: 'relative', zIndex: 1 }}>
-
-        {/* Header */}
-        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: '2rem', position: 'relative' }}>
-          <div className="tape" style={{ top: -6, right: '6%' }} />
-          <div className="zine-kicker" style={{ marginBottom: '0.4rem' }}>Discipline Library</div>
-          <h1 className="zine-display misreg" data-text="COGNITIVE ARENAS" style={{ fontSize: 'clamp(2rem, 6vw, 3.4rem)', marginBottom: '0.5rem' }}>
-            COGNITIVE ARENAS
-          </h1>
-          <p className="zine-lede" style={{ maxWidth: '54ch' }}>
-            Select your discipline. Each arena targets specific algorithmic and analytical faculties.
+    <div className="page">
+      <div className="container stack">
+        <header className="page-head" style={{ marginBottom: 0 }}>
+          <h1 className="page-title">Arena</h1>
+          <p className="page-lede">
+            Four disciplines, three difficulty tiers. Practice solo or take it ranked.
           </p>
-        </motion.div>
+        </header>
 
-        {/* Search + Filters */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="zine-card"
-          style={{ marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '1.15rem', padding: '1.4rem 1.5rem', boxShadow: '6px 6px 0 var(--ink)' }}
-        >
-          {/* Search bar */}
-          <div style={{ position: 'relative', maxWidth: '460px' }}>
-            <Search size={16} style={{ position: 'absolute', left: '0.9rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--ink-muted)', pointerEvents: 'none' }} />
+        {/* Search + filters */}
+        <div className="games-toolbar">
+          <div className="games-search">
+            <Search size={15} className="games-search-icon" />
             <input
               type="text"
-              placeholder="Search arenas or topics..."
+              placeholder="Search arenas…"
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="zine-field"
-              style={{ paddingLeft: '2.5rem', fontSize: '0.875rem' }}
+              className="zine-field games-search-input"
+              aria-label="Search arenas"
             />
           </div>
 
-          {/* Category tabs */}
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            {CATEGORIES.map(cat => {
-              const active = category === cat;
-              return (
+          <div className="games-filter-group" role="group" aria-label="Category">
+            <span className="games-filter-label">Category</span>
+            <div className="tabs">
+              {CATEGORIES.map(cat => (
                 <button
                   key={cat}
                   onClick={() => setCategory(cat)}
-                  className={`zine-btn-sm${active ? ' zine-btn-sm--violet' : ''}`}
-                  style={{ padding: '0.45rem 1.1rem', fontSize: '0.7rem' }}
+                  className={`tab${category === cat ? ' active' : ''}`}
                 >
                   {cat}
                 </button>
-              );
-            })}
+              ))}
+            </div>
           </div>
 
-          {/* Difficulty filter row */}
-          <div style={{ display: 'flex', gap: '0.45rem', alignItems: 'center', flexWrap: 'wrap' }}>
-            <span className="zine-label" style={{ marginBottom: 0, marginRight: '0.35rem' }}>
-              Complexity
-            </span>
-            {DIFFICULTIES.map(d => {
-              const active = difficulty === d;
-              return (
+          <div className="games-filter-group" role="group" aria-label="Difficulty">
+            <span className="games-filter-label">Difficulty</span>
+            <div className="tabs">
+              {DIFFICULTIES.map(d => (
                 <button
                   key={d}
                   onClick={() => setDifficulty(d)}
-                  className={`zine-btn-sm${active ? ' zine-btn-sm--teal' : ''}`}
-                  style={{ padding: '0.3rem 0.8rem' }}
+                  className={`tab${difficulty === d ? ' active' : ''}`}
                 >
-                  {d}
+                  {d === 'All' ? 'All' : d.charAt(0) + d.slice(1).toLowerCase()}
                 </button>
-              );
-            })}
+              ))}
+            </div>
           </div>
-        </motion.div>
+        </div>
 
-        {/* Game grid */}
+        {/* Grid */}
         {filtered.length === 0 ? (
-          <div className="zine-card" style={{ textAlign: 'center', padding: '4rem 2rem', boxShadow: '6px 6px 0 var(--riso-coral)' }}>
-            <p className="zine-lede">No arenas found matching your current filter criteria.</p>
+          <div className="card games-empty">
+            <p className="muted">No arenas match your filters.</p>
           </div>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.15rem' }}>
+          <div className="grid-cards">
             {filtered.map((game, i) => (
               <GameCard key={game.slug} game={game} index={i} activeDifficulty={difficulty} />
             ))}
           </div>
         )}
       </div>
+
+      <style>{`
+        .games-toolbar {
+          display: flex;
+          align-items: center;
+          gap: 24px;
+          flex-wrap: wrap;
+          padding: 16px 20px;
+          border: 1px solid var(--border);
+          border-radius: var(--radius);
+          background: var(--surface);
+        }
+        .games-search { position: relative; flex: 1 1 220px; max-width: 320px; }
+        .games-search-icon {
+          position: absolute;
+          left: 12px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: var(--ink-faint);
+          pointer-events: none;
+        }
+        .games-search-input { padding-left: 36px; }
+        .games-filter-group { display: flex; align-items: center; gap: 10px; }
+        .games-filter-label {
+          font-family: var(--font-mono);
+          font-size: 0.68rem;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          color: var(--ink-muted);
+        }
+        .games-empty { padding: 48px 24px; text-align: center; }
+        @media (max-width: 720px) {
+          .games-search { max-width: 100%; }
+          .games-filter-group { width: 100%; flex-wrap: wrap; }
+        }
+      `}</style>
     </div>
   );
 }

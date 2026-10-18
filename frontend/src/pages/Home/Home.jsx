@@ -1,346 +1,233 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowRight, Swords, Trophy, Brain, ChevronRight } from 'lucide-react';
-
-/* ---------- Riso ink marks (bold, blocky, screen-printed) ---------- */
-function StarburstMark() {
-  return (
-    <svg width="34" height="34" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M16 2V30M2 16H30M6.1 6.1L25.9 25.9M6.1 25.9L25.9 6.1" stroke="var(--riso-violet)" strokeWidth="2.75" strokeLinecap="round"/>
-      <circle cx="16" cy="16" r="3.5" fill="var(--riso-coral)" />
-    </svg>
-  );
-}
-function LayersMark() {
-  return (
-    <svg width="34" height="34" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M16 4L28 10L16 16L4 10L16 4Z" fill="var(--riso-violet)"/>
-      <path d="M4 17L16 23L28 17" stroke="var(--riso-coral)" strokeWidth="2.75" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M4 23L16 29L28 23" stroke="var(--riso-teal)" strokeWidth="2.75" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  );
-}
-function CubeMark() {
-  return (
-    <svg width="34" height="34" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M16 3L28 9.5V22.5L16 29L4 22.5V9.5L16 3Z" fill="var(--riso-yellow)" stroke="var(--ink)" strokeWidth="2" strokeLinejoin="round"/>
-      <path d="M16 16V29M16 16L28 9.5M16 16L4 9.5" stroke="var(--ink)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  );
-}
-
-const INKS = ['var(--riso-violet)', 'var(--riso-coral)', 'var(--riso-teal)', 'var(--riso-yellow)', 'var(--riso-violet)', 'var(--riso-coral)'];
+import { ArrowRight, Brain, Swords, Trophy } from 'lucide-react';
 
 const DISCIPLINES = [
-  { glyph: '01', icon: '🧠', title: 'DSA & Algorithms',  desc: 'Master data structures, algorithm complexities, graph traversals, and code output analysis.', difficulty: 5 },
-  { glyph: '02', icon: '🧩', title: 'Logical Reasoning', desc: 'Solve multi-step deduction grids, syllogisms, analogies, and boolean condition puzzles.', difficulty: 4 },
-  { glyph: '03', icon: '🔢', title: 'Number Detective',    desc: 'Crack patterns in non-linear mathematical formulas, Fibonacci variants, and exponential matrices.', difficulty: 3 },
-  { glyph: '04', icon: '🔐', title: 'Code Breaker',        desc: 'Deduce secret combinations through systematic elimination, positional logic, and entropy clues.', difficulty: 4 },
+  { title: 'DSA & Algorithms',  desc: 'Data structures, complexity analysis, graph traversals and code output questions.' },
+  { title: 'Logical Reasoning', desc: 'Multi-step deduction grids, syllogisms, analogies and boolean condition puzzles.' },
+  { title: 'Number Detective',  desc: 'Patterns in non-linear sequences, Fibonacci variants and exponential matrices.' },
+  { title: 'Code Breaker',      desc: 'Deduce secret codes through positional logic, elimination and entropy clues.' },
 ];
 
-const KEY_FEATURES = [
-  { mark: <StarburstMark />, tag: 'Ultra Responsive', title: 'Sub-Second Grading',   desc: 'Instant code and logic validation with millisecond precision, powered by reactive client-server architecture.', ink: 'var(--riso-violet)' },
-  { mark: <LayersMark />,    tag: 'Skill Tiers',      title: 'Adaptive Progression', desc: 'Four calibrated game arenas that test algorithms, logic, number patterns, and deduction against your tier.', ink: 'var(--riso-coral)' },
-  { mark: <CubeMark />,      tag: 'Competitive',       title: 'Real-Time 1v1 Elo',    desc: 'Live head-to-head battles with automated matchmaking, bot fallbacks, and Elo rating updates.', ink: 'var(--riso-teal)' },
+const FEATURES = [
+  {
+    Icon: Swords,
+    title: 'Live 1v1 duels',
+    desc: 'Ranked matchmaking against real players, with bots as a fallback so you never wait.',
+  },
+  {
+    Icon: Trophy,
+    title: 'Competitive rating',
+    desc: 'A balanced Elo ladder from Rookie to Mythic across every arena.',
+  },
+  {
+    Icon: Brain,
+    title: 'Four arenas',
+    desc: 'Algorithms, logic, number patterns and ciphers — each with three difficulty tiers.',
+  },
 ];
-
-const TICKER = ['DAILY MIDNIGHT RESET', 'FOUR GAME ARENAS', 'LIVE ELO MATCHMAKING', 'INSTANT GRADING', 'DAILY STREAKS', 'GLOBAL LEADERBOARD'];
 
 export default function Home() {
   return (
-    <div style={{ background: 'var(--paper)', minHeight: '100vh', overflowX: 'hidden', color: 'var(--ink)', position: 'relative' }}>
-      <div className="paper-grain" />
-      <div className="halftone-violet halftone-fade-b" style={{ position: 'absolute', inset: 0, opacity: 0.22 }} />
+    <div className="home-root">
+      <main>
+        {/* Hero */}
+        <section className="home-hero">
+          <div className="home-hero-inner">
+            <span className="badge">Daily challenges · Live duels · Global leaderboard</span>
+            <h1 className="home-title">
+              Master algorithms.<br />Conquer puzzles.
+            </h1>
+            <p className="home-lede">
+              A quiet place to sharpen analytical thinking. Curated DSA challenges,
+              logic grids and ciphers, with real-time 1v1 duels and an Elo ladder.
+            </p>
+            <div className="home-cta">
+              <Link to="/signup" className="btn btn--primary home-btn-lg">
+                Create free account <ArrowRight size={15} />
+              </Link>
+              <Link to="/games" className="btn btn--secondary home-btn-lg">
+                Browse arenas
+              </Link>
+            </div>
+          </div>
+        </section>
 
-      {/* ================= MASTHEAD ================= */}
-      <section style={{
-        position: 'relative',
-        padding: '9.5rem 1.5rem 5rem',
-        zIndex: 1,
-        overflow: 'hidden',
-        borderBottom: '3px solid var(--ink)'
-      }}>
-        <div className="halftone-coral halftone-fade-l" style={{ position: 'absolute', top: 90, right: -40, width: 420, height: 420, opacity: 0.35 }} />
-        <div className="tape" style={{ top: 84, left: '12%', transform: 'rotate(-7deg)' }} />
-        <div className="reg-mark" style={{ top: 120, right: 32 }} />
-        <div className="reg-mark" style={{ top: 152, right: 32 }} />
-
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="zine-badge"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', marginBottom: '2rem', background: 'var(--ink)', color: 'var(--paper)', padding: '0.4rem 0.8rem' }}
-          >
-            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--riso-coral)', animation: 'pulse 1.6s infinite' }} />
-            LIVE ARENAS &mdash; ISSUE 01
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.08 }}
-            className="zine-display"
-            style={{ fontSize: 'clamp(2.6rem, 8.5vw, 6rem)', marginBottom: '1.5rem' }}
-          >
-            Master<br />
-            <span className="misreg" data-text="Algorithms." style={{ color: 'var(--ink)' }}>Algorithms.</span><br />
-            <span style={{ color: 'var(--riso-violet)' }}>Conquer</span> Puzzles.
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 0.18 }}
-            className="zine-lede"
-            style={{ fontSize: 'clamp(1rem, 2vw, 1.2rem)', maxWidth: '620px', margin: '0 auto 2.5rem' }}
-          >
-            Level up your analytical intellect through curated DSA challenges, logic grids,
-            cryptographic ciphers, and real-time 1v1 Elo duels.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 0.26 }}
-            style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '4.5rem' }}
-          >
-            <Link to="/games" className="btn-primary" style={{ padding: '0.95rem 2.4rem', fontSize: '0.95rem' }}>
-              Enter Arenas <ArrowRight size={16} />
-            </Link>
-            <Link to="/signup" className="btn-secondary" style={{ padding: '0.95rem 2.4rem', fontSize: '0.95rem' }}>
-              Create Free Account
-            </Link>
-          </motion.div>
-
-          {/* 3-column ruled strip */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.36 }}
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))',
-              maxWidth: '900px',
-              margin: '0 auto',
-              width: '100%',
-              textAlign: 'left'
-            }}
-          >
-            {[
-              { icon: <Swords size={18} />, title: 'Live 1v1 Duels',      desc: 'Battle friends or matchmaking opponents in synchronized cognitive sprints.', ink: 'var(--riso-coral)' },
-              { icon: <Trophy size={18} />, title: 'Competitive Elo',     desc: 'Climb from Novice to Master tier with a mathematically balanced rating system.', ink: 'var(--riso-violet)' },
-              { icon: <Brain size={18} />,  title: '4 Game Arenas',       desc: 'Algorithms, logic puzzles, number patterns, and code ciphers.', ink: 'var(--riso-teal)' },
-            ].map((s, i, arr) => (
-              <div
-                key={s.title}
-                style={{
-                  padding: '0 1.5rem',
-                  borderLeft: i === 0 ? 'none' : '2px dashed var(--ink-faint)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.4rem'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: s.ink }}>
-                  {s.icon}
-                  <h4 className="zine-display" style={{ fontSize: '0.95rem' }}>{s.title}</h4>
+        {/* Features */}
+        <section className="home-section">
+          <div className="container--wide home-container">
+            <h2 className="home-section-title">Everything you need to sharpen up</h2>
+            <div className="home-features">
+              {FEATURES.map(({ Icon, title, desc }) => (
+                <div key={title} className="card home-feature">
+                  <span className="home-feature-icon"><Icon size={17} /></span>
+                  <h3 className="home-feature-title">{title}</h3>
+                  <p className="home-feature-desc">{desc}</p>
                 </div>
-                <p style={{ fontSize: '0.8rem', color: 'var(--ink-muted)', lineHeight: 1.5 }}>{s.desc}</p>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Disciplines */}
+        <section className="home-section home-section--alt">
+          <div className="container--wide home-container">
+            <h2 className="home-section-title">Four disciplines, one ladder</h2>
+            <p className="muted home-section-lede">
+              Each arena targets a specific faculty. Play solo to practice, or ranked to climb.
+            </p>
+            <div className="home-disciplines">
+              {DISCIPLINES.map((d, i) => (
+                <Link key={d.title} to="/games" className="home-discipline">
+                  <span className="home-discipline-num mono">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="home-discipline-body">
+                    <span className="home-discipline-title">{d.title}</span>
+                    <span className="home-discipline-desc">{d.desc}</span>
+                  </span>
+                  <ArrowRight size={15} className="home-discipline-arrow" />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="home-section">
+          <div className="container--narrow home-container">
+            <div className="card home-final">
+              <h2 className="home-final-title">Ready to test your limits?</h2>
+              <p className="muted" style={{ marginTop: 8, fontSize: '0.9rem' }}>
+                Free forever. Create an account and start with today's daily mission.
+              </p>
+              <div className="home-cta" style={{ justifyContent: 'center', marginTop: 24 }}>
+                <Link to="/signup" className="btn btn--primary home-btn-lg">
+                  Get started <ArrowRight size={15} />
+                </Link>
+                <Link to="/login" className="btn btn--secondary home-btn-lg">
+                  Log in
+                </Link>
               </div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ================= MARQUEE TICKER ================= */}
-      <div style={{ background: 'var(--ink)', color: 'var(--paper)', overflow: 'hidden', padding: '0.6rem 0', borderBottom: '3px solid var(--ink)' }}>
-        <div style={{ display: 'flex', gap: '2.5rem', width: 'max-content', animation: 'marquee 28s linear infinite', whiteSpace: 'nowrap' }}>
-          {[...TICKER, ...TICKER].map((t, i) => (
-            <span key={i} className="font-mono" style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.2em' }}>
-              {t} <span style={{ color: 'var(--riso-coral)' }}>&#9679;</span>
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* ================= KEY FEATURES ================= */}
-      <section style={{ padding: '6rem 1.5rem 4rem', position: 'relative', zIndex: 2 }}>
-        <div style={{ maxWidth: '1160px', margin: '0 auto' }}>
-          <div className="zine-section-head" style={{ marginBottom: '2.5rem' }}>
-            <span className="zine-kicker">Engineered for Problem Solvers</span>
+            </div>
           </div>
+        </section>
+      </main>
 
-          <h2 className="zine-display" style={{ fontSize: 'clamp(1.9rem, 4.5vw, 3.2rem)', maxWidth: '760px', marginBottom: '3.5rem' }}>
-            Everything you need to sharpen analytical thinking &amp; coding intuition.
-          </h2>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.75rem' }}>
-            {KEY_FEATURES.map((f, i) => (
-              <motion.div
-                key={f.title}
-                whileHover={{ x: -4, y: -4 }}
-                transition={{ duration: 0.12 }}
-                className="zine-card"
-                style={{ padding: '1.75rem', boxShadow: `6px 6px 0 ${f.ink}`, display: 'flex', flexDirection: 'column', gap: '0.9rem' }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <div style={{
-                    width: '58px', height: '58px',
-                    background: 'var(--paper-sunk)',
-                    border: '2px solid var(--ink)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    boxShadow: '3px 3px 0 var(--ink)'
-                  }}>
-                    {f.mark}
-                  </div>
-                  <span className="sticker">{f.tag}</span>
-                </div>
-                <h3 className="zine-display" style={{ fontSize: '1.3rem' }}>{f.title}</h3>
-                <p style={{ fontSize: '0.875rem', color: 'var(--ink-muted)', lineHeight: 1.6 }}>{f.desc}</p>
-                <div className="zine-divider" style={{ marginTop: 'auto' }} />
-                <span className="font-mono" style={{ fontSize: '0.66rem', color: 'var(--ink-faint)', letterSpacing: '0.16em', textTransform: 'uppercase' }}>
-                  Plate {String(i + 1).padStart(2, '0')} / 03
-                </span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ================= DISCIPLINES ================= */}
-      <section style={{ padding: '4rem 1.5rem 6rem', position: 'relative', zIndex: 2 }}>
-        <div style={{ maxWidth: '1160px', margin: '0 auto' }}>
-          <div className="zine-section-head" style={{ marginBottom: '2.5rem' }}>
-            <span className="zine-kicker">Architecture of Arenas</span>
-          </div>
-
-          <h2 className="zine-display misreg" data-text="Targeted Cognitive Disciplines" style={{ fontSize: 'clamp(1.9rem, 4.5vw, 3rem)', maxWidth: '720px', marginBottom: '1rem' }}>
-            Targeted Cognitive Disciplines
-          </h2>
-          <p className="zine-lede" style={{ maxWidth: '540px', marginBottom: '2.5rem' }}>
-            Curated pathways engineered to expand algorithmic speed, deduction accuracy, and mental acuity.
-          </p>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(310px, 1fr))', gap: '1.25rem' }}>
-            {DISCIPLINES.map((f, i) => (
-              <motion.div
-                key={f.title}
-                whileHover={{ x: -3, y: -3 }}
-                transition={{ duration: 0.12 }}
-                className="zine-card"
-                style={{ padding: '1.6rem', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}
-              >
-                <div className="halftone-coral halftone-fade-l" style={{ position: 'absolute', top: 0, right: 0, width: 110, height: 110, opacity: 0.3 }} />
-                <span className="font-mono" style={{ position: 'absolute', top: '1.1rem', right: '1.1rem', fontSize: '2.2rem', fontWeight: 800, color: 'var(--paper-edge)', lineHeight: 1, zIndex: 1 }}>
-                  {f.glyph}
-                </span>
-
-                <div style={{
-                  width: '54px', height: '54px',
-                  background: INKS[i],
-                  border: '2px solid var(--ink)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '1.5rem',
-                  boxShadow: '3px 3px 0 var(--ink)',
-                  transform: 'rotate(-2deg)',
-                  marginBottom: '1rem'
-                }}>
-                  {f.icon}
-                </div>
-
-                <h3 className="zine-display" style={{ fontSize: '1.15rem', marginBottom: '0.45rem' }}>{f.title}</h3>
-                <p style={{ fontSize: '0.85rem', color: 'var(--ink-muted)', lineHeight: 1.6, marginBottom: '1.15rem' }}>{f.desc}</p>
-
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem', paddingTop: '0.9rem', borderTop: '2px solid var(--ink)', marginTop: 'auto' }}>
-                  <div>
-                    <span className="font-mono" style={{ fontSize: '0.62rem', color: 'var(--ink-faint)', letterSpacing: '0.14em', textTransform: 'uppercase', display: 'block' }}>Tier</span>
-                    <div style={{ display: 'flex', gap: '3px', marginTop: '3px' }}>
-                      {[1, 2, 3, 4, 5].map(n => (
-                        <span key={n} style={{ width: '12px', height: '8px', border: '1.5px solid var(--ink)', background: n <= f.difficulty ? INKS[i] : 'transparent' }} />
-                      ))}
-                    </div>
-                  </div>
-                  <Link
-                    to="/games"
-                    className="zine-btn-sm"
-                    style={{ textDecoration: 'none' }}
-                  >
-                    Enter <ChevronRight size={13} />
-                  </Link>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ================= BOTTOM CTA ================= */}
-      <section style={{ padding: '0 1.5rem 7rem', position: 'relative', zIndex: 2 }}>
-        <div className="zine-card" style={{
-          maxWidth: '960px',
-          margin: '0 auto',
-          background: 'var(--riso-violet)',
-          color: '#fffdf6',
-          padding: '3.5rem 2rem',
-          textAlign: 'center',
-          boxShadow: '12px 12px 0 var(--ink)',
-          position: 'relative',
-          overflow: 'hidden'
-        }}>
-          <div className="halftone-ink halftone-fade-b" style={{ position: 'absolute', inset: 0, opacity: 0.28 }} />
-          <div className="tape" style={{ top: 24, left: '50%', marginLeft: -70, transform: 'rotate(-3deg)', background: 'rgba(255, 196, 0, 0.8)' }} />
-
-          <span className="zine-badge" style={{ background: 'var(--riso-yellow)', color: 'var(--ink)', marginBottom: '1.25rem', position: 'relative' }}>Limited Run</span>
-          <h2 className="zine-display" style={{ fontSize: 'clamp(1.9rem, 5vw, 3.2rem)', marginBottom: '1rem', color: '#fffdf6', position: 'relative' }}>
-            Ready to Test Your Cognitive Limits?
-          </h2>
-          <p style={{ fontSize: '1rem', maxWidth: '520px', margin: '0 auto 2.25rem', lineHeight: 1.6, color: 'rgba(255,253,246,0.85)', position: 'relative' }}>
-            Join competitive thinkers, solve curated problems, and climb the global ranking leaderboard.
-          </p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', position: 'relative' }}>
-            <Link
-              to="/signup"
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-                padding: '0.9rem 2.2rem', background: 'var(--riso-yellow)', color: 'var(--ink)',
-                border: '3px solid var(--ink)', boxShadow: '5px 5px 0 var(--ink)',
-                fontFamily: 'var(--font-display)', textTransform: 'uppercase', fontSize: '0.85rem',
-                textDecoration: 'none', cursor: 'pointer'
-              }}
-            >
-              Get Started Now <ArrowRight size={16} />
-            </Link>
-            <Link
-              to="/games"
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-                padding: '0.9rem 2.2rem', background: 'transparent', color: '#fffdf6',
-                border: '3px solid #fffdf6', boxShadow: '5px 5px 0 var(--riso-coral)',
-                fontFamily: 'var(--font-display)', textTransform: 'uppercase', fontSize: '0.85rem',
-                textDecoration: 'none', cursor: 'pointer'
-              }}
-            >
-              Browse Arenas
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ================= COLOPHON ================= */}
-      <footer style={{ borderTop: '3px solid var(--ink)', padding: '2.5rem 1.5rem', textAlign: 'center', position: 'relative', zIndex: 2, background: 'var(--paper-deep)' }}>
-        <div className="hazard-tape" style={{ height: 10, marginBottom: '1.75rem', borderBottom: '2px solid var(--ink)' }} />
-        <div style={{ maxWidth: '1160px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span style={{ width: '12px', height: '12px', background: 'var(--riso-coral)', border: '2px solid var(--ink)', display: 'inline-block' }} />
-            <span className="zine-display" style={{ fontSize: '0.9rem' }}>AlgoArena</span>
-          </div>
-          <span className="font-mono" style={{ fontSize: '0.68rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--ink-muted)' }}>
-            &copy; {new Date().getFullYear()} &mdash; Three inks, one press, zero tracking pixels.
-          </span>
+      <footer className="home-footer">
+        <div className="container--wide home-container home-footer-inner">
+          <span className="home-footer-brand">AlgoArena</span>
+          <span>© {new Date().getFullYear()} — Competitive algorithms, puzzles and duels.</span>
         </div>
       </footer>
+
+      <style>{`
+        .home-root { background: var(--bg); min-height: 100vh; }
+
+        .home-hero {
+          padding: 176px 24px 96px;
+          border-bottom: 1px solid var(--border);
+        }
+        .home-hero-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+        .home-title {
+          font-size: clamp(2.25rem, 6vw, 3.5rem);
+          font-weight: 600;
+          letter-spacing: -0.035em;
+          line-height: 1.08;
+          margin-top: 20px;
+        }
+        .home-lede {
+          margin: 20px auto 0;
+          max-width: 56ch;
+          color: var(--ink-muted);
+          font-size: 1.03rem;
+          line-height: 1.65;
+        }
+        .home-cta {
+          display: flex;
+          gap: 12px;
+          justify-content: center;
+          flex-wrap: wrap;
+          margin-top: 32px;
+        }
+        .home-btn-lg { height: 44px; padding: 0 22px; font-size: 0.9rem; }
+
+        .home-section { padding: 88px 24px; }
+        .home-section--alt { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .home-container { margin: 0 auto; }
+        .home-section-title {
+          font-size: clamp(1.35rem, 3vw, 1.75rem);
+          font-weight: 600;
+          letter-spacing: -0.025em;
+          max-width: 30ch;
+        }
+        .home-section-lede { margin-top: 10px; font-size: 0.92rem; max-width: 56ch; }
+
+        .home-features {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+          gap: 16px;
+          margin-top: 40px;
+        }
+        .home-feature { padding: 26px; }
+        .home-feature-icon {
+          width: 36px;
+          height: 36px;
+          border-radius: 9px;
+          background: var(--surface-2);
+          border: 1px solid var(--border);
+          color: var(--ink-soft);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .home-feature-title { font-size: 0.98rem; font-weight: 600; margin-top: 16px; }
+        .home-feature-desc { font-size: 0.86rem; color: var(--ink-muted); line-height: 1.6; margin-top: 6px; }
+
+        .home-disciplines {
+          margin-top: 40px;
+          border: 1px solid var(--border);
+          border-radius: var(--radius);
+          background: var(--surface);
+          overflow: hidden;
+        }
+        .home-discipline {
+          display: flex;
+          align-items: center;
+          gap: 24px;
+          padding: 22px 26px;
+          border-bottom: 1px solid var(--border);
+          text-decoration: none;
+          color: var(--ink);
+          transition: background 0.15s ease;
+        }
+        .home-discipline:last-child { border-bottom: none; }
+        .home-discipline:hover { background: var(--surface-2); }
+        .home-discipline-num { color: var(--ink-faint); font-size: 0.8rem; flex-shrink: 0; }
+        .home-discipline-body { flex: 1; min-width: 0; }
+        .home-discipline-title { display: block; font-size: 0.95rem; font-weight: 550; }
+        .home-discipline-desc { display: block; margin-top: 3px; font-size: 0.85rem; color: var(--ink-muted); }
+        .home-discipline-arrow { color: var(--ink-faint); flex-shrink: 0; }
+        .home-discipline:hover .home-discipline-arrow { color: var(--ink-soft); }
+
+        .home-final { padding: 56px 32px; text-align: center; }
+        .home-final-title { font-size: clamp(1.3rem, 3vw, 1.6rem); font-weight: 600; letter-spacing: -0.025em; }
+
+        .home-footer { border-top: 1px solid var(--border); padding: 28px 24px; }
+        .home-footer-inner {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          flex-wrap: wrap;
+          color: var(--ink-faint);
+          font-size: 0.78rem;
+        }
+        .home-footer-brand { font-weight: 600; color: var(--ink-soft); font-size: 0.85rem; }
+
+        @media (max-width: 640px) {
+          .home-hero { padding: 140px 20px 72px; }
+          .home-section { padding: 64px 20px; }
+          .home-discipline { gap: 16px; padding: 18px 20px; align-items: flex-start; }
+        }
+      `}</style>
     </div>
   );
 }

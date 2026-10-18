@@ -4,8 +4,12 @@ import { Mail, Lock, User, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import AuthShell, { AuthError } from '../../components/AuthShell/AuthShell';
 
-const STRENGTH_INKS = ['var(--riso-coral)', 'var(--riso-yellow)', 'var(--riso-teal)', 'var(--riso-violet)'];
-const STRENGTH_LABELS = ['Weak', 'Fair', 'Good', 'Strong'];
+const STRENGTH_TOKENS = [
+  { color: 'var(--err)', label: 'Weak' },
+  { color: 'var(--warn)', label: 'Fair' },
+  { color: 'var(--ok)', label: 'Good' },
+  { color: 'var(--ok)', label: 'Strong' },
+];
 
 export default function Signup() {
   const [form, setForm]         = useState({ username: '', email: '', password: '', confirm: '' });
@@ -42,50 +46,49 @@ export default function Signup() {
 
   return (
     <AuthShell
-      title="Join Us"
-      lede="Claim your copy of the daily puzzle gauntlet. Free forever, no fine print."
-      accent="var(--riso-coral)"
+      title="Create account"
+      lede="Free forever. Track progress, duel players, climb the ladder."
     >
       <AuthError>
         {error && (
           <>
-            <AlertCircle size={16} />
-            <span className="font-mono" style={{ fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{error}</span>
+            <AlertCircle size={15} />
+            <span>{error}</span>
           </>
         )}
       </AuthError>
 
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.05rem' }}>
+      <form onSubmit={handleSubmit} className="auth-form">
         <div>
           <label className="zine-label" htmlFor="su-user">Username</label>
           <div style={{ position: 'relative' }}>
-            <User size={16} color="var(--ink-muted)" style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)' }} />
+            <User size={15} className="field-icon" />
             <input
               id="su-user"
               type="text"
               required
-              placeholder="Mastermind_01"
+              autoComplete="username"
+              placeholder="e.g. mastermind_01"
               value={form.username}
               onChange={update('username')}
-              className="zine-field"
-              style={{ paddingLeft: '2.4rem' }}
+              className="zine-field field-with-icon"
             />
           </div>
         </div>
 
         <div>
-          <label className="zine-label" htmlFor="su-email">Email Address</label>
+          <label className="zine-label" htmlFor="su-email">Email</label>
           <div style={{ position: 'relative' }}>
-            <Mail size={16} color="var(--ink-muted)" style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)' }} />
+            <Mail size={15} className="field-icon" />
             <input
               id="su-email"
               type="email"
               required
-              placeholder="Enter your email"
+              autoComplete="email"
+              placeholder="you@example.com"
               value={form.email}
               onChange={update('email')}
-              className="zine-field"
-              style={{ paddingLeft: '2.4rem' }}
+              className="zine-field field-with-icon"
             />
           </div>
         </div>
@@ -93,63 +96,60 @@ export default function Signup() {
         <div>
           <label className="zine-label" htmlFor="su-pass">Password</label>
           <div style={{ position: 'relative' }}>
-            <Lock size={16} color="var(--ink-muted)" style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)' }} />
+            <Lock size={15} className="field-icon" />
             <input
               id="su-pass"
               type={showPass ? 'text' : 'password'}
               required
-              placeholder="••••••••••••"
+              autoComplete="new-password"
+              placeholder="At least 6 characters"
               value={form.password}
               onChange={update('password')}
-              className="zine-field"
-              style={{ paddingLeft: '2.4rem', paddingRight: '2.4rem' }}
+              className="zine-field field-with-icon field-with-icon-r"
             />
             <button
               type="button"
               onClick={() => setShowPass(!showPass)}
               aria-label={showPass ? 'Hide password' : 'Show password'}
-              style={{ position: 'absolute', right: '0.7rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'var(--ink-muted)', cursor: 'pointer', display: 'flex', padding: 0 }}
+              className="field-action"
             >
-              {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
+              {showPass ? <EyeOff size={15} /> : <Eye size={15} />}
             </button>
           </div>
 
           {form.password && (
-            <div style={{ marginTop: '0.5rem' }}>
-              <div style={{ display: 'flex', gap: '3px', marginBottom: '0.3rem' }}>
+            <div style={{ marginTop: 10 }}>
+              <div className="strength-track">
                 {[1, 2, 3, 4].map(idx => (
-                  <div
+                  <span
                     key={idx}
+                    className="strength-seg"
                     style={{
-                      height: '8px',
-                      flex: 1,
-                      border: '2px solid var(--ink)',
-                      background: idx <= strength ? STRENGTH_INKS[strength - 1] : 'var(--paper-sunk)',
-                      transition: 'background 0.15s linear'
+                      background: idx <= strength ? STRENGTH_TOKENS[strength - 1].color : 'var(--surface-3)',
                     }}
                   />
                 ))}
               </div>
-              <span className="font-mono" style={{ fontSize: '0.64rem', color: 'var(--ink-muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em' }}>
-                Ink pressure: {STRENGTH_LABELS[strength - 1] || 'Too short'}
-              </span>
+              <div className="strength-label">
+                Password strength: <strong>{STRENGTH_TOKENS[strength - 1]?.label || 'Too short'}</strong>
+              </div>
             </div>
           )}
         </div>
 
         <div>
-          <label className="zine-label" htmlFor="su-conf">Confirm Password</label>
+          <label className="zine-label" htmlFor="su-conf">Confirm password</label>
           <div style={{ position: 'relative' }}>
-            <Lock size={16} color="var(--ink-muted)" style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)' }} />
+            <Lock size={15} className="field-icon" />
             <input
               id="su-conf"
               type={showPass ? 'text' : 'password'}
               required
-              placeholder="••••••••••••"
+              autoComplete="new-password"
+              placeholder="Repeat your password"
               value={form.confirm}
               onChange={update('confirm')}
-              className="zine-field"
-              style={{ paddingLeft: '2.4rem' }}
+              className="zine-field field-with-icon"
             />
           </div>
         </div>
@@ -157,21 +157,33 @@ export default function Signup() {
         <button
           type="submit"
           disabled={loading}
-          className="btn-primary"
-          style={{ width: '100%', marginTop: '0.35rem', padding: '0.85rem', background: 'var(--riso-coral)', opacity: loading ? 0.6 : 1 }}
+          className="btn btn--primary"
+          style={{ width: '100%', marginTop: 6 }}
         >
-          {loading ? 'Printing...' : 'Create Account'}
+          {loading ? 'Creating account…' : 'Create account'}
         </button>
       </form>
 
-      <div style={{ marginTop: '1.5rem', paddingTop: '1rem', borderTop: '2px dashed var(--ink-faint)', textAlign: 'center' }}>
-        <span style={{ color: 'var(--ink-muted)', fontSize: '0.85rem' }}>
-          Already registered?{' '}
-          <Link to="/login" style={{ color: 'var(--riso-violet)', fontWeight: 700, textDecoration: 'underline', textDecorationThickness: '2px' }}>
-            Log in
-          </Link>
-        </span>
-      </div>
+      <p className="auth-switch">
+        Already registered? <Link to="/login">Log in</Link>
+      </p>
+
+      <style>{`
+        .strength-track { display: flex; gap: 4px; }
+        .strength-seg {
+          height: 4px;
+          flex: 1;
+          border-radius: 999px;
+          background: var(--surface-3);
+          transition: background 0.2s ease;
+        }
+        .strength-label {
+          margin-top: 7px;
+          font-size: 0.75rem;
+          color: var(--ink-muted);
+        }
+        .strength-label strong { font-weight: 500; color: var(--ink-soft); }
+      `}</style>
     </AuthShell>
   );
 }

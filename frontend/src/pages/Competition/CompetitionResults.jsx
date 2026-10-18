@@ -26,7 +26,7 @@ export default function CompetitionResults({ id, member }) {
 
   return (
     <>
-      <div className="zine-card comp-card" style={{ boxShadow: '8px 8px 0 var(--riso-teal)' }}>
+      <div className="zine-card comp-card">
         <div className="zine-kicker">Final leaderboard</div>
         {board?.you && (
           <h1 className="zine-display" style={{ fontSize: 'clamp(1.4rem, 4vw, 2rem)', margin: '0.3rem 0 0.5rem' }}>

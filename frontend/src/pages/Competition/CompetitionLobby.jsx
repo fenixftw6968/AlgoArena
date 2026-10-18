@@ -18,7 +18,7 @@ export default function CompetitionLobby({ state, serverNow, busy, error, onJoin
   const needed = Math.max(0, state.minPlayers - state.playerCount);
 
   return (
-    <div className="zine-card comp-card" style={{ boxShadow: '8px 8px 0 var(--riso-yellow)' }}>
+    <div className="zine-card comp-card">
       <div className="zine-kicker">{starting ? 'Get ready' : 'Lobby'}</div>
       <h1 className="zine-display" style={{ fontSize: 'clamp(1.4rem, 4vw, 2rem)', margin: '0.3rem 0 0.5rem' }}>
         {starting ? 'Starting in' : `Hosted by ${state.hostUsername}`}
@@ -34,7 +34,7 @@ export default function CompetitionLobby({ state, serverNow, busy, error, onJoin
       ) : (
         <>
           <div className="comp-row">
-            <span className="zine-badge" style={{ background: 'var(--riso-teal)', gap: '0.35rem' }}>
+            <span className="badge" style={{ gap: 6 }}>
               <Users size={12} /> {state.playerCount}/{state.maxPlayers}
             </span>
             <span className="comp-muted">

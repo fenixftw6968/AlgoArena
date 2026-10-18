@@ -1,71 +1,67 @@
-import React from 'react';
 import { motion } from 'framer-motion';
-import { AlertTriangle, LogOut } from 'lucide-react';
+import { AlertTriangle } from 'lucide-react';
 
 export default function ExitModal({
   isOpen,
   onCancel,
   onConfirm,
-  title = "ABORT ARENA SESSION?",
-  message = "Are you sure you wish to disconnect? Active match rating deltas and progression data for this round will be forfeited."
+  title = "Leave this session?",
+  message = "Are you sure you want to exit? Progress for this round and any rating changes will be forfeited."
 }) {
   if (!isOpen) return null;
 
   return (
-    <div className="overlay" style={{ zIndex: 99999 }}>
-      <div className="halftone-coral halftone-fade-b" style={{ position: 'absolute', inset: 0, opacity: 0.4 }} />
-
+    <div className="overlay" style={{ zIndex: 99999 }} role="dialog" aria-modal="true" aria-label={title}>
       <motion.div
-        initial={{ opacity: 0, y: 15 }}
+        initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.2 }}
+        transition={{ duration: 0.14 }}
         className="zine-modal"
         style={{
           width: '100%',
-          maxWidth: '460px',
-          padding: '2.25rem 2rem',
+          maxWidth: '420px',
+          padding: '32px 28px 26px',
           textAlign: 'center',
-          position: 'relative',
-          overflow: 'hidden'
         }}
       >
-        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 12, background: 'var(--riso-coral)' }} />
+        <span className="exit-icon">
+          <AlertTriangle size={20} />
+        </span>
 
-        <div style={{
-          width: '72px',
-          height: '72px',
-          background: 'var(--riso-coral)',
-          border: '3px solid var(--ink)',
-          boxShadow: '5px 5px 0 var(--ink)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          margin: '1.5rem auto 1.25rem',
-          color: '#fffdf6',
-          transform: 'rotate(-4deg)'
-        }}>
-          <AlertTriangle size={30} />
-        </div>
+        <h2 className="exit-title">{title}</h2>
+        <p className="exit-message">{message}</p>
 
-        <h2 className="zine-display misreg" data-text={title} style={{ fontSize: 'clamp(1.3rem, 5vw, 1.75rem)', marginBottom: '0.6rem' }}>
-          {title}
-        </h2>
-
-        <p className="zine-lede" style={{ fontSize: '0.85rem', marginBottom: '1.75rem' }}>{message}</p>
-
-        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-          <button onClick={onCancel} className="btn-primary" style={{ flex: 1, minWidth: '140px' }}>
-            RESUME MATCH
+        <div className="row" style={{ gap: 10, marginTop: 26 }}>
+          <button onClick={onCancel} className="btn btn--primary grow">
+            Keep playing
           </button>
-          <button
-            onClick={onConfirm}
-            className="btn-rose"
-            style={{ flex: 1, minWidth: '140px' }}
-          >
-            <LogOut size={14} /> FORFEIT
+          <button onClick={onConfirm} className="btn btn--secondary grow" style={{ color: 'var(--err)', borderColor: '#fecaca' }}>
+            Leave
           </button>
         </div>
       </motion.div>
+
+      <style>{`
+        .exit-icon {
+          width: 44px;
+          height: 44px;
+          border-radius: 12px;
+          background: var(--err-soft);
+          border: 1px solid #fecaca;
+          color: var(--err);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 18px;
+        }
+        .exit-title { font-size: 1.1rem; font-weight: 600; letter-spacing: -0.02em; }
+        .exit-message {
+          margin-top: 8px;
+          font-size: 0.85rem;
+          color: var(--ink-muted);
+          line-height: 1.6;
+        }
+      `}</style>
     </div>
   );
 }

@@ -31,27 +31,15 @@ export default function ForgotPassword() {
 
   return (
     <AuthShell
-      kicker="Recovery Notice"
-      title={submitted ? 'Check Your Inbox' : 'Reset Password'}
-      lede={submitted ? undefined : 'Drop your address below and we will courier a reset link.'}
-      accent="var(--riso-teal)"
+      title={submitted ? 'Check your inbox' : 'Reset password'}
+      lede={submitted ? undefined : 'Enter the email on your account and we’ll send a reset link.'}
     >
       {submitted ? (
-        <div style={{ textAlign: 'center' }}>
-          <div style={{
-            width: '64px', height: '64px',
-            background: 'var(--riso-teal)',
-            border: '3px solid var(--ink)',
-            boxShadow: '4px 4px 0 var(--ink)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            margin: '0 auto 1.25rem',
-            transform: 'rotate(-4deg)'
-          }}>
-            <CheckCircle2 size={30} color="#fffdf6" />
-          </div>
-          <p className="zine-lede" style={{ fontSize: '0.9rem', marginBottom: '1.75rem' }}>{message}</p>
-          <Link to="/login" className="btn-primary" style={{ width: '100%' }}>
-            Return to Login
+        <div>
+          <div className="auth-success-icon"><CheckCircle2 size={22} /></div>
+          <p className="muted" style={{ fontSize: '0.875rem', lineHeight: 1.65, marginBottom: 24 }}>{message}</p>
+          <Link to="/login" className="btn btn--primary" style={{ width: '100%' }}>
+            Return to login
           </Link>
         </div>
       ) : (
@@ -59,26 +47,26 @@ export default function ForgotPassword() {
           <AuthError>
             {error && (
               <>
-                <AlertCircle size={16} />
-                <span className="font-mono" style={{ fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{error}</span>
+                <AlertCircle size={15} />
+                <span>{error}</span>
               </>
             )}
           </AuthError>
 
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+          <form onSubmit={handleSubmit} className="auth-form">
             <div>
-              <label className="zine-label" htmlFor="fp-email">Email Address</label>
+              <label className="zine-label" htmlFor="fp-email">Email</label>
               <div style={{ position: 'relative' }}>
-                <Mail size={16} color="var(--ink-muted)" style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)' }} />
+                <Mail size={15} className="field-icon" />
                 <input
                   id="fp-email"
                   type="email"
                   required
-                  placeholder="solver@algoarena.ai"
+                  autoComplete="email"
+                  placeholder="you@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="zine-field"
-                  style={{ paddingLeft: '2.4rem' }}
+                  className="zine-field field-with-icon"
                 />
               </div>
             </div>
@@ -86,18 +74,18 @@ export default function ForgotPassword() {
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary"
-              style={{ width: '100%', marginTop: '0.35rem', padding: '0.85rem', background: 'var(--riso-teal)', opacity: loading ? 0.6 : 1 }}
+              className="btn btn--primary"
+              style={{ width: '100%', marginTop: 6 }}
             >
-              {loading ? 'Dispatching...' : 'Send Recovery Link'}
+              {loading ? 'Sending…' : 'Send reset link'}
             </button>
           </form>
 
-          <div style={{ marginTop: '1.5rem', paddingTop: '1rem', borderTop: '2px dashed var(--ink-faint)', textAlign: 'center' }}>
-            <Link to="/login" className="zine-btn-sm" style={{ textDecoration: 'none' }}>
-              <ArrowLeft size={13} /> Back to Sign In
+          <p className="auth-switch">
+            <Link to="/login" className="row" style={{ justifyContent: 'center', gap: 6 }}>
+              <ArrowLeft size={13} /> Back to login
             </Link>
-          </div>
+          </p>
         </>
       )}
     </AuthShell>

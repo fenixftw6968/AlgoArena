@@ -55,10 +55,9 @@ export default function CompetitionHome() {
   };
 
   return (
-    <div className="cosmic-void comp-page">
-      <div className="paper-grain" />
+    <div className="comp-page">
       <div className="comp-wrap">
-        <div className="zine-card comp-card" style={{ boxShadow: '8px 8px 0 var(--riso-violet)' }}>
+        <div className="zine-card comp-card">
           <div className="zine-kicker">DSA Competition • up to 25 players</div>
           <h1 className="zine-display" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', margin: '0.3rem 0 0.5rem' }}>
             Live DSA Showdown
@@ -86,10 +85,10 @@ export default function CompetitionHome() {
         {page?.items?.map((c) => (
           <div key={c.id} className="zine-panel comp-card comp-row" style={{ padding: '0.9rem 1rem', marginBottom: '0.7rem' }}>
             <div className="comp-grow">
-              <div style={{ fontWeight: 800 }}>Hosted by {c.hostUsername}</div>
+              <div style={{ fontWeight: 550, fontSize: '0.9rem' }}>Hosted by {c.hostUsername}</div>
               <div className="comp-muted">Starts automatically when full or at the lobby deadline</div>
             </div>
-            <span className="zine-badge" style={{ background: 'var(--riso-teal)', gap: '0.35rem' }}>
+            <span className="badge" style={{ gap: 6 }}>
               <Users size={12} /> {c.playerCount}/{c.maxPlayers}
             </span>
             <button className="zine-btn zine-btn--sm zine-btn--yellow" disabled={busy || c.playerCount >= c.maxPlayers} onClick={() => join(c.id)}>

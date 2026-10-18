@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
 export default function Modal({ isOpen, onClose, children, title, size = 'md' }) {
-  const widths = { sm: '420px', md: '560px', lg: '720px', xl: '900px' };
+  const widths = { sm: '420px', md: '540px', lg: '680px', xl: '840px' };
 
   return (
     <AnimatePresence>
@@ -12,18 +12,19 @@ export default function Modal({ isOpen, onClose, children, title, size = 'md' })
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.12 }}
             onClick={onClose}
             className="overlay"
             style={{ zIndex: 200 }}
-          >
-            <div className="halftone-ink halftone-fade-b" style={{ position: 'absolute', inset: 0, opacity: 0.35 }} />
-          </motion.div>
+          />
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 15 }}
-            transition={{ duration: 0.16 }}
+            exit={{ opacity: 0, y: 8 }}
+            transition={{ duration: 0.14 }}
             className="zine-modal"
+            role="dialog"
+            aria-modal="true"
             style={{
               position: 'fixed',
               top: '50%', left: '50%',
@@ -32,25 +33,47 @@ export default function Modal({ isOpen, onClose, children, title, size = 'md' })
               zIndex: 201,
               maxHeight: '90vh',
               overflow: 'auto',
-              color: 'var(--ink)',
             }}
           >
-            <div className="halftone-violet halftone-fade-r" style={{ position: 'absolute', top: 0, right: 0, width: 84, height: 84, opacity: 0.4 }} />
             {title && (
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', padding: '1rem 1.5rem', borderBottom: '3px solid var(--ink)', background: 'var(--riso-yellow)', position: 'relative' }}>
-                <h2 className="zine-display" style={{ fontSize: '1.15rem', margin: 0 }}>{title}</h2>
+              <div className="modal-head">
+                <h2 className="modal-title">{title}</h2>
                 {onClose && (
-                  <button onClick={onClose} aria-label="Close" className="zine-btn-sm"
-                  >
-                    <X size={14} />
+                  <button onClick={onClose} aria-label="Close dialog" className="modal-close">
+                    <X size={15} />
                   </button>
                 )}
               </div>
             )}
-            <div style={{ padding: '1.5rem', position: 'relative' }}>
+            <div style={{ padding: 24 }}>
               {children}
             </div>
           </motion.div>
+
+          <style>{`
+            .modal-head {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              gap: 16px;
+              padding: 18px 24px;
+              border-bottom: 1px solid var(--border);
+            }
+            .modal-title { font-size: 1rem; font-weight: 600; letter-spacing: -0.01em; }
+            .modal-close {
+              width: 30px;
+              height: 30px;
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              border: 1px solid var(--border);
+              border-radius: 7px;
+              background: var(--surface);
+              color: var(--ink-muted);
+              cursor: pointer;
+            }
+            .modal-close:hover { border-color: var(--border-strong); color: var(--ink); }
+          `}</style>
         </>
       )}
     </AnimatePresence>
