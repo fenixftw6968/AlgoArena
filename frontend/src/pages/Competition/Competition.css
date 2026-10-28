@@ -1,10 +1,10 @@
-.comp-page { min-height: 100vh; padding: 96px 16px 48px; }
-.comp-wrap { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; }
-.comp-card { padding: 24px; margin-bottom: 20px; }
-.comp-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.comp-page { min-height: 100vh; padding: 110px clamp(32px, 5vw, 88px) 88px; }
+.comp-wrap { position: relative; z-index: 1; max-width: min(96vw, 1720px); margin: 0 auto; }
+.comp-card { padding: 42px 48px; border-radius: 20px; margin-bottom: 28px; }
+.comp-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
 .comp-grow { flex: 1 1 auto; min-width: 0; }
-.comp-mono { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.01em; color: var(--ink-soft); }
-.comp-muted { color: var(--ink-muted); font-size: 0.85rem; line-height: 1.6; }
+.comp-mono { font-family: var(--font-mono); font-size: 0.88rem; font-weight: 550; letter-spacing: 0.02em; color: var(--ink-soft); }
+.comp-muted { color: var(--ink-muted); font-size: 1.05rem; line-height: 1.6; }
 .comp-error { color: var(--err); font-size: 0.85rem; margin: 10px 0 0; }
 .comp-note {
   background: var(--surface-2);

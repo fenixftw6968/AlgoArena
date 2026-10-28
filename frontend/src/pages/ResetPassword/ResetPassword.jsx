@@ -125,7 +125,6 @@ export default function ResetPassword() {
                   type={showPass ? 'text' : 'password'}
                   required
                   autoComplete="new-password"
-                  placeholder="At least 6 characters"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="zine-field field-with-icon field-with-icon-r"
@@ -172,7 +171,6 @@ export default function ResetPassword() {
                   type={showPass ? 'text' : 'password'}
                   required
                   autoComplete="new-password"
-                  placeholder="Repeat your password"
                   value={confirmPassword}
                   onChange={(e) => setConfirm(e.target.value)}
                   className="zine-field field-with-icon"

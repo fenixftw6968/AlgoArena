@@ -132,7 +132,7 @@ body {
   background-color: var(--bg);
   color: var(--ink);
   font-family: var(--font-body);
-  font-size: 0.9375rem;
+  font-size: 1rem;
   min-height: 100vh;
   overflow-x: hidden;
   line-height: 1.6;
@@ -198,27 +198,28 @@ img, svg { display: inline-block; vertical-align: middle; }
    ========================================================================== */
 .page {
   min-height: 100vh;
-  padding: 104px 24px 80px;
+  padding: 110px clamp(32px, 5vw, 88px) 88px;
   background: var(--bg);
 }
-.page--plain { padding: 40px 24px 72px; }
+.page--plain { padding: 48px clamp(32px, 5vw, 88px) 88px; }
 
-.container { width: 100%; max-width: 1080px; margin: 0 auto; }
-.container--narrow { max-width: 720px; }
-.container--wide { max-width: 1200px; }
+.container { width: 100%; max-width: min(94vw, 1720px); margin: 0 auto; }
+.container--narrow { max-width: min(90vw, 1360px); }
+.container--wide { max-width: min(96vw, 1840px); }
 
-.page-head { margin-bottom: 40px; }
+.page-head { margin-bottom: 44px; }
 .page-title {
-  font-size: clamp(1.5rem, 3vw, 1.875rem);
-  font-weight: 600;
-  letter-spacing: -0.025em;
-  line-height: 1.2;
+  font-size: clamp(2.4rem, 4vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.12;
 }
 .page-lede {
-  margin-top: 10px;
+  margin-top: 14px;
   color: var(--ink-muted);
-  font-size: 0.95rem;
-  max-width: 60ch;
+  font-size: clamp(1.1rem, 1.4vw, 1.3rem);
+  max-width: 65ch;
+  line-height: 1.6;
 }
 
 .section-head {
@@ -226,28 +227,28 @@ img, svg { display: inline-block; vertical-align: middle; }
   align-items: baseline;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 .section-title {
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-size: clamp(1.35rem, 1.7vw, 1.65rem);
+  font-weight: 650;
+  letter-spacing: -0.015em;
 }
 
-.stack { display: flex; flex-direction: column; gap: 24px; }
-.stack--sm { gap: 12px; }
-.row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.stack { display: flex; flex-direction: column; gap: 36px; }
+.stack--sm { gap: 18px; }
+.row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .row--between { justify-content: space-between; }
 .grow { flex: 1 1 auto; min-width: 0; }
 
 .grid-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
+  gap: 28px;
 }
 .grid-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 0;
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -362,13 +363,13 @@ img, svg { display: inline-block; vertical-align: middle; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 0 16px;
-  height: 40px;
-  border-radius: var(--radius-sm);
+  gap: 9px;
+  padding: 0 24px;
+  height: 48px;
+  border-radius: 10px;
   font-family: var(--font-body);
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 550;
   letter-spacing: 0;
   text-transform: none;
   text-decoration: none;
@@ -451,25 +452,25 @@ img, svg { display: inline-block; vertical-align: middle; }
 }
 .btn--danger:hover:not(:disabled) { background: #991b1b; border-color: #991b1b; }
 
-.btn--sm { height: 32px; padding: 0 12px; font-size: 0.8125rem; border-radius: 7px; }
-.btn--icon { width: 40px; padding: 0; }
-.btn--icon.btn--sm { width: 32px; }
+.btn--sm { height: 38px; padding: 0 16px; font-size: 0.9rem; border-radius: 8px; }
+.btn--icon { width: 44px; height: 44px; padding: 0; }
+.btn--icon.btn--sm { width: 36px; height: 36px; }
 
 /* Legacy poster buttons */
 .zine-btn, .zine-btn-sm {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  height: 40px;
-  padding: 0 16px;
+  gap: 8px;
+  height: 48px;
+  padding: 0 24px;
   border: 1px solid var(--border-strong);
-  border-radius: var(--radius-sm);
+  border-radius: 10px;
   background: var(--surface);
   color: var(--ink);
   font-family: var(--font-body);
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-size: 0.98rem;
+  font-weight: 550;
   text-transform: none;
   letter-spacing: 0;
   cursor: pointer;
@@ -485,10 +486,10 @@ img, svg { display: inline-block; vertical-align: middle; }
 .zine-btn:active:not(:disabled), .zine-btn-sm:active:not(:disabled) { transform: none; box-shadow: none; }
 .zine-btn:disabled, .zine-btn-sm:disabled { opacity: 0.5; cursor: not-allowed; }
 .zine-btn--sm, .zine-btn-sm {
-  height: 32px;
-  padding: 0 12px;
-  font-size: 0.8125rem;
-  border-radius: 7px;
+  height: 38px;
+  padding: 0 16px;
+  font-size: 0.9rem;
+  border-radius: 8px;
 }
 
 .zine-stamp {
@@ -518,13 +519,13 @@ img, svg { display: inline-block; vertical-align: middle; }
 .input-dark, .input-styled, .zine-field, .zine-input {
   background: var(--surface);
   border: 1px solid var(--border-strong);
-  border-radius: var(--radius-sm);
+  border-radius: 10px;
   color: var(--ink);
-  padding: 10px 12px;
+  padding: 12px 16px;
   width: 100%;
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 0.9rem;
+  font-size: 1.02rem;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
   outline: none;
   box-shadow: none;
@@ -534,7 +535,7 @@ img, svg { display: inline-block; vertical-align: middle; }
   color: var(--ink-faint);
   text-transform: none;
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: 1.02rem;
 }
 .input-dark:focus, .input-styled:focus, .zine-field:focus, .zine-input:focus {
   background: var(--surface);
@@ -546,12 +547,12 @@ img, svg { display: inline-block; vertical-align: middle; }
 .zine-label {
   display: block;
   font-family: var(--font-body);
-  font-size: 0.8125rem;
-  font-weight: 500;
+  font-size: 0.92rem;
+  font-weight: 550;
   text-transform: none;
   letter-spacing: 0;
   color: var(--ink-soft);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 /* ==========================================================================
@@ -628,24 +629,24 @@ img, svg { display: inline-block; vertical-align: middle; }
 .tabs {
   display: inline-flex;
   align-items: center;
-  gap: 2px;
-  padding: 3px;
+  gap: 4px;
+  padding: 5px;
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 12px;
   background: var(--surface);
 }
 .tab {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  height: 32px;
-  padding: 0 14px;
+  gap: 8px;
+  height: 38px;
+  padding: 0 18px;
   border: none;
-  border-radius: 7px;
+  border-radius: 8px;
   background: transparent;
   color: var(--ink-muted);
-  font-size: 0.8125rem;
-  font-weight: 500;
+  font-size: 0.95rem;
+  font-weight: 550;
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
 }
@@ -953,8 +954,8 @@ img, svg { display: inline-block; vertical-align: middle; }
 
 /* Avatar */
 .avatar {
-  width: 34px;
-  height: 34px;
+  width: 48px;
+  height: 48px;
   border-radius: var(--radius-full);
   background: var(--surface-2);
   border: 1px solid var(--border);
@@ -962,12 +963,12 @@ img, svg { display: inline-block; vertical-align: middle; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.8rem;
+  font-size: 1.05rem;
   font-weight: 600;
   font-family: var(--font-mono);
   flex-shrink: 0;
 }
-.avatar--lg { width: 56px; height: 56px; font-size: 1.25rem; }
+.avatar--lg { width: 92px; height: 92px; font-size: 2.2rem; border-radius: 22px; }
 
 @media (max-width: 1024px) {
   .dashboard-two-col { grid-template-columns: 1fr !important; }
@@ -986,24 +987,32 @@ img, svg { display: inline-block; vertical-align: middle; }
   display: flex;
   flex-direction: column;
   gap: 0;
-  padding: 20px;
+  padding: 32px 34px;
+  border-radius: 18px;
   text-decoration: none;
   color: var(--ink);
   cursor: pointer;
   animation: card-in 0.25s ease both;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.game-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--ink);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
 }
 .game-card--locked { opacity: 0.6; cursor: default; }
+.game-card--locked:hover { transform: none; box-shadow: none; border-color: var(--border); }
 
 .game-card-top {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 16px;
+  gap: 14px;
+  margin-bottom: 20px;
 }
 .game-card-icon {
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
   background: var(--surface-2);
   border: 1px solid var(--border);
   color: var(--ink-soft);
@@ -1014,20 +1023,20 @@ img, svg { display: inline-block; vertical-align: middle; }
 }
 .game-card-icon--locked { color: var(--ink-faint); }
 .game-card-category {
-  font-size: 0.68rem;
+  font-size: 0.82rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--ink-muted);
 }
 
-.game-card-title { font-size: 0.98rem; font-weight: 600; letter-spacing: -0.01em; }
+.game-card-title { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.015em; }
 .game-card-desc {
-  margin-top: 6px;
-  font-size: 0.84rem;
+  margin-top: 10px;
+  font-size: 1.02rem;
   color: var(--ink-muted);
-  line-height: 1.55;
+  line-height: 1.6;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -1035,14 +1044,14 @@ img, svg { display: inline-block; vertical-align: middle; }
 .game-card-bottom {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-top: 18px;
-  padding-top: 16px;
+  gap: 14px;
+  margin-top: 26px;
+  padding-top: 20px;
   border-top: 1px solid var(--border);
 }
-.game-card-time { font-size: 0.72rem; }
-.game-card-arrow { margin-left: auto; color: var(--ink-faint); transition: color 0.15s ease; }
-.game-card:hover .game-card-arrow { color: var(--ink-soft); }
+.game-card-time { font-size: 0.88rem; }
+.game-card-arrow { margin-left: auto; color: var(--ink-faint); transition: color 0.15s ease, transform 0.15s ease; }
+.game-card:hover .game-card-arrow { color: var(--ink); transform: translateX(3px); }
 
 @keyframes card-in {
   from { opacity: 0; }

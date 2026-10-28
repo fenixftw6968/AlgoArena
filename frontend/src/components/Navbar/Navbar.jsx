@@ -125,7 +125,9 @@ export default function Navbar() {
         <div className="nav-inner">
           {/* Brand */}
           <Link to={isAuthenticated ? '/dashboard' : '/'} className="nav-brand">
-            <span className="nav-brand-mark"><Brain size={15} /></span>
+            <span className="nav-brand-mark" style={{ background: '#0a0d14', border: '1px solid rgba(255,255,255,0.08)' }}>
+              <img src="/logo-icon.png" alt="AlgoArena" style={{ width: 16, height: 16, objectFit: 'contain' }} />
+            </span>
             <span className="nav-brand-name">AlgoArena</span>
           </Link>
 
@@ -295,25 +297,25 @@ export default function Navbar() {
           border-bottom: 1px solid var(--border);
         }
         .nav-inner {
-          max-width: 1200px;
+          max-width: min(96vw, 1840px);
           margin: 0 auto;
-          height: 64px;
-          padding: 0 24px;
+          height: 68px;
+          padding: 0 clamp(32px, 5vw, 88px);
           display: flex;
           align-items: center;
-          gap: 24px;
+          gap: 28px;
         }
         .nav-brand {
           display: inline-flex;
           align-items: center;
-          gap: 9px;
+          gap: 11px;
           text-decoration: none;
           color: var(--ink);
           flex-shrink: 0;
         }
         .nav-brand-mark {
-          width: 28px;
-          height: 28px;
+          width: 32px;
+          height: 32px;
           border-radius: 8px;
           background: var(--ink);
           color: #fff;
@@ -322,14 +324,14 @@ export default function Navbar() {
           justify-content: center;
         }
         .nav-brand-name {
-          font-size: 0.94rem;
-          font-weight: 600;
+          font-size: 1.05rem;
+          font-weight: 650;
           letter-spacing: -0.02em;
         }
         .nav-links {
           display: flex;
           align-items: center;
-          gap: 2px;
+          gap: 4px;
           flex: 1;
           min-width: 0;
           overflow: hidden;
@@ -337,9 +339,9 @@ export default function Navbar() {
         .nav-link {
           display: inline-flex;
           align-items: center;
-          padding: 7px 12px;
-          border-radius: 7px;
-          font-size: 0.85rem;
+          padding: 8px 15px;
+          border-radius: 8px;
+          font-size: 0.92rem;
           font-weight: 450;
           color: var(--ink-muted);
           text-decoration: none;
@@ -347,29 +349,29 @@ export default function Navbar() {
           transition: color 0.15s ease, background 0.15s ease;
         }
         .nav-link:hover { color: var(--ink); background: var(--surface-2); }
-        .nav-link--active { color: var(--ink); font-weight: 550; }
+        .nav-link--active { color: var(--ink); font-weight: 600; }
         .nav-actions {
           display: flex;
           align-items: center;
-          gap: 10px;
+          gap: 12px;
           margin-left: auto;
           flex-shrink: 0;
         }
         .nav-stats {
           display: flex;
           align-items: center;
-          gap: 14px;
-          padding-right: 12px;
+          gap: 16px;
+          padding-right: 16px;
           border-right: 1px solid var(--border);
         }
         .nav-stat {
           display: inline-flex;
           align-items: center;
-          gap: 5px;
-          font-size: 0.8rem;
+          gap: 6px;
+          font-size: 0.88rem;
           color: var(--ink-muted);
         }
-        .nav-stat .mono { color: var(--ink-soft); font-size: 0.78rem; }
+        .nav-stat .mono { color: var(--ink-soft); font-size: 0.84rem; }
         .nav-icon-btn {
           width: 34px;
           height: 34px;

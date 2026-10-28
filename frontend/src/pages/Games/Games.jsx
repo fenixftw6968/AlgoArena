@@ -98,7 +98,7 @@ export default function Games() {
             <p className="muted">No arenas match your filters.</p>
           </div>
         ) : (
-          <div className="grid-cards">
+          <div className="games-grid">
             {filtered.map((game, i) => (
               <GameCard key={game.slug} game={game} index={i} activeDifficulty={difficulty} />
             ))}
@@ -110,32 +110,41 @@ export default function Games() {
         .games-toolbar {
           display: flex;
           align-items: center;
-          gap: 24px;
+          gap: 32px;
           flex-wrap: wrap;
-          padding: 16px 20px;
+          padding: 24px 32px;
           border: 1px solid var(--border);
-          border-radius: var(--radius);
+          border-radius: 18px;
           background: var(--surface);
         }
-        .games-search { position: relative; flex: 1 1 220px; max-width: 320px; }
+        .games-search { position: relative; flex: 1 1 320px; max-width: 480px; }
         .games-search-icon {
           position: absolute;
-          left: 12px;
+          left: 16px;
           top: 50%;
           transform: translateY(-50%);
           color: var(--ink-faint);
           pointer-events: none;
         }
-        .games-search-input { padding-left: 36px; }
-        .games-filter-group { display: flex; align-items: center; gap: 10px; }
+        .games-search-input { padding-left: 48px !important; height: 50px; font-size: 1.05rem; border-radius: 10px; }
+        .games-filter-group { display: flex; align-items: center; gap: 14px; }
         .games-filter-label {
           font-family: var(--font-mono);
-          font-size: 0.68rem;
+          font-size: 0.82rem;
+          font-weight: 650;
           text-transform: uppercase;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.08em;
           color: var(--ink-muted);
         }
-        .games-empty { padding: 48px 24px; text-align: center; }
+        .games-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 28px;
+        }
+        .games-empty { padding: 64px 24px; text-align: center; font-size: 1.05rem; }
+        @media (max-width: 900px) {
+          .games-grid { grid-template-columns: 1fr; }
+        }
         @media (max-width: 720px) {
           .games-search { max-width: 100%; }
           .games-filter-group { width: 100%; flex-wrap: wrap; }

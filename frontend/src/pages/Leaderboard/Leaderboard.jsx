@@ -34,7 +34,7 @@ export default function Leaderboard() {
 
   return (
     <div className="page">
-      <div className="container container--narrow stack">
+      <div className="container stack" style={{ maxWidth: 'min(96vw, 1500px)' }}>
         <header className="page-head" style={{ marginBottom: 0 }}>
           <h1 className="page-title">Leaderboard</h1>
           <p className="page-lede">Top players across the AlgoArena network.</p>
@@ -100,52 +100,54 @@ export default function Leaderboard() {
       </div>
 
       <style>{`
-        .lb-card { overflow: hidden; }
+        .lb-card { overflow: hidden; border-radius: 20px; }
         .lb-state {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 12px;
-          padding: 64px 24px;
-          font-size: 0.875rem;
+          gap: 14px;
+          padding: 80px 24px;
+          font-size: 1.1rem;
         }
         .lb-row {
           display: grid;
-          grid-template-columns: 44px 34px 1fr auto;
+          grid-template-columns: 60px 48px 1fr auto;
           align-items: center;
-          gap: 14px;
-          padding: 13px 20px;
+          gap: 24px;
+          padding: 22px 32px;
           border-bottom: 1px solid var(--border);
         }
         .lb-row:last-child { border-bottom: none; }
         .lb-row--you { background: var(--surface-2); }
         .lb-rank {
           color: var(--ink-faint);
-          font-size: 0.8rem;
+          font-size: 1.15rem;
+          font-weight: 600;
         }
-        .lb-rank--top { color: var(--ink); font-weight: 600; }
-        .lb-player { min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+        .lb-rank--top { color: var(--ink); font-weight: 750; }
+        .lb-player { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
         .lb-name {
-          font-size: 0.875rem;
-          font-weight: 500;
+          font-size: 1.18rem;
+          font-weight: 650;
           display: flex;
           align-items: center;
-          gap: 8px;
+          gap: 12px;
         }
         .lb-you-tag {
           font-family: var(--font-mono);
-          font-size: 0.6rem;
+          font-size: 0.72rem;
           text-transform: uppercase;
           letter-spacing: 0.08em;
-          color: var(--ink-muted);
+          color: var(--ink);
           border: 1px solid var(--border-strong);
-          border-radius: 5px;
-          padding: 1px 5px;
+          border-radius: 6px;
+          padding: 3px 8px;
+          background: var(--surface);
         }
-        .lb-meta { font-size: 0.75rem; color: var(--ink-muted); }
-        .lb-value { font-size: 0.85rem; font-weight: 600; }
+        .lb-meta { font-size: 0.92rem; color: var(--ink-muted); }
+        .lb-value { font-size: 1.28rem; font-weight: 750; color: var(--ink); }
         @media (max-width: 520px) {
-          .lb-row { grid-template-columns: 34px 1fr auto; padding: 12px 16px; }
+          .lb-row { grid-template-columns: 40px 1fr auto; padding: 16px 18px; gap: 14px; }
           .lb-rank { display: none; }
         }
       `}</style>

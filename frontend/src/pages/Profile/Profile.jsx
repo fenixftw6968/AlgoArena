@@ -56,7 +56,7 @@ export default function Profile() {
               Joined {new Date(user.createdAt || Date.now()).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
               {' · '}Level {user.level || 1}
             </div>
-            <div style={{ marginTop: 18, maxWidth: 480 }}>
+            <div style={{ marginTop: 24, maxWidth: 820 }}>
               <XPBar current={Math.max(0, xpCurrent)} total={Math.max(1, xpNext)} level={user.level || 1} />
             </div>
           </div>
@@ -128,50 +128,53 @@ export default function Profile() {
       <style>{`
         .profile-head {
           display: flex;
-          align-items: flex-start;
-          gap: 24px;
-          padding: 28px;
+          align-items: center;
+          gap: 36px;
+          padding: clamp(32px, 4vh, 48px);
+          border-radius: 22px;
         }
         .profile-head-main { flex: 1; min-width: 0; }
-        .profile-name { font-size: 1.35rem; font-weight: 600; letter-spacing: -0.025em; }
-        .profile-meta { margin-top: 4px; font-size: 0.8rem; color: var(--ink-muted); }
+        .profile-name { font-size: clamp(2.4rem, 3.5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; color: var(--ink); }
+        .profile-meta { margin-top: 8px; font-size: 1.05rem; color: var(--ink-muted); }
 
-        .profile-stat { padding: 18px 20px; border-right: 1px solid var(--border); }
+        .profile-stat { padding: 28px 36px; border-right: 1px solid var(--border); }
         .profile-stat:last-child { border-right: none; }
-        .profile-stat-value { font-size: 1.35rem; font-weight: 600; letter-spacing: -0.02em; }
+        .profile-stat-value { font-size: clamp(2.2rem, 3vw, 2.9rem); font-weight: 750; letter-spacing: -0.02em; color: var(--ink); }
         .profile-stat-label {
-          margin-top: 4px;
-          font-size: 0.75rem;
-          color: var(--ink-muted);
+          margin-top: 8px;
+          font-size: 0.95rem;
+          font-weight: 600;
+          color: var(--ink-soft);
         }
 
         .ach-card {
           display: flex;
-          gap: 14px;
-          padding: 18px;
+          gap: 22px;
+          padding: 26px 30px;
+          border-radius: 16px;
         }
         .ach-card--locked { background: var(--surface-2); }
         .ach-icon {
-          width: 36px;
-          height: 36px;
-          border-radius: 9px;
+          width: 56px;
+          height: 56px;
+          border-radius: 14px;
           background: var(--surface-2);
           border: 1px solid var(--border);
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          font-size: 1rem;
+          font-size: 1.6rem;
           flex-shrink: 0;
         }
         .ach-card--locked .ach-icon { color: var(--ink-faint); }
         .ach-body { flex: 1; min-width: 0; }
-        .ach-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-        .ach-title { font-size: 0.875rem; font-weight: 550; }
-        .ach-rarity { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-faint); flex-shrink: 0; }
-        .ach-desc { margin-top: 4px; font-size: 0.8rem; color: var(--ink-muted); line-height: 1.5; }
+        .ach-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+        .ach-title { font-size: 1.18rem; font-weight: 650; }
+        .ach-rarity { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-faint); flex-shrink: 0; }
+        .ach-desc { margin-top: 8px; font-size: 1rem; color: var(--ink-muted); line-height: 1.6; }
 
         @media (max-width: 640px) {
-          .profile-head { flex-direction: column; gap: 16px; padding: 22px; }
+          .profile-head { flex-direction: column; gap: 18px; padding: 24px; }
           .grid-stats { grid-template-columns: repeat(2, 1fr); }
           .profile-stat:nth-child(2) { border-right: none; }
           .profile-stat:nth-child(1), .profile-stat:nth-child(2) { border-bottom: 1px solid var(--border); }

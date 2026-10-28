@@ -57,13 +57,12 @@ export default function ForgotPassword() {
             <div>
               <label className="zine-label" htmlFor="fp-email">Email</label>
               <div style={{ position: 'relative' }}>
-                <Mail size={15} className="field-icon" />
+                <Mail size={18} className="field-icon" />
                 <input
                   id="fp-email"
                   type="email"
                   required
                   autoComplete="email"
-                  placeholder="you@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="zine-field field-with-icon"
@@ -75,7 +74,7 @@ export default function ForgotPassword() {
               type="submit"
               disabled={loading}
               className="btn btn--primary"
-              style={{ width: '100%', marginTop: 6 }}
+              style={{ width: '100%', height: 54, fontSize: '1.08rem', marginTop: 8 }}
             >
               {loading ? 'Sending…' : 'Send reset link'}
             </button>

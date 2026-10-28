@@ -43,13 +43,12 @@ export default function Login() {
         <div>
           <label className="zine-label" htmlFor="login-email">Email</label>
           <div style={fieldStyle}>
-            <Mail size={15} className="field-icon" />
+            <Mail size={18} className="field-icon" />
             <input
               id="login-email"
               type="email"
               required
               autoComplete="email"
-              placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="zine-field field-with-icon"
@@ -63,13 +62,12 @@ export default function Login() {
             <Link to="/forgot-password" className="auth-link-sm">Forgot password?</Link>
           </div>
           <div style={fieldStyle}>
-            <Lock size={15} className="field-icon" />
+            <Lock size={18} className="field-icon" />
             <input
               id="login-pass"
               type={showPass ? 'text' : 'password'}
               required
               autoComplete="current-password"
-              placeholder="Your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="zine-field field-with-icon field-with-icon-r"
@@ -80,7 +78,7 @@ export default function Login() {
               aria-label={showPass ? 'Hide password' : 'Show password'}
               className="field-action"
             >
-              {showPass ? <EyeOff size={15} /> : <Eye size={15} />}
+              {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
           </div>
         </div>
@@ -89,7 +87,7 @@ export default function Login() {
           type="submit"
           disabled={loading}
           className="btn btn--primary"
-          style={{ width: '100%', marginTop: 6 }}
+          style={{ width: '100%', height: 54, fontSize: '1.08rem', marginTop: 8 }}
         >
           {loading ? 'Signing in…' : 'Log in'}
         </button>

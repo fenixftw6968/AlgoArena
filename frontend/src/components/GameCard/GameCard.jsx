@@ -37,10 +37,10 @@ export default function GameCard({ game, index = 0, activeDifficulty = 'All' }) 
     >
       <div className="game-card-top">
         <span className={`game-card-icon${unlocked ? '' : ' game-card-icon--locked'}`}>
-          {unlocked ? <IconComponent size={17} /> : <Lock size={14} />}
+          {unlocked ? <IconComponent size={22} /> : <Lock size={18} />}
         </span>
         <span className="game-card-category mono">{categoryLabel}</span>
-        {game.isNew && <span className="badge" style={{ marginLeft: 4 }}>New</span>}
+        {game.isNew && <span className="badge" style={{ marginLeft: 6 }}>New</span>}
       </div>
 
       <h3 className="game-card-title truncate">{game.title}</h3>
@@ -51,7 +51,7 @@ export default function GameCard({ game, index = 0, activeDifficulty = 'All' }) 
       <div className="game-card-bottom">
         <span className={`badge ${diff.cls}`}>{diff.label}</span>
         {game.estimatedTime && <span className="game-card-time faint mono">{game.estimatedTime}</span>}
-        {unlocked && <ChevronRight size={15} className="game-card-arrow" />}
+        {unlocked && <ChevronRight size={18} className="game-card-arrow" />}
       </div>
     </Tag>
   );

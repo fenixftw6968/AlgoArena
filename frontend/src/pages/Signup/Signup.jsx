@@ -47,7 +47,6 @@ export default function Signup() {
   return (
     <AuthShell
       title="Create account"
-      lede="Free forever. Track progress, duel players, climb the ladder."
     >
       <AuthError>
         {error && (
@@ -62,13 +61,12 @@ export default function Signup() {
         <div>
           <label className="zine-label" htmlFor="su-user">Username</label>
           <div style={{ position: 'relative' }}>
-            <User size={15} className="field-icon" />
+            <User size={18} className="field-icon" />
             <input
               id="su-user"
               type="text"
               required
               autoComplete="username"
-              placeholder="e.g. mastermind_01"
               value={form.username}
               onChange={update('username')}
               className="zine-field field-with-icon"
@@ -79,13 +77,12 @@ export default function Signup() {
         <div>
           <label className="zine-label" htmlFor="su-email">Email</label>
           <div style={{ position: 'relative' }}>
-            <Mail size={15} className="field-icon" />
+            <Mail size={18} className="field-icon" />
             <input
               id="su-email"
               type="email"
               required
               autoComplete="email"
-              placeholder="you@example.com"
               value={form.email}
               onChange={update('email')}
               className="zine-field field-with-icon"
@@ -96,13 +93,12 @@ export default function Signup() {
         <div>
           <label className="zine-label" htmlFor="su-pass">Password</label>
           <div style={{ position: 'relative' }}>
-            <Lock size={15} className="field-icon" />
+            <Lock size={18} className="field-icon" />
             <input
               id="su-pass"
               type={showPass ? 'text' : 'password'}
               required
               autoComplete="new-password"
-              placeholder="At least 6 characters"
               value={form.password}
               onChange={update('password')}
               className="zine-field field-with-icon field-with-icon-r"
@@ -113,7 +109,7 @@ export default function Signup() {
               aria-label={showPass ? 'Hide password' : 'Show password'}
               className="field-action"
             >
-              {showPass ? <EyeOff size={15} /> : <Eye size={15} />}
+              {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
           </div>
 
@@ -140,13 +136,12 @@ export default function Signup() {
         <div>
           <label className="zine-label" htmlFor="su-conf">Confirm password</label>
           <div style={{ position: 'relative' }}>
-            <Lock size={15} className="field-icon" />
+            <Lock size={18} className="field-icon" />
             <input
               id="su-conf"
               type={showPass ? 'text' : 'password'}
               required
               autoComplete="new-password"
-              placeholder="Repeat your password"
               value={form.confirm}
               onChange={update('confirm')}
               className="zine-field field-with-icon"
@@ -158,7 +153,7 @@ export default function Signup() {
           type="submit"
           disabled={loading}
           className="btn btn--primary"
-          style={{ width: '100%', marginTop: 6 }}
+          style={{ width: '100%', height: 54, fontSize: '1.08rem', marginTop: 8 }}
         >
           {loading ? 'Creating account…' : 'Create account'}
         </button>

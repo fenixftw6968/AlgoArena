@@ -1,21 +1,22 @@
 import { Link } from 'react-router-dom';
-import { Brain } from 'lucide-react';
+
+export function AuthError({ children }) {
+  if (!children) return null;
+  return (
+    <div className="auth-error-banner" role="alert">
+      {children}
+    </div>
+  );
+}
 
 /**
- * Minimal auth chrome: quiet top bar, centered card, hairline footer.
- * All four auth pages (login, signup, forgot, reset) render inside this shell.
+ * Minimal auth chrome: centered card, hairline footer.
+ * Navbar is provided globally by App.jsx, so AuthShell focuses on a clean,
+ * perfectly centered card with generous, modern proportions.
  */
 export default function AuthShell({ kicker, title, lede, children, footer }) {
   return (
     <div className="auth-root">
-      <header className="auth-top">
-        <Link to="/" className="auth-brand">
-          <span className="auth-brand-mark"><Brain size={15} /></span>
-          <span className="auth-brand-name">AlgoArena</span>
-        </Link>
-        <Link to="/games" className="btn btn--ghost btn--sm">Browse arenas</Link>
-      </header>
-
       <main className="auth-main">
         <div className="auth-card">
           <div className="auth-card-head">
@@ -29,6 +30,7 @@ export default function AuthShell({ kicker, title, lede, children, footer }) {
 
       <footer className="auth-foot">
         <span>© {new Date().getFullYear()} AlgoArena</span>
+        <span className="auth-foot-dot">·</span>
         <span>Competitive algorithms, puzzles & duels.</span>
         {footer}
       </footer>
@@ -39,93 +41,81 @@ export default function AuthShell({ kicker, title, lede, children, footer }) {
           display: flex;
           flex-direction: column;
           background: var(--bg);
+          padding-top: 70px;
+          box-sizing: border-box;
         }
-        .auth-top {
-          height: 64px;
-          padding: 0 24px;
-          max-width: 1080px;
-          width: 100%;
-          margin: 0 auto;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
-        .auth-brand {
-          display: inline-flex;
-          align-items: center;
-          gap: 9px;
-          text-decoration: none;
-          color: var(--ink);
-        }
-        .auth-brand-mark {
-          width: 28px;
-          height: 28px;
-          border-radius: 8px;
-          background: var(--ink);
-          color: #fff;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .auth-brand-name { font-size: 0.94rem; font-weight: 600; letter-spacing: -0.02em; }
         .auth-main {
           flex: 1;
           display: flex;
-          align-items: flex-start;
+          align-items: center;
           justify-content: center;
-          padding: 48px 24px 72px;
+          padding: 48px 24px 64px;
+          box-sizing: border-box;
         }
         .auth-card {
           width: 100%;
-          max-width: 420px;
+          max-width: 580px;
           background: var(--surface);
           border: 1px solid var(--border);
-          border-radius: 16px;
-          padding: 36px 32px 32px;
+          border-radius: 24px;
+          padding: clamp(44px, 5.5vh, 58px) clamp(36px, 4.5vw, 52px);
+          box-shadow: 0 12px 48px -12px rgba(0, 0, 0, 0.08);
+          box-sizing: border-box;
         }
-        .auth-card-head { margin-bottom: 28px; }
-        .auth-title {
-          font-size: 1.5rem;
-          font-weight: 600;
-          letter-spacing: -0.025em;
-          margin-top: 8px;
+        .auth-card-head {
+          margin-bottom: 32px;
         }
-        .auth-lede {
-          margin-top: 8px;
-          color: var(--ink-muted);
-          font-size: 0.875rem;
-          line-height: 1.6;
-        }
-        .auth-foot {
-          padding: 20px 24px 28px;
+        .auth-error-banner {
           display: flex;
           align-items: center;
-          justify-content: center;
-          gap: 16px;
-          flex-wrap: wrap;
-          color: var(--ink-faint);
-          font-size: 0.75rem;
+          gap: 12px;
+          background: var(--err-soft);
+          border: 1px solid #fecaca;
+          color: var(--err);
+          padding: 14px 18px;
+          border-radius: 12px;
+          font-size: 0.98rem;
+          font-weight: 500;
+          margin-bottom: 24px;
         }
-        @media (max-width: 480px) {
-          .auth-card { padding: 28px 20px 24px; }
-          .auth-main { padding: 24px 16px 56px; }
+        .auth-title {
+          font-size: clamp(2.3rem, 3.2vw, 2.85rem);
+          font-weight: 700;
+          letter-spacing: -0.035em;
+          color: var(--ink);
+          margin: 0;
         }
-
-        /* Shared form patterns for all auth pages */
-        .auth-form { display: flex; flex-direction: column; gap: 18px; }
+        .auth-lede {
+          margin-top: 12px;
+          color: var(--ink-muted);
+          font-size: 1.08rem;
+          line-height: 1.6;
+        }
+        .auth-form {
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+        }
         .field-icon {
           position: absolute;
-          left: 12px;
+          left: 16px;
           top: 50%;
           transform: translateY(-50%);
           color: var(--ink-faint);
           pointer-events: none;
         }
-        .field-with-icon { padding-left: 36px; }
-        .field-with-icon-r { padding-right: 38px; }
+        .field-with-icon {
+          padding-left: 48px !important;
+          height: 54px;
+          font-size: 1.06rem;
+          border-radius: 12px;
+        }
+        .field-with-icon-r {
+          padding-right: 48px !important;
+        }
         .field-action {
           position: absolute;
-          right: 8px;
+          right: 14px;
           top: 50%;
           transform: translateY(-50%);
           background: none;
@@ -133,48 +123,61 @@ export default function AuthShell({ kicker, title, lede, children, footer }) {
           color: var(--ink-faint);
           cursor: pointer;
           display: flex;
+          align-items: center;
+          justify-content: center;
           padding: 6px;
-          border-radius: 6px;
         }
-        .field-action:hover { color: var(--ink-soft); }
+        .field-action:hover {
+          color: var(--ink);
+        }
+        .auth-switch {
+          margin-top: 28px;
+          text-align: center;
+          font-size: 1.02rem;
+          color: var(--ink-muted);
+        }
+        .auth-switch a {
+          color: var(--ink);
+          font-weight: 600;
+          text-decoration: none;
+        }
+        .auth-switch a:hover {
+          text-decoration: underline;
+          color: #2563eb;
+        }
         .auth-link-sm {
-          font-size: 0.78rem;
+          font-size: 0.92rem;
           color: var(--ink-muted);
           text-decoration: none;
         }
-        .auth-link-sm:hover { color: var(--ink); text-decoration: underline; }
-        .auth-switch {
-          margin-top: 24px;
-          padding-top: 20px;
-          border-top: 1px solid var(--border);
-          text-align: center;
-          color: var(--ink-muted);
-          font-size: 0.85rem;
+        .auth-link-sm:hover {
+          color: #2563eb;
         }
-        .auth-switch a { color: var(--ink); font-weight: 500; text-decoration: none; }
-        .auth-switch a:hover { text-decoration: underline; }
-        .auth-success-icon {
-          width: 44px;
-          height: 44px;
-          border-radius: 12px;
-          background: var(--ok-soft);
-          border: 1px solid #bbf7d0;
-          color: var(--ok);
-          display: inline-flex;
+        .auth-foot {
+          padding: 24px 24px 32px;
+          display: flex;
           align-items: center;
           justify-content: center;
-          margin-bottom: 18px;
+          gap: 14px;
+          flex-wrap: wrap;
+          color: var(--ink-faint);
+          font-size: 0.92rem;
+        }
+          font-size: 0.82rem;
+        }
+        .auth-foot-dot {
+          color: var(--ink-faint);
+        }
+        @media (max-width: 520px) {
+          .auth-card {
+            padding: 28px 22px;
+            border-radius: 16px;
+          }
+          .auth-title {
+            font-size: 1.65rem;
+          }
         }
       `}</style>
-    </div>
-  );
-}
-
-export function AuthError({ children }) {
-  if (!children) return null;
-  return (
-    <div className="notice" role="alert" style={{ marginBottom: 20 }}>
-      {children}
     </div>
   );
 }

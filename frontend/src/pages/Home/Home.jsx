@@ -1,231 +1,690 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Brain, Swords, Trophy } from 'lucide-react';
+import { ArrowRight, Swords, ChevronRight } from 'lucide-react';
 
-const DISCIPLINES = [
-  { title: 'DSA & Algorithms',  desc: 'Data structures, complexity analysis, graph traversals and code output questions.' },
-  { title: 'Logical Reasoning', desc: 'Multi-step deduction grids, syllogisms, analogies and boolean condition puzzles.' },
-  { title: 'Number Detective',  desc: 'Patterns in non-linear sequences, Fibonacci variants and exponential matrices.' },
-  { title: 'Code Breaker',      desc: 'Deduce secret codes through positional logic, elimination and entropy clues.' },
+const ARENAS = [
+  {
+    slug: 'dsa-master-quiz',
+    title: 'DSA Master Quiz',
+    category: 'Algorithms & Coding',
+    icon: '🧠',
+    tier: 'Hard',
+    desc: 'Complexity analysis, graphs, dynamic programming & code outputs.',
+    color: '#2563eb',
+  },
+  {
+    slug: 'logic-puzzle',
+    title: 'Logic Puzzle',
+    category: 'Analytical Reasoning',
+    icon: '🧩',
+    tier: 'Medium',
+    desc: 'Multi-step deduction grids, syllogisms & boolean logic statements.',
+    color: '#0284c7',
+  },
+  {
+    slug: 'number-detective',
+    title: 'Number Detective',
+    category: 'Mathematical Patterns',
+    icon: '🔢',
+    tier: 'Medium',
+    desc: 'Non-linear sequences, Fibonacci variants & number relationships.',
+    color: '#059669',
+  },
+  {
+    slug: 'code-breaker',
+    title: 'Code Breaker',
+    category: 'Ciphers & Deduction',
+    icon: '🔐',
+    tier: 'Medium',
+    desc: 'Positional entropy, constraint elimination & secret code decryption.',
+    color: '#7c3aed',
+  },
 ];
 
-const FEATURES = [
-  {
-    Icon: Swords,
-    title: 'Live 1v1 duels',
-    desc: 'Ranked matchmaking against real players, with bots as a fallback so you never wait.',
-  },
-  {
-    Icon: Trophy,
-    title: 'Competitive rating',
-    desc: 'A balanced Elo ladder from Rookie to Mythic across every arena.',
-  },
-  {
-    Icon: Brain,
-    title: 'Four arenas',
-    desc: 'Algorithms, logic, number patterns and ciphers — each with three difficulty tiers.',
-  },
+const METRICS = [
+  { label: 'Arenas', val: '4', sub: 'Multi-Tiered' },
+  { label: 'Duels', val: '1v1', sub: 'Live Elo Ladder' },
+  { label: 'Challenges', val: '150+', sub: 'Curated Puzzles' },
+  { label: 'Rankings', val: 'Global', sub: 'Real-Time Sync' },
 ];
 
 export default function Home() {
   return (
-    <div className="home-root">
-      <main>
-        {/* Hero */}
-        <section className="home-hero">
-          <div className="home-hero-inner">
-            <span className="badge">Daily challenges · Live duels · Global leaderboard</span>
-            <h1 className="home-title">
-              Master algorithms.<br />Conquer puzzles.
+    <div className="home-viewport">
+      <main className="home-stage">
+        {/* Left Column: Hero & Actions */}
+        <section className="home-left">
+          <div className="home-left-content">
+            {/* Badge */}
+            <div className="home-badge">
+              <span className="home-badge-logo">
+                <img src="/logo-icon.png" alt="AlgoArena Logo" />
+              </span>
+              <span className="home-badge-text">Competitive Algorithms & Logic Arenas</span>
+              <span className="home-badge-pulse" />
+            </div>
+
+            {/* Headline */}
+            <h1 className="home-headline">
+              Master algorithms.<br />
+              <span className="home-headline-accent">Conquer puzzles.</span>
             </h1>
-            <p className="home-lede">
-              A quiet place to sharpen analytical thinking. Curated DSA challenges,
-              logic grids and ciphers, with real-time 1v1 duels and an Elo ladder.
+
+            {/* Description */}
+            <p className="home-subtext">
+              Sharpen your analytical problem-solving with curated algorithmic duels,
+              logic grids, and positional ciphers. Compete in real-time 1v1 ranked matches
+              and scale the global Elo ladder.
             </p>
-            <div className="home-cta">
-              <Link to="/signup" className="btn btn--primary home-btn-lg">
-                Create free account <ArrowRight size={15} />
+
+            {/* Action Buttons */}
+            <div className="home-actions">
+              <Link to="/signup" className="btn btn--primary home-action-primary">
+                <span>Create free account</span>
+                <ArrowRight size={18} />
               </Link>
-              <Link to="/games" className="btn btn--secondary home-btn-lg">
-                Browse arenas
+              <Link to="/games" className="btn btn--secondary home-action-secondary">
+                <span>Browse arenas</span>
+              </Link>
+              <Link to="/login" className="home-action-text">
+                Already registered? <span className="home-action-text-bold">Sign in →</span>
               </Link>
             </div>
-          </div>
-        </section>
 
-        {/* Features */}
-        <section className="home-section">
-          <div className="container--wide home-container">
-            <h2 className="home-section-title">Everything you need to sharpen up</h2>
-            <div className="home-features">
-              {FEATURES.map(({ Icon, title, desc }) => (
-                <div key={title} className="card home-feature">
-                  <span className="home-feature-icon"><Icon size={17} /></span>
-                  <h3 className="home-feature-title">{title}</h3>
-                  <p className="home-feature-desc">{desc}</p>
+            {/* Metrics Ribbon */}
+            <div className="home-metrics-row">
+              {METRICS.map((m) => (
+                <div key={m.label} className="home-metric-item">
+                  <div className="home-metric-val">{m.val}</div>
+                  <div className="home-metric-label">{m.label}</div>
+                  <div className="home-metric-sub">{m.sub}</div>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Disciplines */}
-        <section className="home-section home-section--alt">
-          <div className="container--wide home-container">
-            <h2 className="home-section-title">Four disciplines, one ladder</h2>
-            <p className="muted home-section-lede">
-              Each arena targets a specific faculty. Play solo to practice, or ranked to climb.
-            </p>
-            <div className="home-disciplines">
-              {DISCIPLINES.map((d, i) => (
-                <Link key={d.title} to="/games" className="home-discipline">
-                  <span className="home-discipline-num mono">{String(i + 1).padStart(2, '0')}</span>
-                  <span className="home-discipline-body">
-                    <span className="home-discipline-title">{d.title}</span>
-                    <span className="home-discipline-desc">{d.desc}</span>
-                  </span>
-                  <ArrowRight size={15} className="home-discipline-arrow" />
+        {/* Right Column: Arena Hub & Logo Showcase */}
+        <section className="home-right">
+          <div className="home-hub-card">
+            {/* Logo showcase header */}
+            <div className="home-hub-header">
+              <div className="home-hub-brand-showcase">
+                <img
+                  src="/logo-full.png"
+                  alt="AlgoArena"
+                  className="home-hub-logo-img"
+                />
+              </div>
+              <div className="home-hub-status">
+                <span className="home-status-indicator" />
+                <span className="home-status-title">LIVE ARENA MATCHMAKING</span>
+              </div>
+            </div>
+
+            {/* 4 Arenas Grid */}
+            <div className="home-arenas-grid">
+              {ARENAS.map((arena) => (
+                <Link
+                  key={arena.slug}
+                  to="/games"
+                  className="home-arena-tile"
+                >
+                  <div className="home-arena-top">
+                    <span className="home-arena-icon">{arena.icon}</span>
+                    <span className="home-arena-tier">{arena.tier}</span>
+                  </div>
+                  <div className="home-arena-title">{arena.title}</div>
+                  <div className="home-arena-desc">{arena.desc}</div>
+                  <div className="home-arena-footer">
+                    <span className="home-arena-category">{arena.category}</span>
+                    <span className="home-arena-arrow">
+                      <ChevronRight size={16} />
+                    </span>
+                  </div>
                 </Link>
               ))}
             </div>
-          </div>
-        </section>
 
-        {/* CTA */}
-        <section className="home-section">
-          <div className="container--narrow home-container">
-            <div className="card home-final">
-              <h2 className="home-final-title">Ready to test your limits?</h2>
-              <p className="muted" style={{ marginTop: 8, fontSize: '0.9rem' }}>
-                Free forever. Create an account and start with today's daily mission.
-              </p>
-              <div className="home-cta" style={{ justifyContent: 'center', marginTop: 24 }}>
-                <Link to="/signup" className="btn btn--primary home-btn-lg">
-                  Get started <ArrowRight size={15} />
-                </Link>
-                <Link to="/login" className="btn btn--secondary home-btn-lg">
-                  Log in
-                </Link>
+            {/* 1v1 Live Ranked Strip */}
+            <div className="home-duel-strip">
+              <div className="home-duel-left">
+                <Swords size={20} className="home-duel-icon" />
+                <span>
+                  <strong>1v1 Ranked Duels</strong> · Instant matchmaking with live turn-by-turn scoring
+                </span>
               </div>
+              <Link to="/games" className="home-duel-link">
+                Play now →
+              </Link>
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="home-footer">
-        <div className="container--wide home-container home-footer-inner">
+      {/* Hairline Bottom Status Footer */}
+      <footer className="home-single-footer">
+        <div className="home-footer-side">
           <span className="home-footer-brand">AlgoArena</span>
-          <span>© {new Date().getFullYear()} — Competitive algorithms, puzzles and duels.</span>
+          <span className="home-footer-dot">·</span>
+          <span>Competitive algorithms, logic puzzles & Elo duels</span>
+        </div>
+        <div className="home-footer-nav">
+          <Link to="/daily-challenge" className="home-footer-link">Daily Challenge</Link>
+          <span className="home-footer-dot">·</span>
+          <Link to="/leaderboard" className="home-footer-link">Leaderboard</Link>
+          <span className="home-footer-dot">·</span>
+          <Link to="/games" className="home-footer-link">Arenas</Link>
+          <span className="home-footer-dot">·</span>
+          <span className="home-footer-copy">© {new Date().getFullYear()} AlgoArena</span>
         </div>
       </footer>
 
       <style>{`
-        .home-root { background: var(--bg); min-height: 100vh; }
-
-        .home-hero {
-          padding: 176px 24px 96px;
-          border-bottom: 1px solid var(--border);
-        }
-        .home-hero-inner { max-width: 720px; margin: 0 auto; text-align: center; }
-        .home-title {
-          font-size: clamp(2.25rem, 6vw, 3.5rem);
-          font-weight: 600;
-          letter-spacing: -0.035em;
-          line-height: 1.08;
-          margin-top: 20px;
-        }
-        .home-lede {
-          margin: 20px auto 0;
-          max-width: 56ch;
-          color: var(--ink-muted);
-          font-size: 1.03rem;
-          line-height: 1.65;
-        }
-        .home-cta {
+        /* Viewport root pinned to exact screen height */
+        .home-viewport {
+          position: fixed;
+          top: 64px;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: calc(100vh - 64px);
+          max-height: calc(100vh - 64px);
+          background: var(--bg);
           display: flex;
-          gap: 12px;
-          justify-content: center;
-          flex-wrap: wrap;
-          margin-top: 32px;
+          flex-direction: column;
+          justify-content: space-between;
+          overflow: hidden;
+          box-sizing: border-box;
         }
-        .home-btn-lg { height: 44px; padding: 0 22px; font-size: 0.9rem; }
 
-        .home-section { padding: 88px 24px; }
-        .home-section--alt { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-        .home-container { margin: 0 auto; }
-        .home-section-title {
-          font-size: clamp(1.35rem, 3vw, 1.75rem);
-          font-weight: 600;
-          letter-spacing: -0.025em;
-          max-width: 30ch;
-        }
-        .home-section-lede { margin-top: 10px; font-size: 0.92rem; max-width: 56ch; }
-
-        .home-features {
+        /* Expansive main stage that gracefully fits the screen */
+        .home-stage {
+          flex: 1;
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-          gap: 16px;
-          margin-top: 40px;
+          grid-template-columns: 1.15fr 1fr;
+          gap: clamp(36px, 5vw, 84px);
+          max-width: min(96vw, 1840px);
+          width: 100%;
+          margin: 0 auto;
+          padding: clamp(16px, 3vh, 48px) clamp(32px, 5vw, 88px);
+          align-items: center;
+          min-height: 0;
+          box-sizing: border-box;
         }
-        .home-feature { padding: 26px; }
-        .home-feature-icon {
-          width: 36px;
-          height: 36px;
-          border-radius: 9px;
-          background: var(--surface-2);
+
+        /* Left column */
+        .home-left {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          min-height: 0;
+        }
+
+        .home-left-content {
+          max-width: 860px;
+          width: 100%;
+        }
+
+        /* Badge pill */
+        .home-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 12px;
+          background: var(--surface);
           border: 1px solid var(--border);
+          padding: 8px 20px 8px 10px;
+          border-radius: 9999px;
+          font-size: clamp(0.92rem, 1.05vw, 1.02rem);
           color: var(--ink-soft);
+          font-weight: 550;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+          margin-bottom: clamp(14px, 2.2vh, 24px);
+        }
+
+        .home-badge-logo {
+          width: 28px;
+          height: 28px;
+          border-radius: 7px;
+          background: #0a0d14;
           display: inline-flex;
           align-items: center;
           justify-content: center;
-        }
-        .home-feature-title { font-size: 0.98rem; font-weight: 600; margin-top: 16px; }
-        .home-feature-desc { font-size: 0.86rem; color: var(--ink-muted); line-height: 1.6; margin-top: 6px; }
-
-        .home-disciplines {
-          margin-top: 40px;
-          border: 1px solid var(--border);
-          border-radius: var(--radius);
-          background: var(--surface);
           overflow: hidden;
+          flex-shrink: 0;
         }
-        .home-discipline {
+
+        .home-badge-logo img {
+          width: 18px;
+          height: 18px;
+          object-fit: contain;
+        }
+
+        .home-badge-text {
+          letter-spacing: 0.01em;
+        }
+
+        .home-badge-pulse {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #10b981;
+          display: inline-block;
+          animation: pulseGreen 2s infinite ease-in-out;
+        }
+
+        @keyframes pulseGreen {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        /* Headline: commanding, large, and modern */
+        .home-headline {
+          font-size: clamp(3.2rem, 5vw, 5rem);
+          font-weight: 700;
+          letter-spacing: -0.04em;
+          line-height: 1.06;
+          color: var(--ink);
+          margin: 0;
+        }
+
+        .home-headline-accent {
+          color: #2563eb;
+          display: block;
+        }
+
+        /* Subtext */
+        .home-subtext {
+          margin-top: clamp(16px, 2.4vh, 26px);
+          font-size: clamp(1.15rem, 1.45vw, 1.35rem);
+          color: var(--ink-muted);
+          line-height: 1.65;
+          max-width: 58ch;
+        }
+
+        /* Action buttons */
+        .home-actions {
           display: flex;
           align-items: center;
-          gap: 24px;
-          padding: 22px 26px;
-          border-bottom: 1px solid var(--border);
-          text-decoration: none;
-          color: var(--ink);
-          transition: background 0.15s ease;
+          gap: 18px;
+          flex-wrap: wrap;
+          margin-top: clamp(20px, 3.2vh, 36px);
         }
-        .home-discipline:last-child { border-bottom: none; }
-        .home-discipline:hover { background: var(--surface-2); }
-        .home-discipline-num { color: var(--ink-faint); font-size: 0.8rem; flex-shrink: 0; }
-        .home-discipline-body { flex: 1; min-width: 0; }
-        .home-discipline-title { display: block; font-size: 0.95rem; font-weight: 550; }
-        .home-discipline-desc { display: block; margin-top: 3px; font-size: 0.85rem; color: var(--ink-muted); }
-        .home-discipline-arrow { color: var(--ink-faint); flex-shrink: 0; }
-        .home-discipline:hover .home-discipline-arrow { color: var(--ink-soft); }
 
-        .home-final { padding: 56px 32px; text-align: center; }
-        .home-final-title { font-size: clamp(1.3rem, 3vw, 1.6rem); font-weight: 600; letter-spacing: -0.025em; }
+        .home-action-primary {
+          height: clamp(52px, 6.5vh, 62px);
+          padding: 0 34px;
+          font-size: clamp(1.05rem, 1.2vw, 1.18rem);
+          font-weight: 600;
+          display: inline-flex;
+          align-items: center;
+          gap: 12px;
+          background: #18181b;
+          color: #ffffff;
+          border-radius: 12px;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+          transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+        }
 
-        .home-footer { border-top: 1px solid var(--border); padding: 28px 24px; }
-        .home-footer-inner {
+        .home-action-primary:hover {
+          background: #09090b;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+        }
+
+        .home-action-secondary {
+          height: clamp(52px, 6.5vh, 62px);
+          padding: 0 30px;
+          font-size: clamp(1.05rem, 1.2vw, 1.18rem);
+          font-weight: 550;
+          border-radius: 12px;
+          background: var(--surface);
+          border: 1px solid var(--border-strong);
+          color: var(--ink);
+          transition: background 0.15s ease, border-color 0.15s ease;
+        }
+
+        .home-action-secondary:hover {
+          background: var(--surface-2);
+          border-color: var(--ink);
+        }
+
+        .home-action-text {
+          font-size: 1.05rem;
+          color: var(--ink-muted);
+          text-decoration: none;
+          margin-left: 8px;
+        }
+
+        .home-action-text-bold {
+          color: var(--ink);
+          font-weight: 600;
+        }
+
+        .home-action-text:hover .home-action-text-bold {
+          color: #2563eb;
+        }
+
+        /* Metrics row */
+        .home-metrics-row {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: clamp(14px, 2.2vw, 28px);
+          margin-top: clamp(22px, 3.4vh, 40px);
+          padding-top: clamp(18px, 2.6vh, 30px);
+          border-top: 1px solid var(--border);
+          max-width: 720px;
+        }
+
+        .home-metric-item {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .home-metric-val {
+          font-family: var(--font-mono, monospace);
+          font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+          font-weight: 750;
+          color: var(--ink);
+          letter-spacing: -0.03em;
+          line-height: 1.1;
+        }
+
+        .home-metric-label {
+          font-size: 0.94rem;
+          font-weight: 600;
+          color: var(--ink-soft);
+          margin-top: 4px;
+        }
+
+        .home-metric-sub {
+          font-size: 0.84rem;
+          color: var(--ink-muted);
+        }
+
+        /* Right column: Hub card */
+        .home-right {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 0;
+          height: 100%;
+        }
+
+        .home-hub-card {
+          width: 100%;
+          max-width: 820px;
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 22px;
+          padding: clamp(22px, 3.2vh, 34px);
+          box-shadow: 0 10px 36px -4px rgba(0, 0, 0, 0.08);
+          display: flex;
+          flex-direction: column;
+          gap: clamp(14px, 2.2vh, 22px);
+          box-sizing: border-box;
+        }
+
+        /* Logo showcase header */
+        .home-hub-header {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: 12px;
-          flex-wrap: wrap;
-          color: var(--ink-faint);
-          font-size: 0.78rem;
+          padding-bottom: clamp(14px, 2vh, 20px);
+          border-bottom: 1px solid var(--border);
         }
-        .home-footer-brand { font-weight: 600; color: var(--ink-soft); font-size: 0.85rem; }
 
-        @media (max-width: 640px) {
-          .home-hero { padding: 140px 20px 72px; }
-          .home-section { padding: 64px 20px; }
-          .home-discipline { gap: 16px; padding: 18px 20px; align-items: flex-start; }
+        .home-hub-brand-showcase {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+
+        .home-hub-logo-img {
+          height: clamp(54px, 7.5vh, 74px);
+          width: auto;
+          object-fit: contain;
+          background: #0a0d14;
+          padding: 10px 22px;
+          border-radius: 12px;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .home-hub-status {
+          display: flex;
+          align-items: center;
+          gap: 9px;
+          font-family: var(--font-mono, monospace);
+          font-size: 0.86rem;
+          font-weight: 650;
+          color: #2563eb;
+          background: rgba(37, 99, 235, 0.08);
+          border: 1px solid rgba(37, 99, 235, 0.18);
+          padding: 7px 16px;
+          border-radius: 9999px;
+          letter-spacing: 0.04em;
+        }
+
+        .home-status-indicator {
+          width: 9px;
+          height: 9px;
+          border-radius: 50%;
+          background: #2563eb;
+          box-shadow: 0 0 8px #2563eb;
+        }
+
+        /* 4 Arenas Grid */
+        .home-arenas-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: clamp(12px, 2vh, 18px);
+        }
+
+        .home-arena-tile {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          background: var(--surface-2);
+          border: 1px solid var(--border);
+          border-radius: 14px;
+          padding: clamp(18px, 2.4vh, 22px);
+          text-decoration: none;
+          color: inherit;
+          transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .home-arena-tile:hover {
+          background: #ffffff;
+          border-color: #2563eb;
+          transform: translateY(-3px);
+          box-shadow: 0 8px 24px rgba(37, 99, 235, 0.14);
+        }
+
+        .home-arena-top {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .home-arena-icon {
+          font-size: clamp(1.8rem, 2.4vh, 2.3rem);
+          line-height: 1;
+        }
+
+        .home-arena-tier {
+          font-size: 0.78rem;
+          font-weight: 650;
+          font-family: var(--font-mono, monospace);
+          text-transform: uppercase;
+          color: var(--ink-muted);
+          background: var(--surface);
+          border: 1px solid var(--border);
+          padding: 4px 10px;
+          border-radius: 6px;
+        }
+
+        .home-arena-title {
+          font-size: clamp(1.12rem, 1.35vw, 1.28rem);
+          font-weight: 650;
+          color: var(--ink);
+          margin-top: 12px;
+          letter-spacing: -0.015em;
+        }
+
+        .home-arena-desc {
+          font-size: clamp(0.88rem, 1vw, 0.98rem);
+          color: var(--ink-muted);
+          line-height: 1.5;
+          margin-top: 5px;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        .home-arena-footer {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 12px;
+          padding-top: 10px;
+          border-top: 1px dashed var(--border);
+        }
+
+        .home-arena-category {
+          font-size: 0.84rem;
+          color: var(--ink-soft);
+          font-weight: 550;
+        }
+
+        .home-arena-arrow {
+          color: var(--ink-faint);
+          display: flex;
+          align-items: center;
+          transition: transform 0.15s ease, color 0.15s ease;
+        }
+
+        .home-arena-tile:hover .home-arena-arrow {
+          color: #2563eb;
+          transform: translateX(3px);
+        }
+
+        /* 1v1 Live Duel strip */
+        .home-duel-strip {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background: linear-gradient(135deg, rgba(37, 99, 235, 0.07), rgba(37, 99, 235, 0.02));
+          border: 1px solid rgba(37, 99, 235, 0.22);
+          border-radius: 12px;
+          padding: clamp(14px, 2vh, 18px) 22px;
+          font-size: clamp(0.92rem, 1.05vw, 1.02rem);
+          color: var(--ink-soft);
+        }
+
+        .home-duel-left {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .home-duel-icon {
+          color: #2563eb;
+          flex-shrink: 0;
+        }
+
+        .home-duel-link {
+          font-weight: 650;
+          color: #2563eb;
+          text-decoration: none;
+          font-size: 0.98rem;
+          white-space: nowrap;
+          transition: transform 0.15s ease;
+        }
+
+        .home-duel-link:hover {
+          text-decoration: underline;
+        }
+
+        /* Hairline compact footer */
+        .home-single-footer {
+          height: 44px;
+          min-height: 44px;
+          border-top: 1px solid var(--border);
+          background: var(--surface);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0 clamp(24px, 4vw, 64px);
+          font-size: 0.82rem;
+          color: var(--ink-muted);
+          box-sizing: border-box;
+          z-index: 10;
+        }
+
+        .home-footer-side {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .home-footer-brand {
+          font-weight: 650;
+          color: var(--ink);
+        }
+
+        .home-footer-dot {
+          color: var(--ink-faint);
+        }
+
+        .home-footer-nav {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+
+        .home-footer-link {
+          color: var(--ink-muted);
+          text-decoration: none;
+          transition: color 0.15s ease;
+        }
+
+        .home-footer-link:hover {
+          color: var(--ink);
+        }
+
+        .home-footer-copy {
+          color: var(--ink-faint);
+        }
+
+        /* Responsive breakpoints */
+        @media (max-width: 1080px) {
+          .home-viewport {
+            position: relative;
+            top: 0;
+            height: auto;
+            max-height: none;
+            overflow-y: auto;
+            padding-top: 76px;
+          }
+          .home-stage {
+            grid-template-columns: 1fr;
+            padding: 24px 20px;
+          }
+          .home-hub-card {
+            max-width: 100%;
+          }
+          .home-single-footer {
+            flex-direction: column;
+            height: auto;
+            padding: 16px 20px;
+            gap: 8px;
+            text-align: center;
+          }
+          .home-footer-nav {
+            flex-wrap: wrap;
+            justify-content: center;
+          }
         }
       `}</style>
     </div>
