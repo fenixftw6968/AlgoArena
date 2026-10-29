@@ -221,7 +221,7 @@ export default function MCQGameEngine({
     } else {
       const targetAns = (puzzle.correctAnswer || puzzle.answer || '').trim().toLowerCase();
       const chosen = (selectedOption || '').trim().toLowerCase();
-      let isCorrect = chosen === targetAns;
+      isCorrect = chosen === targetAns;
 
       if (!isCorrect && Array.isArray(puzzle.options)) {
         const correctIdx = puzzle.options.findIndex(
