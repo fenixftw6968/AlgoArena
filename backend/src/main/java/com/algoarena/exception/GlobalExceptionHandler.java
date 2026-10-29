@@ -5,9 +5,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.transaction.CannotCreateTransactionException;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.DataAccessResourceFailureException;
-import org.springframework.transaction.CannotCreateTransactionException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +16,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
-@Slf4j
 @Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -119,14 +115,6 @@ public class GlobalExceptionHandler {
                 .path(request.getRequestURI())
                 .build();
         return new ResponseEntity<>(body, status);
-    }
-
-    /** Database connection failure, pool exhaustion, or unreachable DB */
-    @ExceptionHandler({CannotCreateTransactionException.class, DataAccessResourceFailureException.class})
-    public ResponseEntity<ErrorResponse> handleDatabaseConnectionFailure(Exception ex, HttpServletRequest request) {
-        log.error("Database connection failure at {}: {}", request.getRequestURI(), ex.getMessage());
-        return build(HttpStatus.SERVICE_UNAVAILABLE, HttpStatus.SERVICE_UNAVAILABLE.getReasonPhrase(),
-                "Database service is temporarily unavailable. Please verify database connection or retry in a few moments.", request);
     }
 
     /** Database connection failure, pool exhaustion, or unreachable DB */
