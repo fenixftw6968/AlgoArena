@@ -39,20 +39,20 @@ export default function IncomingInviteModal({
             transform: 'rotate(0.7deg)'
           }}
         >
-          <div className="hazard-tape" style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 8, borderBottom: '2px solid var(--ink)' }} />
+          <div className="hazard-tape" style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 8, borderBottom: '1px solid rgba(255, 255, 255, 0.14)' }} />
 
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.9rem', marginTop: '0.35rem' }}>
             <div style={{
               width: '48px',
               height: '48px',
               background: 'var(--riso-violet)',
-              border: '2px solid var(--ink)',
+              border: '1px solid rgba(255, 255, 255, 0.14)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               fontSize: '1.4rem',
               flexShrink: 0,
-              boxShadow: '3px 3px 0 var(--ink)'
+              boxShadow: '0 12px 30px -18px rgba(0, 0, 0, 0.9)'
             }}>
               {gameInfo.icon}
             </div>

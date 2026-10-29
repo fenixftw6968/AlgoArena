@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 export function AuthError({ children }) {
   if (!children) return null;
   return (
@@ -40,7 +38,7 @@ export default function AuthShell({ kicker, title, lede, children, footer }) {
           min-height: 100vh;
           display: flex;
           flex-direction: column;
-          background: var(--bg);
+          background: transparent;
           padding-top: 70px;
           box-sizing: border-box;
         }
@@ -55,11 +53,14 @@ export default function AuthShell({ kicker, title, lede, children, footer }) {
         .auth-card {
           width: 100%;
           max-width: 580px;
-          background: var(--surface);
-          border: 1px solid var(--border);
+          background:
+            radial-gradient(ellipse 90% 60% at 50% -10%, rgba(91, 140, 255, 0.14), transparent 70%),
+            linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01)),
+            var(--surface);
+          border: 1px solid rgba(91, 140, 255, 0.24);
           border-radius: 24px;
           padding: clamp(44px, 5.5vh, 58px) clamp(36px, 4.5vw, 52px);
-          box-shadow: 0 12px 48px -12px rgba(0, 0, 0, 0.08);
+          box-shadow: var(--shadow-lg), 0 0 90px -40px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.06);
           box-sizing: border-box;
         }
         .auth-card-head {
@@ -70,7 +71,7 @@ export default function AuthShell({ kicker, title, lede, children, footer }) {
           align-items: center;
           gap: 12px;
           background: var(--err-soft);
-          border: 1px solid #fecaca;
+          border: 1px solid rgba(251, 113, 133, 0.32);
           color: var(--err);
           padding: 14px 18px;
           border-radius: 12px;
@@ -137,13 +138,13 @@ export default function AuthShell({ kicker, title, lede, children, footer }) {
           color: var(--ink-muted);
         }
         .auth-switch a {
-          color: var(--ink);
+          color: var(--accent);
           font-weight: 600;
           text-decoration: none;
         }
         .auth-switch a:hover {
           text-decoration: underline;
-          color: #2563eb;
+          color: #8fb2ff;
         }
         .auth-link-sm {
           font-size: 0.92rem;
@@ -151,7 +152,7 @@ export default function AuthShell({ kicker, title, lede, children, footer }) {
           text-decoration: none;
         }
         .auth-link-sm:hover {
-          color: #2563eb;
+          color: var(--accent);
         }
         .auth-foot {
           padding: 24px 24px 32px;
@@ -161,8 +162,6 @@ export default function AuthShell({ kicker, title, lede, children, footer }) {
           gap: 14px;
           flex-wrap: wrap;
           color: var(--ink-faint);
-          font-size: 0.92rem;
-        }
           font-size: 0.82rem;
         }
         .auth-foot-dot {

@@ -409,7 +409,7 @@ export default function MCQGameEngine({
                 key={idx}
                 style={{
                   background: 'var(--paper-deep)',
-                  border: '2px solid var(--ink)',
+                  border: '1px solid rgba(255, 255, 255, 0.14)',
                   boxShadow: '4px 4px 0 var(--riso-violet)',
                   padding: '1.1rem 1.25rem',
                   fontFamily: 'var(--font-mono)',
@@ -538,8 +538,8 @@ export default function MCQGameEngine({
             width: '66px',
             height: '66px',
             background: 'var(--riso-yellow)',
-            border: '3px solid var(--ink)',
-            boxShadow: '4px 4px 0 var(--ink)',
+            border: '1px solid rgba(255, 255, 255, 0.18)',
+            boxShadow: '0 14px 36px -20px rgba(0, 0, 0, 0.9)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -564,8 +564,8 @@ export default function MCQGameEngine({
 
           <div style={{
             background: 'var(--paper-sunk)',
-            border: '2px solid var(--ink)',
-            boxShadow: '3px 3px 0 var(--ink)',
+            border: '1px solid rgba(255, 255, 255, 0.14)',
+            boxShadow: '0 12px 30px -18px rgba(0, 0, 0, 0.9)',
             padding: '0.9rem 1rem',
             display: 'flex',
             justifyContent: 'space-around',
@@ -683,7 +683,7 @@ export default function MCQGameEngine({
                 className="zine-card"
                 style={{
                   padding: '2rem 2.25rem',
-                  boxShadow: '7px 7px 0 var(--ink)',
+                  boxShadow: '0 22px 50px -24px rgba(0, 0, 0, 0.9)',
                   marginBottom: '1.5rem',
                   position: 'relative'
                 }}
@@ -719,9 +719,9 @@ export default function MCQGameEngine({
                             style={{
                               width: '32px',
                               height: '32px',
-                              background: isSelected ? '#fffdf6' : 'var(--paper-sunk)',
-                              border: '2px solid var(--ink)',
-                              color: isSelected ? 'var(--riso-violet)' : 'var(--ink)',
+                              background: isSelected ? 'rgba(255, 255, 255, 0.2)' : 'var(--paper-sunk)',
+                              border: '1px solid rgba(255, 255, 255, 0.14)',
+                              color: isSelected ? '#ffffff' : 'var(--ink)',
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'center',
@@ -751,8 +751,8 @@ export default function MCQGameEngine({
                         padding: '1rem 1.25rem',
                         background: result === 'correct' ? 'var(--riso-teal)' : 'var(--riso-coral)',
                         color: '#fffdf6',
-                        border: '2px solid var(--ink)',
-                        boxShadow: '4px 4px 0 var(--ink)',
+                        border: '1px solid rgba(255, 255, 255, 0.14)',
+                        boxShadow: '0 14px 36px -20px rgba(0, 0, 0, 0.9)',
                         marginBottom: '1.25rem'
                       }}
                     >
@@ -763,7 +763,7 @@ export default function MCQGameEngine({
                     </div>
 
                     {(serverFeedback?.explanation ?? puzzle.explanation) && (
-                      <div style={{ padding: '1.15rem', background: 'var(--paper-sunk)', border: '2px dashed var(--ink-faint)', marginBottom: '1.5rem' }}>
+                      <div style={{ padding: '1.15rem', background: 'var(--paper-sunk)', border: '1px dashed var(--border-strong)', marginBottom: '1.5rem' }}>
                         <p className="font-mono" style={{ fontSize: '0.66rem', fontWeight: 800, color: 'var(--riso-violet)', marginBottom: '0.45rem', letterSpacing: '0.16em', textTransform: 'uppercase' }}>
                           Decrypted Analysis
                         </p>
@@ -791,8 +791,8 @@ export default function MCQGameEngine({
                           exit={{ opacity: 0, height: 0 }}
                           style={{
                             background: 'var(--riso-yellow)',
-                            border: '2px solid var(--ink)',
-                            boxShadow: '3px 3px 0 var(--ink)',
+                            border: '1px solid rgba(255, 255, 255, 0.14)',
+                            boxShadow: '0 12px 30px -18px rgba(0, 0, 0, 0.9)',
                             padding: '0.9rem 1.15rem',
                             display: 'flex',
                             gap: '0.65rem',
@@ -837,7 +837,7 @@ export default function MCQGameEngine({
         )}
       </div>
       {gradingError && (
-        <div role="alert" style={{ position: 'fixed', bottom: '1rem', left: '50%', transform: 'translateX(-50%)', zIndex: 1000, background: 'var(--riso-coral)', color: '#fffdf6', border: '2px solid var(--ink)', boxShadow: '4px 4px 0 var(--ink)', padding: '0.6rem 1rem', fontWeight: 700 }}>
+        <div role="alert" style={{ position: 'fixed', bottom: '1rem', left: '50%', transform: 'translateX(-50%)', zIndex: 1000, background: 'var(--riso-coral)', color: '#fffdf6', border: '1px solid rgba(255, 255, 255, 0.14)', boxShadow: '0 14px 36px -20px rgba(0, 0, 0, 0.9)', padding: '0.6rem 1rem', fontWeight: 700 }}>
           {gradingError}
         </div>
       )}

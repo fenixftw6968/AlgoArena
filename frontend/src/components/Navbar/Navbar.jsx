@@ -1,7 +1,7 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { COMPETITION_ENABLED } from '../../utils/competitionConfig';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Brain, Coins, Flame, LogOut, Menu, Swords, User, Users, X } from 'lucide-react';
+import { Coins, Flame, LogOut, Menu, Swords, User, Users, X } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { getRankFromRating } from '../../utils/rankUtils';
@@ -125,7 +125,7 @@ export default function Navbar() {
         <div className="nav-inner">
           {/* Brand */}
           <Link to={isAuthenticated ? '/dashboard' : '/'} className="nav-brand">
-            <span className="nav-brand-mark" style={{ background: '#0a0d14', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <span className="nav-brand-mark" style={{ background: 'linear-gradient(135deg, #4f7cff, #8b5cf6)', border: '1px solid rgba(255,255,255,0.16)' }}>
               <img src="/logo-icon.png" alt="AlgoArena" style={{ width: 16, height: 16, objectFit: 'contain' }} />
             </span>
             <span className="nav-brand-name">AlgoArena</span>
@@ -293,8 +293,11 @@ export default function Navbar() {
           left: 0;
           right: 0;
           z-index: 100;
-          background: rgba(250, 250, 250, 0.92);
-          border-bottom: 1px solid var(--border);
+          background: rgba(7, 9, 14, 0.78);
+          backdrop-filter: blur(18px) saturate(140%);
+          -webkit-backdrop-filter: blur(18px) saturate(140%);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+          box-shadow: 0 12px 40px -24px rgba(0, 0, 0, 0.9);
         }
         .nav-inner {
           max-width: min(96vw, 1840px);
@@ -317,11 +320,12 @@ export default function Navbar() {
           width: 32px;
           height: 32px;
           border-radius: 8px;
-          background: var(--ink);
+          background: var(--accent-gradient);
           color: #fff;
           display: inline-flex;
           align-items: center;
           justify-content: center;
+          box-shadow: 0 0 22px -6px var(--accent-glow);
         }
         .nav-brand-name {
           font-size: 1.05rem;
@@ -348,8 +352,13 @@ export default function Navbar() {
           white-space: nowrap;
           transition: color 0.15s ease, background 0.15s ease;
         }
-        .nav-link:hover { color: var(--ink); background: var(--surface-2); }
-        .nav-link--active { color: var(--ink); font-weight: 600; }
+        .nav-link:hover { color: var(--ink); background: rgba(255, 255, 255, 0.05); }
+        .nav-link--active {
+          color: #dbe6ff;
+          font-weight: 600;
+          background: rgba(91, 140, 255, 0.14);
+          box-shadow: inset 0 0 0 1px rgba(91, 140, 255, 0.28);
+        }
         .nav-actions {
           display: flex;
           align-items: center;
@@ -378,14 +387,14 @@ export default function Navbar() {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          border: 1px solid var(--border);
+          border: 1px solid var(--border-strong);
           border-radius: 8px;
-          background: var(--surface);
+          background: var(--surface-2);
           color: var(--ink-soft);
           cursor: pointer;
-          transition: border-color 0.15s ease, color 0.15s ease;
+          transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
         }
-        .nav-icon-btn:hover { border-color: var(--border-strong); color: var(--ink); }
+        .nav-icon-btn:hover { border-color: rgba(91, 140, 255, 0.5); color: var(--accent); background: var(--surface-3); }
         .nav-icon-btn--mobile { display: none; }
         .nav-menu-wrap { position: relative; }
         .nav-user-btn {
@@ -394,23 +403,24 @@ export default function Navbar() {
           gap: 8px;
           height: 34px;
           padding: 0 10px 0 4px;
-          border: 1px solid var(--border);
+          border: 1px solid var(--border-strong);
           border-radius: 8px;
-          background: var(--surface);
+          background: var(--surface-2);
           color: var(--ink);
           font-size: 0.83rem;
           font-weight: 500;
           cursor: pointer;
           max-width: 190px;
-          transition: border-color 0.15s ease;
+          transition: border-color 0.15s ease, background 0.15s ease;
         }
-        .nav-user-btn:hover { border-color: var(--border-strong); }
+        .nav-user-btn:hover { border-color: rgba(91, 140, 255, 0.5); background: var(--surface-3); }
         .nav-user-avatar {
           width: 26px;
           height: 26px;
           border-radius: 6px;
-          background: var(--surface-2);
-          border: 1px solid var(--border);
+          background: rgba(91, 140, 255, 0.16);
+          border: 1px solid rgba(91, 140, 255, 0.35);
+          color: #a9c1ff;
           display: inline-flex;
           align-items: center;
           justify-content: center;
@@ -425,11 +435,14 @@ export default function Navbar() {
           top: calc(100% + 8px);
           right: 0;
           width: 220px;
-          background: var(--surface);
-          border: 1px solid var(--border);
+          background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01)),
+            var(--surface);
+          border: 1px solid rgba(91, 140, 255, 0.22);
           border-radius: 12px;
           padding: 6px;
           z-index: 200;
+          box-shadow: var(--shadow-lg), 0 0 50px -24px var(--accent-glow);
         }
         .nav-dropdown-head { padding: 10px 10px 8px; }
         .nav-dropdown-name { font-size: 0.85rem; font-weight: 600; color: var(--ink); }
@@ -458,7 +471,8 @@ export default function Navbar() {
         .nav-mobile {
           display: none;
           border-top: 1px solid var(--border);
-          background: var(--surface);
+          background: rgba(13, 17, 25, 0.98);
+          backdrop-filter: blur(18px);
           padding: 10px 16px 14px;
         }
         .nav-mobile-link {

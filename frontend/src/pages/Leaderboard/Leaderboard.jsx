@@ -118,13 +118,18 @@ export default function Leaderboard() {
           border-bottom: 1px solid var(--border);
         }
         .lb-row:last-child { border-bottom: none; }
-        .lb-row--you { background: var(--surface-2); }
+        .lb-row--you { background: rgba(91, 140, 255, 0.09); box-shadow: inset 3px 0 0 var(--accent); }
         .lb-rank {
           color: var(--ink-faint);
           font-size: 1.15rem;
           font-weight: 600;
         }
-        .lb-rank--top { color: var(--ink); font-weight: 750; }
+        .lb-rank--top {
+          font-family: var(--font-display);
+          font-weight: 700;
+          color: #ffd479;
+          text-shadow: 0 0 18px rgba(251, 191, 36, 0.45);
+        }
         .lb-player { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
         .lb-name {
           font-size: 1.18rem;

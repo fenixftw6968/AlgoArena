@@ -9,7 +9,7 @@ const ARENAS = [
     icon: '🧠',
     tier: 'Hard',
     desc: 'Complexity analysis, graphs, dynamic programming & code outputs.',
-    color: '#2563eb',
+    color: '#60a5fa',
   },
   {
     slug: 'logic-puzzle',
@@ -18,7 +18,7 @@ const ARENAS = [
     icon: '🧩',
     tier: 'Medium',
     desc: 'Multi-step deduction grids, syllogisms & boolean logic statements.',
-    color: '#0284c7',
+    color: '#38bdf8',
   },
   {
     slug: 'number-detective',
@@ -27,7 +27,7 @@ const ARENAS = [
     icon: '🔢',
     tier: 'Medium',
     desc: 'Non-linear sequences, Fibonacci variants & number relationships.',
-    color: '#059669',
+    color: '#34d399',
   },
   {
     slug: 'code-breaker',
@@ -36,7 +36,7 @@ const ARENAS = [
     icon: '🔐',
     tier: 'Medium',
     desc: 'Positional entropy, constraint elimination & secret code decryption.',
-    color: '#7c3aed',
+    color: '#a78bfa',
   },
 ];
 
@@ -128,6 +128,7 @@ export default function Home() {
                   key={arena.slug}
                   to="/games"
                   className="home-arena-tile"
+                  style={{ '--arena-color': arena.color }}
                 >
                   <div className="home-arena-top">
                     <span className="home-arena-icon">{arena.icon}</span>
@@ -183,13 +184,13 @@ export default function Home() {
         /* Viewport root pinned to exact screen height */
         .home-viewport {
           position: fixed;
-          top: 64px;
+          top: 68px;
           left: 0;
           right: 0;
           bottom: 0;
-          height: calc(100vh - 64px);
-          max-height: calc(100vh - 64px);
-          background: var(--bg);
+          height: calc(100vh - 68px);
+          max-height: calc(100vh - 68px);
+          background: transparent;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
@@ -230,14 +231,14 @@ export default function Home() {
           display: inline-flex;
           align-items: center;
           gap: 12px;
-          background: var(--surface);
-          border: 1px solid var(--border);
+          background: rgba(255, 255, 255, 0.035);
+          border: 1px solid rgba(91, 140, 255, 0.25);
           padding: 8px 20px 8px 10px;
           border-radius: 9999px;
           font-size: clamp(0.92rem, 1.05vw, 1.02rem);
           color: var(--ink-soft);
-          font-weight: 550;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+          font-weight: 500;
+          box-shadow: 0 0 34px -18px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.05);
           margin-bottom: clamp(14px, 2.2vh, 24px);
         }
 
@@ -245,7 +246,7 @@ export default function Home() {
           width: 28px;
           height: 28px;
           border-radius: 7px;
-          background: #0a0d14;
+          background: var(--accent-gradient);
           display: inline-flex;
           align-items: center;
           justify-content: center;
@@ -281,15 +282,21 @@ export default function Home() {
         .home-headline {
           font-size: clamp(3.2rem, 5vw, 5rem);
           font-weight: 700;
-          letter-spacing: -0.04em;
-          line-height: 1.06;
+          letter-spacing: -0.045em;
+          line-height: 1.04;
           color: var(--ink);
           margin: 0;
+          text-wrap: balance;
         }
 
         .home-headline-accent {
-          color: #2563eb;
           display: block;
+          background: linear-gradient(100deg, #7aa2ff 0%, #a78bfa 45%, #22d3ee 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          color: transparent;
+          filter: drop-shadow(0 0 26px rgba(91, 140, 255, 0.28));
         }
 
         /* Subtext */
@@ -318,17 +325,18 @@ export default function Home() {
           display: inline-flex;
           align-items: center;
           gap: 12px;
-          background: #18181b;
+          background: var(--accent-gradient);
           color: #ffffff;
+          border: 1px solid rgba(255, 255, 255, 0.16);
           border-radius: 12px;
-          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
-          transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+          box-shadow: 0 18px 44px -18px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+          transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
         }
 
         .home-action-primary:hover {
-          background: #09090b;
+          filter: brightness(1.08);
           transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+          box-shadow: 0 26px 60px -20px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.26);
         }
 
         .home-action-secondary {
@@ -337,15 +345,16 @@ export default function Home() {
           font-size: clamp(1.05rem, 1.2vw, 1.18rem);
           font-weight: 550;
           border-radius: 12px;
-          background: var(--surface);
+          background: var(--surface-2);
           border: 1px solid var(--border-strong);
           color: var(--ink);
-          transition: background 0.15s ease, border-color 0.15s ease;
+          transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
         }
 
         .home-action-secondary:hover {
-          background: var(--surface-2);
-          border-color: var(--ink);
+          background: var(--surface-3);
+          border-color: rgba(91, 140, 255, 0.5);
+          transform: translateY(-1px);
         }
 
         .home-action-text {
@@ -361,7 +370,7 @@ export default function Home() {
         }
 
         .home-action-text:hover .home-action-text-bold {
-          color: #2563eb;
+          color: var(--accent);
         }
 
         /* Metrics row */
@@ -381,10 +390,14 @@ export default function Home() {
         }
 
         .home-metric-val {
-          font-family: var(--font-mono, monospace);
+          font-family: var(--font-display);
           font-size: clamp(1.8rem, 2.8vw, 2.6rem);
-          font-weight: 750;
-          color: var(--ink);
+          font-weight: 700;
+          background: linear-gradient(180deg, #ffffff 20%, #9fb4d8 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          color: transparent;
           letter-spacing: -0.03em;
           line-height: 1.1;
         }
@@ -413,11 +426,14 @@ export default function Home() {
         .home-hub-card {
           width: 100%;
           max-width: 820px;
-          background: var(--surface);
-          border: 1px solid var(--border);
+          background:
+            radial-gradient(ellipse 80% 60% at 50% -20%, rgba(91, 140, 255, 0.16), transparent 70%),
+            linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01)),
+            var(--surface);
+          border: 1px solid rgba(91, 140, 255, 0.25);
           border-radius: 22px;
           padding: clamp(22px, 3.2vh, 34px);
-          box-shadow: 0 10px 36px -4px rgba(0, 0, 0, 0.08);
+          box-shadow: 0 30px 90px -30px rgba(0, 0, 0, 0.9), 0 0 90px -40px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.06);
           display: flex;
           flex-direction: column;
           gap: clamp(14px, 2.2vh, 22px);
@@ -456,21 +472,23 @@ export default function Home() {
           gap: 9px;
           font-family: var(--font-mono, monospace);
           font-size: 0.86rem;
-          font-weight: 650;
-          color: #2563eb;
-          background: rgba(37, 99, 235, 0.08);
-          border: 1px solid rgba(37, 99, 235, 0.18);
+          font-weight: 600;
+          color: #a9c1ff;
+          background: rgba(91, 140, 255, 0.1);
+          border: 1px solid rgba(91, 140, 255, 0.28);
           padding: 7px 16px;
           border-radius: 9999px;
-          letter-spacing: 0.04em;
+          letter-spacing: 0.05em;
+          box-shadow: 0 0 26px -14px var(--accent-glow);
         }
 
         .home-status-indicator {
           width: 9px;
           height: 9px;
           border-radius: 50%;
-          background: #2563eb;
-          box-shadow: 0 0 8px #2563eb;
+          background: #34d399;
+          box-shadow: 0 0 10px #34d399;
+          animation: pulseGreen 2s infinite ease-in-out;
         }
 
         /* 4 Arenas Grid */
@@ -490,15 +508,29 @@ export default function Home() {
           padding: clamp(18px, 2.4vh, 22px);
           text-decoration: none;
           color: inherit;
-          transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .home-arena-tile::before {
+          content: '';
+          position: absolute;
+          inset: 0 0 auto 0;
+          height: 2px;
+          background: var(--arena-color, var(--accent));
+          opacity: 0;
+          transition: opacity 0.22s ease;
         }
 
         .home-arena-tile:hover {
-          background: #ffffff;
-          border-color: #2563eb;
+          background: var(--surface-3);
+          border-color: color-mix(in srgb, var(--arena-color, var(--accent)) 55%, transparent);
           transform: translateY(-3px);
-          box-shadow: 0 8px 24px rgba(37, 99, 235, 0.14);
+          box-shadow: 0 18px 40px -22px color-mix(in srgb, var(--arena-color, var(--accent)) 60%, transparent);
         }
+
+        .home-arena-tile:hover::before { opacity: 1; }
 
         .home-arena-top {
           display: flex;
@@ -509,15 +541,16 @@ export default function Home() {
         .home-arena-icon {
           font-size: clamp(1.8rem, 2.4vh, 2.3rem);
           line-height: 1;
+          filter: drop-shadow(0 0 14px color-mix(in srgb, var(--arena-color, var(--accent)) 50%, transparent));
         }
 
         .home-arena-tier {
           font-size: 0.78rem;
-          font-weight: 650;
+          font-weight: 600;
           font-family: var(--font-mono, monospace);
           text-transform: uppercase;
-          color: var(--ink-muted);
-          background: var(--surface);
+          color: var(--ink-soft);
+          background: rgba(255, 255, 255, 0.05);
           border: 1px solid var(--border);
           padding: 4px 10px;
           border-radius: 6px;
@@ -565,7 +598,7 @@ export default function Home() {
         }
 
         .home-arena-tile:hover .home-arena-arrow {
-          color: #2563eb;
+          color: var(--arena-color, var(--accent));
           transform: translateX(3px);
         }
 
@@ -574,12 +607,14 @@ export default function Home() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          background: linear-gradient(135deg, rgba(37, 99, 235, 0.07), rgba(37, 99, 235, 0.02));
-          border: 1px solid rgba(37, 99, 235, 0.22);
+          gap: 16px;
+          background: linear-gradient(135deg, rgba(91, 140, 255, 0.14), rgba(139, 92, 246, 0.06));
+          border: 1px solid rgba(91, 140, 255, 0.28);
           border-radius: 12px;
           padding: clamp(14px, 2vh, 18px) 22px;
           font-size: clamp(0.92rem, 1.05vw, 1.02rem);
           color: var(--ink-soft);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
         }
 
         .home-duel-left {
@@ -589,20 +624,22 @@ export default function Home() {
         }
 
         .home-duel-icon {
-          color: #2563eb;
+          color: #a9c1ff;
           flex-shrink: 0;
+          filter: drop-shadow(0 0 10px rgba(91, 140, 255, 0.6));
         }
 
         .home-duel-link {
-          font-weight: 650;
-          color: #2563eb;
+          font-weight: 600;
+          color: #a9c1ff;
           text-decoration: none;
           font-size: 0.98rem;
           white-space: nowrap;
-          transition: transform 0.15s ease;
+          transition: color 0.15s ease;
         }
 
         .home-duel-link:hover {
+          color: #ffffff;
           text-decoration: underline;
         }
 
@@ -611,7 +648,8 @@ export default function Home() {
           height: 44px;
           min-height: 44px;
           border-top: 1px solid var(--border);
-          background: var(--surface);
+          background: rgba(7, 9, 14, 0.65);
+          backdrop-filter: blur(12px);
           display: flex;
           align-items: center;
           justify-content: space-between;

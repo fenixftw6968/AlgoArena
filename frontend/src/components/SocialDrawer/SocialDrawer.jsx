@@ -114,7 +114,7 @@ export default function SocialDrawer({ isOpen, onClose, onInviteFriendToGame }) 
         position: 'fixed',
         inset: 0,
         zIndex: 9990,
-        backgroundColor: 'rgba(23, 20, 15, 0.6)',
+        backgroundColor: 'rgba(3, 5, 10, 0.7)',
         display: 'flex',
         justifyContent: 'flex-end',
       }}>
@@ -128,7 +128,7 @@ export default function SocialDrawer({ isOpen, onClose, onInviteFriendToGame }) 
             maxWidth: '440px',
             height: '100%',
             background: 'var(--paper-card)',
-            borderLeft: '3px solid var(--ink)',
+            borderLeft: '1px solid rgba(255, 255, 255, 0.18)',
             boxShadow: '-8px 0 0 var(--riso-violet)',
             display: 'flex',
             flexDirection: 'column'
@@ -137,7 +137,7 @@ export default function SocialDrawer({ isOpen, onClose, onInviteFriendToGame }) 
           {/* Drawer Header */}
           <div style={{
             padding: '1.35rem 1.5rem',
-            borderBottom: '3px solid var(--ink)',
+            borderBottom: '1px solid rgba(255, 255, 255, 0.18)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
@@ -145,7 +145,7 @@ export default function SocialDrawer({ isOpen, onClose, onInviteFriendToGame }) 
             position: 'relative'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-              <div style={{ width: '34px', height: '34px', background: 'var(--riso-violet)', border: '2px solid var(--ink)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fffdf6' }}>
+              <div style={{ width: '34px', height: '34px', background: 'var(--riso-violet)', border: '1px solid rgba(255, 255, 255, 0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fffdf6' }}>
                 <Users size={16} />
               </div>
               <h2 className="zine-display" style={{ fontSize: '1.15rem', margin: 0 }}>
@@ -158,11 +158,11 @@ export default function SocialDrawer({ isOpen, onClose, onInviteFriendToGame }) 
           </div>
 
           {/* Navigation Tabs */}
-          <div style={{ display: 'flex', borderBottom: '2px solid var(--ink)', background: 'var(--paper-deep)' }}>
+          <div style={{ display: 'flex', borderBottom: '1px solid rgba(255, 255, 255, 0.14)', background: 'var(--paper-deep)' }}>
             <button
               onClick={() => { setActiveTab('FRIENDS'); setSelectedFriend(null); }}
               className="zine-btn-sm"
-              style={{ flex: 1, border: 'none', borderRight: '2px solid var(--ink)', background: activeTab === 'FRIENDS' ? 'var(--riso-violet)' : 'transparent', color: activeTab === 'FRIENDS' ? '#fffdf6' : 'var(--ink-muted)', boxShadow: 'none' }}
+              style={{ flex: 1, border: 'none', borderRight: '1px solid rgba(255, 255, 255, 0.14)', background: activeTab === 'FRIENDS' ? 'var(--riso-violet)' : 'transparent', color: activeTab === 'FRIENDS' ? '#fffdf6' : 'var(--ink-muted)', boxShadow: 'none' }}
             >
               FRIENDS ({acceptedFriends.length})
             </button>
@@ -170,7 +170,7 @@ export default function SocialDrawer({ isOpen, onClose, onInviteFriendToGame }) 
             <button
               onClick={() => { setActiveTab('REQUESTS'); setSelectedFriend(null); }}
               className="zine-btn-sm"
-              style={{ flex: 1, border: 'none', borderRight: selectedFriend ? '2px solid var(--ink)' : 'none', background: activeTab === 'REQUESTS' ? 'var(--riso-violet)' : 'transparent', color: activeTab === 'REQUESTS' ? '#fffdf6' : 'var(--ink-muted)', boxShadow: 'none' }}
+              style={{ flex: 1, border: 'none', borderRight: selectedFriend ? '1px solid rgba(255, 255, 255, 0.14)' : 'none', background: activeTab === 'REQUESTS' ? 'var(--riso-violet)' : 'transparent', color: activeTab === 'REQUESTS' ? '#fffdf6' : 'var(--ink-muted)', boxShadow: 'none' }}
             >
               REQUESTS {incomingRequests.length > 0 && `(${incomingRequests.length})`}
             </button>
@@ -223,7 +223,7 @@ export default function SocialDrawer({ isOpen, onClose, onInviteFriendToGame }) 
                           gap: '0.6rem',
                           padding: '0.8rem 0.95rem',
                           background: 'var(--paper-card)',
-                          boxShadow: '3px 3px 0 var(--ink)',
+                          boxShadow: '0 12px 30px -18px rgba(0, 0, 0, 0.9)',
                           transition: 'transform 0.12s steps(3), box-shadow 0.12s steps(3)'
                         }}
                       >
@@ -233,7 +233,7 @@ export default function SocialDrawer({ isOpen, onClose, onInviteFriendToGame }) 
                               width: '38px',
                               height: '38px',
                               background: 'var(--riso-yellow)',
-                              border: '2px solid var(--ink)',
+                              border: '1px solid rgba(255, 255, 255, 0.14)',
                               boxShadow: '2px 2px 0 var(--ink)',
                               color: 'var(--ink)',
                               display: 'flex',
@@ -252,7 +252,7 @@ export default function SocialDrawer({ isOpen, onClose, onInviteFriendToGame }) 
                               width: '11px',
                               height: '11px',
                               background: friend.isOnline ? 'var(--riso-teal)' : 'var(--ink-faint)',
-                              border: '2px solid var(--ink)'
+                              border: '1px solid rgba(255, 255, 255, 0.14)'
                             }} />
                           </div>
 
@@ -349,7 +349,7 @@ export default function SocialDrawer({ isOpen, onClose, onInviteFriendToGame }) 
                 ) : (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     {incomingRequests.map(req => (
-                      <div key={req.id} className="zine-card zine-card--flat" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem', padding: '0.7rem 0.9rem', background: 'var(--paper-card)', boxShadow: '3px 3px 0 var(--ink)' }}>
+                      <div key={req.id} className="zine-card zine-card--flat" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem', padding: '0.7rem 0.9rem', background: 'var(--paper-card)', boxShadow: '0 12px 30px -18px rgba(0, 0, 0, 0.9)' }}>
                         <div style={{ minWidth: 0 }}>
                           <div className="zine-display" style={{ fontSize: '0.82rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>@{req.username}</div>
                           <div className="font-mono" style={{ fontSize: '0.66rem', color: 'var(--ink-muted)' }}>RATING {req.competitiveRating || 500}</div>
@@ -386,7 +386,7 @@ export default function SocialDrawer({ isOpen, onClose, onInviteFriendToGame }) 
                 ) : (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     {outgoingRequests.map(req => (
-                      <div key={req.id} className="zine-card zine-card--flat" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.7rem 0.9rem', background: 'var(--paper-card)', boxShadow: '3px 3px 0 var(--ink)' }}>
+                      <div key={req.id} className="zine-card zine-card--flat" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.7rem 0.9rem', background: 'var(--paper-card)', boxShadow: '0 12px 30px -18px rgba(0, 0, 0, 0.9)' }}>
                         <span className="zine-display" style={{ fontSize: '0.82rem' }}>@{req.username}</span>
                         <span className="zine-badge" style={{ background: 'var(--riso-yellow)' }}>Pending</span>
                       </div>
@@ -416,8 +416,8 @@ export default function SocialDrawer({ isOpen, onClose, onInviteFriendToGame }) 
                           maxWidth: '80%',
                           background: isMine ? 'var(--riso-violet)' : 'var(--paper-sunk)',
                           color: isMine ? '#fffdf6' : 'var(--ink)',
-                          border: '2px solid var(--ink)',
-                          boxShadow: isMine ? '3px 3px 0 var(--riso-coral)' : '3px 3px 0 var(--ink)',
+                          border: '1px solid rgba(255, 255, 255, 0.14)',
+                          boxShadow: isMine ? '3px 3px 0 var(--riso-coral)' : '0 12px 30px -18px rgba(0, 0, 0, 0.9)',
                           padding: '0.6rem 0.9rem',
                           fontSize: '0.825rem',
                           lineHeight: 1.4
@@ -432,7 +432,7 @@ export default function SocialDrawer({ isOpen, onClose, onInviteFriendToGame }) 
               </div>
 
               {/* Chat input form */}
-              <form onSubmit={handleSendMessage} style={{ padding: '0.85rem 1.25rem', borderTop: '2px solid var(--ink)', display: 'flex', gap: '0.5rem', background: 'var(--paper-deep)' }}>
+              <form onSubmit={handleSendMessage} style={{ padding: '0.85rem 1.25rem', borderTop: '1px solid rgba(255, 255, 255, 0.14)', display: 'flex', gap: '0.5rem', background: 'var(--paper-deep)' }}>
                 <input
                   type="text"
                   placeholder={`Message @${selectedFriend.username}...`}

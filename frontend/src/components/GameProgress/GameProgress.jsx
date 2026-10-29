@@ -95,12 +95,12 @@ export default function GameProgress({
       </div>
 
       {/* Progress Track — segmented riso meter */}
-      <div style={{ display: 'flex', gap: '3px', width: '100%', height: '16px', background: 'var(--paper-sunk)', border: '2px solid var(--ink)' }}>
+      <div style={{ display: 'flex', gap: '3px', width: '100%', height: '16px', background: 'var(--paper-sunk)', border: '1px solid rgba(255, 255, 255, 0.14)' }}>
         <motion.div
           style={{
             height: '100%',
             background: 'repeating-linear-gradient(45deg, var(--riso-violet) 0 7px, var(--riso-violet-2) 7px 14px)',
-            borderRight: progressPercent > 0 ? '2px solid var(--ink)' : 'none'
+            borderRight: progressPercent > 0 ? '1px solid rgba(255, 255, 255, 0.14)' : 'none'
           }}
           initial={{ width: 0 }}
           animate={{ width: `${progressPercent}%` }}

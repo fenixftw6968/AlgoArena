@@ -336,8 +336,8 @@ export default function DailyChallenge() {
           cursor: pointer;
           transition: border-color 0.15s ease, background 0.15s ease;
         }
-        .dc-option:hover { background: var(--surface-2); }
-        .dc-option--selected { border-color: var(--ink); background: var(--surface-2); box-shadow: inset 2px 0 0 var(--ink); }
+        .dc-option:hover { background: var(--surface-3); }
+        .dc-option--selected { border-color: var(--accent); background: rgba(91, 140, 255, 0.09); box-shadow: inset 2px 0 0 var(--accent); }
         .dc-option-letter {
           width: 26px;
           height: 26px;
@@ -350,7 +350,7 @@ export default function DailyChallenge() {
           font-size: 0.75rem;
           flex-shrink: 0;
         }
-        .dc-option--selected .dc-option-letter { background: var(--ink); border-color: var(--ink); color: #fff; }
+        .dc-option--selected .dc-option-letter { background: var(--accent-gradient); border-color: rgba(255, 255, 255, 0.18); color: #fff; }
         .dc-input { text-align: center; font-size: 1rem; height: 46px; }
         .dc-result {
           display: flex;
@@ -360,8 +360,8 @@ export default function DailyChallenge() {
           border: 1px solid var(--border);
           border-radius: var(--radius);
         }
-        .dc-result--ok { background: var(--ok-soft); border-color: #bbf7d0; color: var(--ok); }
-        .dc-result--err { background: var(--err-soft); border-color: #fecaca; color: var(--err); }
+        .dc-result--ok { background: var(--ok-soft); border-color: rgba(52, 211, 153, 0.35); color: var(--ok); }
+        .dc-result--err { background: var(--err-soft); border-color: rgba(251, 113, 133, 0.35); color: var(--err); }
         .dc-result-icon { display: flex; }
         .dc-result-title { font-weight: 600; font-size: 0.95rem; }
         .dc-result-sub { font-size: 0.8rem; margin-top: 2px; opacity: 0.85; }

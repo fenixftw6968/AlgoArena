@@ -60,8 +60,8 @@ export default function DifficultySelector({
             <div style={{
               width: '76px', height: '76px', margin: '0 auto 1rem',
               background: 'var(--riso-yellow)',
-              border: '3px solid var(--ink)',
-              boxShadow: '5px 5px 0 var(--ink)',
+              border: '1px solid rgba(255, 255, 255, 0.18)',
+              boxShadow: '0 18px 44px -24px rgba(0, 0, 0, 0.9)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontSize: '2.2rem',
               transform: 'rotate(-4deg)'
@@ -98,7 +98,7 @@ export default function DifficultySelector({
                     gap: '1.1rem',
                     textAlign: 'left',
                     background: isCurrentLoading ? 'var(--riso-yellow)' : 'var(--paper-card)',
-                    boxShadow: isCurrentLoading ? `6px 6px 0 ${ink}` : '4px 4px 0 var(--ink)',
+                    boxShadow: isCurrentLoading ? `6px 6px 0 ${ink}` : '0 14px 36px -20px rgba(0, 0, 0, 0.9)',
                     opacity: isAnyLoading && !isCurrentLoading ? 0.45 : 1
                   }}
                 >
@@ -106,7 +106,7 @@ export default function DifficultySelector({
                     width: '52px',
                     height: '52px',
                     background: ink,
-                    border: '2px solid var(--ink)',
+                    border: '1px solid rgba(255, 255, 255, 0.14)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',

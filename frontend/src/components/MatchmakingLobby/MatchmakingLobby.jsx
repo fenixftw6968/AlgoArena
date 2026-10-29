@@ -317,7 +317,7 @@ export default function MatchmakingLobby({
 
   return (
     <AnimatePresence>
-      <div className="overlay" style={{ zIndex: 9999, backgroundColor: 'rgba(23, 20, 15, 0.72)' }}>
+      <div className="overlay" style={{ zIndex: 9999, backgroundColor: 'rgba(3, 5, 10, 0.78)' }}>
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -334,7 +334,7 @@ export default function MatchmakingLobby({
           }}
         >
           <div className="halftone-violet halftone-fade-b" style={{ position: 'absolute', inset: 0, opacity: 0.1, pointerEvents: 'none' }} />
-          <div className="hazard-tape" style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 8, borderBottom: '2px solid var(--ink)' }} />
+          <div className="hazard-tape" style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 8, borderBottom: '1px solid rgba(255, 255, 255, 0.14)' }} />
 
           {/* Close / Cancel Button */}
           {(status === 'QUEUING' || status === 'WAITING_FRIEND' || status === 'TIMEOUT_PROMPT') && (
@@ -373,7 +373,7 @@ export default function MatchmakingLobby({
                   position: 'absolute',
                   inset: '8px',
                   background: 'var(--riso-violet)',
-                  border: '3px solid var(--ink)',
+                  border: '1px solid rgba(255, 255, 255, 0.18)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center'
@@ -432,8 +432,8 @@ export default function MatchmakingLobby({
                   position: 'absolute',
                   inset: '8px',
                   background: 'var(--riso-teal)',
-                  border: '3px solid var(--ink)',
-                  boxShadow: '3px 3px 0 var(--ink)',
+                  border: '1px solid rgba(255, 255, 255, 0.18)',
+                  boxShadow: '0 12px 30px -18px rgba(0, 0, 0, 0.9)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center'
@@ -477,8 +477,8 @@ export default function MatchmakingLobby({
                 width: '76px',
                 height: '76px',
                 background: 'var(--riso-yellow)',
-                border: '3px solid var(--ink)',
-                boxShadow: '4px 4px 0 var(--ink)',
+                border: '1px solid rgba(255, 255, 255, 0.18)',
+                boxShadow: '0 14px 36px -20px rgba(0, 0, 0, 0.9)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -523,8 +523,8 @@ export default function MatchmakingLobby({
                 width: '72px',
                 height: '72px',
                 background: 'var(--riso-coral)',
-                border: '3px solid var(--ink)',
-                boxShadow: '4px 4px 0 var(--ink)',
+                border: '1px solid rgba(255, 255, 255, 0.18)',
+                boxShadow: '0 14px 36px -20px rgba(0, 0, 0, 0.9)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -555,8 +555,8 @@ export default function MatchmakingLobby({
                 width: '64px',
                 height: '64px',
                 background: 'var(--riso-teal)',
-                border: '3px solid var(--ink)',
-                boxShadow: '4px 4px 0 var(--ink)',
+                border: '1px solid rgba(255, 255, 255, 0.18)',
+                boxShadow: '0 14px 36px -20px rgba(0, 0, 0, 0.9)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -577,8 +577,8 @@ export default function MatchmakingLobby({
                 gridTemplateColumns: '1fr auto 1fr',
                 alignItems: 'center',
                 background: 'var(--paper-sunk)',
-                border: '2px solid var(--ink)',
-                boxShadow: '3px 3px 0 var(--ink)',
+                border: '1px solid rgba(255, 255, 255, 0.14)',
+                boxShadow: '0 12px 30px -18px rgba(0, 0, 0, 0.9)',
                 padding: '1.05rem 1.25rem',
                 margin: '1.25rem 0'
               }}>
@@ -644,8 +644,8 @@ export default function MatchmakingLobby({
                 width: '72px',
                 height: '72px',
                 background: 'var(--riso-coral)',
-                border: '3px solid var(--ink)',
-                boxShadow: '4px 4px 0 var(--ink)',
+                border: '1px solid rgba(255, 255, 255, 0.18)',
+                boxShadow: '0 14px 36px -20px rgba(0, 0, 0, 0.9)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',

@@ -132,6 +132,10 @@ export default function Profile() {
           gap: 36px;
           padding: clamp(32px, 4vh, 48px);
           border-radius: 22px;
+          background:
+            radial-gradient(ellipse 70% 100% at 0% 0%, rgba(91, 140, 255, 0.14), transparent 65%),
+            linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01)),
+            var(--surface);
         }
         .profile-head-main { flex: 1; min-width: 0; }
         .profile-name { font-size: clamp(2.4rem, 3.5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; color: var(--ink); }
@@ -139,7 +143,17 @@ export default function Profile() {
 
         .profile-stat { padding: 28px 36px; border-right: 1px solid var(--border); }
         .profile-stat:last-child { border-right: none; }
-        .profile-stat-value { font-size: clamp(2.2rem, 3vw, 2.9rem); font-weight: 750; letter-spacing: -0.02em; color: var(--ink); }
+        .profile-stat-value {
+          font-family: var(--font-display);
+          font-size: clamp(2.2rem, 3vw, 2.9rem);
+          font-weight: 700;
+          letter-spacing: -0.02em;
+          background: linear-gradient(180deg, #ffffff 20%, #9fb4d8 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          color: transparent;
+        }
         .profile-stat-label {
           margin-top: 8px;
           font-size: 0.95rem;

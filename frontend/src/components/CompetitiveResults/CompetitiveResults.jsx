@@ -41,7 +41,7 @@ export default function CompetitiveResults({
       className="zine-card"
       style={{ maxWidth: '580px', margin: '2rem auto', padding: '2.5rem 2.25rem', textAlign: 'center', position: 'relative', zIndex: 10, boxShadow: `10px 10px 0 ${ink}` }}
     >
-      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 14, background: ink, borderBottom: '3px solid var(--ink)' }} />
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 14, background: ink, borderBottom: '1px solid rgba(255, 255, 255, 0.18)' }} />
       <div className="halftone-ink halftone-fade-b" style={{ position: 'absolute', inset: 0, opacity: 0.12, pointerEvents: 'none' }} />
 
       <div style={{ marginBottom: '1.75rem', position: 'relative' }}>
@@ -49,8 +49,8 @@ export default function CompetitiveResults({
           width: '84px',
           height: '84px',
           background: ink,
-          border: '3px solid var(--ink)',
-          boxShadow: `5px 5px 0 var(--ink)`,
+          border: '1px solid rgba(255, 255, 255, 0.18)',
+          boxShadow: `0 18px 44px -24px rgba(0, 0, 0, 0.9)`,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -73,7 +73,7 @@ export default function CompetitiveResults({
         gridTemplateColumns: '1fr auto 1fr',
         alignItems: 'center',
         background: 'var(--paper-sunk)',
-        border: '2px solid var(--ink)',
+        border: '1px solid rgba(255, 255, 255, 0.14)',
         padding: '1.15rem 1.25rem',
         marginBottom: '1.25rem',
         position: 'relative'
@@ -95,7 +95,7 @@ export default function CompetitiveResults({
       {matchResult.mode !== 'RANKED' && matchResult.isBotMatch ? (
         <div className="font-mono" style={{
           background: 'var(--paper-sunk)',
-          border: '2px dashed var(--ink-faint)',
+          border: '1px dashed var(--border-strong)',
           padding: '0.85rem 1.15rem',
           marginBottom: '1.75rem',
           display: 'flex',
@@ -112,8 +112,8 @@ export default function CompetitiveResults({
         <div style={{
           background: myDelta > 0 ? 'var(--riso-teal)' : (myDelta < 0 ? 'var(--riso-coral)' : 'var(--paper-sunk)'),
           color: myDelta === 0 ? 'var(--ink)' : '#fffdf6',
-          border: '2px solid var(--ink)',
-          boxShadow: '4px 4px 0 var(--ink)',
+          border: '1px solid rgba(255, 255, 255, 0.14)',
+          boxShadow: '0 14px 36px -20px rgba(0, 0, 0, 0.9)',
           padding: '1rem 1.25rem',
           marginBottom: '1.75rem',
           display: 'flex',
@@ -128,7 +128,7 @@ export default function CompetitiveResults({
               width: '46px',
               height: '46px',
               background: 'var(--paper-card)',
-              border: '2px solid var(--ink)',
+              border: '1px solid rgba(255, 255, 255, 0.14)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',

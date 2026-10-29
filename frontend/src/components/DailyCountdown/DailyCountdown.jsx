@@ -40,13 +40,13 @@ export default function DailyCountdown({
         width: '44px',
         height: '44px',
         background: 'var(--riso-coral)',
-        border: '2px solid var(--ink)',
+        border: '1px solid rgba(255, 255, 255, 0.14)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         color: '#fffdf6',
         flexShrink: 0,
-        boxShadow: '3px 3px 0 var(--ink)',
+        boxShadow: '0 12px 30px -18px rgba(0, 0, 0, 0.9)',
         transform: 'rotate(-3deg)'
       }}>
         <Clock size={19} />

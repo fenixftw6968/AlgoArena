@@ -35,7 +35,7 @@ export default function ExitModal({
           <button onClick={onCancel} className="btn btn--primary grow">
             Keep playing
           </button>
-          <button onClick={onConfirm} className="btn btn--secondary grow" style={{ color: 'var(--err)', borderColor: '#fecaca' }}>
+          <button onClick={onConfirm} className="btn btn--secondary grow" style={{ color: 'var(--err)', borderColor: 'rgba(251, 113, 133, 0.4)' }}>
             Leave
           </button>
         </div>
@@ -47,7 +47,7 @@ export default function ExitModal({
           height: 44px;
           border-radius: 12px;
           background: var(--err-soft);
-          border: 1px solid #fecaca;
+          border: 1px solid rgba(251, 113, 133, 0.35);
           color: var(--err);
           display: inline-flex;
           align-items: center;

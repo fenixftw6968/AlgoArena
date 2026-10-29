@@ -58,11 +58,11 @@
   padding: 6px 12px;
   border: 1px solid var(--border-strong);
   border-radius: 8px;
-  background: var(--surface);
+  background: var(--surface-2);
   color: var(--ink);
 }
-.comp-timer--warn { background: var(--warn-soft); border-color: #fde68a; color: var(--warn); }
-.comp-timer--crit { background: var(--err-soft); border-color: #fecaca; color: var(--err); }
+.comp-timer--warn { background: var(--warn-soft); border-color: rgba(251, 191, 36, 0.4); color: var(--warn); }
+.comp-timer--crit { background: var(--err-soft); border-color: rgba(251, 113, 133, 0.4); color: var(--err); }
 
 .comp-qgrid { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 20px; }
 .comp-qdot {
@@ -70,16 +70,16 @@
   height: 34px;
   border: 1px solid var(--border-strong);
   border-radius: 8px;
-  background: var(--surface);
+  background: var(--surface-2);
   font-weight: 500;
   font-size: 0.8rem;
   font-family: var(--font-mono);
   color: var(--ink-soft);
   cursor: pointer;
-  transition: border-color 0.15s ease, background 0.15s ease;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
 }
-.comp-qdot:hover { background: var(--surface-2); }
-.comp-qdot--current { border-color: var(--ink); color: var(--ink); box-shadow: 0 0 0 2px var(--ink); }
+.comp-qdot:hover { background: var(--surface-3); }
+.comp-qdot--current { border-color: var(--accent); color: #dbe6ff; background: rgba(91, 140, 255, 0.15); box-shadow: 0 0 0 2px rgba(91, 140, 255, 0.35); }
 .comp-qdot--right { background: var(--ok); border-color: var(--ok); color: #ffffff; }
 .comp-qdot--wrong { background: var(--err); border-color: var(--err); color: #ffffff; }
 
@@ -98,19 +98,19 @@
   padding: 14px 16px;
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-sm);
-  background: var(--surface);
+  background: var(--surface-2);
   font-weight: 450;
   font-size: 0.9rem;
   color: var(--ink);
   cursor: pointer;
   white-space: pre-wrap;
   word-break: break-word;
-  transition: border-color 0.15s ease, background 0.15s ease;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
 }
-.comp-option:hover:not(:disabled) { background: var(--surface-2); }
+.comp-option:hover:not(:disabled) { background: var(--surface-3); border-color: rgba(91, 140, 255, 0.45); }
 .comp-option:disabled { cursor: default; }
-.comp-option--right { background: var(--ok-soft); border-color: #86efac; color: var(--ok); font-weight: 550; }
-.comp-option--wrong { background: var(--err-soft); border-color: #fecaca; color: var(--err); font-weight: 550; }
+.comp-option--right { background: var(--ok-soft); border-color: rgba(52, 211, 153, 0.55); color: var(--ok); font-weight: 550; box-shadow: 0 0 26px -10px rgba(52, 211, 153, 0.4); }
+.comp-option--wrong { background: var(--err-soft); border-color: rgba(251, 113, 133, 0.55); color: var(--err); font-weight: 550; }
 .comp-option--dim { opacity: 0.5; }
 
 .comp-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }

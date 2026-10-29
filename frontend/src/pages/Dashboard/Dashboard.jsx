@@ -202,10 +202,15 @@ export default function Dashboard() {
         }
         .dash-stat-value {
           margin-top: 12px;
+          font-family: var(--font-display);
           font-size: clamp(1.9rem, 2.7vw, 2.7rem);
-          font-weight: 750;
+          font-weight: 700;
           letter-spacing: -0.025em;
-          color: var(--ink);
+          background: linear-gradient(180deg, #ffffff 20%, #9fb4d8 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          color: transparent;
         }
         .dash-stat-hint {
           margin-top: 6px;
@@ -270,7 +275,7 @@ export default function Dashboard() {
           color: var(--ink-muted);
           text-decoration: none;
         }
-        .dash-view-all:hover { color: #2563eb; }
+        .dash-view-all:hover { color: var(--accent); }
 
         .dash-games { overflow: hidden; border-radius: 20px; }
         .dash-games-empty { padding: 40px; font-size: 1.05rem; }
@@ -285,14 +290,14 @@ export default function Dashboard() {
           transition: background 0.15s ease;
         }
         .dash-game-row:last-child { border-bottom: none; }
-        .dash-game-row:hover { background: var(--surface-2); }
+        .dash-game-row:hover { background: rgba(91, 140, 255, 0.07); }
         .dash-game-icon {
           width: 48px;
           height: 48px;
           border-radius: 12px;
-          background: var(--surface-2);
-          border: 1px solid var(--border);
-          color: var(--ink-soft);
+          background: rgba(91, 140, 255, 0.12);
+          border: 1px solid rgba(91, 140, 255, 0.28);
+          color: #8fb2ff;
           display: inline-flex;
           align-items: center;
           justify-content: center;
