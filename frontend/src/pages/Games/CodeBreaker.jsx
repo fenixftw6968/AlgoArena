@@ -5,7 +5,6 @@ import { KeyRound, Lightbulb, CheckCircle2, XCircle, Delete, Lock } from 'lucide
 import { useAuth } from '../../context/AuthContext';
 import { useGame } from '../../context/GameContext';
 import { useTimer } from '../../hooks/useTimer';
-import XPPopup from '../../components/XPPopup/XPPopup';
 import DifficultySelector from '../../components/DifficultySelector/DifficultySelector';
 import GameProgress from '../../components/GameProgress/GameProgress';
 import GameResults from '../../components/GameResults/GameResults';
@@ -15,7 +14,6 @@ import CompetitiveResults from '../../components/CompetitiveResults/CompetitiveR
 import SocialDrawer from '../../components/SocialDrawer/SocialDrawer';
 import ExitModal from '../../components/ExitModal/ExitModal';
 import { getDailyQuestionSet } from '../../services/dailyQuestionService';
-import { getRandomQuestionSet } from '../../services/randomQuestionService';
 import { selectQuestionsForGame } from '../../services/questionHistoryService';
 import { codeBreakerQuestions } from '../../data/codeBreakerQuestions';
 import api from '../../utils/api';
@@ -221,12 +219,12 @@ export default function CodeBreaker() {
     if (currentMatch?.id) {
       try {
         await api.post(`/api/matches/${currentMatch.id}/abandon`);
-      } catch (e) {}
+      } catch {}
       clearMatchStorage(currentMatch.id);
     } else if (showMatchmaking) {
       try {
         await api.post('/api/matches/queue/cancel?gameSlug=code-breaker');
-      } catch (e) {}
+      } catch {}
     }
     navigate('/games');
   };
@@ -338,7 +336,7 @@ export default function CodeBreaker() {
         start();
       }
     }
-  }, [index, puzzles, showComplete]);
+  }, [index, puzzles, showComplete, difficulty, reset, start]);
 
   const handleDigitInput = (val) => {
     if (showResult || !puzzle) return;
@@ -415,7 +413,7 @@ export default function CodeBreaker() {
         if (res.data?.user) {
           refreshUser(res.data.user);
         }
-      } catch (e) {
+      } catch {
         // Offline fallback
       }
     } else {
@@ -538,42 +536,38 @@ export default function CodeBreaker() {
   // === WAITING FOR OPPONENT TO FINISH ===
   if (waitingForOpponent) {
     return (
-      <div className="cosmic-void" style={{ minHeight: '100vh', paddingTop: '6.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.5rem', position: 'relative', overflow: 'hidden' }}>
-        <div className="paper-grain" />
-        <div className="halftone-violet halftone-fade-r" style={{ position: 'absolute', top: 0, right: 0, width: '38%', height: '100%', opacity: 0.2 }} />
-
-        <div className="zine-card" style={{ textAlign: 'center', padding: '3rem 2rem', maxWidth: '440px', width: '100%', position: 'relative', zIndex: 1, boxShadow: '10px 10px 0 var(--riso-violet)' }}>
+      <div style={{ minHeight: '100vh', paddingTop: '52px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1.5rem' }}>
+        <div className="card" style={{ textAlign: 'center', padding: '28px 24px', maxWidth: '400px', width: '100%' }}>
           <div style={{
-            width: '66px',
-            height: '66px',
-            background: 'var(--riso-violet)',
-            border: '1px solid rgba(255, 255, 255, 0.18)',
-            boxShadow: '0 14px 36px -20px rgba(0, 0, 0, 0.9)',
+            width: '44px',
+            height: '44px',
+            background: 'var(--surface-subtle)',
+            border: '1px solid var(--border)',
+            borderRadius: 'var(--radius-sm)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            margin: '0 auto 1.5rem',
-            transform: 'rotate(4deg)',
-            color: '#fffdf6'
+            margin: '0 auto 1.25rem',
+            color: 'var(--ink)'
           }}>
-            <Lock size={30} />
+            <Lock size={20} />
           </div>
 
-          <h2 className="zine-display misreg" data-text="SET COMPLETED" style={{ fontSize: 'clamp(1.3rem, 4vw, 1.8rem)', marginBottom: '0.6rem' }}>
-            SET COMPLETED
+          <h2 style={{ fontSize: '1.25rem', fontWeight: 650, letterSpacing: '-0.02em', marginBottom: '0.4rem', color: 'var(--ink)' }}>
+            Set Completed
           </h2>
 
-          <p style={{ color: 'var(--ink-muted)', fontSize: '0.85rem', marginBottom: '1.5rem', lineHeight: 1.5 }}>
-            Synchronizing neural stream. Awaiting opponent submission...
+          <p style={{ color: 'var(--ink-muted)', fontSize: '0.8125rem', marginBottom: '1.25rem', lineHeight: 1.5 }}>
+            Waiting for opponent to submit their decryption…
           </p>
 
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '0.4rem' }}>
             {[0, 1, 2].map(i => (
               <motion.div
                 key={i}
-                animate={{ scale: [0.6, 1.2, 0.6], opacity: [0.3, 1, 0.3] }}
+                animate={{ opacity: [0.3, 1, 0.3] }}
                 transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.2 }}
-                style={{ width: '10px', height: '10px', background: 'var(--riso-violet)', border: '1px solid rgba(255, 255, 255, 0.14)' }}
+                style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--ink)' }}
               />
             ))}
           </div>
@@ -585,9 +579,8 @@ export default function CodeBreaker() {
   // === COMPETITIVE MATCH RESULTS SCREEN ===
   if (competitiveResult) {
     return (
-      <div className="cosmic-void" style={{ minHeight: '100vh', paddingTop: '6.5rem', paddingBottom: '3rem', position: 'relative' }}>
-        <div className="paper-grain" />
-        <div style={{ position: 'relative', zIndex: 1 }}>
+      <div style={{ minHeight: '100vh', paddingTop: '52px', paddingBottom: '3rem' }}>
+        <div>
           <CompetitiveResults
             matchResult={competitiveResult}
             currentUserId={user?.id || currentMatch?.player1Id}
@@ -633,6 +626,7 @@ export default function CodeBreaker() {
         score={score}
         total={puzzles.length}
         xpEarned={totalXP}
+        ratingEarned={score * 5}
         onPlayAgain={() => startGame(difficulty)}
         gameTitle="Code Breaker"
       />
@@ -640,11 +634,8 @@ export default function CodeBreaker() {
   }
 
   return (
-    <div className="cosmic-void" style={{ minHeight: '100vh', paddingTop: '6.5rem', position: 'relative', overflow: 'hidden' }}>
-      <div className="paper-grain" />
-      <div className="halftone-teal halftone-fade-l" style={{ position: 'absolute', top: 0, left: 0, width: '26%', height: '100%', opacity: 0.18 }} />
-
-      <div style={{ maxWidth: '820px', margin: '0 auto', padding: '1.25rem 1.5rem 4rem', position: 'relative', zIndex: 1 }}>
+    <div style={{ minHeight: '100vh', paddingTop: '52px' }}>
+      <div style={{ maxWidth: '980px', margin: '0 auto', padding: '1.5rem 1.5rem 4rem' }}>
         <GameProgress
           current={index + 1}
           total={puzzles.length}
@@ -669,14 +660,13 @@ export default function CodeBreaker() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
-              className="zine-card"
+              className="card"
               style={{
                 padding: '2rem 2.25rem',
-                boxShadow: '0 22px 50px -24px rgba(0, 0, 0, 0.9)',
-                position: 'relative'
+                position: 'relative',
+                borderRadius: '18px'
               }}
             >
-              <div className="tape" style={{ top: -14, left: '8%' }} />
 
               {/* Header Title */}
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.75rem', flexWrap: 'wrap', gap: '1rem' }}>
@@ -684,20 +674,19 @@ export default function CodeBreaker() {
                   <div style={{
                     width: '46px',
                     height: '46px',
-                    background: 'var(--riso-violet)',
-                    border: '1px solid rgba(255, 255, 255, 0.14)',
-                    boxShadow: '0 12px 30px -18px rgba(0, 0, 0, 0.9)',
+                    background: 'rgba(79, 110, 247, 0.1)',
+                    border: '1px solid rgba(79, 110, 247, 0.2)',
+                    borderRadius: '12px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: '#fffdf6',
-                    transform: 'rotate(-3deg)'
+                    color: 'var(--accent)'
                   }}>
                     <KeyRound size={22} />
                   </div>
                   <div>
-                    <h2 className="zine-display" style={{ fontSize: 'clamp(1.1rem, 3.4vw, 1.5rem)', margin: 0 }}>
-                      {puzzle.title || "DECRYPT CIPHER"}
+                    <h2 style={{ fontSize: 'clamp(1.1rem, 3.4vw, 1.5rem)', fontWeight: 650, margin: 0, color: 'var(--ink)' }}>
+                      {puzzle.title || "Decrypt cipher"}
                     </h2>
                     <p className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--ink-muted)', margin: '0.2rem 0 0', letterSpacing: '0.08em' }}>
                       Crack the {digitCount}-digit secret sequence using the constraints
@@ -708,9 +697,10 @@ export default function CodeBreaker() {
                 <button
                   onClick={() => { setShowHint(true); setHintUsed(true); }}
                   disabled={showHint || showResult}
-                  className={`zine-btn-sm${showHint ? '' : ' zine-btn-sm--yellow'}`}
+                  className="btn btn--secondary"
+                  style={{ height: 38, padding: '0 14px', fontSize: '0.8rem' }}
                 >
-                  <Lightbulb size={14} color={showHint ? 'var(--ink-faint)' : 'var(--ink)'} /> {showHint ? 'HINT ACTIVE' : 'REQUEST HINT'}
+                  <Lightbulb size={14} color={showHint ? 'var(--ink-faint)' : 'var(--warn)'} /> {showHint ? 'Hint active' : 'Request hint'}
                 </button>
               </div>
 
@@ -736,9 +726,9 @@ export default function CodeBreaker() {
                   className="zine-hint"
                   style={{ marginBottom: '2rem' }}
                 >
-                  <Lightbulb size={16} color="var(--ink)" style={{ flexShrink: 0 }} />
+                  <Lightbulb size={16} color="var(--warn)" style={{ flexShrink: 0 }} />
                   <span style={{ fontSize: '0.825rem', color: 'var(--ink)', lineHeight: 1.5, fontWeight: 500 }}>
-                    <strong>DECRYPT HINT:</strong> {puzzle.hint}
+                    <strong>Hint:</strong> {puzzle.hint}
                   </span>
                 </motion.div>
               )}
@@ -792,10 +782,10 @@ export default function CodeBreaker() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   style={{
-                    background: result === 'correct' ? 'var(--riso-teal)' : 'var(--riso-coral)',
-                    color: '#fffdf6',
-                    border: '1px solid rgba(255, 255, 255, 0.14)',
-                    boxShadow: '0 22px 50px -24px rgba(0, 0, 0, 0.9)',
+                    background: result === 'correct' ? 'var(--ok-soft)' : 'var(--err-soft)',
+                    color: result === 'correct' ? 'var(--ok)' : 'var(--err)',
+                    border: '1px solid ' + (result === 'correct' ? 'rgba(52, 211, 153, 0.32)' : 'rgba(251, 113, 133, 0.32)'),
+                    borderRadius: '12px',
                     padding: '1.5rem',
                     marginTop: '1.5rem',
                     textAlign: 'center'
@@ -803,17 +793,17 @@ export default function CodeBreaker() {
                 >
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.6rem' }}>
                     {result === 'correct' ? <CheckCircle2 size={24} /> : <XCircle size={24} />}
-                    <h3 className="zine-display" style={{ fontSize: 'clamp(1.05rem, 3.2vw, 1.35rem)', margin: 0, color: '#fffdf6' }}>
-                      {result === 'correct' ? 'VAULT UNLOCKED' : 'ACCESS DENIED'}
+                    <h3 style={{ fontSize: 'clamp(1.05rem, 3.2vw, 1.35rem)', fontWeight: 650, margin: 0 }}>
+                      {result === 'correct' ? 'Vault unlocked' : 'Access denied'}
                     </h3>
                   </div>
 
-                  <p style={{ color: '#fffdf6', fontSize: '0.875rem', marginBottom: '1.5rem', lineHeight: 1.5, fontWeight: 500 }}>
+                  <p style={{ color: 'var(--ink-soft)', fontSize: '0.875rem', marginBottom: '1.5rem', lineHeight: 1.55 }}>
                     {serverFeedback?.explanation ?? puzzle.explanation}
                   </p>
 
-                  <button onClick={handleNext} className="zine-btn" style={{ background: '#fffdf6', color: '#0b0e14' }}>
-                    {index + 1 < puzzles.length ? 'NEXT CIPHER →' : 'VIEW CLASSIFICATION'}
+                  <button onClick={handleNext} className="btn btn--primary">
+                    {index + 1 < puzzles.length ? 'Next cipher' : 'View results'}
                   </button>
                 </motion.div>
               )}
@@ -822,7 +812,7 @@ export default function CodeBreaker() {
         </AnimatePresence>
       </div>
       {gradingError && (
-        <div role="alert" style={{ position: 'fixed', bottom: '1rem', left: '50%', transform: 'translateX(-50%)', zIndex: 1000, background: 'var(--riso-coral)', color: '#fffdf6', border: '1px solid rgba(255, 255, 255, 0.14)', boxShadow: '0 14px 36px -20px rgba(0, 0, 0, 0.9)', padding: '0.6rem 1rem', fontWeight: 700 }}>
+        <div role="alert" style={{ position: 'fixed', bottom: '1rem', left: '50%', transform: 'translateX(-50%)', zIndex: 1000, background: 'var(--err-soft)', color: 'var(--err)', border: '1px solid rgba(251, 113, 133, 0.32)', borderRadius: '10px', boxShadow: 'var(--shadow-md)', padding: '0.6rem 1rem', fontWeight: 600 }}>
           {gradingError}
         </div>
       )}

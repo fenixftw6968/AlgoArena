@@ -50,7 +50,7 @@ export default function Navbar() {
         } else if (isMounted) {
           setPendingInvite(null);
         }
-      } catch (e) {
+      } catch {
         // Silently catch error
       }
     };
@@ -111,12 +111,16 @@ export default function Navbar() {
     { to: '/dashboard',       label: 'Dashboard' },
     { to: '/games',           label: 'Arena' },
     { to: '/daily-challenge', label: 'Daily' },
-    ...(COMPETITION_ENABLED ? [{ to: '/competitions', label: 'Showdown' }] : []),
+    ...(COMPETITION_ENABLED ? [{ to: '/competitions', label: 'Custom' }] : []),
     { to: '/leaderboard',     label: 'Leaderboard' },
     { to: '/profile',         label: 'Profile' },
   ];
 
-  const isActive = (to) => location.pathname === to;
+  const isActive = (to) => {
+    if (to === '/games') return location.pathname.startsWith('/games');
+    if (to === '/competitions') return location.pathname.startsWith('/competitions');
+    return location.pathname === to;
+  };
   const currentRank = getRankFromRating(user?.competitiveRating || 500);
 
   return (
@@ -125,8 +129,8 @@ export default function Navbar() {
         <div className="nav-inner">
           {/* Brand */}
           <Link to={isAuthenticated ? '/dashboard' : '/'} className="nav-brand">
-            <span className="nav-brand-mark" style={{ background: 'linear-gradient(135deg, #4f7cff, #8b5cf6)', border: '1px solid rgba(255,255,255,0.16)' }}>
-              <img src="/logo-icon.png" alt="AlgoArena" style={{ width: 16, height: 16, objectFit: 'contain' }} />
+            <span className="nav-brand-mark">
+              <span className="nav-brand-dot" />
             </span>
             <span className="nav-brand-name">AlgoArena</span>
           </Link>
@@ -134,14 +138,13 @@ export default function Navbar() {
           {/* Desktop nav */}
           {isAuthenticated && (
             <nav className="nav-links" aria-label="Primary">
-              {navLinks.map(link => (
+              {navLinks.map(({ to, label }) => (
                 <Link
-                  key={link.to}
-                  to={link.to}
-                  className={`nav-link${isActive(link.to) ? ' nav-link--active' : ''}`}
-                  aria-current={isActive(link.to) ? 'page' : undefined}
+                  key={to}
+                  to={to}
+                  className={`nav-link${isActive(to) ? ' nav-link--active' : ''}`}
                 >
-                  {link.label}
+                  {label}
                 </Link>
               ))}
             </nav>
@@ -153,16 +156,16 @@ export default function Navbar() {
               <>
                 <div className="nav-stats" aria-label="Player stats">
                   <span className="nav-stat" title="Rating">
-                    <Swords size={13} />
-                    <span className="mono">{user.competitiveRating || 500}</span>
+                    <Swords size={12} className="nav-stat-icon" />
+                    <span className="mono nav-stat-val">{user.competitiveRating || 500}</span>
                   </span>
                   <span className="nav-stat" title="Coins">
-                    <Coins size={13} />
-                    <span className="mono">{user.coins ?? 0}</span>
+                    <Coins size={12} className="nav-stat-icon" />
+                    <span className="mono nav-stat-val">{user.coins ?? 0}</span>
                   </span>
                   <span className="nav-stat" title="Streak">
-                    <Flame size={13} />
-                    <span className="mono">{user.currentStreak ?? 0}</span>
+                    <Flame size={12} className="nav-stat-icon" />
+                    <span className="mono nav-stat-val">{user.currentStreak ?? 0}d</span>
                   </span>
                 </div>
 
@@ -172,7 +175,7 @@ export default function Navbar() {
                   aria-label="Friends and social"
                   className="nav-icon-btn"
                 >
-                  <Users size={15} />
+                  <Users size={14} />
                 </button>
 
                 <div className="nav-menu-wrap">
@@ -189,9 +192,9 @@ export default function Navbar() {
                   <AnimatePresence>
                     {userMenuOpen && (
                       <motion.div
-                        initial={{ opacity: 0, y: -4 }}
+                        initial={{ opacity: 0, y: 4 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -4 }}
+                        exit={{ opacity: 0, y: 4 }}
                         transition={{ duration: 0.12 }}
                         className="nav-dropdown"
                         role="menu"
@@ -199,15 +202,15 @@ export default function Navbar() {
                         <div className="nav-dropdown-head">
                           <div className="nav-dropdown-name truncate">{user.username}</div>
                           <div className="nav-dropdown-meta mono">
-                            {currentRank.name} · {user.competitiveRating || 500} · Lv {user.level || 1}
+                            {currentRank.name} · {user.competitiveRating ?? 101} Rating
                           </div>
                         </div>
                         <div className="nav-dropdown-sep" />
                         <Link to="/profile" className="nav-dropdown-item" role="menuitem">
-                          <User size={14} /> Profile
+                          <User size={13} /> Profile
                         </Link>
                         <Link to="/leaderboard" className="nav-dropdown-item" role="menuitem">
-                          <Swords size={14} /> Leaderboard
+                          <Swords size={13} /> Leaderboard
                         </Link>
                         <div className="nav-dropdown-sep" />
                         <button
@@ -215,7 +218,7 @@ export default function Navbar() {
                           className="nav-dropdown-item nav-dropdown-item--danger"
                           role="menuitem"
                         >
-                          <LogOut size={14} /> Log out
+                          <LogOut size={13} /> Log out
                         </button>
                       </motion.div>
                     )}
@@ -228,13 +231,13 @@ export default function Navbar() {
                   aria-label="Toggle navigation menu"
                   aria-expanded={mobileMenuOpen}
                 >
-                  {mobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
+                  {mobileMenuOpen ? <X size={15} /> : <Menu size={15} />}
                 </button>
               </>
             ) : (
               <div className="nav-auth">
                 <Link to="/login" className="nav-link">Log in</Link>
-                <Link to="/signup" className="btn btn--primary btn--sm">Create account</Link>
+                <Link to="/signup" className="btn btn--primary btn--sm">Get started</Link>
               </div>
             )}
           </div>
@@ -244,47 +247,54 @@ export default function Navbar() {
         <AnimatePresence>
           {isAuthenticated && mobileMenuOpen && (
             <motion.nav
-              initial={{ opacity: 0, y: -4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -4 }}
-              transition={{ duration: 0.12 }}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.15 }}
               className="nav-mobile"
               aria-label="Mobile navigation"
             >
-              {navLinks.map(link => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  className={`nav-mobile-link${isActive(link.to) ? ' nav-mobile-link--active' : ''}`}
+              <div className="nav-mobile-links">
+                {navLinks.map(({ to, label }) => (
+                  <Link
+                    key={to}
+                    to={to}
+                    className={`nav-mobile-link${isActive(to) ? ' nav-mobile-link--active' : ''}`}
+                  >
+                    {label}
+                  </Link>
+                ))}
+                <div className="nav-dropdown-sep" />
+                <button
+                  onClick={handleLogout}
+                  className="nav-mobile-link nav-mobile-link--danger"
                 >
-                  {link.label}
-                </Link>
-              ))}
-              <div className="nav-mobile-sep" />
-              <button onClick={handleLogout} className="nav-mobile-link nav-mobile-link--danger">
-                <LogOut size={14} /> Log out
-              </button>
+                  <LogOut size={14} /> Log out
+                </button>
+              </div>
             </motion.nav>
           )}
         </AnimatePresence>
       </header>
 
-      {/* Incoming friend match invitation popup */}
-      <IncomingInviteModal
-        invite={pendingInvite}
-        onAccept={handleAcceptInvite}
-        onDecline={handleDeclineInvite}
-      />
-
-      {/* Friends & social drawer */}
+      {/* Social Drawer */}
       <SocialDrawer
         isOpen={socialOpen}
         onClose={() => setSocialOpen(false)}
-        onInviteFriendToGame={() => {
+        onInviteFriendToGame={(friend) => {
           setSocialOpen(false);
-          navigate('/games');
+          navigate('/games', { state: { inviteFriend: friend } });
         }}
       />
+
+      {/* Incoming Invite Notification Modal */}
+      {pendingInvite && (
+        <IncomingInviteModal
+          invite={pendingInvite}
+          onAccept={() => handleAcceptInvite(pendingInvite)}
+          onDecline={() => handleDeclineInvite(pendingInvite)}
+        />
+      )}
 
       <style>{`
         .nav-root {
@@ -292,218 +302,313 @@ export default function Navbar() {
           top: 0;
           left: 0;
           right: 0;
-          z-index: 100;
-          background: rgba(7, 9, 14, 0.78);
-          backdrop-filter: blur(18px) saturate(140%);
-          -webkit-backdrop-filter: blur(18px) saturate(140%);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-          box-shadow: 0 12px 40px -24px rgba(0, 0, 0, 0.9);
+          z-index: 50;
+          background: rgba(11, 11, 11, 0.92);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          border-bottom: 1px solid var(--border);
+          height: 52px;
         }
+
         .nav-inner {
-          max-width: min(96vw, 1840px);
+          max-width: 1200px;
           margin: 0 auto;
-          height: 68px;
-          padding: 0 clamp(32px, 5vw, 88px);
+          height: 100%;
+          padding: 0 clamp(16px, 3vw, 32px);
           display: flex;
           align-items: center;
-          gap: 28px;
+          gap: 24px;
         }
+
         .nav-brand {
           display: inline-flex;
           align-items: center;
-          gap: 11px;
-          text-decoration: none;
+          gap: 8px;
           color: var(--ink);
+          font-weight: 650;
+          font-size: 0.9375rem;
+          letter-spacing: -0.02em;
+          text-decoration: none;
           flex-shrink: 0;
         }
+
         .nav-brand-mark {
-          width: 32px;
-          height: 32px;
-          border-radius: 8px;
-          background: var(--accent-gradient);
-          color: #fff;
+          width: 22px;
+          height: 22px;
+          border-radius: var(--radius-xs);
+          background: rgba(197, 244, 103, 0.15);
+          border: 1px solid rgba(197, 244, 103, 0.4);
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 0 22px -6px var(--accent-glow);
+          box-shadow: 0 0 10px rgba(197, 244, 103, 0.2);
         }
+
+        .nav-brand-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: var(--accent);
+        }
+
         .nav-brand-name {
-          font-size: 1.05rem;
-          font-weight: 650;
-          letter-spacing: -0.02em;
+          color: #F2F2F2;
         }
+
         .nav-links {
           display: flex;
           align-items: center;
-          gap: 4px;
+          gap: 2px;
           flex: 1;
-          min-width: 0;
-          overflow: hidden;
         }
+
         .nav-link {
           display: inline-flex;
           align-items: center;
-          padding: 8px 15px;
-          border-radius: 8px;
-          font-size: 0.92rem;
-          font-weight: 450;
+          padding: 5px 10px;
+          border-radius: var(--radius-xs);
+          font-size: 0.8125rem;
+          font-weight: 500;
           color: var(--ink-muted);
           text-decoration: none;
           white-space: nowrap;
-          transition: color 0.15s ease, background 0.15s ease;
+          transition: color 0.12s ease, background 0.12s ease;
         }
-        .nav-link:hover { color: var(--ink); background: rgba(255, 255, 255, 0.05); }
+
+        .nav-link:hover {
+          color: var(--ink);
+          background: var(--surface-3);
+        }
+
         .nav-link--active {
-          color: #dbe6ff;
+          color: var(--accent);
           font-weight: 600;
-          background: rgba(91, 140, 255, 0.14);
-          box-shadow: inset 0 0 0 1px rgba(91, 140, 255, 0.28);
+          background: rgba(197, 244, 103, 0.12);
+          border: 1px solid rgba(197, 244, 103, 0.35);
         }
+
         .nav-actions {
           display: flex;
           align-items: center;
-          gap: 12px;
+          gap: 8px;
           margin-left: auto;
           flex-shrink: 0;
         }
+
         .nav-stats {
           display: flex;
           align-items: center;
-          gap: 16px;
-          padding-right: 16px;
+          gap: 12px;
+          padding-right: 12px;
           border-right: 1px solid var(--border);
         }
+
         .nav-stat {
           display: inline-flex;
           align-items: center;
-          gap: 6px;
-          font-size: 0.88rem;
+          gap: 5px;
+          font-size: 0.8125rem;
           color: var(--ink-muted);
         }
-        .nav-stat .mono { color: var(--ink-soft); font-size: 0.84rem; }
+
+        .nav-stat-icon {
+          color: var(--accent);
+        }
+
+        .nav-stat-val {
+          color: var(--ink);
+          font-size: 0.78125rem;
+          font-weight: 600;
+        }
+
         .nav-icon-btn {
-          width: 34px;
-          height: 34px;
+          width: 30px;
+          height: 30px;
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          border: 1px solid var(--border-strong);
-          border-radius: 8px;
-          background: var(--surface-2);
-          color: var(--ink-soft);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-sm);
+          background: var(--surface);
+          color: var(--ink-muted);
           cursor: pointer;
-          transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+          transition: border-color 0.12s ease, color 0.12s ease;
         }
-        .nav-icon-btn:hover { border-color: rgba(91, 140, 255, 0.5); color: var(--accent); background: var(--surface-3); }
-        .nav-icon-btn--mobile { display: none; }
-        .nav-menu-wrap { position: relative; }
+
+        .nav-icon-btn:hover {
+          border-color: #383838;
+          color: var(--accent);
+          background: var(--surface-elevated);
+        }
+
+        .nav-icon-btn--mobile {
+          display: none;
+        }
+
+        .nav-menu-wrap {
+          position: relative;
+        }
+
         .nav-user-btn {
           display: inline-flex;
           align-items: center;
-          gap: 8px;
-          height: 34px;
-          padding: 0 10px 0 4px;
-          border: 1px solid var(--border-strong);
-          border-radius: 8px;
-          background: var(--surface-2);
+          gap: 6px;
+          height: 30px;
+          padding: 0 8px 0 3px;
+          border: 1px solid var(--border);
+          border-radius: var(--radius-sm);
+          background: var(--surface);
           color: var(--ink);
-          font-size: 0.83rem;
+          font-size: 0.8125rem;
           font-weight: 500;
           cursor: pointer;
-          max-width: 190px;
-          transition: border-color 0.15s ease, background 0.15s ease;
+          transition: border-color 0.12s ease;
         }
-        .nav-user-btn:hover { border-color: rgba(91, 140, 255, 0.5); background: var(--surface-3); }
+
+        .nav-user-btn:hover {
+          border-color: #383838;
+          background: var(--surface-elevated);
+        }
+
         .nav-user-avatar {
-          width: 26px;
-          height: 26px;
-          border-radius: 6px;
-          background: rgba(91, 140, 255, 0.16);
-          border: 1px solid rgba(91, 140, 255, 0.35);
-          color: #a9c1ff;
+          width: 22px;
+          height: 22px;
+          border-radius: 4px;
+          background: var(--surface-3);
+          border: 1px solid var(--border);
+          color: var(--accent);
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          font-size: 0.72rem;
+          font-size: 0.6875rem;
           font-weight: 600;
           font-family: var(--font-mono);
           flex-shrink: 0;
         }
-        .nav-user-name { max-width: 110px; }
+
+        .nav-user-name {
+          max-width: 90px;
+        }
+
         .nav-dropdown {
           position: absolute;
-          top: calc(100% + 8px);
+          top: calc(100% + 6px);
           right: 0;
-          width: 220px;
-          background:
-            linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01)),
-            var(--surface);
-          border: 1px solid rgba(91, 140, 255, 0.22);
-          border-radius: 12px;
-          padding: 6px;
-          z-index: 200;
-          box-shadow: var(--shadow-lg), 0 0 50px -24px var(--accent-glow);
+          width: 200px;
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-sm);
+          box-shadow: var(--shadow-md);
+          padding: 4px;
+          z-index: 60;
         }
-        .nav-dropdown-head { padding: 10px 10px 8px; }
-        .nav-dropdown-name { font-size: 0.85rem; font-weight: 600; color: var(--ink); }
-        .nav-dropdown-meta { font-size: 0.7rem; color: var(--ink-muted); margin-top: 2px; }
-        .nav-dropdown-sep { height: 1px; background: var(--border); margin: 5px 4px; }
+
+        .nav-dropdown-head {
+          padding: 8px 10px;
+        }
+
+        .nav-dropdown-name {
+          font-size: 0.8125rem;
+          font-weight: 600;
+          color: var(--ink);
+        }
+
+        .nav-dropdown-meta {
+          font-size: 0.6875rem;
+          color: var(--accent);
+          margin-top: 2px;
+        }
+
+        .nav-dropdown-sep {
+          height: 1px;
+          background: var(--border);
+          margin: 4px 0;
+        }
+
         .nav-dropdown-item {
           display: flex;
           align-items: center;
-          gap: 9px;
+          gap: 8px;
           width: 100%;
-          padding: 8px 10px;
-          border: none;
-          border-radius: 7px;
-          background: transparent;
+          padding: 6px 10px;
+          border-radius: var(--radius-xs);
+          font-size: 0.8125rem;
           color: var(--ink-soft);
-          font-size: 0.84rem;
-          font-weight: 450;
           text-decoration: none;
+          background: transparent;
+          border: none;
           cursor: pointer;
+          text-align: left;
           transition: background 0.12s ease, color 0.12s ease;
         }
-        .nav-dropdown-item:hover { background: var(--surface-2); color: var(--ink); }
-        .nav-dropdown-item--danger { color: var(--err); }
-        .nav-dropdown-item--danger:hover { background: var(--err-soft); color: var(--err); }
-        .nav-auth { display: flex; align-items: center; gap: 12px; }
-        .nav-mobile {
-          display: none;
-          border-top: 1px solid var(--border);
-          background: rgba(13, 17, 25, 0.98);
-          backdrop-filter: blur(18px);
-          padding: 10px 16px 14px;
+
+        .nav-dropdown-item:hover {
+          background: var(--surface-3);
+          color: var(--ink);
         }
+
+        .nav-dropdown-item--danger {
+          color: var(--err);
+        }
+
+        .nav-dropdown-item--danger:hover {
+          background: var(--err-soft);
+          color: var(--err);
+        }
+
+        .nav-auth {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .nav-mobile {
+          background: var(--surface);
+          border-bottom: 1px solid var(--border);
+          overflow: hidden;
+        }
+
+        .nav-mobile-links {
+          padding: 12px 16px;
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+
         .nav-mobile-link {
           display: flex;
           align-items: center;
-          gap: 9px;
-          width: 100%;
-          padding: 11px 12px;
-          border: none;
-          border-radius: 8px;
-          background: transparent;
+          gap: 8px;
+          padding: 8px 12px;
+          border-radius: var(--radius-xs);
+          font-size: 0.875rem;
           color: var(--ink-soft);
-          font-size: 0.88rem;
           text-decoration: none;
-          cursor: pointer;
         }
-        .nav-mobile-link:hover { background: var(--surface-2); color: var(--ink); }
-        .nav-mobile-link--active { color: var(--ink); font-weight: 550; }
-        .nav-mobile-link--danger { color: var(--err); }
-        .nav-mobile-sep { height: 1px; background: var(--border); margin: 6px 0; }
 
-        @media (max-width: 1024px) {
-          .nav-links { display: none; }
-          .nav-icon-btn--mobile { display: inline-flex; }
-          .nav-mobile { display: block; }
+        .nav-mobile-link--active {
+          background: var(--surface-3);
+          color: var(--accent);
+          font-weight: 600;
         }
-        @media (max-width: 560px) {
-          .nav-inner { padding: 0 16px; gap: 12px; }
-          .nav-stats { display: none; }
-          .nav-user-name { display: none; }
-          .nav-user-btn { padding: 0 4px; }
+
+        .nav-mobile-link--danger {
+          color: var(--err);
+          background: none;
+          border: none;
+          cursor: pointer;
+          width: 100%;
+          text-align: left;
+        }
+
+        @media (max-width: 820px) {
+          .nav-links,
+          .nav-stats {
+            display: none;
+          }
+          .nav-icon-btn--mobile {
+            display: inline-flex;
+          }
         }
       `}</style>
     </>

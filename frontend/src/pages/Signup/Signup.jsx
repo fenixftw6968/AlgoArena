@@ -6,9 +6,9 @@ import AuthShell, { AuthError } from '../../components/AuthShell/AuthShell';
 
 const STRENGTH_TOKENS = [
   { color: 'var(--err)', label: 'Weak' },
-  { color: 'var(--warn)', label: 'Fair' },
-  { color: 'var(--ok)', label: 'Good' },
-  { color: 'var(--ok)', label: 'Strong' },
+  { color: '#F59E0B', label: 'Fair' },
+  { color: '#EAB308', label: 'Good' },
+  { color: 'var(--accent)', label: 'Strong' },
 ];
 
 export default function Signup() {
@@ -43,10 +43,12 @@ export default function Signup() {
   };
 
   const update = (field) => (e) => setForm(f => ({ ...f, [field]: e.target.value }));
+  const fieldStyle = { position: 'relative' };
 
   return (
     <AuthShell
       title="Create account"
+      lede="Join the verified algorithmic arena and track your rating."
     >
       <AuthError>
         {error && (
@@ -59,49 +61,52 @@ export default function Signup() {
 
       <form onSubmit={handleSubmit} className="auth-form">
         <div>
-          <label className="zine-label" htmlFor="su-user">Username</label>
-          <div style={{ position: 'relative' }}>
-            <User size={18} className="field-icon" />
+          <label className="zine-label" htmlFor="signup-username">Username</label>
+          <div style={fieldStyle}>
+            <User size={16} className="field-icon" />
             <input
-              id="su-user"
+              id="signup-username"
               type="text"
               required
               autoComplete="username"
               value={form.username}
               onChange={update('username')}
               className="zine-field field-with-icon"
+              placeholder="username"
             />
           </div>
         </div>
 
         <div>
-          <label className="zine-label" htmlFor="su-email">Email</label>
-          <div style={{ position: 'relative' }}>
-            <Mail size={18} className="field-icon" />
+          <label className="zine-label" htmlFor="signup-email">Email</label>
+          <div style={fieldStyle}>
+            <Mail size={16} className="field-icon" />
             <input
-              id="su-email"
+              id="signup-email"
               type="email"
               required
               autoComplete="email"
               value={form.email}
               onChange={update('email')}
               className="zine-field field-with-icon"
+              placeholder="you@domain.com"
             />
           </div>
         </div>
 
         <div>
-          <label className="zine-label" htmlFor="su-pass">Password</label>
-          <div style={{ position: 'relative' }}>
-            <Lock size={18} className="field-icon" />
+          <label className="zine-label" htmlFor="signup-pass">Password</label>
+          <div style={fieldStyle}>
+            <Lock size={16} className="field-icon" />
             <input
-              id="su-pass"
+              id="signup-pass"
               type={showPass ? 'text' : 'password'}
               required
               autoComplete="new-password"
               value={form.password}
               onChange={update('password')}
               className="zine-field field-with-icon field-with-icon-r"
+              placeholder="••••••••"
             />
             <button
               type="button"
@@ -109,42 +114,48 @@ export default function Signup() {
               aria-label={showPass ? 'Hide password' : 'Show password'}
               className="field-action"
             >
-              {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
+              {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
             </button>
           </div>
 
           {form.password && (
-            <div style={{ marginTop: 10 }}>
-              <div className="strength-track">
-                {[1, 2, 3, 4].map(idx => (
-                  <span
+            <div style={{ marginTop: 8 }}>
+              <div style={{ display: 'flex', gap: 4, height: 3 }}>
+                {[0, 1, 2, 3].map((idx) => (
+                  <div
                     key={idx}
-                    className="strength-seg"
                     style={{
-                      background: idx <= strength ? STRENGTH_TOKENS[strength - 1].color : 'var(--surface-3)',
+                      flex: 1,
+                      borderRadius: 2,
+                      background: idx < strength ? STRENGTH_TOKENS[strength - 1]?.color || 'var(--accent)' : 'var(--surface-3)',
+                      transition: 'background 0.2s ease',
                     }}
                   />
                 ))}
               </div>
-              <div className="strength-label">
-                Password strength: <strong>{STRENGTH_TOKENS[strength - 1]?.label || 'Too short'}</strong>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 4 }}>
+                <span className="mono faint" style={{ fontSize: '0.6875rem' }}>Strength</span>
+                <span className="mono" style={{ fontSize: '0.6875rem', color: STRENGTH_TOKENS[strength - 1]?.color || 'var(--ink-muted)' }}>
+                  {STRENGTH_TOKENS[strength - 1]?.label || 'Too short'}
+                </span>
               </div>
             </div>
           )}
         </div>
 
         <div>
-          <label className="zine-label" htmlFor="su-conf">Confirm password</label>
-          <div style={{ position: 'relative' }}>
-            <Lock size={18} className="field-icon" />
+          <label className="zine-label" htmlFor="signup-confirm">Confirm password</label>
+          <div style={fieldStyle}>
+            <Lock size={16} className="field-icon" />
             <input
-              id="su-conf"
+              id="signup-confirm"
               type={showPass ? 'text' : 'password'}
               required
               autoComplete="new-password"
               value={form.confirm}
               onChange={update('confirm')}
               className="zine-field field-with-icon"
+              placeholder="••••••••"
             />
           </div>
         </div>
@@ -153,32 +164,15 @@ export default function Signup() {
           type="submit"
           disabled={loading}
           className="btn btn--primary"
-          style={{ width: '100%', height: 54, fontSize: '1.08rem', marginTop: 8 }}
+          style={{ width: '100%', height: 38, marginTop: 4 }}
         >
           {loading ? 'Creating account…' : 'Create account'}
         </button>
       </form>
 
       <p className="auth-switch">
-        Already registered? <Link to="/login">Log in</Link>
+        Already registered? <Link to="/login">Sign in</Link>
       </p>
-
-      <style>{`
-        .strength-track { display: flex; gap: 4px; }
-        .strength-seg {
-          height: 4px;
-          flex: 1;
-          border-radius: 999px;
-          background: var(--surface-3);
-          transition: background 0.2s ease;
-        }
-        .strength-label {
-          margin-top: 7px;
-          font-size: 0.75rem;
-          color: var(--ink-muted);
-        }
-        .strength-label strong { font-weight: 500; color: var(--ink-soft); }
-      `}</style>
     </AuthShell>
   );
 }

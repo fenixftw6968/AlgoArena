@@ -34,7 +34,7 @@ public class FriendshipService {
         List<Friendship> accepted = friendshipRepository.findByUserAndStatus(user, Friendship.Status.ACCEPTED);
         for (Friendship f : accepted) {
             User friendUser = f.getUser().getId().equals(userId) ? f.getFriend() : f.getUser();
-            int r = friendUser.getCompetitiveRating() != null ? friendUser.getCompetitiveRating() : 500;
+            int r = friendUser.getCompetitiveRating() != null ? friendUser.getCompetitiveRating() : 101;
             results.add(FriendDto.builder()
                     .id(f.getId())
                     .userId(friendUser.getId())
@@ -52,7 +52,7 @@ public class FriendshipService {
         List<Friendship> incoming = friendshipRepository.findIncomingPendingRequests(user);
         for (Friendship f : incoming) {
             User requester = f.getUser();
-            int r = requester.getCompetitiveRating() != null ? requester.getCompetitiveRating() : 500;
+            int r = requester.getCompetitiveRating() != null ? requester.getCompetitiveRating() : 101;
             results.add(FriendDto.builder()
                     .id(f.getId())
                     .userId(requester.getId())
@@ -70,7 +70,7 @@ public class FriendshipService {
         List<Friendship> outgoing = friendshipRepository.findOutgoingPendingRequests(user);
         for (Friendship f : outgoing) {
             User addressee = f.getFriend();
-            int r = addressee.getCompetitiveRating() != null ? addressee.getCompetitiveRating() : 500;
+            int r = addressee.getCompetitiveRating() != null ? addressee.getCompetitiveRating() : 101;
             results.add(FriendDto.builder()
                     .id(f.getId())
                     .userId(addressee.getId())
@@ -112,7 +112,7 @@ public class FriendshipService {
             f.setFriend(target);
             f.setStatus(Friendship.Status.PENDING);
             f = friendshipRepository.save(f);
-            int r = target.getCompetitiveRating() != null ? target.getCompetitiveRating() : 500;
+            int r = target.getCompetitiveRating() != null ? target.getCompetitiveRating() : 101;
             return FriendDto.builder()
                     .id(f.getId())
                     .userId(target.getId())
@@ -133,7 +133,7 @@ public class FriendshipService {
                 .build();
 
         friendship = friendshipRepository.save(friendship);
-        int r = target.getCompetitiveRating() != null ? target.getCompetitiveRating() : 500;
+        int r = target.getCompetitiveRating() != null ? target.getCompetitiveRating() : 101;
         return FriendDto.builder()
                 .id(friendship.getId())
                 .userId(target.getId())
@@ -172,7 +172,7 @@ public class FriendshipService {
         List<User> allUsers = userRepository.findAllOrderByCompetitiveRatingDesc();
         List<FriendDto> recommendations = new ArrayList<>();
 
-        int userRating = currentUser.getCompetitiveRating() != null ? currentUser.getCompetitiveRating() : 500;
+        int userRating = currentUser.getCompetitiveRating() != null ? currentUser.getCompetitiveRating() : 101;
 
         for (User other : allUsers) {
             if (other.getId().equals(userId)) continue;
@@ -181,7 +181,7 @@ public class FriendshipService {
             boolean alreadyConnected = friendshipRepository.findBetweenUsers(currentUser, other).isPresent();
             if (alreadyConnected) continue;
 
-            int otherRating = other.getCompetitiveRating() != null ? other.getCompetitiveRating() : 500;
+            int otherRating = other.getCompetitiveRating() != null ? other.getCompetitiveRating() : 101;
 
             recommendations.add(FriendDto.builder()
                     .userId(other.getId())

@@ -3,8 +3,9 @@ import { useAuth } from '../../context/AuthContext';
 import XPBar from '../../components/XPBar/XPBar';
 import RankCard from '../../components/RankCard/RankCard';
 import { getXPForNextLevel, getXPForCurrentLevel } from '../../data/mockUser';
-import { Lock } from 'lucide-react';
+import { Lock, Bell, BellCheck, Download } from 'lucide-react';
 import api from '../../utils/api';
+import { subscribeUserToPush, isPushNotificationSupported } from '../../services/pushNotificationService';
 
 const RARITY_LABEL = {
   COMMON: 'Common',
@@ -41,82 +42,112 @@ export default function Profile() {
   if (!user) return null;
 
   const unlockedIds = new Set(unlockedAchievements.map(ua => ua.achievement?.achievementKey));
-  const xpCurrent = user.xp - getXPForCurrentLevel(user.level);
-  const xpNext    = getXPForNextLevel(user.level) - getXPForCurrentLevel(user.level);
+  const xpCurrent = (user.xp || 0) - getXPForCurrentLevel(user.level || 1);
+  const xpNext    = getXPForNextLevel(user.level || 1) - getXPForCurrentLevel(user.level || 1);
 
   return (
     <div className="page">
       <div className="container stack">
-        {/* Identity */}
+        {/* Identity Head */}
         <section className="card profile-head">
           <span className="avatar avatar--lg">{user.username?.[0]?.toUpperCase()}</span>
           <div className="profile-head-main">
             <h1 className="profile-name">{user.username}</h1>
-            <div className="profile-meta">
-              Joined {new Date(user.createdAt || Date.now()).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+            <div className="profile-meta mono">
+              Member since {new Date(user.createdAt || Date.now()).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
               {' · '}Level {user.level || 1}
             </div>
-            <div style={{ marginTop: 24, maxWidth: 820 }}>
+            <div style={{ marginTop: 16, maxWidth: 640 }}>
               <XPBar current={Math.max(0, xpCurrent)} total={Math.max(1, xpNext)} level={user.level || 1} />
             </div>
           </div>
         </section>
 
-        {/* Stats */}
+        {/* Stats Grid */}
         <div className="grid-stats" role="list" aria-label="Account stats">
           {[
             { label: 'Current streak', value: `${user.currentStreak || 0}d` },
             { label: 'Best streak',    value: `${user.longestStreak || 0}d` },
-            { label: 'Coins',          value: user.coins ?? 0 },
-            { label: 'Games completed', value: user.gamesCompleted || 0 },
+            { label: 'Available coins', value: user.coins ?? 0 },
+            { label: 'Challenges finished', value: user.gamesCompleted || 0 },
           ].map(({ label, value }) => (
             <div key={label} className="profile-stat" role="listitem">
-              <div className="profile-stat-value num">{value}</div>
-              <div className="profile-stat-label">{label}</div>
+              <span className="profile-stat-label">{label}</span>
+              <div className="profile-stat-value mono">{value}</div>
             </div>
           ))}
         </div>
 
-        {/* Ranked career */}
+        {/* Ranked Career Card */}
         <RankCard
-          rating={user.competitiveRating || 500}
+          rating={user.competitiveRating ?? 101}
           matchesPlayed={user.matchesPlayed || 0}
           matchesWon={user.matchesWon || 0}
         />
 
-        {/* Achievements */}
+        {/* PWA & Notification Preferences */}
+        <section className="card" style={{ padding: '20px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
+          <div>
+            <div style={{ fontWeight: 650, fontSize: '0.95rem', color: 'var(--ink)' }}>PWA Push Alerts</div>
+            <div className="muted" style={{ fontSize: '0.8125rem', marginTop: '2px' }}>
+              Receive instant updates for tournaments, daily challenges, and friend invites.
+            </div>
+          </div>
+          <button
+            onClick={async () => {
+              const res = await subscribeUserToPush();
+              if (res.success) {
+                alert('Push notifications enabled for AlgoArena!');
+              } else if (res.reason === 'permission_denied') {
+                alert('Notification permission was blocked in browser settings.');
+              }
+            }}
+            className="btn btn--secondary btn--sm"
+          >
+            <Bell size={14} style={{ color: 'var(--accent)' }} />
+            <span>Enable Push Notifications</span>
+          </button>
+        </section>
+
+        {/* Achievements Section */}
         <section>
           <div className="section-head">
-            <h2 className="section-title">Achievements</h2>
-            <span className="faint mono" style={{ fontSize: '0.75rem' }}>
+            <div>
+              <h2 className="section-title">Milestones & Achievements</h2>
+              <p className="muted" style={{ fontSize: '0.8125rem' }}>Earn trophies through tournament victories and streak retention.</p>
+            </div>
+            <span className="mono faint" style={{ fontSize: '0.75rem' }}>
               {unlockedIds.size} / {achievements.length || 0} unlocked
             </span>
           </div>
 
           {loading ? (
-            <div className="card" style={{ padding: 40, textAlign: 'center' }}>
-              <span className="zine-spinner" />
+            <div className="card" style={{ padding: 32, textAlign: 'center' }}>
+              <span className="zine-spinner" style={{ margin: '0 auto' }} />
             </div>
           ) : achievements.length === 0 ? (
-            <div className="card" style={{ padding: 40, textAlign: 'center' }}>
-              <p className="muted" style={{ fontSize: '0.875rem' }}>No achievements available yet.</p>
+            <div className="card" style={{ padding: 24, textAlign: 'center' }}>
+              <p className="muted" style={{ fontSize: '0.8125rem' }}>No achievements recorded yet.</p>
             </div>
           ) : (
-            <div className="grid-cards">
-              {achievements.map((ach) => {
-                const isUnlocked = unlockedIds.has(ach.achievementKey);
+            <div className="profile-ach-grid">
+              {achievements.map((a) => {
+                const unlocked = unlockedIds.has(a.achievementKey);
                 return (
-                  <div key={ach.id || ach.achievementKey} className={`card ach-card${isUnlocked ? '' : ' ach-card--locked'}`}>
-                    <span className={`ach-icon${isUnlocked ? '' : ' ach-icon--locked'}`}>
-                      {isUnlocked ? (ach.icon || '★') : <Lock size={13} />}
-                    </span>
-                    <div className="ach-body">
-                      <div className="ach-top">
-                        <span className="ach-title truncate">{ach.title}</span>
-                        <span className="ach-rarity mono">{RARITY_LABEL[ach.rarity] || 'Common'}</span>
-                      </div>
-                      <p className="ach-desc">{ach.description}</p>
+                  <div
+                    key={a.achievementKey}
+                    className={`card profile-ach-card${unlocked ? '' : ' profile-ach-card--locked'}`}
+                  >
+                    <div className="profile-ach-top">
+                      <span className="profile-ach-icon">
+                        {unlocked ? (a.icon || '🏆') : <Lock size={14} />}
+                      </span>
+                      <span className="badge badge--success" style={{ fontSize: '0.625rem' }}>
+                        {RARITY_LABEL[a.rarity] || 'Common'}
+                      </span>
                     </div>
+                    <div className="profile-ach-name">{a.title}</div>
+                    <div className="profile-ach-desc">{a.description}</div>
                   </div>
                 );
               })}
@@ -127,71 +158,96 @@ export default function Profile() {
 
       <style>{`
         .profile-head {
+          padding: 24px 28px;
           display: flex;
           align-items: center;
-          gap: 36px;
-          padding: clamp(32px, 4vh, 48px);
-          border-radius: 22px;
-          background:
-            radial-gradient(ellipse 70% 100% at 0% 0%, rgba(91, 140, 255, 0.14), transparent 65%),
-            linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01)),
-            var(--surface);
+          gap: 20px;
+          background: var(--surface);
         }
-        .profile-head-main { flex: 1; min-width: 0; }
-        .profile-name { font-size: clamp(2.4rem, 3.5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; color: var(--ink); }
-        .profile-meta { margin-top: 8px; font-size: 1.05rem; color: var(--ink-muted); }
 
-        .profile-stat { padding: 28px 36px; border-right: 1px solid var(--border); }
-        .profile-stat:last-child { border-right: none; }
-        .profile-stat-value {
-          font-family: var(--font-display);
-          font-size: clamp(2.2rem, 3vw, 2.9rem);
-          font-weight: 700;
+        .profile-head-main {
+          flex: 1;
+        }
+
+        .profile-name {
+          font-size: 1.35rem;
+          font-weight: 650;
           letter-spacing: -0.02em;
-          background: linear-gradient(180deg, #ffffff 20%, #9fb4d8 100%);
-          -webkit-background-clip: text;
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
-          color: transparent;
-        }
-        .profile-stat-label {
-          margin-top: 8px;
-          font-size: 0.95rem;
-          font-weight: 600;
-          color: var(--ink-soft);
+          color: var(--ink);
         }
 
-        .ach-card {
-          display: flex;
-          gap: 22px;
-          padding: 26px 30px;
-          border-radius: 16px;
+        .profile-meta {
+          font-size: 0.8125rem;
+          color: var(--ink-muted);
+          margin-top: 2px;
         }
-        .ach-card--locked { background: var(--surface-2); }
-        .ach-icon {
-          width: 56px;
-          height: 56px;
-          border-radius: 14px;
-          background: var(--surface-2);
-          border: 1px solid var(--border);
+
+        .profile-stat {
+          display: flex;
+          flex-direction: column;
+          padding: 16px 20px;
+          border-right: 1px solid var(--border);
+        }
+
+        .profile-stat:last-child {
+          border-right: none;
+        }
+
+        .profile-stat-label {
+          font-size: 0.75rem;
+          color: var(--ink-muted);
+          font-weight: 500;
+        }
+
+        .profile-stat-value {
+          font-size: 1.35rem;
+          font-weight: 600;
+          color: var(--accent);
+          margin-top: 2px;
+        }
+
+        .profile-ach-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+          gap: 12px;
+        }
+
+        .profile-ach-card {
+          padding: 16px;
+          background: var(--surface);
+          border-radius: var(--radius);
+        }
+
+        .profile-ach-card--locked {
+          opacity: 0.4;
+        }
+
+        .profile-ach-top {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 8px;
+        }
+
+        .profile-ach-icon {
+          font-size: 1.1rem;
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          font-size: 1.6rem;
-          flex-shrink: 0;
+          color: var(--accent);
         }
-        .ach-card--locked .ach-icon { color: var(--ink-faint); }
-        .ach-body { flex: 1; min-width: 0; }
-        .ach-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
-        .ach-title { font-size: 1.18rem; font-weight: 650; }
-        .ach-rarity { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-faint); flex-shrink: 0; }
-        .ach-desc { margin-top: 8px; font-size: 1rem; color: var(--ink-muted); line-height: 1.6; }
 
-        @media (max-width: 640px) {
-          .profile-head { flex-direction: column; gap: 18px; padding: 24px; }
-          .grid-stats { grid-template-columns: repeat(2, 1fr); }
-          .profile-stat:nth-child(2) { border-right: none; }
-          .profile-stat:nth-child(1), .profile-stat:nth-child(2) { border-bottom: 1px solid var(--border); }
+        .profile-ach-name {
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: var(--ink);
+        }
+
+        .profile-ach-desc {
+          margin-top: 4px;
+          font-size: 0.78125rem;
+          color: var(--ink-muted);
+          line-height: 1.45;
         }
       `}</style>
     </div>

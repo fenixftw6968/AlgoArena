@@ -1,37 +1,54 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
-export function useTimer(initialSeconds, { autoStart = false, onComplete } = {}) {
+export function useTimer(initialSeconds, options = {}) {
+  const { autoStart = false, onComplete } =
+    typeof options === 'function' ? { onComplete: options } : options;
+
   const [timeLeft, setTimeLeft]   = useState(initialSeconds);
   const [isRunning, setIsRunning] = useState(autoStart);
   const [isDone, setIsDone]       = useState(false);
   const intervalRef = useRef(null);
+  const timeLeftRef = useRef(initialSeconds);
+  const initialSecondsRef = useRef(initialSeconds);
+  const onCompleteRef = useRef(onComplete);
+
+  initialSecondsRef.current = initialSeconds;
+  onCompleteRef.current = onComplete;
 
   useEffect(() => {
-    if (isRunning && timeLeft > 0) {
-      intervalRef.current = setInterval(() => {
-        setTimeLeft(t => {
-          if (t <= 1) {
-            clearInterval(intervalRef.current);
-            setIsRunning(false);
-            setIsDone(true);
-            onComplete?.();
-            return 0;
-          }
-          return t - 1;
-        });
-      }, 1000);
-    }
-    return () => clearInterval(intervalRef.current);
-  }, [isRunning, onComplete]);
+    if (!isRunning || timeLeftRef.current <= 0) return undefined;
 
-  const start  = () => { setIsRunning(true); setIsDone(false); };
-  const pause  = () => setIsRunning(false);
-  const reset  = (secs = initialSeconds) => {
+    intervalRef.current = setInterval(() => {
+      const next = Math.max(0, timeLeftRef.current - 1);
+      timeLeftRef.current = next;
+      setTimeLeft(next);
+
+      if (next === 0) {
+        clearInterval(intervalRef.current);
+        setIsRunning(false);
+        setIsDone(true);
+        onCompleteRef.current?.();
+      }
+    }, 1000);
+
+    return () => clearInterval(intervalRef.current);
+  }, [isRunning]);
+
+  const start = useCallback(() => {
+    setIsRunning(true);
+    setIsDone(false);
+  }, []);
+
+  const pause = useCallback(() => setIsRunning(false), []);
+
+  const reset = useCallback((secs = initialSecondsRef.current) => {
     clearInterval(intervalRef.current);
-    setTimeLeft(secs);
+    const next = Math.max(0, Number.isFinite(secs) ? secs : initialSecondsRef.current);
+    timeLeftRef.current = next;
+    setTimeLeft(next);
     setIsRunning(false);
     setIsDone(false);
-  };
+  }, []);
 
   const urgency = timeLeft <= 10 ? 'critical' : timeLeft <= 30 ? 'warning' : 'normal';
   const formattedTime = `${Math.floor(timeLeft / 60).toString().padStart(2, '0')}:${(timeLeft % 60).toString().padStart(2, '0')}`;

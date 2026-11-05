@@ -26,6 +26,7 @@ export default function MatchmakingLobby({
   const [error, setError] = useState(null);
   const matchStartedRef = useRef(false);
   const matchDataRef = useRef(null);
+  const connectRankedBotRef = useRef(null);
   matchDataRef.current = matchData;
 
   const onMatchReadyRef = useRef(onMatchReady);
@@ -188,7 +189,7 @@ export default function MatchmakingLobby({
                   }
                 } else if (++elapsedPolls >= 90) {
                   clearInterval(pollInterval);
-                  await connectRankedBot(queuedMatch.id);
+                  await connectRankedBotRef.current?.(queuedMatch.id);
                 }
               } catch (e) {
                 console.warn('Match status poll error', e);
@@ -264,7 +265,7 @@ export default function MatchmakingLobby({
         api.post(`/api/matches/queue/cancel?gameSlug=${gameSlug}`).catch(() => {});
       }
     };
-  }, [isOpen, gameSlug, mode, friendTarget, difficulty, initialMatch]);
+  }, [isOpen, gameSlug, mode, friendTarget, difficulty, initialMatch, handleMatchFound]);
 
   const connectRankedBot = async (matchId) => {
     if (matchStartedRef.current) return;
@@ -295,11 +296,13 @@ export default function MatchmakingLobby({
     handleMatchFound(botOpponent);
   };
 
+  connectRankedBotRef.current = connectRankedBot;
+
   const handleCancelInvitation = async () => {
     if (matchData?.id) {
       try {
         await api.post(`/api/matches/${matchData.id}/cancel`);
-      } catch (e) {}
+      } catch {}
     }
     onClose();
   };
@@ -317,351 +320,353 @@ export default function MatchmakingLobby({
 
   return (
     <AnimatePresence>
-      <div className="overlay" style={{ zIndex: 9999, backgroundColor: 'rgba(3, 5, 10, 0.78)' }}>
+      <div className="overlay ml-overlay" style={{ zIndex: 9999 }}>
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 15 }}
-          className="zine-card"
-          style={{
-            width: '100%',
-            maxWidth: '520px',
-            boxShadow: '10px 10px 0 var(--riso-violet)',
-            padding: '2.5rem 2rem',
-            textAlign: 'center',
-            position: 'relative',
-            overflow: 'hidden'
-          }}
+          exit={{ opacity: 0, y: 12 }}
+          className="zine-modal ml-card"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Matchmaking lobby"
         >
-          <div className="halftone-violet halftone-fade-b" style={{ position: 'absolute', inset: 0, opacity: 0.1, pointerEvents: 'none' }} />
-          <div className="hazard-tape" style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 8, borderBottom: '1px solid rgba(255, 255, 255, 0.14)' }} />
-
           {/* Close / Cancel Button */}
           {(status === 'QUEUING' || status === 'WAITING_FRIEND' || status === 'TIMEOUT_PROMPT') && (
             <button
               onClick={status === 'WAITING_FRIEND' ? handleCancelInvitation : onClose}
-              className="zine-btn-sm"
-              style={{ position: 'absolute', top: '1.15rem', right: '1.15rem' }}
+              className="ml-close"
+              aria-label="Cancel matchmaking"
             >
-              <X size={14} />
+              <X size={15} />
             </button>
           )}
 
           {/* QUEUING STATE */}
           {status === 'QUEUING' && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ position: 'relative' }}>
-              <div style={{ position: 'relative', width: '96px', height: '96px', margin: '1.5rem auto 1.5rem' }}>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="ml-state">
+              <div className="ml-orbit">
                 <motion.div
                   animate={{ rotate: 360 }}
-                  transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    border: '3px dashed var(--riso-violet)',
-                  }}
+                  transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+                  className="ml-orbit-ring"
                 />
-                <motion.div
-                  animate={{ scale: [1, 1.08, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  style={{
-                    position: 'absolute',
-                    inset: '-8px',
-                    border: '2px solid var(--riso-coral)',
-                  }}
-                />
-                <div style={{
-                  position: 'absolute',
-                  inset: '8px',
-                  background: 'var(--riso-violet)',
-                  border: '1px solid rgba(255, 255, 255, 0.18)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <Swords size={30} color="#fffdf6" />
-                </div>
+                <div className="ml-orbit-core"><Swords size={28} /></div>
               </div>
 
-              <h2 className="zine-display misreg" data-text="SCANNING LOBBY" style={{ fontSize: 'clamp(1.3rem, 4.5vw, 1.8rem)', marginBottom: '0.5rem' }}>
-                SCANNING LOBBY
-              </h2>
-              <p className="zine-lede" style={{ fontSize: '0.85rem', marginBottom: '1.5rem', lineHeight: 1.5 }}>
-                Locating active neural challengers in {gameTitle} matching your classification tier.
+              <h2 className="ml-title">Finding an opponent</h2>
+              <p className="ml-lede">
+                Searching {gameTitle} for a challenger near your rating.
               </p>
 
-              <div className="zine-badge" style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                background: 'var(--riso-yellow)',
-                color: 'var(--ink)',
-                padding: '0.45rem 1.15rem',
-                fontSize: '0.72rem',
-                marginBottom: '0.75rem'
-              }}>
-                <Loader2 size={13} className="zine-bounce" color="var(--ink)" />
-                QUEUE {Math.floor(queueTime / 60)}:{(queueTime % 60).toString().padStart(2, '0')}
+              <div className="ml-queue-badge">
+                <Loader2 size={13} className="zine-bounce" />
+                Queue {Math.floor(queueTime / 60)}:{(queueTime % 60).toString().padStart(2, '0')}
               </div>
 
-              <div className="font-mono" style={{ fontSize: '0.7rem', color: 'var(--ink-muted)', marginBottom: '1.75rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.35rem' }}>
-                <Sparkles size={12} color="var(--riso-coral)" /> Auto-assigning Cortex AI Challenger after 90s
-              </div>
+              <p className="ml-note">
+                <Sparkles size={12} /> A bot opponent will step in after 90 seconds.
+              </p>
 
-              <div>
-                <button onClick={onClose} className="zine-btn-sm zine-btn-sm--coral" style={{ padding: '0.55rem 1.3rem' }}>
-                  ABORT QUEUE
-                </button>
-              </div>
+              <button onClick={onClose} className="btn btn--secondary ml-abort">
+                Cancel queue
+              </button>
             </motion.div>
           )}
 
           {/* WAITING FOR FRIEND ACCEPTANCE STATE */}
           {status === 'WAITING_FRIEND' && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ position: 'relative' }}>
-              <div style={{ position: 'relative', width: '96px', height: '96px', margin: '1.5rem auto 1.5rem' }}>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="ml-state">
+              <div className="ml-orbit">
                 <motion.div
                   animate={{ rotate: 360 }}
-                  transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    border: '3px dashed var(--riso-teal)',
-                  }}
+                  transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+                  className="ml-orbit-ring ml-orbit-ring--teal"
                 />
-                <div style={{
-                  position: 'absolute',
-                  inset: '8px',
-                  background: 'var(--riso-teal)',
-                  border: '1px solid rgba(255, 255, 255, 0.18)',
-                  boxShadow: '0 12px 30px -18px rgba(0, 0, 0, 0.9)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <User size={30} color="#fffdf6" />
-                </div>
+                <div className="ml-orbit-core ml-orbit-core--teal"><User size={28} /></div>
               </div>
 
-              <h2 className="zine-display misreg" data-text="INVITATION SENT" style={{ fontSize: 'clamp(1.25rem, 4.5vw, 1.7rem)', marginBottom: '0.5rem' }}>
-                INVITATION SENT
-              </h2>
-              <p className="zine-lede" style={{ fontSize: '0.85rem', marginBottom: '1.5rem' }}>
-                Awaiting connection from <strong style={{ color: 'var(--ink)' }}>{friendTarget?.username || 'Challenger'}</strong>...
+              <h2 className="ml-title">Invitation sent</h2>
+              <p className="ml-lede">
+                Waiting for <strong>{friendTarget?.username || 'your friend'}</strong> to accept…
               </p>
 
-              <div className="zine-badge" style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                background: 'var(--paper-sunk)',
-                padding: '0.45rem 1.15rem',
-                fontSize: '0.72rem',
-                marginBottom: '1.75rem'
-              }}>
-                <Loader2 size={13} className="zine-bounce" color="var(--riso-teal)" />
-                ELAPSED {Math.floor(queueTime / 60)}:{(queueTime % 60).toString().padStart(2, '0')}
+              <div className="ml-queue-badge ml-queue-badge--muted">
+                <Loader2 size={13} className="zine-bounce" />
+                Elapsed {Math.floor(queueTime / 60)}:{(queueTime % 60).toString().padStart(2, '0')}
               </div>
 
-              <div>
-                <button onClick={handleCancelInvitation} className="zine-btn-sm zine-btn-sm--coral" style={{ padding: '0.55rem 1.3rem' }}>
-                  CANCEL CHALLENGE
-                </button>
-              </div>
+              <button onClick={handleCancelInvitation} className="btn btn--secondary ml-abort">
+                Cancel invitation
+              </button>
             </motion.div>
           )}
 
           {/* TIMEOUT PROMPT */}
           {status === 'TIMEOUT_PROMPT' && (
-            <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} style={{ position: 'relative' }}>
-              <div style={{
-                width: '76px',
-                height: '76px',
-                background: 'var(--riso-yellow)',
-                border: '1px solid rgba(255, 255, 255, 0.18)',
-                boxShadow: '0 14px 36px -20px rgba(0, 0, 0, 0.9)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                margin: '1.5rem auto 1.25rem',
-                color: 'var(--ink)',
-                transform: 'rotate(4deg)'
-              }}>
-                <Bot size={34} />
-              </div>
+            <motion.div initial={{ scale: 0.97, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="ml-state">
+              <span className="ml-badge-icon ml-badge-icon--yellow"><Bot size={30} /></span>
 
-              <h2 className="zine-display misreg" data-text="QUEUE TIMEOUT" style={{ fontSize: 'clamp(1.25rem, 4.5vw, 1.6rem)', marginBottom: '0.5rem' }}>
-                QUEUE TIMEOUT
-              </h2>
-              <p className="zine-lede" style={{ fontSize: '0.85rem', lineHeight: 1.5, marginBottom: '1.5rem' }}>
-                No active human challenger found. Engage AI Neural Core or extend lobby search?
+              <h2 className="ml-title">No humans available</h2>
+              <p className="ml-lede">
+                No challenger joined in time. Play against Cortex AI or keep searching.
               </p>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                <button onClick={handleSimulatedMatch} className="btn-primary" style={{ width: '100%' }}>
-                  <Bot size={16} /> ENGAGE CORTEX AI (RANKED)
+              <div className="ml-actions">
+                <button onClick={handleSimulatedMatch} className="btn btn--primary ml-action-btn">
+                  <Bot size={15} /> Play vs Cortex AI
                 </button>
-
-                <button onClick={handleContinueWaiting} className="btn-secondary" style={{ width: '100%' }}>
-                  <RefreshCw size={14} /> EXTEND SEARCH
+                <button onClick={handleContinueWaiting} className="btn btn--secondary ml-action-btn">
+                  <RefreshCw size={14} /> Keep searching
                 </button>
-
-                <button
-                  onClick={onClose}
-                  className="zine-btn-sm"
-                  style={{ alignSelf: 'center' }}
-                >
-                  DISMISS
-                </button>
+                <button onClick={onClose} className="ml-text-btn">Dismiss</button>
               </div>
             </motion.div>
           )}
 
           {/* DECLINED STATE */}
           {status === 'DECLINED' && (
-            <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} style={{ position: 'relative' }}>
-              <div style={{
-                width: '72px',
-                height: '72px',
-                background: 'var(--riso-coral)',
-                border: '1px solid rgba(255, 255, 255, 0.18)',
-                boxShadow: '0 14px 36px -20px rgba(0, 0, 0, 0.9)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                margin: '1.5rem auto 1.25rem',
-                color: '#fffdf6',
-                transform: 'rotate(-4deg)'
-              }}>
-                <X size={30} />
-              </div>
+            <motion.div initial={{ scale: 0.97, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="ml-state">
+              <span className="ml-badge-icon ml-badge-icon--red"><X size={28} /></span>
 
-              <h2 className="zine-display misreg" data-text="INVITATION DECLINED" style={{ fontSize: 'clamp(1.25rem, 4.5vw, 1.6rem)', marginBottom: '0.5rem' }}>
-                INVITATION DECLINED
-              </h2>
-              <p className="zine-lede" style={{ fontSize: '0.85rem', marginBottom: '1.5rem' }}>
-                {friendTarget?.username || 'Opponent'} declined the match request.
+              <h2 className="ml-title">Invitation declined</h2>
+              <p className="ml-lede">
+                {friendTarget?.username || 'Your opponent'} declined the match request.
               </p>
 
-              <button onClick={onClose} className="btn-primary" style={{ padding: '0.65rem 1.5rem' }}>
-                RETURN
+              <button onClick={onClose} className="btn btn--primary ml-action-btn">
+                Return
               </button>
             </motion.div>
           )}
 
           {/* OPPONENT FOUND & COUNTDOWN STATE */}
           {(status === 'COUNTDOWN' || status === 'FOUND') && (
-            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} style={{ position: 'relative' }}>
-              <div style={{
-                width: '64px',
-                height: '64px',
-                background: 'var(--riso-teal)',
-                border: '1px solid rgba(255, 255, 255, 0.18)',
-                boxShadow: '0 14px 36px -20px rgba(0, 0, 0, 0.9)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                margin: '1.5rem auto 0.85rem',
-                color: '#fffdf6',
-                transform: 'rotate(-4deg)'
-              }}>
-                <CheckCircle size={30} />
-              </div>
+            <motion.div initial={{ scale: 0.96, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="ml-state">
+              <span className="ml-badge-icon ml-badge-icon--green"><CheckCircle size={28} /></span>
 
-              <h2 className="zine-display misreg" data-text="MATCH READY" style={{ fontSize: 'clamp(1.3rem, 4.5vw, 1.8rem)', marginBottom: '0.35rem' }}>
-                MATCH READY
-              </h2>
+              <h2 className="ml-title">Match ready</h2>
 
               {/* Player vs Player card */}
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr auto 1fr',
-                alignItems: 'center',
-                background: 'var(--paper-sunk)',
-                border: '1px solid rgba(255, 255, 255, 0.14)',
-                boxShadow: '0 12px 30px -18px rgba(0, 0, 0, 0.9)',
-                padding: '1.05rem 1.25rem',
-                margin: '1.25rem 0'
-              }}>
-                <div style={{ textAlign: 'left' }}>
-                  <div className="font-mono" style={{ fontSize: '0.6rem', fontWeight: 700, color: 'var(--ink-muted)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>
-                    {user && matchData?.player1Id === user.id ? 'YOU (P1)' : 'PLAYER 1'}
+              <div className="ml-versus">
+                <div className="ml-player">
+                  <div className="ml-player-tag">
+                    {user && matchData?.player1Id === user.id ? 'You' : 'Player 1'}
                   </div>
-                  <div className="zine-display" style={{ fontSize: '0.9rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  <div className="ml-player-name truncate">
                     {matchData?.player1Username || 'Player 1'}
                   </div>
-                  <div className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--riso-teal)', fontWeight: 700 }}>
-                    {matchData?.player1Rating || 500} Elo
-                  </div>
+                  <div className="ml-player-rating">{matchData?.player1Rating ?? 101} Rating</div>
                 </div>
 
-                <div className="zine-display" style={{ fontSize: '1rem', color: 'var(--riso-coral)', padding: '0 0.5rem' }}>
-                  VS
-                </div>
+                <div className="ml-vs">VS</div>
 
-                <div style={{ textAlign: 'right' }}>
-                  <div className="font-mono" style={{ fontSize: '0.6rem', fontWeight: 700, color: 'var(--ink-muted)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>
-                    {user && matchData?.player2Id === user.id ? 'YOU (P2)' : (matchData?.isBotMatch ? 'AI CORE' : 'PLAYER 2')}
+                <div className="ml-player ml-player--right">
+                  <div className="ml-player-tag">
+                    {user && matchData?.player2Id === user.id ? 'You' : (matchData?.isBotMatch ? 'AI' : 'Player 2')}
                   </div>
-                  <div className="zine-display" style={{ fontSize: '0.9rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  <div className="ml-player-name truncate">
                     {matchData?.isBotMatch ? 'CortexAI_Bot' : (matchData?.player2Username || 'Challenger')}
                   </div>
-                  <div className="font-mono" style={{ fontSize: '0.72rem', color: matchData?.isBotMatch ? 'var(--riso-violet)' : 'var(--ink)', fontWeight: 700 }}>
-                    {matchData?.isBotMatch ? `⚡ ${matchData?.player2Rating || 500} Elo` : `${matchData?.player2Rating || 500} Elo`}
-                  </div>
+                  <div className="ml-player-rating">{matchData?.player2Rating ?? 101} Rating</div>
                 </div>
               </div>
 
-              <div className="font-mono" style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--riso-teal)', textTransform: 'uppercase', letterSpacing: '0.18em', marginBottom: '0.25rem' }}>
-                Synchronizing In
-              </div>
+              <div className="ml-countdown-label">Starting in</div>
 
               <motion.div
                 key={countdown}
-                initial={{ scale: 1.4, opacity: 0 }}
+                initial={{ scale: 1.3, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.5, opacity: 0 }}
-                transition={{ duration: 0.25 }}
-                className="zine-num"
-                style={{
-                  color: countdown <= 1 ? 'var(--riso-teal)' : 'var(--riso-violet)',
-                  lineHeight: 1,
-                  margin: '0.4rem 0 0.85rem'
-                }}
+                exit={{ scale: 0.6, opacity: 0 }}
+                transition={{ duration: 0.22 }}
+                className="ml-countdown"
               >
                 {countdown > 0 ? countdown : 'GO'}
               </motion.div>
 
-              <p className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--ink-muted)' }}>
-                Initializing competitive stream...
-              </p>
+              <p className="ml-note">Preparing your questions…</p>
             </motion.div>
           )}
 
           {/* ERROR STATE */}
           {status === 'ERROR' && (
-            <div style={{ position: 'relative' }}>
-              <div style={{
-                width: '72px',
-                height: '72px',
-                background: 'var(--riso-coral)',
-                border: '1px solid rgba(255, 255, 255, 0.18)',
-                boxShadow: '0 14px 36px -20px rgba(0, 0, 0, 0.9)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                margin: '1.5rem auto 1.25rem',
-                color: '#fffdf6'
-              }}>
-                <ShieldAlert size={32} />
-              </div>
-              <h3 className="zine-display" style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>MATCHMAKING ERROR</h3>
-              <p className="zine-lede" style={{ fontSize: '0.85rem', marginBottom: '1.5rem' }}>{error}</p>
-              <button onClick={onClose} className="btn-primary" style={{ padding: '0.65rem 1.5rem' }}>
-                DISMISS
+            <div className="ml-state">
+              <span className="ml-badge-icon ml-badge-icon--red"><ShieldAlert size={28} /></span>
+              <h2 className="ml-title">Matchmaking error</h2>
+              <p className="ml-lede">{error}</p>
+              <button onClick={onClose} className="btn btn--primary ml-action-btn">
+                Dismiss
               </button>
             </div>
           )}
         </motion.div>
+
+        <style>{`
+          .ml-overlay { background: rgba(23, 32, 51, 0.34); backdrop-filter: blur(2px); }
+          .ml-card {
+            width: 100%;
+            max-width: 500px;
+            padding: 40px 32px 34px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+          }
+          .ml-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--surface);
+            color: var(--ink-muted);
+            cursor: pointer;
+          }
+          .ml-close:hover { background: var(--surface-2); color: var(--ink); }
+          .ml-state { position: relative; }
+          .ml-orbit { position: relative; width: 92px; height: 92px; margin: 10px auto 24px; }
+          .ml-orbit-ring {
+            position: absolute;
+            inset: 0;
+            border: 2px dashed rgba(79, 110, 247, 0.4);
+            border-radius: 50%;
+          }
+          .ml-orbit-ring--teal { border-color: rgba(13, 148, 136, 0.35); }
+          .ml-orbit-core {
+            position: absolute;
+            inset: 16px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 16px 36px -18px var(--accent-glow);
+          }
+          .ml-orbit-core--teal {
+            background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+            box-shadow: 0 16px 36px -18px rgba(13, 148, 136, 0.4);
+          }
+          .ml-title {
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            color: var(--ink);
+            margin-bottom: 8px;
+          }
+          .ml-lede {
+            font-size: 0.92rem;
+            color: var(--ink-muted);
+            line-height: 1.55;
+            max-width: 38ch;
+            margin: 0 auto 20px;
+          }
+          .ml-lede strong { color: var(--ink); font-weight: 600; }
+          .ml-queue-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 999px;
+            background: rgba(79, 110, 247, 0.09);
+            border: 1px solid rgba(79, 110, 247, 0.18);
+            color: var(--accent);
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+          }
+          .ml-queue-badge--muted {
+            background: var(--surface-2);
+            border-color: var(--border);
+            color: var(--ink-muted);
+          }
+          .ml-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 0.76rem;
+            color: var(--ink-faint);
+            margin-bottom: 22px;
+          }
+          .ml-abort { margin-top: 4px; }
+          .ml-badge-icon {
+            width: 68px;
+            height: 68px;
+            border-radius: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 6px auto 20px;
+          }
+          .ml-badge-icon--yellow { background: var(--warn-soft); color: var(--warn); border: 1px solid rgba(251, 191, 36, 0.3); }
+          .ml-badge-icon--red { background: var(--err-soft); color: var(--err); border: 1px solid rgba(251, 113, 133, 0.3); }
+          .ml-badge-icon--green { background: var(--ok-soft); color: var(--ok); border: 1px solid rgba(52, 211, 153, 0.3); }
+          .ml-actions { display: flex; flex-direction: column; gap: 10px; }
+          .ml-action-btn { width: 100%; }
+          .ml-text-btn {
+            border: none;
+            background: none;
+            color: var(--ink-muted);
+            font-size: 0.85rem;
+            cursor: pointer;
+            padding: 6px;
+          }
+          .ml-text-btn:hover { color: var(--ink); }
+          .ml-versus {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 12px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 18px 20px;
+            margin: 20px 0;
+          }
+          .ml-player { text-align: left; min-width: 0; }
+          .ml-player--right { text-align: right; }
+          .ml-player-tag {
+            font-family: var(--font-mono);
+            font-size: 0.62rem;
+            font-weight: 600;
+            color: var(--ink-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+          }
+          .ml-player-name {
+            font-size: 0.98rem;
+            font-weight: 650;
+            color: var(--ink);
+            margin-top: 3px;
+          }
+          .ml-player-rating { font-size: 0.74rem; color: var(--ink-muted); margin-top: 2px; }
+          .ml-vs { font-size: 0.8rem; font-weight: 700; color: var(--ink-faint); }
+          .ml-countdown-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--ink-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+          }
+          .ml-countdown {
+            font-family: var(--font-display);
+            font-size: 3.4rem;
+            font-weight: 750;
+            line-height: 1.15;
+            color: var(--accent);
+          }
+          @media (max-width: 480px) {
+            .ml-card { padding: 34px 22px 28px; }
+          }
+        `}</style>
       </div>
     </AnimatePresence>
   );

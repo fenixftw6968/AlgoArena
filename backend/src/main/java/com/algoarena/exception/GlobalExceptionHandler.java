@@ -126,7 +126,13 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleGlobalException(Exception ex, HttpServletRequest request) {
+    public ResponseEntity<ErrorResponse> handleGlobalException(Exception ex, HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response) {
+        // Some callers (SockJS transports, static/error dispatches) arrive with a non-JSON
+        // content type already negotiated. Force JSON so Jackson can actually serialize the
+        // error body instead of failing with HttpMessageNotWritableException.
+        if (!response.isCommitted()) {
+            response.setContentType(org.springframework.http.MediaType.APPLICATION_JSON_VALUE);
+        }
         ErrorResponse error = ErrorResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())

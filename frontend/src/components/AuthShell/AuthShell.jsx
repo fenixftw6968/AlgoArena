@@ -8,9 +8,7 @@ export function AuthError({ children }) {
 }
 
 /**
- * Minimal auth chrome: centered card, hairline footer.
- * Navbar is provided globally by App.jsx, so AuthShell focuses on a clean,
- * perfectly centered card with generous, modern proportions.
+ * Yellow + Black Dark Cinematic Auth Shell
  */
 export default function AuthShell({ kicker, title, lede, children, footer }) {
   return (
@@ -27,9 +25,11 @@ export default function AuthShell({ kicker, title, lede, children, footer }) {
       </main>
 
       <footer className="auth-foot">
-        <span>© {new Date().getFullYear()} AlgoArena</span>
+        <span>AlgoArena</span>
         <span className="auth-foot-dot">·</span>
-        <span>Competitive algorithms, puzzles & duels.</span>
+        <span>Dark cinematic algorithmic arena</span>
+        <span className="auth-foot-dot">·</span>
+        <span className="mono">© {new Date().getFullYear()}</span>
         {footer}
       </footer>
 
@@ -38,85 +38,91 @@ export default function AuthShell({ kicker, title, lede, children, footer }) {
           min-height: 100vh;
           display: flex;
           flex-direction: column;
-          background: transparent;
-          padding-top: 70px;
+          padding-top: 52px;
           box-sizing: border-box;
+          background: var(--bg);
         }
+
         .auth-main {
           flex: 1;
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 48px 24px 64px;
-          box-sizing: border-box;
+          padding: 40px 20px 48px;
         }
+
         .auth-card {
           width: 100%;
-          max-width: 580px;
-          background:
-            radial-gradient(ellipse 90% 60% at 50% -10%, rgba(91, 140, 255, 0.14), transparent 70%),
-            linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01)),
-            var(--surface);
-          border: 1px solid rgba(91, 140, 255, 0.24);
-          border-radius: 24px;
-          padding: clamp(44px, 5.5vh, 58px) clamp(36px, 4.5vw, 52px);
-          box-shadow: var(--shadow-lg), 0 0 90px -40px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.06);
-          box-sizing: border-box;
+          max-width: 420px;
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-lg);
+          padding: 32px 32px 36px;
+          box-shadow: var(--shadow-md);
         }
+
         .auth-card-head {
-          margin-bottom: 32px;
-        }
-        .auth-error-banner {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          background: var(--err-soft);
-          border: 1px solid rgba(251, 113, 133, 0.32);
-          color: var(--err);
-          padding: 14px 18px;
-          border-radius: 12px;
-          font-size: 0.98rem;
-          font-weight: 500;
           margin-bottom: 24px;
         }
+
         .auth-title {
-          font-size: clamp(2.3rem, 3.2vw, 2.85rem);
-          font-weight: 700;
-          letter-spacing: -0.035em;
+          font-size: 1.5rem;
+          font-weight: 650;
+          letter-spacing: -0.03em;
           color: var(--ink);
           margin: 0;
         }
+
         .auth-lede {
-          margin-top: 12px;
+          margin-top: 6px;
           color: var(--ink-muted);
-          font-size: 1.08rem;
-          line-height: 1.6;
+          font-size: 0.875rem;
+          line-height: 1.5;
         }
+
+        .auth-error-banner {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          background: var(--err-soft);
+          border: 1px solid var(--err-border);
+          color: var(--err);
+          padding: 10px 12px;
+          border-radius: var(--radius-sm);
+          font-size: 0.8125rem;
+          font-weight: 500;
+          margin-bottom: 20px;
+        }
+
         .auth-form {
           display: flex;
           flex-direction: column;
-          gap: 24px;
+          gap: 16px;
         }
+
         .field-icon {
           position: absolute;
-          left: 16px;
+          left: 12px;
           top: 50%;
           transform: translateY(-50%);
           color: var(--ink-faint);
           pointer-events: none;
         }
+
         .field-with-icon {
-          padding-left: 48px !important;
-          height: 54px;
-          font-size: 1.06rem;
-          border-radius: 12px;
+          padding-left: 36px !important;
+          height: 38px;
+          font-size: 0.875rem;
+          border-radius: var(--radius-sm);
         }
+
         .field-with-icon-r {
-          padding-right: 48px !important;
+          padding-right: 36px !important;
         }
+
         .field-action {
           position: absolute;
-          right: 14px;
+          right: 10px;
           top: 50%;
           transform: translateY(-50%);
           background: none;
@@ -126,55 +132,52 @@ export default function AuthShell({ kicker, title, lede, children, footer }) {
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 6px;
+          padding: 4px;
         }
+
         .field-action:hover {
-          color: var(--ink);
+          color: var(--accent);
         }
+
         .auth-switch {
-          margin-top: 28px;
+          margin-top: 20px;
           text-align: center;
-          font-size: 1.02rem;
+          font-size: 0.8125rem;
           color: var(--ink-muted);
         }
+
         .auth-switch a {
           color: var(--accent);
-          font-weight: 600;
-          text-decoration: none;
-        }
-        .auth-switch a:hover {
+          font-weight: 550;
           text-decoration: underline;
-          color: #8fb2ff;
+          text-underline-offset: 3px;
         }
+
         .auth-link-sm {
-          font-size: 0.92rem;
+          font-size: 0.75rem;
           color: var(--ink-muted);
           text-decoration: none;
         }
+
         .auth-link-sm:hover {
           color: var(--accent);
+          text-decoration: underline;
         }
+
         .auth-foot {
-          padding: 24px 24px 32px;
+          padding: 20px 24px;
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 14px;
-          flex-wrap: wrap;
+          gap: 10px;
+          font-size: 0.75rem;
           color: var(--ink-faint);
-          font-size: 0.82rem;
+          border-top: 1px solid var(--border);
+          background: var(--surface);
         }
+
         .auth-foot-dot {
-          color: var(--ink-faint);
-        }
-        @media (max-width: 520px) {
-          .auth-card {
-            padding: 28px 22px;
-            border-radius: 16px;
-          }
-          .auth-title {
-            font-size: 1.65rem;
-          }
+          color: var(--border);
         }
       `}</style>
     </div>

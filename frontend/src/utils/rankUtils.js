@@ -1,13 +1,13 @@
 // Rank definition and utilities in Dark Theme
 export const COMPETITIVE_RANKS = [
-  { name: "Rookie",   minRating: 0,    maxRating: 199,  badge: "🌱", color: "#94A3B8", bg: "rgba(148, 163, 184, 0.12)", border: "rgba(148, 163, 184, 0.25)", desc: "Starting tier" },
-  { name: "Scout",    minRating: 200,  maxRating: 399,  badge: "🧭", color: "#38BDF8", bg: "rgba(56, 189, 248, 0.12)", border: "rgba(56, 189, 248, 0.25)", desc: "Sharpening reflexes" },
-  { name: "Knight",   minRating: 400,  maxRating: 599,  badge: "🛡️", color: "#60A5FA", bg: "rgba(96, 165, 250, 0.12)", border: "rgba(96, 165, 250, 0.25)", desc: "" },
-  { name: "Guardian", minRating: 600,  maxRating: 799,  badge: "⚔️", color: "#C084FC", bg: "rgba(192, 132, 252, 0.12)", border: "rgba(192, 132, 252, 0.25)", desc: "Proven defender" },
-  { name: "Champion", minRating: 800,  maxRating: 1049, badge: "🌟", color: "#FBBF24", bg: "rgba(251, 191, 36, 0.12)", border: "rgba(251, 191, 36, 0.25)", desc: "Grand competitor" },
-  { name: "Elite",    minRating: 1050, maxRating: 1349, badge: "⚡", color: "#FB7185", bg: "rgba(251, 113, 133, 0.12)", border: "rgba(251, 113, 133, 0.25)", desc: "Master of speed" },
-  { name: "Legend",   minRating: 1350, maxRating: 1699, badge: "🔮", color: "#E879F9", bg: "rgba(232, 121, 249, 0.12)", border: "rgba(232, 121, 249, 0.25)", desc: "Grandmaster mind" },
-  { name: "Mythic",   minRating: 1700, maxRating: 9999, badge: "👑", color: "#4ADE80", bg: "rgba(74, 222, 128, 0.12)", border: "rgba(74, 222, 128, 0.25)", desc: "Peak intellect" },
+  { name: "Iron",        minRating: 0,    maxRating: 100,  badge: "⚙️", color: "#94A3B8", bg: "rgba(148, 163, 184, 0.12)", border: "rgba(148, 163, 184, 0.25)", desc: "Foundational tier" },
+  { name: "Bronze",      minRating: 101,  maxRating: 200,  badge: "🥉", color: "#CD7F32", bg: "rgba(205, 127, 50, 0.12)",  border: "rgba(205, 127, 50, 0.25)",  desc: "Starting competitive baseline" },
+  { name: "Silver",      minRating: 201,  maxRating: 300,  badge: "🥈", color: "#E2E8F0", bg: "rgba(226, 232, 240, 0.12)", border: "rgba(226, 232, 240, 0.25)", desc: "Rising competitor" },
+  { name: "Gold",        minRating: 301,  maxRating: 400,  badge: "🥇", color: "#FBBF24", bg: "rgba(251, 191, 36, 0.12)",  border: "rgba(251, 191, 36, 0.25)",  desc: "Proven problem solver" },
+  { name: "Platinum",    minRating: 401,  maxRating: 500,  badge: "💎", color: "#38BDF8", bg: "rgba(56, 189, 248, 0.12)",  border: "rgba(56, 189, 248, 0.25)",  desc: "Advanced logic mastery" },
+  { name: "Diamond",     minRating: 501,  maxRating: 600,  badge: "💠", color: "#818CF8", bg: "rgba(129, 140, 248, 0.12)", border: "rgba(129, 140, 248, 0.25)", desc: "Elite algorithmic tactician" },
+  { name: "Master",      minRating: 601,  maxRating: 700,  badge: "⚡", color: "#C084FC", bg: "rgba(192, 132, 252, 0.12)", border: "rgba(192, 132, 252, 0.25)", desc: "Master of optimization" },
+  { name: "Grandmaster", minRating: 701,  maxRating: 9999, badge: "👑", color: "#C5F467", bg: "rgba(197, 244, 103, 0.12)", border: "rgba(197, 244, 103, 0.32)", desc: "Apex algorithm engineer" },
 ];
 
 export const getRankFromRating = (rating) => {

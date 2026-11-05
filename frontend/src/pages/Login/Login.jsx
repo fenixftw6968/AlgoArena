@@ -28,7 +28,7 @@ export default function Login() {
   return (
     <AuthShell
       title="Log in"
-      lede="Welcome back. Pick up where you left off."
+      lede="Enter your credentials to continue to AlgoArena."
     >
       <AuthError>
         {error && (
@@ -43,7 +43,7 @@ export default function Login() {
         <div>
           <label className="zine-label" htmlFor="login-email">Email</label>
           <div style={fieldStyle}>
-            <Mail size={18} className="field-icon" />
+            <Mail size={16} className="field-icon" />
             <input
               id="login-email"
               type="email"
@@ -52,6 +52,7 @@ export default function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="zine-field field-with-icon"
+              placeholder="you@domain.com"
             />
           </div>
         </div>
@@ -62,7 +63,7 @@ export default function Login() {
             <Link to="/forgot-password" className="auth-link-sm">Forgot password?</Link>
           </div>
           <div style={fieldStyle}>
-            <Lock size={18} className="field-icon" />
+            <Lock size={16} className="field-icon" />
             <input
               id="login-pass"
               type={showPass ? 'text' : 'password'}
@@ -71,6 +72,7 @@ export default function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="zine-field field-with-icon field-with-icon-r"
+              placeholder="••••••••"
             />
             <button
               type="button"
@@ -78,7 +80,7 @@ export default function Login() {
               aria-label={showPass ? 'Hide password' : 'Show password'}
               className="field-action"
             >
-              {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
+              {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
             </button>
           </div>
         </div>
@@ -87,14 +89,14 @@ export default function Login() {
           type="submit"
           disabled={loading}
           className="btn btn--primary"
-          style={{ width: '100%', height: 54, fontSize: '1.08rem', marginTop: 8 }}
+          style={{ width: '100%', height: 38, marginTop: 4 }}
         >
-          {loading ? 'Signing in…' : 'Log in'}
+          {loading ? 'Authenticating…' : 'Sign in'}
         </button>
       </form>
 
       <p className="auth-switch">
-        No account yet? <Link to="/signup">Create one</Link>
+        Don't have an account? <Link to="/signup">Create one</Link>
       </p>
     </AuthShell>
   );

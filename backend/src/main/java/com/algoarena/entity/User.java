@@ -84,9 +84,9 @@ public class User {
     private Integer noHintGames = 0;
 
     // ── Competitive Multiplayer ───────────────────────────────
-    @Column(nullable = false, columnDefinition = "integer default 500")
+    @Column(nullable = false, columnDefinition = "integer default 101")
     @Builder.Default
-    private Integer competitiveRating = 500;
+    private Integer competitiveRating = 101;
 
     @Column(nullable = false, columnDefinition = "integer default 0")
     @Builder.Default

@@ -28,40 +28,60 @@ export default function DailyCountdown({
 
   if (compact) {
     return (
-      <span className="zine-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', background: 'var(--riso-coral)', color: '#fffdf6', padding: '0.35rem 0.75rem' }}>
-        <Flame size={12} /> RESET {countdown.formatted}
+      <span className="badge badge--danger" style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+        <Flame size={11} /> Resets {countdown.formatted}
       </span>
     );
   }
 
   return (
-    <div className="zine-card" style={{ display: 'flex', alignItems: 'center', gap: '0.9rem', padding: '1rem 1.25rem', boxShadow: '4px 4px 0 var(--riso-coral)' }}>
-      <div style={{
-        width: '44px',
-        height: '44px',
-        background: 'var(--riso-coral)',
-        border: '1px solid rgba(255, 255, 255, 0.14)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: '#fffdf6',
-        flexShrink: 0,
-        boxShadow: '0 12px 30px -18px rgba(0, 0, 0, 0.9)',
-        transform: 'rotate(-3deg)'
-      }}>
-        <Clock size={19} />
+    <div className="card dc-count-card">
+      <div className="dc-count-icon">
+        <Clock size={18} />
       </div>
 
       <div>
         {showLabel && (
-          <div className="font-mono" style={{ fontSize: '0.6rem', color: 'var(--ink-muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em' }}>
-            Daily Arena Refresh (12:00 AM IST)
-          </div>
+          <div className="dc-count-label">Daily arena refresh · 12:00 AM IST</div>
         )}
-        <div className="font-mono" style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--ink)', letterSpacing: '0.04em' }}>
-          {countdown.formatted}
-        </div>
+        <div className="dc-count-value num">{countdown.formatted}</div>
       </div>
+
+      <style>{`
+        .dc-count-card {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          padding: 14px 18px;
+          border-radius: 14px;
+        }
+        .dc-count-icon {
+          width: 42px;
+          height: 42px;
+          border-radius: 11px;
+          background: var(--err-soft);
+          border: 1px solid rgba(251, 113, 133, 0.24);
+          color: var(--err);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+        .dc-count-label {
+          font-size: 0.68rem;
+          color: var(--ink-muted);
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+        }
+        .dc-count-value {
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: var(--ink);
+          letter-spacing: 0.02em;
+          margin-top: 2px;
+        }
+      `}</style>
     </div>
   );
 }

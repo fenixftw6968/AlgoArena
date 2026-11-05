@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Star, Clock, Flame } from 'lucide-react';
-import { getDailyCountdown, subscribeToMidnightIST } from '../../services/dailyQuestionService';
+import { ArrowLeft, Clock } from 'lucide-react';
+import { subscribeToMidnightIST } from '../../services/dailyQuestionService';
 
 const DIFF_STYLES = {
-  EASY:   { ink: 'var(--riso-teal)',   label: 'EASY' },
-  MEDIUM: { ink: 'var(--riso-violet)', label: 'MEDIUM' },
-  HARD:   { ink: 'var(--riso-coral)',  label: 'HARD' }
+  EASY:   { tone: 'var(--ok)',   label: 'Easy' },
+  MEDIUM: { tone: 'var(--ink-soft)', label: 'Medium' },
+  HARD:   { tone: 'var(--err)',  label: 'Hard' },
 };
 
 export default function GameProgress({
@@ -18,95 +18,117 @@ export default function GameProgress({
   formattedTime = null,
   urgency = 'normal',
   scoreLabel = 'Score',
-  showDailyCountdown = true,
   onMidnightRollover = null
 }) {
   const normDiff = (difficulty || 'MEDIUM').toUpperCase();
   const ds = DIFF_STYLES[normDiff] || DIFF_STYLES.MEDIUM;
   const progressPercent = Math.min(100, Math.max(0, (current / (total || 1)) * 100));
 
-  const [dailyCountdown, setDailyCountdown] = useState(() => getDailyCountdown().formatted);
-
   useEffect(() => {
-    if (!showDailyCountdown) return;
-
-    const timer = setInterval(() => {
-      setDailyCountdown(getDailyCountdown().formatted);
-    }, 1000);
-
     const unsubscribe = subscribeToMidnightIST((newDate, oldDate) => {
       if (typeof onMidnightRollover === 'function') {
         onMidnightRollover(newDate, oldDate);
       }
     });
 
-    return () => {
-      clearInterval(timer);
-      unsubscribe();
-    };
-  }, [showDailyCountdown, onMidnightRollover]);
+    return unsubscribe;
+  }, [onMidnightRollover]);
 
-  const timerInk =
-    urgency === 'critical' ? 'var(--riso-coral)' :
-    urgency === 'warning'  ? 'var(--riso-yellow)' : 'var(--ink)';
+  const timerTone =
+    urgency === 'critical' ? 'var(--err)' :
+    urgency === 'warning'  ? 'var(--warn)' : 'var(--ink)';
 
   return (
-    <div style={{ marginBottom: '1.75rem' }}>
+    <div className="gp-root">
       {/* Top action bar */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.6rem' }}>
+      <div className="gp-bar">
         {onExit && (
-          <button onClick={onExit} className="zine-btn-sm">
-            <ArrowLeft size={13} /> EXIT ARENA
+          <button onClick={onExit} className="btn btn--secondary btn--sm gp-exit">
+            <ArrowLeft size={13} /> Exit
           </button>
         )}
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginLeft: 'auto', flexWrap: 'wrap' }}>
-          {showDailyCountdown && dailyCountdown && (
-            <span
-              className="zine-badge"
-              style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', background: 'var(--riso-coral)', color: '#fffdf6' }}
-              title="Questions refresh every night at 12:00 AM Indian Standard Time (Asia/Kolkata)"
-            >
-              <Flame size={11} /> RESET {dailyCountdown}
-            </span>
-          )}
-
-          <span className="zine-badge" style={{ background: 'var(--paper-sunk)' }}>
-            SEQ <strong style={{ fontWeight: 800 }}>{current}</strong> / {total}
+        <div className="gp-badges">
+          <span className="gp-badge mono">
+            Q{current}/{total}
           </span>
 
-          <span className="zine-badge" style={{ background: ds.ink, color: ds.ink === 'var(--riso-yellow)' ? 'var(--ink)' : '#fffdf6' }}>
+          <span className="gp-badge" style={{ color: ds.tone }}>
             {ds.label || normDiff}
           </span>
 
-          <span className="zine-badge" style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', background: 'var(--riso-yellow)' }}>
-            <Star size={11} /> {scoreLabel.toUpperCase()}: {score}
+          <span className="gp-badge mono">
+            {scoreLabel}: {score}
           </span>
 
           {formattedTime && (
-            <span
-              className="zine-badge"
-              style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', background: timerInk, color: timerInk === 'var(--riso-yellow)' ? 'var(--ink)' : '#fffdf6', fontSize: '0.72rem' }}
-            >
+            <span className="gp-badge mono" style={{ color: timerTone }}>
               <Clock size={11} /> {formattedTime}
             </span>
           )}
         </div>
       </div>
 
-      {/* Progress Track — segmented riso meter */}
-      <div style={{ display: 'flex', gap: '3px', width: '100%', height: '16px', background: 'var(--paper-sunk)', border: '1px solid rgba(255, 255, 255, 0.14)' }}>
+      {/* Progress track */}
+      <div className="gp-track" role="progressbar" aria-valuenow={Math.round(progressPercent)} aria-valuemin={0} aria-valuemax={100}>
         <motion.div
-          style={{
-            height: '100%',
-            background: 'repeating-linear-gradient(45deg, var(--riso-violet) 0 7px, var(--riso-violet-2) 7px 14px)',
-            borderRight: progressPercent > 0 ? '1px solid rgba(255, 255, 255, 0.14)' : 'none'
-          }}
+          className="gp-fill"
           initial={{ width: 0 }}
           animate={{ width: `${progressPercent}%` }}
-          transition={{ duration: 0.3, ease: 'easeOut' }}
+          transition={{ duration: 0.25, ease: 'easeOut' }}
         />
       </div>
+
+      <style>{`
+        .gp-root {
+          margin-bottom: 20px;
+        }
+
+        .gp-bar {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          flex-wrap: wrap;
+          margin-bottom: 10px;
+        }
+
+        .gp-badges {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          margin-left: auto;
+          flex-wrap: wrap;
+        }
+
+        .gp-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          height: 28px;
+          padding: 0 8px;
+          border: 1px solid var(--border);
+          border-radius: var(--radius-xs);
+          background: var(--surface-elevated);
+          font-size: 0.75rem;
+          color: var(--ink-soft);
+          font-weight: 500;
+        }
+
+        .gp-track {
+          width: 100%;
+          height: 3px;
+          background: var(--surface-3);
+          border-radius: 999px;
+          overflow: hidden;
+        }
+
+        .gp-fill {
+          height: 100%;
+          background: var(--accent);
+          border-radius: 999px;
+        }
+      `}</style>
     </div>
   );
 }

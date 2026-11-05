@@ -38,3 +38,6 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+dev-dist/
+**/dev-dist/

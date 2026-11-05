@@ -2,39 +2,36 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Clock, Zap } from 'lucide-react';
 
-const INKS = { EASY: 'var(--riso-teal)', MEDIUM: 'var(--riso-violet)', HARD: 'var(--riso-coral)' };
+const TONES = { EASY: 'var(--ok)', MEDIUM: 'var(--ink)', HARD: 'var(--err)' };
+const TONE_SOFT = { EASY: 'var(--ok-soft)', MEDIUM: 'var(--surface-subtle)', HARD: 'var(--err-soft)' };
 
 const DEFAULT_DIFFICULTIES = [
   {
     id: 'EASY',
-    label: 'EASY',
-    icon: '🌱',
+    label: 'Easy Tier',
     xp: '+10 XP',
-    time: 'Standard',
-    desc: ''
+    time: '90s clock',
+    desc: 'Foundational algorithmic intuition and gentle constraints.'
   },
   {
     id: 'MEDIUM',
-    label: 'MEDIUM',
-    icon: '⚡',
+    label: 'Medium Tier',
     xp: '+25 XP',
-    time: 'Moderate',
-    desc: ''
+    time: '60s clock',
+    desc: 'Standard competitive difficulty with balanced deduction steps.'
   },
   {
     id: 'HARD',
-    label: 'HARD',
-    icon: '🔥',
+    label: 'Hard Tier',
     xp: '+50 XP',
-    time: 'Fast Pace',
-    desc: ''
+    time: '45s clock',
+    desc: 'Complex edge cases, strict timers, and intricate logical depth.'
   }
 ];
 
 export default function DifficultySelector({
-  title = "Select Protocol Tier",
-  subtitle = "Choose your operational complexity to initialize the challenge.",
-  icon = "🎮",
+  title = "Select Difficulty",
+  subtitle = "Choose an evaluation tier to calibrate problem constraints and timers.",
   onSelectDifficulty,
   onBack,
   customTiers = null,
@@ -43,120 +40,169 @@ export default function DifficultySelector({
   const tiers = customTiers || DEFAULT_DIFFICULTIES;
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--paper)', paddingTop: '7.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--ink)', position: 'relative', overflow: 'hidden' }}>
-      <div className="paper-grain" />
-      <div className="halftone-teal halftone-fade-b" style={{ position: 'absolute', inset: 0, opacity: 0.22 }} />
-      <div className="tape" style={{ top: 118, right: '9%', transform: 'rotate(6deg)', background: 'rgba(0, 151, 140, 0.55)' }} />
-
-      <div style={{ maxWidth: '600px', width: '100%', padding: '2rem 1.5rem 4rem', position: 'relative', zIndex: 10 }}>
+    <div className="ds-page">
+      <div className="ds-wrap">
         {onBack && (
-          <button onClick={onBack} className="zine-btn-sm" style={{ marginBottom: '2rem' }}>
-            <ArrowLeft size={13} /> BACK TO ARENA
+          <button onClick={onBack} className="btn btn--secondary btn--sm ds-back">
+            <ArrowLeft size={13} /> Back to arenas
           </button>
         )}
 
-        <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }}>
-          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-            <div style={{
-              width: '76px', height: '76px', margin: '0 auto 1rem',
-              background: 'var(--riso-yellow)',
-              border: '1px solid rgba(255, 255, 255, 0.18)',
-              boxShadow: '0 18px 44px -24px rgba(0, 0, 0, 0.9)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: '2.2rem',
-              transform: 'rotate(-4deg)'
-            }}>
-              {icon}
-            </div>
-            <span className="zine-kicker" style={{ display: 'block', marginBottom: '0.5rem' }}>Choose Your Tier</span>
-            <h1 className="zine-display misreg" data-text={title} style={{ fontSize: 'clamp(1.6rem, 5.5vw, 2.4rem)', marginBottom: '0.5rem' }}>
-              {title}
-            </h1>
-            <p className="zine-lede" style={{ fontSize: '0.875rem', maxWidth: '420px', margin: '0 auto' }}>{subtitle}</p>
+        <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.18 }}>
+          <div className="ds-head">
+            <span className="zine-kicker">Calibration</span>
+            <h1 className="ds-title">{title}</h1>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-            {tiers.map((tier, idx) => {
-              const ink = tier.ink || INKS[String(tier.id).toUpperCase()] || 'var(--riso-violet)';
-              const isCurrentLoading = loadingTier && String(loadingTier).toUpperCase() === String(tier.id).toUpperCase();
+          <div className="ds-list">
+            {tiers.map((tier) => {
+              const key = String(tier.id).toUpperCase();
+              const isCurrentLoading = loadingTier && String(loadingTier).toUpperCase() === key;
               const isAnyLoading = !!loadingTier;
 
               return (
-                <motion.button
+                <button
                   key={tier.id}
-                  whileHover={!isAnyLoading ? { x: -3, y: -3 } : {}}
-                  whileTap={!isAnyLoading ? { scale: 0.99 } : {}}
                   disabled={isAnyLoading}
                   onClick={() => !isAnyLoading && onSelectDifficulty(tier.id)}
-                  className="zine-card"
+                  className="ds-tier"
                   style={{
-                    width: '100%',
-                    padding: '1.15rem 1.25rem',
                     cursor: isAnyLoading ? (isCurrentLoading ? 'wait' : 'not-allowed') : 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '1.1rem',
-                    textAlign: 'left',
-                    background: isCurrentLoading ? 'var(--riso-yellow)' : 'var(--paper-card)',
-                    boxShadow: isCurrentLoading ? `6px 6px 0 ${ink}` : '0 14px 36px -20px rgba(0, 0, 0, 0.9)',
-                    opacity: isAnyLoading && !isCurrentLoading ? 0.45 : 1
+                    opacity: isAnyLoading && !isCurrentLoading ? 0.45 : 1,
                   }}
                 >
-                  <div style={{
-                    width: '52px',
-                    height: '52px',
-                    background: ink,
-                    border: '1px solid rgba(255, 255, 255, 0.14)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                    fontSize: '1.4rem',
-                    transform: `rotate(${(idx % 2 ? 1 : -1) * 3}deg)`
-                  }}>
-                    {isCurrentLoading ? <span className="zine-spinner" style={{ width: '22px', height: '22px', borderWidth: '3px' }} /> : tier.icon}
+                  <div className="ds-tier-main">
+                    <div className="ds-tier-title">
+                      <span>{tier.label || tier.id}</span>
+                      {isCurrentLoading && <span className="zine-spinner" style={{ width: 14, height: 14 }} />}
+                    </div>
                   </div>
 
-                  <div style={{ flex: 1 }}>
-                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.6rem', flexWrap: 'wrap' }}>
-                      <span className="zine-display" style={{ fontSize: '1.15rem' }}>{tier.label || tier.id}</span>
-                      {isCurrentLoading && (
-                        <span className="font-mono" style={{ fontSize: '0.64rem', color: 'var(--riso-coral)', fontWeight: 800, letterSpacing: '0.12em' }}>
-                          INITIALIZING...
-                        </span>
-                      )}
-                    </div>
-                    {isCurrentLoading ? (
-                      <div style={{ fontSize: '0.8rem', color: 'var(--ink-muted)', marginTop: '0.25rem', lineHeight: 1.4 }}>
-                        Synthesizing a verified, non-repeating problem stream...
-                      </div>
-                    ) : (
-                      tier.desc ? (
-                        <div style={{ fontSize: '0.8rem', color: 'var(--ink-muted)', marginTop: '0.25rem', lineHeight: 1.4 }}>
-                          {tier.desc}
-                        </div>
-                      ) : null
-                    )}
-                  </div>
-
-                  <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', justifyContent: 'flex-end', color: 'var(--ink)' }}>
-                      <Zap size={13} fill="var(--riso-coral)" color="var(--riso-coral)" />
-                      <span className="font-mono" style={{ fontSize: '0.8rem', fontWeight: 800 }}>{tier.xp}</span>
-                    </div>
+                  <div className="ds-tier-meta">
+                    <div className="ds-xp mono">{tier.xp}</div>
                     {tier.time && (
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', justifyContent: 'flex-end', color: 'var(--ink-faint)', marginTop: '0.25rem' }}>
+                      <div className="ds-time mono">
                         <Clock size={11} />
-                        <span className="font-mono" style={{ fontSize: '0.66rem', letterSpacing: '0.1em', textTransform: 'uppercase' }}>{tier.time}</span>
+                        <span>{tier.time}</span>
                       </div>
                     )}
                   </div>
-                </motion.button>
+                </button>
               );
             })}
           </div>
         </motion.div>
       </div>
+
+      <style>{`
+        .ds-page {
+          min-height: 100vh;
+          background: transparent;
+          padding: 88px 20px 60px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .ds-wrap {
+          width: 100%;
+          max-width: 520px;
+        }
+
+        .ds-back {
+          margin-bottom: 24px;
+        }
+
+        .ds-head {
+          margin-bottom: 24px;
+        }
+
+        .ds-title {
+          font-size: 1.5rem;
+          font-weight: 650;
+          letter-spacing: -0.03em;
+          margin-top: 4px;
+          color: var(--ink);
+        }
+
+        .ds-lede {
+          margin-top: 6px;
+          font-size: 0.84375rem;
+          color: var(--ink-muted);
+          line-height: 1.5;
+        }
+
+        .ds-list {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .ds-tier {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+          padding: 16px 18px;
+          text-align: left;
+          border-radius: var(--radius-sm);
+          background: var(--surface-elevated);
+          border: 1px solid var(--border);
+          transition: border-color 0.12s ease, background 0.12s ease;
+        }
+
+        .ds-tier:hover:not(:disabled) {
+          border-color: var(--accent);
+          background: #252525;
+        }
+
+        .ds-tier:hover:not(:disabled) .ds-xp {
+          color: var(--accent);
+        }
+
+        .ds-tier-main {
+          flex: 1;
+          min-width: 0;
+        }
+
+        .ds-tier-title {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 0.9375rem;
+          font-weight: 600;
+          color: var(--ink);
+        }
+
+        .ds-tier-desc {
+          margin-top: 3px;
+          font-size: 0.78125rem;
+          color: var(--ink-muted);
+          line-height: 1.45;
+        }
+
+        .ds-tier-meta {
+          text-align: right;
+          flex-shrink: 0;
+        }
+
+        .ds-xp {
+          font-size: 0.8125rem;
+          font-weight: 600;
+          color: var(--ink);
+        }
+
+        .ds-time {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          justify-content: flex-end;
+          color: var(--ink-faint);
+          margin-top: 2px;
+          font-size: 0.6875rem;
+        }
+      `}</style>
     </div>
   );
 }

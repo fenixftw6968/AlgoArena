@@ -36,7 +36,6 @@ export default function SocialDrawer({ isOpen, onClose, onInviteFriendToGame }) 
     }
   }, [isOpen]);
 
-  // Load chat messages when selecting friend
   useEffect(() => {
     let interval = null;
     if (activeTab === 'CHAT' && selectedFriend) {
@@ -49,7 +48,7 @@ export default function SocialDrawer({ isOpen, onClose, onInviteFriendToGame }) 
         }
       };
       fetchChat();
-      interval = setInterval(fetchChat, 2000);
+      interval = setInterval(fetchChat, 2500);
     }
     return () => clearInterval(interval);
   }, [activeTab, selectedFriend]);
@@ -101,8 +100,7 @@ export default function SocialDrawer({ isOpen, onClose, onInviteFriendToGame }) 
   if (!isOpen) return null;
 
   const acceptedFriends = friends.filter(f => f.status === 'ACCEPTED');
-  const incomingRequests = friends.filter(f => f.status === 'PENDING_INCOMING');
-  const outgoingRequests = friends.filter(f => f.status === 'PENDING_OUTGOING');
+  const incomingRequests = friends.filter(f => f.status === 'PENDING' && f.isIncoming);
 
   const filteredFriends = acceptedFriends.filter(f =>
     f.username.toLowerCase().includes(searchTerm.toLowerCase())
@@ -110,348 +108,446 @@ export default function SocialDrawer({ isOpen, onClose, onInviteFriendToGame }) 
 
   return (
     <AnimatePresence>
-      <div style={{
-        position: 'fixed',
-        inset: 0,
-        zIndex: 9990,
-        backgroundColor: 'rgba(3, 5, 10, 0.7)',
-        display: 'flex',
-        justifyContent: 'flex-end',
-      }}>
+      <div className="sd-overlay" onClick={onClose}>
         <motion.div
           initial={{ x: '100%' }}
           animate={{ x: 0 }}
           exit={{ x: '100%' }}
-          transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-          style={{
-            width: '100%',
-            maxWidth: '440px',
-            height: '100%',
-            background: 'var(--paper-card)',
-            borderLeft: '1px solid rgba(255, 255, 255, 0.18)',
-            boxShadow: '-8px 0 0 var(--riso-violet)',
-            display: 'flex',
-            flexDirection: 'column'
-          }}
+          transition={{ type: 'spring', damping: 28, stiffness: 280 }}
+          className="sd-panel"
+          onClick={e => e.stopPropagation()}
         >
-          {/* Drawer Header */}
-          <div style={{
-            padding: '1.35rem 1.5rem',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.18)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            background: 'var(--riso-yellow)',
-            position: 'relative'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-              <div style={{ width: '34px', height: '34px', background: 'var(--riso-violet)', border: '1px solid rgba(255, 255, 255, 0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fffdf6' }}>
-                <Users size={16} />
-              </div>
-              <h2 className="zine-display" style={{ fontSize: '1.15rem', margin: 0 }}>
-                FRIENDS
-              </h2>
+          {/* Header */}
+          <div className="sd-head">
+            <div className="sd-title-wrap">
+              <h2 className="sd-title">Network</h2>
+              <span className="mono faint" style={{ fontSize: '0.75rem' }}>{acceptedFriends.length} contacts</span>
             </div>
-            <button onClick={onClose} className="zine-btn-sm" style={{ background: 'var(--paper-card)' }}>
+            <button onClick={onClose} aria-label="Close panel" className="sd-close-btn">
               <X size={14} />
             </button>
           </div>
 
-          {/* Navigation Tabs */}
-          <div style={{ display: 'flex', borderBottom: '1px solid rgba(255, 255, 255, 0.14)', background: 'var(--paper-deep)' }}>
+          {/* Segmented Tabs */}
+          <div className="sd-tabs">
             <button
-              onClick={() => { setActiveTab('FRIENDS'); setSelectedFriend(null); }}
-              className="zine-btn-sm"
-              style={{ flex: 1, border: 'none', borderRight: '1px solid rgba(255, 255, 255, 0.14)', background: activeTab === 'FRIENDS' ? 'var(--riso-violet)' : 'transparent', color: activeTab === 'FRIENDS' ? '#fffdf6' : 'var(--ink-muted)', boxShadow: 'none' }}
+              onClick={() => setActiveTab('FRIENDS')}
+              className={`sd-tab${activeTab === 'FRIENDS' ? ' is-active' : ''}`}
             >
-              FRIENDS ({acceptedFriends.length})
+              Friends ({acceptedFriends.length})
             </button>
-
             <button
-              onClick={() => { setActiveTab('REQUESTS'); setSelectedFriend(null); }}
-              className="zine-btn-sm"
-              style={{ flex: 1, border: 'none', borderRight: selectedFriend ? '1px solid rgba(255, 255, 255, 0.14)' : 'none', background: activeTab === 'REQUESTS' ? 'var(--riso-violet)' : 'transparent', color: activeTab === 'REQUESTS' ? '#fffdf6' : 'var(--ink-muted)', boxShadow: 'none' }}
+              onClick={() => setActiveTab('REQUESTS')}
+              className={`sd-tab${activeTab === 'REQUESTS' ? ' is-active' : ''}`}
             >
-              REQUESTS {incomingRequests.length > 0 && `(${incomingRequests.length})`}
+              Invites {incomingRequests.length > 0 && `(${incomingRequests.length})`}
             </button>
-
             {selectedFriend && (
               <button
                 onClick={() => setActiveTab('CHAT')}
-                className="zine-btn-sm"
-                style={{ flex: 1, border: 'none', background: activeTab === 'CHAT' ? 'var(--riso-violet)' : 'transparent', color: activeTab === 'CHAT' ? '#fffdf6' : 'var(--ink-muted)', boxShadow: 'none', overflow: 'hidden', whiteSpace: 'nowrap' }}
+                className={`sd-tab sd-tab--chat${activeTab === 'CHAT' ? ' is-active' : ''}`}
               >
-                CHAT: @{selectedFriend.username}
+                @{selectedFriend.username}
               </button>
             )}
           </div>
 
-          {/* TAB 1: FRIENDS LIST */}
-          {activeTab === 'FRIENDS' && (
-            <div style={{ flex: 1, overflowY: 'auto', padding: '1.25rem' }}>
-              {/* Search friend */}
-              <div style={{ position: 'relative', marginBottom: '1.25rem' }}>
-                <Search size={14} style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--ink-muted)', pointerEvents: 'none' }} />
-                <input
-                  type="text"
-                  placeholder="Search friends..."
-                  value={searchTerm}
-                  onChange={e => setSearchTerm(e.target.value)}
-                  className="zine-field"
-                  style={{ paddingLeft: '2.4rem', fontSize: '0.82rem' }}
-                />
-              </div>
-
-              {/* Friends list */}
-              {filteredFriends.length === 0 ? (
-                <div style={{ textAlign: 'center', padding: '3rem 1rem', color: 'var(--ink-muted)' }}>
-                  <Users size={32} style={{ margin: '0 auto 0.75rem', opacity: 0.4 }} />
-                  <p style={{ fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}>NO FRIENDS FOUND. SEND REQUESTS IN THE REQUESTS TAB.</p>
-                </div>
-              ) : (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-                  {filteredFriends.map(friend => {
-                    const rank = getRankFromRating(friend.competitiveRating || 500);
-                    return (
-                      <div
-                        key={friend.id}
-                        className="zine-card zine-card--flat"
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
-                          gap: '0.6rem',
-                          padding: '0.8rem 0.95rem',
-                          background: 'var(--paper-card)',
-                          boxShadow: '0 12px 30px -18px rgba(0, 0, 0, 0.9)',
-                          transition: 'transform 0.12s steps(3), box-shadow 0.12s steps(3)'
-                        }}
-                      >
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0 }}>
-                          <div style={{ position: 'relative', flexShrink: 0 }}>
-                            <div style={{
-                              width: '38px',
-                              height: '38px',
-                              background: 'var(--riso-yellow)',
-                              border: '1px solid rgba(255, 255, 255, 0.14)',
-                              boxShadow: '2px 2px 0 var(--ink)',
-                              color: 'var(--ink)',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              fontWeight: 800,
-                              fontFamily: 'var(--font-mono)',
-                              fontSize: '0.95rem'
-                            }}>
-                              {friend.username[0]?.toUpperCase()}
-                            </div>
-                            <div style={{
-                              position: 'absolute',
-                              bottom: '-3px',
-                              right: '-3px',
-                              width: '11px',
-                              height: '11px',
-                              background: friend.isOnline ? 'var(--riso-teal)' : 'var(--ink-faint)',
-                              border: '1px solid rgba(255, 255, 255, 0.14)'
-                            }} />
-                          </div>
-
-                          <div style={{ minWidth: 0 }}>
-                            <div className="zine-display" style={{ fontSize: '0.85rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                              @{friend.username}
-                            </div>
-                            <div className="font-mono" style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontSize: '0.66rem', color: 'var(--ink-muted)' }}>
-                              <span>{rank.badge} {rank.name}</span>
-                              <span>&bull;</span>
-                              <span>{friend.competitiveRating || 500} pts</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Action buttons */}
-                        <div style={{ display: 'flex', gap: '0.4rem', flexShrink: 0 }}>
-                          <button
-                            title="Direct Message"
-                            onClick={() => {
-                              setSelectedFriend(friend);
-                              setActiveTab('CHAT');
-                            }}
-                            className="zine-btn-sm"
-                            style={{ padding: '0.4rem' }}
-                          >
-                            <MessageSquare size={14} />
-                          </button>
-
-                          {onInviteFriendToGame && (
-                            <button
-                              title="Invite to Game"
-                              onClick={() => onInviteFriendToGame(friend)}
-                              className="zine-btn-sm zine-btn-sm--violet"
-                            >
-                              <Swords size={12} /> 1V1
-                            </button>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* TAB 2: REQUESTS & ADD FRIEND */}
-          {activeTab === 'REQUESTS' && (
-            <div style={{ flex: 1, overflowY: 'auto', padding: '1.25rem' }}>
-              {/* Add friend form */}
-              <form onSubmit={handleSendRequest} style={{ marginBottom: '1.75rem' }}>
-                <label className="zine-label">
-                  Send Friend Request
-                </label>
-                <div style={{ display: 'flex', gap: '0.5rem' }}>
+          {/* Drawer Body */}
+          <div className="sd-body">
+            {activeTab === 'FRIENDS' && (
+              <>
+                {/* Search */}
+                <div className="sd-search">
+                  <Search size={13} className="sd-search-icon" />
                   <input
                     type="text"
-                    placeholder="Enter username..."
-                    value={addUsername}
-                    onChange={e => setAddUsername(e.target.value)}
-                    className="zine-field"
-                    style={{ flex: 1, fontSize: '0.82rem' }}
+                    placeholder="Filter contacts…"
+                    value={searchTerm}
+                    onChange={e => setSearchTerm(e.target.value)}
+                    className="zine-field sd-search-input"
                   />
-                  <button
-                    type="submit"
-                    disabled={addStatus?.type === 'loading'}
-                    className="zine-btn-sm zine-btn-sm--violet"
-                    style={{ padding: '0.6rem 1.1rem' }}
-                  >
-                    {addStatus?.type === 'loading' ? 'SENDING...' : addStatus?.type === 'success' ? 'SENT' : 'SEND'}
-                  </button>
                 </div>
-                {addStatus && (
-                  <p style={{
-                    fontSize: '0.72rem',
-                    fontFamily: 'var(--font-mono)',
-                    marginTop: '0.5rem',
-                    fontWeight: 700,
-                    color: addStatus.type === 'error' ? 'var(--riso-coral)' : 'var(--riso-teal)'
-                  }}>
-                    {addStatus.msg}
-                  </p>
-                )}
-              </form>
 
-              {/* Incoming requests */}
-              <div style={{ marginBottom: '1.75rem' }}>
-                <h3 className="zine-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  Incoming Requests ({incomingRequests.length})
-                </h3>
-                {incomingRequests.length === 0 ? (
-                  <p style={{ fontSize: '0.75rem', color: 'var(--ink-faint)', fontFamily: 'var(--font-mono)' }}>No pending requests.</p>
+                {/* List */}
+                {loading ? (
+                  <div className="sd-empty">
+                    <span className="zine-spinner" />
+                  </div>
+                ) : filteredFriends.length === 0 ? (
+                  <div className="sd-empty">
+                    <p>No contacts found.</p>
+                  </div>
                 ) : (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                    {incomingRequests.map(req => (
-                      <div key={req.id} className="zine-card zine-card--flat" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem', padding: '0.7rem 0.9rem', background: 'var(--paper-card)', boxShadow: '0 12px 30px -18px rgba(0, 0, 0, 0.9)' }}>
-                        <div style={{ minWidth: 0 }}>
-                          <div className="zine-display" style={{ fontSize: '0.82rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>@{req.username}</div>
-                          <div className="font-mono" style={{ fontSize: '0.66rem', color: 'var(--ink-muted)' }}>RATING {req.competitiveRating || 500}</div>
+                  <div className="sd-list">
+                    {filteredFriends.map(f => {
+                      const rank = getRankFromRating(f.rating || 500);
+                      return (
+                        <div key={f.userId} className="sd-friend">
+                          <div className="sd-avatar">
+                            {f.username[0]?.toUpperCase()}
+                            <span className={`sd-presence ${f.online ? 'is-online' : ''}`} />
+                          </div>
+                          <div className="sd-friend-main">
+                            <div className="sd-friend-name">{f.username}</div>
+                            <div className="sd-friend-meta mono">{rank.name} · {f.rating ?? 101} Rating</div>
+                          </div>
+                          <div className="sd-friend-actions">
+                            <button
+                              onClick={() => onInviteFriendToGame && onInviteFriendToGame(f)}
+                              className="btn btn--primary btn--sm sd-invite-btn"
+                              title="Invite to 1v1 match"
+                            >
+                              <Swords size={12} />
+                            </button>
+                            <button
+                              onClick={() => {
+                                setSelectedFriend(f);
+                                setActiveTab('CHAT');
+                              }}
+                              className="btn btn--secondary btn--sm sd-invite-btn"
+                              title="Direct message"
+                            >
+                              <MessageSquare size={12} />
+                            </button>
+                          </div>
                         </div>
-                        <div style={{ display: 'flex', gap: '0.35rem', flexShrink: 0 }}>
-                          <button
-                            onClick={() => handleRespondRequest(req.id, true)}
-                            className="zine-btn-sm zine-btn-sm--teal"
-                            style={{ padding: '0.35rem 0.55rem' }}
-                          >
-                            <Check size={14} />
-                          </button>
-                          <button
-                            onClick={() => handleRespondRequest(req.id, false)}
-                            className="zine-btn-sm zine-btn-sm--coral"
-                            style={{ padding: '0.35rem 0.55rem' }}
-                          >
-                            <X size={14} />
-                          </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </>
+            )}
+
+            {activeTab === 'REQUESTS' && (
+              <div className="sd-requests">
+                {/* Add Friend Form */}
+                <form onSubmit={handleSendRequest} className="sd-add">
+                  <label className="zine-label">Add by handle</label>
+                  <div className="sd-add-row">
+                    <input
+                      type="text"
+                      placeholder="Username…"
+                      value={addUsername}
+                      onChange={e => setAddUsername(e.target.value)}
+                      className="zine-field sd-add-input"
+                    />
+                    <button type="submit" className="btn btn--primary btn--sm">
+                      Send
+                    </button>
+                  </div>
+                  {addStatus && (
+                    <div className={`sd-status sd-status--${addStatus.type}`}>
+                      {addStatus.msg}
+                    </div>
+                  )}
+                </form>
+
+                {/* Pending Incoming */}
+                <div className="sd-section">
+                  <div className="zine-kicker" style={{ marginBottom: 8 }}>Pending Invites</div>
+                  {incomingRequests.length === 0 ? (
+                    <div className="sd-muted">No pending invitations.</div>
+                  ) : (
+                    <div className="sd-list">
+                      {incomingRequests.map(r => (
+                        <div key={r.friendshipId} className="sd-request">
+                          <div className="sd-request-main">
+                            <span className="sd-friend-name">@{r.username}</span>
+                          </div>
+                          <div className="sd-friend-actions">
+                            <button
+                              onClick={() => handleRespondRequest(r.friendshipId, true)}
+                              className="sd-icon-btn sd-icon-btn--ok"
+                              title="Accept"
+                            >
+                              <Check size={13} />
+                            </button>
+                            <button
+                              onClick={() => handleRespondRequest(r.friendshipId, false)}
+                              className="sd-icon-btn sd-icon-btn--err"
+                              title="Decline"
+                            >
+                              <X size={13} />
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
+            )}
 
-              {/* Outgoing requests */}
-              <div>
-                <h3 className="zine-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  Outgoing Requests ({outgoingRequests.length})
-                </h3>
-                {outgoingRequests.length === 0 ? (
-                  <p style={{ fontSize: '0.75rem', color: 'var(--ink-faint)', fontFamily: 'var(--font-mono)' }}>No pending transmissions.</p>
-                ) : (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                    {outgoingRequests.map(req => (
-                      <div key={req.id} className="zine-card zine-card--flat" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.7rem 0.9rem', background: 'var(--paper-card)', boxShadow: '0 12px 30px -18px rgba(0, 0, 0, 0.9)' }}>
-                        <span className="zine-display" style={{ fontSize: '0.82rem' }}>@{req.username}</span>
-                        <span className="zine-badge" style={{ background: 'var(--riso-yellow)' }}>Pending</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
+            {activeTab === 'CHAT' && selectedFriend && (
+              <div className="sd-chat">
+                <div className="sd-chat-body">
+                  {chatMessages.length === 0 ? (
+                    <div className="sd-empty" style={{ margin: 'auto' }}>
+                      <p>Start a conversation with @{selectedFriend.username}</p>
+                    </div>
+                  ) : (
+                    chatMessages.map((m, i) => {
+                      const isMine = m.senderId !== selectedFriend.userId;
+                      return (
+                        <div key={m.id || i} className={`sd-msg ${isMine ? 'sd-msg--mine' : ''}`}>
+                          {m.content}
+                        </div>
+                      );
+                    })
+                  )}
+                  <div ref={chatBottomRef} />
+                </div>
+                <form onSubmit={handleSendMessage} className="sd-chat-form">
+                  <input
+                    type="text"
+                    placeholder={`Message @${selectedFriend.username}…`}
+                    value={chatInput}
+                    onChange={e => setChatInput(e.target.value)}
+                    className="zine-field sd-chat-input"
+                  />
+                  <button type="submit" className="btn btn--primary btn--sm sd-send-btn">
+                    <Send size={13} />
+                  </button>
+                </form>
               </div>
-            </div>
-          )}
-
-          {/* TAB 3: PRIVATE CHAT */}
-          {activeTab === 'CHAT' && selectedFriend && (
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
-              <div style={{ flex: 1, overflowY: 'auto', padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                {chatMessages.length === 0 ? (
-                  <div style={{ textAlign: 'center', padding: '3rem 1rem', color: 'var(--ink-muted)', fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}>
-                    Link initialized with @{selectedFriend.username}. Transmit your first message.
-                  </div>
-                ) : (
-                  chatMessages.map(msg => {
-                    const isMine = msg.senderId !== selectedFriend.userId;
-                    return (
-                      <div
-                        key={msg.id}
-                        style={{
-                          alignSelf: isMine ? 'flex-end' : 'flex-start',
-                          maxWidth: '80%',
-                          background: isMine ? 'var(--riso-violet)' : 'var(--paper-sunk)',
-                          color: isMine ? '#fffdf6' : 'var(--ink)',
-                          border: '1px solid rgba(255, 255, 255, 0.14)',
-                          boxShadow: isMine ? '3px 3px 0 var(--riso-coral)' : '0 12px 30px -18px rgba(0, 0, 0, 0.9)',
-                          padding: '0.6rem 0.9rem',
-                          fontSize: '0.825rem',
-                          lineHeight: 1.4
-                        }}
-                      >
-                        {msg.content}
-                      </div>
-                    );
-                  })
-                )}
-                <div ref={chatBottomRef} />
-              </div>
-
-              {/* Chat input form */}
-              <form onSubmit={handleSendMessage} style={{ padding: '0.85rem 1.25rem', borderTop: '1px solid rgba(255, 255, 255, 0.14)', display: 'flex', gap: '0.5rem', background: 'var(--paper-deep)' }}>
-                <input
-                  type="text"
-                  placeholder={`Message @${selectedFriend.username}...`}
-                  value={chatInput}
-                  onChange={e => setChatInput(e.target.value)}
-                  className="zine-field"
-                  style={{ flex: 1, fontSize: '0.825rem' }}
-                />
-                <button
-                  type="submit"
-                  className="zine-btn-sm zine-btn-sm--violet"
-                  style={{ padding: '0.6rem 0.9rem' }}
-                >
-                  <Send size={14} />
-                </button>
-              </form>
-            </div>
-          )}
+            )}
+          </div>
         </motion.div>
+
+        <style>{`
+          .sd-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: flex;
+            justify-content: flex-end;
+          }
+
+          .sd-panel {
+            width: 100%;
+            max-width: 380px;
+            height: 100%;
+            background: var(--surface);
+            border-left: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-lg);
+          }
+
+          .sd-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+          }
+
+          .sd-title {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--ink);
+          }
+
+          .sd-close-btn {
+            width: 26px;
+            height: 26px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xs);
+            background: var(--surface);
+            color: var(--ink-muted);
+            cursor: pointer;
+          }
+
+          .sd-close-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+          }
+
+          .sd-tabs {
+            display: flex;
+            background: var(--surface-subtle);
+            border-bottom: 1px solid var(--border);
+          }
+
+          .sd-tab {
+            flex: 1;
+            padding: 8px 10px;
+            border: none;
+            background: transparent;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--ink-muted);
+            cursor: pointer;
+            transition: color 0.12s ease;
+          }
+
+          .sd-tab.is-active {
+            color: var(--accent);
+            background: var(--surface);
+            font-weight: 600;
+            box-shadow: inset 0 -1px 0 var(--accent);
+          }
+
+          .sd-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+          }
+
+          .sd-search {
+            position: relative;
+            margin-bottom: 12px;
+          }
+
+          .sd-search-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--ink-faint);
+            pointer-events: none;
+          }
+
+          .sd-search-input {
+            padding-left: 30px !important;
+            height: 32px !important;
+            font-size: 0.8125rem !important;
+          }
+
+          .sd-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+          }
+
+          .sd-friend, .sd-request {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 10px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: var(--surface);
+          }
+
+          .sd-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: var(--radius-xs);
+            background: var(--surface-3);
+            border: 1px solid var(--border);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            position: relative;
+            flex-shrink: 0;
+          }
+
+          .sd-presence {
+            position: absolute;
+            bottom: -1px;
+            right: -1px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--ink-faint);
+            border: 1px solid var(--surface);
+          }
+
+          .sd-presence.is-online {
+            background: var(--accent);
+          }
+
+          .sd-friend-main {
+            flex: 1;
+            min-width: 0;
+          }
+
+          .sd-friend-name {
+            font-size: 0.8125rem;
+            font-weight: 550;
+            color: var(--ink);
+          }
+
+          .sd-friend-meta {
+            font-size: 0.6875rem;
+            color: var(--ink-muted);
+          }
+
+          .sd-friend-actions {
+            display: flex;
+            gap: 4px;
+          }
+
+          .sd-invite-btn {
+            width: 28px;
+            height: 28px;
+            padding: 0;
+          }
+
+          .sd-chat {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+          }
+
+          .sd-chat-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+          }
+
+          .sd-msg {
+            max-width: 80%;
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.8125rem;
+            background: var(--surface-3);
+            border: 1px solid var(--border);
+            color: var(--ink);
+            line-height: 1.45;
+          }
+
+          .sd-msg--mine {
+            align-self: flex-end;
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #0B0B0B;
+            font-weight: 500;
+          }
+
+          .sd-chat-form {
+            display: flex;
+            gap: 6px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+          }
+
+          .sd-chat-input {
+            height: 34px !important;
+            font-size: 0.8125rem !important;
+          }
+
+          .sd-send-btn {
+            height: 34px;
+            width: 34px;
+            padding: 0;
+          }
+        `}</style>
       </div>
     </AnimatePresence>
   );

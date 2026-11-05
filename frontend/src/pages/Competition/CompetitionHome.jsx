@@ -60,7 +60,7 @@ export default function CompetitionHome() {
         <div className="zine-card comp-card">
           <div className="zine-kicker">DSA Competition • up to 25 players</div>
           <h1 className="zine-display" style={{ fontSize: 'clamp(2.4rem, 4vw, 3.2rem)', margin: '0.5rem 0 0.8rem' }}>
-            Live DSA Showdown
+            Custom Live Showdown
           </h1>
           <p className="zine-lede" style={{ fontSize: '1.12rem', maxWidth: '75ch', lineHeight: 1.65 }}>
             Everyone gets the same 10 questions and 20 minutes. Highest score wins; ties go to the faster finisher.
@@ -91,7 +91,7 @@ export default function CompetitionHome() {
             <span className="badge" style={{ gap: 8, padding: '6px 12px', fontSize: '0.88rem' }}>
               <Users size={15} /> {c.playerCount}/{c.maxPlayers}
             </span>
-            <button className="zine-btn zine-btn--yellow" disabled={busy || c.playerCount >= c.maxPlayers} onClick={() => join(c.id)} style={{ height: 42, padding: '0 20px', fontSize: '0.95rem' }}>
+            <button className="zine-btn zine-btn--primary" disabled={busy || c.playerCount >= c.maxPlayers} onClick={() => join(c.id)} style={{ height: 42, padding: '0 20px', fontSize: '0.95rem' }}>
               {c.playerCount >= c.maxPlayers ? 'Full' : 'Join'}
             </button>
           </div>

@@ -34,7 +34,7 @@ export function evaluateClue(guess, secret) {
 }
 
 // Builds human-readable clue text from correct and wrong position counts
-export function formatClueText(correctPos, wrongPos, digitCount = 3) {
+export function formatClueText(correctPos, wrongPos, _digitCount = 3) {
   if (correctPos === 0 && wrongPos === 0) {
     return 'No digit is correct';
   }
@@ -96,8 +96,6 @@ export function findAllSolutions(clues, digitCount = 3) {
 
 // Generates a valid puzzle with guaranteed unique solution
 export function generateCodeBreakerPuzzle(difficulty = 'EASY', id = 1) {
-  const digitCount = difficulty === 'HARD' ? 4 : 3;
-  
   // Pre-validated curated puzzles for flawless instant response, plus dynamic fallback
   const curated = CURATED_CODE_PUZZLES[difficulty.toUpperCase()] || CURATED_CODE_PUZZLES.EASY;
   const puzzle = curated[(id - 1) % curated.length];

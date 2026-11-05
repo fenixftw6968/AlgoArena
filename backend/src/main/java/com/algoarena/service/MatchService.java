@@ -172,9 +172,9 @@ public class MatchService {
                 } else {
                     openMatch.setPlayer2(user);
                     openMatch.setPlayer1RatingBefore(openMatch.getPlayer1().getCompetitiveRating() != null ?
-                            openMatch.getPlayer1().getCompetitiveRating() : 500);
+                            openMatch.getPlayer1().getCompetitiveRating() : 101);
                     openMatch.setPlayer2RatingBefore(user.getCompetitiveRating() != null ?
-                            user.getCompetitiveRating() : 500);
+                            user.getCompetitiveRating() : 101);
                     openMatch.setStatus(Match.MatchStatus.READY);
                     openMatch.setPlayer1Ready(true);
                     openMatch.setPlayer2Ready(true);
@@ -211,7 +211,7 @@ public class MatchService {
                     .status(Match.MatchStatus.WAITING)
                     .player1(user)
                     .player1Ready(true)
-                    .player1RatingBefore(user.getCompetitiveRating() != null ? user.getCompetitiveRating() : 500)
+                    .player1RatingBefore(user.getCompetitiveRating() != null ? user.getCompetitiveRating() : 101)
                     .challengeData(challengeData)
                     .isBotMatch(false)
                     .build();
@@ -272,7 +272,7 @@ public class MatchService {
                     throw new BadRequestException("Match is not in a connectable state");
                 }
 
-                int userRating = match.getPlayer1RatingBefore() != null ? match.getPlayer1RatingBefore() : 500;
+                int userRating = match.getPlayer1RatingBefore() != null ? match.getPlayer1RatingBefore() : 101;
                 // Bot rating dynamically close to user's rating (± 20 points)
                 int botRating = Math.max(100, userRating + (new Random().nextInt(41) - 20));
 
@@ -338,8 +338,8 @@ public class MatchService {
                 .player2(friend)
                 .player1Ready(true)
                 .player2Ready(false)
-                .player1RatingBefore(host.getCompetitiveRating() != null ? host.getCompetitiveRating() : 500)
-                .player2RatingBefore(friend.getCompetitiveRating() != null ? friend.getCompetitiveRating() : 500)
+                .player1RatingBefore(host.getCompetitiveRating() != null ? host.getCompetitiveRating() : 101)
+                .player2RatingBefore(friend.getCompetitiveRating() != null ? friend.getCompetitiveRating() : 101)
                 .challengeData(challengeData)
                 .isBotMatch(false)
                 .build();
@@ -721,9 +721,9 @@ public class MatchService {
         User p1 = match.getPlayer1();
         User p2 = match.getPlayer2();
 
-        int r1 = p1.getCompetitiveRating() != null ? p1.getCompetitiveRating() : 500;
+        int r1 = p1.getCompetitiveRating() != null ? p1.getCompetitiveRating() : 101;
         int r2 = p2 != null && p2.getCompetitiveRating() != null ? p2.getCompetitiveRating() : 
-                 (match.getPlayer2RatingBefore() != null ? match.getPlayer2RatingBefore() : 500);
+                 (match.getPlayer2RatingBefore() != null ? match.getPlayer2RatingBefore() : 101);
 
         match.setPlayer1RatingBefore(r1);
         match.setPlayer2RatingBefore(r2);
@@ -998,8 +998,8 @@ public class MatchService {
         User p1 = match.getPlayer1();
         User p2 = match.getPlayer2();
 
-        int p1Rating = match.getPlayer1RatingBefore() != null ? match.getPlayer1RatingBefore() : (p1.getCompetitiveRating() != null ? p1.getCompetitiveRating() : 500);
-        int p2Rating = match.getPlayer2RatingBefore() != null ? match.getPlayer2RatingBefore() : (p2 != null && p2.getCompetitiveRating() != null ? p2.getCompetitiveRating() : 500);
+        int p1Rating = match.getPlayer1RatingBefore() != null ? match.getPlayer1RatingBefore() : (p1.getCompetitiveRating() != null ? p1.getCompetitiveRating() : 101);
+        int p2Rating = match.getPlayer2RatingBefore() != null ? match.getPlayer2RatingBefore() : (p2 != null && p2.getCompetitiveRating() != null ? p2.getCompetitiveRating() : 101);
 
         String winnerName = null;
         if (match.getWinnerId() != null) {

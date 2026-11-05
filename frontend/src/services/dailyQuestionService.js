@@ -248,7 +248,7 @@ export function forceRefreshDailySet({
     if (typeof window !== 'undefined' && window.localStorage) {
       localStorage.removeItem(dailyKey);
     }
-  } catch (e) {}
+  } catch {}
 
   return getDailyQuestionSet({
     gameType,

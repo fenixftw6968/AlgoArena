@@ -26,6 +26,10 @@ import LogicPuzzle from './pages/Games/LogicPuzzle';
 import NumberDetective from './pages/Games/NumberDetective';
 import CodeBreaker from './pages/Games/CodeBreaker';
 
+// PWA Utilities
+import NetworkStatusIndicator from './components/PWA/NetworkStatusIndicator';
+import InstallPrompt from './components/PWA/InstallPrompt';
+
 
 
 export default function App() {
@@ -66,6 +70,8 @@ export default function App() {
             {/* Fallback */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
+          <NetworkStatusIndicator />
+          <InstallPrompt />
         </GameProvider>
       </AuthProvider>
     </BrowserRouter>

@@ -24,7 +24,7 @@ export function useUserInvitationsSocket(userId, onEvent) {
         // The server authenticates every STOMP session: send the current JWT on each (re)connect.
         beforeConnect: (stompClient) => {
           let token = null;
-          try { token = localStorage.getItem('mm_token'); } catch (e) { /* storage unavailable */ }
+          try { token = localStorage.getItem('mm_token'); } catch { /* storage unavailable */ }
           stompClient.connectHeaders = token ? { Authorization: `Bearer ${token}` } : {};
         },
         heartbeatIncoming: 4000,
@@ -71,7 +71,7 @@ export function useUserInvitationsSocket(userId, onEvent) {
         if (client) {
           client.deactivate();
         }
-      } catch (e) {}
+      } catch {}
       clientRef.current = null;
     };
   }, [userId]);

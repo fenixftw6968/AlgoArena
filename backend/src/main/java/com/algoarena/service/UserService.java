@@ -69,6 +69,7 @@ public class UserService {
                 .longestStreak(0)
                 .gamesCompleted(0)
                 .role("ROLE_USER")
+                .competitiveRating(101)
                 .build();
 
         user = userRepository.save(user);
@@ -103,6 +104,10 @@ public class UserService {
     public void updateProgression(User user, int xpGained, int coinsGained) {
         user.setXp(user.getXp() + xpGained);
         user.setCoins(user.getCoins() + coinsGained);
+
+        // Increase competitive rating from solo arena progress (+5 rating per completed challenge)
+        int currentRating = user.getCompetitiveRating() != null ? user.getCompetitiveRating() : 101;
+        user.setCompetitiveRating(currentRating + 5);
 
         // Update Level
         int oldLevel = user.getLevel();
@@ -186,7 +191,7 @@ public class UserService {
                 });
         }
 
-        int rating = user.getCompetitiveRating() != null ? user.getCompetitiveRating() : 500;
+        int rating = user.getCompetitiveRating() != null ? user.getCompetitiveRating() : 101;
         String compRank = com.algoarena.util.RankUtil.getRankName(rating);
 
         return UserDto.builder()

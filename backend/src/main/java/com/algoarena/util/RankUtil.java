@@ -3,14 +3,14 @@ package com.algoarena.util;
 public class RankUtil {
 
     public enum RankTier {
-        ROOKIE("Rookie", 0, 199, "#64748B", "🌱"),
-        SCOUT("Scout", 200, 399, "#0284C7", "🧭"),
-        KNIGHT("Knight", 400, 599, "#2563EB", "🛡️"),
-        GUARDIAN("Guardian", 600, 799, "#7C3AED", "⚔️"),
-        CHAMPION("Champion", 800, 1049, "#D97706", "🌟"),
-        ELITE("Elite", 1050, 1349, "#E11D48", "⚡"),
-        LEGEND("Legend", 1350, 1699, "#9333EA", "🔮"),
-        MYTHIC("Mythic", 1700, Integer.MAX_VALUE, "#4F46E5", "👑");
+        IRON("Iron", 0, 100, "#94A3B8", "⚙️"),
+        BRONZE("Bronze", 101, 200, "#CD7F32", "🥉"),
+        SILVER("Silver", 201, 300, "#E2E8F0", "🥈"),
+        GOLD("Gold", 301, 400, "#FBBF24", "🥇"),
+        PLATINUM("Platinum", 401, 500, "#38BDF8", "💎"),
+        DIAMOND("Diamond", 501, 600, "#818CF8", "💠"),
+        MASTER("Master", 601, 700, "#C084FC", "⚡"),
+        GRANDMASTER("Grandmaster", 701, Integer.MAX_VALUE, "#C5F467", "👑");
 
         private final String name;
         private final int minRating;
@@ -54,7 +54,7 @@ public class RankUtil {
                 return tier;
             }
         }
-        return RankTier.ROOKIE;
+        return RankTier.IRON;
     }
 
     public static String getRankName(int rating) {

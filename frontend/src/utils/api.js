@@ -5,7 +5,7 @@ const getBaseUrl = () => {
     if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_URL) {
       return import.meta.env.VITE_API_URL.replace(/\/+$/, '');
     }
-  } catch (e) {}
+  } catch {}
   const host = typeof window !== 'undefined' && window.location && window.location.hostname ? window.location.hostname : 'localhost';
   return `http://${host}:8080`;
 };

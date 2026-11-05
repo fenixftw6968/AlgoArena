@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { TrendingUp, TrendingDown, RotateCcw, Home } from 'lucide-react';
+import { TrendingUp, TrendingDown, RotateCcw, Home, Minus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { getRankFromRating } from '../../utils/rankUtils';
 
@@ -27,139 +27,197 @@ export default function CompetitiveResults({
 
   const currentRank = getRankFromRating(myAfter);
 
-  const ink = isWinner ? 'var(--riso-teal)' : (isDraw ? 'var(--riso-violet)' : 'var(--riso-coral)');
-  const emoji = isWinner ? '🏆' : (isDraw ? '🤝' : '⚔️');
-  const heading = isWinner ? 'VICTORY' : (isDraw ? 'DRAW' : 'DEFEAT');
+  const heading = isWinner ? 'Match Won' : (isDraw ? 'Match Draw' : 'Match Defeat');
   const sub = isWinner
-    ? 'Superior deduction speed and accuracy verified.'
-    : (isDraw ? 'Equal cognitive performance registered across both nodes.' : 'Review mistake analysis to recalibrate your competitive strategy.');
+    ? 'All criteria satisfied. Competitive rating updated.'
+    : (isDraw ? 'Evenly matched finish. Score recorded.' : 'Round completed. Review deductions and queue again.');
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 15 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="zine-card"
-      style={{ maxWidth: '580px', margin: '2rem auto', padding: '2.5rem 2.25rem', textAlign: 'center', position: 'relative', zIndex: 10, boxShadow: `10px 10px 0 ${ink}` }}
+      initial={{ opacity: 0, scale: 0.98 }}
+      animate={{ opacity: 1, scale: 1 }}
+      className="card cr-card"
     >
-      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 14, background: ink, borderBottom: '1px solid rgba(255, 255, 255, 0.18)' }} />
-      <div className="halftone-ink halftone-fade-b" style={{ position: 'absolute', inset: 0, opacity: 0.12, pointerEvents: 'none' }} />
-
-      <div style={{ marginBottom: '1.75rem', position: 'relative' }}>
-        <div style={{
-          width: '84px',
-          height: '84px',
-          background: ink,
-          border: '1px solid rgba(255, 255, 255, 0.18)',
-          boxShadow: `0 18px 44px -24px rgba(0, 0, 0, 0.9)`,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          margin: '1.5rem auto 1.1rem',
-          fontSize: '2.4rem',
-          transform: 'rotate(-4deg)'
-        }}>
-          {emoji}
-        </div>
-
-        <h1 className="zine-display misreg" data-text={heading} style={{ fontSize: 'clamp(1.9rem, 6vw, 2.8rem)', marginBottom: '0.4rem' }}>
-          {heading}
-        </h1>
-        <p className="zine-lede" style={{ fontSize: '0.875rem' }}>{sub}</p>
+      <div className="cr-hero">
+        <span className={`badge ${isWinner ? 'badge--success' : isDraw ? 'badge--warn' : 'badge--danger'}`} style={{ marginBottom: 8 }}>
+          {isWinner ? 'Victory' : isDraw ? 'Stalemate' : 'Defeat'}
+        </span>
+        <h1 className="cr-title">{heading}</h1>
+        <p className="cr-lede">{sub}</p>
       </div>
 
-      {/* Head to head */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr auto 1fr',
-        alignItems: 'center',
-        background: 'var(--paper-sunk)',
-        border: '1px solid rgba(255, 255, 255, 0.14)',
-        padding: '1.15rem 1.25rem',
-        marginBottom: '1.25rem',
-        position: 'relative'
-      }}>
-        <div style={{ textAlign: 'left' }}>
-          <div className="font-mono" style={{ fontSize: '0.6rem', fontWeight: 700, color: 'var(--ink-muted)', letterSpacing: '0.14em', textTransform: 'uppercase' }}>Your Score</div>
-          <div style={{ fontFamily: 'var(--font-display)', fontSize: '2.1rem', lineHeight: 1, color: 'var(--riso-teal)', textTransform: 'uppercase' }}>{myScore ?? 0}</div>
+      {/* Head to head table */}
+      <div className="cr-versus">
+        <div className="cr-player">
+          <div className="cr-player-tag">You</div>
+          <div className="cr-player-score mono">{myScore ?? 0}</div>
         </div>
 
-        <div className="font-mono" style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--ink)', padding: '0 0.6rem' }}>VS</div>
+        <div className="cr-vs mono">VS</div>
 
-        <div style={{ textAlign: 'right' }}>
-          <div className="font-mono" style={{ fontSize: '0.6rem', fontWeight: 700, color: 'var(--ink-muted)', letterSpacing: '0.14em', textTransform: 'uppercase', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{oppName}</div>
-          <div style={{ fontFamily: 'var(--font-display)', fontSize: '2.1rem', lineHeight: 1, color: 'var(--ink)', textTransform: 'uppercase' }}>{oppScore ?? 0}</div>
+        <div className="cr-player cr-player--right">
+          <div className="cr-player-tag truncate">{oppName}</div>
+          <div className="cr-player-score mono">{oppScore ?? 0}</div>
         </div>
       </div>
 
       {/* Rating delta */}
       {matchResult.mode !== 'RANKED' && matchResult.isBotMatch ? (
-        <div className="font-mono" style={{
-          background: 'var(--paper-sunk)',
-          border: '1px dashed var(--border-strong)',
-          padding: '0.85rem 1.15rem',
-          marginBottom: '1.75rem',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '0.5rem',
-          color: 'var(--ink-muted)',
-          fontSize: '0.75rem',
-          textAlign: 'center'
-        }}>
-          <span>🤖 Custom Bot Simulation — Ranked Elo rating unaffected.</span>
+        <div className="cr-note mono">
+          Bot Practice Match — Rating ladder is unaffected.
         </div>
       ) : (
-        <div style={{
-          background: myDelta > 0 ? 'var(--riso-teal)' : (myDelta < 0 ? 'var(--riso-coral)' : 'var(--paper-sunk)'),
-          color: myDelta === 0 ? 'var(--ink)' : '#fffdf6',
-          border: '1px solid rgba(255, 255, 255, 0.14)',
-          boxShadow: '0 14px 36px -20px rgba(0, 0, 0, 0.9)',
-          padding: '1rem 1.25rem',
-          marginBottom: '1.75rem',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '1rem',
-          flexWrap: 'wrap',
-          position: 'relative'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-            <div style={{
-              width: '46px',
-              height: '46px',
-              background: 'var(--paper-card)',
-              border: '1px solid rgba(255, 255, 255, 0.14)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '1.3rem',
-              flexShrink: 0
-            }}>
-              {currentRank.badge}
-            </div>
-            <div style={{ textAlign: 'left' }}>
-              <div className="zine-display" style={{ fontSize: '0.85rem' }}>{currentRank.name} Tier</div>
-              <div className="font-mono" style={{ fontSize: '0.7rem', opacity: 0.85 }}>
-                {myBefore} &rarr; <strong>{myAfter}</strong> Elo
+        <div className="cr-delta">
+          <div className="cr-rank">
+            <div>
+              <div className="cr-rank-name">{currentRank.name} Tier</div>
+              <div className="cr-rank-elo mono">
+                {myBefore} → <strong style={{ color: 'var(--accent)' }}>{myAfter}</strong> Rating
               </div>
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-            {myDelta > 0 ? <TrendingUp size={20} /> : (myDelta < 0 ? <TrendingDown size={20} /> : null)}
-            <span className="zine-display" style={{ fontSize: '1.3rem' }}>{myDelta > 0 ? `+${myDelta}` : myDelta}</span>
+          <div className={`cr-delta-value mono ${myDelta > 0 ? 'cr-delta-value--up' : myDelta < 0 ? 'cr-delta-value--down' : ''}`}>
+            {myDelta > 0 ? <TrendingUp size={15} /> : myDelta < 0 ? <TrendingDown size={15} /> : <Minus size={15} />}
+            <span>{myDelta > 0 ? `+${myDelta}` : myDelta}</span>
           </div>
         </div>
       )}
 
-      <div style={{ display: 'flex', gap: '0.85rem', justifyContent: 'center', flexWrap: 'wrap', position: 'relative' }}>
-        <button onClick={onRematch} className="btn-primary" style={{ flex: 1, minWidth: '170px' }}>
-          <RotateCcw size={15} /> REMATCH
+      <div className="cr-actions">
+        <button onClick={onRematch} className="btn btn--primary btn--sm cr-action">
+          <RotateCcw size={14} /> Rematch
         </button>
-        <button onClick={() => onDashboard ? onDashboard() : navigate('/dashboard')} className="btn-secondary" style={{ flex: 1, minWidth: '170px' }}>
-          <Home size={15} /> DASHBOARD
+        <button onClick={() => onDashboard ? onDashboard() : navigate('/dashboard')} className="btn btn--secondary btn--sm cr-action">
+          <Home size={14} /> Dashboard
         </button>
       </div>
+
+      <style>{`
+        .cr-card {
+          max-width: 460px;
+          margin: 1.5rem auto;
+          padding: 28px 32px;
+          background: var(--surface);
+          border-radius: var(--radius);
+        }
+
+        .cr-hero {
+          text-align: center;
+          margin-bottom: 24px;
+        }
+
+        .cr-title {
+          font-size: 1.35rem;
+          font-weight: 650;
+          letter-spacing: -0.02em;
+          color: var(--ink);
+        }
+
+        .cr-lede {
+          margin-top: 4px;
+          font-size: 0.8125rem;
+          color: var(--ink-muted);
+          line-height: 1.5;
+        }
+
+        .cr-versus {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 16px 20px;
+          background: var(--surface-subtle);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-sm);
+          margin-bottom: 16px;
+        }
+
+        .cr-player {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .cr-player--right {
+          align-items: flex-end;
+        }
+
+        .cr-player-tag {
+          font-size: 0.75rem;
+          color: var(--ink-muted);
+          font-weight: 500;
+        }
+
+        .cr-player-score {
+          font-size: 1.5rem;
+          font-weight: 600;
+          color: var(--ink);
+        }
+
+        .cr-vs {
+          font-size: 0.75rem;
+          color: var(--ink-faint);
+          font-weight: 600;
+        }
+
+        .cr-note {
+          padding: 8px 12px;
+          background: var(--surface-subtle);
+          border-radius: var(--radius-sm);
+          font-size: 0.75rem;
+          color: var(--ink-muted);
+          text-align: center;
+          margin-bottom: 20px;
+        }
+
+        .cr-delta {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 12px 16px;
+          border: 1px solid var(--border);
+          border-radius: var(--radius-sm);
+          margin-bottom: 24px;
+          background: var(--surface-subtle);
+        }
+
+        .cr-rank-name {
+          font-size: 0.84375rem;
+          font-weight: 600;
+          color: var(--ink);
+        }
+
+        .cr-rank-elo {
+          font-size: 0.75rem;
+          color: var(--ink-muted);
+          margin-top: 1px;
+        }
+
+        .cr-delta-value {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: var(--ink-muted);
+        }
+
+        .cr-delta-value--up {
+          color: var(--accent);
+        }
+
+        .cr-delta-value--down {
+          color: var(--err);
+        }
+
+        .cr-actions {
+          display: flex;
+          gap: 10px;
+        }
+
+        .cr-action {
+          flex: 1;
+        }
+      `}</style>
     </motion.div>
   );
 }

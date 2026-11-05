@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Lightbulb, CheckCircle, XCircle } from 'lucide-react';
+import { ArrowLeft, Lightbulb, CheckCircle, XCircle, Clock } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useGame } from '../../context/GameContext';
 import { getDailyCountdown, subscribeToMidnightIST } from '../../services/dailyQuestionService';
@@ -8,9 +8,9 @@ import api from '../../utils/api';
 
 const GAME_TYPE_LABELS = {
   'dsa-master-quiz':     'DSA & Algorithms',
-  'logic-puzzle':        'Logic & Reasoning',
-  'number-detective':    'Number Sequence',
-  'code-breaker':        'Code Breaker',
+  'logic-puzzle':        'Logic & Deduction',
+  'number-detective':    'Mathematical Sequence',
+  'code-breaker':        'Combinatorial Cipher',
 };
 
 export default function DailyChallenge() {
@@ -19,6 +19,7 @@ export default function DailyChallenge() {
   const navigate = useNavigate();
 
   const [challenge, setChallenge] = useState(null);
+  const [puzzleData, setPuzzleData] = useState(null);
   const [loading, setLoading]     = useState(true);
   const [answer, setAnswer]       = useState('');
   const [hintUsed, setHintUsed]   = useState(false);
@@ -32,16 +33,27 @@ export default function DailyChallenge() {
     try {
       setLoading(true);
       const res = await api.get('/api/games/daily');
-      setChallenge(res.data);
-      if (res.data.attempted) {
-        // One graded attempt per day: the server only sends the answer/explanation once graded.
+      const data = res.data;
+      setChallenge(data);
+
+      let parsed = null;
+      if (data?.puzzle) {
+        try {
+          parsed = typeof data.puzzle === 'string' ? JSON.parse(data.puzzle) : data.puzzle;
+        } catch {
+          parsed = null;
+        }
+      }
+      setPuzzleData(parsed);
+
+      if (data.attempted) {
         setSubmitted(true);
         setResult({
-          correct: res.data.isCorrect === true,
-          xpEarned: res.data.xpEarned || 0,
-          coinEarned: res.data.coinsEarned || 0,
-          explanation: res.data.explanation || "",
-          correctAnswer: res.data.correctAnswer || ""
+          correct: data.isCorrect === true,
+          xpEarned: data.xpEarned || 0,
+          coinEarned: data.coinsEarned || 0,
+          explanation: data.explanation || parsed?.explanation || "",
+          correctAnswer: data.correctAnswer || parsed?.correctAnswer || parsed?.answer || ""
         });
       } else {
         setSubmitted(false);
@@ -62,7 +74,6 @@ export default function DailyChallenge() {
     fetchChallenge();
   }, []);
 
-  // Sync live countdown to 12:00:00 AM IST & auto-refresh challenge when date flips
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft(getDailyCountdown().formatted);
@@ -92,281 +103,319 @@ export default function DailyChallenge() {
       });
 
       const isCorrect = res.data.isCorrect !== undefined ? res.data.isCorrect : (res.data.correct !== undefined ? res.data.correct : false);
-      // Rewards are decided by the server only; a repeat submission earns nothing new.
       const xpEarned = res.data.alreadyAttempted ? 0 : (res.data.xpEarned || 0);
       const coinEarned = res.data.alreadyAttempted ? 0 : (res.data.coinsEarned || 0);
 
       setResult({
         correct: isCorrect,
-        xpEarned,
-        coinEarned,
+        xpEarned: xpEarned,
+        coinEarned: coinEarned,
         explanation: res.data.explanation || "",
         correctAnswer: res.data.correctAnswer || ""
       });
 
-      if (isCorrect && !res.data.alreadyAttempted) {
-        showXPPopup(xpEarned, 'Daily mission complete');
+      if (isCorrect && xpEarned > 0) {
+        showXPPopup(xpEarned, 'Daily Mission Complete');
       }
-
-      await refreshUser();
-    } catch (e) {
-      console.error("Failed to submit daily challenge attempt", e);
-      setResult({
-        correct: false,
-        xpEarned: 0,
-        coinEarned: 0,
-        explanation: e.response?.data?.message || "Verification failed. Please retry your selection."
-      });
-    } finally {
-      isSubmittingRef.current = false;
+      refreshUser();
+    } catch (err) {
+      console.error("Failed to submit daily answer", err);
     }
   };
-
-  if (loading) {
-    return (
-      <div className="page">
-        <div className="dc-state">
-          <span className="zine-spinner" />
-          <span className="muted">Loading today's mission…</span>
-        </div>
-      </div>
-    );
-  }
-
-  if (!challenge) {
-    return (
-      <div className="page">
-        <div className="container--narrow" style={{ margin: '0 auto' }}>
-          <div className="card dc-empty">
-            <h2 className="page-title" style={{ fontSize: '1.25rem' }}>No active mission</h2>
-            <p className="muted" style={{ marginTop: 8, fontSize: '0.875rem' }}>
-              Check back later for the next daily challenge.
-            </p>
-            <button onClick={() => navigate('/dashboard')} className="btn btn--primary" style={{ marginTop: 24 }}>
-              Return to dashboard
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  const typeLabel = GAME_TYPE_LABELS[challenge.gameSlug] || 'Daily Challenge';
-
-  let puzzleData = {};
-  try {
-    puzzleData = typeof challenge.puzzle === 'string' ? JSON.parse(challenge.puzzle) : (challenge.puzzle || {});
-  } catch (e) {
-    puzzleData = { question: challenge.description };
-  }
-
-  const hasOptions = Array.isArray(puzzleData.options) && puzzleData.options.length > 0;
 
   return (
     <div className="page">
       <div className="container container--narrow stack">
-        <button onClick={() => navigate('/dashboard')} className="dc-back">
-          <ArrowLeft size={14} /> Dashboard
-        </button>
-
-        {/* Header */}
-        <header>
-          <div className="row" style={{ gap: 10, marginBottom: 10 }}>
-            <span className="zine-kicker">Daily mission · {typeLabel}</span>
-            <span className="badge badge--ink mono" style={{ marginLeft: 'auto' }}>Resets in {timeLeft}</span>
+        {/* Navigation bar */}
+        <div className="row row--between">
+          <button onClick={() => navigate('/dashboard')} className="btn btn--secondary btn--sm">
+            <ArrowLeft size={14} /> Back to dashboard
+          </button>
+          <div className="daily-timer-pill mono">
+            <Clock size={13} />
+            <span>Next mission in {timeLeft}</span>
           </div>
-          <h1 className="page-title">{challenge.title}</h1>
-          <p className="page-lede">{challenge.description}</p>
+        </div>
 
-          <div className="row" style={{ gap: 8, marginTop: 16 }}>
-            <span className="badge">+{challenge.xpReward} XP</span>
-            <span className="badge">+{challenge.coinReward} coins</span>
-            {challenge.difficulty && <span className="badge">{challenge.difficulty}</span>}
+        {loading ? (
+          <div className="card" style={{ padding: 48, textAlign: 'center' }}>
+            <span className="zine-spinner" style={{ margin: '0 auto 12px' }} />
+            <p className="muted" style={{ fontSize: '0.8125rem' }}>Fetching daily problem…</p>
           </div>
-        </header>
-
-        {/* Question */}
-        <section className="card dc-question">
-          <div className="zine-kicker" style={{ marginBottom: 10 }}>Problem</div>
-          <p className="dc-question-text">{puzzleData.question}</p>
-        </section>
-
-        {/* Answer */}
-        {!submitted ? (
-          <form onSubmit={handleSubmit} className="stack--sm" style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-            {hasOptions ? (
-              <div className="dc-options" role="radiogroup" aria-label="Answer options">
-                {puzzleData.options.map((opt, optIdx) => {
-                  const isSelected = answer === opt;
-                  const letter = String.fromCharCode(65 + optIdx);
-                  return (
-                    <button
-                      type="button"
-                      key={optIdx}
-                      role="radio"
-                      aria-checked={isSelected}
-                      onClick={() => setAnswer(opt)}
-                      className={`dc-option${isSelected ? ' dc-option--selected' : ''}`}
-                    >
-                      <span className="dc-option-letter mono">{letter}</span>
-                      <span className="dc-option-text">{opt}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            ) : (
-              <input
-                type="text"
-                placeholder="Type your answer…"
-                value={answer}
-                onChange={(e) => setAnswer(e.target.value)}
-                required
-                className="zine-field zine-input--mono dc-input"
-                aria-label="Your answer"
-              />
-            )}
-
-            {showHint && puzzleData.hint && (
-              <div className="zine-hint" role="note">
-                <Lightbulb size={15} style={{ flexShrink: 0, marginTop: 2 }} />
-                <span style={{ fontSize: '0.85rem', lineHeight: 1.55 }}>{puzzleData.hint}</span>
-              </div>
-            )}
-
-            <div className="row" style={{ gap: 10 }}>
-              {!showHint && puzzleData.hint && answer === '' && (
-                <button
-                  type="button"
-                  onClick={() => { setShowHint(true); setHintUsed(true); }}
-                  className="btn btn--secondary"
-                >
-                  <Lightbulb size={14} /> Hint
-                </button>
-              )}
-              <button
-                type="submit"
-                disabled={!answer.trim()}
-                className="btn btn--primary grow"
-              >
-                Submit answer
-              </button>
-            </div>
-          </form>
+        ) : !challenge ? (
+          <div className="card" style={{ padding: 32, textAlign: 'center' }}>
+            <p className="muted">No daily challenge found for today.</p>
+          </div>
         ) : (
-          <div className="stack--sm" style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-            <div className={`dc-result ${result?.correct ? 'dc-result--ok' : 'dc-result--err'}`} role="status">
-              <span className="dc-result-icon">
-                {result?.correct ? <CheckCircle size={20} /> : <XCircle size={20} />}
+          <div className="card daily-card">
+            <div className="daily-card-head">
+              <span className="zine-kicker">
+                {GAME_TYPE_LABELS[challenge.gameSlug] || 'Daily Assessment'}
               </span>
-              <div>
-                <div className="dc-result-title">
-                  {result?.correct ? 'Correct' : 'Not quite'}
+              <h1 className="daily-card-title">{challenge.title || 'Daily Puzzle'}</h1>
+            </div>
+
+            <div className="daily-prompt">
+              {puzzleData?.question || challenge.question || challenge.description}
+            </div>
+
+            {puzzleData?.options && !submitted && (
+              <div className="daily-options-grid">
+                {puzzleData.options.map((opt, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => setAnswer(opt)}
+                    className={`daily-option-btn ${answer === opt ? 'daily-option-btn--active' : ''}`}
+                  >
+                    <span className="daily-option-idx">{String.fromCharCode(65 + idx)}</span>
+                    <span className="daily-option-val mono">{opt}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Answer interface or Results */}
+            {!submitted ? (
+              <form onSubmit={handleSubmit} className="daily-form">
+                <div>
+                  <label className="zine-label" htmlFor="daily-ans">Your Solution</label>
+                  <input
+                    id="daily-ans"
+                    type="text"
+                    required
+                    value={answer}
+                    onChange={(e) => setAnswer(e.target.value)}
+                    className="zine-field mono"
+                    placeholder="Enter output or final numerical deduction…"
+                    autoFocus
+                  />
                 </div>
-                {result?.correct ? (
-                  <div className="dc-result-sub mono">+{result.xpEarned} XP · +{result.coinEarned} coins</div>
-                ) : (
-                  <div className="dc-result-sub">One attempt per day. See the explanation below.</div>
+
+                <div className="row row--between" style={{ marginTop: 8 }}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowHint(true);
+                      setHintUsed(true);
+                    }}
+                    className="btn btn--secondary btn--sm"
+                    disabled={showHint || !challenge.hint}
+                  >
+                    <Lightbulb size={13} />
+                    <span>{showHint ? 'Hint displayed' : 'Show hint (-5 XP)'}</span>
+                  </button>
+
+                  <button type="submit" className="btn btn--primary btn--sm">
+                    Submit answer
+                  </button>
+                </div>
+
+                {showHint && challenge.hint && (
+                  <div className="zine-hint" style={{ marginTop: 12 }}>
+                    <Lightbulb size={14} style={{ color: 'var(--accent)', flexShrink: 0, marginTop: 2 }} />
+                    <span style={{ fontSize: '0.8125rem', color: 'var(--ink-soft)' }}>{challenge.hint}</span>
+                  </div>
                 )}
-              </div>
-            </div>
+              </form>
+            ) : (
+              <div className="daily-result-pane">
+                <div className={`daily-result-header ${result?.correct ? 'daily-result--ok' : 'daily-result--err'}`}>
+                  {result?.correct ? <CheckCircle size={18} /> : <XCircle size={18} />}
+                  <div>
+                    <div style={{ fontWeight: 600, fontSize: '0.9375rem' }}>
+                      {result?.correct ? 'Correct solution' : 'Incorrect solution'}
+                    </div>
+                    <div style={{ fontSize: '0.75rem', opacity: 0.85 }}>
+                      {result?.correct ? `+${result.xpEarned} XP awarded` : 'Review the solution below'}
+                    </div>
+                  </div>
+                </div>
 
-            {result?.explanation && (
-              <div className="card dc-note">
-                <div className="zine-kicker" style={{ marginBottom: 8 }}>Explanation</div>
-                <p className="dc-note-text">{result.explanation}</p>
+                {result?.correctAnswer && (
+                  <div className="daily-info-row">
+                    <span className="muted" style={{ fontSize: '0.75rem' }}>Verified solution:</span>
+                    <span className="mono" style={{ fontWeight: 600, color: 'var(--accent)' }}>{result.correctAnswer}</span>
+                  </div>
+                )}
+
+                {result?.explanation && (
+                  <div className="daily-explanation">
+                    <div className="zine-kicker" style={{ marginBottom: 4 }}>Explanation</div>
+                    <p style={{ fontSize: '0.84375rem', color: 'var(--ink-soft)', lineHeight: 1.55 }}>
+                      {result.explanation}
+                    </p>
+                  </div>
+                )}
+
+                <div className="row" style={{ marginTop: 16 }}>
+                  <button onClick={() => navigate('/games')} className="btn btn--secondary btn--sm grow">
+                    Browse more arenas
+                  </button>
+                  <button onClick={() => navigate('/dashboard')} className="btn btn--primary btn--sm grow">
+                    Return to dashboard
+                  </button>
+                </div>
               </div>
             )}
-
-            {!result?.correct && result?.correctAnswer && (
-              <div className="card dc-note">
-                <div className="zine-kicker" style={{ marginBottom: 8 }}>Correct answer</div>
-                <p className="dc-note-text">{result.correctAnswer}</p>
-              </div>
-            )}
-
-            <div className="row row--between">
-              <span className="muted mono" style={{ fontSize: '0.75rem' }}>
-                Next challenge in {timeLeft}
-              </span>
-              <button onClick={() => navigate('/dashboard')} className="btn btn--secondary">
-                Return to dashboard
-              </button>
-            </div>
           </div>
         )}
       </div>
 
       <style>{`
-        .dc-back {
+        .daily-timer-pill {
           display: inline-flex;
           align-items: center;
           gap: 6px;
-          align-self: flex-start;
-          border: none;
-          background: none;
-          padding: 0;
-          color: var(--ink-muted);
-          font-size: 0.82rem;
-          cursor: pointer;
-        }
-        .dc-back:hover { color: var(--ink); }
-        .dc-state {
-          min-height: 60vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 12px;
-          font-size: 0.875rem;
-        }
-        .dc-empty { padding: 48px 32px; text-align: center; max-width: 440px; margin: 8vh auto 0; }
-        .dc-question { padding: 24px; }
-        .dc-question-text { font-size: 1.02rem; line-height: 1.7; color: var(--ink); white-space: pre-wrap; }
-        .dc-options { display: grid; gap: 10px; }
-        .dc-option {
-          display: flex;
-          align-items: center;
-          gap: 14px;
-          padding: 14px 16px;
-          border: 1px solid var(--border-strong);
-          border-radius: var(--radius-sm);
-          background: var(--surface);
-          color: var(--ink);
-          font-size: 0.9rem;
-          text-align: left;
-          cursor: pointer;
-          transition: border-color 0.15s ease, background 0.15s ease;
-        }
-        .dc-option:hover { background: var(--surface-3); }
-        .dc-option--selected { border-color: var(--accent); background: rgba(91, 140, 255, 0.09); box-shadow: inset 2px 0 0 var(--accent); }
-        .dc-option-letter {
-          width: 26px;
-          height: 26px;
-          border-radius: 6px;
-          background: var(--surface-2);
-          border: 1px solid var(--border);
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
           font-size: 0.75rem;
-          flex-shrink: 0;
-        }
-        .dc-option--selected .dc-option-letter { background: var(--accent-gradient); border-color: rgba(255, 255, 255, 0.18); color: #fff; }
-        .dc-input { text-align: center; font-size: 1rem; height: 46px; }
-        .dc-result {
-          display: flex;
-          align-items: center;
-          gap: 14px;
-          padding: 18px 20px;
+          color: var(--accent);
+          background: var(--surface);
           border: 1px solid var(--border);
+          border-radius: var(--radius-sm);
+          padding: 4px 10px;
+        }
+
+        .daily-card {
+          padding: 28px 32px;
+          background: var(--surface);
           border-radius: var(--radius);
         }
-        .dc-result--ok { background: var(--ok-soft); border-color: rgba(52, 211, 153, 0.35); color: var(--ok); }
-        .dc-result--err { background: var(--err-soft); border-color: rgba(251, 113, 133, 0.35); color: var(--err); }
-        .dc-result-icon { display: flex; }
-        .dc-result-title { font-weight: 600; font-size: 0.95rem; }
-        .dc-result-sub { font-size: 0.8rem; margin-top: 2px; opacity: 0.85; }
-        .dc-note { padding: 20px; }
-        .dc-note-text { font-size: 0.9rem; line-height: 1.65; color: var(--ink-soft); white-space: pre-wrap; }
+
+        .daily-card-head {
+          margin-bottom: 20px;
+        }
+
+        .daily-card-title {
+          font-size: 1.35rem;
+          font-weight: 650;
+          letter-spacing: -0.02em;
+          color: var(--ink);
+          margin-top: 4px;
+        }
+
+        .daily-prompt {
+          padding: 16px 20px;
+          background: var(--surface-subtle);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-sm);
+          font-size: 0.9375rem;
+          line-height: 1.6;
+          color: var(--ink);
+          white-space: pre-wrap;
+          margin-bottom: 20px;
+        }
+
+        .daily-options-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px;
+          margin-bottom: 20px;
+        }
+
+        @media (max-width: 640px) {
+          .daily-options-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        .daily-option-btn {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 12px 14px;
+          background: var(--surface-elevated);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-sm);
+          color: var(--ink);
+          text-align: left;
+          cursor: pointer;
+          transition: all 150ms ease;
+        }
+
+        .daily-option-btn:hover {
+          border-color: var(--border-hover);
+          background: #252525;
+        }
+
+        .daily-option-btn--active {
+          border-color: var(--accent);
+          background: var(--accent-subtle);
+          color: var(--accent);
+        }
+
+        .daily-option-idx {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 24px;
+          height: 24px;
+          border-radius: 4px;
+          background: var(--surface-subtle);
+          border: 1px solid var(--border);
+          font-size: 0.75rem;
+          font-weight: 700;
+          color: var(--ink-soft);
+          flex-shrink: 0;
+        }
+
+        .daily-option-btn--active .daily-option-idx {
+          border-color: var(--accent);
+          background: var(--accent);
+          color: #0b0b0b;
+        }
+
+        .daily-option-val {
+          font-size: 0.875rem;
+        }
+
+        .daily-form {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .daily-result-pane {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .daily-result-header {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 12px 16px;
+          border-radius: var(--radius-sm);
+        }
+
+        .daily-result--ok {
+          background: var(--ok-soft);
+          color: var(--accent);
+          border: 1px solid var(--ok-border);
+        }
+
+        .daily-result--err {
+          background: var(--err-soft);
+          color: var(--err);
+          border: 1px solid var(--err-border);
+        }
+
+        .daily-info-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 8px 12px;
+          background: var(--surface-subtle);
+          border-radius: var(--radius-sm);
+          border: 1px solid var(--border);
+        }
+
+        .daily-explanation {
+          padding: 14px 16px;
+          border: 1px solid var(--border);
+          border-radius: var(--radius-sm);
+          background: var(--surface-subtle);
+        }
       `}</style>
     </div>
   );

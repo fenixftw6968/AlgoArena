@@ -33,7 +33,7 @@ public class LeaderboardService {
         List<LeaderboardEntryDto> result = new ArrayList<>();
         int rank = 1;
         for (User user : sortedUsers) {
-            int r = user.getCompetitiveRating() != null ? user.getCompetitiveRating() : 500;
+            int r = user.getCompetitiveRating() != null ? user.getCompetitiveRating() : 101;
             result.add(LeaderboardEntryDto.builder()
                     .rank(rank++)
                     .username(user.getUsername())

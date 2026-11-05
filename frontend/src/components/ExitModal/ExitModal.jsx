@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { AlertTriangle } from 'lucide-react';
+import { AlertCircle } from 'lucide-react';
 
 export default function ExitModal({
   isOpen,
@@ -13,53 +13,60 @@ export default function ExitModal({
   return (
     <div className="overlay" style={{ zIndex: 99999 }} role="dialog" aria-modal="true" aria-label={title}>
       <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, scale: 0.97 }}
+        animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.14 }}
         className="zine-modal"
         style={{
           width: '100%',
-          maxWidth: '420px',
-          padding: '32px 28px 26px',
+          maxWidth: '380px',
+          padding: '24px',
           textAlign: 'center',
         }}
       >
-        <span className="exit-icon">
-          <AlertTriangle size={20} />
-        </span>
+        <div className="exit-icon">
+          <AlertCircle size={18} />
+        </div>
 
         <h2 className="exit-title">{title}</h2>
         <p className="exit-message">{message}</p>
 
-        <div className="row" style={{ gap: 10, marginTop: 26 }}>
-          <button onClick={onCancel} className="btn btn--primary grow">
+        <div className="row" style={{ gap: 8, marginTop: 20 }}>
+          <button onClick={onCancel} className="btn btn--secondary btn--sm grow">
             Keep playing
           </button>
-          <button onClick={onConfirm} className="btn btn--secondary grow" style={{ color: 'var(--err)', borderColor: 'rgba(251, 113, 133, 0.4)' }}>
-            Leave
+          <button onClick={onConfirm} className="btn btn--danger btn--sm grow">
+            Leave session
           </button>
         </div>
       </motion.div>
 
       <style>{`
         .exit-icon {
-          width: 44px;
-          height: 44px;
-          border-radius: 12px;
+          width: 36px;
+          height: 36px;
+          border-radius: var(--radius-sm);
           background: var(--err-soft);
-          border: 1px solid rgba(251, 113, 133, 0.35);
+          border: 1px solid var(--err-border);
           color: var(--err);
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          margin-bottom: 18px;
+          margin: 0 auto 12px;
         }
-        .exit-title { font-size: 1.1rem; font-weight: 600; letter-spacing: -0.02em; }
+
+        .exit-title {
+          font-size: 1rem;
+          font-weight: 600;
+          letter-spacing: -0.015em;
+          color: var(--ink);
+        }
+
         .exit-message {
-          margin-top: 8px;
-          font-size: 0.85rem;
+          margin-top: 6px;
+          font-size: 0.8125rem;
           color: var(--ink-muted);
-          line-height: 1.6;
+          line-height: 1.5;
         }
       `}</style>
     </div>

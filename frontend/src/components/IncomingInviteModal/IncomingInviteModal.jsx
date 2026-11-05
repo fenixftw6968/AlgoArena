@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, X } from 'lucide-react';
+import { Check, X, Swords } from 'lucide-react';
 import { GAME_REGISTRY } from '../../data/gameRegistry';
 
 export default function IncomingInviteModal({
@@ -11,82 +11,105 @@ export default function IncomingInviteModal({
   if (!invite) return null;
 
   const gameInfo = GAME_REGISTRY[invite.gameSlug] || {
-    title: invite.gameSlug ? invite.gameSlug.replace(/-/g, ' ').toUpperCase() : 'Game',
-    icon: '🎮'
+    title: invite.gameSlug ? invite.gameSlug.replace(/-/g, ' ').toUpperCase() : 'Arena',
   };
 
   return (
     <AnimatePresence>
-      <div style={{
-        position: 'fixed',
-        top: '88px',
-        right: '24px',
-        zIndex: 99999,
-        maxWidth: '400px',
-        width: 'calc(100vw - 48px)',
-      }}>
+      <div className="ii-wrap">
         <motion.div
-          initial={{ opacity: 0, y: -20, scale: 0.95 }}
+          initial={{ opacity: 0, y: -10, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: -20, scale: 0.95 }}
-          className="zine-card"
-          style={{
-            padding: '1.25rem 1.35rem',
-            position: 'relative',
-            overflow: 'hidden',
-            background: 'var(--paper-card)',
-            boxShadow: '7px 7px 0 var(--riso-violet)',
-            transform: 'rotate(0.7deg)'
-          }}
+          exit={{ opacity: 0, y: -10, scale: 0.98 }}
+          className="card ii-card"
+          role="dialog"
+          aria-label="Incoming match invitation"
         >
-          <div className="hazard-tape" style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 8, borderBottom: '1px solid rgba(255, 255, 255, 0.14)' }} />
+          <div className="ii-head">
+            <span className="ii-icon"><Swords size={13} /></span>
+            <span className="zine-kicker">Match Invitation</span>
+          </div>
 
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.9rem', marginTop: '0.35rem' }}>
-            <div style={{
-              width: '48px',
-              height: '48px',
-              background: 'var(--riso-violet)',
-              border: '1px solid rgba(255, 255, 255, 0.14)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '1.4rem',
-              flexShrink: 0,
-              boxShadow: '0 12px 30px -18px rgba(0, 0, 0, 0.9)'
-            }}>
-              {gameInfo.icon}
-            </div>
+          <div className="ii-body">
+            <h4 className="ii-name truncate">@{invite.player1Username}</h4>
+            <p className="ii-text">
+              Invited you to a 1v1 showdown in <strong>{gameInfo.title}</strong>
+            </p>
+          </div>
 
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <span className="font-mono" style={{ fontSize: '0.6rem', fontWeight: 800, color: 'var(--riso-coral)', letterSpacing: '0.14em', textTransform: 'uppercase', display: 'block', marginBottom: '0.25rem' }}>
-                Incoming 1v1 Challenge
-              </span>
-
-              <h4 className="zine-display" style={{
-                fontSize: '1rem',
-                marginBottom: '0.25rem',
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis'
-              }}>
-                @{invite.player1Username}
-              </h4>
-
-              <p style={{ fontSize: '0.8rem', color: 'var(--ink-muted)', lineHeight: 1.4, marginBottom: '0.9rem' }}>
-                Dispatched challenge for <strong style={{ color: 'var(--ink)' }}>{gameInfo.title}</strong>
-              </p>
-
-              <div style={{ display: 'flex', gap: '0.5rem' }}>
-                <button onClick={() => onAccept(invite)} className="zine-btn-sm zine-btn-sm--violet" style={{ flex: 1, padding: '0.5rem 0.75rem' }}>
-                  <Check size={12} /> ACCEPT
-                </button>
-                <button onClick={() => onDecline(invite)} className="zine-btn-sm" style={{ flex: 1, padding: '0.5rem 0.75rem' }}>
-                  <X size={12} /> DECLINE
-                </button>
-              </div>
-            </div>
+          <div className="ii-actions">
+            <button onClick={() => onAccept(invite)} className="btn btn--primary btn--sm grow">
+              <Check size={13} /> Accept
+            </button>
+            <button onClick={() => onDecline(invite)} className="btn btn--secondary btn--sm grow">
+              <X size={13} /> Decline
+            </button>
           </div>
         </motion.div>
+
+        <style>{`
+          .ii-wrap {
+            position: fixed;
+            top: 64px;
+            right: 20px;
+            z-index: 99999;
+            max-width: 340px;
+            width: calc(100vw - 40px);
+          }
+
+          .ii-card {
+            padding: 16px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            background: var(--surface);
+          }
+
+          .ii-head {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+          }
+
+          .ii-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: var(--radius-xs);
+            background: var(--surface-3);
+            border: 1px solid var(--border);
+            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .ii-body {
+            margin-bottom: 14px;
+          }
+
+          .ii-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--ink);
+          }
+
+          .ii-text {
+            font-size: 0.78125rem;
+            color: var(--ink-muted);
+            line-height: 1.45;
+            margin-top: 2px;
+          }
+
+          .ii-text strong {
+            color: var(--accent);
+            font-weight: 550;
+          }
+
+          .ii-actions {
+            display: flex;
+            gap: 8px;
+          }
+        `}</style>
       </div>
     </AnimatePresence>
   );
