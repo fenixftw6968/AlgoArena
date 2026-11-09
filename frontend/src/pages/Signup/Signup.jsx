@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, User, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import AuthShell, { AuthError } from '../../components/AuthShell/AuthShell';
+import GoogleLoginButton from '../../components/GoogleLoginButton/GoogleLoginButton';
 
 const STRENGTH_TOKENS = [
   { color: 'var(--err)', label: 'Weak' },
@@ -89,7 +90,7 @@ export default function Signup() {
               value={form.email}
               onChange={update('email')}
               className="zine-field field-with-icon"
-              placeholder="you@domain.com"
+              placeholder="Enter Email"
             />
           </div>
         </div>
@@ -169,6 +170,14 @@ export default function Signup() {
           {loading ? 'Creating account…' : 'Create account'}
         </button>
       </form>
+
+      <div className="auth-divider">
+        <span className="auth-divider-line" />
+        <span className="auth-divider-text">OR</span>
+        <span className="auth-divider-line" />
+      </div>
+
+      <GoogleLoginButton onError={(msg) => setError(msg)} />
 
       <p className="auth-switch">
         Already registered? <Link to="/login">Sign in</Link>

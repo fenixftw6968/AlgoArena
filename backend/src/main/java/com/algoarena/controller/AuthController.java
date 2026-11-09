@@ -26,6 +26,11 @@ public class AuthController {
         return ResponseEntity.ok(userService.register(request));
     }
 
+    @PostMapping("/google")
+    public ResponseEntity<AuthResponse> googleLogin(@RequestBody com.algoarena.dto.GoogleAuthRequest request) {
+        return ResponseEntity.ok(userService.loginWithGoogle(request));
+    }
+
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request,
                                               jakarta.servlet.http.HttpServletRequest http) {

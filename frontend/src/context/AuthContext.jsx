@@ -112,6 +112,22 @@ export function AuthProvider({ children }) {
     }
   }, [enrichUser]);
 
+  const loginWithGoogle = useCallback(async (googleData) => {
+    try {
+      const res = await api.post('/api/auth/google', googleData);
+      const { token: jwtToken, user: userData } = res.data;
+      const enriched = enrichUser(userData);
+      setUser(enriched);
+      setToken(jwtToken);
+      localStorage.setItem('mm_token', jwtToken);
+      localStorage.setItem('mm_user', JSON.stringify(enriched));
+      return { success: true, user: enriched };
+    } catch (e) {
+      const errMsg = e.response?.data?.message || e.message || 'Google authentication failed';
+      return { success: false, error: errMsg };
+    }
+  }, [enrichUser]);
+
   const refreshUser = useCallback(async (updatedUser) => {
     if (updatedUser) {
       const enriched = enrichUser(updatedUser);
@@ -165,6 +181,7 @@ export function AuthProvider({ children }) {
       loading,
       login,
       signup,
+      loginWithGoogle,
       logout,
       refreshUser,
       addXP,

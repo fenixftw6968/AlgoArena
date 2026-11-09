@@ -78,6 +78,77 @@ public class UserService {
         return new AuthResponse(token, convertToDto(user));
     }
 
+    @Transactional
+    public AuthResponse loginWithGoogle(com.algoarena.dto.GoogleAuthRequest request) {
+        String email = request.getEmail();
+        String name = request.getName();
+
+        if ((email == null || email.isBlank()) && request.getIdToken() != null && !request.getIdToken().isBlank()) {
+            try {
+                String[] parts = request.getIdToken().split("\\.");
+                if (parts.length >= 2) {
+                    byte[] decoded = java.util.Base64.getUrlDecoder().decode(parts[1]);
+                    String payload = new String(decoded, java.nio.charset.StandardCharsets.UTF_8);
+                    com.fasterxml.jackson.databind.JsonNode node = new com.fasterxml.jackson.databind.ObjectMapper().readTree(payload);
+                    if (node.has("email")) {
+                        email = node.get("email").asText();
+                    }
+                    if (node.has("name") && (name == null || name.isBlank())) {
+                        name = node.get("name").asText();
+                    }
+                }
+            } catch (Exception ignored) {
+            }
+        }
+
+        if (email == null || email.isBlank()) {
+            throw new BadRequestException("Email is required for Google authentication");
+        }
+
+        final String normEmail = email.trim().toLowerCase(java.util.Locale.ROOT);
+        User user = userRepository.findByEmail(normEmail).orElse(null);
+
+        if (user == null) {
+            String candidateBase = (name != null && !name.isBlank())
+                    ? name.replaceAll("[^a-zA-Z0-9_]", "").toLowerCase(java.util.Locale.ROOT)
+                    : normEmail.split("@")[0].replaceAll("[^a-zA-Z0-9_]", "").toLowerCase(java.util.Locale.ROOT);
+
+            if (candidateBase.length() < 3) {
+                candidateBase = "user_" + candidateBase;
+            }
+            if (candidateBase.length() > 25) {
+                candidateBase = candidateBase.substring(0, 25);
+            }
+
+            String chosenUsername = candidateBase;
+            int suffix = 1;
+            while (userRepository.existsByUsername(chosenUsername)) {
+                chosenUsername = candidateBase + suffix;
+                suffix++;
+            }
+
+            user = User.builder()
+                    .username(chosenUsername)
+                    .email(normEmail)
+                    .password(passwordEncoder.encode(java.util.UUID.randomUUID().toString()))
+                    .xp(0)
+                    .level(1)
+                    .rank("Beginner")
+                    .coins(0)
+                    .currentStreak(0)
+                    .longestStreak(0)
+                    .gamesCompleted(0)
+                    .role("ROLE_USER")
+                    .competitiveRating(101)
+                    .build();
+
+            user = userRepository.save(user);
+        }
+
+        String token = jwtUtil.generateToken(user.getEmail(), user.getId(), user.getUsername());
+        return new AuthResponse(token, convertToDto(user));
+    }
+
     @Transactional(readOnly = true)
     public AuthResponse login(LoginRequest request) {
         User user = userRepository.findByEmail(request.getEmail()).orElse(null);

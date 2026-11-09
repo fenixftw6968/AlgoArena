@@ -27,8 +27,6 @@ export default function AuthShell({ kicker, title, lede, children, footer }) {
       <footer className="auth-foot">
         <span>AlgoArena</span>
         <span className="auth-foot-dot">·</span>
-        <span>Black · White · Lime algorithmic arena</span>
-        <span className="auth-foot-dot">·</span>
         <span className="mono">© {new Date().getFullYear()}</span>
         {footer}
       </footer>
