@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { GameProvider } from './context/GameContext';
@@ -37,6 +38,18 @@ import InstallPrompt from './components/PWA/InstallPrompt';
 
 
 export default function App() {
+  // Listen for Google OAuth callback in popup window across any route
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.hash.includes('access_token=')) {
+      const params = new URLSearchParams(window.location.hash.substring(1));
+      const accessToken = params.get('access_token');
+      if (accessToken && window.opener && !window.opener.closed) {
+        window.opener.postMessage({ type: 'GOOGLE_TOKEN_SUCCESS', token: accessToken }, '*');
+        window.close();
+      }
+    }
+  }, []);
+
   return (
     <BrowserRouter>
       <AuthProvider>

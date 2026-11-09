@@ -145,7 +145,7 @@ export default function GoogleLoginButton({ onError }) {
     const height = 620;
     const left = window.screenX + Math.max(0, (window.outerWidth - width) / 2);
     const top = window.screenY + Math.max(0, (window.outerHeight - height) / 2);
-    const redirectUri = window.location.origin + window.location.pathname;
+    const redirectUri = window.location.origin;
 
     const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${encodeURIComponent(
       redirectUri
