@@ -2,21 +2,86 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
+const DEFAULT_CLIENT_ID = '115695859558-c2hjaqu1v539tlen8k01nem9hopufavd.apps.googleusercontent.com';
+
 export default function GoogleLoginButton({ onError }) {
   const { loginWithGoogle } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const tokenClientRef = useRef(null);
 
-  const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+  const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || DEFAULT_CLIENT_ID;
 
-  // Initialize Google Identity Services
+  const handleAccessToken = async (token) => {
+    setLoading(true);
+    try {
+      const userRes = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const profile = await userRes.json();
+      if (!profile || !profile.email) {
+        throw new Error('Could not retrieve Google profile');
+      }
+
+      const res = await loginWithGoogle({
+        email: profile.email,
+        name: profile.name || profile.email.split('@')[0],
+        googleId: profile.sub,
+      });
+
+      setLoading(false);
+      if (res.success) {
+        navigate('/dashboard');
+      } else if (onError) {
+        onError(res.error || 'Google login failed');
+      }
+    } catch (e) {
+      setLoading(false);
+      if (onError) onError(e.message || 'Failed to retrieve Google profile');
+    }
+  };
+
+  // Check if current window or popup was redirected with #access_token=...
+  useEffect(() => {
+    if (window.location.hash.includes('access_token=')) {
+      const params = new URLSearchParams(window.location.hash.substring(1));
+      const accessToken = params.get('access_token');
+      if (accessToken) {
+        // Clear hash from address bar
+        window.history.replaceState(null, '', window.location.pathname);
+
+        // If inside popup window, send to parent and close
+        if (window.opener && !window.opener.closed) {
+          window.opener.postMessage({ type: 'GOOGLE_TOKEN_SUCCESS', token: accessToken }, '*');
+          window.close();
+          return;
+        }
+
+        // If inside main window
+        handleAccessToken(accessToken);
+      }
+    }
+  }, []);
+
+  // Listen for message from OAuth popup window
+  useEffect(() => {
+    const handleMessage = async (event) => {
+      if (event.data?.type === 'GOOGLE_TOKEN_SUCCESS' && event.data?.token) {
+        handleAccessToken(event.data.token);
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
+
+  // Initialize Google Identity Services (GIS)
   useEffect(() => {
     if (!clientId) return;
 
     const setupGoogle = () => {
+      // 1. One Tap
       if (window.google?.accounts?.id) {
-        // 1. Setup real Google One Tap prompt
         try {
           window.google.accounts.id.initialize({
             client_id: clientId,
@@ -33,49 +98,31 @@ export default function GoogleLoginButton({ onError }) {
             auto_select: false,
             cancel_on_tap_outside: false,
           });
-
-          // Show Google One Tap automatically
           window.google.accounts.id.prompt();
-        } catch (err) {
-          console.warn('Google One Tap init notice:', err);
+        } catch (e) {
+          console.warn('GIS One-Tap notice:', e);
         }
       }
 
-      // 2. Setup real Google OAuth2 Token Client for button clicks
+      // 2. Token Client
       if (window.google?.accounts?.oauth2) {
         try {
           tokenClientRef.current = window.google.accounts.oauth2.initTokenClient({
             client_id: clientId,
             scope: 'email profile openid',
             prompt: 'select_account',
-            callback: async (tokenResponse) => {
-              if (tokenResponse && tokenResponse.access_token) {
-                setLoading(true);
-                try {
-                  const userRes = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-                    headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
-                  });
-                  const profile = await userRes.json();
-                  const res = await loginWithGoogle({
-                    email: profile.email,
-                    name: profile.name,
-                    googleId: profile.sub,
-                  });
-                  setLoading(false);
-                  if (res.success) {
-                    navigate('/dashboard');
-                  } else if (onError) {
-                    onError(res.error || 'Google login failed');
-                  }
-                } catch (e) {
-                  setLoading(false);
-                  if (onError) onError('Failed to retrieve Google profile');
-                }
+            callback: (tokenResponse) => {
+              if (tokenResponse?.error) {
+                setLoading(false);
+                return;
+              }
+              if (tokenResponse?.access_token) {
+                handleAccessToken(tokenResponse.access_token);
               }
             },
           });
-        } catch (err) {
-          console.warn('Google OAuth2 client init notice:', err);
+        } catch (e) {
+          console.warn('GIS OAuth2 client notice:', e);
         }
       }
     };
@@ -88,59 +135,49 @@ export default function GoogleLoginButton({ onError }) {
           clearInterval(interval);
           setupGoogle();
         }
-      }, 100);
+      }, 150);
       return () => clearInterval(interval);
     }
-  }, [clientId, loginWithGoogle, navigate, onError]);
+  }, [clientId]);
+
+  const openOAuthPopup = () => {
+    const width = 500;
+    const height = 620;
+    const left = window.screenX + Math.max(0, (window.outerWidth - width) / 2);
+    const top = window.screenY + Math.max(0, (window.outerHeight - height) / 2);
+    const redirectUri = window.location.origin + window.location.pathname;
+
+    const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${encodeURIComponent(
+      redirectUri
+    )}&response_type=token&scope=${encodeURIComponent('email profile openid')}&prompt=select_account`;
+
+    const popup = window.open(
+      authUrl,
+      'GoogleOAuthWindow',
+      `width=${width},height=${height},left=${left},top=${top},status=no,menubar=no,toolbar=no,resizable=yes`
+    );
+
+    if (popup) {
+      popup.focus();
+    } else {
+      // If popup is blocked by browser, redirect current window
+      window.location.href = authUrl;
+    }
+  };
 
   const handleGoogleClick = () => {
-    // 1. If Google OAuth token client is initialized, request access token with account picker
+    // Priority 1: Use GIS token client if initialized
     if (tokenClientRef.current) {
-      tokenClientRef.current.requestAccessToken({ prompt: 'select_account' });
-      return;
+      try {
+        tokenClientRef.current.requestAccessToken({ prompt: 'select_account' });
+        return;
+      } catch (err) {
+        console.warn('Token client request error, falling back to popup:', err);
+      }
     }
 
-    // 2. If window.google.accounts.oauth2 is available, initialize immediately and trigger
-    if (clientId && window.google?.accounts?.oauth2) {
-      const client = window.google.accounts.oauth2.initTokenClient({
-        client_id: clientId,
-        scope: 'email profile openid',
-        prompt: 'select_account',
-        callback: async (tokenResponse) => {
-          if (tokenResponse && tokenResponse.access_token) {
-            setLoading(true);
-            try {
-              const userRes = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-                headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
-              });
-              const profile = await userRes.json();
-              const res = await loginWithGoogle({
-                email: profile.email,
-                name: profile.name,
-                googleId: profile.sub,
-              });
-              setLoading(false);
-              if (res.success) {
-                navigate('/dashboard');
-              } else if (onError) {
-                onError(res.error || 'Google login failed');
-              }
-            } catch (e) {
-              setLoading(false);
-              if (onError) onError('Failed to retrieve Google profile');
-            }
-          }
-        },
-      });
-      tokenClientRef.current = client;
-      client.requestAccessToken({ prompt: 'select_account' });
-      return;
-    }
-
-    // 3. Trigger Google One Tap if ready
-    if (clientId && window.google?.accounts?.id) {
-      window.google.accounts.id.prompt();
-    }
+    // Priority 2: Use direct Google OAuth2 popup window
+    openOAuthPopup();
   };
 
   return (
