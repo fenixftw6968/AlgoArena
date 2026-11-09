@@ -75,9 +75,9 @@ export default function IncomingInviteModal({
             width: 22px;
             height: 22px;
             border-radius: var(--radius-xs);
-            background: var(--surface-3);
-            border: 1px solid var(--border);
-            color: var(--accent);
+            background: var(--accent);
+            border: 2px solid #0A0A0A;
+            color: #0A0A0A;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -101,8 +101,8 @@ export default function IncomingInviteModal({
           }
 
           .ii-text strong {
-            color: var(--accent);
-            font-weight: 550;
+            color: var(--ink);
+            font-weight: 800;
           }
 
           .ii-actions {

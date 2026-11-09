@@ -139,7 +139,7 @@ export default function Home() {
       <style>{`
         .home-viewport {
           min-height: 100vh;
-          padding-top: 52px;
+          padding-top: 54px;
           display: flex;
           flex-direction: column;
         }
@@ -182,15 +182,23 @@ export default function Home() {
 
         .home-headline {
           font-size: clamp(2.5rem, 5vw, 3.75rem);
-          font-weight: 650;
+          font-weight: 800;
           letter-spacing: -0.04em;
           line-height: 1.1;
           color: var(--ink);
+          text-transform: uppercase;
           margin: 0;
         }
 
         .home-headline-gold {
-          color: var(--accent);
+          display: inline-block;
+          color: #0A0A0A;
+          background: var(--accent);
+          border: 3px solid #0A0A0A;
+          box-shadow: 6px 6px 0px #0A0A0A;
+          padding: 0 14px;
+          transform: rotate(-1deg);
+          text-transform: uppercase;
         }
 
         .home-subtext {
@@ -222,8 +230,8 @@ export default function Home() {
         }
 
         .home-signin-link {
-          color: var(--accent);
-          font-weight: 550;
+          color: var(--accent-ink);
+          font-weight: 800;
           text-decoration: underline;
           text-underline-offset: 3px;
         }
@@ -232,15 +240,20 @@ export default function Home() {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
           background: var(--surface);
-          border: 1px solid var(--border);
+          border: 2px solid #0A0A0A;
           border-radius: var(--radius);
-          box-shadow: var(--shadow-xs);
+          box-shadow: 4px 4px 0px #0A0A0A;
           overflow: hidden;
         }
 
         .home-metric-col {
           padding: 20px;
-          border-right: 1px solid var(--border);
+          border-right: 2px solid #0A0A0A;
+          transition: background 0.15s ease;
+        }
+
+        .home-metric-col:hover {
+          background: var(--accent-subtle);
         }
 
         .home-metric-col:last-child {
@@ -249,8 +262,8 @@ export default function Home() {
 
         .home-metric-val {
           font-size: 1.5rem;
-          font-weight: 600;
-          color: var(--accent);
+          font-weight: 800;
+          color: var(--accent-ink);
           letter-spacing: -0.02em;
         }
 
@@ -300,33 +313,40 @@ export default function Home() {
           align-items: center;
           gap: 4px;
           font-size: 0.8125rem;
-          font-weight: 550;
-          color: var(--accent);
+          font-weight: 800;
+          text-transform: uppercase;
+          color: var(--ink);
+          border-bottom: 3px solid var(--accent);
+          padding-bottom: 2px;
+          transition: background 0.12s ease;
+        }
+
+        .home-section-link:hover {
+          background: var(--accent);
         }
 
         .home-arenas-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-          gap: 14px;
+          gap: 16px;
         }
 
         .home-arena-card {
           background: var(--surface);
-          border: 1px solid var(--border);
+          border: 2px solid #0A0A0A;
           border-radius: var(--radius);
           padding: 18px;
-          box-shadow: var(--shadow-xs);
+          box-shadow: 4px 4px 0px #0A0A0A;
           display: flex;
           flex-direction: column;
           text-decoration: none;
           color: var(--ink);
-          transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+          transition: transform 0.12s ease, box-shadow 0.12s ease;
         }
 
         .home-arena-card:hover {
-          border-color: rgba(197, 244, 103, 0.45);
-          background: #171B14;
-          box-shadow: 0 4px 20px -4px rgba(197, 244, 103, 0.12);
+          box-shadow: 7px 7px 0px var(--accent);
+          transform: translate(-3px, -3px);
         }
 
         .home-arena-card-top {
@@ -337,22 +357,21 @@ export default function Home() {
         }
 
         .home-arena-card-icon {
-          width: 32px;
-          height: 32px;
+          width: 34px;
+          height: 34px;
           border-radius: var(--radius-sm);
-          background: rgba(197, 244, 103, 0.12);
-          border: 1px solid rgba(197, 244, 103, 0.25);
-          color: var(--accent);
+          background: var(--accent);
+          border: 2px solid #0A0A0A;
+          color: #0A0A0A;
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          transition: all 0.15s ease;
+          box-shadow: 2px 2px 0px #0A0A0A;
+          transition: transform 0.15s ease;
         }
 
         .home-arena-card:hover .home-arena-card-icon {
-          background: var(--accent);
-          border-color: var(--accent);
-          color: #0b0b0b;
+          transform: rotate(-6deg);
         }
 
         .home-arena-card-title {
@@ -393,8 +412,8 @@ export default function Home() {
         }
 
         .home-arena-card:hover .home-arena-arrow {
-          color: var(--accent);
-          transform: translateX(2px);
+          color: var(--ink);
+          transform: translateX(3px);
         }
 
         .home-duel-banner {
@@ -402,11 +421,11 @@ export default function Home() {
           align-items: center;
           justify-content: space-between;
           gap: 20px;
-          background: var(--surface);
-          border: 1px solid var(--border);
+          background: var(--accent);
+          border: 3px solid #0A0A0A;
           border-radius: var(--radius);
           padding: 18px 22px;
-          box-shadow: var(--shadow-xs);
+          box-shadow: 6px 6px 0px #0A0A0A;
           flex-wrap: wrap;
         }
 
@@ -417,33 +436,50 @@ export default function Home() {
         }
 
         .home-duel-icon {
-          width: 36px;
-          height: 36px;
+          width: 38px;
+          height: 38px;
           border-radius: var(--radius-sm);
-          background: var(--surface-3);
-          border: 1px solid var(--border);
-          color: var(--accent);
+          background: #FFFFFF;
+          border: 2px solid #0A0A0A;
+          color: #0A0A0A;
           display: inline-flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
+          box-shadow: 2px 2px 0px #0A0A0A;
         }
 
         .home-duel-heading {
           font-size: 0.9375rem;
-          font-weight: 600;
-          color: var(--ink);
+          font-weight: 800;
+          text-transform: uppercase;
+          color: #0A0A0A;
         }
 
         .home-duel-sub {
           font-size: 0.8125rem;
-          color: var(--ink-muted);
+          color: #1C1C1A;
           margin-top: 2px;
+          font-weight: 600;
+        }
+
+        .home-duel-banner .btn--primary,
+        .home-duel-banner .btn {
+          background: #0A0A0A;
+          color: var(--accent);
+          box-shadow: 3px 3px 0px #FFFFFF;
+        }
+
+        .home-duel-banner .btn--primary:hover:not(:disabled) {
+          background: #0A0A0A;
+          color: var(--accent-hover);
+          transform: translate(-1px, -1px);
+          box-shadow: 4px 4px 0px #FFFFFF;
         }
 
         .home-footer {
-          border-top: 1px solid var(--border);
-          background: var(--surface);
+          border-top: 3px solid #0A0A0A;
+          background: #0A0A0A;
           padding: 24px clamp(20px, 4vw, 32px);
         }
 
@@ -459,8 +495,9 @@ export default function Home() {
 
         .home-footer-name {
           font-size: 0.875rem;
-          font-weight: 600;
-          color: var(--ink);
+          font-weight: 800;
+          text-transform: uppercase;
+          color: var(--accent);
           margin-right: 12px;
         }
 
@@ -477,7 +514,7 @@ export default function Home() {
 
         .home-footer-link {
           font-size: 0.8125rem;
-          color: var(--ink-muted);
+          color: #FFFFFF;
           transition: color 0.12s ease;
         }
 
@@ -498,7 +535,7 @@ export default function Home() {
             border-right: none;
           }
           .home-metric-col:nth-child(-n+2) {
-            border-bottom: 1px solid var(--border);
+            border-bottom: 2px solid #0A0A0A;
           }
         }
       `}</style>

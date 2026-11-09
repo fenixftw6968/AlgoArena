@@ -122,13 +122,14 @@ export default function PlayModeModal({
         }
 
         .pm-mode:hover {
-          border-color: var(--accent);
-          background: #252525;
+          border-color: #0A0A0A;
+          background: var(--accent-subtle);
         }
 
         .pm-mode:hover .pm-mode-icon {
-          border-color: var(--accent);
-          color: var(--accent);
+          border-color: #0A0A0A;
+          color: #0A0A0A;
+          background: var(--accent);
         }
 
         .pm-mode-icon {

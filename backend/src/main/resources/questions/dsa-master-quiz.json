@@ -3,35 +3,35 @@
     "id": "dsa-1",
     "gameType": "dsa-master-quiz",
     "difficulty": "EASY",
-    "category": "Arrays",
-    "title": "Array Index Access",
-    "question": "What is the time complexity to access an element by index in a C++ array?",
+    "category": "Binary Trees",
+    "title": "Binary Tree Postorder Traversal",
+    "question": "Given a binary tree with root node value 1, left child 2, and right child 3, what is its Postorder traversal sequence?",
     "options": [
-      "O(1)",
-      "O(n)",
-      "O(log n)",
-      "O(n log n)"
+      "2, 3, 1",
+      "1, 2, 3",
+      "2, 1, 3",
+      "3, 2, 1"
     ],
-    "correctAnswer": "O(1)",
-    "explanation": "Arrays occupy contiguous memory blocks, allowing direct arithmetic offset calculations: Base_Address + Index * Size.",
-    "hint": "Direct offset calculation requires no search."
+    "correctAnswer": "2, 3, 1",
+    "explanation": "Postorder traversal visits Left subtree, then Right subtree, and finally the Root node (Left -> Right -> Root). Hence: 2, 3, 1.",
+    "hint": "Postorder: Left, Right, Root."
   },
   {
     "id": "dsa-2",
     "gameType": "dsa-master-quiz",
     "difficulty": "EASY",
-    "category": "Arrays",
-    "title": "Dynamic Array Amortized Time",
-    "question": "What is the amortized time complexity of inserting an element at the end of a std::vector in C++?",
+    "category": "Binary Search Trees",
+    "title": "BST Inorder Traversal Property",
+    "question": "What is guaranteed about the output sequence produced by an Inorder traversal of a valid Binary Search Tree (BST)?",
     "options": [
-      "O(1)",
-      "O(n)",
-      "O(log n)",
-      "O(n^2)"
+      "The elements are output in strictly non-decreasing sorted order",
+      "The root element always appears first in the sequence",
+      "All leaf nodes are output before any internal nodes",
+      "The sequence alternates between minimum and maximum keys"
     ],
-    "correctAnswer": "O(1)",
-    "explanation": "std::vector uses geometric array growth (doubling capacity), resulting in O(1) amortized insertion time.",
-    "hint": "Geometric doubling makes reallocations rare."
+    "correctAnswer": "The elements are output in strictly non-decreasing sorted order",
+    "explanation": "Because BST invariant dictates left < root < right, an in-order traversal (Left, Root, Right) processes values in strictly sorted ascending order.",
+    "hint": "Left < Root < Right visits all keys in sorted order."
   },
   {
     "id": "dsa-3",
@@ -54,18 +54,18 @@
     "id": "dsa-4",
     "gameType": "dsa-master-quiz",
     "difficulty": "EASY",
-    "category": "Arrays",
-    "title": "Prefix Sum Range Queries",
-    "question": "After O(n) prefix sum preprocessing, what is the time complexity to find the sum of elements from index L to R?",
+    "category": "Linked Lists",
+    "title": "Floyd's Cycle Detection Pointers",
+    "question": "In Floyd's Cycle-Finding Algorithm (Tortoise and Hare), when slow moves 1 step and fast moves 2 steps, why are they guaranteed to meet if a cycle exists?",
     "options": [
-      "O(1)",
-      "O(R - L)",
-      "O(log n)",
-      "O(n)"
+      "The distance between fast and slow decreases by exactly 1 node per iteration within the loop",
+      "Fast moves infinitely faster than slow",
+      "Slow reverses direction upon entering the loop",
+      "The memory addresses wrap around modulo table size"
     ],
-    "correctAnswer": "O(1)",
-    "explanation": "Range sum query [L, R] is calculated in O(1) using: Prefix[R] - Prefix[L - 1].",
-    "hint": "Subtracting two precomputed sums."
+    "correctAnswer": "The distance between fast and slow decreases by exactly 1 node per iteration within the loop",
+    "explanation": "Once both pointers are inside a cycle of length C, the relative distance between them changes by (2 - 1) = 1 step per step, ensuring the gap reduces to 0 (a meeting) in at most C steps.",
+    "hint": "Relative speed difference is 1, so the gap closes by 1 node on each step."
   },
   {
     "id": "dsa-5",
@@ -88,18 +88,18 @@
     "id": "dsa-6",
     "gameType": "dsa-master-quiz",
     "difficulty": "EASY",
-    "category": "Strings",
-    "title": "Valid Palindrome Check",
-    "question": "What is the optimal time and space complexity to check if a string of length n is a palindrome?",
+    "category": "Graphs",
+    "title": "BFS Shortest Path Invariant",
+    "question": "Why does Breadth-First Search (BFS) guarantee finding the shortest path between two nodes in an unweighted graph?",
     "options": [
-      "Time O(n), Space O(1)",
-      "Time O(n^2), Space O(1)",
-      "Time O(n), Space O(n)",
-      "Time O(log n), Space O(1)"
+      "It visits all vertices at distance d before exploring any vertex at distance d + 1",
+      "It uses a priority queue ordered by heuristic edge weights",
+      "It explores deepest nodes first using a call stack",
+      "It sorts vertices topologically before searching"
     ],
-    "correctAnswer": "Time O(n), Space O(1)",
-    "explanation": "Two pointers comparing characters from outside inward run in O(n/2) = O(n) time using O(1) space.",
-    "hint": "Two pointers moving inward."
+    "correctAnswer": "It visits all vertices at distance d before exploring any vertex at distance d + 1",
+    "explanation": "BFS explores vertex frontiers level by level in FIFO order. The first time a target vertex is reached, the path length is guaranteed to be minimal.",
+    "hint": "Explores all vertices at distance d before reaching any vertex at distance d + 1."
   },
   {
     "id": "dsa-7",
@@ -122,35 +122,35 @@
     "id": "dsa-8",
     "gameType": "dsa-master-quiz",
     "difficulty": "EASY",
-    "category": "Linked Lists",
-    "title": "Singly Linked List Insertion at Head",
-    "question": "What is the time complexity of inserting a node at the head of a singly linked list?",
+    "category": "Dynamic Programming",
+    "title": "0/1 Knapsack Space Optimization",
+    "question": "When optimizing the 0/1 Knapsack DP table to a 1D array of capacity W, why must the inner loop iterate backwards from W down to weight[i]?",
     "options": [
-      "O(1)",
-      "O(n)",
-      "O(log n)",
-      "O(n^2)"
+      "To prevent using the current item multiple times in the same transition step",
+      "To sort the weights in descending order",
+      "To avoid integer overflow when adding values",
+      "Because negative weights are unsupported"
     ],
-    "correctAnswer": "O(1)",
-    "explanation": "Creating a new node and setting new_node->next = head takes constant time O(1).",
-    "hint": "Direct pointer assignment."
+    "correctAnswer": "To prevent using the current item multiple times in the same transition step",
+    "explanation": "Iterating forwards uses dp[w - weight] from the CURRENT item iteration (unbounded knapsack). Iterating backwards preserves the value from the PREVIOUS item iteration.",
+    "hint": "Going forwards would let the same item be reused multiple times."
   },
   {
     "id": "dsa-9",
     "gameType": "dsa-master-quiz",
     "difficulty": "EASY",
-    "category": "Linked Lists",
-    "title": "Linked List Random Access",
-    "question": "What is the time complexity to access the k-th node in a singly linked list of length n?",
+    "category": "Stacks & Queues",
+    "title": "Monotonic Stack Next Greater Element",
+    "question": "To find the Next Greater Element for every element in an array, what invariant should the stack maintain during traversal?",
     "options": [
-      "O(k)",
-      "O(1)",
-      "O(log k)",
-      "O(n log n)"
+      "A monotonic decreasing order of values (or their indices)",
+      "A strictly increasing order of values",
+      "Elements sorted by their frequency of occurrence",
+      "First element always equal to array maximum"
     ],
-    "correctAnswer": "O(k)",
-    "explanation": "Linked list elements are not contiguous in memory, requiring traversal from head through k pointers.",
-    "hint": "Sequential pointer traversal."
+    "correctAnswer": "A monotonic decreasing order of values (or their indices)",
+    "explanation": "A monotonic decreasing stack holds elements waiting for a greater element. When an element greater than stack.top() appears, it is the Next Greater Element for top().",
+    "hint": "Keep elements in decreasing order; when a bigger element appears, pop and record."
   },
   {
     "id": "dsa-10",
@@ -360,18 +360,18 @@
     "id": "dsa-22",
     "gameType": "dsa-master-quiz",
     "difficulty": "EASY",
-    "category": "Graphs",
-    "title": "Adjacency Matrix Space",
-    "question": "What is the space complexity of representing a graph with V vertices and E edges using an Adjacency Matrix?",
+    "category": "Code Output",
+    "title": "Recursion Stack Output Trace",
+    "question": "What does the following recursive function print for `fun(3)`?\n```cpp\nvoid fun(int n) {\n    if (n == 0) return;\n    fun(n - 1);\n    cout << n << \" \";\n}\n```",
     "options": [
-      "O(V^2)",
-      "O(V + E)",
-      "O(E^2)",
-      "O(V * E)"
+      "1 2 3",
+      "3 2 1",
+      "3 2 1 0",
+      "1 2"
     ],
-    "correctAnswer": "O(V^2)",
-    "explanation": "A V x V 2D matrix allocates V^2 memory cells regardless of the number of edges.",
-    "hint": "V by V matrix size."
+    "correctAnswer": "1 2 3",
+    "explanation": "The recursive call occurs before printing. Calls stack up until fun(0) returns, then the print statements execute as unwinding occurs: 1, then 2, then 3.",
+    "hint": "The print happens during the unwinding phase of the recursion stack."
   },
   {
     "id": "dsa-23",
@@ -411,69 +411,69 @@
     "id": "dsa-25",
     "gameType": "dsa-master-quiz",
     "difficulty": "EASY",
-    "category": "Searching",
-    "title": "Binary Search Time Complexity",
-    "question": "What is the worst-case time complexity of Binary Search on an array of size n?",
+    "category": "Heaps & Priority Queues",
+    "title": "Min-Heap Insertion Rebalance",
+    "question": "When a new element is inserted at the end of a Min-Heap array, which operation restores the heap invariant?",
     "options": [
-      "O(log n)",
-      "O(n)",
-      "O(1)",
-      "O(n log n)"
+      "Percolate up (bubble up / sift up) with parent nodes",
+      "Sift down with the smaller child",
+      "Reverse the entire array",
+      "Topological sort of the tree nodes"
     ],
-    "correctAnswer": "O(log n)",
-    "explanation": "Binary search halves the search space in every step: n -> n/2 -> n/4 -> ... -> 1, taking log2(n) steps.",
-    "hint": "Halving space at each comparison."
+    "correctAnswer": "Percolate up (bubble up / sift up) with parent nodes",
+    "explanation": "The element is placed at index N (next leaf), then compared and swapped with its parent at `(i - 1) / 2` until the parent is smaller or it becomes root.",
+    "hint": "It bubbles up toward the root by swapping with smaller parents."
   },
   {
     "id": "dsa-26",
     "gameType": "dsa-master-quiz",
     "difficulty": "EASY",
-    "category": "Sorting",
-    "title": "Merge Sort Time Complexity",
-    "question": "What is the worst-case time complexity of Merge Sort on an array of n elements?",
+    "category": "Hashing",
+    "title": "Quadratic Probing vs Linear Probing",
+    "question": "What primary issue with Linear Probing in hash tables is mitigated by Quadratic Probing?",
     "options": [
-      "O(n log n)",
-      "O(n^2)",
-      "O(n)",
-      "O(log n)"
+      "Primary Clustering (formation of long continuous blocks of occupied slots)",
+      "Hash collision rate dropping to zero",
+      "Secondary index corruption",
+      "Infinite loops during successful lookups"
     ],
-    "correctAnswer": "O(n log n)",
-    "explanation": "Merge sort divides the array into halves in O(log n) levels and merges them in O(n) per level, giving O(n log n) in all cases.",
-    "hint": "Divide and conquer with linear merge."
+    "correctAnswer": "Primary Clustering (formation of long continuous blocks of occupied slots)",
+    "explanation": "Linear Probing causes adjacent occupied slots to merge into large contiguous clusters. Quadratic Probing uses an `i^2` step offset to disperse collisions across the table.",
+    "hint": "It breaks up continuous clusters of adjacent occupied slots."
   },
   {
     "id": "dsa-27",
     "gameType": "dsa-master-quiz",
     "difficulty": "EASY",
-    "category": "Sorting",
-    "title": "Merge Sort Auxiliary Space",
-    "question": "What is the standard auxiliary space complexity of Merge Sort on an array of size n?",
+    "category": "Trees",
+    "title": "AVL Tree Rotation Trigger",
+    "question": "An AVL Tree node requires rebalancing when its balance factor (height(left) - height(right)) becomes:",
     "options": [
-      "O(n)",
-      "O(1)",
-      "O(log n)",
-      "O(n^2)"
+      "Greater than +1 or less than -1",
+      "Exactly equal to 0",
+      "Equal to +1 only",
+      "Greater than the depth of the root"
     ],
-    "correctAnswer": "O(n)",
-    "explanation": "Standard Merge Sort creates temporary auxiliary arrays during the merge step to hold elements.",
-    "hint": "Temporary buffer for merging."
+    "correctAnswer": "Greater than +1 or less than -1",
+    "explanation": "AVL trees maintain the balance invariant: for every node, the difference in height between its left and right subtrees must be -1, 0, or +1. A factor of +2 or -2 triggers rotation.",
+    "hint": "The height difference must never exceed 1 in magnitude."
   },
   {
     "id": "dsa-28",
     "gameType": "dsa-master-quiz",
     "difficulty": "EASY",
-    "category": "Hashing",
-    "title": "Hash Table Average Search Time",
-    "question": "What is the average-case time complexity of searching a key in a Hash Map with a good hash function?",
+    "category": "Graphs",
+    "title": "Topological Sort Existence Condition",
+    "question": "A graph admits a valid Topological Ordering if and only if it is a:",
     "options": [
-      "O(1)",
-      "O(n)",
-      "O(log n)",
-      "O(n^2)"
+      "Directed Acyclic Graph (DAG)",
+      "Connected Undirected Graph",
+      "Complete Bipartite Graph",
+      "Eulerian Tour Graph"
     ],
-    "correctAnswer": "O(1)",
-    "explanation": "A uniform hash function distributes keys across buckets evenly, giving O(1) constant average lookup time.",
-    "hint": "Direct bucket mapping."
+    "correctAnswer": "Directed Acyclic Graph (DAG)",
+    "explanation": "A cycle creates a dependency deadlock where no vertex can be placed first. Hence, topological sorting requires directed edges and zero cycles (a DAG).",
+    "hint": "It must have directed edges and contain zero cycles."
   },
   {
     "id": "dsa-29",
@@ -530,35 +530,35 @@
     "id": "dsa-32",
     "gameType": "dsa-master-quiz",
     "difficulty": "EASY",
-    "category": "Time Complexity",
-    "title": "Nested Loops Complexity",
-    "question": "What is the time complexity of the following C++ loop nest?\n```cpp\nfor (int i = 0; i < n; i++) {\n    for (int j = 0; j < n; j++) {\n        sum += arr[i][j];\n    }\n}\n```",
+    "category": "Sorting",
+    "title": "QuickSort Pivot Worst-Case Invariant",
+    "question": "What condition causes standard Lomuto/Hoare QuickSort to degenerate into its worst-case O(n^2) performance when picking the first or last element as pivot?",
     "options": [
-      "O(n^2)",
-      "O(n)",
-      "O(n log n)",
-      "O(2^n)"
+      "The input array is already sorted or reverse sorted",
+      "All elements are distinct and randomized",
+      "The array length is an exact power of 2",
+      "The pivot is always the exact median element"
     ],
-    "correctAnswer": "O(n^2)",
-    "explanation": "Outer loop runs n times and inner loop runs n times for each outer iteration: n * n = n^2 total iterations.",
-    "hint": "Double nested loops of size n."
+    "correctAnswer": "The input array is already sorted or reverse sorted",
+    "explanation": "When sorted data is partitioned using the first/last element, partitions are maximally unbalanced (1 element vs n - 1 elements), leading to n recursive levels.",
+    "hint": "Unbalanced splits occur on already sorted inputs when choosing edge elements."
   },
   {
     "id": "dsa-33",
     "gameType": "dsa-master-quiz",
     "difficulty": "EASY",
-    "category": "Time Complexity",
-    "title": "Logarithmic Loop Step",
-    "question": "What is the time complexity of this loop?\n```cpp\nfor (int i = 1; i < n; i *= 2) {\n    cout << i << endl;\n}\n```",
+    "category": "Trie (Prefix Tree)",
+    "title": "Trie Node Structure",
+    "question": "In a standard 26-character English alphabet Trie, what does each node primarily store?",
     "options": [
-      "O(log n)",
-      "O(n)",
-      "O(n^2)",
-      "O(1)"
+      "An array or map of 26 child node pointers and an `isEndOfWord` boolean flag",
+      "The complete string formed from root to that node",
+      "A hash of all previously inserted dictionary words",
+      "A balanced AVL subtree containing words"
     ],
-    "correctAnswer": "O(log n)",
-    "explanation": "The loop index doubles in each step (1, 2, 4, 8, ...), reaching n in log2(n) iterations.",
-    "hint": "Geometric multiplication by 2."
+    "correctAnswer": "An array or map of 26 child node pointers and an `isEndOfWord` boolean flag",
+    "explanation": "Each Trie node stores pointers to children corresponding to character edges (e.g. `children[26]`) and a boolean marker indicating if the path represents a completed word.",
+    "hint": "Pointers to children for each letter plus an end-of-word flag."
   },
   {
     "id": "dsa-34",
@@ -615,18 +615,18 @@
     "id": "dsa-37",
     "gameType": "dsa-master-quiz",
     "difficulty": "EASY",
-    "category": "Strings",
-    "title": "String Length in C++",
-    "question": "What is the time complexity of calling s.length() on a std::string in C++11 and later?",
+    "category": "Disjoint Set Union (DSU)",
+    "title": "DSU Path Compression Effect",
+    "question": "What does the 'Path Compression' optimization do during the `find(x)` operation in a Disjoint Set Union (Union-Find) structure?",
     "options": [
-      "O(1)",
-      "O(n)",
-      "O(log n)",
-      "O(n^2)"
+      "It points every visited node directly to the representative root of the set",
+      "It combines two sets by comparing their sizes or ranks",
+      "It sorts the elements in the disjoint set alphabetically",
+      "It deletes disconnected graph components"
     ],
-    "correctAnswer": "O(1)",
-    "explanation": "In modern C++, std::string maintains its size in a member variable, making .length() and .size() constant O(1) operations.",
-    "hint": "Size is stored as a member variable."
+    "correctAnswer": "It points every visited node directly to the representative root of the set",
+    "explanation": "Path compression flattens the tree structure by making every traversed node point directly to the root, reducing future `find` lookups to near O(1) amortized time.",
+    "hint": "It flattens tree height by linking traversed nodes straight to the root."
   },
   {
     "id": "dsa-38",
@@ -717,35 +717,35 @@
     "id": "dsa-43",
     "gameType": "dsa-master-quiz",
     "difficulty": "EASY",
-    "category": "Queues",
-    "title": "Circular Queue Dequeue",
-    "question": "In a FIFO queue implemented with a circular array buffer, what is the time complexity of the dequeue operation?",
+    "category": "Linked Lists",
+    "title": "Reversing a Singly Linked List",
+    "question": "When reversing a singly linked list iteratively with three pointers (`prev = null`, `curr = head`, `next`), what is the correct pointer update order inside the loop?",
     "options": [
-      "O(1)",
-      "O(n)",
-      "O(log n)",
-      "O(n^2)"
+      "next = curr->next; curr->next = prev; prev = curr; curr = next;",
+      "curr->next = prev; next = curr->next; curr = next; prev = curr;",
+      "prev = curr; curr = curr->next; next = prev;",
+      "curr = curr->next; prev->next = curr; next = prev;"
     ],
-    "correctAnswer": "O(1)",
-    "explanation": "A circular buffer advances the front pointer with modulo arithmetic in O(1) constant time without shifting remaining elements.",
-    "hint": "Circular buffers update index pointers directly."
+    "correctAnswer": "next = curr->next; curr->next = prev; prev = curr; curr = next;",
+    "explanation": "You must first save the remainder of the list (`next = curr->next`), then reverse the current link (`curr->next = prev`), advance `prev = curr`, and finally advance `curr = next`.",
+    "hint": "Save the forward pointer first so you don't lose the remaining list."
   },
   {
     "id": "dsa-44",
     "gameType": "dsa-master-quiz",
     "difficulty": "EASY",
-    "category": "Searching",
-    "title": "Linear Search Worst Case",
-    "question": "What is the worst-case time complexity of linear search on an unsorted array of size n?",
+    "category": "Binary Trees",
+    "title": "Binary Tree Diameter Definition",
+    "question": "The diameter (or width) of a binary tree is defined as:",
     "options": [
-      "O(n)",
-      "O(1)",
-      "O(log n)",
-      "O(n log n)"
+      "The number of edges on the longest path between any two leaf nodes in the tree",
+      "The total number of nodes located at the deepest level",
+      "The maximum difference between leaf depths",
+      "The height of the left subtree minus height of the right subtree"
     ],
-    "correctAnswer": "O(n)",
-    "explanation": "If the target element is at the very last index or absent, linear search must inspect all n elements sequentially, requiring O(n) comparisons.",
-    "hint": "In the worst case, every element must be inspected."
+    "correctAnswer": "The number of edges on the longest path between any two leaf nodes in the tree",
+    "explanation": "Diameter is the length of the longest path between any two nodes in a tree, which may or may not pass through the root node.",
+    "hint": "The longest path connecting any pair of nodes in the tree."
   },
   {
     "id": "dsa-45",
@@ -768,18 +768,18 @@
     "id": "dsa-46",
     "gameType": "dsa-master-quiz",
     "difficulty": "EASY",
-    "category": "Strings",
-    "title": "String Index Access",
-    "question": "In C++, what is the time complexity to access the character at index i using operator[] on a std::string?",
+    "category": "Code Output",
+    "title": "Bitwise XOR In-Place Array Property",
+    "question": "Given an array where every integer appears twice except one single number that appears once, how does XOR fold the array to find the unique number?",
     "options": [
-      "O(1)",
-      "O(n)",
-      "O(log n)",
-      "O(i)"
+      "XOR is commutative and associative, and X ^ X = 0 while X ^ 0 = X",
+      "XOR adds all numbers modulo 2^32",
+      "XOR multiplies odd numbers and subtracts even numbers",
+      "XOR clears only the least significant bit of each number"
     ],
-    "correctAnswer": "O(1)",
-    "explanation": "std::string stores its characters in contiguous memory, allowing direct address calculation in O(1) constant time.",
-    "hint": "Contiguous character storage allows direct indexing."
+    "correctAnswer": "XOR is commutative and associative, and X ^ X = 0 while X ^ 0 = X",
+    "explanation": "Identical pairs cancel out (`a ^ a = 0`). Because order does not matter, `(a ^ a) ^ (b ^ b) ^ ... ^ unique = 0 ^ unique = unique`.",
+    "hint": "Any number XORed with itself is 0, and XORed with 0 is itself."
   },
   {
     "id": "dsa-47",
@@ -802,18 +802,18 @@
     "id": "dsa-48",
     "gameType": "dsa-master-quiz",
     "difficulty": "EASY",
-    "category": "Linked Lists",
-    "title": "Singly Linked List Delete Head",
-    "question": "What is the time complexity of deleting the head node of a singly linked list given the head pointer?",
+    "category": "Greedy Algorithms",
+    "title": "Activity Selection Problem Invariant",
+    "question": "In the greedy Activity Selection problem, which sorting criterion guarantees an optimal solution?",
     "options": [
-      "O(1)",
-      "O(n)",
-      "O(log n)",
-      "O(n^2)"
+      "Sort activities in ascending order of their finish times",
+      "Sort activities in ascending order of their start times",
+      "Sort activities in descending order of their total duration",
+      "Sort activities by earliest start time minus finish time"
     ],
-    "correctAnswer": "O(1)",
-    "explanation": "Deleting the head only requires advancing the head pointer to head->next and freeing the old node, taking O(1) time.",
-    "hint": "No list traversal is needed to remove the first node."
+    "correctAnswer": "Sort activities in ascending order of their finish times",
+    "explanation": "Picking the activity that finishes earliest leaves the maximum remaining time available for subsequent compatible activities.",
+    "hint": "Finishing as early as possible frees up the resource for more future activities."
   },
   {
     "id": "dsa-49",
@@ -887,18 +887,18 @@
     "id": "dsa-53",
     "gameType": "dsa-master-quiz",
     "difficulty": "MEDIUM",
-    "category": "Arrays",
-    "title": "Majority Element Boyer-Moore",
-    "question": "What is the space complexity of the Boyer-Moore Voting Algorithm to find a majority element (> n/2 occurrences)?",
+    "category": "Strings",
+    "title": "KMP String Matching LPS Array",
+    "question": "In the Knuth-Morris-Pratt (KMP) pattern matching algorithm, what does the LPS array store for each index i?",
     "options": [
-      "O(1)",
-      "O(n)",
-      "O(log n)",
-      "O(n/2)"
+      "Length of the longest proper prefix of pattern[0..i] that is also a suffix of pattern[0..i]",
+      "The frequency count of characters up to index i",
+      "The byte offset to the next vowel in the text",
+      "The ASCII hash value of the pattern"
     ],
-    "correctAnswer": "O(1)",
-    "explanation": "Boyer-Moore Voting Algorithm tracks only a candidate variable and a counter, requiring strictly O(1) auxiliary space.",
-    "hint": "Only requires a single candidate and a counter variable."
+    "correctAnswer": "Length of the longest proper prefix of pattern[0..i] that is also a suffix of pattern[0..i]",
+    "explanation": "LPS stands for 'Longest Prefix which is also Suffix'. It informs the matcher how many characters can be skipped upon mismatch without backtracking the text index.",
+    "hint": "Longest proper prefix that matches a suffix of the pattern."
   },
   {
     "id": "dsa-54",
@@ -921,18 +921,18 @@
     "id": "dsa-55",
     "gameType": "dsa-master-quiz",
     "difficulty": "MEDIUM",
-    "category": "Arrays",
-    "title": "Next Permutation Algorithm",
-    "question": "What is the time complexity of generating the lexicographically next permutation of an array of size n?",
+    "category": "Stacks & Queues",
+    "title": "Queue Implementation Using Stacks",
+    "question": "When implementing a FIFO Queue using two LIFO Stacks (stack1 for enqueue, stack2 for dequeue), when should elements be transferred from stack1 to stack2?",
     "options": [
-      "O(n)",
-      "O(n log n)",
-      "O(n!)",
-      "O(1)"
+      "Only when stack2 is completely empty during a dequeue/peek operation",
+      "After every single enqueue operation",
+      "Whenever stack1 has more than 5 elements",
+      "Periodically using a background timer thread"
     ],
-    "correctAnswer": "O(n)",
-    "explanation": "Finding the pivot from the right, swapping with the next larger element, and reversing the suffix takes O(n) linear time.",
-    "hint": "Single reverse scan and suffix reversal."
+    "correctAnswer": "Only when stack2 is completely empty during a dequeue/peek operation",
+    "explanation": "Transferring elements only when stack2 is empty preserves FIFO order while amortizing the transfer cost to O(1) per operation over time.",
+    "hint": "Transfer all elements in reverse order only when the dequeue stack is empty."
   },
   {
     "id": "dsa-56",
@@ -955,18 +955,18 @@
     "id": "dsa-57",
     "gameType": "dsa-master-quiz",
     "difficulty": "MEDIUM",
-    "category": "Arrays",
-    "title": "Search in 2D Sorted Matrix",
-    "question": "In an m x n matrix where every row and column is sorted, what is the optimal time complexity to search for a target?",
+    "category": "Binary Trees",
+    "title": "Lowest Common Ancestor (LCA) in BST",
+    "question": "To find the Lowest Common Ancestor (LCA) of nodes p and q in a BST, how do we choose the branch from current node curr?",
     "options": [
-      "O(m + n)",
-      "O(m * n)",
-      "O(log(m + n))",
-      "O(m log n)"
+      "If both p and q are smaller than curr, go left; if both are larger, go right; otherwise curr is the LCA",
+      "Always go to the subtree with greater height",
+      "Perform a full BFS search for p, then a full DFS for q",
+      "Choose the left branch whenever p is odd"
     ],
-    "correctAnswer": "O(m + n)",
-    "explanation": "Starting at top-right (or bottom-left) eliminates an entire row or column at each comparison in O(m + n) steps.",
-    "hint": "Step-wise elimination from corner."
+    "correctAnswer": "If both p and q are smaller than curr, go left; if both are larger, go right; otherwise curr is the LCA",
+    "explanation": "In a BST, if p and q fall on opposite sides of curr (or one equals curr), curr is the first split point and therefore the Lowest Common Ancestor.",
+    "hint": "The first node where the paths to p and q split is their LCA."
   },
   {
     "id": "dsa-58",
@@ -989,52 +989,52 @@
     "id": "dsa-59",
     "gameType": "dsa-master-quiz",
     "difficulty": "MEDIUM",
-    "category": "Arrays",
-    "title": "Spiral Matrix Traversal",
-    "question": "What is the time complexity of printing all elements of an m x n matrix in spiral order?",
+    "category": "Dynamic Programming",
+    "title": "Optimal Substructure Property",
+    "question": "A problem is said to have an 'Optimal Substructure' if:",
     "options": [
-      "O(m * n)",
-      "O(m + n)",
-      "O(m log n)",
-      "O((m * n)^2)"
+      "An optimal solution to the problem contains optimal solutions to its subproblems",
+      "The problem can be solved in strictly linear time",
+      "The problem does not require any dynamic memory allocation",
+      "All subproblems can be executed concurrently without shared state"
     ],
-    "correctAnswer": "O(m * n)",
-    "explanation": "Every element is visited exactly once across top, right, bottom, and left boundary contractions in O(m * n) time.",
-    "hint": "Every cell is visited once."
+    "correctAnswer": "An optimal solution to the problem contains optimal solutions to its subproblems",
+    "explanation": "Optimal substructure is a prerequisite for Greedy and DP: optimal global decisions are composed of optimal decisions for smaller sub-problems.",
+    "hint": "The optimal global answer can be constructed from optimal answers to subproblems."
   },
   {
     "id": "dsa-60",
     "gameType": "dsa-master-quiz",
     "difficulty": "MEDIUM",
-    "category": "Strings",
-    "title": "Longest Palindromic Substring",
-    "question": "What is the time complexity of the Expand Around Center approach for finding the longest palindromic substring?",
+    "category": "Bit Manipulation",
+    "title": "Brian Kernighan's Bit Counting Trick",
+    "question": "What does the bitwise expression `n & (n - 1)` accomplish in a single operation?",
     "options": [
-      "O(n^2)",
-      "O(n)",
-      "O(n log n)",
-      "O(n^3)"
+      "It clears the lowest (rightmost) set bit (1-bit) of n",
+      "It doubles the value of n",
+      "It flips all bits of n",
+      "It checks if n is divisible by 3"
     ],
-    "correctAnswer": "O(n^2)",
-    "explanation": "There are 2n - 1 possible centers. Expanding from each center takes up to O(n) time, yielding O(n^2) total time with O(1) extra space.",
-    "hint": "Consider single-character and pair-character centers."
+    "correctAnswer": "It clears the lowest (rightmost) set bit (1-bit) of n",
+    "explanation": "Subtracting 1 flips the rightmost set bit and all bits below it. ANDing with the original `n` zeros out that rightmost set bit, counting 1s in O(set bits) time.",
+    "hint": "It clears the lowest set bit in the binary representation."
   },
   {
     "id": "dsa-61",
     "gameType": "dsa-master-quiz",
     "difficulty": "MEDIUM",
-    "category": "Strings",
-    "title": "Manacher Algorithm Complexity",
-    "question": "What is the time complexity of Manachers Algorithm for finding the longest palindromic substring?",
+    "category": "Graphs",
+    "title": "Bipartite Graph 2-Coloring Invariant",
+    "question": "A graph is Bipartite (can be colored with 2 colors without adjacent matching colors) if and only if it contains:",
     "options": [
-      "O(n)",
-      "O(n log n)",
-      "O(n^2)",
-      "O(n sqrt(n))"
+      "No odd-length cycles",
+      "No even-length cycles",
+      "An even number of total edges",
+      "Zero vertices with degree higher than 2"
     ],
-    "correctAnswer": "O(n)",
-    "explanation": "Manachers algorithm utilizes palindrome symmetry and rightmost boundary tracking to achieve linear O(n) time.",
-    "hint": "Linear time palindrome algorithm."
+    "correctAnswer": "No odd-length cycles",
+    "explanation": "An odd-length cycle (like a triangle of 3 vertices) inevitably forces two adjacent vertices to share the same color. Graphs with only even cycles or trees are always bipartite.",
+    "hint": "Odd-length cycles make 2-coloring impossible."
   },
   {
     "id": "dsa-62",
@@ -1057,18 +1057,18 @@
     "id": "dsa-63",
     "gameType": "dsa-master-quiz",
     "difficulty": "MEDIUM",
-    "category": "Strings",
-    "title": "KMP Time Complexity",
-    "question": "What is the overall worst-case time complexity of the KMP algorithm to search a pattern of length m in text of length n?",
+    "category": "Recursion & Backtracking",
+    "title": "N-Queens Safe Placement Check",
+    "question": "When placing a Queen at row `r` and column `c` on an N-Queens board, which diagonal indices can be used with hash sets for O(1) conflict checking?",
     "options": [
-      "O(n + m)",
-      "O(n * m)",
-      "O(n log m)",
-      "O(n^2)"
+      "`r - c` for main diagonals and `r + c` for anti-diagonals",
+      "`r * c` for main diagonals and `r / c` for anti-diagonals",
+      "`r ^ c` for all diagonals",
+      "`r % c` for main diagonals and `c % r` for anti-diagonals"
     ],
-    "correctAnswer": "O(n + m)",
-    "explanation": "Preprocessing LPS takes O(m) and text scanning takes O(n), making the total time O(n + m).",
-    "hint": "Linear in text plus pattern length."
+    "correctAnswer": "`r - c` for main diagonals and `r + c` for anti-diagonals",
+    "explanation": "On a chess board, elements on the same main diagonal share a constant `row - col`, and elements on the anti-diagonal share a constant `row + col`.",
+    "hint": "Row minus col is constant along one diagonal; row plus col along the other."
   },
   {
     "id": "dsa-64",

@@ -44,19 +44,16 @@ export default function NetworkStatusIndicator() {
         display: 'inline-flex',
         alignItems: 'center',
         gap: '8px',
-        padding: '8px 16px',
-        borderRadius: '999px',
+        padding: '9px 16px',
+        borderRadius: '0px',
         fontSize: '0.8125rem',
-        fontWeight: 600,
-        boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
-        backdropFilter: 'blur(10px)',
-        border: isOnline
-          ? '1px solid rgba(197, 244, 103, 0.4)'
-          : '1px solid rgba(239, 68, 68, 0.4)',
-        background: isOnline
-          ? 'rgba(23, 27, 20, 0.94)'
-          : 'rgba(30, 15, 15, 0.94)',
-        color: isOnline ? '#C5F467' : '#F87171',
+        fontWeight: 800,
+        textTransform: 'uppercase',
+        fontFamily: 'var(--font-mono)',
+        boxShadow: '4px 4px 0px #0A0A0A',
+        border: '2px solid #0A0A0A',
+        background: isOnline ? '#B9FF66' : '#0A0A0A',
+        color: isOnline ? '#0A0A0A' : '#FFFFFF',
         transition: 'all 0.25s ease'
       }}
     >

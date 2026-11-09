@@ -6,8 +6,8 @@ import AuthShell, { AuthError } from '../../components/AuthShell/AuthShell';
 
 const STRENGTH_TOKENS = [
   { color: 'var(--err)', label: 'Weak' },
-  { color: '#F59E0B', label: 'Fair' },
-  { color: '#EAB308', label: 'Good' },
+  { color: '#8F9E6B', label: 'Fair' },
+  { color: '#5E8F45', label: 'Good' },
   { color: 'var(--accent)', label: 'Strong' },
 ];
 

@@ -268,9 +268,11 @@ export default function DailyChallenge() {
           align-items: center;
           gap: 6px;
           font-size: 0.75rem;
-          color: var(--accent);
-          background: var(--surface);
-          border: 1px solid var(--border);
+          font-weight: 800;
+          color: var(--accent-ink);
+          background: var(--accent-subtle);
+          border: 2px solid #0A0A0A;
+          box-shadow: 2px 2px 0px #0A0A0A;
           border-radius: var(--radius-sm);
           padding: 4px 10px;
         }
@@ -324,23 +326,26 @@ export default function DailyChallenge() {
           gap: 12px;
           padding: 12px 14px;
           background: var(--surface-elevated);
-          border: 1px solid var(--border);
+          border: 2px solid #0A0A0A;
+          box-shadow: 2px 2px 0px #0A0A0A;
           border-radius: var(--radius-sm);
           color: var(--ink);
           text-align: left;
+          font-weight: 600;
           cursor: pointer;
           transition: all 150ms ease;
         }
 
         .daily-option-btn:hover {
           border-color: var(--border-hover);
-          background: #252525;
+          background: var(--surface-subtle);
         }
 
         .daily-option-btn--active {
-          border-color: var(--accent);
-          background: var(--accent-subtle);
-          color: var(--accent);
+          border-color: #0A0A0A;
+          background: var(--accent);
+          color: #0A0A0A;
+          font-weight: 700;
         }
 
         .daily-option-idx {
@@ -349,7 +354,7 @@ export default function DailyChallenge() {
           justify-content: center;
           width: 24px;
           height: 24px;
-          border-radius: 4px;
+          border-radius: var(--radius-xs);
           background: var(--surface-subtle);
           border: 1px solid var(--border);
           font-size: 0.75rem;
@@ -359,9 +364,9 @@ export default function DailyChallenge() {
         }
 
         .daily-option-btn--active .daily-option-idx {
-          border-color: var(--accent);
-          background: var(--accent);
-          color: #0b0b0b;
+          border-color: #0A0A0A;
+          background: #0A0A0A;
+          color: var(--accent);
         }
 
         .daily-option-val {
@@ -390,14 +395,16 @@ export default function DailyChallenge() {
 
         .daily-result--ok {
           background: var(--ok-soft);
-          color: var(--accent);
-          border: 1px solid var(--ok-border);
+          color: var(--ink);
+          border: 2px solid #0A0A0A;
+          box-shadow: 3px 3px 0px var(--accent);
         }
 
         .daily-result--err {
-          background: var(--err-soft);
-          color: var(--err);
-          border: 1px solid var(--err-border);
+          background: #0A0A0A;
+          color: #FFFFFF;
+          border: 2px solid #0A0A0A;
+          box-shadow: 3px 3px 0px var(--accent);
         }
 
         .daily-info-row {

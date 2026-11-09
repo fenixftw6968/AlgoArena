@@ -201,8 +201,9 @@ export default function Profile() {
 
         .profile-stat-value {
           font-size: 1.35rem;
-          font-weight: 600;
-          color: var(--accent);
+          font-weight: 800;
+          font-family: var(--font-mono);
+          color: var(--accent-ink);
           margin-top: 2px;
         }
 
@@ -234,7 +235,7 @@ export default function Profile() {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          color: var(--accent);
+          color: var(--ink);
         }
 
         .profile-ach-name {

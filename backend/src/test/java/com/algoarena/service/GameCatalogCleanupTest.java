@@ -49,7 +49,10 @@ import static org.mockito.Mockito.*;
  */
 class GameCatalogCleanupTest {
 
-    private static final List<String> APPROVED = List.of("dsa-master-quiz", "logic-puzzle", "number-detective", "code-breaker");
+    private static final List<String> APPROVED = List.of(
+            "dsa-master-quiz", "logic-puzzle", "number-detective", "code-breaker",
+            "os-quiz", "dbms-quiz", "cn-quiz", "oop-quiz"
+    );
 
     /** Slugs of games that used to exist (or were planned) and must never work again. */
     private static final List<String> RETIRED = List.of(
@@ -100,7 +103,7 @@ class GameCatalogCleanupTest {
                 .getAllGames().stream().map(GameDto::getSlug).collect(Collectors.toList());
 
         assertEquals(Set.copyOf(APPROVED), Set.copyOf(listed));
-        assertEquals(4, listed.size());
+        assertEquals(APPROVED.size(), listed.size());
     }
 
     @Test
@@ -184,7 +187,7 @@ class GameCatalogCleanupTest {
         assertDoesNotThrow(() -> seeder.run());
 
         ArgumentCaptor<Game> saved = ArgumentCaptor.forClass(Game.class);
-        verify(games, times(4)).save(saved.capture());
+        verify(games, times(8)).save(saved.capture());
         assertEquals(Set.copyOf(APPROVED), saved.getAllValues().stream().map(Game::getSlug).collect(Collectors.toSet()));
 
         // no deletion of any kind, and retired games are not even looked up (so their stale rows are untouched)

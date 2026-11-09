@@ -53,15 +53,16 @@ export default function DailyCountdown({
           align-items: center;
           gap: 14px;
           padding: 14px 18px;
-          border-radius: 14px;
+          border-radius: 0px;
         }
         .dc-count-icon {
           width: 42px;
           height: 42px;
-          border-radius: 11px;
-          background: var(--err-soft);
-          border: 1px solid rgba(251, 113, 133, 0.24);
-          color: var(--err);
+          border-radius: 0px;
+          background: #0A0A0A;
+          border: 2px solid #0A0A0A;
+          box-shadow: 2px 2px 0px var(--accent);
+          color: var(--accent);
           display: flex;
           align-items: center;
           justify-content: center;

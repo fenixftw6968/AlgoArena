@@ -202,11 +202,11 @@ export default function CompetitiveResults({
         }
 
         .cr-delta-value--up {
-          color: var(--accent);
+          color: var(--accent-ink);
         }
 
         .cr-delta-value--down {
-          color: var(--err);
+          color: var(--ink);
         }
 
         .cr-actions {

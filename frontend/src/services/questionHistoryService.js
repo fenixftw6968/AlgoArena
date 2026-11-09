@@ -128,8 +128,37 @@ export async function selectQuestionsForGame(optionsOrSlug, optDifficulty, optBa
     }
   }
 
-  // 3. Guest / Offline / Fast Fallback: Local shuffle selection with strict uniqueness
-  const shuffled = shuffleArray([...eligible]);
+// 3. Guest / Offline / Fast Fallback: Local sliding window history (no repeats for >= 5 games)
+  const HISTORY_KEY = `game_history_window_${normGame}`;
+  let recentHistory = [];
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const stored = localStorage.getItem(HISTORY_KEY);
+      if (stored) {
+        recentHistory = JSON.parse(stored);
+        if (!Array.isArray(recentHistory)) recentHistory = [];
+      }
+    }
+  } catch {
+    recentHistory = [];
+  }
+
+  // Filter out questions played in the last 5 games
+  const recentIdSet = new Set(recentHistory.map(String));
+  let availableCandidates = eligible.filter(q => !recentIdSet.has(String(q.id)) && isUniqueCandidate(q));
+
+  // If pool exhausted or fewer than count remaining, reset the sliding window cycle
+  if (availableCandidates.length < count) {
+    recentHistory = [];
+    try {
+      if (typeof window !== 'undefined' && window.localStorage) {
+        localStorage.removeItem(HISTORY_KEY);
+      }
+    } catch {}
+    availableCandidates = eligible.filter(isUniqueCandidate);
+  }
+
+  const shuffled = shuffleArray([...availableCandidates]);
   const fallbackSelection = [];
   for (const q of shuffled) {
     if (fallbackSelection.length >= count) break;
@@ -138,6 +167,27 @@ export async function selectQuestionsForGame(optionsOrSlug, optDifficulty, optBa
       fallbackSelection.push(q);
     }
   }
+
+  // If still need more to meet count, fill with remaining
+  if (fallbackSelection.length < count) {
+    const remainder = eligible.filter(isUniqueCandidate);
+    const extra = shuffleArray(remainder).slice(0, count - fallbackSelection.length);
+    for (const eq of extra) {
+      markAdded(eq);
+      fallbackSelection.push(eq);
+    }
+  }
+
+  // Save selected questions to rolling history (keep up to count * 5 questions = 5 full games)
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const newIds = fallbackSelection.map(q => String(q.id));
+      const maxWindowSize = Math.max(count * 5, 25);
+      const updatedHistory = [...recentHistory, ...newIds].slice(-maxWindowSize);
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(updatedHistory));
+    }
+  } catch {}
+
   const ordered = userShuffle ? shuffleArray([...fallbackSelection]) : fallbackSelection;
   return balanceAndRandomizeQuestionOptions(ordered);
 }

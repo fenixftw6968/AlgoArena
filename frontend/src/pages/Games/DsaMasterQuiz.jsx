@@ -11,6 +11,7 @@ export default function DsaMasterQuiz() {
       questionBank={dsaMasterQuestions}
       codeLanguage="cpp"
       questionCount={5}
+      directPlay={true}
     />
   );
 }

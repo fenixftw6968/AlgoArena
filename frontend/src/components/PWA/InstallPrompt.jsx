@@ -75,11 +75,11 @@ export default function InstallPrompt() {
         zIndex: 9999,
         maxWidth: '380px',
         width: 'calc(100% - 48px)',
-        background: '#171717',
-        border: '1px solid rgba(197, 244, 103, 0.35)',
-        borderRadius: '12px',
+        background: '#FFFFFF',
+        border: '3px solid #0A0A0A',
+        borderRadius: '0px',
         padding: '16px 18px',
-        boxShadow: '0 12px 36px -6px rgba(0, 0, 0, 0.7), 0 0 16px rgba(197, 244, 103, 0.1)',
+        boxShadow: '6px 6px 0px #0A0A0A',
         display: 'flex',
         flexDirection: 'column',
         gap: '12px',
@@ -91,13 +91,13 @@ export default function InstallPrompt() {
           <img
             src="/pwa-192x192.png"
             alt="AlgoArena"
-            style={{ width: '38px', height: '38px', borderRadius: '8px', border: '1px solid #292929' }}
+            style={{ width: '38px', height: '38px', borderRadius: '0px', border: '2px solid #0A0A0A' }}
           />
           <div>
-            <div style={{ fontWeight: 650, fontSize: '0.875rem', color: '#F2F2F2' }}>
+            <div style={{ fontWeight: 800, fontSize: '0.875rem', color: '#0A0A0A', textTransform: 'uppercase' }}>
               Install AlgoArena
             </div>
-            <div style={{ fontSize: '0.725rem', color: '#929292' }}>
+            <div style={{ fontSize: '0.725rem', color: '#4A4A45' }}>
               Instant access & offline support
             </div>
           </div>
@@ -109,10 +109,10 @@ export default function InstallPrompt() {
           style={{
             background: 'transparent',
             border: 'none',
-            color: '#929292',
+            color: '#4A4A45',
             cursor: 'pointer',
             padding: '4px',
-            borderRadius: '4px',
+            borderRadius: '0px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center'
@@ -123,8 +123,8 @@ export default function InstallPrompt() {
       </div>
 
       {isIOS ? (
-        <div style={{ fontSize: '0.78rem', color: '#D4D4D4', lineHeight: 1.5, background: '#1E1E1E', padding: '10px 12px', borderRadius: '8px' }}>
-          Tap <Share size={13} style={{ display: 'inline', verticalAlign: '-2px', color: '#C5F467' }} /> in Safari and select <PlusSquare size={13} style={{ display: 'inline', verticalAlign: '-2px', color: '#C5F467' }} /> <strong>Add to Home Screen</strong>.
+        <div style={{ fontSize: '0.78rem', color: '#0A0A0A', lineHeight: 1.5, background: '#EFFFD2', border: '2px solid #0A0A0A', padding: '10px 12px', borderRadius: '0px' }}>
+          Tap <Share size={13} style={{ display: 'inline', verticalAlign: '-2px', color: '#4E7400' }} /> in Safari and select <PlusSquare size={13} style={{ display: 'inline', verticalAlign: '-2px', color: '#4E7400' }} /> <strong>Add to Home Screen</strong>.
         </div>
       ) : (
         <div style={{ display: 'flex', gap: '8px', marginTop: '2px' }}>
@@ -132,13 +132,14 @@ export default function InstallPrompt() {
             onClick={handleDismiss}
             style={{
               flex: 1,
-              height: '34px',
-              background: '#1E1E1E',
-              border: '1px solid #292929',
-              borderRadius: '6px',
-              color: '#929292',
-              fontSize: '0.8125rem',
-              fontWeight: 500,
+              height: '36px',
+              background: '#FFFFFF',
+              border: '2px solid #0A0A0A',
+              borderRadius: '0px',
+              color: '#0A0A0A',
+              fontSize: '0.75rem',
+              fontWeight: 800,
+              textTransform: 'uppercase',
               cursor: 'pointer'
             }}
           >
@@ -148,17 +149,19 @@ export default function InstallPrompt() {
             onClick={handleInstallClick}
             style={{
               flex: 1.5,
-              height: '34px',
-              background: '#C5F467',
-              border: 'none',
-              borderRadius: '6px',
-              color: '#0B0B0B',
-              fontSize: '0.8125rem',
-              fontWeight: 650,
+              height: '36px',
+              background: '#B9FF66',
+              border: '2px solid #0A0A0A',
+              borderRadius: '0px',
+              color: '#0A0A0A',
+              fontSize: '0.75rem',
+              fontWeight: 800,
+              textTransform: 'uppercase',
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
               gap: '6px',
+              boxShadow: '3px 3px 0px #0A0A0A',
               cursor: 'pointer'
             }}
           >

@@ -731,10 +731,11 @@ export default function NumberDetective() {
                     alignItems: 'center',
                     gap: '0.75rem',
                     padding: '1rem 1.25rem',
-                    background: result === 'correct' ? 'var(--ok-soft)' : 'var(--err-soft)',
-                    color: result === 'correct' ? 'var(--ok)' : 'var(--err)',
-                    border: '1px solid ' + (result === 'correct' ? 'rgba(52, 211, 153, 0.32)' : 'rgba(251, 113, 133, 0.32)'),
-                    borderRadius: '10px',
+                    background: result === 'correct' ? 'var(--accent)' : '#0A0A0A',
+                    color: result === 'correct' ? 'var(--ink)' : '#FFFFFF',
+                    border: '3px solid #0A0A0A',
+                    boxShadow: result === 'correct' ? '3px 3px 0px #0A0A0A' : '3px 3px 0px var(--accent)',
+                    borderRadius: '0px',
                     marginBottom: '1.25rem'
                   }}
                 >
@@ -748,8 +749,8 @@ export default function NumberDetective() {
 
                 {/* Explanation */}
                 {(serverFeedback?.explanation ?? puzzle.explanation) && (
-                  <div style={{ padding: '1.15rem', background: 'var(--surface-2)', border: '1px dashed var(--border-strong)', borderRadius: '10px', marginBottom: '1.5rem' }}>
-                    <p className="font-mono" style={{ fontSize: '0.66rem', fontWeight: 700, color: 'var(--accent)', marginBottom: '0.45rem', letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+                  <div style={{ padding: '1.15rem', background: 'var(--surface-subtle)', border: '2px dashed var(--border-strong)', borderRadius: '0px', marginBottom: '1.5rem' }}>
+                    <p className="font-mono" style={{ fontSize: '0.66rem', fontWeight: 800, color: 'var(--accent-ink)', marginBottom: '0.45rem', letterSpacing: '0.14em', textTransform: 'uppercase' }}>
                       Sequence rule
                     </p>
                     <p style={{ fontSize: '0.875rem', color: 'var(--ink-soft)', lineHeight: 1.6, fontWeight: 400, margin: 0 }}>
@@ -775,14 +776,14 @@ export default function NumberDetective() {
                 className="btn btn--secondary"
                 style={{ height: 38, padding: '0 14px', fontSize: '0.8rem' }}
               >
-                <Lightbulb size={14} color="var(--warn)" /> Hint (-30% XP)
+                <Lightbulb size={14} color="var(--ink)" /> Hint (-30% XP)
               </button>
             )}
           </div>
         )}
       </div>
       {gradingError && (
-        <div role="alert" style={{ position: 'fixed', bottom: '1rem', left: '50%', transform: 'translateX(-50%)', zIndex: 1000, background: 'var(--err-soft)', color: 'var(--err)', border: '1px solid rgba(251, 113, 133, 0.32)', borderRadius: '10px', boxShadow: 'var(--shadow-md)', padding: '0.6rem 1rem', fontWeight: 600 }}>
+        <div role="alert" style={{ position: 'fixed', bottom: '1rem', left: '50%', transform: 'translateX(-50%)', zIndex: 1000, background: 'var(--accent)', color: 'var(--ink)', border: '2px solid #0A0A0A', borderRadius: '0px', boxShadow: '4px 4px 0px #0A0A0A', padding: '0.6rem 1rem', fontWeight: 700 }}>
           {gradingError}
         </div>
       )}

@@ -364,14 +364,15 @@ export default function SocialDrawer({ isOpen, onClose, onInviteFriendToGame }) 
           }
 
           .sd-close-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
+            border-color: #0A0A0A;
+            background: var(--accent);
+            color: #0A0A0A;
           }
 
           .sd-tabs {
             display: flex;
             background: var(--surface-subtle);
-            border-bottom: 1px solid var(--border);
+            border-bottom: 2px solid #0A0A0A;
           }
 
           .sd-tab {
@@ -380,17 +381,18 @@ export default function SocialDrawer({ isOpen, onClose, onInviteFriendToGame }) 
             border: none;
             background: transparent;
             font-size: 0.75rem;
-            font-weight: 500;
+            font-weight: 700;
+            text-transform: uppercase;
             color: var(--ink-muted);
             cursor: pointer;
             transition: color 0.12s ease;
           }
 
           .sd-tab.is-active {
-            color: var(--accent);
-            background: var(--surface);
-            font-weight: 600;
-            box-shadow: inset 0 -1px 0 var(--accent);
+            color: #0A0A0A;
+            background: var(--accent);
+            font-weight: 800;
+            box-shadow: inset 0 -3px 0 #0A0A0A;
           }
 
           .sd-body {
@@ -441,14 +443,14 @@ export default function SocialDrawer({ isOpen, onClose, onInviteFriendToGame }) 
             width: 28px;
             height: 28px;
             border-radius: var(--radius-xs);
-            background: var(--surface-3);
-            border: 1px solid var(--border);
-            color: var(--accent);
+            background: var(--accent);
+            border: 2px solid #0A0A0A;
+            color: #0A0A0A;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 0.75rem;
-            font-weight: 600;
+            font-weight: 800;
             position: relative;
             flex-shrink: 0;
           }
@@ -525,9 +527,9 @@ export default function SocialDrawer({ isOpen, onClose, onInviteFriendToGame }) 
           .sd-msg--mine {
             align-self: flex-end;
             background: var(--accent);
-            border-color: var(--accent);
-            color: #0B0B0B;
-            font-weight: 500;
+            border-color: #0A0A0A;
+            color: #0A0A0A;
+            font-weight: 700;
           }
 
           .sd-chat-form {

@@ -100,11 +100,13 @@ class RetiredGamesGuardTest {
         String registry = Files.readString(root().resolve("frontend/src/data/gameRegistry.js"), StandardCharsets.UTF_8);
         String app = Files.readString(root().resolve("frontend/src/App.jsx"), StandardCharsets.UTF_8);
 
-        for (String slug : List.of("dsa-master-quiz", "logic-puzzle", "number-detective", "code-breaker")) {
+        for (String slug : List.of(
+                "dsa-master-quiz", "logic-puzzle", "number-detective", "code-breaker",
+                "os-quiz", "dbms-quiz", "cn-quiz", "oop-quiz")) {
             assertTrue(registry.contains("slug: '" + slug + "'"), slug + " in registry");
             assertTrue(app.contains("path=\"/games/" + slug + "\""), slug + " route");
         }
-        assertEquals(4, Pattern.compile("slug: '").matcher(registry).results().count(), "registry must list exactly four games");
-        assertEquals(4, Pattern.compile("path=\"/games/").matcher(app).results().count(), "exactly four game routes");
+        assertEquals(8, Pattern.compile("slug: '").matcher(registry).results().count(), "registry must list exactly eight games");
+        assertEquals(8, Pattern.compile("path=\"/games/").matcher(app).results().count(), "exactly eight game routes");
     }
 }

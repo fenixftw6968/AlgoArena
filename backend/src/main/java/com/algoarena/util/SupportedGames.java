@@ -17,9 +17,16 @@ public final class SupportedGames {
     public static final String LOGIC_PUZZLE = "logic-puzzle";
     public static final String NUMBER_DETECTIVE = "number-detective";
     public static final String CODE_BREAKER = "code-breaker";
+    public static final String OS_QUIZ = "os-quiz";
+    public static final String DBMS_QUIZ = "dbms-quiz";
+    public static final String CN_QUIZ = "cn-quiz";
+    public static final String OOP_QUIZ = "oop-quiz";
 
     /** The approved games, in display order. */
-    public static final List<String> SLUGS = List.of(DSA_MASTER_QUIZ, LOGIC_PUZZLE, NUMBER_DETECTIVE, CODE_BREAKER);
+    public static final List<String> SLUGS = List.of(
+        DSA_MASTER_QUIZ, LOGIC_PUZZLE, NUMBER_DETECTIVE, CODE_BREAKER,
+        OS_QUIZ, DBMS_QUIZ, CN_QUIZ, OOP_QUIZ
+    );
 
     private static final Set<String> LOOKUP = Set.copyOf(SLUGS);
 

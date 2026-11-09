@@ -27,7 +27,7 @@ export default function AuthShell({ kicker, title, lede, children, footer }) {
       <footer className="auth-foot">
         <span>AlgoArena</span>
         <span className="auth-foot-dot">·</span>
-        <span>Dark cinematic algorithmic arena</span>
+        <span>Black · White · Lime algorithmic arena</span>
         <span className="auth-foot-dot">·</span>
         <span className="mono">© {new Date().getFullYear()}</span>
         {footer}
@@ -38,7 +38,7 @@ export default function AuthShell({ kicker, title, lede, children, footer }) {
           min-height: 100vh;
           display: flex;
           flex-direction: column;
-          padding-top: 52px;
+          padding-top: 54px;
           box-sizing: border-box;
           background: var(--bg);
         }
@@ -55,10 +55,10 @@ export default function AuthShell({ kicker, title, lede, children, footer }) {
           width: 100%;
           max-width: 420px;
           background: var(--surface);
-          border: 1px solid var(--border);
+          border: 2px solid #0A0A0A;
           border-radius: var(--radius-lg);
           padding: 32px 32px 36px;
-          box-shadow: var(--shadow-md);
+          box-shadow: 6px 6px 0px #0A0A0A;
         }
 
         .auth-card-head {
@@ -84,13 +84,13 @@ export default function AuthShell({ kicker, title, lede, children, footer }) {
           display: flex;
           align-items: center;
           gap: 10px;
-          background: var(--err-soft);
-          border: 1px solid var(--err-border);
-          color: var(--err);
+          background: #0A0A0A;
+          border: 2px solid #0A0A0A;
+          color: var(--accent);
           padding: 10px 12px;
           border-radius: var(--radius-sm);
           font-size: 0.8125rem;
-          font-weight: 500;
+          font-weight: 700;
           margin-bottom: 20px;
         }
 
@@ -136,7 +136,7 @@ export default function AuthShell({ kicker, title, lede, children, footer }) {
         }
 
         .field-action:hover {
-          color: var(--accent);
+          color: var(--accent-ink);
         }
 
         .auth-switch {
@@ -147,8 +147,8 @@ export default function AuthShell({ kicker, title, lede, children, footer }) {
         }
 
         .auth-switch a {
-          color: var(--accent);
-          font-weight: 550;
+          color: var(--accent-ink);
+          font-weight: 700;
           text-decoration: underline;
           text-underline-offset: 3px;
         }
@@ -160,7 +160,7 @@ export default function AuthShell({ kicker, title, lede, children, footer }) {
         }
 
         .auth-link-sm:hover {
-          color: var(--accent);
+          color: var(--accent-ink);
           text-decoration: underline;
         }
 
@@ -172,7 +172,7 @@ export default function AuthShell({ kicker, title, lede, children, footer }) {
           gap: 10px;
           font-size: 0.75rem;
           color: var(--ink-faint);
-          border-top: 1px solid var(--border);
+          border-top: 2px solid #0A0A0A;
           background: var(--surface);
         }
 

@@ -25,6 +25,10 @@ import DsaMasterQuiz from './pages/Games/DsaMasterQuiz';
 import LogicPuzzle from './pages/Games/LogicPuzzle';
 import NumberDetective from './pages/Games/NumberDetective';
 import CodeBreaker from './pages/Games/CodeBreaker';
+import OsQuiz from './pages/Games/OsQuiz';
+import DbmsQuiz from './pages/Games/DbmsQuiz';
+import CnQuiz from './pages/Games/CnQuiz';
+import OopQuiz from './pages/Games/OopQuiz';
 
 // PWA Utilities
 import NetworkStatusIndicator from './components/PWA/NetworkStatusIndicator';
@@ -66,6 +70,10 @@ export default function App() {
             <Route path="/games/logic-puzzle"       element={<ProtectedRoute><LogicPuzzle /></ProtectedRoute>} />
             <Route path="/games/number-detective"   element={<ProtectedRoute><NumberDetective /></ProtectedRoute>} />
             <Route path="/games/code-breaker"       element={<ProtectedRoute><CodeBreaker /></ProtectedRoute>} />
+            <Route path="/games/os-quiz"            element={<ProtectedRoute><OsQuiz /></ProtectedRoute>} />
+            <Route path="/games/dbms-quiz"          element={<ProtectedRoute><DbmsQuiz /></ProtectedRoute>} />
+            <Route path="/games/cn-quiz"            element={<ProtectedRoute><CnQuiz /></ProtectedRoute>} />
+            <Route path="/games/oop-quiz"           element={<ProtectedRoute><OopQuiz /></ProtectedRoute>} />
 
             {/* Fallback */}
             <Route path="*" element={<Navigate to="/" replace />} />

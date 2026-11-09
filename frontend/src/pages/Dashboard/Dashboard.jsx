@@ -169,8 +169,8 @@ export default function Dashboard() {
 
       <style>{`
         .dash-daily-banner {
-          background: linear-gradient(135deg, rgba(197, 244, 103, 0.08) 0%, #171717 70%);
-          border: 1px solid rgba(197, 244, 103, 0.3);
+          background: var(--accent);
+          border: 3px solid #0A0A0A;
           border-radius: var(--radius);
           padding: 20px 24px;
           display: flex;
@@ -178,7 +178,7 @@ export default function Dashboard() {
           justify-content: space-between;
           gap: 20px;
           flex-wrap: wrap;
-          box-shadow: 0 8px 32px -8px rgba(197, 244, 103, 0.1);
+          box-shadow: 6px 6px 0px #0A0A0A;
         }
 
         .dash-daily-left {
@@ -193,31 +193,52 @@ export default function Dashboard() {
           margin-bottom: 6px;
         }
 
+        .dash-daily-kicker .zine-kicker {
+          background: #0A0A0A;
+          color: var(--accent);
+          box-shadow: none;
+        }
+
         .dash-daily-timer {
           display: inline-flex;
           align-items: center;
           gap: 4px;
           font-size: 0.75rem;
-          color: var(--accent);
+          font-weight: 800;
+          color: #0A0A0A;
         }
 
         .dash-daily-title {
           font-size: 1.125rem;
-          font-weight: 650;
+          font-weight: 800;
           letter-spacing: -0.02em;
-          color: var(--ink);
+          color: #0A0A0A;
+          text-transform: uppercase;
         }
 
         .dash-daily-desc {
           margin-top: 4px;
           font-size: 0.84375rem;
-          color: var(--ink-muted);
+          color: #1C1C1A;
           line-height: 1.5;
           max-width: 68ch;
+          font-weight: 600;
         }
 
         .dash-daily-actions {
           flex-shrink: 0;
+        }
+
+        .dash-daily-actions .btn--primary {
+          background: #0A0A0A;
+          color: var(--accent);
+          box-shadow: 3px 3px 0px #FFFFFF;
+        }
+
+        .dash-daily-actions .btn--primary:hover:not(:disabled) {
+          background: #0A0A0A;
+          color: var(--accent-hover);
+          box-shadow: 5px 5px 0px #FFFFFF;
         }
       `}</style>
     </div>

@@ -10,6 +10,7 @@ export default function LogicPuzzle() {
       category="Reasoning"
       questionBank={logicPuzzleQuestions}
       questionCount={5}
+      directPlay={true}
     />
   );
 }

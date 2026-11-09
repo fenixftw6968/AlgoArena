@@ -46,9 +46,9 @@ export default function ExitModal({
           width: 36px;
           height: 36px;
           border-radius: var(--radius-sm);
-          background: var(--err-soft);
-          border: 1px solid var(--err-border);
-          color: var(--err);
+          background: #0A0A0A;
+          border: 2px solid #0A0A0A;
+          color: var(--accent);
           display: inline-flex;
           align-items: center;
           justify-content: center;

@@ -6,16 +6,15 @@ import api from '../../utils/api';
 
 const CATEGORIES = [
   { value: 'All', label: 'All tracks', short: 'All' },
+  { value: 'Core CS', label: 'Core CS Interview', short: 'Core CS' },
   { value: 'Programming / DSA', label: 'Algorithms & DSA', short: 'DSA' },
   { value: 'Reasoning', label: 'Analytical Reasoning', short: 'Reasoning' },
 ];
-const DIFFICULTIES = ['All', 'EASY', 'MEDIUM', 'HARD'];
 
 export default function Games() {
-  const [category,   setCategory]   = useState('All');
-  const [difficulty, setDifficulty] = useState('All');
-  const [search,     setSearch]     = useState('');
-  const [games,      setGames]      = useState(() => getAllGamesList());
+  const [category, setCategory] = useState('All');
+  const [search,   setSearch]   = useState('');
+  const [games,    setGames]    = useState(() => getAllGamesList());
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -32,16 +31,12 @@ export default function Games() {
   }, []);
 
   const filtered = games.filter(g => {
-    const matchCat  = category   === 'All' || g.category   === category;
-    const matchDiff = difficulty === 'All'
-      || g.difficulty === difficulty
-      || (g.xpReward && g.xpReward[difficulty.toLowerCase()] !== undefined)
-      || (Array.isArray(g.difficulties) && g.difficulties.includes(difficulty));
+    const matchCat  = category === 'All' || g.category === category;
     const needle = search.toLowerCase();
     const matchSrc  = !search
       || (g.title || '').toLowerCase().includes(needle)
       || (g.description || '').toLowerCase().includes(needle);
-    return matchCat && matchDiff && matchSrc;
+    return matchCat && matchSrc;
   });
 
   return (
@@ -80,21 +75,6 @@ export default function Games() {
               ))}
             </div>
           </div>
-
-          <div className="games-filter-group" role="group" aria-label="Difficulty">
-            <span className="games-filter-label">Tier</span>
-            <div className="tabs">
-              {DIFFICULTIES.map(d => (
-                <button
-                  key={d}
-                  onClick={() => setDifficulty(d)}
-                  className={`tab${difficulty === d ? ' active' : ''}`}
-                >
-                  {d === 'All' ? 'All' : d.charAt(0) + d.slice(1).toLowerCase()}
-                </button>
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* Results grid */}
@@ -105,7 +85,7 @@ export default function Games() {
         ) : (
           <div className="grid-cards">
             {filtered.map((g, i) => (
-              <GameCard key={g.slug || i} game={g} index={i} activeDifficulty={difficulty} />
+              <GameCard key={g.slug || i} game={g} index={i} activeDifficulty="All" />
             ))}
           </div>
         )}

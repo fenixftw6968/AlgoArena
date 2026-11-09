@@ -53,9 +53,11 @@ export default function GameProgress({
             Q{current}/{total}
           </span>
 
-          <span className="gp-badge" style={{ color: ds.tone }}>
-            {ds.label || normDiff}
-          </span>
+          {normDiff !== 'ALL' && (
+            <span className="gp-badge" style={{ color: ds.tone }}>
+              {ds.label || normDiff}
+            </span>
+          )}
 
           <span className="gp-badge mono">
             {scoreLabel}: {score}
@@ -117,16 +119,18 @@ export default function GameProgress({
 
         .gp-track {
           width: 100%;
-          height: 3px;
-          background: var(--surface-3);
-          border-radius: 999px;
+          height: 10px;
+          background: #FFFFFF;
+          border: 2px solid #0A0A0A;
+          border-radius: 0px;
           overflow: hidden;
+          box-shadow: 2px 2px 0px #0A0A0A;
         }
 
         .gp-fill {
           height: 100%;
           background: var(--accent);
-          border-radius: 999px;
+          border-radius: 0px;
         }
       `}</style>
     </div>

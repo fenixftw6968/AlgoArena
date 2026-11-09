@@ -502,7 +502,7 @@ export default function MatchmakingLobby({
         </motion.div>
 
         <style>{`
-          .ml-overlay { background: rgba(23, 32, 51, 0.34); backdrop-filter: blur(2px); }
+          .ml-overlay { background: rgba(10, 10, 10, 0.6); backdrop-filter: blur(0px); }
           .ml-card {
             width: 100%;
             max-width: 500px;
@@ -510,47 +510,51 @@ export default function MatchmakingLobby({
             text-align: center;
             position: relative;
             overflow: hidden;
-            border-radius: 20px;
+            border-radius: 0px;
           }
           .ml-close {
             position: absolute;
-            top: 16px;
-            right: 16px;
+            top: 14px;
+            right: 14px;
             width: 32px;
             height: 32px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: var(--surface);
-            color: var(--ink-muted);
+            border: 2px solid #0A0A0A;
+            border-radius: 0px;
+            background: #FFFFFF;
+            color: #0A0A0A;
             cursor: pointer;
+            transition: background 0.12s ease, color 0.12s ease;
           }
-          .ml-close:hover { background: var(--surface-2); color: var(--ink); }
+          .ml-close:hover { background: #0A0A0A; color: var(--accent); }
           .ml-state { position: relative; }
           .ml-orbit { position: relative; width: 92px; height: 92px; margin: 10px auto 24px; }
           .ml-orbit-ring {
             position: absolute;
             inset: 0;
-            border: 2px dashed rgba(79, 110, 247, 0.4);
+            border: 2px dashed rgba(10, 10, 10, 0.35);
             border-radius: 50%;
           }
-          .ml-orbit-ring--teal { border-color: rgba(13, 148, 136, 0.35); }
+          .ml-orbit-ring--teal { border-color: rgba(10, 10, 10, 0.6); }
           .ml-orbit-core {
             position: absolute;
             inset: 16px;
-            border-radius: 50%;
-            background: var(--accent-gradient);
-            color: #ffffff;
+            border-radius: 0%;
+            background: var(--accent);
+            border: 2px solid #0A0A0A;
+            color: #0A0A0A;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 16px 36px -18px var(--accent-glow);
+            transform: rotate(-4deg);
+            box-shadow: 3px 3px 0px #0A0A0A;
           }
           .ml-orbit-core--teal {
-            background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
-            box-shadow: 0 16px 36px -18px rgba(13, 148, 136, 0.4);
+            background: #0A0A0A;
+            color: var(--accent);
+            box-shadow: 3px 3px 0px var(--accent);
           }
           .ml-title {
             font-size: clamp(1.4rem, 4vw, 1.8rem);
@@ -571,14 +575,15 @@ export default function MatchmakingLobby({
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 16px;
-            border-radius: 999px;
-            background: rgba(79, 110, 247, 0.09);
-            border: 1px solid rgba(79, 110, 247, 0.18);
-            color: var(--accent);
+            padding: 7px 16px;
+            border-radius: 0px;
+            background: var(--accent-subtle);
+            border: 2px solid #0A0A0A;
+            box-shadow: 2px 2px 0px #0A0A0A;
+            color: #0A0A0A;
             font-family: var(--font-mono);
             font-size: 0.78rem;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 14px;
           }
           .ml-queue-badge--muted {
@@ -599,15 +604,15 @@ export default function MatchmakingLobby({
           .ml-badge-icon {
             width: 68px;
             height: 68px;
-            border-radius: 18px;
+            border-radius: 0px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             margin: 6px auto 20px;
           }
-          .ml-badge-icon--yellow { background: var(--warn-soft); color: var(--warn); border: 1px solid rgba(251, 191, 36, 0.3); }
-          .ml-badge-icon--red { background: var(--err-soft); color: var(--err); border: 1px solid rgba(251, 113, 133, 0.3); }
-          .ml-badge-icon--green { background: var(--ok-soft); color: var(--ok); border: 1px solid rgba(52, 211, 153, 0.3); }
+          .ml-badge-icon--yellow { background: var(--accent-subtle); color: #0A0A0A; border: 2px solid #0A0A0A; box-shadow: 3px 3px 0px #0A0A0A; }
+          .ml-badge-icon--red { background: #0A0A0A; color: var(--accent); border: 2px solid #0A0A0A; box-shadow: 3px 3px 0px var(--accent); }
+          .ml-badge-icon--green { background: var(--accent); color: #0A0A0A; border: 2px solid #0A0A0A; box-shadow: 3px 3px 0px #0A0A0A; }
           .ml-actions { display: flex; flex-direction: column; gap: 10px; }
           .ml-action-btn { width: 100%; }
           .ml-text-btn {
@@ -624,9 +629,10 @@ export default function MatchmakingLobby({
             grid-template-columns: 1fr auto 1fr;
             align-items: center;
             gap: 12px;
-            background: var(--surface-2);
-            border: 1px solid var(--border);
-            border-radius: 14px;
+            background: var(--surface-subtle);
+            border: 2px solid #0A0A0A;
+            box-shadow: 3px 3px 0px #0A0A0A;
+            border-radius: 0px;
             padding: 18px 20px;
             margin: 20px 0;
           }
@@ -661,7 +667,7 @@ export default function MatchmakingLobby({
             font-size: 3.4rem;
             font-weight: 750;
             line-height: 1.15;
-            color: var(--accent);
+            color: var(--accent-ink);
           }
           @media (max-width: 480px) {
             .ml-card { padding: 34px 22px 28px; }

@@ -32,7 +32,8 @@ export default function MCQGameEngine({
   questionBank = [],
   customDifficulties = null,
   codeLanguage: _codeLanguage = 'cpp',
-  questionCount = null
+  questionCount = null,
+  directPlay = true
 }) {
   const targetCount = questionCount || (gameSlug === 'dsa-master-quiz' || gameSlug === 'number-detective' || gameSlug === 'logic-puzzle' ? 5 : 10);
   const { user, refreshUser } = useAuth();
@@ -404,9 +405,10 @@ export default function MCQGameEngine({
               <div
                 key={idx}
                 style={{
-                  background: 'var(--surface-2)',
-                  border: '1px solid var(--border)',
-                  borderRadius: '10px',
+                  background: 'var(--surface-subtle)',
+                  border: '2px solid #0A0A0A',
+                  boxShadow: '3px 3px 0px #0A0A0A',
+                  borderRadius: '0px',
                   padding: '1.25rem 1.4rem',
                   fontFamily: 'var(--font-mono)',
                   fontSize: '0.95rem',
@@ -416,7 +418,7 @@ export default function MCQGameEngine({
                   position: 'relative'
                 }}
               >
-                <span className="zine-badge" style={{ position: 'absolute', top: '-11px', left: '12px', background: 'var(--accent)', color: '#0b0b0b' }}>CODE</span>
+                <span className="zine-badge" style={{ position: 'absolute', top: '-11px', left: '12px', background: 'var(--accent)', color: '#0A0A0A' }}>CODE</span>
                 <pre style={{ margin: 0, fontFamily: 'inherit' }}>{lines.trim()}</pre>
               </div>
             );
@@ -443,7 +445,11 @@ export default function MCQGameEngine({
           setPlayMode(mode);
           setShowModeModal(false);
           if (mode === 'PRACTICE') {
-            setDifficulty(null);
+            if (directPlay) {
+              initGameSession('all');
+            } else {
+              setDifficulty(null);
+            }
           } else if (mode === 'RANKED') {
             setShowMatchmaking(true);
           } else if (mode === 'FRIEND') {
@@ -705,10 +711,11 @@ export default function MCQGameEngine({
                             style={{
                               width: '36px',
                               height: '36px',
-                              background: isSelected ? 'rgba(255, 255, 255, 0.18)' : 'var(--surface-2)',
-                              border: '1px solid ' + (isSelected ? 'rgba(255, 255, 255, 0.22)' : 'var(--border)'),
-                              borderRadius: '8px',
-                              color: isSelected ? '#ffffff' : 'var(--ink)',
+                              background: isSelected ? '#B9FF66' : 'var(--surface-subtle)',
+                              border: '2px solid #0A0A0A',
+                              boxShadow: '2px 2px 0px #0A0A0A',
+                              borderRadius: '0px',
+                              color: '#0A0A0A',
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'center',
@@ -736,10 +743,11 @@ export default function MCQGameEngine({
                         alignItems: 'center',
                         gap: '0.75rem',
                         padding: '1rem 1.25rem',
-                        background: result === 'correct' ? 'var(--ok-soft)' : 'var(--err-soft)',
-                        color: result === 'correct' ? 'var(--ok)' : 'var(--err)',
-                        border: '1px solid ' + (result === 'correct' ? 'rgba(52, 211, 153, 0.32)' : 'rgba(251, 113, 133, 0.32)'),
-                        borderRadius: '10px',
+                        background: result === 'correct' ? 'var(--accent)' : '#0A0A0A',
+                        color: result === 'correct' ? 'var(--ink)' : '#FFFFFF',
+                        border: '3px solid #0A0A0A',
+                        boxShadow: result === 'correct' ? '3px 3px 0px #0A0A0A' : '3px 3px 0px var(--accent)',
+                        borderRadius: '0px',
                         marginBottom: '1.25rem'
                       }}
                     >
@@ -750,8 +758,8 @@ export default function MCQGameEngine({
                     </div>
 
                     {(serverFeedback?.explanation ?? puzzle.explanation) && (
-                      <div style={{ padding: '1.15rem', background: 'var(--surface-2)', border: '1px dashed var(--border-strong)', borderRadius: '10px', marginBottom: '1.5rem' }}>
-                        <p className="font-mono" style={{ fontSize: '0.66rem', fontWeight: 700, color: 'var(--accent)', marginBottom: '0.45rem', letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+                      <div style={{ padding: '1.15rem', background: 'var(--surface-subtle)', border: '2px dashed var(--border-strong)', borderRadius: '0px', marginBottom: '1.5rem' }}>
+                        <p className="font-mono" style={{ fontSize: '0.66rem', fontWeight: 800, color: 'var(--accent-ink)', marginBottom: '0.45rem', letterSpacing: '0.14em', textTransform: 'uppercase' }}>
                           Explanation
                         </p>
                         <p style={{ fontSize: '0.875rem', color: 'var(--ink-soft)', lineHeight: 1.6, fontWeight: 400, margin: 0 }}>
@@ -777,16 +785,16 @@ export default function MCQGameEngine({
                           animate={{ opacity: 1, height: 'auto' }}
                           exit={{ opacity: 0, height: 0 }}
                           style={{
-                            background: 'var(--warn-soft)',
-                            border: '1px solid rgba(251, 191, 36, 0.28)',
-                            borderRadius: '10px',
+                            background: 'var(--accent-subtle)',
+                            border: '2px dashed #0A0A0A',
+                            borderRadius: '0px',
                             padding: '0.9rem 1.15rem',
                             display: 'flex',
                             gap: '0.65rem',
                             alignItems: 'flex-start'
                           }}
                         >
-                          <Lightbulb size={16} color="var(--warn)" style={{ flexShrink: 0, marginTop: '2px' }} />
+                          <Lightbulb size={16} color="var(--ink)" style={{ flexShrink: 0, marginTop: '2px' }} />
                           <span style={{ fontSize: '0.825rem', color: 'var(--ink)', lineHeight: 1.5, fontWeight: 500 }}>
                             {puzzle.hint}
                           </span>
@@ -802,7 +810,7 @@ export default function MCQGameEngine({
                           className="zine-btn-sm"
                           style={{ padding: '0.7rem 1rem' }}
                         >
-                          <Lightbulb size={14} color="var(--warn)" /> Hint (-30% XP)
+                          <Lightbulb size={14} color="var(--ink)" /> Hint (-30% XP)
                         </button>
                       )}
 
@@ -824,7 +832,7 @@ export default function MCQGameEngine({
         )}
       </div>
       {gradingError && (
-        <div role="alert" style={{ position: 'fixed', bottom: '1rem', left: '50%', transform: 'translateX(-50%)', zIndex: 1000, background: 'var(--err-soft)', color: 'var(--err)', border: '1px solid rgba(251, 113, 133, 0.32)', borderRadius: '10px', boxShadow: 'var(--shadow-md)', padding: '0.6rem 1rem', fontWeight: 600 }}>
+        <div role="alert" style={{ position: 'fixed', bottom: '1rem', left: '50%', transform: 'translateX(-50%)', zIndex: 1000, background: 'var(--accent)', color: 'var(--ink)', border: '2px solid #0A0A0A', borderRadius: '0px', boxShadow: '4px 4px 0px #0A0A0A', padding: '0.6rem 1rem', fontWeight: 700 }}>
           {gradingError}
         </div>
       )}

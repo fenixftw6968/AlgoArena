@@ -153,12 +153,12 @@ export default function DifficultySelector({
         }
 
         .ds-tier:hover:not(:disabled) {
-          border-color: var(--accent);
-          background: #252525;
+          border-color: #0A0A0A;
+          background: var(--accent-subtle);
         }
 
         .ds-tier:hover:not(:disabled) .ds-xp {
-          color: var(--accent);
+          color: var(--accent-ink);
         }
 
         .ds-tier-main {

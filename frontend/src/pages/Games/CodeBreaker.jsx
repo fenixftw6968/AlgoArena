@@ -674,13 +674,14 @@ export default function CodeBreaker() {
                   <div style={{
                     width: '46px',
                     height: '46px',
-                    background: 'rgba(79, 110, 247, 0.1)',
-                    border: '1px solid rgba(79, 110, 247, 0.2)',
-                    borderRadius: '12px',
+                    background: 'var(--accent)',
+                    border: '2px solid #0A0A0A',
+                    boxShadow: '3px 3px 0px #0A0A0A',
+                    borderRadius: '0px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: 'var(--accent)'
+                    color: '#0A0A0A'
                   }}>
                     <KeyRound size={22} />
                   </div>
@@ -726,7 +727,7 @@ export default function CodeBreaker() {
                   className="zine-hint"
                   style={{ marginBottom: '2rem' }}
                 >
-                  <Lightbulb size={16} color="var(--warn)" style={{ flexShrink: 0 }} />
+                  <Lightbulb size={16} color="var(--ink)" style={{ flexShrink: 0 }} />
                   <span style={{ fontSize: '0.825rem', color: 'var(--ink)', lineHeight: 1.5, fontWeight: 500 }}>
                     <strong>Hint:</strong> {puzzle.hint}
                   </span>
@@ -782,10 +783,11 @@ export default function CodeBreaker() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   style={{
-                    background: result === 'correct' ? 'var(--ok-soft)' : 'var(--err-soft)',
-                    color: result === 'correct' ? 'var(--ok)' : 'var(--err)',
-                    border: '1px solid ' + (result === 'correct' ? 'rgba(52, 211, 153, 0.32)' : 'rgba(251, 113, 133, 0.32)'),
-                    borderRadius: '12px',
+                    background: result === 'correct' ? 'var(--accent)' : '#0A0A0A',
+                    color: result === 'correct' ? 'var(--ink)' : '#FFFFFF',
+                    border: '3px solid #0A0A0A',
+                    boxShadow: result === 'correct' ? '4px 4px 0px #0A0A0A' : '4px 4px 0px var(--accent)',
+                    borderRadius: '0px',
                     padding: '1.5rem',
                     marginTop: '1.5rem',
                     textAlign: 'center'
@@ -798,7 +800,7 @@ export default function CodeBreaker() {
                     </h3>
                   </div>
 
-                  <p style={{ color: 'var(--ink-soft)', fontSize: '0.875rem', marginBottom: '1.5rem', lineHeight: 1.55 }}>
+                  <p style={{ color: result === 'correct' ? 'var(--ink-soft)' : '#FFFFFF', fontSize: '0.875rem', marginBottom: '1.5rem', lineHeight: 1.55 }}>
                     {serverFeedback?.explanation ?? puzzle.explanation}
                   </p>
 
@@ -812,7 +814,7 @@ export default function CodeBreaker() {
         </AnimatePresence>
       </div>
       {gradingError && (
-        <div role="alert" style={{ position: 'fixed', bottom: '1rem', left: '50%', transform: 'translateX(-50%)', zIndex: 1000, background: 'var(--err-soft)', color: 'var(--err)', border: '1px solid rgba(251, 113, 133, 0.32)', borderRadius: '10px', boxShadow: 'var(--shadow-md)', padding: '0.6rem 1rem', fontWeight: 600 }}>
+        <div role="alert" style={{ position: 'fixed', bottom: '1rem', left: '50%', transform: 'translateX(-50%)', zIndex: 1000, background: 'var(--accent)', color: 'var(--ink)', border: '2px solid #0A0A0A', borderRadius: '0px', boxShadow: '4px 4px 0px #0A0A0A', padding: '0.6rem 1rem', fontWeight: 700 }}>
           {gradingError}
         </div>
       )}

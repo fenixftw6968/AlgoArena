@@ -82,8 +82,9 @@ export default function RankCard({ rating = 101, matchesPlayed = 0, matchesWon =
 
         .rank-rating {
           font-size: 1.05rem;
-          color: var(--accent);
-          font-weight: 600;
+          color: var(--accent-ink);
+          font-weight: 800;
+          font-family: var(--font-mono);
         }
 
         .rank-record {
@@ -126,8 +127,9 @@ export default function RankCard({ rating = 101, matchesPlayed = 0, matchesWon =
 
         .rank-stat-value {
           font-size: 1.25rem;
-          font-weight: 600;
-          color: var(--accent);
+          font-weight: 800;
+          font-family: var(--font-mono);
+          color: var(--accent-ink);
         }
 
         .rank-stat-label {

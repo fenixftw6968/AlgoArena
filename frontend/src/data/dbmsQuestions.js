@@ -1,0 +1,604 @@
+/**
+ * MindForge - dbmsQuestions
+ * Exactly 35 verified high-quality MCQ questions.
+ */
+
+export const dbmsQuestions = [
+  {
+    "id": "dbms-1",
+    "gameType": "dbms-quiz",
+    "difficulty": "EASY",
+    "category": "Transactions & ACID",
+    "title": "ACID Atomicity Property",
+    "question": "Which ACID property ensures that either all operations of a transaction succeed, or none do?",
+    "options": [
+      "Atomicity",
+      "Consistency",
+      "Isolation",
+      "Durability"
+    ],
+    "correctAnswer": "Atomicity",
+    "explanation": "Atomicity guarantees the 'all-or-nothing' execution of database operations within a transaction. If any operation fails, the transaction is rolled back.",
+    "hint": "Think 'all-or-nothing'."
+  },
+  {
+    "id": "dbms-2",
+    "gameType": "dbms-quiz",
+    "difficulty": "EASY",
+    "category": "Normalization",
+    "title": "Second Normal Form (2NF) Rule",
+    "question": "A relation is in Second Normal Form (2NF) if it is in 1NF and contains no:",
+    "options": [
+      "Partial functional dependency",
+      "Transitive dependency",
+      "Multi-valued dependency",
+      "Join dependency"
+    ],
+    "correctAnswer": "Partial functional dependency",
+    "explanation": "2NF requires that no non-prime attribute is functionally dependent on any proper subset of any candidate key (no partial dependency).",
+    "hint": "Non-prime attributes must depend on the whole candidate key, not part of it."
+  },
+  {
+    "id": "dbms-3",
+    "gameType": "dbms-quiz",
+    "difficulty": "EASY",
+    "category": "Normalization",
+    "title": "Third Normal Form (3NF) Rule",
+    "question": "A table in 2NF violates Third Normal Form (3NF) if it contains:",
+    "options": [
+      "Transitive dependencies between non-prime attributes",
+      "Repeating groups of values",
+      "A composite primary key",
+      "Foreign key constraints"
+    ],
+    "correctAnswer": "Transitive dependencies between non-prime attributes",
+    "explanation": "3NF eliminates transitive dependencies (X -> Y and Y -> Z where Z is a non-prime attribute not directly dependent on candidate key X).",
+    "hint": "Every non-key attribute must depend directly on the primary key, nothing else."
+  },
+  {
+    "id": "dbms-4",
+    "gameType": "dbms-quiz",
+    "difficulty": "EASY",
+    "category": "SQL",
+    "title": "DELETE vs TRUNCATE",
+    "question": "What is the key difference between SQL DELETE and TRUNCATE statements?",
+    "options": [
+      "TRUNCATE is DDL, deallocates pages, and cannot be filtered with WHERE; DELETE is DML",
+      "DELETE is faster than TRUNCATE because it avoids transaction logging",
+      "TRUNCATE activates per-row ON DELETE database triggers",
+      "DELETE completely removes the table schema from the database catalog"
+    ],
+    "correctAnswer": "TRUNCATE is DDL, deallocates pages, and cannot be filtered with WHERE; DELETE is DML",
+    "explanation": "TRUNCATE is a DDL command that quickly resets data pages without logging individual row deletions and doesn't support WHERE clauses. DELETE is DML and removes row-by-row.",
+    "hint": "One is a DDL operation that resets the storage structure without a WHERE clause."
+  },
+  {
+    "id": "dbms-5",
+    "gameType": "dbms-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Indexing",
+    "title": "B+ Tree Index Advantage",
+    "question": "Why are B+ Trees preferred over Binary Search Trees (BST) or B-Trees for disk-based relational database indexes?",
+    "options": [
+      "Leaf nodes are linked in a sequential list for fast range scans and higher fan-out minimizes disk I/O",
+      "B+ Trees have strictly O(1) worst-case search complexity",
+      "B+ Trees store full table records in internal routing nodes",
+      "B+ Trees require zero disk rebalancing operations on inserts"
+    ],
+    "correctAnswer": "Leaf nodes are linked in a sequential list for fast range scans and higher fan-out minimizes disk I/O",
+    "explanation": "B+ Trees have large fan-out (low height, minimizing slow disk block fetches) and keep all data pointers in linked leaf nodes, enabling extremely fast range scans (e.g. BETWEEN / > / <).",
+    "hint": "High branching factor reduces tree height, and linked leaves make range queries efficient."
+  },
+  {
+    "id": "dbms-6",
+    "gameType": "dbms-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Transactions & ACID",
+    "title": "Dirty Read Anomaly",
+    "question": "In database transaction isolation levels, what is a 'Dirty Read'?",
+    "options": [
+      "A transaction reads uncommitted changes written by another concurrent transaction",
+      "A transaction re-reads a row and finds that values changed due to a committed transaction",
+      "A transaction runs a range query and discovers newly inserted rows committed by another",
+      "A transaction fails to acquire a write lock due to disk corruption"
+    ],
+    "correctAnswer": "A transaction reads uncommitted changes written by another concurrent transaction",
+    "explanation": "A dirty read occurs at the Read Uncommitted isolation level when Transaction A reads data modified by Transaction B that has not yet been committed (and might roll back).",
+    "hint": "Reading data that might still be rolled back."
+  },
+  {
+    "id": "dbms-7",
+    "gameType": "dbms-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Transactions & ACID",
+    "title": "Two-Phase Locking (2PL)",
+    "question": "What does strict Two-Phase Locking (2PL) guarantee for concurrent database execution?",
+    "options": [
+      "Conflict serializability",
+      "Freedom from deadlocks",
+      "Zero lock contention",
+      "Strict real-time execution bounds"
+    ],
+    "correctAnswer": "Conflict serializability",
+    "explanation": "Basic Two-Phase Locking (growing phase where locks are acquired, shrinking phase where locks are released) guarantees conflict serializable schedules, though it does not prevent deadlocks.",
+    "hint": "Growing and shrinking lock phases guarantee equivalent serial order."
+  },
+  {
+    "id": "dbms-8",
+    "gameType": "dbms-quiz",
+    "difficulty": "HARD",
+    "category": "Transactions & ACID",
+    "title": "Write-Ahead Logging (WAL)",
+    "question": "What is the core rule of Write-Ahead Logging (WAL) in database recovery engines?",
+    "options": [
+      "Log records describing changes must be flushed to non-volatile disk before the modified data pages are written",
+      "Data pages must be flushed before any commit record is generated",
+      "Logs are written in asynchronous batches only during system shutdown",
+      "User transactions can only write to secondary replicas"
+    ],
+    "correctAnswer": "Log records describing changes must be flushed to non-volatile disk before the modified data pages are written",
+    "explanation": "WAL dictates that before an uncommitted or committed dirty data page is written to disk, the corresponding log record must already reside on stable storage to enable UNDO/REDO.",
+    "hint": "The log always goes to persistent storage ahead of data pages."
+  },
+  {
+    "id": "dbms-9",
+    "gameType": "dbms-quiz",
+    "difficulty": "MEDIUM",
+    "category": "SQL",
+    "title": "WHERE vs HAVING",
+    "question": "What is the fundamental difference between WHERE and HAVING clauses in SQL?",
+    "options": [
+      "WHERE filters individual rows before grouping; HAVING filters aggregated groups after GROUP BY",
+      "HAVING can only be used with primary key columns",
+      "WHERE executes after aggregate functions like SUM() and AVG() are calculated",
+      "HAVING is an ANSI SQL extension that operates strictly on table indexes"
+    ],
+    "correctAnswer": "WHERE filters individual rows before grouping; HAVING filters aggregated groups after GROUP BY",
+    "explanation": "WHERE filters rows before aggregation. HAVING filters groups produced by GROUP BY based on aggregate conditions (e.g. HAVING COUNT(*) > 5).",
+    "hint": "One filters rows before grouping; the other filters aggregated groups."
+  },
+  {
+    "id": "dbms-10",
+    "gameType": "dbms-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Relational Algebra",
+    "title": "Natural Join vs Cross Product",
+    "question": "In relational algebra, a Natural Join (⋈) between tables R and S is equivalent to:",
+    "options": [
+      "Cartesian product followed by equality selection on common attributes and projection to remove duplicates",
+      "Simple union of all rows from both tables",
+      "Difference between R and S",
+      "Intersection of primary key sets only"
+    ],
+    "correctAnswer": "Cartesian product followed by equality selection on common attributes and projection to remove duplicates",
+    "explanation": "Natural Join takes the Cartesian Product (R × S), selects rows where attributes with identical names match (σ), and projects out duplicate column names.",
+    "hint": "Cross product filtered by equality on shared column names."
+  },
+  {
+    "id": "dbms-11",
+    "gameType": "dbms-quiz",
+    "difficulty": "HARD",
+    "category": "Concurrency Control",
+    "title": "Phantom Read Phenomenon",
+    "question": "Which SQL isolation level is the minimum required to completely eliminate Phantom Reads?",
+    "options": [
+      "Serializable",
+      "Repeatable Read",
+      "Read Committed",
+      "Read Uncommitted"
+    ],
+    "correctAnswer": "Serializable",
+    "explanation": "Phantom reads occur when a transaction re-executes a range query and sees new rows inserted by another committed transaction. Standard ANSI SQL requires Serializable isolation to prevent this.",
+    "hint": "The highest isolation level prevents new rows from appearing in range queries."
+  },
+  {
+    "id": "dbms-12",
+    "gameType": "dbms-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Normalization",
+    "title": "Boyce-Codd Normal Form (BCNF)",
+    "question": "A relation is in BCNF if and only if for every non-trivial functional dependency X -> Y:",
+    "options": [
+      "X is a super key",
+      "Y is a prime attribute",
+      "X is a candidate key and Y is prime",
+      "Both X and Y are non-prime attributes"
+    ],
+    "correctAnswer": "X is a super key",
+    "explanation": "BCNF is a stricter version of 3NF. In BCNF, for every functional dependency X -> Y, the determinant X must be a super key (no exceptions for prime attributes).",
+    "hint": "The left hand side of every dependency must be a super key."
+  },
+  {
+    "id": "dbms-13",
+    "gameType": "dbms-quiz",
+    "difficulty": "EASY",
+    "category": "Keys & Constraints",
+    "title": "Primary Key vs Unique Key",
+    "question": "What is a key difference between a PRIMARY KEY and a UNIQUE constraint in standard relational databases?",
+    "options": [
+      "A table can have only one Primary Key and it rejects NULLs; UNIQUE permits NULL values",
+      "A table can have multiple Primary Keys but only one UNIQUE constraint",
+      "UNIQUE keys automatically create a clustered index, Primary Keys never do",
+      "Primary Keys cannot be referenced by foreign keys"
+    ],
+    "correctAnswer": "A table can have only one Primary Key and it rejects NULLs; UNIQUE permits NULL values",
+    "explanation": "A table allows only one PRIMARY KEY (which strictly forbids NULLs). A table can have multiple UNIQUE constraints, which allow NULLs (subject to dialect rules).",
+    "hint": "Only one primary key is permitted per table, and it cannot be NULL."
+  },
+  {
+    "id": "dbms-14",
+    "gameType": "dbms-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Indexing",
+    "title": "Clustered vs Non-Clustered Index",
+    "question": "How many clustered indexes can a single database table have, and why?",
+    "options": [
+      "Only 1, because the clustered index dictates the physical sorting order of rows on disk",
+      "Up to 16, one for each indexed column",
+      "Unlimited, depending on available disk space",
+      "Exactly 2, one forward and one backward"
+    ],
+    "correctAnswer": "Only 1, because the clustered index dictates the physical sorting order of rows on disk",
+    "explanation": "Because table rows can be physically ordered on disk in only one sequence, a table can have only one clustered index (usually the primary key).",
+    "hint": "Physical records on disk can only be stored in one physical order."
+  },
+  {
+    "id": "dbms-15",
+    "gameType": "dbms-quiz",
+    "difficulty": "HARD",
+    "category": "Concurrency Control",
+    "title": "Multi-Version Concurrency Control (MVCC)",
+    "question": "How does MVCC (used in PostgreSQL, MySQL InnoDB) enable high concurrency for reads and writes?",
+    "options": [
+      "Readers do not block writers, and writers do not block readers, by maintaining historical row snapshots",
+      "It acquires exclusive table locks on all SELECT queries",
+      "It replaces all disk writes with an in-memory Redis layer",
+      "It executes all transactions sequentially on a single thread"
+    ],
+    "correctAnswer": "Readers do not block writers, and writers do not block readers, by maintaining historical row snapshots",
+    "explanation": "MVCC creates new versions of updated rows instead of overwriting in place. Readers view a consistent point-in-time snapshot, avoiding read-write locking conflicts.",
+    "hint": "Readers see a snapshot of past data while writers write new row versions."
+  },
+  {
+    "id": "dbms-16",
+    "gameType": "dbms-quiz",
+    "difficulty": "EASY",
+    "category": "Data Integrity",
+    "title": "Referential Integrity & Cascading",
+    "question": "In a foreign key relationship with 'ON DELETE CASCADE', what happens when a parent row is deleted?",
+    "options": [
+      "All corresponding child rows referencing that parent key are automatically deleted",
+      "The deletion is aborted and a foreign key constraint violation error is thrown",
+      "The referencing child foreign keys are set to NULL",
+      "The child table is dropped from the database"
+    ],
+    "correctAnswer": "All corresponding child rows referencing that parent key are automatically deleted",
+    "explanation": "CASCADE propagates the deletion of the referenced row down to all dependent child rows in foreign key relationship.",
+    "hint": "Deletions cascade down to delete matching child rows."
+  },
+  {
+    "id": "dbms-17",
+    "gameType": "dbms-quiz",
+    "difficulty": "HARD",
+    "category": "Transactions & ACID",
+    "title": "ARIES Recovery Algorithm",
+    "question": "What are the three main phases of the ARIES database crash recovery algorithm?",
+    "options": [
+      "Analysis, REDO, and UNDO",
+      "Locking, Verification, and Write",
+      "Prepare, Commit, and Acknowledge",
+      "Scan, Compact, and Checkpoint"
+    ],
+    "correctAnswer": "Analysis, REDO, and UNDO",
+    "explanation": "ARIES operates in three distinct phases: 1) Analysis (determines state of buffer pool/active transactions), 2) REDO (repeats history to crash point), 3) UNDO (rolls back uncommitted transactions).",
+    "hint": "First analyze the crash state, redo all operations, then undo uncommitted work."
+  },
+  {
+    "id": "dbms-18",
+    "gameType": "dbms-quiz",
+    "difficulty": "MEDIUM",
+    "category": "SQL",
+    "title": "Correlated Subquery Execution",
+    "question": "What makes a correlated subquery different from a standard independent subquery in SQL?",
+    "options": [
+      "It references columns from the outer query and re-evaluates for every outer row",
+      "It executes once before the outer query runs and caches the result",
+      "It cannot use WHERE or JOIN clauses",
+      "It can only be used inside the FROM clause"
+    ],
+    "correctAnswer": "It references columns from the outer query and re-evaluates for every outer row",
+    "explanation": "A correlated subquery depends on values from the outer query row, meaning the database engine must logically evaluate it once per candidate row of the outer query.",
+    "hint": "The inner query references outer columns and executes row-by-row."
+  },
+  {
+    "id": "dbms-19",
+    "gameType": "dbms-quiz",
+    "difficulty": "EASY",
+    "category": "Architecture",
+    "title": "Three-Schema Database Architecture",
+    "question": "In the ANSI/SPARC 3-schema architecture, which level describes how data is physically stored on disk blocks?",
+    "options": [
+      "Internal (Physical) Schema",
+      "Conceptual (Logical) Schema",
+      "External (View) Schema",
+      "Application Schema"
+    ],
+    "correctAnswer": "Internal (Physical) Schema",
+    "explanation": "The Internal/Physical level describes physical storage structures, access paths, and page indexing on storage devices.",
+    "hint": "The lowest level dealing with physical hardware storage."
+  },
+  {
+    "id": "dbms-20",
+    "gameType": "dbms-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Transactions & ACID",
+    "title": "Deadlock Detection vs Prevention in DBMS",
+    "question": "In Wait-Die and Wound-Wait deadlock prevention schemes, how are transactions prioritized?",
+    "options": [
+      "By timestamp (older transactions have higher priority)",
+      "By the number of rows modified in the buffer",
+      "By random lottery selection",
+      "By user permission tier"
+    ],
+    "correctAnswer": "By timestamp (older transactions have higher priority)",
+    "explanation": "Both schemes assign timestamps when transactions begin. Older transactions (smaller timestamp) have priority over younger ones to prevent circular waiting.",
+    "hint": "Timestamps determine age: older transactions take precedence."
+  },
+  {
+    "id": "dbms-21",
+    "gameType": "dbms-quiz",
+    "difficulty": "HARD",
+    "category": "Query Optimization",
+    "title": "Hash Join vs Nested Loop Join",
+    "question": "When is an Equi-Hash Join typically superior to a Nested Loop Join in database query execution?",
+    "options": [
+      "When joining two large unsorted tables without existing indexes on the join columns",
+      "When joining a tiny table to an indexed column of a large table",
+      "When evaluating non-equality joins (such as t1.val > t2.val)",
+      "When memory is constrained to less than two database pages"
+    ],
+    "correctAnswer": "When joining two large unsorted tables without existing indexes on the join columns",
+    "explanation": "Hash joins build an in-memory hash table on the smaller relation and probe it with the larger one in O(M+N) time, beating O(M*N) nested loops for large unindexed datasets.",
+    "hint": "Hash join builds a hash table in memory to join large unindexed relations in linear time."
+  },
+  {
+    "id": "dbms-22",
+    "gameType": "dbms-quiz",
+    "difficulty": "MEDIUM",
+    "category": "SQL",
+    "title": "SQL UNION vs UNION ALL",
+    "question": "What is the primary operational difference between SQL UNION and UNION ALL?",
+    "options": [
+      "UNION performs an expensive sorting/deduplication step; UNION ALL retains duplicates without sorting",
+      "UNION ALL requires both queries to have completely different column types",
+      "UNION can only be used with two queries; UNION ALL allows unlimited queries",
+      "UNION is faster because it ignores duplicates"
+    ],
+    "correctAnswer": "UNION performs an expensive sorting/deduplication step; UNION ALL retains duplicates without sorting",
+    "explanation": "UNION sorts and filters out duplicate rows between result sets. UNION ALL simply concatenates result sets, making it much faster when duplicates are acceptable or absent.",
+    "hint": "One removes duplicates by sorting; the other simply concatenates."
+  },
+  {
+    "id": "dbms-23",
+    "gameType": "dbms-quiz",
+    "difficulty": "EASY",
+    "category": "Database Modeling",
+    "title": "Candidate Key Definition",
+    "question": "What is a Candidate Key in relational database theory?",
+    "options": [
+      "A minimal super key that uniquely identifies each tuple in a relation",
+      "Any column with an integer data type",
+      "A foreign key that references multiple parent tables",
+      "An index created exclusively on text columns"
+    ],
+    "correctAnswer": "A minimal super key that uniquely identifies each tuple in a relation",
+    "explanation": "A candidate key is a minimal super key: it uniquely identifies any tuple, and removing any attribute from it would destroy uniqueness.",
+    "hint": "It has uniqueness plus minimality (no extraneous attributes)."
+  },
+  {
+    "id": "dbms-24",
+    "gameType": "dbms-quiz",
+    "difficulty": "HARD",
+    "category": "Concurrency Control",
+    "title": "Strict 2PL vs Rigorous 2PL",
+    "question": "What additional constraint does Rigorous 2PL enforce beyond standard 2PL?",
+    "options": [
+      "All exclusive and shared locks must be held until transaction commit or abort",
+      "Only exclusive write locks are held until commit, shared locks can release early",
+      "No locks may be acquired if another transaction has a lower timestamp",
+      "Transactions cannot update more than 100 rows"
+    ],
+    "correctAnswer": "All exclusive and shared locks must be held until transaction commit or abort",
+    "explanation": "In Strict 2PL, exclusive locks are held until commit. In Rigorous 2PL, ALL locks (both shared read locks and exclusive write locks) must be held until transaction completion.",
+    "hint": "Both read and write locks must remain locked until the transaction finishes."
+  },
+  {
+    "id": "dbms-25",
+    "gameType": "dbms-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Transactions & ACID",
+    "title": "Non-Repeatable Read Anomaly",
+    "question": "A Non-Repeatable Read occurs when a transaction:",
+    "options": [
+      "Reads the same row twice and observes different data because another transaction modified and committed it in between",
+      "Reads uncommitted dirty data that is subsequently rolled back",
+      "Finds that a table has been dropped during execution",
+      "Fails to commit due to disk write timeouts"
+    ],
+    "correctAnswer": "Reads the same row twice and observes different data because another transaction modified and committed it in between",
+    "explanation": "Non-repeatable reads happen at Read Committed isolation when another transaction modifies and commits an existing row between two reads by the first transaction.",
+    "hint": "Two consecutive reads of the same row return different values due to an intervening commit."
+  },
+  {
+    "id": "dbms-26",
+    "gameType": "dbms-quiz",
+    "difficulty": "EASY",
+    "category": "SQL",
+    "title": "COALESCE Function",
+    "question": "What does the SQL standard COALESCE(val1, val2, val3) function return?",
+    "options": [
+      "The first non-NULL expression in the argument list",
+      "The arithmetic mean of all numeric arguments",
+      "A concatenated string of all non-null values",
+      "A boolean indicating if all values are NULL"
+    ],
+    "correctAnswer": "The first non-NULL expression in the argument list",
+    "explanation": "COALESCE evaluates arguments from left to right and returns the first value that is not NULL (or NULL if all evaluate to NULL).",
+    "hint": "It returns the first non-NULL value in the list."
+  },
+  {
+    "id": "dbms-27",
+    "gameType": "dbms-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Storage & Buffer Pool",
+    "title": "Database Buffer Pool & Dirty Pages",
+    "question": "In a database storage engine, what is a 'dirty page' in the buffer pool?",
+    "options": [
+      "A memory page modified by a transaction that has not yet been flushed to disk",
+      "A page containing corrupt checksum data after hardware failure",
+      "A page that has been marked for deletion by the garbage collector",
+      "A page read by an unauthenticated database connection"
+    ],
+    "correctAnswer": "A memory page modified by a transaction that has not yet been flushed to disk",
+    "explanation": "A dirty page is a page in RAM whose contents have been modified by updates/inserts and differ from the copy on persistent storage (disk).",
+    "hint": "Memory content that has changed but is not yet written to disk."
+  },
+  {
+    "id": "dbms-28",
+    "gameType": "dbms-quiz",
+    "difficulty": "HARD",
+    "category": "Distributed Databases",
+    "title": "CAP Theorem Trade-Offs",
+    "question": "According to Eric Brewer's CAP Theorem, when a network partition (P) occurs in a distributed data store, the system must choose between:",
+    "options": [
+      "Consistency (C) and Availability (A)",
+      "Atomicity (A) and Durability (D)",
+      "Speed (S) and Redundancy (R)",
+      "Linearizability (L) and Fault Tolerance (F)"
+    ],
+    "correctAnswer": "Consistency (C) and Availability (A)",
+    "explanation": "Network partitions are inevitable in distributed systems. When nodes cannot communicate, the system must either sacrifice Availability (reject requests) or sacrifice Consistency (serve stale data).",
+    "hint": "In the presence of network partitions, you cannot guarantee both C and A."
+  },
+  {
+    "id": "dbms-29",
+    "gameType": "dbms-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Database Modeling",
+    "title": "Lossless Join Decomposition",
+    "question": "A decomposition of relation R into R1 and R2 is a Lossless Join Decomposition if and only if:",
+    "options": [
+      "The intersection of R1 and R2 functionally determines either R1 or R2",
+      "R1 and R2 share no common attributes whatsoever",
+      "Both R1 and R2 have equal numbers of tuples",
+      "R1 and R2 are both in Boyce-Codd Normal Form"
+    ],
+    "correctAnswer": "The intersection of R1 and R2 functionally determines either R1 or R2",
+    "explanation": "A decomposition is lossless if and only if the shared attribute set (R1 ∩ R2) is a superkey of R1, or a superkey of R2 (i.e. (R1 ∩ R2) -> R1 or (R1 ∩ R2) -> R2).",
+    "hint": "Common attributes must form a superkey in at least one of the decomposed relations."
+  },
+  {
+    "id": "dbms-30",
+    "gameType": "dbms-quiz",
+    "difficulty": "EASY",
+    "category": "Views",
+    "title": "Materialized View vs Standard View",
+    "question": "What differentiates a Materialized View from a standard database View?",
+    "options": [
+      "A Materialized View physically stores query results on disk and requires refreshing; a standard View is a saved query",
+      "Standard Views consume physical disk space for row storage",
+      "Materialized Views cannot use indexes or aggregate functions",
+      "A Materialized View is temporary and drops automatically when the session closes"
+    ],
+    "correctAnswer": "A Materialized View physically stores query results on disk and requires refreshing; a standard View is a saved query",
+    "explanation": "A standard view is a virtual table defined as a query run on-the-fly. A materialized view computes and stores the result on disk, offering fast reads at the cost of refresh overhead.",
+    "hint": "One physically stores the precomputed data; the other is just a stored query."
+  },
+  {
+    "id": "dbms-31",
+    "gameType": "dbms-quiz",
+    "difficulty": "HARD",
+    "category": "Transactions & ACID",
+    "title": "Conflict Serializability & Precedence Graph",
+    "question": "A concurrent transaction schedule is conflict serializable if and only if its precedence (serialization) graph:",
+    "options": [
+      "Contains no directed cycles (is a Directed Acyclic Graph)",
+      "Is a complete bipartite graph",
+      "Has equal in-degree and out-degree for every transaction node",
+      "Contains an Eulerian circuit"
+    ],
+    "correctAnswer": "Contains no directed cycles (is a Directed Acyclic Graph)",
+    "explanation": "Testing conflict serializability is done by building a precedence graph of conflicting operations (Read-Write, Write-Read, Write-Write). A cycle proves non-serializability.",
+    "hint": "The graph must be acyclic (no cycles)."
+  },
+  {
+    "id": "dbms-32",
+    "gameType": "dbms-quiz",
+    "difficulty": "MEDIUM",
+    "category": "SQL",
+    "title": "SQL Window Functions vs GROUP BY",
+    "question": "What is the primary distinction between SQL Window functions (e.g. ROW_NUMBER() OVER (...)) and GROUP BY?",
+    "options": [
+      "Window functions perform calculations across related rows without collapsing individual rows into a single summary row",
+      "Window functions can only be used with DELETE statements",
+      "GROUP BY preserves all original table rows intact",
+      "Window functions require tables to have no primary keys"
+    ],
+    "correctAnswer": "Window functions perform calculations across related rows without collapsing individual rows into a single summary row",
+    "explanation": "GROUP BY collapses multiple rows into a single group row. Window functions compute values over a frame/partition while preserving each individual row in the output.",
+    "hint": "Window functions compute across sets without collapsing rows."
+  },
+  {
+    "id": "dbms-33",
+    "gameType": "dbms-quiz",
+    "difficulty": "EASY",
+    "category": "Transactions & ACID",
+    "title": "Durability Property",
+    "question": "Which mechanism allows relational databases to guarantee Durability even if power cuts immediately after commit?",
+    "options": [
+      "Non-volatile Write-Ahead Logs (WAL) flushed to stable disk storage",
+      "Keeping data only in volatile CPU L1/L2 caches",
+      "Re-executing all user queries from the frontend browser memory",
+      "Using dynamic RAM without batteries"
+    ],
+    "correctAnswer": "Non-volatile Write-Ahead Logs (WAL) flushed to stable disk storage",
+    "explanation": "Durability guarantees that once a transaction commits, its effects survive crashes. This is achieved by flushing commit log records to persistent, non-volatile storage.",
+    "hint": "Changes are committed to persistent non-volatile media before reporting success."
+  },
+  {
+    "id": "dbms-34",
+    "gameType": "dbms-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Indexing",
+    "title": "Covering Index",
+    "question": "What is a 'Covering Index' in SQL query optimization?",
+    "options": [
+      "An index that includes all columns referenced by a query, allowing the engine to satisfy the query without table lookups",
+      "An index that automatically covers and encrypts sensitive table columns",
+      "An index that spans across all tables in a database schema",
+      "A full table scan forced by the query planner"
+    ],
+    "correctAnswer": "An index that includes all columns referenced by a query, allowing the engine to satisfy the query without table lookups",
+    "explanation": "When an index contains (covers) all columns required by the SELECT, WHERE, and JOIN clauses, the engine retrieves data purely from index leaf blocks, skipping costly heap table reads.",
+    "hint": "All requested columns exist directly inside the index itself."
+  },
+  {
+    "id": "dbms-35",
+    "gameType": "dbms-quiz",
+    "difficulty": "HARD",
+    "category": "Transactions & ACID",
+    "title": "Cascadeless vs Recoverable Schedule",
+    "question": "In database transaction scheduling, what is a Cascadeless Schedule?",
+    "options": [
+      "A schedule where transactions only read values written by transactions that have already committed",
+      "A schedule that avoids using rollback logs completely",
+      "A schedule where deadlocks are resolved by terminating all active connections",
+      "A schedule executed exclusively on a single CPU core"
+    ],
+    "correctAnswer": "A schedule where transactions only read values written by transactions that have already committed",
+    "explanation": "If Ti reads data written by Tj only after Tj commits, then if Tj aborts, Ti does not need to be aborted. This completely prevents cascading aborts.",
+    "hint": "Transactions read only committed data to prevent cascading rollbacks."
+  }
+];
+
+export default dbmsQuestions;

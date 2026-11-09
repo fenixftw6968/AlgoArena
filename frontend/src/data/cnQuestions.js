@@ -1,0 +1,604 @@
+/**
+ * MindForge - cnQuestions
+ * Exactly 35 verified high-quality MCQ questions.
+ */
+
+export const cnQuestions = [
+  {
+    "id": "cn-1",
+    "gameType": "cn-quiz",
+    "difficulty": "EASY",
+    "category": "OSI & TCP/IP Model",
+    "title": "OSI Layer for Routers",
+    "question": "At which layer of the OSI model do standard IP routers operate?",
+    "options": [
+      "Network Layer (Layer 3)",
+      "Data Link Layer (Layer 2)",
+      "Transport Layer (Layer 4)",
+      "Session Layer (Layer 5)"
+    ],
+    "correctAnswer": "Network Layer (Layer 3)",
+    "explanation": "Routers inspect logical IP addresses to forward packets across subnet boundaries, operating at Layer 3 (Network Layer). Layer 2 switches operate on MAC addresses.",
+    "hint": "It handles logical IP addressing and path routing."
+  },
+  {
+    "id": "cn-2",
+    "gameType": "cn-quiz",
+    "difficulty": "EASY",
+    "category": "Transport Layer",
+    "title": "TCP vs UDP Fundamentals",
+    "question": "Which feature is provided by TCP but NOT by UDP?",
+    "options": [
+      "Guaranteed ordered delivery with flow and congestion control",
+      "Low latency broadcast capability",
+      "Multiplexing using port numbers",
+      "Stateless datagram transmission"
+    ],
+    "correctAnswer": "Guaranteed ordered delivery with flow and congestion control",
+    "explanation": "TCP is connection-oriented and provides reliable, ordered byte-stream delivery with retransmissions, flow control (sliding window), and congestion control. UDP provides raw connectionless datagram delivery.",
+    "hint": "TCP guarantees reliable order and prevents network congestion."
+  },
+  {
+    "id": "cn-3",
+    "gameType": "cn-quiz",
+    "difficulty": "EASY",
+    "category": "Transport Layer",
+    "title": "TCP 3-Way Handshake",
+    "question": "What is the correct packet sequence exchanged during a standard TCP connection establishment?",
+    "options": [
+      "SYN -> SYN-ACK -> ACK",
+      "ACK -> SYN -> ACK-SYN",
+      "SYN -> ACK -> DATA",
+      "HELLO -> HELLO-ACK -> READY"
+    ],
+    "correctAnswer": "SYN -> SYN-ACK -> ACK",
+    "explanation": "The client sends a SYN packet, the server responds with SYN-ACK (acknowledging client and synchronizing server sequence), and the client finishes with an ACK.",
+    "hint": "Synchronize, Synchronize-Acknowledge, Acknowledge."
+  },
+  {
+    "id": "cn-4",
+    "gameType": "cn-quiz",
+    "difficulty": "EASY",
+    "category": "Application Layer",
+    "title": "DNS Protocol Port & Transport",
+    "question": "Which default transport protocol and port does standard DNS query resolution primarily use?",
+    "options": [
+      "UDP port 53",
+      "TCP port 80",
+      "UDP port 67",
+      "TCP port 443"
+    ],
+    "correctAnswer": "UDP port 53",
+    "explanation": "Standard DNS client queries operate over UDP port 53 for fast, low-overhead name resolution (TCP 53 is used for large zone transfers or queries exceeding 512 bytes).",
+    "hint": "It uses lightweight datagrams on port 53."
+  },
+  {
+    "id": "cn-5",
+    "gameType": "cn-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Data Link Layer",
+    "title": "Address Resolution Protocol (ARP)",
+    "question": "What is the purpose of the Address Resolution Protocol (ARP)?",
+    "options": [
+      "Map a known IPv4 address to its physical MAC address on the local network",
+      "Translate domain names into public IP addresses",
+      "Dynamically assign IP configurations to booting host machines",
+      "Establish encrypted tunnels across the public internet"
+    ],
+    "correctAnswer": "Map a known IPv4 address to its physical MAC address on the local network",
+    "explanation": "ARP broadcasts a request on the local Ethernet segment asking 'who has IP X?', and the owner responds with its hardware MAC address.",
+    "hint": "It resolves IP addresses to hardware MAC addresses."
+  },
+  {
+    "id": "cn-6",
+    "gameType": "cn-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Network Layer",
+    "title": "IPv4 Subnetting Calculation",
+    "question": "How many usable host IP addresses are available in a subnet with CIDR prefix /28?",
+    "options": [
+      "14",
+      "16",
+      "30",
+      "32"
+    ],
+    "correctAnswer": "14",
+    "explanation": "A /28 subnet leaves 32 - 28 = 4 host bits. 2^4 = 16 total addresses, minus 2 reserved addresses (network ID and broadcast address) gives 14 usable hosts.",
+    "hint": "Total addresses are 2^(32-prefix), minus the network and broadcast addresses."
+  },
+  {
+    "id": "cn-7",
+    "gameType": "cn-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Transport Layer",
+    "title": "TCP Congestion Control Algorithms",
+    "question": "In TCP Reno/Tahoe congestion control, what happens immediately after a packet timeout occurs?",
+    "options": [
+      "Congestion window (cwnd) drops back to 1 MSS and slow start begins",
+      "The window size doubles immediately",
+      "The connection switches permanently to UDP mode",
+      "The socket terminates with an ECONNRESET error"
+    ],
+    "correctAnswer": "Congestion window (cwnd) drops back to 1 MSS and slow start begins",
+    "explanation": "A timeout is considered a sign of severe congestion. TCP drops the congestion window (cwnd) to 1 Maximum Segment Size (MSS) and enters the Slow Start phase.",
+    "hint": "Severe timeout resets the congestion window to the initial minimum segment size."
+  },
+  {
+    "id": "cn-8",
+    "gameType": "cn-quiz",
+    "difficulty": "HARD",
+    "category": "Application Layer",
+    "title": "HTTP/1.1 vs HTTP/2",
+    "question": "What major architectural improvement does HTTP/2 introduce to solve Head-of-Line (HoL) blocking at the application layer?",
+    "options": [
+      "Multiplexed binary framing over a single persistent TCP connection",
+      "Switching all data transmission to raw UDP datagrams without handshakes",
+      "Opening up to 60 simultaneous parallel TCP connections per browser tab",
+      "Mandatory gzip compression for binary image payloads"
+    ],
+    "correctAnswer": "Multiplexed binary framing over a single persistent TCP connection",
+    "explanation": "HTTP/2 introduces a binary framing layer that interleaves independent bidirectional streams over a single TCP connection, eliminating application-level HoL blocking.",
+    "hint": "Multiple streams are multiplexed as binary frames over one socket."
+  },
+  {
+    "id": "cn-9",
+    "gameType": "cn-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Application Layer",
+    "title": "HTTPS & TLS Handshake",
+    "question": "During a standard TLS 1.2 handshake, what is the role of asymmetric encryption?",
+    "options": [
+      "To authenticate the server's identity and securely exchange a symmetric session key",
+      "To encrypt all subsequent application HTTP request and response payloads",
+      "To compress HTTP headers using HPACK dictionary tables",
+      "To bypass firewall packet inspection"
+    ],
+    "correctAnswer": "To authenticate the server's identity and securely exchange a symmetric session key",
+    "explanation": "Asymmetric cryptography (RSA or Diffie-Hellman) is used only during the handshake to verify certificates and negotiate a shared symmetric key; fast symmetric encryption (AES) encrypts bulk data.",
+    "hint": "Asymmetric is used to verify certificates and exchange symmetric keys."
+  },
+  {
+    "id": "cn-10",
+    "gameType": "cn-quiz",
+    "difficulty": "EASY",
+    "category": "Network Layer",
+    "title": "ICMP Protocol Function",
+    "question": "The popular diagnostic tool 'ping' uses which network layer protocol?",
+    "options": [
+      "ICMP (Internet Control Message Protocol)",
+      "IGMP (Internet Group Management Protocol)",
+      "SNMP (Simple Network Management Protocol)",
+      "BGP (Border Gateway Protocol)"
+    ],
+    "correctAnswer": "ICMP (Internet Control Message Protocol)",
+    "explanation": "Ping sends ICMP Echo Request messages and waits for ICMP Echo Reply messages to test network reachability and measure round-trip time.",
+    "hint": "Echo requests and replies are handled by this control message protocol."
+  },
+  {
+    "id": "cn-11",
+    "gameType": "cn-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Transport Layer",
+    "title": "TCP TIME_WAIT State",
+    "question": "Why must a TCP endpoint spend 2 * MSL (Maximum Segment Lifetime) in the TIME_WAIT state before closing?",
+    "options": [
+      "To ensure lingering duplicate segments in the network expire and the final ACK is acknowledged",
+      "To allow the operating system to defragment the kernel heap",
+      "To wait for DNS caches to invalidate the remote hostname",
+      "To give the remote server time to upgrade its TLS certificate"
+    ],
+    "correctAnswer": "To ensure lingering duplicate segments in the network expire and the final ACK is acknowledged",
+    "explanation": "TIME_WAIT (usually 1-2 minutes) ensures that the remote host received the final ACK of the 4-way termination, and prevents delayed segments from interfering with a future reincarnation of the socket.",
+    "hint": "Ensures old duplicate packets die out before the port is reused."
+  },
+  {
+    "id": "cn-12",
+    "gameType": "cn-quiz",
+    "difficulty": "HARD",
+    "category": "Routing",
+    "title": "Distance Vector vs Link State Routing",
+    "question": "Which routing problem is specific to Distance Vector routing (RIP) and mitigated by Split Horizon and Poison Reverse?",
+    "options": [
+      "Count-to-Infinity problem",
+      "Byzantine Generals deadlock",
+      "Dijkstra shortest-path oscillation",
+      "Checksum collision under fragmentation"
+    ],
+    "correctAnswer": "Count-to-Infinity problem",
+    "explanation": "Distance Vector protocols can form routing loops where invalid metric updates bounce between adjacent routers, counting up to infinity (usually capped at 16 in RIP).",
+    "hint": "Routing loops that cause metric costs to continuously increment."
+  },
+  {
+    "id": "cn-13",
+    "gameType": "cn-quiz",
+    "difficulty": "EASY",
+    "category": "Network Layer",
+    "title": "NAT (Network Address Translation)",
+    "question": "What is the primary role of NAT (specifically NAPT / PAT) in home and enterprise routers?",
+    "options": [
+      "Allowing multiple private IP devices to share a single public IPv4 address using port numbers",
+      "Encrypting all outbound packets using IPsec ESP headers",
+      "Converting IPv6 addresses into MAC addresses",
+      "Providing authoritative domain name registration"
+    ],
+    "correctAnswer": "Allowing multiple private IP devices to share a single public IPv4 address using port numbers",
+    "explanation": "Port Address Translation (PAT) rewrites source private IP:port pairs to a single public IP with unique source ports, conserving scarce IPv4 addresses.",
+    "hint": "Multiple private local addresses map to one public IP through port multiplexing."
+  },
+  {
+    "id": "cn-14",
+    "gameType": "cn-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Application Layer",
+    "title": "HTTP Idempotent Methods",
+    "question": "According to HTTP specifications, which of the following HTTP methods is idempotent?",
+    "options": [
+      "PUT",
+      "POST",
+      "CONNECT",
+      "PATCH"
+    ],
+    "correctAnswer": "PUT",
+    "explanation": "An HTTP method is idempotent if executing it multiple times produces the identical server resource state. PUT, GET, DELETE, and HEAD are idempotent; POST is not.",
+    "hint": "Sending the same replacement request multiple times leaves the resource state identical."
+  },
+  {
+    "id": "cn-15",
+    "gameType": "cn-quiz",
+    "difficulty": "HARD",
+    "category": "Transport Layer",
+    "title": "QUIC & HTTP/3 Transport",
+    "question": "What underlying transport layer protocol is HTTP/3 built upon to eliminate TCP head-of-line blocking?",
+    "options": [
+      "QUIC over UDP",
+      "SCTP over IPv6",
+      "Raw IP without transport headers",
+      "WebSockets over TLS"
+    ],
+    "correctAnswer": "QUIC over UDP",
+    "explanation": "HTTP/3 uses QUIC (Quick UDP Internet Connections), which runs on top of UDP and embeds TLS 1.3 encryption and per-stream independent loss recovery directly.",
+    "hint": "It uses UDP to avoid kernel TCP connection stalls."
+  },
+  {
+    "id": "cn-16",
+    "gameType": "cn-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Data Link Layer",
+    "title": "CSMA/CD Mechanism",
+    "question": "In classical Ethernet, what does CSMA/CD stand for?",
+    "options": [
+      "Carrier Sense Multiple Access with Collision Detection",
+      "Circuit Switched Media Access with Contention Distribution",
+      "Code Division Segmented Access with Collision Defense",
+      "Channel Switching Multiplex Architecture with Carrier Decoupling"
+    ],
+    "correctAnswer": "Carrier Sense Multiple Access with Collision Detection",
+    "explanation": "CSMA/CD: nodes listen before talking (Carrier Sense), share the channel (Multiple Access), and abort immediately upon detecting overlapping signals (Collision Detection).",
+    "hint": "Listen before talk, detect collisions, and back off exponentially."
+  },
+  {
+    "id": "cn-17",
+    "gameType": "cn-quiz",
+    "difficulty": "EASY",
+    "category": "Application Layer",
+    "title": "DHCP Protocol Operation",
+    "question": "What is the acronym sequence representing the 4-step DHCP address leasing process?",
+    "options": [
+      "DORA (Discover, Offer, Request, Acknowledge)",
+      "ACID (Authenticate, Configure, Install, Done)",
+      "ROAR (Register, Obtain, Allocate, Release)",
+      "SYNC (Search, Yield, Negotiate, Confirm)"
+    ],
+    "correctAnswer": "DORA (Discover, Offer, Request, Acknowledge)",
+    "explanation": "DHCP uses the DORA handshake: Client broadcasts Discover, Server sends Offer, Client responds with Request, and Server returns Acknowledge.",
+    "hint": "Discover, Offer, Request, Acknowledge."
+  },
+  {
+    "id": "cn-18",
+    "gameType": "cn-quiz",
+    "difficulty": "HARD",
+    "category": "Routing",
+    "title": "Border Gateway Protocol (BGP)",
+    "question": "Border Gateway Protocol (BGP) is classified as which type of routing protocol?",
+    "options": [
+      "Path Vector Exterior Gateway Protocol (EGP)",
+      "Link State Interior Gateway Protocol (IGP)",
+      "Distance Vector Interior Gateway Protocol",
+      "Centralized Software-Defined Routing Protocol"
+    ],
+    "correctAnswer": "Path Vector Exterior Gateway Protocol (EGP)",
+    "explanation": "BGP is a Path Vector protocol that exchanges routing reachability information containing full Autonomous System (AS) paths between distinct autonomous systems across the internet.",
+    "hint": "It routes between Autonomous Systems using AS-PATH attributes."
+  },
+  {
+    "id": "cn-19",
+    "gameType": "cn-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Network Layer",
+    "title": "IP Packet Fragmentation",
+    "question": "Which fields in the IPv4 header are used by the destination host to reassemble fragmented packets?",
+    "options": [
+      "Identification, Flags (DF/MF), and Fragment Offset",
+      "Time-to-Live (TTL) and Protocol number",
+      "Type of Service (ToS) and Header Checksum",
+      "Source Port and Destination Port"
+    ],
+    "correctAnswer": "Identification, Flags (DF/MF), and Fragment Offset",
+    "explanation": "Identification groups fragments of the original packet, Fragment Offset indicates the relative position in 8-byte units, and More Fragments (MF) flag signals if more fragments follow.",
+    "hint": "ID links the fragments together, offset tells where each piece belongs."
+  },
+  {
+    "id": "cn-20",
+    "gameType": "cn-quiz",
+    "difficulty": "EASY",
+    "category": "Security",
+    "title": "Symmetric vs Asymmetric Encryption in SSL",
+    "question": "Why is symmetric encryption (like AES-GCM) used for bulk data transfer in HTTPS instead of asymmetric encryption (like RSA)?",
+    "options": [
+      "Symmetric encryption is orders of magnitude faster computationally",
+      "Asymmetric encryption cannot encrypt streams larger than 256 bytes",
+      "Symmetric encryption does not require secret keys",
+      "Asymmetric encryption only works on UDP"
+    ],
+    "correctAnswer": "Symmetric encryption is orders of magnitude faster computationally",
+    "explanation": "Asymmetric public-key math (modular exponentiation / elliptic curves) requires intense CPU computation. Symmetric ciphers use simple bitwise XOR and substitution boxes with hardware acceleration.",
+    "hint": "Asymmetric math is too computationally expensive for high-throughput streaming."
+  },
+  {
+    "id": "cn-21",
+    "gameType": "cn-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Transport Layer",
+    "title": "TCP Flow Control vs Congestion Control",
+    "question": "What is the primary difference between Flow Control and Congestion Control in TCP?",
+    "options": [
+      "Flow control protects the receiver from being overwhelmed; congestion control protects the intermediate network routers",
+      "Flow control uses UDP while congestion control uses TCP",
+      "Flow control is handled by DNS while congestion control is handled by BGP",
+      "Congestion control adjusts receiver buffer sizes; flow control sets router queue depths"
+    ],
+    "correctAnswer": "Flow control protects the receiver from being overwhelmed; congestion control protects the intermediate network routers",
+    "explanation": "Flow control is end-to-end between sender and receiver using advertised Receive Window (rwnd). Congestion control senses intermediate network bottlenecks using Congestion Window (cwnd).",
+    "hint": "Flow control respects the receiving host's buffer; congestion control respects the network links."
+  },
+  {
+    "id": "cn-22",
+    "gameType": "cn-quiz",
+    "difficulty": "HARD",
+    "category": "Network Layer",
+    "title": "IPv4 vs IPv6 Header Differences",
+    "question": "Which field was intentionally removed from the IPv6 base header to increase router processing speed?",
+    "options": [
+      "Header Checksum",
+      "Hop Limit",
+      "Next Header",
+      "Flow Label"
+    ],
+    "correctAnswer": "Header Checksum",
+    "explanation": "The Header Checksum was eliminated in IPv6 because Layer 2 (Ethernet FCS) and Layer 4 (TCP/UDP) already perform checksums, saving routers from recalculating it at every hop when TTL changes.",
+    "hint": "Layer 2 and Layer 4 already verify data integrity, making an intermediate checksum redundant."
+  },
+  {
+    "id": "cn-23",
+    "gameType": "cn-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Transport Layer",
+    "title": "TCP Silly Window Syndrome",
+    "question": "Nagle's Algorithm is primarily used in TCP to prevent:",
+    "options": [
+      "Flooding the network with tiny packets containing only 1 byte of user data (Silly Window Syndrome)",
+      "SYN flood denial of service attacks",
+      "Spurious retransmissions during slow start",
+      "Router bufferbloat on gigabit fiber lines"
+    ],
+    "correctAnswer": "Flooding the network with tiny packets containing only 1 byte of user data (Silly Window Syndrome)",
+    "explanation": "Nagle's algorithm buffers small outgoing data chunks until a full MSS segment can be formed or until an ACK arrives for the previous in-flight segment.",
+    "hint": "It avoids sending tiny 1-byte payloads wrapped in 40-byte TCP/IP headers."
+  },
+  {
+    "id": "cn-24",
+    "gameType": "cn-quiz",
+    "difficulty": "EASY",
+    "category": "Data Link Layer",
+    "title": "MAC Address Length & Format",
+    "question": "What is the standard length of an Ethernet IEEE 802 MAC address?",
+    "options": [
+      "48 bits (6 bytes)",
+      "32 bits (4 bytes)",
+      "64 bits (8 bytes)",
+      "128 bits (16 bytes)"
+    ],
+    "correctAnswer": "48 bits (6 bytes)",
+    "explanation": "A standard MAC address is 48 bits (6 bytes), represented as six hexadecimal pairs separated by colons or hyphens (e.g., 00:1A:2B:3C:4D:5E).",
+    "hint": "It consists of 6 pairs of hexadecimal digits (6 bytes)."
+  },
+  {
+    "id": "cn-25",
+    "gameType": "cn-quiz",
+    "difficulty": "HARD",
+    "category": "Application Layer",
+    "title": "Cross-Origin Resource Sharing (CORS) Preflight",
+    "question": "When does a browser issue an HTTP OPTIONS preflight request before executing an API call?",
+    "options": [
+      "When the cross-origin request uses non-simple HTTP methods (PUT, DELETE) or custom headers",
+      "On every single cross-origin GET request with standard headers",
+      "Only when communicating over unsecured HTTP port 80",
+      "Whenever cookies are disabled in browser privacy settings"
+    ],
+    "correctAnswer": "When the cross-origin request uses non-simple HTTP methods (PUT, DELETE) or custom headers",
+    "explanation": "If a cross-origin request is not a 'Simple Request' (e.g. methods other than GET/HEAD/POST, or headers beyond Accept/Language/Content-Type), the browser sends an OPTIONS preflight first.",
+    "hint": "Custom headers, JSON payloads, or PUT/DELETE methods trigger a preflight OPTIONS check."
+  },
+  {
+    "id": "cn-26",
+    "gameType": "cn-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Security",
+    "title": "SYN Flood Attack Mitigation",
+    "question": "What kernel mechanism allows a server to resist TCP SYN flood attacks without allocating memory for half-open sockets?",
+    "options": [
+      "SYN Cookies",
+      "Increasing TCP listen backlog to infinity",
+      "Dropping all incoming ACK packets",
+      "Disabling TCP window scaling"
+    ],
+    "correctAnswer": "SYN Cookies",
+    "explanation": "With SYN cookies, the server encodes connection state parameters directly into the initial sequence number of the SYN-ACK, allocating zero memory until the valid client ACK arrives.",
+    "hint": "Encodes initial state into the TCP sequence number rather than holding memory."
+  },
+  {
+    "id": "cn-27",
+    "gameType": "cn-quiz",
+    "difficulty": "EASY",
+    "category": "Application Layer",
+    "title": "WebSocket Protocol Handshake",
+    "question": "How does a client initiate a WebSocket connection with a server?",
+    "options": [
+      "By sending an HTTP GET request with 'Upgrade: websocket' and 'Connection: Upgrade' headers",
+      "By opening a raw UDP socket on port 8080",
+      "By executing an SSH key exchange over port 22",
+      "By streaming binary protobuf messages directly to port 53"
+    ],
+    "correctAnswer": "By sending an HTTP GET request with 'Upgrade: websocket' and 'Connection: Upgrade' headers",
+    "explanation": "WebSockets start as a standard HTTP 1.1 GET request containing upgrade headers. If the server agrees, it returns 101 Switching Protocols, converting the socket to full-duplex framing.",
+    "hint": "It upgrades an existing HTTP connection via the Upgrade header."
+  },
+  {
+    "id": "cn-28",
+    "gameType": "cn-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Network Layer",
+    "title": "Time-to-Live (TTL) Field",
+    "question": "What is the primary function of the Time-to-Live (TTL) field in an IPv4 header?",
+    "options": [
+      "Prevent packets from circulating endlessly in routing loops",
+      "Measure total propagation delay across fiber cables",
+      "Enforce maximum socket connection lifetime in seconds",
+      "Rate-limit sender bandwidth consumption"
+    ],
+    "correctAnswer": "Prevent packets from circulating endlessly in routing loops",
+    "explanation": "Every router decrements the TTL field by 1. When TTL reaches 0, the packet is discarded and an ICMP Time Exceeded message is returned, preventing packets from looping indefinitely.",
+    "hint": "It decrements at each hop to destroy endlessly looping packets."
+  },
+  {
+    "id": "cn-29",
+    "gameType": "cn-quiz",
+    "difficulty": "HARD",
+    "category": "Transport Layer",
+    "title": "TCP Fast Retransmit",
+    "question": "What event triggers a TCP sender to execute a 'Fast Retransmit' without waiting for a retransmission timer to expire?",
+    "options": [
+      "Receiving 3 duplicate ACKs for the same sequence number",
+      "Receiving an ICMP Destination Unreachable packet",
+      "A sudden 50% drop in advertised receive window (rwnd)",
+      "The client closing its local socket end"
+    ],
+    "correctAnswer": "Receiving 3 duplicate ACKs for the same sequence number",
+    "explanation": "When a receiver receives out-of-order packets, it sends duplicate ACKs. Upon receiving 3 duplicate ACKs, the sender infers packet loss and immediately retransmits without waiting for the timer.",
+    "hint": "Three duplicate acknowledgments indicate a single lost segment."
+  },
+  {
+    "id": "cn-30",
+    "gameType": "cn-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Application Layer",
+    "title": "HTTP Status Code 429",
+    "question": "What does an HTTP 429 status code signify?",
+    "options": [
+      "Too Many Requests (Rate limit exceeded)",
+      "Unauthorized authentication credentials",
+      "Internal gateway timeout",
+      "Conflict with current resource state"
+    ],
+    "correctAnswer": "Too Many Requests (Rate limit exceeded)",
+    "explanation": "HTTP 429 Too Many Requests indicates the user has sent too many requests in a given amount of time (rate limiting). It often includes a 'Retry-After' response header.",
+    "hint": "Rate limiting trigger when client sends too many requests."
+  },
+  {
+    "id": "cn-31",
+    "gameType": "cn-quiz",
+    "difficulty": "EASY",
+    "category": "Network Layer",
+    "title": "Loopback IP Address",
+    "question": "What is the standard IPv4 loopback address range used to communicate with localhost?",
+    "options": [
+      "127.0.0.0/8 (e.g. 127.0.0.1)",
+      "192.168.1.0/24",
+      "10.0.0.0/8",
+      "255.255.255.255/32"
+    ],
+    "correctAnswer": "127.0.0.0/8 (e.g. 127.0.0.1)",
+    "explanation": "The entire 127.0.0.0/8 block is reserved for host loopback traffic, routed internally by the OS network stack without reaching physical hardware interfaces.",
+    "hint": "Starts with 127 and routes back to the local host."
+  },
+  {
+    "id": "cn-32",
+    "gameType": "cn-quiz",
+    "difficulty": "HARD",
+    "category": "Data Link Layer",
+    "title": "Spanning Tree Protocol (STP)",
+    "question": "Why is the Spanning Tree Protocol (STP) enabled on Ethernet switch networks?",
+    "options": [
+      "To prevent Layer 2 broadcast storms caused by bridge loops while maintaining link redundancy",
+      "To dynamically assign IP addresses to connected PCs",
+      "To inspect deep packet payloads for malware signatures",
+      "To encrypt inter-switch trunk connections"
+    ],
+    "correctAnswer": "To prevent Layer 2 broadcast storms caused by bridge loops while maintaining link redundancy",
+    "explanation": "Because Ethernet frames lack a TTL field, bridge loops cause broadcast frames to multiply indefinitely into catastrophic broadcast storms. STP disables redundant paths until a failure occurs.",
+    "hint": "Layer 2 frames have no TTL, so loops cause endless broadcast storms."
+  },
+  {
+    "id": "cn-33",
+    "gameType": "cn-quiz",
+    "difficulty": "MEDIUM",
+    "category": "Application Layer",
+    "title": "Cookies: HttpOnly vs Secure Flags",
+    "question": "What security protection is conferred by the 'HttpOnly' flag on an HTTP Set-Cookie header?",
+    "options": [
+      "Prevents client-side scripts (e.g. JavaScript document.cookie) from accessing the cookie, mitigating XSS theft",
+      "Forces the cookie to be transmitted only over HTTPS connections",
+      "Ensures the cookie cannot be read by backend databases",
+      "Restricts cookie transmission to the top-level origin domain only"
+    ],
+    "correctAnswer": "Prevents client-side scripts (e.g. JavaScript document.cookie) from accessing the cookie, mitigating XSS theft",
+    "explanation": "HttpOnly instructs browsers that the cookie must not be accessible via client scripts like document.cookie, making session cookies immune to simple XSS exfiltration.",
+    "hint": "Blocks JavaScript document.cookie access to protect session tokens."
+  },
+  {
+    "id": "cn-34",
+    "gameType": "cn-quiz",
+    "difficulty": "HARD",
+    "category": "Routing",
+    "title": "Dijkstra Link-State Algorithm",
+    "question": "Which interior routing protocol uses Dijkstra's Shortest Path First (SPF) algorithm to calculate loop-free routing tables?",
+    "options": [
+      "OSPF (Open Shortest Path First)",
+      "RIPv2 (Routing Information Protocol)",
+      "BGP-4 (Border Gateway Protocol)",
+      "EGP (Exterior Gateway Protocol)"
+    ],
+    "correctAnswer": "OSPF (Open Shortest Path First)",
+    "explanation": "OSPF is a Link-State protocol where every router builds a full topological map of the autonomous system and computes shortest paths using Dijkstra's algorithm.",
+    "hint": "Shortest Path First is explicitly named in this protocol's acronym."
+  },
+  {
+    "id": "cn-35",
+    "gameType": "cn-quiz",
+    "difficulty": "EASY",
+    "category": "Security",
+    "title": "Man-in-the-Middle (MITM) & ARP Spoofing",
+    "question": "How does ARP spoofing enable an attacker on a local network to execute a Man-in-the-Middle (MITM) attack?",
+    "options": [
+      "By sending forged ARP replies linking the attacker's MAC address with the default gateway's IP address",
+      "By brute-forcing the wireless router's WPA2 password",
+      "By injecting malicious DNS records into public root name servers",
+      "By crashing the switch using power surges"
+    ],
+    "correctAnswer": "By sending forged ARP replies linking the attacker's MAC address with the default gateway's IP address",
+    "explanation": "Because ARP is stateless and unauthenticated, an attacker can broadcast unsolicited ARP responses. Victims update their ARP tables and send gateway-bound packets directly to the attacker.",
+    "hint": "Falsely claims ownership of the default gateway's IP address."
+  }
+];
+
+export default cnQuestions;
