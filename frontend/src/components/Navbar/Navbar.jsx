@@ -129,9 +129,7 @@ export default function Navbar() {
         <div className="nav-inner">
           {/* Brand */}
           <Link to={isAuthenticated ? '/dashboard' : '/'} className="nav-brand">
-            <span className="nav-brand-mark">
-              <span className="nav-brand-dot" />
-            </span>
+            <img src="/algo-logo.png" alt="AlgoArena logo" className="nav-brand-img" />
             <span className="nav-brand-name">AlgoArena</span>
           </Link>
 
@@ -332,28 +330,15 @@ export default function Navbar() {
           flex-shrink: 0;
         }
 
-        .nav-brand-mark {
-          width: 24px;
-          height: 24px;
-          border-radius: var(--radius-xs);
-          background: var(--accent);
-          border: 2px solid #0A0A0A;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          transform: rotate(-4deg);
+        .nav-brand-img {
+          width: 28px;
+          height: 28px;
+          object-fit: contain;
           transition: transform 0.12s ease;
-          box-shadow: 2px 2px 0px #0A0A0A;
         }
 
-        .nav-brand:hover .nav-brand-mark {
-          transform: rotate(4deg);
-        }
-
-        .nav-brand-dot {
-          width: 8px;
-          height: 8px;
-          background: #0A0A0A;
+        .nav-brand:hover .nav-brand-img {
+          transform: rotate(4deg) scale(1.08);
         }
 
         .nav-brand-name {

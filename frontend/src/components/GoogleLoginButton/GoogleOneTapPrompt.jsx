@@ -44,10 +44,7 @@ export default function GoogleOneTapPrompt({ isOpen, onClose, onSelect, loading 
           {/* Left Column: App Badge & Title */}
           <div className="google-onetap-left">
             <div className="google-onetap-app-badge">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none">
-                <path d="M7 10L12 15L17 10" stroke="#B9FF66" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M12 4V14" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round"/>
-              </svg>
+              <img src="/algo-logo.png" alt="AlgoArena" width="32" height="32" style={{ objectFit: 'contain' }} />
             </div>
             <h2 className="google-onetap-choose">Choose an account</h2>
             <p className="google-onetap-continue">
